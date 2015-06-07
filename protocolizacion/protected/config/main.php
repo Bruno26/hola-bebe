@@ -7,6 +7,7 @@
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Protocolización',
+    'defaultController' => 'vivienda', 
     // preloading 'log' component
     'preload' => array(
         'log',
