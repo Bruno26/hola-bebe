@@ -91,8 +91,10 @@ class FuenteFinanciamiento extends CActiveRecord {
 
         $criteria = new CDbCriteria;
 
+        $criteria->order = 'id_fuente_financiamiento DESC';
+
         $criteria->compare('id_fuente_financiamiento', $this->id_fuente_financiamiento);
-        $criteria->compare('nombre_fuente_financiamiento', $this->nombre_fuente_financiamiento, true);
+        $criteria->compare('LOWER(nombre_fuente_financiamiento)', strtolower($this->nombre_fuente_financiamiento), true);
         $criteria->compare('estatus', $this->estatus);
         $criteria->compare('fecha_creacion', $this->fecha_creacion, true);
         $criteria->compare('fecha_actualizacion', $this->fecha_actualizacion, true);
