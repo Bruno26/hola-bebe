@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Viviendas'=>array('index'),
+	'Asignacion Censos'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-array('label'=>'List Vivienda','url'=>array('index')),
-array('label'=>'Create Vivienda','url'=>array('create')),
+array('label'=>'List AsignacionCenso','url'=>array('index')),
+array('label'=>'Create AsignacionCenso','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,7 +15,7 @@ $('.search-form').toggle();
 return false;
 });
 $('.search-form form').submit(function(){
-$.fn.yiiGridView.update('vivienda-grid', {
+$.fn.yiiGridView.update('asignacion-censo-grid', {
 data: $(this).serialize()
 });
 return false;
@@ -23,9 +23,7 @@ return false;
 ");
 ?>
 
-<!--  ****  -->
-
-<h1>Manage Viviendas</h1>
+<h1>Manage Asignacion Censos</h1>
 
 <p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -41,33 +39,19 @@ return false;
 </div><!-- search-form -->
 
 <?php $this->widget('booster.widgets.TbGridView',array(
-'id'=>'vivienda-grid',
+'id'=>'asignacion-censo-grid',
 'dataProvider'=>$model->search(),
 'filter'=>$model,
 'columns'=>array(
-		'id_vivienda',
-		'tipo_vivienda_id',
+		'id_asignacion_censo',
 		'unidad_habitacional_id',
-		'construccion_mt2',
-		'nro_piso',
-		'nro_vivienda',
+		'oficina_id',
+		'persona_id',
+		'fecha_asignacion',
+		'censado',
 		/*
-		'sala',
-		'comedor',
-		'lavandero',
-		'lindero_norte',
-		'lindero_sur',
-		'lindero_este',
-		'lindero_oeste',
-		'coordenadas',
-		'precio_vivienda',
-		'nro_estacionamientos',
-		'descripcion_estac',
-		'nro_habitaciones',
-		'nro_banos',
-		'fuente_datos_entrada_id',
-		'estatus_vivienda_id',
-		'cocina',
+		'estatus',
+		'observaciones',
 		'fecha_creacion',
 		'fecha_actualizacion',
 		'usuario_id_creacion',
