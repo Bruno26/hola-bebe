@@ -1,17 +1,32 @@
 <?php
 
 class DesarrolloController extends Controller {
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
-   // public $layout = '//layouts/column2';
+    // public $layout = '//layouts/column2';
 
     /**
      * @return array action filters
      */
-    public function filters() {
+//    public function filters() {
+//        return array('accessControl', array('CrugeAccessControlFilter'), // perform access control for CRUD operations
+//        );
+//    }
+//
+//    public function accessRules() {
+//        return array(
+//            array('allow', // allow all users to perform 'index' and 'view' actions
+//                //'actions' => array('*'),
+//                'users' => array('*'),
+//            ),
+//            array('deny', // deny all users
+//                'users' => array('*'),
+//            ),
+//        );
+//    }
+   public function filters() {
         return array(
             'accessControl', // perform access control for CRUD operations
         );
@@ -41,6 +56,11 @@ class DesarrolloController extends Controller {
             ),
         );
     }
+    /**
+     * Specifies the access control rules.
+     * This method is used by the 'accessControl' filter.
+     * @return array access control rules
+     */
 
     /**
      * Displays a particular model.
@@ -58,21 +78,48 @@ class DesarrolloController extends Controller {
      */
     public function actionCreate() {
         $model = new Desarrollo;
-        $estado= new Tblestado;
-        $municipio= new Tblmunicipio;
-        $parroquia= new Tblparroquia;
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
         if (isset($_POST['Desarrollo'])) {
             $model->attributes = $_POST['Desarrollo'];
-            if ($model->save())
+            $model->nombre = $_POST['Desarrollo']['nombre'];
+            $model->parroquia_id = $_POST['Desarrollo']['parroquia_id'];
+            $model->descripcion = $_POST['Desarrollo']['descripcion'];
+            $model->urban_barrio = $_POST['Desarrollo']['urban_barrio'];
+            $model->av_call_esq_carr = $_POST['Desarrollo']['av_call_esq_carr'];
+            $model->zona = $_POST['Desarrollo']['zona'];
+            $model->lindero_norte = $_POST['Desarrollo']['lindero_norte'];
+            $model->lindero_este = $_POST['Desarrollo']['lindero_este'];
+            $model->lindero_oeste = $_POST['Desarrollo']['lindero_oeste'];
+            $model->lindero_sur = $_POST['Desarrollo']['lindero_sur'];
+            $model->coordenadas = $_POST['Desarrollo']['coordenadas'];
+            $model->fuente_financiamiento_id = 4;
+            $model->fuente_datos_entrada_id = 5;
+            $model->ente_ejecutor_id = 4;
+            $model->titularidad_del_terreno = isset($_POST['titularidad_del_terreno']) ? true : false;
+            $model->fecha_transferencia = Generico::formatoFecha($_POST['Desarrollo']['fecha_transferencia']);
+            $model->fecha_creacion= 'now()';
+            $model->fecha_actualizacion= 'now()';
+            $model->usuario_id_creacion=  Yii::app()->user->id;;
+            $model->estatus= 5;
+          // echo '<pre>';  var_dump($model); die();
+
+            if ($model->save()){
+            
                 $this->redirect(array('view', 'id' => $model->id_desarrollo));
+            } else{
+                var_dump($model->errors);die();
+            }
+            
         }
 
         $this->render('create', array(
-            'model' => $model, 'estado'=>$estado, 'municipio'=>$municipio, 'parroquia'=>$parroquia
+            'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia
         ));
     }
 

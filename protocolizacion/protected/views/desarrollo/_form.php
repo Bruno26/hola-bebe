@@ -192,14 +192,15 @@
     </div>
     <div class="col-md-4" >
         <?php
-        echo $form->dropDownListGroup($model, 'fuente_financiamiento_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
-            'widgetOptions' => array(
-                //   'data' => Maestro::FindMaestrosByPadreSelect(694, 'descripcion ASC'),
-                'htmlOptions' => array('empty' => 'SELECCIONE',
-                ),
-            )
-                )
-        );
+//        echo $form->dropDownListGroup($model, 'fuente_financiamiento_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+//            'widgetOptions' => array(
+//                //   'data' => Maestro::FindMaestrosByPadreSelect(694, 'descripcion ASC'),
+//                'data' => array(1,2,3),
+//                'htmlOptions' => array('empty' => 'SELECCIONE',
+//                ),
+//            )
+//                )
+//        );
         ?>
     </div>
 </div>
@@ -224,40 +225,41 @@
         ?> 
     </div>
     <div class="col-md-4" >
-        <?php
-        echo $form->dropDownListGroup($model, 'ente_ejecutor_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
-            'widgetOptions' => array(
-                //   'data' => Maestro::FindMaestrosByPadreSelect(694, 'descripcion ASC'),
-                'htmlOptions' => array('empty' => 'SELECCIONE',
+         <?php
+            echo $form->datePickerGroup($model, 'fecha_transferencia', array('widgetOptions' =>
+                array(
+                    'options' => array(
+                        'language' => 'es',
+                        'format' => 'dd/mm/yyyy',
+                        'startView' => 0,
+                        'minViewMode' => 0,
+                        'todayBtn' => 'linked',
+                        'weekStart' => 0,
+                        'endDate' => 'now()',
+                        'autoclose' => true,
+                    ),
+                    'htmlOptions' => array(
+                        'class' => 'span5 limpiar',
+                        'readonly' => true,
+                    ),
                 ),
-            )
-                )
-        );
-        ?>
+                'prepend' => '<i class="glyphicon glyphicon-calendar"></i>',
+                'beforeShowDay' => 'DisableDays',
+                    )
+            );
+            ?>
     </div>
     <div class="col-md-4" >
         <?php
-        echo $form->datePickerGroup($model, 'fecha_transferencia', array('widgetOptions' =>
-            array(
-                'options' => array(
-                    'language' => 'es',
-                    'format' => 'dd/mm/yyyy',
-                    'startView' => 0,
-                    'minViewMode' => 0,
-                    'todayBtn' => 'linked',
-                    'weekStart' => 0,
-                    'startDate' => 'now()',
-                    'autoclose' => true,
-                ),
-                'htmlOptions' => array(
-                    'class' => 'span5 limpiar',
-                //    'readonly' => true,
-                ),
-            ),
-            'prepend' => '<i class="glyphicon glyphicon-calendar"></i>',
-            'beforeShowDay' => 'DisableDays',
-                )
-        );
+//        echo $form->dropDownListGroup($model, 'ente_ejecutor_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+//            'widgetOptions' => array(
+//                //   'data' => Maestro::FindMaestrosByPadreSelect(694, 'descripcion ASC'),
+//                'data' => array(1,2,3),
+//                'htmlOptions' => array('empty' => 'SELECCIONE',
+//                ),
+//            )
+//                )
+//        );
         ?>
     </div>
 </div>
@@ -302,12 +304,12 @@
 
 <?php //echo $form->textFieldGroup($model, 'total_unidades', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
 
- <div class="form-actions">
+<div class="form-actions">
     <?php
     //$this->widget('booster.widgets.TbButton', array(
-     //   'buttonType' => 'submit',
-     //   'context' => 'primary',
-      //  'label' => $model->isNewRecord ? 'Create' : 'Save',
+    //   'buttonType' => 'submit',
+    //   'context' => 'primary',
+    //  'label' => $model->isNewRecord ? 'Create' : 'Save',
     // ));
     ?>
 </div>

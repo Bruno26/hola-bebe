@@ -10,7 +10,31 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     ),
         ));
 ?>
-
+<?php Yii::app()->clientScript->registerScript('desarrollo', "
+         $('#guardar').click(function(){
+                if($('#Desarrollo_nombre').val()==''){
+                    bootox.alert('Por favor indique el nombre del Desarrollo');
+                    return false;
+                }
+         
+                if($('#Tblestado_clvcodigo').val()==''){
+                    bootox.alert('Por favor seleccione Estado');
+                    return false;
+                }
+                if($('#Tblmunicipio_clvcodigo').val()==''){
+                    bootox.alert('Por favor seleccione Municipio');
+                    return false;
+                }
+                if($('#Desarrollo_parroquia_id').val()==''){
+                    bootox.alert('Por favor seleccione Parroquia');
+                    return false;
+                }
+                
+                });
+         
+         
+        
+        ") ?>
 
 <h1>Desarrollo</h1>
 

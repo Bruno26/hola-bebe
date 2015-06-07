@@ -16,6 +16,8 @@ return array(
     'import' => array(
         'application.models.*',
         'application.components.*',
+        'application.controller.*',
+        'application.funciones.*',
         'application.modules.cruge.components.*',
         'application.modules.cruge.extensions.crugemailer.*',
     ),
@@ -111,24 +113,24 @@ return array(
             'errorAction' => 'site/error',
         ),
         'db' => array(
-            'connectionString' => 'pgsql:host=xxx.xxx.x.xxx;dbname=xxxxxxxxxxxxxxx', //cambiar host
+            'connectionString' => 'pgsql:host=192.168.1.148;dbname=protocolizacion', //cambiar host
             'emulatePrepare' => false,
-            'username' => 'xxxxxxxx',
-            'password' => 'xxxxxxxx',
+            'username' => 'postgres',
+            'password' => 'postgres',
         ),
-        'dbOarcle' => array(
+        'dbOrracle' => array(
             'class' => 'application.extensions.PHPPDO.CPdoDbConnection',
             'pdoClass' => 'PHPPDO',
-            'connectionString' => 'oci:dbname=//xxx.xxx.x.xxx/xxxxx',
-            'username' => 'xxxxxxxxxxxxxxx',
-            'password' => 'xxxxxxxxxxxxxxx',
+            'connectionString' => 'oci:dbname=//192.168.1.103/topaz',
+            'username' => 'protocolizacion',
+            'password' => 'protocolizacion',
         ),
         'db3' => array(
-            'connectionString' => 'pgsql:host=xxx.xxx.x.xxx;dbname=xxxxxxxxx', //cambiar host
+            'connectionString' => 'pgsql:host=192.168.1.148;dbname=geografia', //cambiar host
             'class' => 'CDbConnection',
             'emulatePrepare' => false,
-            'username' => 'xxxxxxxx',
-            'password' => 'xxxxxxxx',
+            'username' => 'postgres',
+            'password' => 'postgres',
             'charset' => 'utf8',
         ),
         'booster' => array(
@@ -157,4 +159,6 @@ return array(
         // this is used in contact page
         'adminEmail' => 'webmaster@example.com',
     ),
+    'language' => 'es',
+    'sourceLanguage' => 'en',
 );
