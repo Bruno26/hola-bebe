@@ -45,14 +45,24 @@ return false;
 'dataProvider'=>$model->search(),
 'filter'=>$model,
 'columns'=>array(
-		'id_vivienda',
-		'tipo_vivienda_id',
-		'unidad_habitacional_id',
-		'construccion_mt2',
-		'nro_piso',
-		'nro_vivienda',
-		'precio_vivienda',
-            array(
+	'id_vivienda',
+	//'tipo_vivienda_id',
+	'tipo_vivienda_id' => array(
+                'name' => 'tipoVivienda',
+                'value' => '$data->tipoVivienda->descripcion',
+                'header' => 'Tipo Vivienda',
+            ),
+	//'unidad_habitacional_id',
+        'unidadHabitacional' => array(
+                'name' => 'unidadHabitacional',
+                'value' => '$data->unidadHabitacional->descripcion',
+                'header' => 'Unidad Habitacional',
+        ),
+	'construccion_mt2',
+	'nro_piso',
+	'nro_vivienda',
+	'precio_vivienda',
+        array(
                 'name' => 'fecha_creacion',
                 'value' => 'Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($data->fecha_creacion))',
                 //'value' => '$data->created_date',
