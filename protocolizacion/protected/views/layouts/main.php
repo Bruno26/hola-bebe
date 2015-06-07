@@ -67,7 +67,6 @@
             </header>
             <aside>
                 <div id="sidebar" class="nav-collapse">
-                    <!-- sidebar menu start-->
                     <div class="leftside-navigation">
                         <ul class="sidebar-menu" id="nav-accordion">
                             <li>
@@ -76,103 +75,57 @@
                                     <span>Inicio</span>
                                 </a>
                             </li>
-
-
-
-                            <li class="sub-menu">
-                                <a href="javascript:;">
-                                    <i class="glyphicon glyphicon-pencil"></i>
-                                    <span>Desarrollo Habitacional</span>
+                            <li>
+                                <a href="<?php echo $this->createUrl('/beneficiario/create'); ?>">
+                                    <i class="glyphicon glyphicon-home"></i>
+                                    <span>Beneficiario</span>
                                 </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="<?php echo $this->createUrl('/desarrollo/create'); ?>">
-                                            <i class="glyphicon glyphicon-pencil"></i>
-                                            <span>Desarrollo</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="<?php echo $this->createUrl('/unidadHabitacional/create'); ?>">
-                                            <i class="glyphicon glyphicon-pencil"></i>
-                                            <span>Unidad Habitacional</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="<?php echo $this->createUrl('/beneficiario/create'); ?>">
-                                            <i class="glyphicon glyphicon-pencil"></i>
-                                            <span>Beneficiario</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <ul class="sub-menu">
-
-                                    <li>
-                                        <a href="<?php echo $this->createUrl('/vivienda/create'); ?>">
-                                            <i class="glyphicon glyphicon-file"></i>
-                                            <span>Vivienda</span>
-                                        </a>
-                                    </li>                           
-
-                                </ul>
-                            </li>                          
+                            </li>
                             <li class="sub-menu">
                                 <a href="javascript:;">
                                     <i class="glyphicon glyphicon-stats"></i>
-                                    <span>Gráficas</span>
+                                    <span>Desarrollo Habitacional</span>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li>
-                                        <a href="<?php echo $this->createUrl('/graficas/graficanivelusuario'); ?>">
-                                            <i class="glyphicon glyphicon-lock"></i>
-                                            <span>Usuarios</span>
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="glyphicon glyphicon-map-marker"></i>
+                                            <span>Desarrollo</span>
                                         </a>
+                                        <ul class="sub">
+                                            <li><a href="<?php echo $this->createUrl('/desarrollo/create'); ?>">Cargar Nuevo</a></li>
+                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Programa</a></li>
+                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Ente Ejecutivo</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Funtes</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Listado Desarrollo</a></li>  
+                                        </ul>
                                     </li>
                                     <li class="sub-menu">
                                         <a href="javascript:;">
                                             <i class="glyphicon glyphicon-map-marker"></i>
-                                            <span>Ubicación</span>
+                                            <span>Unidad Habitacional</span>
                                         </a>
                                         <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/graficas/graficasdireccionvivienda'); ?>">Dirección Vivienda 1 </a></li>
-
-
-
+                                            <li><a href="<?php echo $this->createUrl('/unidadHabitacional/create'); ?>">Cargar Nuevo</a></li>
+                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Listado</a></li>  
                                         </ul>
-
                                     </li>
-
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="glyphicon glyphicon-map-marker"></i>
+                                            <span>Vivienda</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a href="<?php echo $this->createUrl('/vivienda/create'); ?>">Cargar Nuevo</a></li>
+                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Listado</a></li>  
+                                        </ul>
+                                    </li>
+                                </ul>
                             </li>                          
+
                         </ul>
-
-                        <li class="leftside-navigation" id="nav-accordion">
-                            <a href="javascript:;">
-                                <i class="glyphicon glyphicon-briefcase"></i>
-                                <span>Administrador</span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li><a href="<?php echo $this->createUrl('/cruge/ui/usermanagementadmin'); ?>"><i class="glyphicon glyphicon-th-list"></i>Listar</a></li>
-                                <li><a href="<?php echo $this->createUrl('/cruge/ui/usermanagementcreate'); ?>"><i class="glyphicon glyphicon-user"></i>Crear Usuarios</a></li>
-                                <li><a href="<?php echo $this->createUrl('/cruge/ui/rbacusersassignments'); ?>"><i class="glyphicon glyphicon-check"></i>Asignar Rol</a></li>
-                                <li><a href="<?php echo $this->createUrl('/cruge/ui/sessionadmin'); ?>"><i class="glyphicon glyphicon-tasks"></i>Sessiones</a></li>
-                            </ul>
-                        </li> 
-                        <!--                        <li>
-                                                    <a href="javascript:;">
-                                                        <i class="glyphicon glyphicon-upload"></i>
-                                                        <span>Descargas</span>
-                                                    </a>
-                                                    <ul class="sub-menu">
-                                                        <li><a href="<?php // echo Yii::app()->request->hostInfo . '/' . Yii::app()->baseUrl . '/archivo/formulario_unamujer.pdf';                                ?>" target="_blank"><i class="glyphicon glyphicon-download"></i>Planilla de Registro</a></li>
-                                                    </ul>
-                                                </li>                           -->
-
-
-                    </div></div></div>
-                <!-- sidebar menu end-->
+                        <!-- sidebar menu end-->
+                    </div>
                 </div>
             </aside>
             <section id="main-content">
@@ -186,7 +139,7 @@
             <div id="expirado"></div>
 
             <!--            <footer class='container col-md-12 col-xs-12 text-center'>
-                            Copyright &copy; <?php // echo date('Y');                                                   ?> by My Company.<br/>
+                            Copyright &copy; <?php // echo date('Y');                                                                     ?> by My Company.<br/>
                             All Rights Reserved.<br/>
             <?php // echo Yii::powered(); ?>
                         </footer>-->

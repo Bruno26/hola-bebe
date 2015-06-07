@@ -1,15 +1,66 @@
 <?php
-$this->breadcrumbs=array(
-	'Fuente Financiamientos'=>array('index'),
-	'Create',
-);
-
-$this->menu=array(
-array('label'=>'List FuenteFinanciamiento','url'=>array('index')),
-array('label'=>'Manage FuenteFinanciamiento','url'=>array('admin')),
-);
+$form = $this->beginWidget('booster.widgets.TbActiveForm', array(
+    'id' => 'fuente-financiamiento-form',
+    'enableAjaxValidation' => false,
+        ));
 ?>
 
-<h1>Create FuenteFinanciamiento</h1>
+<?php
+if (isset($error) && !empty($error)) {
+    $user = Yii::app()->getComponent('user');
+    switch ($error) {
+        case 1:
+            $type = 'warning';
+            $sms = "<strong>Ya existe un registro con este nombre.</strong>.";
+            break;
+        case 2:
+            $type = 'info';
+            $sms = "<strong>Por Favor Ingrese un nombre.</strong>.";
+            break;
+    }
+    $user->setFlash(
+            $type, $sms
+    );
+    $this->widget('booster.widgets.TbAlert', array(
+        'fade' => true,
+        'closeText' => '&times;', // false equals no close link
+        'events' => array(),
+        'htmlOptions' => array(),
+        'userComponentId' => 'user',
+        'alerts' => array(// configurations per alert type
+            $type => array('closeText' => false),
+        ),
+    ));
+}
+?>
+<h1 class="text-center">Fuente de Financiamiento</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<div>
+    <?php
+    $this->widget(
+            'booster.widgets.TbPanel', array(
+        'title' => 'Fuente de Financiamiento',
+        'context' => 'primary',
+        'headerIcon' => 'user',
+        'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
+        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
+            )
+    );
+    ?>
+</div>
+
+
+
+<div class="form-actions text-center">
+    <?php
+    $this->widget('booster.widgets.TbButton', array(
+        'buttonType' => 'submit',
+        'context' => 'primary',
+        'size' => 'large',
+        'label' => 'Registrar',
+    ));
+    ?>
+</div>
+<?php
+$this->endWidget();
