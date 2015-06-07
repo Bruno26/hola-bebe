@@ -129,6 +129,7 @@ return array(
             'emulatePrepare' => false,
             'username' => 'xxxxxxxx',
             'password' => 'xxxxxxxx',
+            'schemaCachingDuration' => 3600,
             'charset' => 'utf8',
         ),
         'booster' => array(
@@ -157,4 +158,6 @@ return array(
         // this is used in contact page
         'adminEmail' => 'webmaster@example.com',
     ),
+    'language' => 'es',
+    'sourceLanguage' => 'en',
 );
