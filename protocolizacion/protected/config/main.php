@@ -112,24 +112,24 @@ return array(
             'errorAction' => 'site/error',
         ),
         'db' => array(
-            'connectionString' => 'pgsql:host=192.168.1.148;dbname=protocolizacion', //cambiar host
+            'connectionString' => 'pgsql:host=xxx.xxx.x.xxx;dbname=xxxxxxxxxxxxxxx', //cambiar host
             'emulatePrepare' => false,
-            'username' => 'postgres',
-            'password' => 'postgres',
+            'username' => 'xxxxxxxx',
+            'password' => 'xxxxxxxx',
         ),
         'dbOarcle' => array(
             'class' => 'application.extensions.PHPPDO.CPdoDbConnection',
             'pdoClass' => 'PHPPDO',
-            'connectionString' => 'oci:dbname=//192.168.1.103/topaz',
-            'username' => 'protocolizacion',
-            'password' => 'protocolizacion',
+            'connectionString' => 'oci:dbname=//xxx.xxx.x.xxx/xxxxx',
+            'username' => 'xxxxxxxxxxxxxxx',
+            'password' => 'xxxxxxxxxxxxxxx',
         ),
         'db3' => array(
-            'connectionString' => 'pgsql:host=192.168.1.148;dbname=geografia', //cambiar host
+            'connectionString' => 'pgsql:host=xxx.xxx.x.xxx;dbname=xxxxxxxxx', //cambiar host
             'class' => 'CDbConnection',
             'emulatePrepare' => false,
-            'username' => 'postgres',
-            'password' => 'postgres',
+            'username' => 'xxxxxxxx',
+            'password' => 'xxxxxxxx',
             'schemaCachingDuration' => 3600,
             'charset' => 'utf8',
         ),
