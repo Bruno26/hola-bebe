@@ -23,15 +23,9 @@ return false;
 ");
 ?>
 
-<h1>Manage Desarrollos</h1>
+<h1>Gestión de Desarrollos</h1>
 
-<p>
-	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
-		&lt;&gt;</b>
-	or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
-
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
+<?php echo CHtml::link('Busqueda Avanzada','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
 	<?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -43,13 +37,39 @@ return false;
 'dataProvider'=>$model->search(),
 'filter'=>$model,
 'columns'=>array(
-		'id_desarrollo',
-		'nombre',
+	'id_desarrollo',
+	'nombre',
+
+	'ente_ejecutor_id' => array(
+            'name' => 'ente_ejecutor_id',
+            'value' => '$data->enteEjecutor->nombre_ente_ejecutor',
+            'filter' => CHtml::listData(EnteEjecutor::model()->findall(), 'id_ente_ejecutor', 'nombre_ente_ejecutor'),
+        ),
+
+	'fuente_financiamiento_id' => array(
+            'name' => 'fuente_financiamiento_id',
+            'value' => '$data->fuenteFinanciamiento->nombre_fuente_financiamiento',
+            'filter' => CHtml::listData(FuenteFinanciamiento::model()->findall(), 'id_fuente_financiamiento', 'nombre_fuente_financiamiento'),
+        ),
+
+	'total_viviendas',
+	//		'parroquia_id',
+            'parroquia_id' => array(
+                'name' => 'parroquia_id',
+               // 'value' => '$data->ParroquiaId->clvmunicipio0->clvestado0->strdescripcion',
+                'header' => 'Estado',
+            ),
+
+        array(
+            'name' => 'fecha_transferencia',
+            'value' => 'Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($data->fecha_transferencia))',
+            //'header' => 'Creación',
+        ),
+		/*
 		'parroquia_id',
 		'descripcion',
 		'urban_barrio',
 		'av_call_esq_carr',
-		/*
 		'zona',
 		'lindero_norte',
 		'lindero_sur',
@@ -60,9 +80,7 @@ return false;
 		'fuente_financiamiento_id',
 		'ente_ejecutor_id',
 		'titularidad_del_terreno',
-		'total_viviendas',
 		'total_viviendas_protocolizadas',
-		'fecha_transferencia',
 		'fuente_datos_entrada_id',
 		'fecha_creacion',
 		'fecha_actualizacion',
