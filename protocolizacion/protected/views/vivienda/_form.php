@@ -5,11 +5,22 @@
 
 <div class="row">
     <div class="col-md-4">
+
         <?php
-        echo $form->dropDownListGroup($model, 'tipo_vivienda_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+        $criteria = new CDbCriteria;
+        $criteria->order = 'strdescripcion ASC';
+        echo $form->dropDownListGroup($estado, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-4',),
             'widgetOptions' => array(
-                //   'data' => Maestro::FindMaestrosByPadreSelect(694, 'descripcion ASC'),
-                'htmlOptions' => array('empty' => 'SELECCIONE',
+                'data' => CHtml::listData(Tblestado::model()->findAll($criteria), 'clvcodigo', 'strdescripcion'),
+                'htmlOptions' => array(
+                    'empty' => 'SELECCIONE',
+                    'ajax' => array(
+                        'type' => 'POST',
+                        'url' => CController::createUrl('ValidacionJs/BuscarMunicipios'),
+                        'update' => '#' . CHtml::activeId($municipio, 'clvcodigo'),
+                    ),
+                // 'title' => 'Por favor, Seleccione el estado de procedencia',
+                // 'data-toggle' => 'tooltip', 'data-placement' => 'right',
                 ),
             )
                 )
@@ -17,6 +28,62 @@
         ?>
     </div>
     <div class="col-md-4">
+        <?php
+        echo $form->dropDownListGroup($municipio, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12',),
+            'widgetOptions' => array(
+                'htmlOptions' => array(
+                    'ajax' => array(
+                        'type' => 'POST',
+                        'url' => CController::createUrl('ValidacionJs/BuscarParroquias'),
+                        'update' => '#' . CHtml::activeId($parroquia, 'clvcodigo'),
+                    ),
+                    'empty' => 'SELECCIONE',
+                // 'title' => 'Por favor, Seleccione su municipio de procedencia',
+                //'data-toggle' => 'tooltip', 'data-placement' => 'right',
+                ),
+            )
+                )
+        );
+        ?>
+    </div>
+    <div class="col-md-4">
+        <?php
+        echo $form->dropDownListGroup($parroquia, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar',),
+            'widgetOptions' => array(
+                'htmlOptions' => array(
+                    'ajax' => array(
+                        'type' => 'POST',
+                        'url' => CController::createUrl('ValidacionJs/BuscarDesarrollo'),
+                        'update' => '#' . CHtml::activeId($desarrollo, 'id_desarrollo'),
+                    ),
+                    'empty' => 'SELECCIONE',
+                ),
+            )
+                )
+        );
+        ?>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <?php
+        echo $form->dropDownListGroup($desarrollo, 'id_desarrollo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+            'widgetOptions' => array(
+                //   'data' => Maestro::FindMaestrosByPadreSelect(694, 'descripcion ASC'),
+                'htmlOptions' => array(
+                    'ajax' => array(
+                        'type' => 'POST',
+                        'url' => CController::createUrl('ValidacionJs/BuscarUnidadHabitacional'),
+                        'update' => '#' . CHtml::activeId($model, 'unidad_habitacional_id'),
+                    ),
+                    'empty' => 'SELECCIONE',
+                ),
+            )
+                )
+        );
+        ?>
+    </div>
+    <div class="col-md-8">
         <?php
         echo $form->dropDownListGroup($model, 'unidad_habitacional_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
             'widgetOptions' => array(
@@ -28,7 +95,21 @@
         );
         ?>
     </div>
-    <div class="col-md-4">
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <?php
+        echo $form->dropDownListGroup($model, 'tipo_vivienda_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+            'widgetOptions' => array(
+                'data' => Maestro::FindMaestrosByPadreSelect(92, 'descripcion ASC'),
+                'htmlOptions' => array('empty' => 'SELECCIONE',
+                ),
+            )
+                )
+        );
+        ?>
+    </div>
+    <div class="col-md-6">
         <?php echo $form->textFieldGroup($model, 'construccion_mt2', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 10)))); ?>
 
     </div>
@@ -219,10 +300,14 @@
 </div>
 <div class="row">
 
-    <div class="col-md-6">
+    <div class="col-md-4">
         <?php echo $form->textFieldGroup($model, 'precio_vivienda', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16)))); ?>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
+     
+        <?php echo $form->textFieldGroup($model, 'nro_estacionamientos', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16)))); ?>
+    </div>
+    <div class="col-md-4">
         <?php
         echo $form->textAreaGroup(
                 $model, 'descripcion_estac', array(

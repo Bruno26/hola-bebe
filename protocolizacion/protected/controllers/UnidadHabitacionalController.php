@@ -60,14 +60,12 @@ class UnidadHabitacionalController extends Controller {
         $estado = new Tblestado;
         $municipio = new Tblmunicipio;
         $parroquia = new Tblparroquia;
-        
+
 //        $model = new Desarrollo;
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
         if (isset($_POST['UnidadHabitacional'])) {
-
-
             $model->attributes = $_POST['UnidadHabitacional'];
             $model->desarrollo_id = $_POST['UnidadHabitacional']['desarrollo_id'];
             $model->nombre = $_POST['UnidadHabitacional']['nombre'];
