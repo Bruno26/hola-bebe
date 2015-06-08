@@ -23,6 +23,7 @@ class Generico {
      * INIDICA EL TIPO DE USUARIO 
      * OUT INTEGER 1 = INVITADO , 2 = USERLOGEADO
      */
+
     public function TipoUsuario() {
         if (!Yii::app()->user->isGuest) {
             if (Yii::app()->user->name != "admin") {
@@ -42,6 +43,11 @@ class Generico {
         } else {
             return 1;
         }
+    }
+
+    public function BurcarPersona($nacionalidad, $cedula) {
+        $SQL = "select * from PERSONA WHERE NACIONALIDAD ='" . $nacionalidad . "' AND CEDULA = " . $cedula;
+        
     }
 
 }

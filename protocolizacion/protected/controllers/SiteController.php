@@ -25,7 +25,7 @@ class SiteController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-
+     
         $TypeUser = Generico::TipoUsuario();
         if ($TypeUser == 2) {
             $this->layout = 'main';
@@ -35,18 +35,6 @@ class SiteController extends Controller {
             $this->layout = 'principal';
             $this->render('index');
         }
-//        $sql = 'select * from DESARROLLO';
-////ss
-//        $dataReader  = Yii::app()->dbOracle->createCommand($sql)->queryAll();
-//        
-//        foreach($dataReader AS $data){            
-//            echo '<pre>';var_dump($data);
-//        }
-//        
-//        echo '<pre>';var_dump($dataReader);
-//        die;
-        // renders the view file 'protected/views/site/index.php'
-        // using the default layout 'protected/views/layouts/main.php'
     }
 
     /**
