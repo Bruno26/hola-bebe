@@ -80,7 +80,7 @@ class Tblparroquia extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'clvcodigo' => 'Clvcodigo',
+			'clvcodigo' => 'Parroquia',
 			'clvmunicipio' => 'Clvmunicipio',
 			'strid' => 'Strid',
 			'clvparroquia_sunacoop' => 'Clvparroquia Sunacoop',

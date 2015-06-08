@@ -57,29 +57,10 @@ class UnidadHabitacionalController extends Controller {
      */
     public function actionCreate() {
         $model = new UnidadHabitacional;
-//        $model = new Desarrollo;
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
-
-        if (isset($_POST['UnidadHabitacional'])) {
-
-
-            $model->attributes = $_POST['UnidadHabitacional'];
-
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_unidad_habitacional));
-        }
-
-        $this->render('create', array(
-            'model' => $model,
-        ));
-    }
-
-    public function actionGuardar() {
-        $model = new UnidadHabitacional;
         $estado = new Tblestado;
         $municipio = new Tblmunicipio;
         $parroquia = new Tblparroquia;
+        
 //        $model = new Desarrollo;
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
@@ -112,9 +93,7 @@ class UnidadHabitacionalController extends Controller {
         }
 
         $this->render('create', array(
-            'model' => $model,
-//            'estado' => $estado,
-//            'municipio' => $municipio, 'parroquia' => $parroquia,
+            'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia
         ));
     }
 

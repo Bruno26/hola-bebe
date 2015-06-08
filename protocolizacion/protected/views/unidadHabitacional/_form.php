@@ -5,58 +5,63 @@
     <div class="col-md-4">
 
         <?php
-//        $criteria = new CDbCriteria;
-//        $criteria->order = 'strdescripcion ASC';
-//        echo $form->dropDownListGroup($estado, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-4',),
-//            'widgetOptions' => array(
-//                'data' => CHtml::listData(Tblestado::model()->findAll($criteria), 'clvcodigo', 'strdescripcion'),
-//                'htmlOptions' => array(
-//                    'empty' => 'SELECCIONE',
-//                    'ajax' => array(
-//                        'type' => 'POST',
-//                        'url' => CController::createUrl('ValidacionJs/BuscarMunicipios'),
-//                        'update' => '#' . CHtml::activeId($municipio, 'clvcodigo'),
-//                    ),
-//                // 'title' => 'Por favor, Seleccione el estado de procedencia',
-//                // 'data-toggle' => 'tooltip', 'data-placement' => 'right',
-//                ),
-//            )
-//                )
-//        );
+        $criteria = new CDbCriteria;
+        $criteria->order = 'strdescripcion ASC';
+        echo $form->dropDownListGroup($estado, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-4',),
+            'widgetOptions' => array(
+                'data' => CHtml::listData(Tblestado::model()->findAll($criteria), 'clvcodigo', 'strdescripcion'),
+                'htmlOptions' => array(
+                    'empty' => 'SELECCIONE',
+                    'ajax' => array(
+                        'type' => 'POST',
+                        'url' => CController::createUrl('ValidacionJs/BuscarMunicipios'),
+                        'update' => '#' . CHtml::activeId($municipio, 'clvcodigo'),
+                    ),
+                // 'title' => 'Por favor, Seleccione el estado de procedencia',
+                // 'data-toggle' => 'tooltip', 'data-placement' => 'right',
+                ),
+            )
+                )
+        );
         ?>
     </div>
     <div class="col-md-4">
         <?php
-//        echo $form->dropDownListGroup($municipio, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12',),
-//            'widgetOptions' => array(
-//                'htmlOptions' => array(
-//                    'ajax' => array(
-//                        'type' => 'POST',
-//                        'url' => CController::createUrl('ValidacionJs/BuscarParroquias'),
-//                        'update' => '#' . CHtml::activeId($model, 'parroquia_id'),
-//                    ),
-//                    'empty' => 'SELECCIONE',
-//                // 'title' => 'Por favor, Seleccione su municipio de procedencia',
-//                //'data-toggle' => 'tooltip', 'data-placement' => 'right',
-//                ),
-//            )
-//                )
-//        );
+        echo $form->dropDownListGroup($municipio, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12',),
+            'widgetOptions' => array(
+                'htmlOptions' => array(
+                    'ajax' => array(
+                        'type' => 'POST',
+                        'url' => CController::createUrl('ValidacionJs/BuscarParroquias'),
+                        'update' => '#' . CHtml::activeId($parroquia, 'clvcodigo'),
+                    ),
+                    'empty' => 'SELECCIONE',
+                // 'title' => 'Por favor, Seleccione su municipio de procedencia',
+                //'data-toggle' => 'tooltip', 'data-placement' => 'right',
+                ),
+            )
+                )
+        );
         ?>
     </div>
     <div class="col-md-4">
 
         <?php
-//        echo $form->dropDownListGroup($model, 'parroquia_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar',),
-//            'widgetOptions' => array(
-//                'htmlOptions' => array(
-//                    'empty' => 'SELECCIONE',
-//                // 'title' => 'Por favor, Seleccione su parroquia ',
-//                //'data-toggle' => 'tooltip', 'data-placement' => 'right',
-//                ),
-//            )
-//                )
-//        );
+        echo $form->dropDownListGroup($parroquia, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar',),
+            'widgetOptions' => array(
+                'htmlOptions' => array(
+                    'ajax' => array(
+                        'type' => 'POST',
+                        'url' => CController::createUrl('ValidacionJs/BuscarDesarrollo'),
+                        'update' => '#' . CHtml::activeId($model, 'desarrollo_id'),
+                    ),
+                    'empty' => 'SELECCIONE',
+                // 'title' => 'Por favor, Seleccione su parroquia ',
+                //'data-toggle' => 'tooltip', 'data-placement' => 'right',
+                ),
+            )
+                )
+        );
         ?>
     </div>
 
@@ -67,7 +72,7 @@
             <?php
             echo $form->dropDownListGroup($model, 'desarrollo_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
                 'widgetOptions' => array(
-                    'data' => CHtml::listData(Desarrollo::model()->findAll(), 'id_desarrollo', 'nombre'),
+                   // 'data' => CHtml::listData(Desarrollo::model()->findAll(), 'id_desarrollo', 'nombre'),
                     'htmlOptions' => array('empty' => 'SELECCIONE',
                     ),
                 )

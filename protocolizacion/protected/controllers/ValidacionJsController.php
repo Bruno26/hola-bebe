@@ -86,5 +86,33 @@ class ValidacionJsController extends Controller {
             echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
         }
     }
+    
+    /**
+     * FUNCION QUE MUESTRA TODOS LAS PARROQUIAS DE  
+     */
+    public function actionBuscarDesarrollo() {
+        $Id = (isset($_POST['Tblparroquia']['clvcodigo']) ? $_POST['Tblparroquia']['clvcodigo'] : $_GET['clvcodigo']);
+        $Selected = isset($_GET['desarrollo']) ? $_GET['desarrollo'] : '';
+
+        if (!empty($Id)) {
+            $criteria = new CDbCriteria;
+            $criteria->addCondition('t.parroquia_id = :parroquia_id');
+            $criteria->params = array(':parroquia_id' => $Id);
+            $criteria->order = 't.nombre ASC';
+            $criteria->select = 'id_desarrollo, nombre';
+
+            $data = CHtml::listData(Desarrollo::model()->findAll($criteria), 'id_desarrollo', 'nombre');
+            echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
+            foreach ($data as $id => $value) {
+                if ($Selected == $id) {
+                    echo CHtml::tag('option', array('value' => $id, 'selected' => true), CHtml::encode($value), true);
+                } else {
+                    echo CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
+                }
+            }
+        } else {
+            echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
+        }
+    }
 
 }

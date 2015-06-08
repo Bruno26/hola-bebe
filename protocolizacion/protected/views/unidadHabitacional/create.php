@@ -27,7 +27,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         'context' => 'danger',
         'headerIcon' => 'user',
         'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
-        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model,  ), TRUE),
+        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model,'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia ), TRUE),
             )
     );
     ?>
