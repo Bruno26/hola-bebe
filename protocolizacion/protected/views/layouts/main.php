@@ -97,7 +97,7 @@
                                             <li><a href="<?php echo $this->createUrl('#'); ?>">Programa</a></li>
                                             <li><a href="<?php echo $this->createUrl('#'); ?>">Ente Ejecutivo</a></li>
                                             <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Funtes</a></li>  
-                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Listado Desarrollo</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/desarrollo/admin'); ?>">Listado Desarrollo</a></li>  
                                         </ul>
                                     </li>
                                     <li class="sub-menu">

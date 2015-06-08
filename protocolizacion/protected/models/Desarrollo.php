@@ -41,6 +41,7 @@
  * @property CrugeUser $usuarioIdCreacion
  * @property CrugeUser $usuarioIdActualizacion
  * @property UnidadHabitacional[] $unidadHabitacionals
+ * @property fkParroquia $fkParroquia
  */
 class Desarrollo extends CActiveRecord {
 
@@ -84,6 +85,7 @@ class Desarrollo extends CActiveRecord {
             'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
             'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
             'unidadHabitacionals' => array(self::HAS_MANY, 'UnidadHabitacional', 'desarrollo_id'),
+            'fkParroquia' => array(self::BELONGS_TO, 'Tblparroquia', 'parroquia_id'),
         );
     }
 
