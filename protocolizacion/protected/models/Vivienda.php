@@ -32,11 +32,13 @@
  * @property integer $usuario_id_actualizacion
  *
  * The followings are the available model relations:
+ * @property AnalisisCredito[] $analisisCreditos
+ * @property Maestro $estatusVivienda
  * @property Maestro $tipoVivienda
  * @property UnidadHabitacional $unidadHabitacional
- * @property Maestro $estatusVivienda
- * @property CrugeUser $usuarioIdCreacion
  * @property CrugeUser $usuarioIdActualizacion
+ * @property CrugeUser $usuarioIdCreacion
+ * @property Maestro $fuenteDatosEntrada
  * @property ReasignacionVivienda[] $reasignacionViviendas
  */
 class Vivienda extends CActiveRecord
@@ -78,11 +80,13 @@ class Vivienda extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'analisisCreditos' => array(self::HAS_MANY, 'AnalisisCredito', 'vivienda_id'),
+			'estatusVivienda' => array(self::BELONGS_TO, 'Maestro', 'estatus_vivienda_id'),
 			'tipoVivienda' => array(self::BELONGS_TO, 'Maestro', 'tipo_vivienda_id'),
 			'unidadHabitacional' => array(self::BELONGS_TO, 'UnidadHabitacional', 'unidad_habitacional_id'),
-			'estatusVivienda' => array(self::BELONGS_TO, 'Maestro', 'estatus_vivienda_id'),
-			'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
 			'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
+			'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
+			'fuenteDatosEntrada' => array(self::BELONGS_TO, 'Maestro', 'fuente_datos_entrada_id'),
 			'reasignacionViviendas' => array(self::HAS_MANY, 'ReasignacionVivienda', 'vivienda_id'),
 		);
 	}
@@ -111,7 +115,7 @@ class Vivienda extends CActiveRecord
 			'nro_estacionamientos' => 'Nro Estacionamientos',
 			'descripcion_estac' => 'Descripcion Estac',
 			'nro_habitaciones' => 'Nro Habitaciones',
-			'nro_banos' => 'Nro Baños',
+			'nro_banos' => 'Nro Banos',
 			'fuente_datos_entrada_id' => 'Fuente Datos Entrada',
 			'estatus_vivienda_id' => 'Estatus Vivienda',
 			'cocina' => 'Cocina',

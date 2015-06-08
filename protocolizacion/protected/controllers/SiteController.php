@@ -26,14 +26,14 @@ class SiteController extends Controller {
      */
     public function actionIndex() {
 
-//        $sql = 'select * from Protocolizacion.DESARROLLO';
-////
+//        $sql = 'select * from DESARROLLO';
+////ss
 //        $dataReader  = Yii::app()->dbOracle->createCommand($sql)->queryAll();
 //        
 //        foreach($dataReader AS $data){            
 //            echo '<pre>';var_dump($data);
 //        }
-        
+//        
 //        echo '<pre>';var_dump($dataReader);
 //        die;
         

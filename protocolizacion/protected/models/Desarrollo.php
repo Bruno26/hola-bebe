@@ -40,6 +40,7 @@
  * @property Maestro $estatus0
  * @property CrugeUser $usuarioIdCreacion
  * @property CrugeUser $usuarioIdActualizacion
+ * @property BeneficiarioTemporal[] $beneficiarioTemporals
  * @property UnidadHabitacional[] $unidadHabitacionals
  * @property fkParroquia $fkParroquia
  */
@@ -84,6 +85,7 @@ class Desarrollo extends CActiveRecord {
             'estatus0' => array(self::BELONGS_TO, 'Maestro', 'estatus'),
             'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
             'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
+            'beneficiarioTemporals' => array(self::HAS_MANY, 'BeneficiarioTemporal', 'desarrollo_id'),
             'unidadHabitacionals' => array(self::HAS_MANY, 'UnidadHabitacional', 'desarrollo_id'),
             'fkParroquia' => array(self::BELONGS_TO, 'Tblparroquia', 'parroquia_id'),
         );
@@ -95,11 +97,11 @@ class Desarrollo extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id_desarrollo' => 'Id Desarrollo',
-            'nombre' => 'Nombre del Desarrollo',
+            'nombre' => 'Nombre',
             'parroquia_id' => 'Parroquia',
             'descripcion' => 'Descripcion',
             'urban_barrio' => 'Indique Urbanización/Barrio',
-            'av_call_esq_carr' => 'Indique Avenida/Calle/Esquina/Carrera',
+            'av_call_esq_carr' => 'Indique Avenida/Calle/Esquina/Carretera',
             'zona' => 'Zona',
             'lindero_norte' => 'Lindero Norte',
             'lindero_sur' => 'Lindero Sur',
@@ -140,11 +142,11 @@ class Desarrollo extends CActiveRecord {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-
         $criteria->order = 'id_desarrollo DESC';
 
+
         $criteria->compare('id_desarrollo', $this->id_desarrollo);
-        $criteria->compare('LOWER(nombre)',  strtolower($this->nombre), true);
+        $criteria->compare('LOWER(nombre)', strtolower($this->nombre), true);
         $criteria->compare('parroquia_id', $this->parroquia_id);
         $criteria->compare('descripcion', $this->descripcion, true);
         $criteria->compare('urban_barrio', $this->urban_barrio, true);
@@ -187,3 +189,5 @@ class Desarrollo extends CActiveRecord {
     }
 
 }
+
+

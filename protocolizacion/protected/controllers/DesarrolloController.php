@@ -1,16 +1,31 @@
 <?php
 
 class DesarrolloController extends Controller {
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
-   // public $layout = '//layouts/column2';
+    // public $layout = '//layouts/column2';
 
     /**
      * @return array action filters
      */
+//    public function filters() {
+//        return array('accessControl', array('CrugeAccessControlFilter'), // perform access control for CRUD operations
+//        );
+//    }
+//
+//    public function accessRules() {
+//        return array(
+//            array('allow', // allow all users to perform 'index' and 'view' actions
+//                //'actions' => array('*'),
+//                'users' => array('*'),
+//            ),
+//            array('deny', // deny all users
+//                'users' => array('*'),
+//            ),
+//        );
+//    }
     public function filters() {
         return array(
             'accessControl', // perform access control for CRUD operations
@@ -43,6 +58,12 @@ class DesarrolloController extends Controller {
     }
 
     /**
+     * Specifies the access control rules.
+     * This method is used by the 'accessControl' filter.
+     * @return array access control rules
+     */
+
+    /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
      */
@@ -58,21 +79,63 @@ class DesarrolloController extends Controller {
      */
     public function actionCreate() {
         $model = new Desarrollo;
-        $estado= new Tblestado;
-        $municipio= new Tblmunicipio;
-        $parroquia= new Tblparroquia;
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
+        $enteEjecutor = new EnteEjecutor;
+        $fuenteFinacimiento = new FuenteFinanciamiento;
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
         if (isset($_POST['Desarrollo'])) {
-            $model->attributes = $_POST['Desarrollo'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_desarrollo));
+            $nombre = trim(strtoupper($_POST['Desarrollo']['nombre']));
+            $id_parroquia = $_POST['Desarrollo']['parroquia_id'];
+            $consulta = Desarrollo::model()->findByAttributes(array('nombre' => $nombre, 'parroquia_id' => $id_parroquia));
+            if (empty($consulta)) {
+                $model->attributes = $_POST['Desarrollo'];
+                $model->nombre = $nombre;
+                $model->parroquia_id = $id_parroquia;
+                $model->descripcion = $_POST['Desarrollo']['descripcion'];
+                $model->urban_barrio = $_POST['Desarrollo']['urban_barrio'];
+                $model->av_call_esq_carr = $_POST['Desarrollo']['av_call_esq_carr'];
+                $model->zona = $_POST['Desarrollo']['zona'];
+                $model->lindero_norte = $_POST['Desarrollo']['lindero_norte'];
+                $model->lindero_este = $_POST['Desarrollo']['lindero_este'];
+                $model->lindero_oeste = $_POST['Desarrollo']['lindero_oeste'];
+                $model->lindero_sur = $_POST['Desarrollo']['lindero_sur'];
+                $model->coordenadas = $_POST['Desarrollo']['coordenadas'];
+                $model->ente_ejecutor_id = $_POST['Desarrollo']['ente_ejecutor_id'];
+                $model->fuente_financiamiento_id = $_POST['Desarrollo']['fuente_financiamiento_id'];
+                $model->fuente_datos_entrada_id = 5;
+                $model->titularidad_del_terreno = isset($_POST['titularidad_del_terreno']) ? true : false;
+                $model->fecha_transferencia = ($model->titularidad_del_terreno) ? Generico::formatoFecha($_POST['Desarrollo']['fecha_transferencia']) : '0001-01-01 00:00:00';
+                $model->fecha_creacion = 'now()';
+                $model->fecha_actualizacion = 'now()';
+                $model->usuario_id_creacion = Yii::app()->user->id;
+                $model->estatus = 5;
+                // echo '<pre>';  var_dump($model); die();
+
+                if ($model->save()) {
+
+                    $this->redirect(array('admin'));
+                } else {
+                    var_dump($model->errors);
+                    die();
+                }
+            } else {
+                $this->render('create', array(
+                    'model' => $model, 'estado' => $estado,
+                    'municipio' => $municipio, 'parroquia' => $parroquia,
+                    'enteEjecutor' => $enteEjecutor, 'fuenteFinacimiento' => $fuenteFinacimiento,
+                    'sms' => 1
+                ));
+                Yii::app()->end();
+            }
         }
 
         $this->render('create', array(
-            'model' => $model, 'estado'=>$estado, 'municipio'=>$municipio, 'parroquia'=>$parroquia
+            'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'enteEjecutor' => $enteEjecutor, 'fuenteFinacimiento' => $fuenteFinacimiento
         ));
     }
 
