@@ -14,8 +14,34 @@
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'id' => 'unidad-habitacional-form',
     'enableAjaxValidation' => false,
+    'enableClientValidation' => true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true,
+        'validateOnChange' => true,
+        'validateOnType' => true,
+    ),
         ));
 ?>
+
+<?php
+if (isset($sms) && !empty($sms)) {
+    $user = Yii::app()->getComponent('user');
+    $user->setFlash(
+            'warning', "<strong>Ya existe una Unidad Habitacional con este nombre en este Desarrollo.</strong>"
+    );
+    $this->widget('booster.widgets.TbAlert', array(
+        'fade' => true,
+        'closeText' => '&times;', // false equals no close link
+        'events' => array(),
+        'htmlOptions' => array(),
+        'userComponentId' => 'user',
+        'alerts' => array(// configurations per alert type
+            'warning' => array('closeText' => false),
+        ),
+    ));
+}
+?>
+
 <h1 class="text-center">Unidad Habitacional</h1>
 
 
@@ -27,7 +53,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         'context' => 'danger',
         'headerIcon' => 'user',
         'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
-        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model,'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia ), TRUE),
+        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
             )
     );
     ?>
