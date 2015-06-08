@@ -4,7 +4,8 @@
     <head>
     <style type="text/css">
         body {
-            background-image: url("<?php echo Yii::app()->baseUrl; ?>/img/cintillo.jpg") !important;
+            /*background-image: url("<?php //echo Yii::app()->baseUrl; ?>/img/cintillo.jpg") !important;*/
+            background-color: #C4E17F !important;
             height: 100% !important;
             width: 100% !important;
             background-size: cover !important;
