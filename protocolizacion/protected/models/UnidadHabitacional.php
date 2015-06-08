@@ -27,15 +27,17 @@
  * @property integer $estatus
  *
  * The followings are the available model relations:
- * @property Vivienda[] $viviendas
+ * @property BeneficiarioTemporal[] $beneficiarioTemporals
  * @property AsignacionCenso[] $asignacionCensos
+ * @property Vivienda[] $viviendas
+ * @property RegistroPublico $registroPublico
  * @property Desarrollo $desarrollo
- * @property Maestro $tipoDocumento
+ * @property Maestro $estatus0
  * @property Maestro $fuenteDatosEntrada
- * @property CrugeUser $usuarioIdCreacion
+ * @property Maestro $tipoDocumento
  * @property UnidadHabitacional $usuarioIdActualizacion
  * @property UnidadHabitacional[] $unidadHabitacionals
- * @property Maestro $estatus0
+ * @property CrugeUser $usuarioIdCreacion
  */
 class UnidadHabitacional extends CActiveRecord {
 
@@ -53,13 +55,12 @@ class UnidadHabitacional extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('nombre, desarrollo_id, gen_tipo_inmueble_id, total_unidades, registro_publico_id, tipo_documento_id, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, estatus', 'required'),
+            array('nombre, desarrollo_id, gen_tipo_inmueble_id, registro_publico_id, tipo_documento_id, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, estatus', 'required'),
             array('desarrollo_id, gen_tipo_inmueble_id, total_unidades, registro_publico_id, tipo_documento_id, ano, fuente_datos_entrada_id, usuario_id_creacion, usuario_id_actualizacion, estatus', 'numerical', 'integerOnly' => true),
-            array('nombre', 'length', 'max' => 100),
-            array('tomo ', 'length', 'max' => 6),
+            array('asiento_registral', 'length', 'max' => 3),
             array('nro_documento', 'length', 'max' => 20),
             array('nro_matricula, total_unidades, folio_real', 'length', 'max' => 4),
-            array('asiento_registral', 'length', 'max' => 3),
+            array('tomo', 'length', 'max' => 6),
             array('fecha_registro', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
@@ -74,15 +75,17 @@ class UnidadHabitacional extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'viviendas' => array(self::HAS_MANY, 'Vivienda', 'unidad_habitacional_id'),
+            'beneficiarioTemporals' => array(self::HAS_MANY, 'BeneficiarioTemporal', 'unidad_habitacional_id'),
             'asignacionCensos' => array(self::HAS_MANY, 'AsignacionCenso', 'unidad_habitacional_id'),
+            'viviendas' => array(self::HAS_MANY, 'Vivienda', 'unidad_habitacional_id'),
+            'registroPublico' => array(self::BELONGS_TO, 'RegistroPublico', 'registro_publico_id'),
             'desarrollo' => array(self::BELONGS_TO, 'Desarrollo', 'desarrollo_id'),
-            'tipoDocumento' => array(self::BELONGS_TO, 'Maestro', 'tipo_documento_id'),
+            'estatus0' => array(self::BELONGS_TO, 'Maestro', 'estatus'),
             'fuenteDatosEntrada' => array(self::BELONGS_TO, 'Maestro', 'fuente_datos_entrada_id'),
-            'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
+            'tipoDocumento' => array(self::BELONGS_TO, 'Maestro', 'tipo_documento_id'),
             'usuarioIdActualizacion' => array(self::BELONGS_TO, 'UnidadHabitacional', 'usuario_id_actualizacion'),
             'unidadHabitacionals' => array(self::HAS_MANY, 'UnidadHabitacional', 'usuario_id_actualizacion'),
-            'estatus0' => array(self::BELONGS_TO, 'Maestro', 'estatus'),
+            'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
         );
     }
 
@@ -101,11 +104,11 @@ class UnidadHabitacional extends CActiveRecord {
             'fecha_registro' => 'Fecha Registro',
             'nro_documento' => 'Nro Documento',
             'tomo' => 'Tomo',
-            'ano' => 'Año',
-            'nro_protocolo' => 'Nro. Protocolo',
+            'ano' => 'Ano',
+            'nro_protocolo' => 'Nro Protocolo',
             'asiento_registral' => 'Asiento Registral',
             'folio_real' => 'Folio Real',
-            'nro_matricula' => 'Nro. Matricula',
+            'nro_matricula' => 'Nro Matricula',
             'fuente_datos_entrada_id' => 'Fuente Datos Entrada',
             'fecha_creacion' => 'Fecha Creacion',
             'fecha_actualizacion' => 'Fecha Actualizacion',

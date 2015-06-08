@@ -1,7 +1,6 @@
 <?php
 
 class UnidadHabitacionalController extends Controller {
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -29,7 +28,7 @@ class UnidadHabitacionalController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
+                'actions' => array('create', 'update', 'guardar'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -58,19 +57,50 @@ class UnidadHabitacionalController extends Controller {
      */
     public function actionCreate() {
         $model = new UnidadHabitacional;
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
 
+//        $model = new Desarrollo;
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
         if (isset($_POST['UnidadHabitacional'])) {
-            $model->attributes = $_POST['UnidadHabitacional'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_unidad_habitacional));
+
+            $nombre = trim(strtoupper($_POST['UnidadHabitacional']['nombre']));
+            $id_desarrollo = $_POST['UnidadHabitacional']['desarrollo_id'];
+            $consulta = UnidadHabitacional ::model()->findByAttributes(array('nombre' => $nombre, 'desarrollo_id' => $id_desarrollo));
+
+            if (empty($consulta)) {
+                $model->attributes = $_POST['UnidadHabitacional'];
+                $model->desarrollo_id = $_POST['UnidadHabitacional']['desarrollo_id'];
+                $model->nombre = $nombre;
+                $model->registro_publico_id = $_POST['UnidadHabitacional']['registro_publico_id'];
+                $model->fecha_registro = Generico::formatoFecha($_POST['UnidadHabitacional']['fecha_registro']);
+                $model->gen_tipo_inmueble_id = $_POST['UnidadHabitacional']['gen_tipo_inmueble_id'];
+                $model->total_unidades = '0';
+                $model->ano = $_POST['UnidadHabitacional']['ano'];
+                $model->tipo_documento_id = $_POST['UnidadHabitacional']['tipo_documento_id'];
+                $model->nro_documento = $_POST['UnidadHabitacional']['nro_documento'];
+                $model->folio_real = $_POST['UnidadHabitacional']['folio_real'];
+                $model->asiento_registral = $_POST['UnidadHabitacional']['asiento_registral'];
+                $model->tomo = $_POST['UnidadHabitacional']['tomo'];
+                $model->nro_protocolo = $_POST['UnidadHabitacional']['nro_protocolo'];
+                $model->fuente_datos_entrada_id = 90;
+                $model->nro_matricula = $_POST['UnidadHabitacional']['nro_matricula'];
+                $model->fecha_creacion = 'now()';
+                $model->fecha_actualizacion = 'now()';
+                $model->usuario_id_creacion = Yii::app()->user->id;
+                $model->estatus = 71;
+                if ($model->save()) {
+                    $this->redirect(array('/site/index'));
+                }
+            } else {
+                $this->render('create', array('model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'sms' => 1));
+            }
         }
 
-        $this->render('create', array(
-            'model' => $model,
-        ));
+        $this->render('create', array('model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia));
     }
 
     /**

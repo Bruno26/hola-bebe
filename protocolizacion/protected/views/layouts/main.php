@@ -75,24 +75,44 @@
                                     <span>Inicio</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="<?php echo $this->createUrl('/beneficiario/create'); ?>">
-                                    <i class="glyphicon glyphicon-home"></i>
-                                    <span>Beneficiario</span>
+                            <li class="sub-menu">
+                                <a href="javascript:;">
+                                    <i class="glyphicon glyphicon-stats"></i>
+                                    <span>Distribución Jurídica</span>
                                 </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo $this->createUrl('/oficina/create'); ?>">
-                                    <i class="glyphicon glyphicon-pencil"></i>
-                                    <span>Oficina</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo $this->createUrl('/abogados/create'); ?>">
-                                    <i class="glyphicon glyphicon-pencil"></i>
-                                    <span>Abogados</span>
-                                </a>
-                            </li>
+                                <ul class="sub-menu">
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="glyphicon glyphicon-map-marker"></i>
+                                            <span>Oficina</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a href="<?php echo $this->createUrl('/oficina/create'); ?>">Cargar Nueva Oficina</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/oficina/admin'); ?>">Listado de Oficinas</a></li>  
+                                        </ul>
+                                    </li>
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="glyphicon glyphicon-map-marker"></i>
+                                            <span>Abogados</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a href="<?php echo $this->createUrl('/abogados/create'); ?>">Cargar Nuevo Abogado</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/abogados/admin'); ?>">Listado de Abogados</a></li>  
+                                        </ul>
+                                    </li>
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="glyphicon glyphicon-map-marker"></i>
+                                            <span>Asignación Censo</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Crear Nueva Asignación</a></li>
+                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Listado de Asignaciones</a></li>  
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>   
                             <li class="sub-menu">
                                 <a href="javascript:;">
                                     <i class="glyphicon glyphicon-stats"></i>
@@ -106,10 +126,10 @@
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/desarrollo/create'); ?>">Cargar Nuevo</a></li>
-                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Programa</a></li>
-                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Ente Ejecutivo</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/programa/create'); ?>">Programa</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/enteEjecutor/create'); ?>">Ente Ejecutivo</a></li>
                                             <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Funtes</a></li>  
-                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Listado Desarrollo</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/desarrollo/admin'); ?>">Listado Desarrollo</a></li>  
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -120,7 +140,7 @@
 
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/unidadHabitacional/create'); ?>">Cargar Nuevo</a></li>
-                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Listado</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/unidadHabitacional/admin'); ?>">Listado</a></li>  
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -130,11 +150,17 @@
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/vivienda/create'); ?>">Cargar Nuevo</a></li>
-                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Listado</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/vivienda/admin'); ?>">Listado</a></li>  
                                         </ul>
                                     </li>
                                 </ul>
-                            </li>                          
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->createUrl('#'); ?>">
+                                    <i class="glyphicon glyphicon-home"></i>
+                                    <span>Censo</span>
+                                </a>
+                            </li>
 
                         </ul>
                         <!-- sidebar menu end-->
@@ -152,7 +178,7 @@
             <div id="expirado"></div>
 
             <!--            <footer class='container col-md-12 col-xs-12 text-center'>
-                            Copyright &copy; <?php // echo date('Y');                                                                        ?> by My Company.<br/>
+                            Copyright &copy; <?php // echo date('Y');                                                                           ?> by My Company.<br/>
                             All Rights Reserved.<br/>
             <?php // echo Yii::powered(); ?>
                         </footer>-->

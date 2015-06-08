@@ -1,12 +1,12 @@
 <?php
 
 /**
- * This is the model class for table "ente_ejecutor".
+ * This is the model class for table "registro_publico".
  *
- * The followings are the available columns in table 'ente_ejecutor':
- * @property integer $id_ente_ejecutor
- * @property string $nombre_ente_ejecutor
- * @property string $observaciones
+ * The followings are the available columns in table 'registro_publico':
+ * @property integer $id_registro_publico
+ * @property string $nombre_registro_publico
+ * @property integer $parroquia_id
  * @property integer $estatus
  * @property string $fecha_creacion
  * @property string $fecha_actualizacion
@@ -14,18 +14,19 @@
  * @property integer $usuario_id_actualizacion
  *
  * The followings are the available model relations:
- * @property Desarrollo[] $desarrollos
  * @property Maestro $estatus0
- * @property CrugeUser $usuarioIdCreacion
  * @property CrugeUser $usuarioIdActualizacion
+ * @property CrugeUser $usuarioIdCreacion
+ * @property RegistroDocumento[] $registroDocumentos
+ * @property UnidadHabitacional[] $unidadHabitacionals
  */
-class EnteEjecutor extends CActiveRecord {
+class RegistroPublico extends CActiveRecord {
 
     /**
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'ente_ejecutor';
+        return 'registro_publico';
     }
 
     /**
@@ -35,12 +36,12 @@ class EnteEjecutor extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('nombre_ente_ejecutor, estatus, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
-            array('estatus, usuario_id_creacion, usuario_id_actualizacion', 'numerical', 'integerOnly' => true),
-            array('nombre_ente_ejecutor, observaciones', 'length', 'max' => 200),
+            array('nombre_registro_publico, parroquia_id, estatus, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
+            array('parroquia_id, estatus, usuario_id_creacion, usuario_id_actualizacion', 'numerical', 'integerOnly' => true),
+            array('nombre_registro_publico', 'length', 'max' => 200),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id_ente_ejecutor, nombre_ente_ejecutor, observaciones, estatus, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion', 'safe', 'on' => 'search'),
+            array('id_registro_publico, nombre_registro_publico, parroquia_id, estatus, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion', 'safe', 'on' => 'search'),
         );
     }
 
@@ -51,10 +52,11 @@ class EnteEjecutor extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'desarrollos' => array(self::HAS_MANY, 'Desarrollo', 'ente_ejecutor_id'),
             'estatus0' => array(self::BELONGS_TO, 'Maestro', 'estatus'),
-            'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
             'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
+            'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
+            'registroDocumentos' => array(self::HAS_MANY, 'RegistroDocumento', 'registro_publico_id'),
+            'unidadHabitacionals' => array(self::HAS_MANY, 'UnidadHabitacional', 'registro_publico_id'),
         );
     }
 
@@ -63,9 +65,9 @@ class EnteEjecutor extends CActiveRecord {
      */
     public function attributeLabels() {
         return array(
-            'id_ente_ejecutor' => 'Id Ente Ejecutor',
-            'nombre_ente_ejecutor' => 'Nombre Ente Ejecutor',
-            'observaciones' => 'Observaciones',
+            'id_registro_publico' => 'Id Registro Publico',
+            'nombre_registro_publico' => 'Nombre Registro Publico',
+            'parroquia_id' => 'Parroquia',
             'estatus' => 'Estatus',
             'fecha_creacion' => 'Fecha Creacion',
             'fecha_actualizacion' => 'Fecha Actualizacion',
@@ -91,9 +93,9 @@ class EnteEjecutor extends CActiveRecord {
 
         $criteria = new CDbCriteria;
 
-        $criteria->compare('id_ente_ejecutor', $this->id_ente_ejecutor);
-        $criteria->compare('nombre_ente_ejecutor', $this->nombre_ente_ejecutor, true);
-        $criteria->compare('observaciones', $this->observaciones, true);
+        $criteria->compare('id_registro_publico', $this->id_registro_publico);
+        $criteria->compare('nombre_registro_publico', $this->nombre_registro_publico, true);
+        $criteria->compare('parroquia_id', $this->parroquia_id);
         $criteria->compare('estatus', $this->estatus);
         $criteria->compare('fecha_creacion', $this->fecha_creacion, true);
         $criteria->compare('fecha_actualizacion', $this->fecha_actualizacion, true);
@@ -109,7 +111,7 @@ class EnteEjecutor extends CActiveRecord {
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
      * @param string $className active record class name.
-     * @return EnteEjecutor the static model class
+     * @return RegistroPublico the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);

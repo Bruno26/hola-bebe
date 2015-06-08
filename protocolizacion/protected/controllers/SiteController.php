@@ -26,23 +26,27 @@ class SiteController extends Controller {
      */
     public function actionIndex() {
 
-//        $sql = 'select * from Protocolizacion.DESARROLLO';
-////
+        $TypeUser = Generico::TipoUsuario();
+        if ($TypeUser == 2) {
+            $this->layout = 'main';
+            $this->render('index');
+            Yii::app()->end();
+        } else {
+            $this->layout = 'principal';
+            $this->render('index');
+        }
+//        $sql = 'select * from DESARROLLO';
+////ss
 //        $dataReader  = Yii::app()->dbOracle->createCommand($sql)->queryAll();
 //        
 //        foreach($dataReader AS $data){            
 //            echo '<pre>';var_dump($data);
 //        }
-        
+//        
 //        echo '<pre>';var_dump($dataReader);
 //        die;
-        
-        
-        
-
         // renders the view file 'protected/views/site/index.php'
         // using the default layout 'protected/views/layouts/main.php'
-        $this->render('index');
     }
 
     /**

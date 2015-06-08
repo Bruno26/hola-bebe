@@ -25,7 +25,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'context' => 'danger',
             // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
             'headerIcon' => 'home',
-            'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
+            'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'desarrollo' => $desarrollo), TRUE),
                 )
         );
         ?>

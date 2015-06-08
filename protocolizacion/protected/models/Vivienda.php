@@ -32,11 +32,13 @@
  * @property integer $usuario_id_actualizacion
  *
  * The followings are the available model relations:
+ * @property AnalisisCredito[] $analisisCreditos
+ * @property Maestro $estatusVivienda
  * @property Maestro $tipoVivienda
  * @property UnidadHabitacional $unidadHabitacional
- * @property Maestro $estatusVivienda
- * @property CrugeUser $usuarioIdCreacion
  * @property CrugeUser $usuarioIdActualizacion
+ * @property CrugeUser $usuarioIdCreacion
+ * @property Maestro $fuenteDatosEntrada
  * @property ReasignacionVivienda[] $reasignacionViviendas
  */
 class Vivienda extends CActiveRecord
@@ -59,7 +61,12 @@ class Vivienda extends CActiveRecord
 		return array(
 			array('tipo_vivienda_id, unidad_habitacional_id, construccion_mt2, nro_piso, nro_vivienda, lindero_norte, lindero_sur, lindero_este, lindero_oeste, precio_vivienda, nro_estacionamientos, nro_habitaciones, nro_banos, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
 			array('tipo_vivienda_id, unidad_habitacional_id, nro_estacionamientos, nro_habitaciones, nro_banos, fuente_datos_entrada_id, estatus_vivienda_id, usuario_id_creacion, usuario_id_actualizacion', 'numerical', 'integerOnly'=>true),
-			array('construccion_mt2, nro_piso, nro_vivienda', 'length', 'max'=>10),
+			array('construccion_mt2', 'length', 'max'=>4),
+			array('nro_piso', 'length', 'max'=>4),
+			array('nro_vivienda', 'length', 'max'=>4),	
+			array('nro_estacionamientos', 'length', 'max'=>4),	
+			array('nro_banos', 'length', 'max'=>4),	
+			array('nro_habitaciones', 'length', 'max'=>4),	
 			array('lindero_norte, lindero_sur, lindero_este, lindero_oeste, coordenadas', 'length', 'max'=>200),
 			array('precio_vivienda', 'length', 'max'=>16),
 			array('descripcion_estac', 'length', 'max'=>15),
@@ -78,11 +85,13 @@ class Vivienda extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'analisisCreditos' => array(self::HAS_MANY, 'AnalisisCredito', 'vivienda_id'),
+			'estatusVivienda' => array(self::BELONGS_TO, 'Maestro', 'estatus_vivienda_id'),
 			'tipoVivienda' => array(self::BELONGS_TO, 'Maestro', 'tipo_vivienda_id'),
 			'unidadHabitacional' => array(self::BELONGS_TO, 'UnidadHabitacional', 'unidad_habitacional_id'),
-			'estatusVivienda' => array(self::BELONGS_TO, 'Maestro', 'estatus_vivienda_id'),
-			'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
 			'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
+			'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
+			'fuenteDatosEntrada' => array(self::BELONGS_TO, 'Maestro', 'fuente_datos_entrada_id'),
 			'reasignacionViviendas' => array(self::HAS_MANY, 'ReasignacionVivienda', 'vivienda_id'),
 		);
 	}
@@ -95,7 +104,7 @@ class Vivienda extends CActiveRecord
 		return array(
 			'id_vivienda' => 'Id Vivienda',
 			'tipo_vivienda_id' => 'Tipo Vivienda',
-			'unidad_habitacional_id' => 'Unidad Habitacional',
+			'unidad_habitacional_id' => 'Nombre Unidad Habitacional',
 			'construccion_mt2' => 'Construccion Mt2',
 			'nro_piso' => 'Nro Piso',
 			'nro_vivienda' => 'Nro Vivienda',
@@ -109,9 +118,9 @@ class Vivienda extends CActiveRecord
 			'coordenadas' => 'Coordenadas',
 			'precio_vivienda' => 'Precio Vivienda',
 			'nro_estacionamientos' => 'Nro Estacionamientos',
-			'descripcion_estac' => 'Descripcion Estac',
+			'descripcion_estac' => 'Descripcion Estacacionamiento',
 			'nro_habitaciones' => 'Nro Habitaciones',
-			'nro_banos' => 'Nro Baños',
+			'nro_banos' => 'Nro Banos',
 			'fuente_datos_entrada_id' => 'Fuente Datos Entrada',
 			'estatus_vivienda_id' => 'Estatus Vivienda',
 			'cocina' => 'Cocina',

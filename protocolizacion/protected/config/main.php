@@ -7,7 +7,7 @@
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Protocolización',
-    'defaultController' => 'vivienda', 
+    'defaultController' => 'vivienda',
     // preloading 'log' component
     'preload' => array(
         'log',
@@ -121,8 +121,8 @@ return array(
             'class' => 'application.extensions.PHPPDO.CPdoDbConnection',
             'pdoClass' => 'PHPPDO',
             'connectionString' => 'oci:dbname=//xxx.xxx.x.xxx/xxxxx',
-            'username' => 'xxxxxxxx',
-            'password' => 'xxxxxxxx',
+            'username' => 'xxxxxxxxxxxxxxx',
+            'password' => 'xxxxxxxxxxxxxxx',
         ),
         'db3' => array(
             'connectionString' => 'pgsql:host=xxx.xxx.x.xxx;dbname=xxxxxxxxx', //cambiar host

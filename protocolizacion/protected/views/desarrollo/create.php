@@ -10,7 +10,50 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     ),
         ));
 ?>
+<?php Yii::app()->clientScript->registerScript('desarrollo', "
+         $('#guardar').click(function(){
+                if($('#Desarrollo_nombre').val()==''){
+                   bootbox.alert('Por favor indique el nombre del Desarrollo');
+                    return false;
+                }
+         
+                if($('#Tblestado_clvcodigo').val()==''){
+                 alert('Por favor seleccione Estado');
+                    return false;
+                }
+                if($('#Tblmunicipio_clvcodigo').val()==''){
+                   alert('Por favor seleccione Municipio');
+                    return false;
+                }
+                if($('#Desarrollo_parroquia_id').val()==''){
+                   alert('Por favor seleccione Parroquia');
+                    return false;
+                }
+                
+                });
+         
+         
+        
+        ") ?>
 
+<?php
+if (isset($sms) && !empty($sms)) {
+    $user = Yii::app()->getComponent('user');
+    $user->setFlash(
+            'warning', "<strong>Ya existe un desarrollo con este nombre.</strong>"
+    );
+    $this->widget('booster.widgets.TbAlert', array(
+        'fade' => true,
+        'closeText' => '&times;', // false equals no close link
+        'events' => array(),
+        'htmlOptions' => array(),
+        'userComponentId' => 'user',
+        'alerts' => array(// configurations per alert type
+            'warning' => array('closeText' => false),
+        ),
+    ));
+}
+?>
 
 <h1>Desarrollo</h1>
 
@@ -23,7 +66,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'context' => 'danger',
             // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
             'headerIcon' => 'globe',
-            'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
+            'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'enteEjecutor' => $enteEjecutor, 'fuenteFinacimiento' => $fuenteFinacimiento), TRUE),
                 )
         );
         ?>
@@ -44,6 +87,6 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     </div>
 </div>
 
-<?php //echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php //echo $this->renderPartial('_form', array('model'=>$model));  ?>
 
 <?php $this->endWidget(); ?>
