@@ -1,6 +1,7 @@
 <?php
 
-class FuenteFinanciamientoController extends Controller {
+class AsignacionCensoController extends Controller {
+
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -56,33 +57,15 @@ class FuenteFinanciamientoController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new FuenteFinanciamiento;
+        $model = new AsignacionCenso;
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-        if (isset($_POST['FuenteFinanciamiento'])) {
-            $nombre_fuente = trim(strtoupper($_POST['FuenteFinanciamiento']['nombre_fuente_financiamiento']));
-            if (!empty($nombre_fuente)) {
-
-                $consulta = FuenteFinanciamiento::model()->findByAttributes(array('nombre_fuente_financiamiento' => $nombre_fuente));
-                if (empty($consulta)) {
-                    $model->nombre_fuente_financiamiento = $nombre_fuente;
-                    $model->fecha_creacion = 'now()';
-                    $model->fecha_actualizacion = 'now()';
-                    $model->usuario_id_creacion = Yii::app()->user->id;
-                    $model->estatus = 35;
-                    if ($model->save()) {
-                        $this->redirect(array('admin'));
-                    }
-                } else {
-                    $this->render('create', array('model' => $model, 'error' => 1));
-                    Yii::app()->end();
-                }
-            } else {
-                $this->render('create', array('model' => $model, 'error' => 2));
-                Yii::app()->end();
-            }
+        if (isset($_POST['AsignacionCenso'])) {
+            $model->attributes = $_POST['AsignacionCenso'];
+            if ($model->save())
+                $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
         }
 
         $this->render('create', array(
@@ -101,10 +84,10 @@ class FuenteFinanciamientoController extends Controller {
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-        if (isset($_POST['FuenteFinanciamiento'])) {
-            $model->attributes = $_POST['FuenteFinanciamiento'];
+        if (isset($_POST['AsignacionCenso'])) {
+            $model->attributes = $_POST['AsignacionCenso'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_fuente_financiamiento));
+                $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
         }
 
         $this->render('update', array(
@@ -133,7 +116,7 @@ class FuenteFinanciamientoController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $dataProvider = new CActiveDataProvider('FuenteFinanciamiento');
+        $dataProvider = new CActiveDataProvider('AsignacionCenso');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
@@ -143,10 +126,10 @@ class FuenteFinanciamientoController extends Controller {
      * Manages all models.
      */
     public function actionAdmin() {
-        $model = new FuenteFinanciamiento('search');
+        $model = new AsignacionCenso('search');
         $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['FuenteFinanciamiento']))
-            $model->attributes = $_GET['FuenteFinanciamiento'];
+        if (isset($_GET['AsignacionCenso']))
+            $model->attributes = $_GET['AsignacionCenso'];
 
         $this->render('admin', array(
             'model' => $model,
@@ -159,7 +142,7 @@ class FuenteFinanciamientoController extends Controller {
      * @param integer the ID of the model to be loaded
      */
     public function loadModel($id) {
-        $model = FuenteFinanciamiento::model()->findByPk($id);
+        $model = AsignacionCenso::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -170,7 +153,7 @@ class FuenteFinanciamientoController extends Controller {
      * @param CModel the model to be validated
      */
     protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'fuente-financiamiento-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'asignacion-censo-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
