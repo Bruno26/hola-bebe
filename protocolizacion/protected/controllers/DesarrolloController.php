@@ -26,7 +26,7 @@ class DesarrolloController extends Controller {
 //            ),
 //        );
 //    }
-   public function filters() {
+    public function filters() {
         return array(
             'accessControl', // perform access control for CRUD operations
         );
@@ -56,6 +56,7 @@ class DesarrolloController extends Controller {
             ),
         );
     }
+
     /**
      * Specifies the access control rules.
      * This method is used by the 'accessControl' filter.
@@ -81,45 +82,62 @@ class DesarrolloController extends Controller {
         $estado = new Tblestado;
         $municipio = new Tblmunicipio;
         $parroquia = new Tblparroquia;
+        $enteEjecutor = new EnteEjecutor;
+        $fuenteFinacimiento = new FuenteFinanciamiento;
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
         if (isset($_POST['Desarrollo'])) {
-            $model->attributes = $_POST['Desarrollo'];
-            $model->nombre = $_POST['Desarrollo']['nombre'];
-            $model->parroquia_id = $_POST['Desarrollo']['parroquia_id'];
-            $model->descripcion = $_POST['Desarrollo']['descripcion'];
-            $model->urban_barrio = $_POST['Desarrollo']['urban_barrio'];
-            $model->av_call_esq_carr = $_POST['Desarrollo']['av_call_esq_carr'];
-            $model->zona = $_POST['Desarrollo']['zona'];
-            $model->lindero_norte = $_POST['Desarrollo']['lindero_norte'];
-            $model->lindero_este = $_POST['Desarrollo']['lindero_este'];
-            $model->lindero_oeste = $_POST['Desarrollo']['lindero_oeste'];
-            $model->lindero_sur = $_POST['Desarrollo']['lindero_sur'];
-            $model->coordenadas = $_POST['Desarrollo']['coordenadas'];
-            $model->fuente_financiamiento_id = 4;
-            $model->fuente_datos_entrada_id = 5;
-            $model->ente_ejecutor_id = 4;
-            $model->titularidad_del_terreno = isset($_POST['titularidad_del_terreno']) ? true : false;
-            $model->fecha_transferencia = Generico::formatoFecha($_POST['Desarrollo']['fecha_transferencia']);
-            $model->fecha_creacion= 'now()';
-            $model->fecha_actualizacion= 'now()';
-            $model->usuario_id_creacion=  Yii::app()->user->id;;
-            $model->estatus= 5;
-          // echo '<pre>';  var_dump($model); die();
+            $nombre = trim(strtoupper($_POST['Desarrollo']['nombre']));
+            $id_parroquia = $_POST['Desarrollo']['parroquia_id'];
+            $consulta = Desarrollo::model()->findByAttributes(array('nombre' => $nombre, 'parroquia_id' => $id_parroquia));
+            if (empty($consulta)) {
 
-            if ($model->save()){
-            
-                $this->redirect(array('view', 'id' => $model->id_desarrollo));
-            } else{
-                var_dump($model->errors);die();
+
+                $model->attributes = $_POST['Desarrollo'];
+                $model->nombre = $nombre;
+                $model->parroquia_id = $id_parroquia;
+                $model->descripcion = $_POST['Desarrollo']['descripcion'];
+                $model->urban_barrio = $_POST['Desarrollo']['urban_barrio'];
+                $model->av_call_esq_carr = $_POST['Desarrollo']['av_call_esq_carr'];
+                $model->zona = $_POST['Desarrollo']['zona'];
+                $model->lindero_norte = $_POST['Desarrollo']['lindero_norte'];
+                $model->lindero_este = $_POST['Desarrollo']['lindero_este'];
+                $model->lindero_oeste = $_POST['Desarrollo']['lindero_oeste'];
+                $model->lindero_sur = $_POST['Desarrollo']['lindero_sur'];
+                $model->coordenadas = $_POST['Desarrollo']['coordenadas'];
+                $model->ente_ejecutor_id = $_POST['Desarrollo']['ente_ejecutor_id'];
+                $model->fuente_financiamiento_id = $_POST['Desarrollo']['fuente_financiamiento_id'];
+                $model->fuente_datos_entrada_id = 5;
+                $model->titularidad_del_terreno = isset($_POST['titularidad_del_terreno']) ? true : false;
+                $model->fecha_transferencia = Generico::formatoFecha($_POST['Desarrollo']['fecha_transferencia']);
+                $model->fecha_creacion = 'now()';
+                $model->fecha_actualizacion = 'now()';
+                $model->usuario_id_creacion = Yii::app()->user->id;
+                $model->estatus = 5;
+                // echo '<pre>';  var_dump($model); die();
+
+                if ($model->save()) {
+
+                    $this->redirect(array('admin'));
+                } else {
+                    var_dump($model->errors);
+                    die();
+                }
+            } else {
+                $this->render('create', array(
+                    'model' => $model, 'estado' => $estado,
+                    'municipio' => $municipio, 'parroquia' => $parroquia,
+                    'enteEjecutor' => $enteEjecutor, 'fuenteFinacimiento' => $fuenteFinacimiento,
+                    'sms' => 1
+                ));
+                Yii::app()->end();
             }
-            
         }
 
         $this->render('create', array(
-            'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia
+            'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'enteEjecutor' => $enteEjecutor, 'fuenteFinacimiento' => $fuenteFinacimiento
         ));
     }
 

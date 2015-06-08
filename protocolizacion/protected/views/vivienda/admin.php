@@ -25,7 +25,7 @@ return false;
 
 <!--  ****  -->
 
-<h1>Manage Viviendas</h1>
+<h1>Gestión de Viviendas</h1>
 
 <p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -33,7 +33,7 @@ return false;
 	or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
+<?php echo CHtml::link('Busqueda Avanzada','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
 	<?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -51,6 +51,13 @@ return false;
 		'construccion_mt2',
 		'nro_piso',
 		'nro_vivienda',
+		'precio_vivienda',
+            array(
+                'name' => 'fecha_creacion',
+                'value' => 'Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($data->fecha_creacion))',
+                //'value' => '$data->created_date',
+                'header' => 'Fecha y Hora de Registro ',
+            ),
 		/*
 		'sala',
 		'comedor',
@@ -60,7 +67,6 @@ return false;
 		'lindero_este',
 		'lindero_oeste',
 		'coordenadas',
-		'precio_vivienda',
 		'nro_estacionamientos',
 		'descripcion_estac',
 		'nro_habitaciones',

@@ -16,17 +16,14 @@ function conMayusculas(field) {
     field.value = field.value.toUpperCase()
 }
 
-if ($('#titularidad').is(':checked')) {
-} else {
 
-}
-
-function titularidades() {
+function Terreno() {
     if ($('.titularidad').is(":checked")) {
-        $('.fecha_trans').show('fade');
+        $('.fecha').show('fade');
 
     } else {
-        $('.fecha_trans').hide('fade');
+        $('#Desarrollo_fecha_transferencia').val('');
+        $('.fecha').hide('fade');
     }
 }
 
