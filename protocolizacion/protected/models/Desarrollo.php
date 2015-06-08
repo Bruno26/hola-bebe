@@ -139,8 +139,10 @@ class Desarrollo extends CActiveRecord {
 
         $criteria = new CDbCriteria;
 
+        $criteria->order = 'id_desarrollo DESC';
+
         $criteria->compare('id_desarrollo', $this->id_desarrollo);
-        $criteria->compare('nombre', $this->nombre, true);
+        $criteria->compare('LOWER(nombre)',  strtolower($this->nombre), true);
         $criteria->compare('parroquia_id', $this->parroquia_id);
         $criteria->compare('descripcion', $this->descripcion, true);
         $criteria->compare('urban_barrio', $this->urban_barrio, true);
