@@ -1,78 +1,116 @@
 <?php
-$this->breadcrumbs=array(
-	'Desarrollos'=>array('index'),
-	'Manage',
+$this->breadcrumbs = array(
+    'Desarrollos' => array('index'),
+    'Manage',
 );
 
-$this->menu=array(
-array('label'=>'List Desarrollo','url'=>array('index')),
-array('label'=>'Create Desarrollo','url'=>array('create')),
+$this->menu = array(
+    array('label' => 'List Desarrollo', 'url' => array('index')),
+    array('label' => 'Create Desarrollo', 'url' => array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-$('.search-form').toggle();
-return false;
-});
-$('.search-form form').submit(function(){
-$.fn.yiiGridView.update('desarrollo-grid', {
-data: $(this).serialize()
-});
-return false;
-});
+    $('.search-button').click(function(){
+    $('.search-form').toggle();
+    return false;
+    });
+    $('.search-form form').submit(function(){
+    $.fn.yiiGridView.update('desarrollo-grid', {
+    data: $(this).serialize()
+    });
+    return false;
+    });
 ");
 ?>
 
-<h1>Manage Desarrollos</h1>
 
-<p>
-	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
-		&lt;&gt;</b>
-	or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+<?php //echo CHtml::link('Advanced Search', '#', array('class' => 'search-button btn btn-info')); ?>
+<h1>Gestión de Desarrollos</h1>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
+<?php echo CHtml::link('Busqueda Avanzada', '#', array('class' => 'search-button btn')); ?>
 <div class="search-form" style="display:none">
-	<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
+    <?php
+    $this->renderPartial('_search', array(
+        'model' => $model,
+    ));
+    ?>
 </div><!-- search-form -->
 
-<?php $this->widget('booster.widgets.TbGridView',array(
-'id'=>'desarrollo-grid',
-'dataProvider'=>$model->search(),
-'filter'=>$model,
-'columns'=>array(
-		'id_desarrollo',
-		'nombre',
-		'parroquia_id',
-		'descripcion',
-		'urban_barrio',
-		'av_call_esq_carr',
-		/*
-		'zona',
-		'lindero_norte',
-		'lindero_sur',
-		'lindero_este',
-		'lindero_oeste',
-		'coordenadas',
-		'lote_terreno_mt2',
-		'fuente_financiamiento_id',
-		'ente_ejecutor_id',
-		'titularidad_del_terreno',
-		'total_viviendas',
-		'total_viviendas_protocolizadas',
-		'fecha_transferencia',
-		'fuente_datos_entrada_id',
-		'fecha_creacion',
-		'fecha_actualizacion',
-		'usuario_id_creacion',
-		'usuario_id_actualizacion',
-		'programa_id',
-		'total_unidades',
-		*/
-array(
-'class'=>'booster.widgets.TbButtonColumn',
-),
-),
-)); ?>
+<?php
+$this->widget('booster.widgets.TbGridView', array(
+    'id' => 'desarrollo-grid',
+    'dataProvider' => $model->search(),
+    'filter' => $model,
+//    'columns' => array(
+//        'id_desarrollo',
+//        'nombre',
+//        'parroquia_id',
+//        'descripcion',
+//        'urban_barrio',
+//        'av_call_esq_carr',
+//        array(
+//            'class' => 'booster.widgets.TbButtonColumn',
+//        ),
+//    ),
+    'columns' => array(
+        'id_desarrollo' => array(
+            'name' => 'id_desarrollo',
+            'value' => '$data->id_desarrollo',
+        ),
+        'nombre' => array(
+            'header' => 'Descripción de Desarrollo',
+            'name' => 'descripcion',
+            'value' => '$data->descripcion',
+//            'filter' => Maestro::FindMaestrosByPadreSelect(71),
+        ),
+        'ente_ejecutor_id' => array(
+            'name' => 'ente_ejecutor_id',
+            'value' => '$data->enteEjecutor->nombre_ente_ejecutor',
+            'filter' => CHtml::listData(EnteEjecutor::model()->findall(), 'id_ente_ejecutor', 'nombre_ente_ejecutor'),
+        ),
+        'fuente_financiamiento_id' => array(
+            'name' => 'fuente_financiamiento_id',
+            'value' => '$data->fuenteFinanciamiento->nombre_fuente_financiamiento',
+            'filter' => CHtml::listData(FuenteFinanciamiento::model()->findall(), 'id_fuente_financiamiento', 'nombre_fuente_financiamiento'),
+        ),
+        'Estado' => array(
+            'header' => 'Estado',
+            'name' => 'nombre',
+            'value' => '$data->fkParroquia->clvmunicipio0->clvestado0->strdescripcion',
+//            'filter' => Maestro::FindMaestrosByPadreSelect(71),
+        ),
+        array(
+            'name' => 'fecha_creacion',
+            'value' => 'Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($data->fecha_creacion))',
+        //'header' => 'Creación',
+        ),
+        array(
+            'class' => 'booster.widgets.TbButtonColumn',
+            'header' => 'Acciones',
+            'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
+            'template' => '{ver} {modificar}',
+            'buttons' => array(
+                'ver' => array(
+                    'label' => 'Ver',
+                    'icon' => 'eye-open',
+                    'size' => 'medium',
+//                    'url' => 'Yii::app()->createUrl("vswSolicitudRecibido/view/", array("id"=>$data->id_solicitud))',
+                ),
+                'modificar' => array(
+                    'label' => 'Modificar',
+                    'icon' => 'glyphicon glyphicon-pencil',
+                    'size' => 'medium',
+//                    'url' => 'Yii::app()->createUrl("vswSolicitudRecibido/asignar/", array("id"=>$data->id_solicitud))',
+//                    'visible' => 'Asignar($data->username);'
+                ),
+//                'editar' => array(
+//                    'label' => 'Editar',
+//                    'icon' => 'glyphicon glyphicon-pencil',
+//                    'size' => 'medium',
+//                    'url' => 'Yii::app()->createUrl("vswSolicitudRecibido/editar/", array("id"=>$data->id_solicitud))',
+//                ),
+            ),
+        ),
+    ),
+));
+?>

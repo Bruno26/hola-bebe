@@ -129,7 +129,6 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
                 )
         );
         ?>
-        <?php //echo $form->textFieldGroup($model, 'lindero_norte', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));   ?>
     </div>
     <div class="col-md-6">
 
@@ -278,54 +277,4 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
         );
         ?>
     </div>
-</div>
-
-
-
-<?php // echo $form->errorSummary($model);    ?>
-
-
-
-
-
-
-
-
-
-
-
-<?php //echo $form->textFieldGroup($model, 'fuente_financiamiento_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5'))));    ?>
-
-<?php //echo $form->textFieldGroup($model, 'ente_ejecutor_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5'))));    ?>
-
-<?php //echo $form->checkBoxGroup($model, 'titularidad_del_terreno');    ?>
-
-<?php //echo $form->textFieldGroup($model, 'total_viviendas', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5'))));    ?>
-
-<?php //echo $form->textFieldGroup($model, 'total_viviendas_protocolizadas', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5'))));    ?>
-
-<?php //echo $form->textFieldGroup($model, 'fecha_transferencia', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5'))));    ?>
-
-<?php //echo $form->textFieldGroup($model, 'fuente_datos_entrada_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5'))));    ?>
-
-<?php //echo $form->textFieldGroup($model, 'fecha_creacion', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5'))));    ?>
-
-<?php //echo $form->textFieldGroup($model, 'fecha_actualizacion', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5'))));    ?>
-
-<?php //echo $form->textFieldGroup($model, 'usuario_id_creacion', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5'))));    ?>
-
-<?php //echo $form->textFieldGroup($model, 'usuario_id_actualizacion', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5'))));    ?>
-
-<?php //echo $form->textFieldGroup($model, 'programa_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5'))));    ?>
-
-<?php //echo $form->textFieldGroup($model, 'total_unidades', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5'))));   ?>
-
-<div class="form-actions">
-    <?php
-    //$this->widget('booster.widgets.TbButton', array(
-    //   'buttonType' => 'submit',
-    //   'context' => 'primary',
-    //  'label' => $model->isNewRecord ? 'Create' : 'Save',
-    // ));
-    ?>
 </div>

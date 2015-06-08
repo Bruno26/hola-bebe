@@ -1,5 +1,18 @@
 <?php
+#$this->breadcrumbs=array(
+#	'Oficinas'=>array('index'),
+#	'Create',
+#);
 
+#$this->menu=array(
+#array('label'=>'List Oficina','url'=>array('index')),
+#array('label'=>'Manage Oficina','url'=>array('admin')),
+#);
+?>
+
+
+
+<?php
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'id' => 'oficina-form',
     'enableAjaxValidation' => false,
@@ -11,25 +24,26 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         )));
 ?>
 
-<h1>Registrar Abogados</h1>
+<h1 class="text-center">Registrar Oficina</h1>
+
+<?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
 
 <div class="row">
     <div class="col-md-12">
     <?php 
     $this->widget(
             'booster.widgets.TbPanel', array(
-        'title' => 'Abogados',
-        'context' => 'danger',
+        'title' => 'Oficina',
+        'context' => 'primary',
         'headerIcon' => 'user',
         //'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
-        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
+        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
         #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
             )
     );
     ?>
-    </div>
+        </div>
 </div>
-<?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
 
 <div class="well">
     <div class="pull-center" style="text-align: right;">
