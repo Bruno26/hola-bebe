@@ -64,3 +64,27 @@ if (isset($error) && !empty($error)) {
 </div>
 <?php
 $this->endWidget();
+?>
+<div class="row">
+    <div class='col-md-12'>
+        <?php
+        $this->widget(
+                'booster.widgets.TbExtendedGridView', array(
+            'type' => 'striped bordered',
+            'responsiveTable' => true,
+            'id' => 'listado_servicios',
+            'dataProvider' => new CActiveDataProvider('FuenteFinanciamiento', array(
+                    )),
+            'template' => "{items}",
+            'columns' => array(
+                array(
+                    'name' => 'nombre_fuente_financiamiento',
+                    'header' => 'Listado de Fuente de Financiamiento',
+                    'value' => '$data->nombre_fuente_financiamiento',
+                ),
+            )
+                )
+        );
+        ?>
+    </div>
+</div>
