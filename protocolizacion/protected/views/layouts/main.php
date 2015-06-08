@@ -112,8 +112,29 @@
 
                                     <li>
                                         <a href="<?php echo $this->createUrl('/vivienda/create'); ?>">
-                                            <i class="glyphicon glyphicon-file"></i>
+                                            <i class="glyphicon glyphicon-pencil"></i>
                                             <span>Vivienda</span>
+                                        </a>
+                                    </li>                           
+
+                                </ul>
+                                <ul class="sub-menu">
+
+                                    <li>
+                                        <a href="<?php echo $this->createUrl('/oficina/create'); ?>">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                            <span>Oficina</span>
+                                        </a>
+                                    </li>                           
+
+                                </ul>
+                                
+                                <ul class="sub-menu">
+
+                                    <li>
+                                        <a href="<?php echo $this->createUrl('/abogados/create'); ?>">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                            <span>Abogados</span>
                                         </a>
                                     </li>                           
 

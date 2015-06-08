@@ -109,6 +109,15 @@ class Abogados extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public static function getListvendedor() {
+
+        return CHtml::listData(Oficina::model()->findAll(array(
+            'select' => "id_us_usuario, var_usuario ||' - '|| var_nombre1 ||' '|| var_apellido1 as var_usuario", 
+            'condition' => "var_estatus = 'act' AND id_li_us_cargo = '4'", 
+            'order' => "var_usuario ASC")), 
+                'id_us_usuario', 'var_usuario');
+    }
 
 	/**
 	 * Returns the static model of the specified AR class.

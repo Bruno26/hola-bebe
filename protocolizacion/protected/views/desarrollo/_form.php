@@ -111,6 +111,8 @@
                 )
         );
         ?>
+        
+  
         <?php //echo $form->textFieldGroup($model, 'lindero_norte', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200)))); ?>
     </div>
     <div class="col-md-6">
