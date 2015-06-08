@@ -93,8 +93,6 @@ class DesarrolloController extends Controller {
             $id_parroquia = $_POST['Desarrollo']['parroquia_id'];
             $consulta = Desarrollo::model()->findByAttributes(array('nombre' => $nombre, 'parroquia_id' => $id_parroquia));
             if (empty($consulta)) {
-
-
                 $model->attributes = $_POST['Desarrollo'];
                 $model->nombre = $nombre;
                 $model->parroquia_id = $id_parroquia;
@@ -111,7 +109,7 @@ class DesarrolloController extends Controller {
                 $model->fuente_financiamiento_id = $_POST['Desarrollo']['fuente_financiamiento_id'];
                 $model->fuente_datos_entrada_id = 5;
                 $model->titularidad_del_terreno = isset($_POST['titularidad_del_terreno']) ? true : false;
-                $model->fecha_transferencia = Generico::formatoFecha($_POST['Desarrollo']['fecha_transferencia']);
+                $model->fecha_transferencia = ($model->titularidad_del_terreno) ? Generico::formatoFecha($_POST['Desarrollo']['fecha_transferencia']) : '0001-01-01 00:00:00';
                 $model->fecha_creacion = 'now()';
                 $model->fecha_actualizacion = 'now()';
                 $model->usuario_id_creacion = Yii::app()->user->id;

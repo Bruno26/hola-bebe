@@ -71,7 +71,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
     <div class="col-md-4">
 
         <?php
-        echo $form->dropDownListGroup($parroquia, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar',),
+        echo $form->dropDownListGroup($model, 'parroquia_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar',),
             'widgetOptions' => array(
                 'htmlOptions' => array(
                     'empty' => 'SELECCIONE',
