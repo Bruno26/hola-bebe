@@ -23,9 +23,11 @@ Yii::app()->clientScript->registerScript('search', "
 ");
 ?>
 
-<h1 class="text-center">Listado de Desarrollos</h1>
 
 <?php //echo CHtml::link('Advanced Search', '#', array('class' => 'search-button btn btn-info')); ?>
+<h1>Gestión de Desarrollos</h1>
+
+<?php echo CHtml::link('Busqueda Avanzada', '#', array('class' => 'search-button btn')); ?>
 <div class="search-form" style="display:none">
     <?php
     $this->renderPartial('_search', array(
@@ -61,11 +63,26 @@ $this->widget('booster.widgets.TbGridView', array(
             'value' => '$data->descripcion',
 //            'filter' => Maestro::FindMaestrosByPadreSelect(71),
         ),
+        'ente_ejecutor_id' => array(
+            'name' => 'ente_ejecutor_id',
+            'value' => '$data->enteEjecutor->nombre_ente_ejecutor',
+            'filter' => CHtml::listData(EnteEjecutor::model()->findall(), 'id_ente_ejecutor', 'nombre_ente_ejecutor'),
+        ),
+        'fuente_financiamiento_id' => array(
+            'name' => 'fuente_financiamiento_id',
+            'value' => '$data->fuenteFinanciamiento->nombre_fuente_financiamiento',
+            'filter' => CHtml::listData(FuenteFinanciamiento::model()->findall(), 'id_fuente_financiamiento', 'nombre_fuente_financiamiento'),
+        ),
         'Estado' => array(
             'header' => 'Estado',
             'name' => 'nombre',
             'value' => '$data->fkParroquia->clvmunicipio0->clvestado0->strdescripcion',
 //            'filter' => Maestro::FindMaestrosByPadreSelect(71),
+        ),
+        array(
+            'name' => 'fecha_creacion',
+            'value' => 'Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($data->fecha_creacion))',
+        //'header' => 'Creación',
         ),
         array(
             'class' => 'booster.widgets.TbButtonColumn',
@@ -92,7 +109,6 @@ $this->widget('booster.widgets.TbGridView', array(
 //                    'size' => 'medium',
 //                    'url' => 'Yii::app()->createUrl("vswSolicitudRecibido/editar/", array("id"=>$data->id_solicitud))',
 //                ),
-
             ),
         ),
     ),

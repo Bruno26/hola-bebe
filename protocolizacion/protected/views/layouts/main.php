@@ -81,6 +81,18 @@
                                     <span>Beneficiario</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="<?php echo $this->createUrl('/oficina/create'); ?>">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                    <span>Oficina</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->createUrl('/abogados/create'); ?>">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                    <span>Abogados</span>
+                                </a>
+                            </li>
                             <li class="sub-menu">
                                 <a href="javascript:;">
                                     <i class="glyphicon glyphicon-stats"></i>
@@ -105,6 +117,7 @@
                                             <i class="glyphicon glyphicon-map-marker"></i>
                                             <span>Unidad Habitacional</span>
                                         </a>
+
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/unidadHabitacional/create'); ?>">Cargar Nuevo</a></li>
                                             <li><a href="<?php echo $this->createUrl('#'); ?>">Listado</a></li>  
@@ -139,7 +152,7 @@
             <div id="expirado"></div>
 
             <!--            <footer class='container col-md-12 col-xs-12 text-center'>
-                            Copyright &copy; <?php // echo date('Y');                                                                     ?> by My Company.<br/>
+                            Copyright &copy; <?php // echo date('Y');                                                                        ?> by My Company.<br/>
                             All Rights Reserved.<br/>
             <?php // echo Yii::powered(); ?>
                         </footer>-->

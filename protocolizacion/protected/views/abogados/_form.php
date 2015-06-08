@@ -1,38 +1,61 @@
-<?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
-	'id'=>'abogados-form',
-	'enableAjaxValidation'=>false,
-)); ?>
+<p class="help-block">Los campos con <span class="required">*</span> son obligatorios.</p>
 
-<p class="help-block">Fields with <span class="required">*</span> are required.</p>
+<?php #echo $form->errorSummary($model); ?>
 
-<?php echo $form->errorSummary($model); ?>
-
-	<?php echo $form->textFieldGroup($model,'persona_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php echo $form->textFieldGroup($model,'inpreabogado',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>20)))); ?>
-
-	<?php echo $form->textFieldGroup($model,'tipo_abogado_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php echo $form->textFieldGroup($model,'oficina_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php echo $form->textFieldGroup($model,'observaciones',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200)))); ?>
-
-	<?php echo $form->textFieldGroup($model,'estatus',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php echo $form->textFieldGroup($model,'fecha_creacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php echo $form->textFieldGroup($model,'fecha_actualizacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php echo $form->textFieldGroup($model,'usuario_id_creacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php echo $form->textFieldGroup($model,'usuario_id_actualizacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-<div class="form-actions">
-	<?php $this->widget('booster.widgets.TbButton', array(
-			'buttonType'=>'submit',
-			'context'=>'primary',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
-		)); ?>
+<div class="row">
+    <div class="row-fluid">
+        <div class="col-md-6">
+            <?php echo $form->textFieldGroup($model,'persona_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+        </div>
+        <div class="col-md-6">
+            <?php echo $form->textFieldGroup($model,'inpreabogado',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>20)))); ?>
+        </div>
+    </div>
 </div>
 
-<?php $this->endWidget(); ?>
+<div class="row">
+    <div class="row-fluid">
+        <div class="col-md-6">
+            <?php #echo $form->textFieldGroup($model, 'tipo_abogado_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 10)))); ?>
+            <?php echo $form->dropDownListGroup($model, 'tipo_abogado_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+                'widgetOptions' => array(
+                    #'data' => CHtml::listData(Oficina::model()->findAll(), 'id_oficina', 'nombre'),
+                    'htmlOptions' => array('empty' => 'SELECCIONE'),
+                )
+                    )
+            );
+            ?>
+        </div>
+        <div class="col-md-6">
+            <?php
+            echo $form->dropDownListGroup($model, 'oficina_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+                'widgetOptions' => array(
+                    'data' => CHtml::listData(Oficina::model()->findAll(), 'id_oficina', 'nombre'),
+                    'htmlOptions' => array('empty' => 'SELECCIONE'),
+                )
+                    )
+            );
+            ?>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <?php
+                echo $form->textAreaGroup(
+                        $model, 'observaciones', array(
+                    'wrapperHtmlOptions' => array(
+                        'class' => 'col-sm-5',
+                    ),
+                    'widgetOptions' => array(
+                        'htmlOptions' => array('rows' => 2, 'maxlength' => 200,
+                        ),
+                    )
+                        )
+                );
+            ?>
+        </div>
+    </div>
+</div>

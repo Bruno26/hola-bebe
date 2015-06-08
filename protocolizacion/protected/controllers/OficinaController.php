@@ -1,12 +1,11 @@
 <?php
 
-class AbogadosController extends Controller {
-
+class OficinaController extends Controller {
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
-//    public $layout = '//layouts/column2';
+//public $layout='//layouts/column2';
 
     /**
      * @return array action filters
@@ -47,6 +46,8 @@ class AbogadosController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        
+        
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -57,23 +58,32 @@ class AbogadosController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new Abogados;
+        
+        $model = new Oficina;
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Abogados'])) {
-            $model->attributes = $_POST['Abogados'];
-            $model->estatus = 2;
+
+        if (isset($_POST['Oficina'])) {
+            //print_r($_POST['Oficina']);die;
+            $model->attributes = $_POST['Oficina'];
+            $model->estatus = 44;
             $model->usuario_id_creacion = Yii::app()->user->id;
             $model->fecha_creacion = 'now()';
             $model->fecha_actualizacion = 'now()';
+                    
+                    
+//            $model->fk
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                $this->redirect(array('view', 'id' => $model->id_oficina));
         }
 
         $this->render('create', array(
-            'model' => $model,
+            'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia
         ));
     }
 
@@ -88,10 +98,10 @@ class AbogadosController extends Controller {
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Abogados'])) {
-            $model->attributes = $_POST['Abogados'];
+        if (isset($_POST['Oficina'])) {
+            $model->attributes = $_POST['Oficina'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                $this->redirect(array('view', 'id' => $model->id_oficina));
         }
 
         $this->render('update', array(
@@ -120,7 +130,7 @@ class AbogadosController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $dataProvider = new CActiveDataProvider('Abogados');
+        $dataProvider = new CActiveDataProvider('Oficina');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
@@ -130,10 +140,10 @@ class AbogadosController extends Controller {
      * Manages all models.
      */
     public function actionAdmin() {
-        $model = new Abogados('search');
+        $model = new Oficina('search');
         $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['Abogados']))
-            $model->attributes = $_GET['Abogados'];
+        if (isset($_GET['Oficina']))
+            $model->attributes = $_GET['Oficina'];
 
         $this->render('admin', array(
             'model' => $model,
@@ -146,7 +156,7 @@ class AbogadosController extends Controller {
      * @param integer the ID of the model to be loaded
      */
     public function loadModel($id) {
-        $model = Abogados::model()->findByPk($id);
+        $model = Oficina::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -157,7 +167,7 @@ class AbogadosController extends Controller {
      * @param CModel the model to be validated
      */
     protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'abogados-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'oficina-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
