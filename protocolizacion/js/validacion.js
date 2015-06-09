@@ -52,7 +52,7 @@ function buscarPersona(nacionalidad, cedula) {
 //                bootbox.alert('Debe Completar el campo Cédula');
 //            } else {
 //
-                $('#Oficina_primer_nombre').val(datos.PRIMERNOMBRE);
+                $('#Oficina_primer_nombre').val(datos.PRIMER_NOMBRE);
 //                $('#Oficina_primer_apellido').val(datos.PRIMER_APELLIDO);
 //                
 //            }
