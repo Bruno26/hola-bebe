@@ -102,6 +102,4 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     </div>
     <?php endif; ?>
 </div>
-
-
 <?php $this->endWidget(); ?>
