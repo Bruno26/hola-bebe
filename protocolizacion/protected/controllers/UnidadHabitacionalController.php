@@ -81,7 +81,7 @@ class UnidadHabitacionalController extends Controller {
                 $model->total_unidades = '0';
                 $model->ano = $_POST['UnidadHabitacional']['ano'];
                 $model->tipo_documento_id = $_POST['UnidadHabitacional']['tipo_documento_id'];
-                $model->nro_documento = $_POST['UnidadHabitacional']['nro_documento'];
+//                $model->num_protocolo = $_POST['UnidadHabitacional']['num_protocolo'];
                 $model->folio_real = $_POST['UnidadHabitacional']['folio_real'];
                 $model->asiento_registral = $_POST['UnidadHabitacional']['asiento_registral'];
                 $model->tomo = $_POST['UnidadHabitacional']['tomo'];

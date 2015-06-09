@@ -133,17 +133,24 @@
 
 <div class="row">
     <div class='row-fluid'>
-        <div class='col-md-4'>
-            <?php
-            echo $form->textFieldGroup($model, 'nro_documento', array('widgetOptions' => array('htmlOptions' => array('class' => ''))));
-            ?>
-        </div>
-        <div class='col-md-4'>
+        <!--<div class='col-md-4'>-->
+        <?php
+//        echo $form->dropDownListGroup($model, 'num_protocolo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+//            'widgetOptions' => array(
+//                'data' => Maestro::FindMaestrosByPadreSelect(80, 'descripcion DESC'),
+//                'htmlOptions' => array('empty' => 'SELECCIONE'),
+//            )
+//                )
+//        );
+//            echo $form->textFieldGroup($model, 'num_protocolo', array('widgetOptions' => array('htmlOptions' => array('class' => ''))));
+        ?>
+        <!--</div>-->
+        <div class='col-md-6'>
             <?php
             echo $form->textFieldGroup($model, 'tomo', array('widgetOptions' => array('htmlOptions' => array('class' => ''))));
             ?>
         </div>
-        <div class='col-md-4'>
+        <div class='col-md-6'>
             <?php
             echo $form->dropDownListGroup($model, 'tipo_documento_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
                 'widgetOptions' => array(

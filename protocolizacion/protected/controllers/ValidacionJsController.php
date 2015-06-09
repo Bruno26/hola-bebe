@@ -38,16 +38,16 @@ class ValidacionJsController extends Controller {
         $cedula = (int) $_POST['cedula'];
         $nacio = $_POST['nacionalidad'];
         $result = ConsultaOracle::getPersona($nacio, $cedula);
-        if ($result == 1) {
-            $saime = ConsultaOracle::getSaime($nacio, $cedula);
+//        if ($result == 1) {
+//            $saime = ConsultaOracle::getSaime($nacio, $cedula);
 //            var_dump($saime);die;
-            if ($saime == 1)
-                echo json_encode(2); //en caso que no exista en saime
-            else
-                echo CJSON::encode($saime);
-        }else {
+//            if ($saime == 1)
+//                echo json_encode(2); //en caso que no exista en saime
+//            else
+//                echo CJSON::encode($saime);
+//        }else {
             echo json_encode($result);
-        }
+//        }
 //        var_dump($result);die;
     }
 

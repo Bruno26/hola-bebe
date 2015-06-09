@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Reasignacion Viviendas'=>array('index'),
+	'Beneficiario Temporals'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-array('label'=>'List ReasignacionVivienda','url'=>array('index')),
-array('label'=>'Create ReasignacionVivienda','url'=>array('create')),
+array('label'=>'List BeneficiarioTemporal','url'=>array('index')),
+array('label'=>'Create BeneficiarioTemporal','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,7 +15,7 @@ $('.search-form').toggle();
 return false;
 });
 $('.search-form form').submit(function(){
-$.fn.yiiGridView.update('reasignacion-vivienda-grid', {
+$.fn.yiiGridView.update('beneficiario-temporal-grid', {
 data: $(this).serialize()
 });
 return false;
@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1>Manage Reasignacion Viviendas</h1>
+<h1>Manage Beneficiario Temporals</h1>
 
 <p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -39,19 +39,20 @@ return false;
 </div><!-- search-form -->
 
 <?php $this->widget('booster.widgets.TbGridView',array(
-'id'=>'reasignacion-vivienda-grid',
+'id'=>'beneficiario-temporal-grid',
 'dataProvider'=>$model->search(),
 'filter'=>$model,
 'columns'=>array(
-		'id_reasignacion_vivienda',
-		'beneficiario_id_anterior',
-		'beneficiario_id_actual',
-		'vivienda_id',
-		'tipo_reasignacion_id',
-		'persona_id_autoriza',
+		'id_beneficiario_temporal',
+		'persona_id',
+		'desarrollo_id',
+		'unidad_habitacional_id',
+		'id_control',
+		'nacionalidad',
 		/*
-		'observaciones',
-		'fecha_reasignacion',
+		'cedula',
+		'nombre_completo',
+		'nombre_archivo',
 		'fecha_creacion',
 		'fecha_actualizacion',
 		'usuario_id_creacion',

@@ -31,7 +31,7 @@ function Terreno() {
 /*
  * FUNCION QUE BUSCA EN SAIME Y EN PERSONA POR NUMERO DE CEDULA Y NACIONALIDAD
  */
-function buscarPersona(nacionalidad, cedula) {
+function buscarPersonaOficina(nacionalidad, cedula) {
 
     if (nacionalidad == 'SELECCIONE') {
         bootbox.alert('Verifique que la nacionalidad no esten vacios');
@@ -53,8 +53,12 @@ function buscarPersona(nacionalidad, cedula) {
 //                bootbox.alert('Debe Completar el campo Cédula');
 //            } else {
 //
-            $('#Oficina_primer_nombre').val(datos.PRIMER_NOMBRE);
-//                $('#Oficina_primer_apellido').val(datos.PRIMER_APELLIDO);
+
+            $('#Oficina_primer_nombre').val(datos.PRIMERNOMBRE);
+            $('#Oficina_persona_id_jefe').val(datos.ID);
+            $('#Oficina_segundo_nombre').val(datos.SEGUNDONOMBRE);
+            $('#Oficina_primer_apellido').val(datos.PRIMERAPELLIDO);
+            $('#Oficina_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
 //                
 //            }
         },
@@ -115,13 +119,86 @@ function buscarBenefAnterior(nacionalidad, cedula) {
                     return false;
                 }
             }
+
+//            alert(datos);
+//            if (datos == 1) {
+//                bootbox.alert('Debe Completar el campo Cédula');
+//            } else {
+//
+
         },
         error: function (datos) {
             bootbox.alert('Ocurrio un error');
         }
+
     });
 }
 
+function buscarPersonaAbogado(nacionalidad, cedula) {
 
+    if (nacionalidad == 'SELECCIONE') {
+        bootbox.alert('Verifique que la nacionalidad no esten vacios');
+        return false;
+    }
+    if (cedula == '') {
+        bootbox.alert('Verifique que la cédula no esten vacios');
+        return false;
+    }
+    $.ajax({
+        url: baseUrl + '/protocolizacion' + "/ValidacionJs/BuscarPersonas",
+        async: true,
+        type: 'POST',
+        data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
+        dataType: 'json',
+        success: function (datos) {
+//            alert(datos);
+//            if (datos == 1) {
+//                bootbox.alert('Debe Completar el campo Cédula');
+//            } else {
+//
+            $('#Abogados_primer_nombre').val(datos.PRIMERNOMBRE);
+            $('#Abogados_persona_id').val(datos.ID);
+            $('#Abogados_primer_apellido').val(datos.PRIMERAPELLIDO);
+//                
+//            }
+        },
+        error: function (datos) {
+            bootbox.alert('Ocurrio un error');
+        }
+    })
+}
 
+function buscarPersonaCensoA(nacionalidad, cedula) {
+
+    if (nacionalidad == 'SELECCIONE') {
+        bootbox.alert('Verifique que la nacionalidad no esten vacios');
+        return false;
+    }
+    if (cedula == '') {
+        bootbox.alert('Verifique que la cédula no esten vacios');
+        return false;
+    }
+    $.ajax({
+        url: baseUrl + '/protocolizacion' + "/ValidacionJs/BuscarPersonas",
+        async: true,
+        type: 'POST',
+        data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
+        dataType: 'json',
+        success: function (datos) {
+//            alert(datos);
+//            if (datos == 1) {
+//                bootbox.alert('Debe Completar el campo Cédula');
+//            } else {
+//
+            $('#AsignacionCenso_primer_nombre').val(datos.PRIMERNOMBRE);
+            $('#AsignacionCenso_persona_id').val(datos.ID);
+            $('#AsignacionCenso_primer_apellido').val(datos.PRIMERAPELLIDO);
+//                
+//            }
+        },
+        error: function (datos) {
+            bootbox.alert('Ocurrio un error');
+        }
+    })
+}
 

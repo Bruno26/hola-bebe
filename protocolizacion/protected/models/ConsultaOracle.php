@@ -42,7 +42,7 @@ class ConsultaOracle extends CActiveRecord {
         if (empty($result)) {
             return 1;
         } else {
-            return $result;
+            return $result[0];
         }
     }
 
