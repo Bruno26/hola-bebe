@@ -48,6 +48,7 @@ class Programa extends CActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'desarrollos' => array(self::HAS_MANY, 'Desarrollo', 'programa_id'),
+
         );
     }
 

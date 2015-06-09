@@ -76,7 +76,7 @@
         <div class='col-md-6'>
             <?php echo $form->textFieldGroup($model,'persona_id_jefe',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
         </div>
-</div>
+    </div>
 </div>
       <div class="row">
     <div class="row-fluid">
@@ -98,8 +98,6 @@
         </div>
 </div>
 </div> 
- 
-</div>
 <div class="form-actions">
 	<?php /*$this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'submit',

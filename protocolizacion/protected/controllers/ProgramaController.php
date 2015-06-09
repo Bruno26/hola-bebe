@@ -64,8 +64,12 @@ class ProgramaController extends Controller {
 
         if (isset($_POST['Programa'])) {
             $model->attributes = $_POST['Programa'];
+            $model->estatus = 47;
+            $model->usuario_id_creacion = Yii::app()->user->id;
+            $model->fecha_creacion = 'now()';
+            $model->fecha_actualizacion = 'now()';
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_programa));
+                $this->redirect(array('create', 'id' => $model->id_programa));
         }
 
         $this->render('create', array(
