@@ -25,7 +25,6 @@ class SiteController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-     
         $TypeUser = Generico::TipoUsuario();
         if ($TypeUser == 2) {
             $this->layout = 'main';
