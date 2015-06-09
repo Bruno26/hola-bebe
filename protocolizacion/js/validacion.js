@@ -42,7 +42,7 @@ function buscarPersonaOficina(nacionalidad, cedula) {
         return false;
     }
     $.ajax({
-        url: baseUrl + '/protocolizacion' + "/ValidacionJs/BuscarPersonas",
+        url: baseUrl +  "/ValidacionJs/BuscarPersonas",
         async: true,
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
@@ -132,7 +132,7 @@ function buscarPersonaAbogado(nacionalidad, cedula) {
         return false;
     }
     $.ajax({
-        url: baseUrl + '/protocolizacion' + "/ValidacionJs/BuscarPersonas",
+        url: baseUrl +  "/ValidacionJs/BuscarPersonas",
         async: true,
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
@@ -166,7 +166,7 @@ function buscarPersonaCensoA(nacionalidad, cedula) {
         return false;
     }
     $.ajax({
-        url: baseUrl + '/protocolizacion' + "/ValidacionJs/BuscarPersonas",
+        url: baseUrl + "/ValidacionJs/BuscarPersonas",
         async: true,
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
