@@ -85,3 +85,4 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 </div>
 
 <?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
