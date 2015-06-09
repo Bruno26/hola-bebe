@@ -137,7 +137,7 @@
             <?php
             echo $form->dropDownListGroup($model, 'num_protocolo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
                 'widgetOptions' => array(
-                    'data' => Maestro::FindMaestrosByPadreSelect(80, 'descripcion DESC'),
+                    'data' => Maestro::FindMaestrosByPadreSelect(144, 'descripcion DESC'),
                     'htmlOptions' => array('empty' => 'SELECCIONE'),
                 )
                     )
