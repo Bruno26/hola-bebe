@@ -180,8 +180,8 @@
                                     <span>Censo Socioeconómico</span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="<?php echo $this->createUrl('#'); ?>">Asignación de Censo</a></li>
-                                    <li><a href="<?php echo $this->createUrl('#'); ?>">Listado de Asignación de Censo</a></li>
+                                    <li><a href="<?php echo $this->createUrl('/asignacionCenso/create'); ?>">Asignación de Censo</a></li>
+                                    <li><a href="<?php echo $this->createUrl('/asignacionCenso/admin'); ?>">Listado de Asignación de Censo</a></li>
                                     <li><a href="<?php echo $this->createUrl('#'); ?>">Censo</a></li>
                                    <li><a href="<?php echo $this->createUrl('#'); ?>">Listado de Censo</a></li>
                                    <li><a href="<?php echo $this->createUrl('#'); ?>">Reasignación de Vivienda</a></li>
