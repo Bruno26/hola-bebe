@@ -130,12 +130,6 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 </div> 
 
 </div>
-<div class="form-actions">
-    <?php /* $this->widget('booster.widgets.TbButton', array(
-      'buttonType'=>'submit',
-      'context'=>'primary',
-      'label'=>$model->isNewRecord ? 'Create' : 'Save',
-      )); */ ?>
-</div>
+
 
 <?php #$this->endWidget(); ?>
