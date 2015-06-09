@@ -70,8 +70,9 @@ function buscarPersonaOficina(nacionalidad, cedula) {
 
 /*
  * FUNCION QUE BUSCA EN SAIME POR NUMERO DE CEDULA Y NACIONALIDAD
+ * VAR caso= 1 CONSULTA BENEFICIARIO ANTERIO ELSE BENEFICIARIOACUAL
  */
-function buscarBenefAnterior(nacionalidad, cedula) {
+function buscarBenefAnterior(nacionalidad, cedula, caso) {
 
     if (nacionalidad == '') {
         bootbox.alert('Verifique que la nacionalidad no esté vacio');
@@ -88,44 +89,30 @@ function buscarBenefAnterior(nacionalidad, cedula) {
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
         success: function (datos) {
-            if (!datos) {
-                bootbox.alert('Debe Completar el campo Cédula');
-                $('.limpiar').val('');
-                $('#Persona_sexo').val('');
-            } else {
-                if (datos != 2) {
-                    if (datos['intcedula'] == null) {
-                        $('#Persona_nombres').val('').attr("readonly", false);
-                        $('#Persona_apellidos').val('').attr("readonly", false);
-                        $('#Persona_fecha_nac').val('').attr("readonly", false);
-                        $('#Persona_edad').val(datos['edad']);
-                    } else {
-                        if (datos['edad'] < 15) {
-                            bootbox.alert('Debes reunir ciertos requisitos de edad, no puede ser menor de 15 años.');
-                            $('.limpiar').val('');
-                            $('#Persona_sexo').val('');
-                            return false;
-                        } else {
-                            $('#Persona_nombres').val(datos['strnombre_primer'] + ' ' + datos['strnombre_segundo']).attr("readonly", true);
-                            $('#Persona_apellidos').val(datos['strapellido_primer'] + ' ' + datos['strapellido_segundo']).attr("readonly", true);
-                            $('#Persona_fecha_nac').val(datos['dtmnacimiento']).attr("readonly", true); //EDAD
-                            $('#Persona_edad').val(datos['edad']);
-                        }
-                    }
+            if (caso == 1) {
+                if (datos == 1) {
+                    $('#ReasignacionVivienda_nombreCompletoAnterior').val('');
+                    $('#ReasignacionVivienda_beneficiario_id_anterior').val('');
+                    $('#ReasignacionVivienda_cedulaAnterior').val('');
+                    $('#ReasignacionVivienda_nacionalidadAnterior').val('');
+                    bootbox.alert('Esta persona no se encuentra registrada.');
                 } else {
-                    bootbox.alert('Usted ya se encuentra registrada en el sistema de UNAMUJER.');
-                    $('.limpiar').val('');
-                    $('#Persona_sexo').val('');
-                    return false;
+                    $('#ReasignacionVivienda_nombreCompletoAnterior').val(datos.nombre_completo);
+                    $('#ReasignacionVivienda_beneficiario_id_anterior').val(datos.persona_id);
                 }
+            } else {
+                if (datos == 1) {
+                    $('#ReasignacionVivienda_nombreCompletoActual').val('');
+                    $('#ReasignacionVivienda_beneficiario_id_actual').val('');
+                    $('#ReasignacionVivienda_cedulaActual').val('');
+                    $('#ReasignacionVivienda_nacionalidadActual').val('');
+                    bootbox.alert('Esta persona no se encuentra registrada.');
+                } else {
+                    $('#ReasignacionVivienda_nombreCompletoActual').val(datos.nombre_completo);
+                    $('#ReasignacionVivienda_beneficiario_id_actual').val(datos.persona_id);
+                }
+
             }
-
-//            alert(datos);
-//            if (datos == 1) {
-//                bootbox.alert('Debe Completar el campo Cédula');
-//            } else {
-//
-
         },
         error: function (datos) {
             bootbox.alert('Ocurrio un error');

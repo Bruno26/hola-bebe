@@ -33,10 +33,8 @@ class ReasignacionVivienda extends CActiveRecord {
     public $cedulaActual;
     public $nacionalidadAnterior;
     public $nacionalidadActual;
-    public $nombreAnterior;
-    public $nombreActual;
-    public $apellidoAnterior;
-    public $apellidoActual;
+    public $nombreCompletoAnterior;
+    public $nombreCompletoActual;
 
     /**
      * @return string the associated database table name
@@ -99,12 +97,10 @@ class ReasignacionVivienda extends CActiveRecord {
             'estatus' => 'Estatus',
             'cedulaAnterior' => 'Cédula del Beneficiario Anterior',
             'nacionalidadAnterior' => 'Nacionalidad del Beneficiario Anterior',
-            'nombreAnterior' => 'Nombre del Beneficiario Anterior',
-            'apellidoAnterior' => 'Apellido del Beneficiario Anterior',
+            'nombreCompletoAnterior' => 'Nombre Completo del Beneficiario Anterior',
             'cedulaActual' => 'Cédula del Beneficiario Actual',
             'nacionalidadActual' => 'Nacionalidad del Beneficiario Actual',
-            'nombreActual' => 'Nombre del Beneficiario Actual',
-            'apellidoActual' => 'Apellido del Beneficiario Actual',
+            'nombreCompletoActual' => 'Nombre Completo del Beneficiario Actual',
         );
     }
 
