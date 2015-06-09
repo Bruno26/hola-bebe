@@ -20,13 +20,4 @@
 	<?php echo CHtml::encode($data->estatus); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('usuario_id_creacion')); ?>:</b>
-	<?php echo CHtml::encode($data->usuario_id_creacion); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('usuario_id_actualizacion')); ?>:</b>
-	<?php echo CHtml::encode($data->usuario_id_actualizacion); ?>
-	<br />
-
-
 </div>

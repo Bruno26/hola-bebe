@@ -104,11 +104,20 @@
                                     <li class="sub-menu">
                                         <a href="javascript:;">
                                             <i class="glyphicon glyphicon-map-marker"></i>
-                                            <span>Asignación Censo</span>
+                                            <span>Registro Público</span>
                                         </a>
                                         <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Crear Nueva Asignación</a></li>
-                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Listado de Asignaciones</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/registroPublico/create'); ?>">Crear Registro Público</a></li>
+                                            
+                                        </ul>
+                                    </li>
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="glyphicon glyphicon-map-marker"></i>
+                                            <span>Registro Documento</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a href="<?php echo $this->createUrl('/registroDocumento/create'); ?>">Crear Registro Documento</a></li>
                                         </ul>
                                     </li>
                                 </ul>

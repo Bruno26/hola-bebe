@@ -1,39 +1,38 @@
 
 
-<h1>Crear Ente Ejecutor</h1>
-
-
 <?php
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
-    'id' => 'EnteEjecutor-form',
+    'id' => 'oficina-form',
     'enableAjaxValidation' => false,
     'enableClientValidation' => true,
     'clientOptions' => array(
         'validateOnSubmit' => true,
         'validateOnChange' => true,
         'validateOnType' => true,
-    ),
-        ));
+        )));
 ?>
 
+<h1>Registro Público</h1>
 
-
+<?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
 
 <div class="row">
     <div class="col-md-12">
-        <?php
-        $this->widget(
-                'booster.widgets.TbPanel', array(
-            'title' => 'Ente Ejecutor',
-            'context' => 'danger',
-            // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
-            'headerIcon' => 'home',
-            'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
-                )
-        );
-        ?>
-    </div>
+    <?php 
+    $this->widget(
+            'booster.widgets.TbPanel', array(
+        'title' => 'Registro Público',
+        'context' => 'primary',
+        'headerIcon' => 'user',
+        //'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
+        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
+        #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
+            )
+    );
+    ?>
+        </div>
 </div>
+
 <div class="well">
     <div class="pull-center" style="text-align: center;">
         <?php
@@ -48,10 +47,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         ?>
     </div>
 </div>
-
-<?php //echo $this->renderPartial('_form', array('model'=>$model)); ?>
-
-<?php $this->endWidget(); ?>
+<?php  $this->endWidget(); ?>
 
 
 <div class="row">
@@ -62,14 +58,14 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'type' => 'striped bordered',
             'responsiveTable' => true,
             'id' => 'listado_servicios',
-            'dataProvider' => new CActiveDataProvider('EnteEjecutor', array(
+            'dataProvider' => new CActiveDataProvider('registroPublico', array(
                     )),
             'template' => "{items}",
             'columns' => array(
                 array(
-                    'name' => 'nombre_ente_ejecutor',
-                    'header' => 'Listado de Ente Ejecutor',
-                    'value' => '$data->nombre_ente_ejecutor',
+                    'name' => 'nombre_registro_publico',
+                    'header' => 'Listado de Registro Publico',
+                    'value' => '$data->nombre_registro_publico',
                 ),
             )
                 )
