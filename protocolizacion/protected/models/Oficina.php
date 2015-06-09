@@ -24,6 +24,12 @@
  */
 class Oficina extends CActiveRecord {
    
+    public $nacionalidad;
+    public $cedula;
+    public $primer_nombre;
+    public $segundo_nombre;
+    public $primer_apellido;
+    public $segundo_apellido;
     /**
      * @return string the associated database table name
      */
@@ -44,7 +50,7 @@ class Oficina extends CActiveRecord {
             array('observaciones', 'length', 'max' => 200),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id_oficina, nombre, parroquia_id, persona_id_jefe, estatus, observaciones, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion', 'safe', 'on' => 'search'),
+            array('id_oficina, nombre, parroquia_id, persona_id_jefe, estatus, observaciones, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, nacionalidad, cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido', 'safe', 'on' => 'search'),
         );
     }
 
@@ -78,6 +84,12 @@ class Oficina extends CActiveRecord {
             'fecha_actualizacion' => 'Fecha Actualización',
             'usuario_id_creacion' => 'Usuario Id Creación',
             'usuario_id_actualizacion' => 'Usuario Id Actualización',
+            'nacionalidad' => 'Nacionalidad',
+            'cedula' => 'Cedula',
+            'primer_nombre' => 'Primer Nombre',
+            'segundo_nombre' => 'Segundo Nombre',
+            'primer_apellido' => 'Primer Apellido',
+            'segundo_apellido' => 'Segundo Apellido',
         );
     }
 

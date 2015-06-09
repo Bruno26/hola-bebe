@@ -18,10 +18,11 @@
  * @property integer $usuario_id_actualizacion
  *
  * The followings are the available model relations:
- * @property UnidadHabitacional $unidadHabitacional
  * @property Maestro $estatus0
- * @property CrugeUser $usuarioIdCreacion
+ * @property UnidadHabitacional $unidadHabitacional
  * @property CrugeUser $usuarioIdActualizacion
+ * @property CrugeUser $usuarioIdCreacion
+ * @property Oficina $oficina
  */
 class AsignacionCenso extends CActiveRecord
 {
@@ -59,10 +60,11 @@ class AsignacionCenso extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'unidadHabitacional' => array(self::BELONGS_TO, 'UnidadHabitacional', 'unidad_habitacional_id'),
 			'estatus0' => array(self::BELONGS_TO, 'Maestro', 'estatus'),
-			'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
+			'unidadHabitacional' => array(self::BELONGS_TO, 'UnidadHabitacional', 'unidad_habitacional_id'),
 			'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
+			'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
+			'oficina' => array(self::BELONGS_TO, 'Oficina', 'oficina_id'),
 		);
 	}
 
