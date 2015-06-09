@@ -96,8 +96,8 @@ class Desarrollo extends CActiveRecord {
      */
     public function attributeLabels() {
         return array(
-            'id_desarrollo' => 'Nombre del Desarrollo',
-            'nombre' => 'Nombre',
+            'id_desarrollo' => 'Id del Desarrollo',
+            'nombre' => 'Nombre del Desarrollo',
             'parroquia_id' => 'Parroquia',
             'descripcion' => 'Descripcion',
             'urban_barrio' => 'Indique Urbanización/Barrio',

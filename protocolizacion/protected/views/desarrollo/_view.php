@@ -1,110 +1,107 @@
-<div class="view">
+<?php
+//echo '<pre>';var_dump($model);die();
 
-		<b><?php echo CHtml::encode($data->getAttributeLabel('id_desarrollo')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id_desarrollo),array('view','id'=>$data->id_desarrollo)); ?>
-	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('nombre')); ?>:</b>
-	<?php echo CHtml::encode($data->nombre); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('parroquia_id')); ?>:</b>
-	<?php echo CHtml::encode($data->parroquia_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('descripcion')); ?>:</b>
-	<?php echo CHtml::encode($data->descripcion); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('urban_barrio')); ?>:</b>
-	<?php echo CHtml::encode($data->urban_barrio); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('av_call_esq_carr')); ?>:</b>
-	<?php echo CHtml::encode($data->av_call_esq_carr); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('zona')); ?>:</b>
-	<?php echo CHtml::encode($data->zona); ?>
-	<br />
-
-	<?php /*
-	<b><?php echo CHtml::encode($data->getAttributeLabel('lindero_norte')); ?>:</b>
-	<?php echo CHtml::encode($data->lindero_norte); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('lindero_sur')); ?>:</b>
-	<?php echo CHtml::encode($data->lindero_sur); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('lindero_este')); ?>:</b>
-	<?php echo CHtml::encode($data->lindero_este); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('lindero_oeste')); ?>:</b>
-	<?php echo CHtml::encode($data->lindero_oeste); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('coordenadas')); ?>:</b>
-	<?php echo CHtml::encode($data->coordenadas); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('lote_terreno_mt2')); ?>:</b>
-	<?php echo CHtml::encode($data->lote_terreno_mt2); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fuente_financiamiento_id')); ?>:</b>
-	<?php echo CHtml::encode($data->fuente_financiamiento_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('ente_ejecutor_id')); ?>:</b>
-	<?php echo CHtml::encode($data->ente_ejecutor_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('titularidad_del_terreno')); ?>:</b>
-	<?php echo CHtml::encode($data->titularidad_del_terreno); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('total_viviendas')); ?>:</b>
-	<?php echo CHtml::encode($data->total_viviendas); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('total_viviendas_protocolizadas')); ?>:</b>
-	<?php echo CHtml::encode($data->total_viviendas_protocolizadas); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_transferencia')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_transferencia); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fuente_datos_entrada_id')); ?>:</b>
-	<?php echo CHtml::encode($data->fuente_datos_entrada_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_creacion')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_creacion); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_actualizacion')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_actualizacion); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('usuario_id_creacion')); ?>:</b>
-	<?php echo CHtml::encode($data->usuario_id_creacion); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('usuario_id_actualizacion')); ?>:</b>
-	<?php echo CHtml::encode($data->usuario_id_actualizacion); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('programa_id')); ?>:</b>
-	<?php echo CHtml::encode($data->programa_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('total_unidades')); ?>:</b>
-	<?php echo CHtml::encode($data->total_unidades); ?>
-	<br />
-
-	*/ ?>
-
+$form = $this->beginWidget('booster.widgets.TbActiveForm', array(
+    'id' => 'vsw-solicitud-recibido-form',
+    'enableAjaxValidation' => false,
+        ));
+?>
+<div class='row'>
+    <div class="col-md-6"> 
+        <?php echo $form->textFieldGroup($model, 'id_desarrollo', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true)))); ?>
+    </div>
+    <div class="col-md-6"> 
+        <?php echo $form->textFieldGroup($model, 'nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true)))); ?>
+    </div>
 </div>
+
+<div class='row'>
+    <div class="col-md-4"> 
+        <?php echo $form->textFieldGroup($estado, 'strdescripcion', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true, 'value' => $model->fkParroquia->clvmunicipio0->clvestado0->strdescripcion)))); ?>
+    </div>
+    <div class="col-md-4"> 
+        <?php echo $form->textFieldGroup($municipio, 'strdescripcion', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true, 'value' => $model->fkParroquia->clvmunicipio0->strdescripcion)))); ?>
+    </div>
+    <div class="col-md-4"> 
+        <?php echo $form->textFieldGroup($model, 'parroquia_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true, 'value' => $model->fkParroquia->strdescripcion)))); ?>
+    </div>
+</div>
+
+<div class='row'>
+    <div class="col-md-4"> 
+        <?php echo $form->textFieldGroup($model, 'urban_barrio', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true)))); ?>
+    </div>
+    <div class="col-md-4"> 
+        <?php echo $form->textFieldGroup($model, 'av_call_esq_carr', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true)))); ?>
+    </div>
+    <div class="col-md-4"> 
+        <?php echo $form->textFieldGroup($model, 'zona', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true)))); ?>
+    </div>
+</div>
+
+<div class='row'>
+    <div class="col-md-3"> 
+        <?php echo $form->textFieldGroup($model, 'lindero_norte', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true)))); ?>
+    </div>
+    <div class="col-md-3"> 
+        <?php echo $form->textFieldGroup($model, 'lindero_sur', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true)))); ?>
+    </div>
+    <div class="col-md-3"> 
+        <?php echo $form->textFieldGroup($model, 'lindero_este', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true)))); ?>
+    </div>
+    <div class="col-md-3"> 
+        <?php echo $form->textFieldGroup($model, 'lindero_oeste', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true)))); ?>
+    </div>
+</div>
+    
+<div class='row'>
+    <div class="col-md-6"> 
+        <?php echo $form->textFieldGroup($model, 'coordenadas', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true)))); ?>
+    </div>
+    <div class="col-md-6"> 
+        <?php echo $form->textFieldGroup($model, 'lote_terreno_mt2', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true)))); ?>
+    </div>
+</div>
+
+<div class='row'>
+    <div class="col-md-4"> 
+        <?php echo $form->textFieldGroup($model, 'programa_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true, 'value' => $model->programa->nombre_programa)))); ?>
+    </div>
+    <div class="col-md-4"> 
+        <?php echo $form->textFieldGroup($model, 'fuente_financiamiento_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true, 'value' => $model->fuenteFinanciamiento->nombre_fuente_financiamiento)))); ?>
+    </div>
+    <div class="col-md-4"> 
+        <?php echo $form->textFieldGroup($model, 'ente_ejecutor_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true, 'value' => $model->enteEjecutor->nombre_ente_ejecutor)))); ?>
+    </div>
+</div>
+
+<div class='row'>
+    <div class="col-md-6"> 
+        <?php echo CHtml::activeLabel($model, 'titularidad_del_terreno'); ?><br>
+        <?php
+        $this->widget('booster.widgets.TbSwitch', array(
+            'name' => 'titularidad_del_terreno',
+            'options' => array(
+                'size' => 'large',
+                'onText' => 'SI',
+                'offText' => 'NO',
+            ),
+            'htmlOptions' => array(
+                'class' => 'titularidad',
+                'onChange' => 'Terreno()',
+                'readOnly' => true,
+            )
+                )
+        );
+        ?>
+    </div>
+    <?php if (!empty($participacion->titularidad_del_terreno)): ?>
+    <div class="col-md-6"> 
+        <?php echo $form->textFieldGroup($model, 'fecha_transferencia', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readOnly' => true)))); ?>
+    </div>
+    <?php endif; ?>
+</div>
+
+
+<?php $this->endWidget(); ?>

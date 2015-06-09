@@ -72,7 +72,7 @@ class Tblestado extends CActiveRecord {
             'clvcodigo' => 'Estado',
             'clvregion' => 'Clvregion',
             'strid' => 'Strid',
-            'strdescripcion' => 'Strdescripcion',
+            'strdescripcion' => 'Estado',
             'strcapital' => 'Strcapital',
             'blnborrado' => 'Blnborrado',
             'dtmregistro' => 'Dtmregistro',

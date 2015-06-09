@@ -75,7 +75,7 @@ class Tblmunicipio extends CActiveRecord
 			'strid_estado' => 'Strid Estado',
 			'strid' => 'Strid',
 			'clvmunicipio_sunacoop' => 'Clvmunicipio Sunacoop',
-			'strdescripcion' => 'Strdescripcion',
+			'strdescripcion' => 'Municipio',
 			'blncapital' => 'Blncapital',
 			'blnborrado' => 'Blnborrado',
 			'dtmregistro' => 'Dtmregistro',
