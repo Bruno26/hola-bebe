@@ -63,10 +63,10 @@ class Vivienda extends CActiveRecord
 			array('tipo_vivienda_id, unidad_habitacional_id, nro_estacionamientos, nro_habitaciones, nro_banos, fuente_datos_entrada_id, estatus_vivienda_id, usuario_id_creacion, usuario_id_actualizacion', 'numerical', 'integerOnly'=>true),
 			array('construccion_mt2', 'length', 'max'=>4),
 			array('nro_piso', 'length', 'max'=>4),
-			array('nro_vivienda', 'length', 'max'=>4),	
-			array('nro_estacionamientos', 'length', 'max'=>4),	
-			array('nro_banos', 'length', 'max'=>4),	
-			array('nro_habitaciones', 'length', 'max'=>4),	
+			array('nro_vivienda', 'length', 'max'=>4),
+			array('nro_estacionamientos', 'length', 'max'=>4),
+			array('nro_banos', 'length', 'max'=>4),
+			array('nro_habitaciones', 'length', 'max'=>4),
 			array('lindero_norte, lindero_sur, lindero_este, lindero_oeste, coordenadas', 'length', 'max'=>200),
 			array('precio_vivienda', 'length', 'max'=>16),
 			array('descripcion_estac', 'length', 'max'=>15),
@@ -148,6 +148,8 @@ class Vivienda extends CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
+
+		$criteria->order = 'id_vivienda DESC';
 
 		$criteria->compare('id_vivienda',$this->id_vivienda);
 		$criteria->compare('tipo_vivienda_id',$this->tipo_vivienda_id);

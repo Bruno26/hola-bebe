@@ -1,22 +1,28 @@
+<?php /*
+$this->breadcrumbs=array(
+	'Registro Documentos'=>array('index'),
+	'Create',
+);
 
-
-<h1>Crear Ente Ejecutor</h1>
-
+$this->menu=array(
+array('label'=>'List RegistroDocumento','url'=>array('index')),
+array('label'=>'Manage RegistroDocumento','url'=>array('admin')),
+);
+*/?>
 
 <?php
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
-    'id' => 'EnteEjecutor-form',
+    'id' => 'registroDocumento-form',
     'enableAjaxValidation' => false,
     'enableClientValidation' => true,
     'clientOptions' => array(
         'validateOnSubmit' => true,
         'validateOnChange' => true,
         'validateOnType' => true,
-    ),
-        ));
+        )));
 ?>
 
-
+<h1>Create RegistroDocumento</h1>
 
 
 <div class="row">
@@ -24,7 +30,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         <?php
         $this->widget(
                 'booster.widgets.TbPanel', array(
-            'title' => 'Ente Ejecutor',
+            'title' => 'Registro Documento',
             'context' => 'danger',
             // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
             'headerIcon' => 'home',
@@ -56,13 +62,13 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 
 <div class="row">
     <div class='col-md-12'>
-        <?php
+        <?php /*
         $this->widget(
                 'booster.widgets.TbExtendedGridView', array(
             'type' => 'striped bordered',
             'responsiveTable' => true,
             'id' => 'listado_servicios',
-            'dataProvider' => new CActiveDataProvider('EnteEjecutor', array(
+            'dataProvider' => new CActiveDataProvider('registroDocumento', array(
                     )),
             'template' => "{items}",
             'columns' => array(
@@ -74,6 +80,9 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             )
                 )
         );
-        ?>
+        */?>
     </div>
 </div>
+
+<?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
