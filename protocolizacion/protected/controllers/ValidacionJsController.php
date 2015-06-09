@@ -40,7 +40,7 @@ class ValidacionJsController extends Controller {
         $result = ConsultaOracle::getPersona($nacio, $cedula);
         if ($result == 1) {
             $saime = ConsultaOracle::getSaime($nacio, $cedula);
-
+//            var_dump($saime);die;
             if ($saime == 1)
                 echo json_encode(2); //en caso que no exista en saime
             else
@@ -48,6 +48,7 @@ class ValidacionJsController extends Controller {
         }else {
             echo json_encode($result);
         }
+//        var_dump($result);die;
     }
 
     public function actionBuscarMunicipios() {
@@ -157,6 +158,23 @@ class ValidacionJsController extends Controller {
         } else {
             echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
         }
+    }
+
+    public function actionBuscarBeneficiarioAnterior() {
+        $cedula = (int) $_POST['cedula'];
+        $nacionalidad = $_POST['nacionalidad'];
+        
+
+        $persona = ConsultaOracle::getPersona($nacionalidad, $cedula);
+        
+        if($persona == '1'){
+            echo json_encode(1);
+        }else{
+//            $consultaBeneficiarioTmp = 
+            
+        }
+            /*  INIDICA QUE NO EXISTE EN PERSONA Y NO EXISTE BENEFICIARIO_TMP */
+            //echo json_encode(2);
     }
 
 }
