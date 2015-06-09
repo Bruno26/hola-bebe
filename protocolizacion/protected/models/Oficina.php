@@ -9,7 +9,12 @@
  * @property integer $parroquia_id
  * @property integer $persona_id_jefe
  * @property integer $estatus
+ * @property integer $cedula
  * @property string $observaciones
+ * @property string $primer_nombre
+ * @property string $segundo_nombre
+ * @property string $primer_apellido
+ * @property string $segundo_apellido
  * @property string $fecha_creacion
  * @property string $fecha_actualizacion
  * @property integer $usuario_id_creacion
@@ -75,7 +80,7 @@ class Oficina extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id_oficina' => 'Id Oficina',
-            'nombre' => 'Nombre',
+            'nombre' => 'Nombre de la Oficina',
             'parroquia_id' => 'Parroquia',
             'persona_id_jefe' => 'Persona Id Jefe',
             'estatus' => 'Estatus',
@@ -86,9 +91,9 @@ class Oficina extends CActiveRecord {
             'usuario_id_actualizacion' => 'Usuario Id Actualización',
             'nacionalidad' => 'Nacionalidad',
             'cedula' => 'Cedula',
-            'primer_nombre' => 'Primer Nombre',
-            'segundo_nombre' => 'Segundo Nombre',
-            'primer_apellido' => 'Primer Apellido',
+            'primer_nombre' => 'Nombre',
+            'segundo_nombre' => 'Nombre',
+            'primer_apellido' => 'Apellido',
             'segundo_apellido' => 'Segundo Apellido',
         );
     }

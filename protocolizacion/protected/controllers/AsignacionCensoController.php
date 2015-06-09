@@ -1,7 +1,6 @@
 <?php
 
 class AsignacionCensoController extends Controller {
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -64,10 +63,21 @@ class AsignacionCensoController extends Controller {
 
         if (isset($_POST['AsignacionCenso'])) {
             $model->attributes = $_POST['AsignacionCenso'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
-        }
+            $model->unidad_habitacional_id = $_POST['AsignacionCenso']['unidad_habitacional_id'];
+            $model->persona_id = $_POST['AsignacionCenso']['persona_id'];
+            $model->oficina_id = $_POST['AsignacionCenso']['oficina_id'];
+            $model->censado = isset($_POST['censado']) ? true : false;
+            $model->fecha_asignacion = Generico::formatoFecha($_POST['AsignacionCenso']['fecha_asignacion']);
+            $model->observaciones = $_POST['AsignacionCenso']['observaciones'];
+            $model->fecha_creacion = 'now()';
+            $model->fecha_actualizacion = 'now()';
+            $model->usuario_id_creacion = Yii::app()->user->id;
+            $model->estatus = 11;
 
+            if ($model->save()) {
+                $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
+            }
+        }
         $this->render('create', array(
             'model' => $model,
         ));
