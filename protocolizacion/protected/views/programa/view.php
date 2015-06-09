@@ -13,17 +13,12 @@ array('label'=>'Manage Programa','url'=>array('admin')),
 );
 ?>
 
-<h1>View Programa #<?php echo $model->id_programa; ?></h1>
+<h1>Programa #<?php echo $model->id_programa; ?></h1>
 
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
-		'id_programa',
 		'nombre_programa',
-		'fecha_creacion',
-		'fecha_actualizacion',
-		'estatus',
-		'usuario_id_creacion',
-		'usuario_id_actualizacion',
+		
 ),
 )); ?>

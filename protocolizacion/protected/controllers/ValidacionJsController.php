@@ -22,7 +22,7 @@ class ValidacionJsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF','BuscarUnidadHabitacional'),
+                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -34,6 +34,23 @@ class ValidacionJsController extends Controller {
     /**
      * FUNCION QUE MUESTRA TODOS LOS MUNICIPIO DE ACUERDO A UN ID DE UN ESTADO
      */
+    public function actionBuscarPersonas() {
+        $cedula = (int) $_POST['cedula'];
+        $nacio = $_POST['nacionalidad'];
+        $result = ConsultaOracle::getPersona($nacio, $cedula);
+//        if ($result == 1) {
+//            $saime = ConsultaOracle::getSaime($nacio, $cedula);
+//            var_dump($saime);die;
+//            if ($saime == 1)
+//                echo json_encode(2); //en caso que no exista en saime
+//            else
+//                echo CJSON::encode($saime);
+//        }else {
+            echo json_encode($result);
+//        }
+//        var_dump($result);die;
+    }
+
     public function actionBuscarMunicipios() {
         $Id = (isset($_POST['Tblestado']['clvcodigo']) ? $_POST['Tblestado']['clvcodigo'] : $_GET['clvcodigo']);
         $Selected = isset($_GET['municipio']) ? $_GET['municipio'] : '';
@@ -86,7 +103,7 @@ class ValidacionJsController extends Controller {
             echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
         }
     }
-    
+
     /**
      * FUNCION QUE MUESTRA TODOS LAS PARROQUIAS DE  
      */
@@ -114,14 +131,14 @@ class ValidacionJsController extends Controller {
             echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
         }
     }
-    
+
     /**
      * FUNCION QUE MUESTRA TODOS LAS PARROQUIAS DE  
      */
     public function actionBuscarUnidadHabitacional() {
         $Id = (isset($_POST['Desarrollo']['id_desarrollo']) ? $_POST['Desarrollo']['id_desarrollo'] : $_GET['clvcodigo']);
         $Selected = isset($_GET['unidadHabitacion']) ? $_GET['unidadHabitacion'] : '';
-      
+
         if (!empty($Id)) {
             $criteria = new CDbCriteria;
             $criteria->addCondition('t.desarrollo_id= :desarrollo_id');

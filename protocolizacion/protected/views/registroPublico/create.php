@@ -1,15 +1,3 @@
-<?php
-#$this->breadcrumbs=array(
-#	'Oficinas'=>array('index'),
-#	'Create',
-#);
-
-#$this->menu=array(
-#array('label'=>'List Oficina','url'=>array('index')),
-#array('label'=>'Manage Oficina','url'=>array('admin')),
-#);
-?>
-
 
 
 <?php
@@ -24,7 +12,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         )));
 ?>
 
-<h1 class="text-center">Registrar Oficina</h1>
+<h1>Registro Público</h1>
 
 <?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
 
@@ -33,10 +21,12 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     <?php 
     $this->widget(
             'booster.widgets.TbPanel', array(
-        'title' => 'Oficina',
-        'context' => 'danger',
+        'title' => 'Registro Público',
+        'context' => 'primary',
         'headerIcon' => 'user',
+        //'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
         'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
+        #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
             )
     );
     ?>
@@ -44,7 +34,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 </div>
 
 <div class="well">
-    <div class="pull-center" style="text-align: right;">
+    <div class="pull-center" style="text-align: center;">
         <?php
         $this->widget('booster.widgets.TbButton', array(
             'buttonType' => 'submit',
@@ -58,3 +48,28 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     </div>
 </div>
 <?php  $this->endWidget(); ?>
+
+
+<div class="row">
+    <div class='col-md-12'>
+        <?php
+        $this->widget(
+                'booster.widgets.TbExtendedGridView', array(
+            'type' => 'striped bordered',
+            'responsiveTable' => true,
+            'id' => 'listado_servicios',
+            'dataProvider' => new CActiveDataProvider('registroPublico', array(
+                    )),
+            'template' => "{items}",
+            'columns' => array(
+                array(
+                    'name' => 'nombre_registro_publico',
+                    'header' => 'Listado de Registro Publico',
+                    'value' => '$data->nombre_registro_publico',
+                ),
+            )
+                )
+        );
+        ?>
+    </div>
+</div>

@@ -104,11 +104,20 @@
                                     <li class="sub-menu">
                                         <a href="javascript:;">
                                             <i class="glyphicon glyphicon-map-marker"></i>
-                                            <span>Asignación Censo</span>
+                                            <span>Registro Público</span>
                                         </a>
                                         <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Crear Nueva Asignación</a></li>
-                                            <li><a href="<?php echo $this->createUrl('#'); ?>">Listado de Asignaciones</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/registroPublico/create'); ?>">Crear Registro Público</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="glyphicon glyphicon-map-marker"></i>
+                                            <span>Registro Documento</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a href="<?php echo $this->createUrl('/registroDocumento/create'); ?>">Crear Registro Documento</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -146,7 +155,7 @@
                                     <li class="sub-menu">
                                         <a href="javascript:;">
                                             <i class="glyphicon glyphicon-map-marker"></i>
-                                            <span>Vivienda</span>
+                                            <span>Vivienda</span> 
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/vivienda/create'); ?>">Cargar Nuevo</a></li>
@@ -158,8 +167,26 @@
                             <li>
                                 <a href="<?php echo $this->createUrl('#'); ?>">
                                     <i class="glyphicon glyphicon-home"></i>
-                                    <span>Censo</span>
+                                    <span>Listado Adjudicatorio</span>
                                 </a>
+                                <ul class="sub">
+                                    <li><a href="<?php echo $this->createUrl('#'); ?>">Carga por Sistema</a></li>
+                                    <!--<li><a href="<?php // echo $this->createUrl('#'); ?>">Carga Masiva</a></li>    SEGUNDA FASE DE DESARROLLO-->  
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->createUrl('#'); ?>">
+                                    <i class="glyphicon glyphicon-home"></i>
+                                    <span>Censo Socioeconómico</span>
+                                </a>
+                                <ul class="sub">
+                                    <li><a href="<?php echo $this->createUrl('#'); ?>">Asignación de Censo</a></li>
+                                    <li><a href="<?php echo $this->createUrl('#'); ?>">Listado de Asignación de Censo</a></li>
+                                    <li><a href="<?php echo $this->createUrl('#'); ?>">Censo</a></li>
+                                   <li><a href="<?php echo $this->createUrl('#'); ?>">Listado de Censo</a></li>
+                                   <li><a href="<?php echo $this->createUrl('#'); ?>">Reasignación de Vivienda</a></li>
+                                   <li><a href="<?php echo $this->createUrl('#'); ?>">Listado de Reasignación de Vivienda</a></li>
+                                </ul>
                             </li>
 
                         </ul>
@@ -178,7 +205,7 @@
             <div id="expirado"></div>
 
             <!--            <footer class='container col-md-12 col-xs-12 text-center'>
-                            Copyright &copy; <?php // echo date('Y');                                                                           ?> by My Company.<br/>
+                            Copyright &copy; <?php // echo date('Y');                                                                            ?> by My Company.<br/>
                             All Rights Reserved.<br/>
             <?php // echo Yii::powered(); ?>
                         </footer>-->

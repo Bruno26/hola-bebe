@@ -1,11 +1,11 @@
 <?php
 
-class AsignacionCensoController extends Controller {
+class RegistroDocumentoController extends Controller {
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
-//    public $layout = '//layouts/column2';
+//public $layout='//layouts/column2';
 
     /**
      * @return array action filters
@@ -56,28 +56,22 @@ class AsignacionCensoController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new AsignacionCenso;
+        $model = new RegistroDocumento;
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-        if (isset($_POST['AsignacionCenso'])) {
-            $model->attributes = $_POST['AsignacionCenso'];
-            $model->unidad_habitacional_id = $_POST['AsignacionCenso']['unidad_habitacional_id'];
-            $model->persona_id = $_POST['AsignacionCenso']['persona_id'];
-            $model->oficina_id = $_POST['AsignacionCenso']['oficina_id'];
-            $model->censado = isset($_POST['censado']) ? true : false;
-            $model->fecha_asignacion = Generico::formatoFecha($_POST['AsignacionCenso']['fecha_asignacion']);
-            $model->observaciones = $_POST['AsignacionCenso']['observaciones'];
+        if (isset($_POST['RegistroDocumento'])) {
+            $model->attributes = $_POST['RegistroDocumento'];
+            $model->fuente_datos_entrada_id = 90;
+            $model->estatus = 53;
+            $model->usuario_id_creacion = Yii::app()->user->id;
             $model->fecha_creacion = 'now()';
             $model->fecha_actualizacion = 'now()';
-            $model->usuario_id_creacion = Yii::app()->user->id;
-            $model->estatus = 11;
-
-            if ($model->save()) {
-                $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
-            }
+            if ($model->save())
+                $this->redirect(array('view', 'id' => $model->id_registro_documento));
         }
+
         $this->render('create', array(
             'model' => $model,
         ));
@@ -94,10 +88,10 @@ class AsignacionCensoController extends Controller {
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-        if (isset($_POST['AsignacionCenso'])) {
-            $model->attributes = $_POST['AsignacionCenso'];
+        if (isset($_POST['RegistroDocumento'])) {
+            $model->attributes = $_POST['RegistroDocumento'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
+                $this->redirect(array('view', 'id' => $model->id_registro_documento));
         }
 
         $this->render('update', array(
@@ -126,7 +120,7 @@ class AsignacionCensoController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $dataProvider = new CActiveDataProvider('AsignacionCenso');
+        $dataProvider = new CActiveDataProvider('RegistroDocumento');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
@@ -136,10 +130,10 @@ class AsignacionCensoController extends Controller {
      * Manages all models.
      */
     public function actionAdmin() {
-        $model = new AsignacionCenso('search');
+        $model = new RegistroDocumento('search');
         $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['AsignacionCenso']))
-            $model->attributes = $_GET['AsignacionCenso'];
+        if (isset($_GET['RegistroDocumento']))
+            $model->attributes = $_GET['RegistroDocumento'];
 
         $this->render('admin', array(
             'model' => $model,
@@ -152,7 +146,7 @@ class AsignacionCensoController extends Controller {
      * @param integer the ID of the model to be loaded
      */
     public function loadModel($id) {
-        $model = AsignacionCenso::model()->findByPk($id);
+        $model = RegistroDocumento::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -163,7 +157,7 @@ class AsignacionCensoController extends Controller {
      * @param CModel the model to be validated
      */
     protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'asignacion-censo-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'registro-documento-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
