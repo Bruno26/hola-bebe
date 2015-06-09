@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Unidad Habitacionals'=>array('index'),
+	'Beneficiario Temporals'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-array('label'=>'List UnidadHabitacional','url'=>array('index')),
-array('label'=>'Create UnidadHabitacional','url'=>array('create')),
+array('label'=>'List BeneficiarioTemporal','url'=>array('index')),
+array('label'=>'Create BeneficiarioTemporal','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,7 +15,7 @@ $('.search-form').toggle();
 return false;
 });
 $('.search-form form').submit(function(){
-$.fn.yiiGridView.update('unidad-habitacional-grid', {
+$.fn.yiiGridView.update('beneficiario-temporal-grid', {
 data: $(this).serialize()
 });
 return false;
@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1>Manage Unidad Habitacionals</h1>
+<h1>Manage Beneficiario Temporals</h1>
 
 <p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -39,32 +39,25 @@ return false;
 </div><!-- search-form -->
 
 <?php $this->widget('booster.widgets.TbGridView',array(
-'id'=>'unidad-habitacional-grid',
+'id'=>'beneficiario-temporal-grid',
 'dataProvider'=>$model->search(),
 'filter'=>$model,
 'columns'=>array(
-		'id_unidad_habitacional',
-		'nombre',
+		'id_beneficiario_temporal',
+		'persona_id',
 		'desarrollo_id',
-		'gen_tipo_inmueble_id',
-		'total_unidades',
-		'registro_publico_id',
+		'unidad_habitacional_id',
+		'id_control',
+		'nacionalidad',
 		/*
-		'tipo_documento_id',
-		'fecha_registro',
-		'tomo',
-		'ano',
-		'nro_documento',
-		'asiento_registral',
-		'folio_real',
-		'nro_matricula',
-		'fuente_datos_entrada_id',
+		'cedula',
+		'nombre_completo',
+		'nombre_archivo',
 		'fecha_creacion',
 		'fecha_actualizacion',
 		'usuario_id_creacion',
 		'usuario_id_actualizacion',
 		'estatus',
-		'num_protocolo',
 		*/
 array(
 'class'=>'booster.widgets.TbButtonColumn',

@@ -38,16 +38,16 @@ class ValidacionJsController extends Controller {
         $cedula = (int) $_POST['cedula'];
         $nacio = $_POST['nacionalidad'];
         $result = ConsultaOracle::getPersona($nacio, $cedula);
-        if ($result == 1) {
-            $saime = ConsultaOracle::getSaime($nacio, $cedula);
+//        if ($result == 1) {
+//            $saime = ConsultaOracle::getSaime($nacio, $cedula);
 //            var_dump($saime);die;
-            if ($saime == 1)
-                echo json_encode(2); //en caso que no exista en saime
-            else
-                echo CJSON::encode($saime);
-        }else {
-            echo json_encode($result);
-        }
+//            if ($saime == 1)
+//                echo json_encode(2); //en caso que no exista en saime
+//            else
+//                echo CJSON::encode($saime);
+//        }else {
+        echo json_encode($result);
+//        }
 //        var_dump($result);die;
     }
 
@@ -159,5 +159,44 @@ class ValidacionJsController extends Controller {
             echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
         }
     }
+
+    public function actionBuscarBeneficiarioAnterior() {
+        $cedula = (int) $_POST['cedula'];
+        $nacionalidad = $_POST['nacionalidad'];
+        $nacionalidad = $_POST['nacionalidad'];
+
+        $consultaBeneficiarioTmp = BeneficiarioTemporal::model()->findByAttributes(array('cedula' => $cedula, 'nacionalidad' => $nacionalidad));
+
+        if (empty($consultaBeneficiarioTmp)) {
+            //NO SE ENCUENTRA EN TABLA BeneficiarioTemporal
+            echo json_encode(1);
+        } else {
+            echo CJSON::encode($consultaBeneficiarioTmp);
+        }
+    }
+    
+//    public function actionBuscarBeneficiarioAnterior() {
+//        $cedula = (int) $_POST['cedula'];
+//        $nacionalidad = $_POST['nacionalidad'];
+//        $caso = $_POST['caso']; //caso 1 es BenefiiarioAnterior && caso 2 es BenefciarioActual
+//
+//        $consultaBeneficiarioTmp = BeneficiarioTemporal::model()->findByAttributes(array('cedula' => $cedula, 'nacionalidad' => $nacionalidad));
+//        if (!empty($consultaBeneficiarioTmp)) {
+//            //FUNCION QUE BUSCA AL BENFICIARIO ANTERIOR
+//            if ($consultaBeneficiarioTmp->estatus == 20 && $caso == 1) {
+//                echo CJSON::encode($consultaBeneficiarioTmp);
+//            } else if ($caso == 2 && $consultaBeneficiarioTmp->estatus == 21) {
+//                //CONSULTA SI EXITE EN BENEFICIARIO
+//                $Beneficiario = Beneficiario::model()->findByAttributes(array('persona_id' => $consultaBeneficiarioTmp->persona_id));
+//                if (!empty($Beneficiario)) {
+//                    echo CJSON::encode($consultaBeneficiarioTmp);
+//                } else {
+//                    echo json_encode(1);
+//                }
+//            }
+//            //NO SE ENCUENTRA EN TABLA BeneficiarioTemporal
+//        } else
+//            echo json_encode(1);
+//    }
 
 }

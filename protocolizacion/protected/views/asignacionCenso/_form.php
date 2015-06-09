@@ -1,4 +1,7 @@
-
+<?php
+$baseUrl = Yii::app()->baseUrl;
+$Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
+?>
 <p class="help-block">Fields with <span class="required">*</span> are required.</p>
 <div class="row">
     <div class="col-md-6">
@@ -32,9 +35,9 @@
 
 </div>
 <!--<div class="rows">-->
-    <!--<div class="col-md-6">-->
-        <?php // echo $form->textFieldGroup($model, 'persona_id', array('widgetOptions' => array('htmlOptions' => array('class' => '')))); ?>
-    <!--</div>-->
+<!--<div class="col-md-6">-->
+<?php // echo $form->textFieldGroup($model, 'persona_id', array('widgetOptions' => array('htmlOptions' => array('class' => '')))); ?>
+<!--</div>-->
 
 <!--</div>-->
 <div class="rows">
@@ -81,6 +84,42 @@
     </div>
 
 </div>
+<div class="row">
+    <div class="row-fluid">
+
+        <?php echo $form->hiddenField($model, 'persona_id'); ?>
+
+        <div class='col-md-3'>
+            <?php
+            echo $form->dropDownListGroup($model, 'nacionalidad', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
+                'widgetOptions' => array(
+                    'data' => Maestro::FindMaestrosByPadreSelect(96, 'descripcion DESC'),
+                    'htmlOptions' => array('empty' => 'SELECCIONE'),
+                )
+                    )
+            );
+            ?>
+        </div>
+        <div class='col-md-3'>
+            <?php
+            echo $form->textFieldGroup($model, 'cedula', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8,
+                        'onblur' => "buscarPersonaCensoA($('#AsignacionCenso_nacionalidad').val(),$(this).val())"
+            ))));
+            ?>
+        </div>
+        <div class='col-md-3'>
+            <?php echo $form->textFieldGroup($model, 'primer_nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
+        </div>
+
+
+        <div class='col-md-3'>
+            <?php echo $form->textFieldGroup($model, 'primer_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
+        </div>
+
+    </div>
+
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <?php

@@ -64,8 +64,12 @@ class EnteEjecutorController extends Controller {
 
         if (isset($_POST['EnteEjecutor'])) {
             $model->attributes = $_POST['EnteEjecutor'];
+            $model->estatus = 32;
+            $model->usuario_id_creacion = Yii::app()->user->id;
+            $model->fecha_creacion = 'now()';
+            $model->fecha_actualizacion = 'now()';
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_ente_ejecutor));
+                $this->redirect(array('create', 'id' => $model->id_ente_ejecutor));
         }
 
         $this->render('create', array(

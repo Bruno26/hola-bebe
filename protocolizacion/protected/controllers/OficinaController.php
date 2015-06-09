@@ -71,6 +71,7 @@ class OficinaController extends Controller {
         if (isset($_POST['Oficina'])) {
             //print_r($_POST['Oficina']);die;
             $model->attributes = $_POST['Oficina'];
+            $model->persona_id_jefe = $_POST['Oficina']['persona_id_jefe'];;
             $model->estatus = 44;
             $model->usuario_id_creacion = Yii::app()->user->id;
             $model->fecha_creacion = 'now()';
