@@ -100,7 +100,7 @@ $this->widget('booster.widgets.TbGridView', array(
                     'label' => 'Modificar',
                     'icon' => 'glyphicon glyphicon-pencil',
                     'size' => 'medium',
-//                    'url' => 'Yii::app()->createUrl("vswSolicitudRecibido/asignar/", array("id"=>$data->id_solicitud))',
+                    'url' => 'Yii::app()->createUrl("desarrollo/update/", array("id"=>$data->id_desarrollo))',
 //                    'visible' => 'Asignar($data->username);'
                 ),
 
