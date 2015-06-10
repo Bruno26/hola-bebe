@@ -7,8 +7,6 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'enableAjaxValidation' => false,
         ));
 ?>
-
-
 <div class="row">
     <div class="col-md-12">
         <div>
