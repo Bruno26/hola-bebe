@@ -62,6 +62,10 @@ $this->render('view',array(
 public function actionCreate()
 {
 $model=new Beneficiario;
+$desarrollo = new Desarrollo;
+$estado = new Tblestado;
+$municipio = new Tblmunicipio;
+$parroquia = new Tblparroquia;
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
@@ -74,7 +78,7 @@ $this->redirect(array('view','id'=>$model->id_beneficiario));
 }
 
 $this->render('create',array(
-'model'=>$model,
+'model'=>$model,'desarrollo'=>$desarrollo,'municipio'=>$municipio,'estado'=>$estado,'parroquia'=>$parroquia,
 ));
 }
 

@@ -63,10 +63,9 @@ public function actionCreate()
 {
 $model      = new BeneficiarioTemporal;
 $desarrollo = new Desarrollo;
-$estado    = new Tblestado;
+$estado = new Tblestado;
 $municipio = new Tblmunicipio;
 $parroquia = new Tblparroquia;
-
 
 
 // Uncomment the following line if AJAX validation is needed

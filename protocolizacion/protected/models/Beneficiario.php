@@ -51,7 +51,7 @@ class Beneficiario extends CActiveRecord
 
   /*   ---------------  Campos de Persona Necesarios ------------------ */
 
-         public $cedula;
+      public $cedula;
          public $nacionalidad;
          public $primer_nombre;
          public $primer_apellido;
@@ -60,6 +60,22 @@ class Beneficiario extends CActiveRecord
          public $fecha_censo;
          public $fecha_nacimiento;
          public $estado_civil;
+         public $telf_habitacion;
+         public $telf_celular;
+         public $correo_electronico;
+
+
+         public $estado;
+         public $municipio;
+         public $nomb_edif;
+         public $piso;
+         public $numero;
+         public $area_vivienda;
+         public $tipo_vivienda;
+         public $observacion;
+         
+
+
 
   /*   ---------------------------------------------------------------- */
 
@@ -120,6 +136,15 @@ class Beneficiario extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+            'telf_habitacion'=>'Teléfono Habitación',
+			'telf_celular'=>'Teléfono Celular',
+			'correo_electronico'=>'Correo Electrónico',
+			'nomb_edif' => 'Nombre Edificación',
+			'numero' =>  'Número',
+			'area_vivienda' =>'Área de Vivienda mt2',
+
+
+
 			'id_beneficiario' => 'Id Beneficiario',
 			'persona_id' => 'Persona',
 			'rif' => 'Rif',

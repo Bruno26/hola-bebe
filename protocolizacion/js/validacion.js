@@ -172,13 +172,13 @@ function buscarPersonaBeneficiario(nacionalidad, cedula){
 
 
      $.ajax({
-        url: baseUrl + '/protocolizacion' + "/ValidacionJs/BuscarPersonas",
+        url: baseUrl  + "/ValidacionJs/BuscarPersonasBeneficiario",
         async: true,
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
         success: function (datos) {
-           
+         //  alert(datos); 
 //            if (datos == 1) {
 //                bootbox.alert('Debe Completar el campo Cédula');
 //            } else {
@@ -187,12 +187,19 @@ function buscarPersonaBeneficiario(nacionalidad, cedula){
            $('#BeneficiarioTemporal_segundo_nombre').val(datos.SEGUNDONOMBRE);
            $('#BeneficiarioTemporal_primer_apellido').val(datos.PRIMERAPELLIDO);
            $('#BeneficiarioTemporal_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
+           $('#BeneficiarioTemporal_fecha_nacimiento').val(datos.FECHANACIMIENTO);
+
+           $('#BeneficiarioTemporal_sexo').val(datos.SEXO);
+           $('#BeneficiarioTemporal_estado_civil').val(datos.EDO_CIVIL);
+           $('#BeneficiarioTemporal_telf_habitacion').val(datos.TELEFONO_HAB);
+           $('#BeneficiarioTemporal_telf_celular').val(datos.TELEFONO_MOVIL);
+           $('#BeneficiarioTemporal_correo_electronico').val(datos.CORREO_PRINCIPAL);
          
 //                
 //            }
         },
         error: function (datos) {
-            bootbox.alert('Ocurrio un error');
+            bootbox.alert('CEDULA NO ES VALIDA VERIFIQUE');
         }
     })
 

@@ -22,7 +22,7 @@ class ValidacionJsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas'),
+                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas','BuscarPersonasBeneficiario'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -46,9 +46,28 @@ class ValidacionJsController extends Controller {
 //            else
 //                echo CJSON::encode($saime);
 //        }else {
+
         echo json_encode($result);
 //        }
-//        var_dump($result);die;
+    //var_dump($result);die;
+    }
+
+    public function actionBuscarPersonasBeneficiario() {
+        $cedula = (int) $_POST['cedula'];
+        $nacio = $_POST['nacionalidad'];
+        $result = ConsultaOracle::getPersonaBeneficiario($nacio, $cedula);
+//        if ($result == 1) {
+//            $saime = ConsultaOracle::getSaime($nacio, $cedula);
+//            var_dump($saime);die;
+//            if ($saime == 1)
+//                echo json_encode(2); //en caso que no exista en saime
+//            else
+//                echo CJSON::encode($saime);
+//        }else {
+
+        echo json_encode($result);
+//        }
+       //var_dump($result);die;
     }
 
     public function actionBuscarMunicipios() {
