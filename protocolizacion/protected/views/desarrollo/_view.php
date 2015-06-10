@@ -19,16 +19,14 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                         <b>Nombre del Desarrollo:</b> <?php echo $model->nombre ?><br/>
 
                     </p>
-                </blockquote>
-            </div>
-            <div class='col-md-6'> 
-                <blockquote>
                     <p>
-                        <b>Descripcion del Desarrollo:</b> <?php echo $model->descripcion ?><br/>
+                        <b>Descripción del Desarrollo:</b> <?php echo $model->descripcion ?><br/>
 
                     </p>
                 </blockquote>
             </div>
+     
+               
         </div>
     </div>
     <div class="col-md-12">
@@ -70,8 +68,8 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         <div class='col-md-6'> 
             <blockquote>
                 <p>
-                    <b> Coordenadas:</b> <?php echo $model->lindero_norte ?><br/>
-                    <b> Lote Terreno Mt2:</b> <?php echo $model->lindero_sur ?><br/>
+                    <b> Coordenadas:</b> <?php echo $model->coordenadas ?><br/>
+                    <b> Lote Terreno Mt2:</b> <?php echo $model->lote_terreno_mt2 ?><br/>
 
 
                 </p>
