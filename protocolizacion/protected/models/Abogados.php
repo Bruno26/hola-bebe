@@ -15,6 +15,8 @@
  * @property string $fecha_actualizacion
  * @property integer $usuario_id_creacion
  * @property integer $usuario_id_actualizacion
+ * @property Oficina $oficinaId
+ * @property Maestro $tipoAbogado
  */
 class Abogados extends CActiveRecord {
 
@@ -56,6 +58,8 @@ class Abogados extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'oficinaId' => array(self::BELONGS_TO, 'Oficina', 'oficina_id'),
+            'tipoAbogado' => array(self::BELONGS_TO, 'Maestro', 'tipo_abogado_id'),
         );
     }
 
@@ -118,13 +122,13 @@ class Abogados extends CActiveRecord {
         ));
     }
 
-    public static function getListvendedor() {
-
-        return CHtml::listData(Oficina::model()->findAll(array(
-                            'select' => "id_us_usuario, var_usuario ||' - '|| var_nombre1 ||' '|| var_apellido1 as var_usuario",
-                            'condition' => "var_estatus = 'act' AND id_li_us_cargo = '4'",
-                            'order' => "var_usuario ASC")), 'id_us_usuario', 'var_usuario');
-    }
+//    public static function getListvendedor() {
+//
+//        return CHtml::listData(Oficina::model()->findAll(array(
+//                            'select' => "id_us_usuario, var_usuario ||' - '|| var_nombre1 ||' '|| var_apellido1 as var_usuario",
+//                            'condition' => "var_estatus = 'act' AND id_li_us_cargo = '4'",
+//                            'order' => "var_usuario ASC")), 'id_us_usuario', 'var_usuario');
+//    }
 
     /**
      * Returns the static model of the specified AR class.
