@@ -2,6 +2,25 @@
 
 class SiteController extends Controller {
 
+  /**
+   * @return array action filters
+   */
+   
+  public function filters() {
+      return array(
+          'accessControl', // perform access control for CRUD operations
+      );
+  }
+
+  public function accessRules() {
+      return array(
+          array('allow', // allow admin user to perform 'admin' and 'delete' actions
+              'actions' => array('indexAdmin'),
+              'users' => array('admin'),
+          ),
+      );
+  }
+
     /**
      * Declares class-based actions.
      */
@@ -93,6 +112,19 @@ class SiteController extends Controller {
         // display the login form
         $this->render('login', array('model' => $model));
     }
+
+
+
+    public function actionIndexAdmin() {
+                $this->render('indexAdmin', array(
+                    'count_desarrollo' => Desarrollo::model()->count(),
+                    'count_unidades_habitacionales' => UnidadHabitacional::model()->count(),
+                    'count_viviendas' => Vivienda::model()->count(),
+                    'count_beneficiarios' => Beneficiario::model()->count(),
+                    'count_grupos_familiares' => Beneficiario::model()->count(),
+                ));
+    }
+
 
     /**
      * Logs out the current user and redirect to homepage.

@@ -6,7 +6,7 @@ class BeneficiarioTemporalController extends Controller
 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 * using two-column layout. See 'protected/views/layouts/column2.php'.
 */
-public $layout='//layouts/column2';
+//public $layout='//layouts/column2';
 
 /**
 * @return array action filters
@@ -63,8 +63,10 @@ public function actionCreate()
 {
 $model      = new BeneficiarioTemporal;
 $desarrollo = new Desarrollo;
-$estado = new Tblestado;
+$estado    = new Tblestado;
 $municipio = new Tblmunicipio;
+$parroquia = new Tblparroquia;
+
 
 
 // Uncomment the following line if AJAX validation is needed
@@ -78,7 +80,7 @@ $this->redirect(array('view','id'=>$model->id_beneficiario_temporal));
 }
 
 $this->render('create',array(
-'model'=>$model,'desarrollo'=>$desarrollo,'municipio'=>$municipio,'estado'=>$estado,
+'model'=>$model,'desarrollo'=>$desarrollo,'municipio'=>$municipio,'estado'=>$estado,'parroquia'=>$parroquia,
 ));
 }
 
