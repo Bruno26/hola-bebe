@@ -47,7 +47,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'context' => 'primary',
             // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
             'headerIcon' => 'user',
-            //'content' => $this->renderPartial('_listardatos', array('form' => $form), TRUE),
+            'content' => $this->renderPartial('_listardatos', array('form' => $form), TRUE),
                 )
         );
         ?>

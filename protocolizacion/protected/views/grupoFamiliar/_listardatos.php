@@ -1,6 +1,12 @@
 <?php
-$cedula = Yii::app()->getSession()->get('CedulaUser');
-$personal = Personal::model()->findByAttributes(array('cedula' => $cedula));
+function nombre($selec,$iD){
+    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
+    return $saime['PRIMER_NOMBRE'];
+}
+function apellido($selec,$iD){
+    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
+    return $saime['PRIMER_APELLIDO'];
+}
 
 function parentesco($valor) {
     switch ($valor) {
@@ -45,43 +51,29 @@ function parentesco($valor) {
             'type' => 'striped bordered',
             'responsiveTable' => false,
             'id' => 'listado_familiar',
-            'dataProvider' => new CActiveDataProvider('Familiar', array(
+            'dataProvider' => new CActiveDataProvider('GrupoFamiliar', array(
                 'criteria' => array(
-                    'condition' => 'id_personal=' . $personal->id_personal,
+                    'condition' => 'unidad_familiar_id=1',
                 ),
                 'pagination' => false,
                     )),
 //            'template' => "{items}",
             'columns' => array(
+             
                 array(
-                    'name' => 'cedula_familiar',
-                    'header' => 'Cedula del Familiar',
+                    'name' => 'persona_id',
+                    'header' => 'Nombre',
+                    'value' => 'nombre("PRIMER_NOMBRE",$data->persona_id)',
                 ),
                 array(
-                    'name' => 'primer_nombre',
-                    'header' => 'Primer Nombre',
+                    'name' => 'persona_id',
+                    'header' => 'Apellido',
+                    'value' => 'apellido("PRIMER_APELLIDO",$data->persona_id)',
                 ),
                 array(
-                    'name' => 'segundo_nombre',
-                    'header' => 'Segundo Nombre',
-                ),
-                array(
-                    'name' => 'primer_apellido',
-                    'header' => 'Primer Apellido',
-                ),
-                array(
-                    'name' => 'segundo_apellido',
-                    'header' => 'Segundo Apellido',
-                ),
-                array(
-                    'name' => 'fecha_nacimiento',
-                    'header' => 'Fecha De Nacimiento',
-                    'value' => 'Yii::app()->dateFormatter->format("dd/MM/yyy", $data->fecha_nacimiento)',
-                ),
-                array(
-                    'name' => 'parentesco',
+                    'name' => 'persona_id',
                     'header' => 'Parentesco',
-                    'value' => 'parentesco($data->parentesco)',
+                    'value' => '$data->genParentesco->descripcion',
                 ),
                 array(
                     'class' => 'booster.widgets.TbButtonColumn',
@@ -90,7 +82,7 @@ function parentesco($valor) {
                     'template' => '{update}',
                     'buttons' => array(
                         'update' => array(
-                            'url' => '$this->grid->controller->createUrl("familiar/update", array("id"=>$data->id_familiar))',
+//                            'url' => '$this->grid->controller->createUrl("familiar/update", array("id"=>$data->id_familiar))',
                         ),
                     ),
                 ),
