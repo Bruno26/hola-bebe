@@ -94,6 +94,19 @@ class SiteController extends Controller {
         $this->render('login', array('model' => $model));
     }
 
+
+
+    public function actionIndexAdmin() {
+                $this->render('indexAdmin', array(
+                    'count_desarrollo' => Desarrollo::model()->count(),
+                    'count_unidades_habitacionales' => UnidadHabitacional::model()->count(),
+                    'count_viviendas' => Vivienda::model()->count(),
+                    'count_beneficiarios' => Beneficiario::model()->count(),
+                    'count_grupos_familiares' => Beneficiario::model()->count(),
+                ));
+    }
+
+
     /**
      * Logs out the current user and redirect to homepage.
      */
