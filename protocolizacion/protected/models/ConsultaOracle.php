@@ -44,6 +44,24 @@ class ConsultaOracle extends CActiveRecord {
         }
     }
 
+
+
+    /*  -------------------------------------------- */
+     public function getPersonaBeneficiario($nacionalidad, $cedula) {
+
+        $nacional = ($nacionalidad == 97) ? '1' : '0';
+        $SLQ = "SELECT P.ID, P.NACIONALIDAD , P.CEDULA, P.PRIMER_NOMBRE AS PRIMERNOMBRE, P.SEGUNDO_NOMBRE AS SEGUNDONOMBRE, P.PRIMER_APELLIDO AS PRIMERAPELLIDO, P.SEGUNDO_APELLIDO AS SEGUNDOAPELLIDO , P.FECHA_NACIMIENTO AS FECHANACIMIENTO ,GEN_SEXO.NOMBRE AS SEXO, GEN_EDO_CIVIL.NOMBRE AS EDO_CIVIL , P.TELEFONO_HAB , P.TELEFONO_MOVIL, P.CORREO_PRINCIPAL AS CORREO FROM PERSONA P LEFT JOIN  GEN_SEXO ON P.GEN_SEXO_ID = GEN_SEXO.ID  LEFT JOIN GEN_EDO_CIVIL ON P.GEN_EDO_CIVIL_ID = GEN_EDO_CIVIL.ID WHERE P.NACIONALIDAD ='" . $nacional . "' AND P.CEDULA = " . $cedula;
+        $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryRow();
+        // var_dump($result); die();
+        if (empty($result)) {
+            return 1;
+        } else {
+            return $result;
+        }
+    }
+       
+    /*   ------------------------------------------- */
+
     /*
      * Consulta Tabla ORGANISMOS_PUBLICOS.SAIME_ORIGINAL de ORGANISMOS_PUBLICOS
      * Consulta que busca por nacionalidad y cedula

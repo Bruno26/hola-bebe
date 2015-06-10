@@ -29,7 +29,9 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
            $('#BeneficiarioTemporal_telf_celular').attr('readonly', true);
            $('#BeneficiarioTemporal_correo_electronico').attr('readonly', true);  
            
-         /*   -------------------------------- */                
+         /*   -------------------------------- */     
+
+                    
              
     }); 
 

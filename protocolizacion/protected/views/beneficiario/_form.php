@@ -1,8 +1,43 @@
-<!--<?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
+<?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	'id'=>'beneficiario-form',
 	'enableAjaxValidation'=>false,
-));  ?>-->
+));  ?>
 
+
+<?php
+ $baseUrl = Yii::app()->baseUrl;
+ $numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
+ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
+
+
+Yii::app()->clientScript->registerScript('Beneficiario', "
+
+
+
+    $(document).ready(function(){
+         $('#Beneficiario_cedula').numeric();
+
+         /*  ------  Bloqueo campos    ------- */
+
+           $('#Beneficiario_primer_apellido').attr('readonly', true);
+           $('#Beneficiario_segundo_apellido').attr('readonly', true);
+           $('#Beneficiario_primer_nombre').attr('readonly', true);
+           $('#Beneficiario_segundo_nombre').attr('readonly', true);
+           $('#Beneficiario_fecha_nacimiento').attr('readonly', true);
+           $('#Beneficiario_sexo').attr('disabled', true);
+           $('#Beneficiario_estado_civil').attr('readonly', true);
+           $('#Beneficiario_telf_habitacion').attr('readonly', true);
+           $('#Beneficiario_telf_celular').attr('readonly', true);
+           $('#Beneficiario_correo_electronico').attr('readonly', true);  
+           
+         /*   -------------------------------- */                
+             
+    }); 
+
+
+  ");
+
+?>
 <p class="help-block">Los Campos con <span class="required">*</span> son obligatorios.</p>
 
 <?php #echo $form->errorSummary($model); ?>
@@ -10,7 +45,7 @@
 <div class="row">
     <div class="row-fluid">
 
-        <div class='col-md-5'>
+        <div class='col-md-4'>
             <?php
             #echo $form->textFieldGroup($model,'fecha_creacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5'))));
             echo $form->datePickerGroup($model, 'fecha_censo', array('widgetOptions' =>
@@ -36,25 +71,27 @@
             );
             ?>
         </div>
-        <div class="col-md-1">
-            <?php   echo $form->labelEx($model, 'nacionalidad'); ?>
-            <?php  
-
-                     $criteria = new CDbCriteria;
-                     $criteria->condition = 'padre =1 and hijo in(1,2,3,4)';
-                     $criteria->order = 'hijo ASC';
-                    echo $form->dropDownList($model, 'nacionalidad', CHtml::listData(Maestro::model()->findAll($criteria), 'hijo', 'descripcion'), 
-                        array(
-                        'title' => 'Seleccione Nacionalidad',
-                        'class' => 'span9',                        
-                        'prompt' => 'Cargando...'
-                    ));  ?>
-        </div>
-         <div class="col-md-4">
-               <?php     echo $form->textFieldGroup($model,'cedula',array('widgetOptions'=>array('htmlOptions'=>array('maxlength'=>200))));
+        <div class="col-md-4">
+          <?php
+            echo $form->dropDownListGroup($model, 'nacionalidad', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
+                'widgetOptions' => array(
+                    'data' => Maestro::FindMaestrosByPadreSelect(96, 'descripcion DESC'),
+                    'htmlOptions' => array('empty' => 'SELECCIONE'),
+                )
+                    )
+            );
             ?>
         </div>
+         <div class="col-md-4">
+              <?php
+            echo $form->textFieldGroup($model, 'cedula', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8,
+                        'onblur' => "buscarPersonaBeneficiario($('#BeneficiarioTemporal_nacionalidad').val(),$(this).val())"
+            ))));
+            ?>
+               <?php echo $form->error($model,'cedula'); ?>
+        </div>
   </div>
+
      <div class="row-fluid">
         <div class='col-md-5'>
             <?php
@@ -138,52 +175,15 @@
 <div class="row">
     <div class="row-fluid">
         <div class='col-md-5'>
-            <?php   echo $form->labelEx($model, 'estado_civil'); ?>
-            <?php
-                     $criteria = new CDbCriteria;
-                     $criteria->condition = 'padre =1 and hijo in(1,2,3,4)';
-                     $criteria->order = 'hijo ASC';
-                    echo $form->dropDownList($model, 'estado_civil', CHtml::listData(Maestro::model()->findAll($criteria), 'hijo', 'descripcion'), 
-                        array(
-                        'title' => 'Seleccione Estado Civil',
-                        'class' => 'span5',                        
-                        'prompt' => 'Cargando...'
-                    ));
-                    ?>
-        </div>
-        <div class='col-md-5'>
              <?php
-                    echo $form->labelEx($model, 'telefono');
-                    //Inicio Campo de Número de Telefono
-            ?>
-            <?php
-          
-                    $this->widget(
-                            'booster.widgets.TbSelect2', array(
-                        'asDropDownList' => false,
-                        'name' => CHtml::activeId($model, 'telefono'),
-                        'attribute' => 'telefono',
-                        'htmlOptions' => array(
-                            'onchange' => 'telfCheck(this.id);',
-                        ),
-                        'options' => array(
-                            'tags' => array(),
-                            'class' => 'Limpiar',
-                            'placeholder' => 'Número teléfonico!',
-                            'width' => '100%',
-                            'tokenSeparators' => array(',', ' '),
-                            'multiple' => true,
-                            'maximumInputLength' => 11,
-                            //'minimumInputLength' => 11,
-                            'maximumSelectionSize' => 2,
-                            'allowClear' => true,
-                            'items' => 4,
-                        )
-                            )
-                    );
-            ?>
-                <?php echo $form->error($model,'telefono'); ?>
+                 echo $form->textFieldGroup($model,'estado_civil',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>100))));
+                ?>
         </div>
+         <div class='col-md-5'>
+                <?php
+                 echo $form->textFieldGroup($model,'telf_habitacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
+                ?>
+           </div>
     </div>
 </div>
 
@@ -191,6 +191,13 @@
 
 <div class="row">
     <div class="row-fluid">
+        <div class='col-md-5'>
+                <?php
+                 echo $form->textFieldGroup($model,'telf_celular',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
+                 ?>
+           </div>
+
+
         <div class='col-md-5'>
         <?php echo $form->labelEx($model, 'correo'); ?>
         <?php

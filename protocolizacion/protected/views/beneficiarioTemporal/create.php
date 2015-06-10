@@ -1,15 +1,45 @@
 <?php
-
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
-    'id' => 'unidad-habitacional-form',
+    'id' => 'desarrollo-form',
     'enableAjaxValidation' => false,
+    'enableClientValidation' => true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true,
+        'validateOnChange' => true,
+        'validateOnType' => true,
+    ),
         ));
 ?>
+<?php Yii::app()->clientScript->registerScript('BeneficiarioTemporal', "
+         $('#guardar').click(function(){
+               
+                if($('#Tblestado_clvcodigo').val()==''){
+                 alert('Por favor seleccione Estado');
+                    return false;
+                }
+                if($('#Tblmunicipio_clvcodigo').val()==''){
+                   alert('Por favor seleccione Municipio');
+                    return false;
+                }
+                if($('#Desarrollo_parroquia_id').val()==''){
+                   alert('Por favor seleccione Parroquia');
+                    return false;
+                }
+                
+                });
+         
+         
+        
+        ") ?>
+
+
 
 
 <h1>Registro Beneficiario Temporal</h1>
 
 <br><br>
+
+
   <?php 
         $this->widget(
                 'booster.widgets.TbLabel', array(
@@ -65,30 +95,42 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 </div>
 
 <br>
+
 <div class="form-actions">
+
+
+   <div class="well">
+    <div class="pull-center" style="text-align: right;">
+        <?php
+        $this->widget('booster.widgets.TbButton', array(
+            'buttonType' => 'submit',
+            'icon' => 'glyphicon glyphicon-floppy-saved',
+            'size' => 'large',
+            'id' => 'guardar',
+            'context' => 'primary',
+            'label' => $model->isNewRecord ? 'Guardar' : 'Save',
+        ));
+        ?>
+
+         <?php
+            $this->widget('booster.widgets.TbButton', array(
+                'context' => 'danger',
+                'label' => 'Cancelar',
+                'size' => 'large',
+                'id' => 'CancelarForm',
+                'icon' => 'ban-circle',
+                'htmlOptions' => array(
+                    'onclick' => 'document.location.href ="' . $this->createUrl('site/index') . '";'
+                )
+            ));
+        ?>
+    </div>
+</div>
+
+
     <!-- *********** -->
-    <?php
-    $this->widget('booster.widgets.TbButton', array(
-        'buttonType' => 'submit',
-        'context' => 'primary',
-        'label' =>$model->isNewRecord ? 'Registrar' : 'Guardar',
-        'icon' => 'ok-sign white',
-        'size' => 'medium'
-    ));
-    ?>
+
    
-    <?php
-    $this->widget('booster.widgets.TbButton', array(
-        'context' => 'danger',
-        'label' => 'Cancelar',
-        'size' => 'medium',
-        'id' => 'CancelarForm',
-        'icon' => 'ban-circle',
-        'htmlOptions' => array(
-            'onclick' => 'document.location.href ="' . $this->createUrl('site/index') . '";'
-        )
-    ));
-    ?>
 </div>
 
 <?php  $this->endWidget(); ?>

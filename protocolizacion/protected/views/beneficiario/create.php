@@ -39,65 +39,67 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 
     /*  ------------------------------------------ */
 
-    /*  *******  Caracteristicas del Desarrollo   ****** */
+ /*  *******  Caracteristicas del Desarrollo   ****** */
 
-    $this->widget(
-        'booster.widgets.TbPanel', array(
-        'title' => 'Caracteristicas del Desarrollo',
-        'context' => 'primary',
-        'headerIcon' => 'home',
-       /*  'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'), */
-        'content' => $this->renderPartial('_desarrollo', array('form' => $form, 'model' => $model), TRUE),
-        #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
-            )
-    );
-        
+
+            $this->widget(
+                            'booster.widgets.TbPanel', array(
+                            'title' => 'Caracteristicas del Desarrollo',
+                            'context' => 'primary',
+                            'headerIcon' => 'home',
+                           /*  'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'), */
+                            'content' => $this->renderPartial('_desarrollo', array('form' => $form, 'desarrollo' => $desarrollo,'model' => $model,'estado' => $estado,'municipio' => $municipio,'parroquia'=>$parroquia), TRUE),
+                            #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
+                                )
+                        );
+
     /*  *********************************************** */
 
 
-    /*  +++++++++++++  Grupo Familiar    +++++++++ */
-
-    $this->widget(
-        'booster.widgets.TbPanel', array(
-        'title' => 'Grupo Familiar',
-        'context' => 'primary',
-        'headerIcon' => 'inbox',
-       /*  'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'), */
-        'content' => $this->renderPartial('_grupof', array('form' => $form, 'model' => $model), TRUE),
-        #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
-            )
-    );
-        
-    /*  ++++++++++++++++++++++++++++++++++++++++++ */
+    
 
     ?>
 </div>
 
 <br><br>
+
 <div class="form-actions">
+
+
+   <div class="well">
+    <div class="pull-center" style="text-align: right;">
+        <?php
+        $this->widget('booster.widgets.TbButton', array(            
+            'icon' => 'glyphicon glyphicon-log-in',
+            'size' => 'large',
+            'id' => 'guardar',
+            'context' => 'primary',
+            'label' => 'Siguiente',
+             'htmlOptions' => array(
+                    'onclick' => 'document.location.href ="' . $this->createUrl('grupoFamiliar/create') . '";'
+                )
+        ));
+        ?>
+
+         <?php
+            $this->widget('booster.widgets.TbButton', array(
+                'context' => 'danger',
+                'label' => 'Cancelar',
+                'size' => 'large',
+                'id' => 'CancelarForm',
+                'icon' => 'ban-circle',
+                'htmlOptions' => array(
+                    'onclick' => 'document.location.href ="' . $this->createUrl('site/index') . '";'
+                )
+            ));
+        ?>
+    </div>
+</div>
+
+
     <!-- *********** -->
-    <?php
-    $this->widget('booster.widgets.TbButton', array(
-        'buttonType' => 'submit',
-        'context' => 'primary',
-        'label' =>$model->isNewRecord ? 'Registrar' : 'Guardar',
-        'icon' => 'ok-sign white',
-        'size' => 'medium'
-    ));
-    ?>
+
    
-    <?php
-    $this->widget('booster.widgets.TbButton', array(
-        'context' => 'danger',
-        'label' => 'Cancelar',
-        'size' => 'medium',
-        'id' => 'CancelarForm',
-        'icon' => 'ban-circle',
-        'htmlOptions' => array(
-            'onclick' => 'document.location.href ="' . $this->createUrl('site/index') . '";'
-        )
-    ));
-    ?>
 </div>
 
 <?php  $this->endWidget(); ?>
