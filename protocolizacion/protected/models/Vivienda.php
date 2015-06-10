@@ -59,14 +59,14 @@ class Vivienda extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('tipo_vivienda_id, unidad_habitacional_id, construccion_mt2, nro_piso, nro_vivienda, lindero_norte, lindero_sur, lindero_este, lindero_oeste, precio_vivienda, nro_estacionamientos, nro_habitaciones, nro_banos, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
+			array('tipo_vivienda_id, unidad_habitacional_id, construccion_mt2, nro_piso, nro_vivienda, precio_vivienda, nro_estacionamientos, nro_habitaciones, nro_banos, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
 			array('tipo_vivienda_id, unidad_habitacional_id, nro_estacionamientos, nro_habitaciones, nro_banos, fuente_datos_entrada_id, estatus_vivienda_id, usuario_id_creacion, usuario_id_actualizacion', 'numerical', 'integerOnly'=>true),
 			array('construccion_mt2', 'length', 'max'=>4),
 			array('nro_piso', 'length', 'max'=>4),
-			array('nro_vivienda', 'length', 'max'=>4),	
-			array('nro_estacionamientos', 'length', 'max'=>4),	
-			array('nro_banos', 'length', 'max'=>4),	
-			array('nro_habitaciones', 'length', 'max'=>4),	
+			array('nro_vivienda', 'length', 'max'=>4),
+			array('nro_estacionamientos', 'length', 'max'=>4),
+			array('nro_banos', 'length', 'max'=>4),
+			array('nro_habitaciones', 'length', 'max'=>4),
 			array('lindero_norte, lindero_sur, lindero_este, lindero_oeste, coordenadas', 'length', 'max'=>200),
 			array('precio_vivienda', 'length', 'max'=>16),
 			array('descripcion_estac', 'length', 'max'=>15),
@@ -105,9 +105,9 @@ class Vivienda extends CActiveRecord
 			'id_vivienda' => 'Id Vivienda',
 			'tipo_vivienda_id' => 'Tipo Vivienda',
 			'unidad_habitacional_id' => 'Nombre Unidad Habitacional',
-			'construccion_mt2' => 'Construccion Mt2',
-			'nro_piso' => 'Nro Piso',
-			'nro_vivienda' => 'Nro Vivienda',
+			'construccion_mt2' => 'Construcción Mt2',
+			'nro_piso' => 'Número Piso',
+			'nro_vivienda' => 'Número Vivienda',
 			'sala' => 'Sala',
 			'comedor' => 'Comedor',
 			'lavandero' => 'Lavandero',
@@ -117,10 +117,10 @@ class Vivienda extends CActiveRecord
 			'lindero_oeste' => 'Lindero Oeste',
 			'coordenadas' => 'Coordenadas',
 			'precio_vivienda' => 'Precio Vivienda',
-			'nro_estacionamientos' => 'Nro Estacionamientos',
-			'descripcion_estac' => 'Descripcion Estacacionamiento',
-			'nro_habitaciones' => 'Nro Habitaciones',
-			'nro_banos' => 'Nro Banos',
+			'nro_estacionamientos' => 'Puesto de Estacionamiento',
+			'descripcion_estac' => 'Número de Estacionamiento',
+			'nro_habitaciones' => 'Número Habitaciones',
+			'nro_banos' => 'Número Banos',
 			'fuente_datos_entrada_id' => 'Fuente Datos Entrada',
 			'estatus_vivienda_id' => 'Estatus Vivienda',
 			'cocina' => 'Cocina',
@@ -148,6 +148,8 @@ class Vivienda extends CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
+
+		$criteria->order = 'id_vivienda DESC';
 
 		$criteria->compare('id_vivienda',$this->id_vivienda);
 		$criteria->compare('tipo_vivienda_id',$this->tipo_vivienda_id);

@@ -9,7 +9,43 @@
 //    array('label' => 'Manage UnidadHabitacional', 'url' => array('admin')),
 //);
 ?>
-
+<?php Yii::app()->clientScript->registerScript('desarrollo', "
+         $('#guardarUnidad').click(function(){
+         
+                if($('#Tblestado_clvcodigo').val()==''){
+                    bootbox.alert('Por favor seleccione Estado');
+                    return false;
+                }
+                if($('#Tblmunicipio_clvcodigo').val()==''){
+                   bootbox.alert('Por favor seleccione Municipio');
+                    return false;
+                }
+                if($('#Tblparroquia_clvcodigo').val()==''){
+                    bootbox.alert('Por favor seleccione Parroquia');
+                    return false;
+                }
+                if($('#UnidadHabitacional_desarrollo_id').val()==''){
+                    bootbox.alert('Por favor seleccione el Desarrollo');
+                    return false;
+                }
+                
+                if($('#UnidadHabitacional_nombre').val()==''){
+                    bootbox.alert('Por favor indique nombre de la unidad habitacional');
+                    return false;
+                }
+                if($('#UnidadHabitacional_gen_tipo_inmueble_id').val()==''){
+                    bootbox.alert('Por favor indique tipo de inmueble');
+                    return false;
+                }
+                
+             
+                
+                
+        });
+         
+        
+        
+        ") ?>
 <?php
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'id' => 'unidad-habitacional-form',
@@ -52,7 +88,7 @@ if (isset($sms) && !empty($sms)) {
         'title' => 'Unidad Habitacional',
         'context' => 'danger',
         'headerIcon' => 'user',
-        'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
+//        'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
         'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
             )
     );
@@ -66,7 +102,7 @@ if (isset($sms) && !empty($sms)) {
             'buttonType' => 'submit',
             'icon' => 'glyphicon glyphicon-floppy-saved',
             'size' => 'large',
-            'id' => 'guardar',
+            'id' => 'guardarUnidad',
             'context' => 'primary',
             'label' => $model->isNewRecord ? 'Guardar' : 'Save',
         ));

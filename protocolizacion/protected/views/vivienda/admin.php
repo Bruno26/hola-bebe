@@ -35,18 +35,83 @@ return false;
     ?>
 </div><!-- search-form -->
 
+
+<div style="text-align: right;vertical-align: middle;">
+    <div align="right" class="row">
+        <?php
+        $this->widget('application.extensions.PageSize.PageSize', array(
+            'mGridId' => 'vivienda-grid', //Gridview id
+            'mPageSize' => @$_GET['pageSize'],
+            'mDefPageSize' => Yii::app()->params['defaultPageSize'],
+        ));
+        ?>
+    </div>
+</div>
 <?php
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'vivienda-grid',
+    'type' => 'striped bordered condensed',
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(
         'id_vivienda',
-        'tipo_vivienda_id',
-        'unidad_habitacional_id',
-        'construccion_mt2',
-        'nro_piso',
-        'nro_vivienda',
+
+        'unidad_habitacional_id' => array(
+            'name' => 'unidad_habitacional_id',
+            'header' => 'Unidad Habitacional',
+            'value' => '$data->unidadHabitacional->nombre',
+            'filter' => CHtml::listData(UnidadHabitacional::model()->findall(), 'id_unidad_habitacional', 'nombre'),
+        ),
+
+        'tipo_vivienda_id' => array(
+            'name' => 'tipo_vivienda_id',
+            'value' => '$data->tipoVivienda->descripcion',
+            'filter' => Maestro::FindMaestrosByPadreSelect(92),
+            'htmlOptions' => array('style' => 'text-align: center', 'width' => '10px'),
+        ),
+        'Estado' => array(
+            'header' => 'Estado',
+            'name' => 'unidad_habitacional_id',
+            //'value' => '$data->fkParroquia->clvmunicipio0->clvestado0->strdescripcion',
+            //$data->unidadHabitacional->desarrollo_id
+            //'value' => '$data->unidadHabitacional->desarrollo_id',
+            //$info_usuario = Desarrollo::model()->find('desarrollo_id=?', array($data->unidadHabitacional->desarrollo_id));
+
+            //'value' => 'Desarrollo::model()->findByPK($data->unidadHabitacional->desarrollo_id)->parroquia_id',
+
+            'value' => 'Tblparroquia::model()->findByPK(Desarrollo::model()->findByPK($data->unidadHabitacional->desarrollo_id)->parroquia_id)->clvmunicipio0->clvestado0->strdescripcion',
+
+
+
+            //'value' => 'Tblparroquia->::model()->findByPK(Desarrollo::model()->findByPK($data->unidadHabitacional->desarrollo_id)->parroquia_id)->strdescripcion',
+
+            //BuscarDesarrollo()
+            //fkParroquia->clvmunicipio0->clvestado0->strdescripcion',
+            //'filter' => CHtml::listData(Tblestado::model()->findall(), 'clvcodigo', 'strdescripcion'),
+//            'filter' => Maestro::FindMaestrosByPadreSelect(71),
+        ),
+        array(
+            'name' => 'construccion_mt2',
+            'htmlOptions' => array('style' => 'text-align: center', 'width' => '10px'),
+        ),
+        array(
+            'name' => 'nro_piso',
+            'htmlOptions' => array('style' => 'text-align: center', 'width' => '10px'),
+        ),
+        array(
+            'name' => 'nro_vivienda',
+            'htmlOptions' => array('style' => 'text-align: center', 'width' => '10px'),
+        ),
+
+        array(
+            'name' => 'precio_vivienda',
+            'htmlOptions' => array('style' => 'text-align: center', 'width' => '10px'),
+        ),
+        array(
+            'name' => 'fecha_creacion',
+            'value' => 'Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($data->fecha_creacion))',
+        //'header' => 'Creación',
+        ),
         /*
           'sala',
           'comedor',
@@ -56,7 +121,6 @@ $this->widget('booster.widgets.TbGridView', array(
           'lindero_este',
           'lindero_oeste',
           'coordenadas',
-          'precio_vivienda',
           'nro_estacionamientos',
           'descripcion_estac',
           'nro_habitaciones',
@@ -64,7 +128,6 @@ $this->widget('booster.widgets.TbGridView', array(
           'fuente_datos_entrada_id',
           'estatus_vivienda_id',
           'cocina',
-          'fecha_creacion',
           'fecha_actualizacion',
           'usuario_id_creacion',
           'usuario_id_actualizacion',

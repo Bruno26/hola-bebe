@@ -68,8 +68,12 @@ class DesarrolloController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
         $this->render('view', array(
             'model' => $this->loadModel($id),
+            'estado' => $estado ,
+            'municipio' => $municipio ,
         ));
     }
 
@@ -113,16 +117,18 @@ class DesarrolloController extends Controller {
                 $model->fecha_creacion = 'now()';
                 $model->fecha_actualizacion = 'now()';
                 $model->usuario_id_creacion = Yii::app()->user->id;
-                $model->estatus = 5;
+                $model->estatus = 29;
                 // echo '<pre>';  var_dump($model); die();
 
                 if ($model->save()) {
 
                     $this->redirect(array('admin'));
-                } else {
-                    var_dump($model->errors);
-                    die();
-                }
+                } 
+                
+//                else {
+//                    var_dump($model->errors);
+//                    die();
+//                }
             } else {
                 $this->render('create', array(
                     'model' => $model, 'estado' => $estado,
@@ -147,6 +153,12 @@ class DesarrolloController extends Controller {
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
 
+        //$model = new Desarrollo;
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
+        $enteEjecutor = new EnteEjecutor;
+        $fuenteFinacimiento = new FuenteFinanciamiento;
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
@@ -157,7 +169,7 @@ class DesarrolloController extends Controller {
         }
 
         $this->render('update', array(
-            'model' => $model,
+          'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'enteEjecutor' => $enteEjecutor, 'fuenteFinacimiento' => $fuenteFinacimiento
         ));
     }
 
@@ -170,6 +182,7 @@ class DesarrolloController extends Controller {
         if (Yii::app()->request->isPostRequest) {
 // we only allow deletion via POST request
             $this->loadModel($id)->delete();
+
 
 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))

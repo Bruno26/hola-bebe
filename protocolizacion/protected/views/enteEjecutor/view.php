@@ -13,18 +13,12 @@ array('label'=>'Manage EnteEjecutor','url'=>array('admin')),
 );
 ?>
 
-<h1>View EnteEjecutor #<?php echo $model->id_ente_ejecutor; ?></h1>
+<h1>Ente Ejecutor #<?php echo $model->id_ente_ejecutor; ?></h1>
 
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
-		'id_ente_ejecutor',
 		'nombre_ente_ejecutor',
 		'observaciones',
-		'estatus',
-		'fecha_creacion',
-		'fecha_actualizacion',
-		'usuario_id_creacion',
-		'usuario_id_actualizacion',
 ),
 )); ?>

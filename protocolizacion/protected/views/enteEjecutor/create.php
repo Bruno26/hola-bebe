@@ -1,11 +1,11 @@
 
 
-<h1>Crear Ente Ejecutor</h1>
+<h1>Registrar Ente Ejecutor</h1>
 
 
 <?php
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
-    'id' => 'vivienda-form',
+    'id' => 'EnteEjecutor-form',
     'enableAjaxValidation' => false,
     'enableClientValidation' => true,
     'clientOptions' => array(
@@ -17,15 +17,15 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 ?>
 
 
-<h1>Ente </h1>
+
 
 <div class="row">
     <div class="col-md-12">
         <?php
         $this->widget(
                 'booster.widgets.TbPanel', array(
-            'title' => 'Vivienda',
-            'context' => 'danger',
+            'title' => 'Ente Ejecutor',
+            'context' => 'info',
             // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
             'headerIcon' => 'home',
             'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
@@ -35,7 +35,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     </div>
 </div>
 <div class="well">
-    <div class="pull-center" style="text-align: right;">
+    <div class="pull-center" style="text-align: center;">
         <?php
         $this->widget('booster.widgets.TbButton', array(
             'buttonType' => 'submit',
@@ -53,3 +53,27 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 
 <?php $this->endWidget(); ?>
 
+
+<div class="row">
+    <div class='col-md-12'>
+        <?php
+        $this->widget(
+                'booster.widgets.TbExtendedGridView', array(
+            'type' => 'striped bordered',
+            'responsiveTable' => true,
+            'id' => 'listado_servicios',
+            'dataProvider' => new CActiveDataProvider('EnteEjecutor', array(
+                    )),
+            'template' => "{items}",
+            'columns' => array(
+                array(
+                    'name' => 'nombre_ente_ejecutor',
+                    'header' => 'Listado de Ente Ejecutor',
+                    'value' => '$data->nombre_ente_ejecutor',
+                ),
+            )
+                )
+        );
+        ?>
+    </div>
+</div>

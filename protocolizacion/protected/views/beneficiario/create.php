@@ -3,7 +3,6 @@ $this->breadcrumbs=array(
 	'Beneficiarios'=>array('index'),
 	'Create',
 );
-
 $this->menu=array(
 array('label'=>'List Beneficiario','url'=>array('index')),
 array('label'=>'Manage Beneficiario','url'=>array('admin')),
@@ -17,33 +16,90 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'enableAjaxValidation' => false,
         ));
 ?>
-<h1 class="text-center">Registrar Beneficiario</h1>
+<h1 class="text-center">Censo Socio Económico</h1>
 
-<?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
 
 <div>
     <?php 
+
+    /* ------------  Datos Beneficiario  --------- */
+
+
+
     $this->widget(
             'booster.widgets.TbPanel', array(
         'title' => 'Beneficiario',
         'context' => 'primary',
         'headerIcon' => 'user',
-        'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
+       /*  'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'), */
         'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
         #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
             )
     );
+
+    /*  ------------------------------------------ */
+
+ /*  *******  Caracteristicas del Desarrollo   ****** */
+
+
+            $this->widget(
+                            'booster.widgets.TbPanel', array(
+                            'title' => 'Caracteristicas del Desarrollo',
+                            'context' => 'primary',
+                            'headerIcon' => 'home',
+                           /*  'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'), */
+                            'content' => $this->renderPartial('_desarrollo', array('form' => $form, 'desarrollo' => $desarrollo,'model' => $model,'estado' => $estado,'municipio' => $municipio,'parroquia'=>$parroquia), TRUE),
+                            #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
+                                )
+                        );
+
+    /*  *********************************************** */
+
+
+    
+
     ?>
 </div>
 
-<div class="form-actions text-center">
-    <?php
-    $this->widget('booster.widgets.TbButton', array(
-        'buttonType' => 'submit',
-        'context' => 'primary',
-        'size' => 'large',
-        'label' => 'Registrar',
-    ));
-    ?>
+<br><br>
+
+<div class="form-actions">
+
+
+   <div class="well">
+    <div class="pull-center" style="text-align: right;">
+        <?php
+        $this->widget('booster.widgets.TbButton', array(            
+            'icon' => 'glyphicon glyphicon-log-in',
+            'size' => 'large',
+            'id' => 'guardar',
+            'context' => 'primary',
+            'label' => 'Siguiente',
+             'htmlOptions' => array(
+                    'onclick' => 'document.location.href ="' . $this->createUrl('grupoFamiliar/create') . '";'
+                )
+        ));
+        ?>
+
+         <?php
+            $this->widget('booster.widgets.TbButton', array(
+                'context' => 'danger',
+                'label' => 'Cancelar',
+                'size' => 'large',
+                'id' => 'CancelarForm',
+                'icon' => 'ban-circle',
+                'htmlOptions' => array(
+                    'onclick' => 'document.location.href ="' . $this->createUrl('site/index') . '";'
+                )
+            ));
+        ?>
+    </div>
 </div>
+
+
+    <!-- *********** -->
+
+   
+</div>
+
 <?php  $this->endWidget(); ?>

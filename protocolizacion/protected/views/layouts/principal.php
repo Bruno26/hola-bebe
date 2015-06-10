@@ -110,8 +110,8 @@
             $(document).ready(function() {
                 $(".fakeloader").fakeLoader({
                     timeToHide: 1200,
-                    bgColor: "#0dcecd",
-                    spinner: "spinner2"
+                    bgColor: "#62C2E4",
+                    spinner: "spinner6"
                 });
             });
         </script>

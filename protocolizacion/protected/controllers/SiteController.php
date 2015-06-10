@@ -2,6 +2,25 @@
 
 class SiteController extends Controller {
 
+  /**
+   * @return array action filters
+   */
+   
+  public function filters() {
+      return array(
+          'accessControl', // perform access control for CRUD operations
+      );
+  }
+
+  public function accessRules() {
+      return array(
+          array('allow', // allow admin user to perform 'admin' and 'delete' actions
+              'actions' => array('indexAdmin'),
+              'users' => array('admin'),
+          ),
+      );
+  }
+
     /**
      * Declares class-based actions.
      */
@@ -25,7 +44,6 @@ class SiteController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-
         $TypeUser = Generico::TipoUsuario();
         if ($TypeUser == 2) {
             $this->layout = 'main';
@@ -35,18 +53,6 @@ class SiteController extends Controller {
             $this->layout = 'principal';
             $this->render('index');
         }
-//        $sql = 'select * from DESARROLLO';
-////ss
-//        $dataReader  = Yii::app()->dbOracle->createCommand($sql)->queryAll();
-//        
-//        foreach($dataReader AS $data){            
-//            echo '<pre>';var_dump($data);
-//        }
-//        
-//        echo '<pre>';var_dump($dataReader);
-//        die;
-        // renders the view file 'protected/views/site/index.php'
-        // using the default layout 'protected/views/layouts/main.php'
     }
 
     /**
@@ -106,6 +112,19 @@ class SiteController extends Controller {
         // display the login form
         $this->render('login', array('model' => $model));
     }
+
+
+
+    public function actionIndexAdmin() {
+                $this->render('indexAdmin', array(
+                    'count_desarrollo' => Desarrollo::model()->count(),
+                    'count_unidades_habitacionales' => UnidadHabitacional::model()->count(),
+                    'count_viviendas' => Vivienda::model()->count(),
+                    'count_beneficiarios' => Beneficiario::model()->count(),
+                    'count_grupos_familiares' => Beneficiario::model()->count(),
+                ));
+    }
+
 
     /**
      * Logs out the current user and redirect to homepage.

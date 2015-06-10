@@ -1,0 +1,82 @@
+<?php
+$Validaciones = Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/validacion.js');
+$numeric = Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/js_jquery.numeric.js');
+Yii::app()->clientScript->registerScript('educacion', "
+    $(document).ready(function(){
+        $('#ReasignacionVivienda_cedulaAnterior').numeric();   
+        $('#ReasignacionVivienda_cedulaActual').numeric();   
+    }),
+");
+$form = $this->beginWidget('booster.widgets.TbActiveForm', array(
+    'id' => 'reasignacion-vivienda-form',
+    'enableAjaxValidation' => false,
+    'enableClientValidation' => true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true,
+        'validateOnChange' => true,
+        'validateOnType' => true,
+        )));
+?>
+
+<h1 class="text-center">Re-Asignación de Vivienda</h1>
+
+<?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<div class="row">
+    <div class="col-md-12">
+        <?php
+        $this->widget(
+                'booster.widgets.TbPanel', array(
+            'title' => 'Beneficiario Anterior',
+            'context' => 'info',
+            'headerIcon' => 'user',
+            'content' => $this->renderPartial('_beneficiarioAnterior', array('form' => $form, 'model' => $model), TRUE),
+                )
+        );
+        ?>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <?php
+        $this->widget(
+                'booster.widgets.TbPanel', array(
+            'title' => 'Beneficiario Actual',
+            'context' => 'info',
+            'headerIcon' => 'user',
+            'content' => $this->renderPartial('_beneficiarioActual', array('form' => $form, 'model' => $model), TRUE),
+                )
+        );
+        ?>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <?php
+        $this->widget(
+                'booster.widgets.TbPanel', array(
+            'title' => 'Re-Asignación ',
+            'context' => 'info',
+            'headerIcon' => 'user',
+            'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
+                )
+        );
+        ?>
+    </div>
+</div>
+
+<div class="well">
+    <div class="pull-center" style="text-align: right;">
+        <?php
+        $this->widget('booster.widgets.TbButton', array(
+            'buttonType' => 'submit',
+            'icon' => 'glyphicon glyphicon-floppy-saved',
+            'size' => 'large',
+            'id' => 'guardar',
+            'context' => 'primary',
+            'label' => $model->isNewRecord ? 'Guardar' : 'Save',
+        ));
+        ?>
+    </div>
+</div>
+<?php $this->endWidget(); ?>

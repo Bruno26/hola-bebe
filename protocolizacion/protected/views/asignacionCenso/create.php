@@ -1,10 +1,17 @@
+
 <?php
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
-    'id' => 'unidad-habitacional-form',
+    'id' => 'asignacion-censo-form',
     'enableAjaxValidation' => false,
+    'enableClientValidation' => true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true,
+        'validateOnChange' => true,
+        'validateOnType' => true,
+    ),
         ));
 ?>
-<h1 class="text-center">Reasignación y Asignación</h1>
+<h1 class="text-center">Asignación de Censo</h1>
 
 <?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
 
@@ -12,25 +19,27 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     <?php
     $this->widget(
             'booster.widgets.TbPanel', array(
-        'title' => 'Reasignación y Asignación',
-        'context' => 'primary',
+        'title' => 'Asignación de Censo',
+        'context' => 'danger',
         'headerIcon' => 'user',
-        'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
         'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
-            #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
             )
     );
     ?>
 </div>
 
-<div class="form-actions text-center">
-    <?php
-    $this->widget('booster.widgets.TbButton', array(
-        'buttonType' => 'submit',
-        'context' => 'primary',
-        'size' => 'large',
-        'label' => 'Re-Asignación',
-    ));
-    ?>
+<div class="well">
+    <div class="pull-center" style="text-align: right;">
+        <?php
+        $this->widget('booster.widgets.TbButton', array(
+            'buttonType' => 'submit',
+            'icon' => 'glyphicon glyphicon-floppy-saved',
+            'size' => 'large',
+            'id' => 'guardar',
+            'context' => 'primary',
+            'label' => $model->isNewRecord ? 'Guardar' : 'Save',
+        ));
+        ?>
+    </div>
 </div>
 <?php $this->endWidget(); ?>

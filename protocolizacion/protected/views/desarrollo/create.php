@@ -13,26 +13,50 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 <?php Yii::app()->clientScript->registerScript('desarrollo', "
          $('#guardar').click(function(){
                 if($('#Desarrollo_nombre').val()==''){
-                   bootbox.alert('Por favor indique el nombre del Desarrollo');
+                    bootbox.alert('Por favor indique el nombre del Desarrollo');
                     return false;
                 }
          
                 if($('#Tblestado_clvcodigo').val()==''){
-                 alert('Por favor seleccione Estado');
+                    bootbox.alert('Por favor seleccione Estado');
                     return false;
                 }
                 if($('#Tblmunicipio_clvcodigo').val()==''){
-                   alert('Por favor seleccione Municipio');
+                   bootbox.alert('Por favor seleccione Municipio');
                     return false;
                 }
                 if($('#Desarrollo_parroquia_id').val()==''){
-                   alert('Por favor seleccione Parroquia');
+                    bootbox.alert('Por favor seleccione Parroquia');
                     return false;
                 }
                 
-                });
+                if($('#Desarrollo_nombre').val()==''){
+                    bootbox.alert('Por favor de indicar el Nombre del Desarrollo');
+                    return false;
+                }
+                if($('#Desarrollo_descripcion').val()==''){
+                    bootbox.alert('Por favor de indicar la Descripción del Desarrollo');
+                    return false;
+                }
+                if($('#Desarrollo_fuente_financiamiento_id').val()==''){
+                    bootbox.alert('Por favor indicar Fuente de Finacinamiento');
+                    return false;
+                }
+                if($('#Desarrollo_ente_ejecutor_id').val()==''){
+                   bootbox.alert('Por favor indicar Fuente de Finacinamiento');
+                    return false;
+                }
+                if($('#titularidad_del_terreno').is(':checked')){
+                    if($('#Desarrollo_fecha_transferencia').val()== ''){
+                        bootbox.alert('Por favor indique Fecha de transferencia');
+                        return false;       
+                    }
+                }
+                
+                
+        });
          
-         
+        
         
         ") ?>
 
@@ -55,15 +79,15 @@ if (isset($sms) && !empty($sms)) {
 }
 ?>
 
-<h1>Desarrollo</h1>
+<h1 class="text-center">Desarrollo</h1>
 
 <div class="row">
     <div class="col-md-12">
         <?php
         $this->widget(
                 'booster.widgets.TbPanel', array(
-            'title' => 'Caracteristica del Desarrollo Habitacional',
-            'context' => 'danger',
+            'title' => 'Desarrollo Habitacional',
+            'context' => 'info',
             // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
             'headerIcon' => 'globe',
             'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'enteEjecutor' => $enteEjecutor, 'fuenteFinacimiento' => $fuenteFinacimiento), TRUE),

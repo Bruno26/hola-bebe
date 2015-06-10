@@ -72,7 +72,7 @@ class Tblestado extends CActiveRecord {
             'clvcodigo' => 'Estado',
             'clvregion' => 'Clvregion',
             'strid' => 'Strid',
-            'strdescripcion' => 'Strdescripcion',
+            'strdescripcion' => 'Estado',
             'strcapital' => 'Strcapital',
             'blnborrado' => 'Blnborrado',
             'dtmregistro' => 'Dtmregistro',
@@ -129,5 +129,4 @@ class Tblestado extends CActiveRecord {
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
-
 }

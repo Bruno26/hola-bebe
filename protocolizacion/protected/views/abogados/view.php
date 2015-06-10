@@ -14,7 +14,6 @@ array('label'=>'Manage Abogados','url'=>array('admin')),
 ?>
 
 <h1>View Abogados #<?php echo $model->id; ?></h1>
-
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
