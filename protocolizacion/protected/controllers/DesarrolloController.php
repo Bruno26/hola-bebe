@@ -151,6 +151,12 @@ class DesarrolloController extends Controller {
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
 
+        //$model = new Desarrollo;
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
+        $enteEjecutor = new EnteEjecutor;
+        $fuenteFinacimiento = new FuenteFinanciamiento;
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
@@ -161,7 +167,7 @@ class DesarrolloController extends Controller {
         }
 
         $this->render('update', array(
-            'model' => $model,
+          'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'enteEjecutor' => $enteEjecutor, 'fuenteFinacimiento' => $fuenteFinacimiento
         ));
     }
 
@@ -174,6 +180,7 @@ class DesarrolloController extends Controller {
         if (Yii::app()->request->isPostRequest) {
 // we only allow deletion via POST request
             $this->loadModel($id)->delete();
+
 
 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
