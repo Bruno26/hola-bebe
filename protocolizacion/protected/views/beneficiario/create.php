@@ -3,7 +3,6 @@ $this->breadcrumbs=array(
 	'Beneficiarios'=>array('index'),
 	'Create',
 );
-
 $this->menu=array(
 array('label'=>'List Beneficiario','url'=>array('index')),
 array('label'=>'Manage Beneficiario','url'=>array('admin')),
