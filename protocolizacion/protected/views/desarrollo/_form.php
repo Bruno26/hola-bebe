@@ -1,8 +1,14 @@
 <?php
 $baseUrl = Yii::app()->baseUrl;
 $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
+$Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
 ?>
-
+<?php Yii::app()->clientScript->registerScript('desarrolloVal', "
+         $(document).ready(function(){
+            $('#Desarrollo_lote_terreno_mt2').numeric(); 
+        });
+        
+"); ?>
 
 <p class="help-block">Los campos marcados con <span class="required">*</span> son requeridos.</p>
 <div class="row">
@@ -150,7 +156,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 </div>
 <div class="row">
     <div class="col-md-6">
-        <?php //echo $form->textFieldGroup($model, 'lindero_este', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200)))); ?>
+        <?php //echo $form->textFieldGroup($model, 'lindero_este', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));  ?>
         <?php
         echo $form->textAreaGroup(
                 $model, 'lindero_este', array(
@@ -168,7 +174,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 
     <div class="col-md-6">
 
-        <?php //echo $form->textFieldGroup($model, 'lindero_oeste', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200)))); ?>
+        <?php //echo $form->textFieldGroup($model, 'lindero_oeste', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));  ?>
         <?php
         echo $form->textAreaGroup(
                 $model, 'lindero_oeste', array(

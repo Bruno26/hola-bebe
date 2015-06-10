@@ -19,7 +19,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     $this->widget(
             'booster.widgets.TbPanel', array(
         'title' => 'Abogados',
-        'context' => 'danger',
+        'context' => 'info',
         'headerIcon' => 'user',
         //'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
         'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),

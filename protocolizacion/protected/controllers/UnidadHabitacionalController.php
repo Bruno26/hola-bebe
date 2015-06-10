@@ -75,27 +75,30 @@ class UnidadHabitacionalController extends Controller {
                 $model->attributes = $_POST['UnidadHabitacional'];
                 $model->desarrollo_id = $_POST['UnidadHabitacional']['desarrollo_id'];
                 $model->nombre = $nombre;
-                $model->registro_publico_id = $_POST['UnidadHabitacional']['registro_publico_id'];
-                $model->fecha_registro = Generico::formatoFecha($_POST['UnidadHabitacional']['fecha_registro']);
                 $model->gen_tipo_inmueble_id = $_POST['UnidadHabitacional']['gen_tipo_inmueble_id'];
-                $model->total_unidades = '0';
-                $model->ano = $_POST['UnidadHabitacional']['ano'];
-                $model->tipo_documento_id = $_POST['UnidadHabitacional']['tipo_documento_id'];
-                $model->num_protocolo = $_POST['UnidadHabitacional']['num_protocolo'];
-                $model->folio_real = $_POST['UnidadHabitacional']['folio_real'];
-                $model->asiento_registral = $_POST['UnidadHabitacional']['asiento_registral'];
-                $model->tomo = $_POST['UnidadHabitacional']['tomo'];
+                $model->total_unidades = 0;
+//                $model->fecha_registro = Generico::formatoFecha($_POST['UnidadHabitacional']['fecha_registro']);
+//                $model->ano = $_POST['UnidadHabitacional']['ano'];
+//                $model->registro_publico_id = $_POST['UnidadHabitacional']['registro_publico_id'];
+//                $model->tipo_documento_id = $_POST['UnidadHabitacional']['tipo_documento_id'];
+//                $model->num_protocolo = $_POST['UnidadHabitacional']['num_protocolo'];
+                $model->fecha_registro = 'now';
+                $model->folio_real = 1;
+                $model->asiento_registral = 1;
+//                $model->tomo = $_POST['UnidadHabitacional']['tomo'];
+//                $model->nro_matricula = $_POST['UnidadHabitacional']['nro_matricula'];
                 $model->fuente_datos_entrada_id = 90;
-                $model->nro_matricula = $_POST['UnidadHabitacional']['nro_matricula'];
                 $model->fecha_creacion = 'now()';
                 $model->fecha_actualizacion = 'now()';
                 $model->usuario_id_creacion = Yii::app()->user->id;
-                $model->estatus = 71;
+                $model->estatus = 77;
+
                 if ($model->save()) {
+
                     $this->redirect(array('/site/index'));
                 }
             } else {
-                $this->render('create', array('model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'sms' => 1));
+                //$this->render('create', array('model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'sms' => 1));
             }
         }
 

@@ -1,4 +1,68 @@
-
+<?php Yii::app()->clientScript->registerScript('desarrollo', "
+         $('#guardarVivienda').click(function(){
+         
+                if($('#Tblestado_clvcodigo').val()==''){
+                    bootbox.alert('Por favor seleccione Estado');
+                    return false;
+                }
+                if($('#Tblmunicipio_clvcodigo').val()==''){
+                   bootbox.alert('Por favor seleccione Municipio');
+                    return false;
+                }
+                if($('#Tblparroquia_clvcodigo').val()==''){
+                    bootbox.alert('Por favor seleccione Parroquia');
+                    return false;
+                }
+                if($('#Desarrollo_id_desarrollo').val()==''){
+                    bootbox.alert('Por favor seleccione el Desarrollo');
+                    return false;
+                }
+                
+                if($('#Vivienda_unidad_habitacional_id').val()==''){
+                    bootbox.alert('Por favor seleccione nombre de la unidad habitacional');
+                    return false;
+                }
+                if($('#Vivienda_tipo_vivienda_id').val()==''){
+                    bootbox.alert('Por favor seleccione tipo de vivienda');
+                    return false;
+                }
+                if($('#Vivienda_construccion_mt2').val()==''){
+                    bootbox.alert('Por favor indique metros cuadrado de la vivienda');
+                    return false;
+                }
+                
+                if($('#Vivienda_nro_piso').val()==''){
+                    bootbox.alert('Por favor indique número piso');
+                    return false;
+                }
+                if($('#Vivienda_nro_vivienda').val()==''){
+                    bootbox.alert('Por favor indique número de vivienda');
+                    return false;
+                }
+                
+                if($('#Vivienda_nro_habitaciones').val()==''){
+                    bootbox.alert('Por favor indique número de habitacione');
+                    return false;
+                }
+                
+                if($('#Vivienda_nro_banos').val()==''){
+                    bootbox.alert('Por favor indique número de baños');
+                    return false;
+                }
+                
+                if($('#Vivienda_precio_vivienda').val()==''){
+                    bootbox.alert('Por favor indique precio vivienda');
+                    return false;
+                }
+                
+             
+                
+                
+        });
+         
+        
+        
+        ") ?>
 
 <?php
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
@@ -22,7 +86,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         $this->widget(
                 'booster.widgets.TbPanel', array(
             'title' => 'Vivienda',
-            'context' => 'danger',
+            'context' => 'info',
             // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
             'headerIcon' => 'home',
             'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'desarrollo' => $desarrollo), TRUE),
@@ -38,7 +102,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'buttonType' => 'submit',
             'icon' => 'glyphicon glyphicon-floppy-saved',
             'size' => 'large',
-            'id' => 'guardar',
+            'id' => 'guardarVivienda',
             'context' => 'primary',
             'label' => $model->isNewRecord ? 'Guardar' : 'Save',
         ));

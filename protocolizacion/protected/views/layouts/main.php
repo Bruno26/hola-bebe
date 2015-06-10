@@ -88,7 +88,7 @@
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/oficina/create'); ?>">Cargar Nueva Oficina</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/oficina/admin'); ?>">Gestipon de Oficinas</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/oficina/admin'); ?>">Listado</a></li>  
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -98,7 +98,7 @@
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/abogados/create'); ?>">Cargar Nuevo Abogado</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/abogados/admin'); ?>">Gestipon de Abogados</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/abogados/admin'); ?>">Listado</a></li>  
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -136,9 +136,9 @@
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/desarrollo/create'); ?>">Cargar Nuevo</a></li>
                                             <li><a href="<?php echo $this->createUrl('/programa/create'); ?>">Programa</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/enteEjecutor/create'); ?>">Ente Ejecutivo</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/enteEjecutor/create'); ?>">Ente Ejecutor</a></li>
                                             <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Funtes</a></li>  
-                                            <li><a href="<?php echo $this->createUrl('/desarrollo/admin'); ?>">Gestipon Desarrollo</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/desarrollo/admin'); ?>">Listado Desarrollo</a></li>  
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -149,7 +149,7 @@
 
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/unidadHabitacional/create'); ?>">Cargar Nuevo</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/unidadHabitacional/admin'); ?>">Gestipon</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/unidadHabitacional/admin'); ?>">Listado</a></li>  
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -159,7 +159,7 @@
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/vivienda/create'); ?>">Cargar Nuevo</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/vivienda/admin'); ?>">Gestipon</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/vivienda/admin'); ?>">Listado</a></li>  
                                         </ul>
                                     </li>
                                 </ul>
@@ -167,7 +167,7 @@
                             <li class="sub-menu">
                                 <a href="<?php echo $this->createUrl('#'); ?>">
                                     <i class="glyphicon glyphicon-home"></i>
-                                    <span>Gestipon Adjudicatorio</span>
+                                    <span>Gestión Adjudicatorio</span>
                                 </a>
                                 <ul class="sub-menu">
                                     <li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Carga por Sistema</span></a></li>
@@ -181,11 +181,11 @@
                                 </a>
                                 <ul class="sub">
                                     <li><a href="<?php echo $this->createUrl('/asignacionCenso/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Asignación de Censo</span></a></li>
-                                    <li><a href="<?php echo $this->createUrl('/asignacionCenso/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestipon de Asignación</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('/asignacionCenso/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Listado de Asignación</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Censo</span></a></li>
-                                    <li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestipon  de Censo</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión  de Censo</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('/reasignacionVivienda/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Reasignación de Vivienda</span></a></li>
-                                    <li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestipon de Reasignación</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Reasignación</span></a></li>
                                 </ul>
                             </li>
 
