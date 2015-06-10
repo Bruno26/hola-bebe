@@ -14,24 +14,65 @@
  </div>
 
  <div class="row-fluid">
-        <div class='col-md-5'>
-            <?php
-           echo $form->textFieldGroup($model,'estado',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
-            ?>
+        <div class='col-md-5'>            
+
+          <?php
+        $criteria = new CDbCriteria;
+        $criteria->order = 'strdescripcion ASC';
+        echo $form->dropDownListGroup($estado, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-4',),
+            'widgetOptions' => array(
+                'data' => CHtml::listData(Tblestado::model()->findAll($criteria), 'clvcodigo', 'strdescripcion'),
+                'htmlOptions' => array(
+                    'empty' => 'SELECCIONE',
+                    'ajax' => array(
+                        'type' => 'POST',
+                        'url' => CController::createUrl('ValidacionJs/BuscarMunicipios'),
+                        'update' => '#' . CHtml::activeId($municipio, 'clvcodigo'),
+                    ),
+                ),
+            )
+                )
+        );
+        ?>
         </div>
         <div class='col-md-5'>
             <?php
-            echo $form->textFieldGroup($model,'municipio',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
-            ?>
+        echo $form->dropDownListGroup($municipio, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12',),
+            'widgetOptions' => array(
+                'htmlOptions' => array(
+                    'ajax' => array(
+                        'type' => 'POST',
+                        'url' => CController::createUrl('ValidacionJs/BuscarParroquias'),
+                        'update' => '#' . CHtml::activeId($parroquia, 'clvcodigo'),
+                    ),
+                    'empty' => 'SELECCIONE',
+                ),
+            )
+                )
+        );
+        ?>
         </div>
  </div>
 
 
  <div class="row-fluid">
         <div class='col-md-5'>
-            <?php
-           echo $form->textFieldGroup($desarrollo,'parroquia_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
-            ?>
+       
+         <?php
+        echo $form->dropDownListGroup($parroquia, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar',),
+            'widgetOptions' => array(
+                'htmlOptions' => array(
+                    'ajax' => array(
+                        'type' => 'POST',
+                        'url' => CController::createUrl('ValidacionJs/BuscarDesarrollo'),
+                        'update' => '#' . CHtml::activeId($model, 'desarrollo_id'),
+                    ),
+                    'empty' => 'SELECCIONE',
+                ),
+            )
+                )
+        );
+        ?>
         </div>
         <div class='col-md-5'>
             <?php

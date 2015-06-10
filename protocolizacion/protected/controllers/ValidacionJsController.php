@@ -132,6 +132,7 @@ class ValidacionJsController extends Controller {
         }
     }
 
+
     /**
      * FUNCION QUE MUESTRA TODOS LAS PARROQUIAS DE  
      */

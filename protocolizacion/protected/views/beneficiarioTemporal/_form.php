@@ -6,6 +6,7 @@
 <?php
  $baseUrl = Yii::app()->baseUrl;
  $numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
+ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
 
 
 Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
@@ -33,56 +34,31 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
     }); 
 
 
-     /*  +++++++++++++++++   Validacion de cedula +++++++++++++++++  */
-         
-            $('#BeneficiarioTemporal_cedula').focusout(function(){
-            	
-                
-                       if($('#BeneficiarioTemporal_nacionalidad').children(':selected').text() != 'Seleccione Nacionalidad' ){
-                        
-                          if($('#BeneficiarioTemporal_cedula').val() != '' ){
-
-                              /*  //////////////// Verifico existencia del beneficiario /////////////////////  */
-                                   
-                                        
-
-
-                              /*  ///////////////////////////////////////////////////////////////////////////  */
-
-
-                          }else{
-                                  bootbox.alert('Ingrese Cedula del Beneficiario');
-                          }
-
-            }else{
-                   bootbox.alert('Ingrese Nacionalidad del Beneficiario');
-            }
-
-            }); 
-
-         /*  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */       ");
+  ");
 
 ?>
 
 <div class="row">
     <div class="row-fluid"> 
            <div class='col-md-5'>
-                     <?php   echo $form->labelEx($model, 'nacionalidad'); ?>
-        			 <?php
-			                    $criteria = new CDbCriteria;
-			                    $criteria->condition = 'padre =96';
-			                    $criteria->order = 'hijo ASC';
-			                    echo $form->dropDownList($model, 'nacionalidad', CHtml::listData(Maestro::model()->findAll($criteria), 'id_maestro', 'descripcion'), 
-			                        array(
-			                        'title' => 'Seleccione Nacionalidad',
-			                        'class' => 'span9',                        
-			                        'prompt' => 'Seleccione Nacionalidad'
-			                    ));
-      				  ?>
+                   
+        		  <?php
+                    echo $form->dropDownListGroup($model, 'nacionalidad', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
+                        'widgetOptions' => array(
+                            'data' => Maestro::FindMaestrosByPadreSelect(96, 'descripcion DESC'),
+                            'htmlOptions' => array('empty' => 'SELECCIONE'),
+                        )
+                    )
+            );
+            ?>
 
            </div>
            <div class='col-md-5'>
-               <?php echo $form->textFieldGroup($model, 'cedula', array('class' => 'span5')); ?>
+                <?php
+            echo $form->textFieldGroup($model, 'cedula', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8,
+                        'onblur' => "buscarPersonaBeneficiario($('#BeneficiarioTemporal_nacionalidad').val(),$(this).val())"
+            ))));
+            ?>
                <?php echo $form->error($model,'cedula'); ?>
                <span hidden="hidden" class="cargar"><?php echo CHtml::image(Yii::app()->request->baseUrl."/images/loading.gif"); ?></span>
            </div>
