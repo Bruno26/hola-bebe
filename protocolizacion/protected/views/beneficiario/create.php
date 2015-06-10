@@ -76,7 +76,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'context' => 'primary',
             'label' => 'Siguiente',
              'htmlOptions' => array(
-                    'onclick' => 'document.location.href ="' . $this->createUrl('site/index') . '";'
+                    'onclick' => 'document.location.href ="' . $this->createUrl('grupoFamiliar/create') . '";'
                 )
         ));
         ?>
