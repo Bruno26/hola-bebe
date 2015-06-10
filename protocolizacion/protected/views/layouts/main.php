@@ -88,7 +88,7 @@
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/oficina/create'); ?>">Cargar Nueva Oficina</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/oficina/admin'); ?>">Listado de Oficinas</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/oficina/admin'); ?>">Gestipon de Oficinas</a></li>  
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -98,7 +98,7 @@
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/abogados/create'); ?>">Cargar Nuevo Abogado</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/abogados/admin'); ?>">Listado de Abogados</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/abogados/admin'); ?>">Gestipon de Abogados</a></li>  
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -138,7 +138,7 @@
                                             <li><a href="<?php echo $this->createUrl('/programa/create'); ?>">Programa</a></li>
                                             <li><a href="<?php echo $this->createUrl('/enteEjecutor/create'); ?>">Ente Ejecutivo</a></li>
                                             <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Funtes</a></li>  
-                                            <li><a href="<?php echo $this->createUrl('/desarrollo/admin'); ?>">Listado Desarrollo</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/desarrollo/admin'); ?>">Gestipon Desarrollo</a></li>  
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -149,7 +149,7 @@
 
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/unidadHabitacional/create'); ?>">Cargar Nuevo</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/unidadHabitacional/admin'); ?>">Listado</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/unidadHabitacional/admin'); ?>">Gestipon</a></li>  
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -159,33 +159,33 @@
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/vivienda/create'); ?>">Cargar Nuevo</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/vivienda/admin'); ?>">Listado</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/vivienda/admin'); ?>">Gestipon</a></li>  
                                         </ul>
                                     </li>
                                 </ul>
                             </li>
-                            <li>
+                            <li class="sub-menu">
                                 <a href="<?php echo $this->createUrl('#'); ?>">
                                     <i class="glyphicon glyphicon-home"></i>
-                                    <span>Listado Adjudicatorio</span>
+                                    <span>Gestipon Adjudicatorio</span>
                                 </a>
-                                <ul class="sub">
-                                    <li><a href="<?php echo $this->createUrl('#'); ?>">Carga por Sistema</a></li>
-                                    <!--<li><a href="<?php // echo $this->createUrl('#'); ?>">Carga Masiva</a></li>    SEGUNDA FASE DE DESARROLLO-->  
+                                <ul class="sub-menu">
+                                    <li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Carga por Sistema</span></a></li>
+                                    <!--<li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Carga Masiva</span></a></li>-->
                                 </ul>
                             </li>
-                            <li>
+                            <li class="sub-menu">
                                 <a href="<?php echo $this->createUrl('#'); ?>">
                                     <i class="glyphicon glyphicon-home"></i>
                                     <span>Censo Socioeconómico</span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="<?php echo $this->createUrl('#'); ?>">Asignación de Censo</a></li>
-                                    <li><a href="<?php echo $this->createUrl('#'); ?>">Listado de Asignación de Censo</a></li>
-                                    <li><a href="<?php echo $this->createUrl('#'); ?>">Censo</a></li>
-                                   <li><a href="<?php echo $this->createUrl('#'); ?>">Listado de Censo</a></li>
-                                   <li><a href="<?php echo $this->createUrl('#'); ?>">Reasignación de Vivienda</a></li>
-                                   <li><a href="<?php echo $this->createUrl('#'); ?>">Listado de Reasignación de Vivienda</a></li>
+                                    <li><a href="<?php echo $this->createUrl('/asignacionCenso/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Asignación de Censo</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('/asignacionCenso/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestipon de Asignación</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Censo</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestipon  de Censo</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('/reasignacionVivienda/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Reasignación de Vivienda</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestipon de Reasignación</span></a></li>
                                 </ul>
                             </li>
 
@@ -205,7 +205,7 @@
             <div id="expirado"></div>
 
             <!--            <footer class='container col-md-12 col-xs-12 text-center'>
-                            Copyright &copy; <?php // echo date('Y');                                                                            ?> by My Company.<br/>
+                            Copyright &copy; <?php // echo date('Y');                                                                                ?> by My Company.<br/>
                             All Rights Reserved.<br/>
             <?php // echo Yii::powered(); ?>
                         </footer>-->

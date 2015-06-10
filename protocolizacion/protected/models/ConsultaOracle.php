@@ -17,7 +17,7 @@ class ConsultaOracle extends CActiveRecord {
         $nacional = ($nacionalidad == 97) ? '1' : '0';
         $SLQ = "SELECT ID, NACIONALIDAD , CEDULA, PRIMER_NOMBRE AS PRIMERNOMBRE, SEGUNDO_NOMBRE AS SEGUNDONOMBRE, PRIMER_APELLIDO AS PRIMERAPELLIDO, SEGUNDO_APELLIDO AS SEGUNDOAPELLIDO , FECHA_NACIMIENTO AS FECHANACIMIENTO FROM PERSONA WHERE NACIONALIDAD ='" . $nacional . "' AND CEDULA = " . $cedula;
         $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryAll();
-
+        
         if (empty($result)) {
             return 1;
         } else {

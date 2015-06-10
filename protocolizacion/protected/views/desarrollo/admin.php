@@ -94,7 +94,7 @@ $this->widget('booster.widgets.TbGridView', array(
                     'label' => 'Ver',
                     'icon' => 'eye-open',
                     'size' => 'medium',
-//                    'url' => 'Yii::app()->createUrl("vswSolicitudRecibido/view/", array("id"=>$data->id_solicitud))',
+                    'url' => 'Yii::app()->createUrl("desarrollo/view/", array("id"=>$data->id_desarrollo))',
                 ),
                 'modificar' => array(
                     'label' => 'Modificar',
