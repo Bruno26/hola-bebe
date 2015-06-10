@@ -16,12 +16,12 @@ class ConsultaOracle extends CActiveRecord {
 
         $nacional = ($nacionalidad == 97) ? '1' : '0';
         $SLQ = "SELECT ID, NACIONALIDAD , CEDULA, PRIMER_NOMBRE AS PRIMERNOMBRE, SEGUNDO_NOMBRE AS SEGUNDONOMBRE, PRIMER_APELLIDO AS PRIMERAPELLIDO, SEGUNDO_APELLIDO AS SEGUNDOAPELLIDO , FECHA_NACIMIENTO AS FECHANACIMIENTO FROM PERSONA WHERE NACIONALIDAD ='" . $nacional . "' AND CEDULA = " . $cedula;
-        $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryAll();
-        
+        $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryRow();
+
         if (empty($result)) {
             return 1;
         } else {
-            return (object) $result[0];
+            return $result;
         }
     }
 
@@ -33,16 +33,15 @@ class ConsultaOracle extends CActiveRecord {
      */
 
     public function getSaime($nacionalidad, $cedula) {
-        $valNacionalidad = array('valNacionalidad' => ($nacionalidad == 97) ? '1' : '0');
+        //$valNacionalidad = array('valNacionalidad' => ($nacionalidad == 97) ? '1' : '0');
         $nacional = ($nacionalidad == 97) ? 'V' : 'E';
 
         $SLQ = "SELECT NACIONALIDAD, CEDULA, PRIMERNOMBRE, SEGUNDONOMBRE, PRIMERAPELLIDO, SEGUNDOAPELLIDO, FECHANACIMIENTO FROM ORGANISMOS_PUBLICOS.SAIME_ORIGINAL WHERE NACIONALIDAD ='" . $nacional . "' AND CEDULA = " . $cedula;
-        $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryAll();
-        $result = $valNacionalidad + $result[0];
+        $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryRow();
         if (empty($result)) {
             return 1;
         } else {
-            return $result[0];
+            return $result;
         }
     }
 
