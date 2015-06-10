@@ -1,4 +1,19 @@
-
+<?php
+$baseUrl = Yii::app()->baseUrl;
+$Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
+$Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
+?>
+<?php Yii::app()->clientScript->registerScript('desarrolloVal', "
+         $(document).ready(function(){
+            $('#Vivienda_nro_piso').numeric(); 
+            $('#Vivienda_nro_habitaciones').numeric(); 
+            $('#Vivienda_nro_banos').numeric(); 
+            $('#Vivienda_construccion_mt2').numeric(); 
+            $('#Vivienda_precio_vivienda').numeric(); 
+            $('#Vivienda_nro_estacionamientos').numeric(); 
+        });
+        
+"); ?>
 
 <p class="help-block">Los campos marcados con <span class="required">*</span> son requeridos.</p>
 

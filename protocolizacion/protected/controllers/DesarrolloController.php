@@ -117,16 +117,18 @@ class DesarrolloController extends Controller {
                 $model->fecha_creacion = 'now()';
                 $model->fecha_actualizacion = 'now()';
                 $model->usuario_id_creacion = Yii::app()->user->id;
-                $model->estatus = 5;
+                $model->estatus = 29;
                 // echo '<pre>';  var_dump($model); die();
 
                 if ($model->save()) {
 
                     $this->redirect(array('admin'));
-                } else {
-                    var_dump($model->errors);
-                    die();
-                }
+                } 
+                
+//                else {
+//                    var_dump($model->errors);
+//                    die();
+//                }
             } else {
                 $this->render('create', array(
                     'model' => $model, 'estado' => $estado,

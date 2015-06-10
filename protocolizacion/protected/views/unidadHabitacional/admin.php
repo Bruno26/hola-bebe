@@ -44,9 +44,6 @@ $this->widget('booster.widgets.TbGridView', array(
             'value' => '$data->desarrollo->nombre',
 
         ),
-        
-        
-        
 
         'Estado' => array(
             'header' => 'Estado',

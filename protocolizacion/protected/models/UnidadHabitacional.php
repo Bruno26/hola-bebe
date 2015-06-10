@@ -59,7 +59,7 @@ class UnidadHabitacional extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre, desarrollo_id, gen_tipo_inmueble_id, registro_publico_id, tipo_documento_id, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, estatus, num_protocolo', 'required'),
+			array('nombre, desarrollo_id, gen_tipo_inmueble_id, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, estatus', 'required'),
 			array('desarrollo_id, gen_tipo_inmueble_id, total_unidades, registro_publico_id, tipo_documento_id, ano, fuente_datos_entrada_id, usuario_id_creacion, usuario_id_actualizacion, estatus, num_protocolo', 'numerical', 'integerOnly'=>true),
 			array('nombre, nro_matricula', 'length', 'max'=>100),
 			array('tomo, nro_documento', 'length', 'max'=>50),

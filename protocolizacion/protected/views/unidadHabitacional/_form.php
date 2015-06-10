@@ -1,5 +1,15 @@
+<?php
+$baseUrl = Yii::app()->baseUrl;
+$Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
+?>
+<?php Yii::app()->clientScript->registerScript('desarrolloVal', "
+         $(document).ready(function(){
+            $('#UnidadHabitacional_asiento_registral').numeric(); 
+            $('#UnidadHabitacional_folio_real').numeric(); 
+        });
+        
+"); ?>
 <p class="help-block">Los Campos con <span class="required">*</span> son obligatorios.</p>
-
 <div class="row">
     <div class="col-md-4">
 
@@ -97,7 +107,7 @@
             echo $form->dropDownListGroup($model, 'registro_publico_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
                 'widgetOptions' => array(
                     'data' => CHtml::listData(RegistroPublico::model()->findAll(), 'id_registro_publico', 'nombre_registro_publico'),
-                    'htmlOptions' => array('empty' => 'SELECCIONE'),
+                    'htmlOptions' => array('empty' => 'SELECCIONE', 'readonly' => true),
                 )
                     )
             );
@@ -138,7 +148,7 @@
             echo $form->dropDownListGroup($model, 'num_protocolo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
                 'widgetOptions' => array(
                     'data' => Maestro::FindMaestrosByPadreSelect(144, 'descripcion DESC'),
-                    'htmlOptions' => array('empty' => 'SELECCIONE'),
+                    'htmlOptions' => array('empty' => 'SELECCIONE', 'readonly' => true),
                 )
                     )
             );
@@ -147,7 +157,7 @@
         </div>
         <div class='col-md-4'>
             <?php
-            echo $form->textFieldGroup($model, 'tomo', array('widgetOptions' => array('htmlOptions' => array('class' => ''))));
+            echo $form->textFieldGroup($model, 'tomo', array('widgetOptions' => array('htmlOptions' => array('class' => '','readonly' => true))));
             ?>
         </div>
         <div class='col-md-4'>
@@ -155,7 +165,7 @@
             echo $form->dropDownListGroup($model, 'tipo_documento_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
                 'widgetOptions' => array(
                     'data' => Maestro::FindMaestrosByPadreSelect(86, 'descripcion DESC'),
-                    'htmlOptions' => array('empty' => 'SELECCIONE'),
+                    'htmlOptions' => array('empty' => 'SELECCIONE','readonly' => true),
                 )
                     )
             );
@@ -189,12 +199,12 @@
         </div>
         <div class='col-md-4'>
             <?php
-            echo $form->textFieldGroup($model, 'nro_documento', array('widgetOptions' => array('htmlOptions' => array('class' => ''))));
+            echo $form->textFieldGroup($model, 'nro_documento', array('widgetOptions' => array('htmlOptions' => array('class' => '','readonly' => true,))));
             ?>
         </div>
         <div class='col-md-4'>
             <?php
-            echo $form->textFieldGroup($model, 'asiento_registral', array('widgetOptions' => array('htmlOptions' => array('class' => ''))));
+            echo $form->textFieldGroup($model, 'asiento_registral', array('widgetOptions' => array('htmlOptions' => array('class' => '','readonly' => true,))));
             ?>
         </div>
 
@@ -204,12 +214,12 @@
     <div class='row-fluid'>
         <div class='col-md-6'>
             <?php
-            echo $form->textFieldGroup($model, 'folio_real', array('widgetOptions' => array('htmlOptions' => array('class' => ''))));
+            echo $form->textFieldGroup($model, 'folio_real', array('widgetOptions' => array('htmlOptions' => array('class' => '','readonly' => true,))));
             ?>
         </div>
         <div class='col-md-6'>
             <?php
-            echo $form->textFieldGroup($model, 'nro_matricula', array('widgetOptions' => array('htmlOptions' => array('class' => ''))));
+            echo $form->textFieldGroup($model, 'nro_matricula', array('widgetOptions' => array('htmlOptions' => array('class' => '','readonly' => true,))));
             ?>
         </div>
     </div>
