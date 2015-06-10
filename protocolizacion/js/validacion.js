@@ -243,3 +243,42 @@ function buscarPersonaCensoA(nacionalidad, cedula) {
     })
 }
 
+
+/* -------------------------------------------------------*/
+
+function buscarPersonaFamiliar(nacionalidad, cedula) {
+    alert(nacionalidad + ' - ' + cedula);
+    if (nacionalidad == 'SELECCIONE') {
+        bootbox.alert('Verifique que la nacionalidad no esten vacios');
+        return false;
+    }
+    if (cedula == '') {
+        bootbox.alert('Verifique que la cédula no esten vacios');
+        return false;
+    }
+    $.ajax({
+        url: baseUrl + "/ValidacionJs/BuscarPersonasFamiliar",
+        async: true,
+        type: 'POST',
+        data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
+        dataType: 'json',
+        success: function (datos) {
+            if (datos == 1) {
+                bootbox.alert('La Persona ya se encuentra asignada a un grupo Familiar.');
+            } else if (datos == 2) {
+                bootbox.alert('La Persona no se encuentra registrada en el Saime.');
+            } else {
+                $('#GrupoFamiliar_primer_nombre').val(datos.PRIMERNOMBRE);
+                $('#GrupoFamiliar_persona_id').val(datos.ID);
+                $('#GrupoFamiliar_primer_apellido').val(datos.PRIMERAPELLIDO);
+            }
+        },
+        error: function (datos) {
+            bootbox.alert('Ocurrio un error');
+        }
+    })
+}
+
+
+
+

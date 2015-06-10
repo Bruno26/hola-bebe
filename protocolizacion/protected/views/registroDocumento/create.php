@@ -22,7 +22,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         )));
 ?>
 
-<h1>Create RegistroDocumento</h1>
+<h1>Registro Documento</h1>
 
 
 <div class="row">
@@ -31,9 +31,9 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         $this->widget(
                 'booster.widgets.TbPanel', array(
             'title' => 'Registro Documento',
-            'context' => 'danger',
+            'context' => 'info',
             // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
-            'headerIcon' => 'home',
+            'headerIcon' => 'file',
             'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
                 )
         );

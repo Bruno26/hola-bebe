@@ -25,16 +25,16 @@ Yii::app()->clientScript->registerScript('search', "
 
 
 <?php //echo CHtml::link('Advanced Search', '#', array('class' => 'search-button btn btn-info')); ?>
-<h1>Gestión de Desarrollos</h1>
+<h1>Listado de Desarrollos</h1>
 
-<?php echo CHtml::link('Busqueda Avanzada', '#', array('class' => 'search-button btn')); ?>
-<div class="search-form" style="display:none">
+<?php // echo CHtml::link('Busqueda Avanzada', '#', array('class' => 'search-button btn')); ?>
+<!--<div class="search-form" style="display:none">-->
     <?php
-    $this->renderPartial('_search', array(
-        'model' => $model,
-    ));
+//    $this->renderPartial('_search', array(
+//        'model' => $model,
+//    ));
     ?>
-</div><!-- search-form -->
+<!----></div><!-- search-form -->
 
 <?php
 $this->widget('booster.widgets.TbGridView', array(
@@ -100,15 +100,10 @@ $this->widget('booster.widgets.TbGridView', array(
                     'label' => 'Modificar',
                     'icon' => 'glyphicon glyphicon-pencil',
                     'size' => 'medium',
-//                    'url' => 'Yii::app()->createUrl("vswSolicitudRecibido/asignar/", array("id"=>$data->id_solicitud))',
+                    'url' => 'Yii::app()->createUrl("desarrollo/update/", array("id"=>$data->id_desarrollo))',
 //                    'visible' => 'Asignar($data->username);'
                 ),
-//                'editar' => array(
-//                    'label' => 'Editar',
-//                    'icon' => 'glyphicon glyphicon-pencil',
-//                    'size' => 'medium',
-//                    'url' => 'Yii::app()->createUrl("vswSolicitudRecibido/editar/", array("id"=>$data->id_solicitud))',
-//                ),
+
             ),
         ),
     ),

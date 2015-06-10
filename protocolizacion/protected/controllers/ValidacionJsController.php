@@ -38,18 +38,17 @@ class ValidacionJsController extends Controller {
         $cedula = (int) $_POST['cedula'];
         $nacio = $_POST['nacionalidad'];
         $result = ConsultaOracle::getPersona($nacio, $cedula);
-//        if ($result == 1) {
-//            $saime = ConsultaOracle::getSaime($nacio, $cedula);
+        if ($result == 1) {
+            $saime = ConsultaOracle::getSaime($nacio, $cedula);
 //            var_dump($saime);die;
-//            if ($saime == 1)
-//                echo json_encode(2); //en caso que no exista en saime
-//            else
-//                echo CJSON::encode($saime);
-//        }else {
-
-        echo json_encode($result);
-//        }
-    //var_dump($result);die;
+            if ($saime == 1)
+                echo json_encode(2); //en caso que no exista en saime
+            else
+                echo CJSON::encode($saime);
+        }else {
+            echo CJSON::encode($result);
+        }
+//        var_dump($result);die;
     }
 
     public function actionBuscarPersonasBeneficiario() {
@@ -68,6 +67,7 @@ class ValidacionJsController extends Controller {
         echo json_encode($result);
 //        }
        //var_dump($result);die;
+
     }
 
     public function actionBuscarMunicipios() {
@@ -151,7 +151,6 @@ class ValidacionJsController extends Controller {
         }
     }
 
-
     /**
      * FUNCION QUE MUESTRA TODOS LAS PARROQUIAS DE  
      */
@@ -194,7 +193,7 @@ class ValidacionJsController extends Controller {
             echo CJSON::encode($consultaBeneficiarioTmp);
         }
     }
-    
+
 //    public function actionBuscarBeneficiarioAnterior() {
 //        $cedula = (int) $_POST['cedula'];
 //        $nacionalidad = $_POST['nacionalidad'];
@@ -218,5 +217,28 @@ class ValidacionJsController extends Controller {
 //        } else
 //            echo json_encode(1);
 //    }
+
+     public function actionBuscarPersonasFamiliar() {
+        $cedula = (int) $_POST['cedula'];
+        $nacio = $_POST['nacionalidad'];
+
+        $result = ConsultaOracle::getPersona($nacio, $cedula);
+        if ($result != '1') {
+            $ExisteGrupoFamiliar = GrupoFamiliarController::FindByIdPersona($result->ID);
+            var_dump($ExisteGrupoFamiliar);die;
+            if ($ExisteGrupoFamiliar === null)
+                echo json_encode(1);
+            else
+                echo CJSON::encode($result);
+        } else {
+            $saime = ConsultaOracle::getSaime($nacio, $cedula);
+            if ($saime === null) {
+                echo json_encode(2);
+            } else {
+                echo CJSON::encode($saime);
+            }
+        }
+    }
+
 
 }

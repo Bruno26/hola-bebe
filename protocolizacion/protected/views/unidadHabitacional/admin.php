@@ -27,13 +27,21 @@
 <?php
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'unidad-habitacional-grid',
+    'type' => 'striped bordered condensed',
     'dataProvider' => $model->search(),
     'filter' => $model,
 
     'columns' => array(
-    
+      'id_unidad_habitacional' => array(
+          'header' => 'N°',
+          'name' => 'id_unidad_habitacional',
+          'value' => '$data->id_unidad_habitacional',
+          'htmlOptions' => array('style' => 'text-align: center', 'width' => '15px'),
+
+//            'filter' => Maestro::FindMaestrosByPadreSelect(71),
+      ),
         'nombre' => array(
-            'header' => 'Descripción de Desarrollo',
+            'header' => 'Unidad Habitacional',
             'name' => 'nombre',
             'value' => '$data->nombre',
 //            'filter' => Maestro::FindMaestrosByPadreSelect(71),
@@ -44,9 +52,6 @@ $this->widget('booster.widgets.TbGridView', array(
             'value' => '$data->desarrollo->nombre',
 
         ),
-        
-        
-        
 
         'Estado' => array(
             'header' => 'Estado',
@@ -54,7 +59,7 @@ $this->widget('booster.widgets.TbGridView', array(
             'value' => '$data->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion',
 //            'filter' => Maestro::FindMaestrosByPadreSelect(71),
         ),
- 
+
         array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
@@ -65,13 +70,13 @@ $this->widget('booster.widgets.TbGridView', array(
                     'label' => 'Ver',
                     'icon' => 'eye-open',
                     'size' => 'medium',
-                    'url' => 'Yii::app()->createUrl("desarrollo/view/", array("id"=>$data->id_unidad_habitacional))',
+                    'url' => 'Yii::app()->createUrl("UnidadHabitacional/view/", array("id"=>$data->id_unidad_habitacional))',
                 ),
                 'modificar' => array(
                     'label' => 'Modificar',
                     'icon' => 'glyphicon glyphicon-pencil',
                     'size' => 'medium',
-//                    'url' => 'Yii::app()->createUrl("vswSolicitudRecibido/asignar/", array("id"=>$data->id_solicitud))',
+                    'url' => 'Yii::app()->createUrl("UnidadHabitacional/update/", array("id"=>$data->id_unidad_habitacional))',
 //                    'visible' => 'Asignar($data->username);'
                 ),
 
@@ -87,7 +92,7 @@ $this->widget('booster.widgets.TbGridView', array(
 <?php
 // $this->renderPartial('_search',array(
 //	'model'=>$model,
-//)); 
+//));
 ?>
 </div> search-form -->
 
