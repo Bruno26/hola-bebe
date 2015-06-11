@@ -37,13 +37,13 @@
                 <div class="nav notify-row" id="top_menu">
                     <!--  notification start -->
                     <!--                    <ul class="nav top-menu">
-                                             settings start 
+                                             settings start
                                             <li class="dropdown">
                                                 <a data-toggle="dropdown" class="dropdown-toggle" href="<?php echo $this->createUrl('site/index'); ?>">
                                                     <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
                                                 </a>
                                             </li>
-                                             notification dropdown end 
+                                             notification dropdown end
                                         </ul>-->
                     <!--  notification end -->
                 </div>
@@ -57,7 +57,8 @@
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu extended logout">
-                                <li><a href="<?php echo $this->createUrl('/site/logout'); ?>"><i class="fa fa-key"></i>Salir</a></li>
+                              <li><a class="glyphicon glyphicon-lock" href="<?php echo $this->createUrl('/cruge/ui/usermanagementupdate'); ?>"><i class="fa fa-key"></i>Cambiar Clave</a></li>
+                              <li><a class="glyphicon glyphicon-off" href="<?php echo $this->createUrl('/site/logout'); ?>"><i class="fa fa-key"></i>Salir</a></li>
                             </ul>
                         </li>
                         <!-- user login dropdown end -->
@@ -88,7 +89,7 @@
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/oficina/create'); ?>">Cargar Nueva Oficina</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/oficina/admin'); ?>">Listado</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/oficina/admin'); ?>">Listado</a></li>
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -98,7 +99,7 @@
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/abogados/create'); ?>">Cargar Nuevo Abogado</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/abogados/admin'); ?>">Listado</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/abogados/admin'); ?>">Listado</a></li>
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -121,7 +122,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                            </li>   
+                            </li>
                             <li class="sub-menu">
                                 <a href="javascript:;">
                                     <i class="glyphicon glyphicon-stats"></i>
@@ -137,8 +138,8 @@
                                             <li><a href="<?php echo $this->createUrl('/desarrollo/create'); ?>">Cargar Nuevo</a></li>
                                             <li><a href="<?php echo $this->createUrl('/programa/create'); ?>">Programa</a></li>
                                             <li><a href="<?php echo $this->createUrl('/enteEjecutor/create'); ?>">Ente Ejecutor</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Funtes</a></li>  
-                                            <li><a href="<?php echo $this->createUrl('/desarrollo/admin'); ?>">Listado Desarrollo</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Funtes</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/desarrollo/admin'); ?>">Listado Desarrollo</a></li>
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -149,17 +150,17 @@
 
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/unidadHabitacional/create'); ?>">Cargar Nuevo</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/unidadHabitacional/admin'); ?>">Listado</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/unidadHabitacional/admin'); ?>">Listado</a></li>
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
                                         <a href="javascript:;">
                                             <i class="glyphicon glyphicon-map-marker"></i>
-                                            <span>Vivienda</span> 
+                                            <span>Vivienda</span>
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/vivienda/create'); ?>">Cargar Nuevo</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/vivienda/admin'); ?>">Listado</a></li>  
+                                            <li><a href="<?php echo $this->createUrl('/vivienda/admin'); ?>">Listado</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -232,7 +233,7 @@ $url_destroy_session = CHtml::normalizeUrl(array('/site/logout'));
 Yii::app()->getClientScript()->registerScript("core_cruge", "
 var tstampActual = 0;
 var comprobar = 1200000;
-        
+
 
 
     function kill_session() {
@@ -246,22 +247,22 @@ var comprobar = 1200000;
 
         document.getElementById('expirado').innerHTML=xmlhttp.responseText;
         document.location.href = '$url_redirect';
-   
-    }      
+
+    }
 
 function actividad() {
 
     var tstamp = new Date().getTime();
-    
+
     if (Math.abs(tstampActual - tstamp) > comprobar) {
-        kill_session();  
+        kill_session();
     }
 }
 
 $( document ).ready(function() {
     // Handler for .ready() called.
     document.body.addEventListener('mousemove', function() {
-    tstampActual = new Date().getTime(); 
+    tstampActual = new Date().getTime();
     }, false);
     setInterval(function() {actividad()}, comprobar);
 });

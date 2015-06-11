@@ -132,9 +132,28 @@ $this->widget('booster.widgets.TbGridView', array(
           'usuario_id_creacion',
           'usuario_id_actualizacion',
          */
-        array(
-            'class' => 'booster.widgets.TbButtonColumn',
-        ),
+         array(
+             'class' => 'booster.widgets.TbButtonColumn',
+             'header' => 'Acciones',
+             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
+             'template' => '{ver} {modificar}',
+             'buttons' => array(
+                 'ver' => array(
+                     'label' => 'Ver',
+                     'icon' => 'eye-open',
+                     'size' => 'medium',
+                     'url' => 'Yii::app()->createUrl("vivienda/view/", array("id"=>$data->id_vivienda))',
+                 ),
+                 'modificar' => array(
+                     'label' => 'Modificar',
+                     'icon' => 'glyphicon glyphicon-pencil',
+                     'size' => 'medium',
+                     'url' => 'Yii::app()->createUrl("vivienda/update/", array("id"=>$data->id_vivienda))',
+ //                    'visible' => 'Asignar($data->username);'
+                 ),
+
+             ),
+         ),
     ),
 ));
 ?>

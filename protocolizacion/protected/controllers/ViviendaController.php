@@ -112,6 +112,10 @@ class ViviendaController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
+        $desarrollo = new Desarrollo;
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
@@ -122,8 +126,8 @@ class ViviendaController extends Controller {
                 $this->redirect(array('view', 'id' => $model->id_vivienda));
         }
 
-        $this->render('update', array(
-            'model' => $model,
+        $this->render('update', array( 'model' => $model, 'estado' => $estado,
+            'municipio' => $municipio, 'parroquia' => $parroquia, 'desarrollo' => $desarrollo
         ));
     }
 
