@@ -46,9 +46,21 @@ class UnidadHabitacionalController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        $model = new UnidadHabitacional;
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
         $this->render('view', array(
             'model' => $this->loadModel($id),
+            'estado' => $estado ,
+            'municipio' => $municipio ,
+            
+            
         ));
+        
+        
+        //$this->render('view', array(
+        //    'model' => $this->loadModel($id),
+        //));
     }
 
     /**
