@@ -1,16 +1,26 @@
 <?php
-//$this->breadcrumbs=array(
-//	'Grupo Familiars'=>array('index'),
-//	'Create',
-//);
-//
-//$this->menu=array(
-//array('label'=>'List GrupoFamiliar','url'=>array('index')),
-//array('label'=>'Manage GrupoFamiliar','url'=>array('admin')),
-//);
-?>
+Yii::app()->clientScript->registerScript('camara', "
+    
+    $('#GuardarFamiliar').click(function(){
+    
+        var cedula = $('#Visitantes_cedula').val();
+         $.ajax({
+            url: '" . Yii::app()->createAbsoluteUrl('GrupoFamiliar/InsertFamiliar') . "',
+            async: true,
+            type: 'POST',
+            data: 'cedula=' + cedula ,
+            dataType: 'json',
+            success: function(data) {
+                
+            },
+            error: function(data) {
+                bootbox.alert('Ocurrio un error');
+            }
+        });
 
-<?php
+    });
+");
+
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'id' => 'desarrollo-form',
     'enableAjaxValidation' => false,
@@ -58,12 +68,12 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     <div class="pull-center" style="text-align: right;">
         <?php
         $this->widget('booster.widgets.TbButton', array(
-            'buttonType' => 'submit',
+            'buttonType' => 'button',
             'icon' => 'glyphicon glyphicon-floppy-saved',
             'size' => 'large',
-            'id' => 'guardar',
+            'id' => 'GuardarFamiliar',
             'context' => 'primary',
-            'label' => $model->isNewRecord ? 'Guardar' : 'Save',
+            'label' => 'Agregar Familiar',
         ));
         ?>
     </div>

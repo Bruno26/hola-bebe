@@ -171,4 +171,18 @@ class GrupoFamiliarController extends Controller {
         return $model;
     }
 
+    /*
+     * Funcion que ingresa en tabla grupo familiar
+     */
+
+    public function actionInsertFamiliar() {
+        $Familiar = new GrupoFamiliar;
+
+        echo '<pre>';var_dump($_POST);die;
+        $sql = "insert into logintransLog (user_id, created) values (:user_id, :created)";
+        $parameters = array(":user_id" => $user->id, ':created' => date('Y-m-d H:i:s'));
+        Yii::app()->db->createCommand($sql)->execute($parameters);
+
+    }
+
 }

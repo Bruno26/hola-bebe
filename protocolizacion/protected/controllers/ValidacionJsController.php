@@ -223,10 +223,10 @@ class ValidacionJsController extends Controller {
         $nacio = $_POST['nacionalidad'];
 
         $result = ConsultaOracle::getPersona($nacio, $cedula);
+        
         if ($result != '1') {
-            $ExisteGrupoFamiliar = GrupoFamiliarController::FindByIdPersona($result->ID);
-            var_dump($ExisteGrupoFamiliar);die;
-            if ($ExisteGrupoFamiliar === null)
+            $ExisteGrupoFamiliar = GrupoFamiliarController::FindByIdPersona($result['ID']);
+            if (!empty($ExisteGrupoFamiliar))
                 echo json_encode(1);
             else
                 echo CJSON::encode($result);
