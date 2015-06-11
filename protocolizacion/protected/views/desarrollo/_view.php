@@ -1,12 +1,3 @@
-<?php
-//echo '<pre>';var_dump($model);die();
-
-
-$form = $this->beginWidget('booster.widgets.TbActiveForm', array(
-    'id' => 'vsw-solicitud-recibido-form',
-    'enableAjaxValidation' => false,
-        ));
-?>
 <div class="row">
     <div class="col-md-12">
         <div>
@@ -109,9 +100,3 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     </div>
 </div>
 
-
-
-
-
-
-<?php $this->endWidget(); ?>
