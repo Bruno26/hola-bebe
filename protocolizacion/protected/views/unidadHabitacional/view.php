@@ -13,9 +13,9 @@ array('label'=>'Manage UnidadHabitacional','url'=>array('admin')),
 );
 ?>
 
-<h1>View UnidadHabitacional #<?php echo $model->id_unidad_habitacional; ?></h1>
+<h1 class="text-center">Unidad Habitacional <?php echo $model->nombre; ?></h1>
 
-<?php $this->widget('booster.widgets.TbDetailView',array(
+<?php /* $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
 		'id_unidad_habitacional',
@@ -39,4 +39,12 @@ array('label'=>'Manage UnidadHabitacional','url'=>array('admin')),
 		'usuario_id_creacion',
 		'usuario_id_actualizacion',
 ),
-)); ?>
+)); */ ?>
+<?php $this->widget('booster.widgets.TbPanel', array(
+    'context' => 'primary',
+    'content' => $this->renderPartial('_view', array('model' => $model, 'estado' => $estado, 'municipio' => $municipio), TRUE),
+        )
+);
+?>
+
+               
