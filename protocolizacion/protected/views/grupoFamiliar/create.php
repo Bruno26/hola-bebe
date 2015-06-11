@@ -22,7 +22,9 @@ Yii::app()->clientScript->registerScript('camara', "
             data: 'cedula=' +cedula + '&nacionalida=' +nacionalidad + '&primerNombre=' + primerNombre +'&segundoNombre=' +segundoNombre + '&primerApellido=' +primerApellido +'&segundoApellido=' +segundoApellido +'&idPersona=' +idPersona +'&parentesco=' +parentesco +'&tipoSujeto=' +tipoSujeto +'&ingresoM='+ ingresoM+ '&faov='+faov,                   
             dataType: 'json',
             success: function(data) {
-                
+                if(data == 3){
+                    $.fn.yiiGridView.update('listado_familiar');
+                }
             },
             error: function(data) {
                 bootbox.alert('Ocurrio un error');
@@ -31,7 +33,6 @@ Yii::app()->clientScript->registerScript('camara', "
 
     });
 ");
-
 
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'id' => 'desarrollo-form',

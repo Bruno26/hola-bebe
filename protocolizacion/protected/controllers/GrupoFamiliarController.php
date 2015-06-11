@@ -24,7 +24,7 @@ class GrupoFamiliarController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view','InsertFamiliar'),
+                'actions' => array('index', 'view', 'InsertFamiliar'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -161,6 +161,43 @@ class GrupoFamiliarController extends Controller {
         }
     }
 
+    /*
+     * Funcion que ingresa en tabla grupo familiar
+     */
+
+    public function actionInsertFamiliar() {
+        $Familiar = new GrupoFamiliar;
+        if ($_POST['idPersona'] == '') {
+//            $sql = "insert into logintransLog (user_id, created) values (:user_id, :created)";
+//            $parameters = array(":user_id" => $user->id, ':created' => date('Y-m-d H:i:s'));
+//            Yii::app()->db->createCommand($sql)->execute($parameters);
+        } else {
+            $idPersona = $_POST['idPersona'];
+        }
+        $ExisteFamiliar = $this->FindByIdPersona($idPersona);
+        if ($ExisteFamiliar) {
+            echo CJSON::encode(1);
+        } else {
+            $Familiar->persona_id = $idPersona;
+            $Familiar->gen_parentesco_id = $_POST['parentesco'];
+            $Familiar->tipo_sujeto_atencion = $_POST['tipoSujeto'];
+            $Familiar->cotiza_faov = $_POST['faov'];
+            $Familiar->ingreso_mensual = $_POST['ingresoM'];
+            $Familiar->unidad_familiar_id = 1;
+            $Familiar->estatus = 41;
+            $Familiar->fuente_datos_entrada_id = 5;
+            $Familiar->fecha_creacion = 'now()';
+            $Familiar->fecha_actualizacion = 'now()';
+            $Familiar->usuario_id_creacion = Yii::app()->user->id;
+            if ($Familiar->save()) {
+                echo CJSON::encode(3);
+            } else {
+                echo '<pre>';var_dump($Familiar->Errors);Die;
+                echo CJSON::encode(2);
+            }
+        }
+    }
+
     /**
      * @param integer the ID of the model to be loaded
      */
@@ -169,21 +206,6 @@ class GrupoFamiliarController extends Controller {
         if ($model === null)
             return FALSE;
         return $model;
-    }
-
-    /*
-     * Funcion que ingresa en tabla grupo familiar
-     */
-
-    public function actionInsertFamiliar() {
-        echo '<pre>';var_dump($_POST);die;
-        $Familiar = new GrupoFamiliar;
-
-        echo '<pre>';var_dump($_POST);die;
-        $sql = "insert into logintransLog (user_id, created) values (:user_id, :created)";
-        $parameters = array(":user_id" => $user->id, ':created' => date('Y-m-d H:i:s'));
-        Yii::app()->db->createCommand($sql)->execute($parameters);
-
     }
 
 }

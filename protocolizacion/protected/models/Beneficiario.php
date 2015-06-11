@@ -32,12 +32,15 @@
  * @property integer $usuario_id_actualizacion
  * @property integer $estatus_beneficiario_id
  * @property string $codigo_trab
+ * @property integer $condicion_laboral
+ * @property integer $beneficiario_temporal_id
  *
  * The followings are the available model relations:
+ * @property BeneficiarioTemporal $beneficiarioTemporal
+ * @property Maestro $condicionLaboral
  * @property Maestro $condicionTrabajo
  * @property Maestro $estatusBeneficiario
  * @property Maestro $fuenteIngreso
- * @property Maestro $genCargo
  * @property Maestro $relacionTrabajo
  * @property Maestro $sectorTrabajo
  * @property CrugeUser $usuarioIdActualizacion
@@ -51,33 +54,28 @@ class Beneficiario extends CActiveRecord
 
   /*   ---------------  Campos de Persona Necesarios ------------------ */
 
-      public $cedula;
-         public $nacionalidad;
-         public $primer_nombre;
-         public $primer_apellido;
-         public $segundo_nombre;
-         public $segundo_apellido;
-         public $fecha_censo;
-         public $fecha_nacimiento;
-         public $estado_civil;
-         public $telf_habitacion;
-         public $telf_celular;
-         public $correo_electronico;
+    public $cedula;
+    public $nacionalidad;
+    public $primer_nombre;
+    public $primer_apellido;
+    public $segundo_nombre;
+    public $segundo_apellido;
+    public $fecha_censo;
+    public $fecha_nacimiento;
+    public $estado_civil;
+    public $telf_habitacion;
+    public $telf_celular;
+    public $correo_electronico;
+    public $estado;
+    public $municipio;
+    public $nomb_edif;
+    public $piso;
+    public $numero;
+    public $area_vivienda;
+    public $tipo_vivienda;
+    public $observacion;
 
-
-         public $estado;
-         public $municipio;
-         public $nomb_edif;
-         public $piso;
-         public $numero;
-         public $area_vivienda;
-         public $tipo_vivienda;
-         public $observacion;
-         
-
-
-
-  /*   ---------------------------------------------------------------- */
+    /*   ---------------------------------------------------------------- */
 
 	/**
 	 * @return string the associated database table name
@@ -96,15 +94,15 @@ class Beneficiario extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('persona_id, rif, condicion_trabajo_id, fuente_ingreso_id, relacion_trabajo_id, sector_trabajo_id, ingreso_mensual, ingreso_declarado, ingreso_promedio_faov, direccion_anterior, parroquia_id, fecha_ultimo_censo, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
-			array('persona_id, condicion_trabajo_id, fuente_ingreso_id, relacion_trabajo_id, sector_trabajo_id, gen_cargo_id, parroquia_id, usuario_id_creacion, usuario_id_actualizacion, estatus_beneficiario_id', 'numerical', 'integerOnly'=>true),
+			array('persona_id, condicion_trabajo_id, fuente_ingreso_id, relacion_trabajo_id, sector_trabajo_id, gen_cargo_id, parroquia_id, usuario_id_creacion, usuario_id_actualizacion, estatus_beneficiario_id, condicion_laboral, beneficiario_temporal_id', 'numerical', 'integerOnly'=>true),
 			array('rif', 'length', 'max'=>10),
 			array('nombre_empresa, direccion_empresa, direccion_anterior, urban_barrio, av_call_esq_carr, zona', 'length', 'max'=>200),
-			array('telefono_trabajo', 'length', 'max'=>7),
+			array('telefono_trabajo', 'length', 'max'=>11),
 			array('codigo_trab', 'length', 'max'=>4),
 			array('cotiza_faov, protocolizado', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_beneficiario, persona_id, rif, condicion_trabajo_id, fuente_ingreso_id, relacion_trabajo_id, sector_trabajo_id, nombre_empresa, direccion_empresa, telefono_trabajo, gen_cargo_id, ingreso_mensual, ingreso_declarado, ingreso_promedio_faov, cotiza_faov, direccion_anterior, parroquia_id, urban_barrio, av_call_esq_carr, zona, fecha_ultimo_censo, protocolizado, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, estatus_beneficiario_id, codigo_trab', 'safe', 'on'=>'search'),
+			array('id_beneficiario, persona_id, rif, condicion_trabajo_id, fuente_ingreso_id, relacion_trabajo_id, sector_trabajo_id, nombre_empresa, direccion_empresa, telefono_trabajo, gen_cargo_id, ingreso_mensual, ingreso_declarado, ingreso_promedio_faov, cotiza_faov, direccion_anterior, parroquia_id, urban_barrio, av_call_esq_carr, zona, fecha_ultimo_censo, protocolizado, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, estatus_beneficiario_id, codigo_trab, condicion_laboral, beneficiario_temporal_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -116,10 +114,11 @@ class Beneficiario extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'beneficiarioTemporal' => array(self::BELONGS_TO, 'BeneficiarioTemporal', 'beneficiario_temporal_id'),
+			'condicionLaboral' => array(self::BELONGS_TO, 'Maestro', 'condicion_laboral'),
 			'condicionTrabajo' => array(self::BELONGS_TO, 'Maestro', 'condicion_trabajo_id'),
 			'estatusBeneficiario' => array(self::BELONGS_TO, 'Maestro', 'estatus_beneficiario_id'),
 			'fuenteIngreso' => array(self::BELONGS_TO, 'Maestro', 'fuente_ingreso_id'),
-			'genCargo' => array(self::BELONGS_TO, 'Maestro', 'gen_cargo_id'),
 			'relacionTrabajo' => array(self::BELONGS_TO, 'Maestro', 'relacion_trabajo_id'),
 			'sectorTrabajo' => array(self::BELONGS_TO, 'Maestro', 'sector_trabajo_id'),
 			'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
@@ -136,34 +135,31 @@ class Beneficiario extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-            'telf_habitacion'=>'Teléfono Habitación',
-			'telf_celular'=>'Teléfono Celular',
-			'correo_electronico'=>'Correo Electrónico',
-			'nomb_edif' => 'Nombre Edificación',
-			'numero' =>  'Número',
-			'area_vivienda' =>'Área de Vivienda mt2',
-
-
-
+			'telf_habitacion' => 'Teléfono Habitación',
+            		'telf_celular' => 'Teléfono Celular',
+            		'correo_electronico' => 'Correo Electrónico',
+            		'nomb_edif' => 'Nombre Edificación',
+            		'numero' => 'Número',
+			'area_vivienda' => 'Área de Vivienda mt2',
 			'id_beneficiario' => 'Id Beneficiario',
 			'persona_id' => 'Persona',
 			'rif' => 'Rif',
-			'condicion_trabajo_id' => 'Condicion Trabajo',
+			'condicion_trabajo_id' => 'Condición de Trabajo',
 			'fuente_ingreso_id' => 'Fuente Ingreso',
-			'relacion_trabajo_id' => 'Relacion Trabajo',
-			'sector_trabajo_id' => 'Sector Trabajo',
-			'nombre_empresa' => 'Nombre Empresa',
-			'direccion_empresa' => 'Direccion Empresa',
-			'telefono_trabajo' => 'Telefono Trabajo',
-			'gen_cargo_id' => 'Gen Cargo',
-			'ingreso_mensual' => 'Ingreso Mensual',
-			'ingreso_declarado' => 'Ingreso Declarado',
-			'ingreso_promedio_faov' => 'Ingreso Promedio Faov',
-			'cotiza_faov' => 'Cotiza Faov',
-			'direccion_anterior' => 'Direccion Anterior',
+			'relacion_trabajo_id' => 'Relación de Trabajo',
+			'sector_trabajo_id' => 'Sector en el que Trabajo',
+			'nombre_empresa' => 'Nombre de la Empresa donde Trabaja',
+			'direccion_empresa' => 'Dirección Empresa',
+			'telefono_trabajo' => 'Teléfono Empresa',
+			'gen_cargo_id' => 'Cargo',
+			'ingreso_mensual' => 'Ingreso familiar',
+			'ingreso_declarado' => 'Ingreso Mensual Personal Bs',
+			'ingreso_promedio_faov' => 'Ingreso integral',
+			'cotiza_faov' => 'Cotiza Fondo de Ahorro de Vivienda',
+			'direccion_anterior' => 'Dirección Anterior',
 			'parroquia_id' => 'Parroquia',
-			'urban_barrio' => 'Urban Barrio',
-			'av_call_esq_carr' => 'Av Call Esq Carr',
+			'urban_barrio' => 'Urbanización/Barrio',
+			'av_call_esq_carr' => 'Avenida/Calle/Esquina/Carretera',
 			'zona' => 'Zona',
 			'fecha_ultimo_censo' => 'Fecha Ultimo Censo',
 			'protocolizado' => 'Protocolizado',
@@ -172,7 +168,9 @@ class Beneficiario extends CActiveRecord
 			'usuario_id_creacion' => 'Usuario Id Creacion',
 			'usuario_id_actualizacion' => 'Usuario Id Actualizacion',
 			'estatus_beneficiario_id' => 'Estatus Beneficiario',
-			'codigo_trab' => 'Codigo Trab',
+			'codigo_trab' => 'Condición Trab',
+			'condicion_laboral' => 'Condición Laboral',
+			'beneficiario_temporal_id' => 'Beneficiario Temporal',
 		);
 	}
 
@@ -222,6 +220,8 @@ class Beneficiario extends CActiveRecord
 		$criteria->compare('usuario_id_actualizacion',$this->usuario_id_actualizacion);
 		$criteria->compare('estatus_beneficiario_id',$this->estatus_beneficiario_id);
 		$criteria->compare('codigo_trab',$this->codigo_trab,true);
+		$criteria->compare('condicion_laboral',$this->condicion_laboral);
+		$criteria->compare('beneficiario_temporal_id',$this->beneficiario_temporal_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

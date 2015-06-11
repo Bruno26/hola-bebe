@@ -227,8 +227,9 @@ class ValidacionJsController extends Controller {
             $ExisteGrupoFamiliar = GrupoFamiliarController::FindByIdPersona($result['ID']);
             if (!empty($ExisteGrupoFamiliar))
                 echo json_encode(1);
-            else
+            else {
                 echo CJSON::encode($result);
+            }
         } else {
             $saime = ConsultaOracle::getSaime($nacio, $cedula);
             if ($saime == '1') {
