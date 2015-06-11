@@ -32,6 +32,7 @@ Yii::app()->clientScript->registerScript('camara', "
     });
 ");
 
+
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'id' => 'desarrollo-form',
     'enableAjaxValidation' => false,
