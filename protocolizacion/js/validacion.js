@@ -53,14 +53,20 @@ function buscarPersonaOficina(nacionalidad, cedula) {
 //                bootbox.alert('Debe Completar el campo Cédula');
 //            } else {
 //
-
+ 	if (datos == 1) {
             $('#Oficina_primer_nombre').val(datos.PRIMERNOMBRE);
             $('#Oficina_persona_id_jefe').val(datos.ID);
             $('#Oficina_segundo_nombre').val(datos.SEGUNDONOMBRE);
             $('#Oficina_primer_apellido').val(datos.PRIMERAPELLIDO);
             $('#Oficina_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
-//                
-//            }
+	}else{
+    	    	$('#Oficina_primer_nombre').val(datos.PRIMERNOMBRE);
+            	$('#Oficina_persona_id_jefe').val(datos.ID);
+            	$('#Oficina_segundo_nombre').val(datos.SEGUNDONOMBRE);
+           	$('#Oficina_primer_apellido').val(datos.PRIMERAPELLIDO);
+           	$('#Oficina_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
+	}
+
         },
         error: function (datos) {
             bootbox.alert('Ocurrio un error');
@@ -138,16 +144,17 @@ function buscarPersonaAbogado(nacionalidad, cedula) {
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
         success: function (datos) {
-//            alert(datos);
-//            if (datos == 1) {
-//                bootbox.alert('Debe Completar el campo Cédula');
-//            } else {
-//
+
+	if (datos == 1) {
             $('#Abogados_primer_nombre').val(datos.PRIMERNOMBRE);
             $('#Abogados_persona_id').val(datos.ID);
             $('#Abogados_primer_apellido').val(datos.PRIMERAPELLIDO);
-//                
-//            }
+	}else{
+    	   	$('#Abogados_primer_nombre').val(datos.PRIMERNOMBRE);
+            	$('#Abogados_persona_id').val(datos.ID);
+            	$('#Abogados_primer_apellido').val(datos.PRIMERAPELLIDO);
+	}
+
         },
         error: function (datos) {
             bootbox.alert('Ocurrio un error');
@@ -226,16 +233,18 @@ function buscarPersonaCensoA(nacionalidad, cedula) {
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
         success: function (datos) {
-//            alert(datos);
-//            if (datos == 1) {
-//                bootbox.alert('Debe Completar el campo Cédula');
-//            } else {
-//
+
+ 	if (datos == 1) {
+
             $('#AsignacionCenso_primer_nombre').val(datos.PRIMERNOMBRE);
             $('#AsignacionCenso_persona_id').val(datos.ID);
             $('#AsignacionCenso_primer_apellido').val(datos.PRIMERAPELLIDO);
-//                
-//            }
+	}else{ 
+  	    	$('#AsignacionCenso_primer_nombre').val(datos.PRIMERNOMBRE);
+          	$('#AsignacionCenso_persona_id').val(datos.ID);
+            	$('#AsignacionCenso_primer_apellido').val(datos.PRIMERAPELLIDO);
+		}
+
         },
         error: function (datos) {
             bootbox.alert('Ocurrio un error');
