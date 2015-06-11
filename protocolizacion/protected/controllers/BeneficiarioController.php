@@ -99,11 +99,11 @@ class BeneficiarioController extends Controller {
     }
 
     public function actionCreateDatos($id) {
-        $model = Beneficiario::mode()->findByPk($id);
+        $model = new Beneficiario;
+// $model = Beneficiario::mode()->findByPk($id);
         $estado = new Tblestado;
         $municipio = new Tblmunicipio;
         $parroquia = new Tblparroquia;
-
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
