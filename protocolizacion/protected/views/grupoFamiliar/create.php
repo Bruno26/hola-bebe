@@ -2,13 +2,24 @@
 Yii::app()->clientScript->registerScript('camara', "
     
     $('#GuardarFamiliar').click(function(){
-    
-        var cedula = $('#Visitantes_cedula').val();
+        var idPersona = $('#GrupoFamiliar_persona_id').val();
+        var cedula = $('#GrupoFamiliar_cedula').val();
+        var nacionalidad = $('#GrupoFamiliar_nacionalidad').val();
+        var primerNombre = $('#GrupoFamiliar_primer_nombre').val();
+        var segundoNombre = $('#GrupoFamiliar_segundo_nombre').val();
+        var primerApellido = $('#GrupoFamiliar_primer_apellido').val();
+        var segundoApellido = $('#GrupoFamiliar_primer_apellido').val();
+        var parentesco = $('#GrupoFamiliar_gen_parentesco_id').val();
+        var tipoSujeto = $('#GrupoFamiliar_tipo_sujeto_atencion').val();
+        var ingresoM = $('#GrupoFamiliar_ingreso_mensual').val();
+        
+        if ($('#GrupoFamiliar_cotiza_faov').is(':checked')) {var faov = '1';}else{var faov = '0';}
+        
          $.ajax({
             url: '" . Yii::app()->createAbsoluteUrl('GrupoFamiliar/InsertFamiliar') . "',
             async: true,
             type: 'POST',
-            data: 'cedula=' + cedula ,
+            data: 'cedula=' +cedula + '&nacionalida=' +nacionalidad + '&primerNombre=' + primerNombre +'&segundoNombre=' +segundoNombre + '&primerApellido=' +primerApellido +'&segundoApellido=' +segundoApellido +'&idPersona=' +idPersona +'&parentesco=' +parentesco +'&tipoSujeto=' +tipoSujeto +'&ingresoM='+ ingresoM+ '&faov='+faov,                   
             dataType: 'json',
             success: function(data) {
                 
@@ -20,6 +31,7 @@ Yii::app()->clientScript->registerScript('camara', "
 
     });
 ");
+
 
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'id' => 'desarrollo-form',

@@ -5,14 +5,63 @@ $this->breadcrumbs=array(
 	'Update',
 );
 
-	$this->menu=array(
-	array('label'=>'List Vivienda','url'=>array('index')),
-	array('label'=>'Create Vivienda','url'=>array('create')),
-	array('label'=>'View Vivienda','url'=>array('view','id'=>$model->id_vivienda)),
-	array('label'=>'Manage Vivienda','url'=>array('admin')),
-	);
-	?>
+$form = $this->beginWidget('booster.widgets.TbActiveForm', array(
+    'id' => 'desarrollo-form',
+    'enableAjaxValidation' => false,
+    'enableClientValidation' => true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true,
+        'validateOnChange' => true,
+        'validateOnType' => true,
+    ),
+        ));
+?>
 
-	<h1>Update Vivienda <?php echo $model->id_vivienda; ?></h1>
+	<div class="row">
+	    <div class="col-md-12">
+	        <?php
+	        $this->widget(
+	                'booster.widgets.TbPanel', array(
+	            'title' => 'Actualización de la vivienda N° '.$model->id_vivienda,
+	            'context' => 'danger',
+	            // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
+	            'headerIcon' => 'globe',
+	            'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'desarrollo' => $desarrollo), TRUE),
+	                )
+	        );
+	        ?>
+	    </div>
+	</div>
 
-<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
+	<div class="well">
+	    <div class="pull-center" style="text-align: right;">
+				<?php
+				$this->widget('booster.widgets.TbButton', array(
+						'buttonType' => 'submit',
+						'icon' => 'glyphicon glyphicon glyphicon-step-backward',
+						'size' => 'large',
+						'id' => 'cancelar',
+						'context' => 'danger',
+						'label' => 'Cancelar',
+						//'url' => $this->createURL('/desarrollo/admin'),
+						'htmlOptions' => array(
+			'onclick' => 'document.location.href ="' . $this->createUrl('vivienda/admin') . '"'),
+
+				));
+				?>
+				<?php
+	        $this->widget('booster.widgets.TbButton', array(
+	            'buttonType' => 'submit',
+	            'icon' => 'glyphicon glyphicon-floppy-saved',
+	            'size' => 'large',
+	            'id' => 'guardar',
+	            'context' => 'primary',
+	            'label' => $model->isNewRecord ? 'Guardar' : 'Actualizar',
+	        ));
+	        ?>
+	    </div>
+	</div>
+
+	<?php //echo $this->renderPartial('_form', array('model'=>$model));  ?>
+
+	<?php $this->endWidget(); ?>

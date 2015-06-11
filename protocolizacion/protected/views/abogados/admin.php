@@ -56,23 +56,38 @@
 //),
 //),
 //)); ?>
-
+<?php
+	function nombre($selec,$iD){
+	    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
+	    return $saime['PRIMER_NOMBRE'];
+	}
+	function apellido($selec,$iD){
+	    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
+	    return $saime['PRIMER_APELLIDO'];
+	}
+?>
 <?php
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'abogados-grid',
     'dataProvider' => $model->search(),
-    'filter' => $model,
+   // 'filter' => $model,
     'columns' => array(
         'id' => array(
             'header' => 'id_Abogado',
             'name' => 'id',
             'value' => '$data->id',
         ),
-        'persona_id' => array(
-            'name' => 'persona_id',
-            'value' => '$data->persona_id',
-
+	'primer_nombre' => array(
+            'header' => 'Nombre',
+            'name' => 'primer_nombre',
+	    'value' => 'nombre("PRIMER_NOMBRE",$data->persona_id)',     
         ),
+            'primer_apellido' => array(
+            'header' => 'Apellido',
+            'name' => 'primer_nombre',
+	    'value' => 'apellido("PRIMER_APELLIDO",$data->persona_id)',    
+        ),
+
         'tipo_abogado_id' => array(
             'header' => 'Tipo de Abogado',
             'name' => 'tipo_abogado_id',
