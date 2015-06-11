@@ -42,7 +42,7 @@ function buscarPersonaOficina(nacionalidad, cedula) {
         return false;
     }
     $.ajax({
-        url: baseUrl +  "/ValidacionJs/BuscarPersonas",
+        url: baseUrl + "/ValidacionJs/BuscarPersonas",
         async: true,
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
@@ -138,7 +138,7 @@ function buscarPersonaAbogado(nacionalidad, cedula) {
         return false;
     }
     $.ajax({
-        url: baseUrl +  "/ValidacionJs/BuscarPersonas",
+        url: baseUrl + "/ValidacionJs/BuscarPersonas",
         async: true,
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
@@ -166,7 +166,7 @@ function buscarPersonaAbogado(nacionalidad, cedula) {
 
 /* --------------------------------------------- */
 
-function buscarPersonaBeneficiario(nacionalidad, cedula){
+function buscarPersonaBeneficiario(nacionalidad, cedula) {
 
     if (nacionalidad == 'SELECCIONE') {
         bootbox.alert('Verifique que la nacionalidad no esten vacios');
@@ -178,30 +178,30 @@ function buscarPersonaBeneficiario(nacionalidad, cedula){
     }
 
 
-     $.ajax({
-        url: baseUrl  + "/ValidacionJs/BuscarPersonasBeneficiario",
+    $.ajax({
+        url: baseUrl + "/ValidacionJs/BuscarPersonasBeneficiario",
         async: true,
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
         success: function (datos) {
-         //  alert(datos); 
+            //  alert(datos); 
 //            if (datos == 1) {
 //                bootbox.alert('Debe Completar el campo Cédula');
 //            } else {
 //
-           $('#BeneficiarioTemporal_primer_nombre').val(datos.PRIMERNOMBRE);
-           $('#BeneficiarioTemporal_segundo_nombre').val(datos.SEGUNDONOMBRE);
-           $('#BeneficiarioTemporal_primer_apellido').val(datos.PRIMERAPELLIDO);
-           $('#BeneficiarioTemporal_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
-           $('#BeneficiarioTemporal_fecha_nacimiento').val(datos.FECHANACIMIENTO);
+            $('#BeneficiarioTemporal_primer_nombre').val(datos.PRIMERNOMBRE);
+            $('#BeneficiarioTemporal_segundo_nombre').val(datos.SEGUNDONOMBRE);
+            $('#BeneficiarioTemporal_primer_apellido').val(datos.PRIMERAPELLIDO);
+            $('#BeneficiarioTemporal_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
+            $('#BeneficiarioTemporal_fecha_nacimiento').val(datos.FECHANACIMIENTO);
 
-           $('#BeneficiarioTemporal_sexo').val(datos.SEXO);
-           $('#BeneficiarioTemporal_estado_civil').val(datos.EDO_CIVIL);
-           $('#BeneficiarioTemporal_telf_habitacion').val(datos.TELEFONO_HAB);
-           $('#BeneficiarioTemporal_telf_celular').val(datos.TELEFONO_MOVIL);
-           $('#BeneficiarioTemporal_correo_electronico').val(datos.CORREO_PRINCIPAL);
-         
+            $('#BeneficiarioTemporal_sexo').val(datos.SEXO);
+            $('#BeneficiarioTemporal_estado_civil').val(datos.EDO_CIVIL);
+            $('#BeneficiarioTemporal_telf_habitacion').val(datos.TELEFONO_HAB);
+            $('#BeneficiarioTemporal_telf_celular').val(datos.TELEFONO_MOVIL);
+            $('#BeneficiarioTemporal_correo_electronico').val(datos.CORREO_PRINCIPAL);
+
 //                
 //            }
         },
@@ -256,7 +256,6 @@ function buscarPersonaCensoA(nacionalidad, cedula) {
 /* -------------------------------------------------------*/
 
 function buscarPersonaFamiliar(nacionalidad, cedula) {
-    alert(nacionalidad + ' - ' + cedula);
     if (nacionalidad == 'SELECCIONE') {
         bootbox.alert('Verifique que la nacionalidad no esten vacios');
         return false;
@@ -265,6 +264,13 @@ function buscarPersonaFamiliar(nacionalidad, cedula) {
         bootbox.alert('Verifique que la cédula no esten vacios');
         return false;
     }
+    $('#GrupoFamiliar_primer_nombre').val('');
+    $('#GrupoFamiliar_segundor_nombre').val('');
+    $('#GrupoFamiliar_persona_id').val('');
+    $('#GrupoFamiliar_primer_apellido').val('');
+    $('#GrupoFamiliar_segundo_apellido').val('');
+    $('#GrupoFamiliar_fecha_nacimiento').val('');
+    $('#iconLoding').show();
     $.ajax({
         url: baseUrl + "/ValidacionJs/BuscarPersonasFamiliar",
         async: true,
@@ -273,13 +279,33 @@ function buscarPersonaFamiliar(nacionalidad, cedula) {
         dataType: 'json',
         success: function (datos) {
             if (datos == 1) {
+                $('#iconLoding').hide();
+                $('#GrupoFamiliar_primer_nombre').val('');
+                $('#GrupoFamiliar_segundor_nombre').val('');
+                $('#GrupoFamiliar_persona_id').val('');
+                $('#GrupoFamiliar_primer_apellido').val('');
+                $('#GrupoFamiliar_segundo_apellido').val('');
+                $('#GrupoFamiliar_fecha_nacimiento').val('');
+                $('#GrupoFamiliar_cedula').val('');
                 bootbox.alert('La Persona ya se encuentra asignada a un grupo Familiar.');
             } else if (datos == 2) {
+                $('#iconLoding').hide();
+                $('#GrupoFamiliar_primer_nombre').val('');
+                $('#GrupoFamiliar_cedula').val('');
+                $('#GrupoFamiliar_segundo_nombre').val('');
+                $('#GrupoFamiliar_persona_id').val('');
+                $('#GrupoFamiliar_primer_apellido').val('');
+                $('#GrupoFamiliar_segundo_apellido').val('');
+                $('#GrupoFamiliar_fecha_nacimiento').val('');
                 bootbox.alert('La Persona no se encuentra registrada en el Saime.');
             } else {
-                $('#GrupoFamiliar_primer_nombre').val(datos.PRIMERNOMBRE);
                 $('#GrupoFamiliar_persona_id').val(datos.ID);
+                $('#GrupoFamiliar_primer_nombre').val(datos.PRIMERNOMBRE);
+                $('#GrupoFamiliar_segundo_nombre').val(datos.SEGUNDONOMBRE);
                 $('#GrupoFamiliar_primer_apellido').val(datos.PRIMERAPELLIDO);
+                $('#GrupoFamiliar_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
+                $('#GrupoFamiliar_fecha_nacimiento').val(datos.FECHANACIMIENTO);
+                $('#iconLoding').hide();
             }
         },
         error: function (datos) {
@@ -287,7 +313,3 @@ function buscarPersonaFamiliar(nacionalidad, cedula) {
         }
     })
 }
-
-
-
-

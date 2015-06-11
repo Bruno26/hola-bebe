@@ -34,6 +34,7 @@ class GrupoFamiliar extends CActiveRecord {
     public $segundo_nombre;
     public $primer_apellido;
     public $segundo_apellido;
+    public $fecha_nacimiento;
 
     /**
      * @return string the associated database table name

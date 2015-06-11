@@ -14,7 +14,7 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
 
 <div class="row">
     <?php echo $form->hiddenField($model, 'persona_id'); ?>
-    <?php echo $form->hiddenField($model, 'unidad_familiar_id'); ?>
+    <?php echo $form->hiddenField($model, 'fecha_nacimiento'); ?>
     <div class='col-md-2'>
         <?php
         echo $form->dropDownListGroup($model, 'nacionalidad', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
@@ -33,11 +33,23 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
         ))));
         ?>
     </div>
-    <div class='col-md-4'>
+    <div class="col-md-8"  id="iconLoding" style="display: none">
+        <img src="<?php echo Yii::app()->baseUrl;?>/images/loading.gif" width="50px" height="60px">
+    </div>
+</div>
+<div class="row">
+    <div class='col-md-2'>
+        
         <?php echo $form->textFieldGroup($model, 'primer_nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
+    </div>
+    <div class='col-md-2'>
+        <?php echo $form->textFieldGroup($model, 'segundo_nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
     </div>
     <div class='col-md-4'>
         <?php echo $form->textFieldGroup($model, 'primer_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
+    </div>
+    <div class='col-md-4'>
+        <?php echo $form->textFieldGroup($model, 'segundo_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
     </div>
 </div>
 <div class="row">
