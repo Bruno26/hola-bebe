@@ -44,7 +44,7 @@ class DesarrolloController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
+                'actions' => array('create', 'update', 'pdf'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -123,8 +123,8 @@ class DesarrolloController extends Controller {
                 if ($model->save()) {
 
                     $this->redirect(array('admin'));
-                } 
-                
+                }
+
 //                else {
 //                    var_dump($model->errors);
 //                    die();
@@ -201,9 +201,19 @@ class DesarrolloController extends Controller {
         ));
     }
 
-    /**
-     * Manages all models.
-     */
+    public function actionPdf($id) {
+      $estado = new Tblestado;
+      $municipio = new Tblmunicipio;
+      $this->render('pdf', array(
+          'model' => $this->loadModel($id),
+          'estado' => $estado ,
+          'municipio' => $municipio ,
+      ));
+
+
+    }
+
+
     public function actionAdmin() {
         $model = new Desarrollo('search');
         $model->unsetAttributes();  // clear any default values
