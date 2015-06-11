@@ -45,7 +45,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 						'label' => 'Cancelar',
 						//'url' => $this->createURL('/desarrollo/admin'),
 						'htmlOptions' => array(
-			'onclick' => 'document.location.href ="' . $this->createUrl('desarrollo/admin') . '"'),
+			'onclick' => 'document.location.href ="' . $this->createUrl('vivienda/admin') . '"'),
 
 				));
 				?>
