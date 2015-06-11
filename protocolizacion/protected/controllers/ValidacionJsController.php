@@ -22,7 +22,7 @@ class ValidacionJsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas','BuscarPersonasBeneficiario'),
+                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -66,8 +66,7 @@ class ValidacionJsController extends Controller {
 
         echo json_encode($result);
 //        }
-       //var_dump($result);die;
-
+        //var_dump($result);die;
     }
 
     public function actionBuscarMunicipios() {
@@ -218,18 +217,19 @@ class ValidacionJsController extends Controller {
 //            echo json_encode(1);
 //    }
 
-     public function actionBuscarPersonasFamiliar() {
+    public function actionBuscarPersonasFamiliar() {
         $cedula = (int) $_POST['cedula'];
         $nacio = $_POST['nacionalidad'];
 
         $result = ConsultaOracle::getPersona($nacio, $cedula);
-        
+
         if ($result != '1') {
             $ExisteGrupoFamiliar = GrupoFamiliarController::FindByIdPersona($result['ID']);
             if (!empty($ExisteGrupoFamiliar))
                 echo json_encode(1);
-            else
+            else {
                 echo CJSON::encode($result);
+            }
         } else {
             $saime = ConsultaOracle::getSaime($nacio, $cedula);
             if ($saime === null) {
@@ -239,6 +239,5 @@ class ValidacionJsController extends Controller {
             }
         }
     }
-
 
 }
