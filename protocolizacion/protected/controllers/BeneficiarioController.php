@@ -101,14 +101,12 @@ class BeneficiarioController extends Controller {
     
     //ACTUALIZACION DE DATOS DE BENEFICIARIO
     public function actionCreateDatos($id) {
-//        $id=$model->id_beneficiario;
+
         $model = Beneficiario::model()->findByPk($id);
         $estado = new Tblestado;
         $municipio = new Tblmunicipio;
         $parroquia = new Tblparroquia;
 
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
 
         if (isset($_POST['Beneficiario']['fuente_ingreso_id'])) {
             $model->attributes = $_POST['Beneficiario'];
