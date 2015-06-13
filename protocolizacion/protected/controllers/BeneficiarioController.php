@@ -128,7 +128,6 @@ class BeneficiarioController extends Controller {
 //            $model->ingreso_declarado = $_POST['Beneficiario']['ingreso_declarado'];
 //            $model->ingreso_promedio_faov = $_POST['Beneficiario']['ingreso_promedio_faov'];
 
-
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id_beneficiario));
         }
