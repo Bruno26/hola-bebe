@@ -17,7 +17,6 @@
             </div>
         </div>
     </div>
-
     <div class="col-md-12">
         <div>  
             <h4><i class="glyphicon glyphicon-globe"></i> Ubicación del Desarrollo</h4>
