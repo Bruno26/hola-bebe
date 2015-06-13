@@ -3,8 +3,19 @@ $this->breadcrumbs=array(
 	'Actualizar la Unidad Habitacional N°'=>array('index'),
 	$model->id_unidad_habitacional=>array('view','id'=>$model->id_unidad_habitacional),
 	'Update',
-);
+);  ?>
 
+    <?php
+    if (!empty($model->desarrollo_id)) {
+        $id_desarrollo = Desarrollo::model()->findByPk($model->desarrollo_id); // consulta en la tabla ciudad el id_ciudad y id_estado 
+        $id_parroquia = $id_desarrollo->parroquia_id;
+        $id_municipio = $id_desarrollo->fkParroquia->clvmunicipio0->clvcodigo;
+        $id_estado = $id_desarrollo->fkParroquia->clvmunicipio0->clvestado0->clvcodigo; 
+
+//    var_dump($model->desarrollo_id); die();
+    } ?>
+
+<?php
 Yii::app()->clientScript->registerScript('unidadHabitacional', "
          $('#guardarUnidad').click(function(){
 
@@ -33,10 +44,25 @@ Yii::app()->clientScript->registerScript('unidadHabitacional', "
                     bootbox.alert('Por favor indique tipo de inmueble');
                     return false;
                 }
+        });
 
-
-
-
+      $(document).ready(function(){
+       $('#Tblestado_clvcodigo').val(" . $id_estado . ");
+ 
+         $.get('" . CController::createUrl('ValidacionJs/BuscarMunicipios') . "', {clvcodigo: " . $id_estado . " }, function(data){
+                $('#Tblmunicipio_clvcodigo').html(data);
+                $('#Tblmunicipio_clvcodigo').val(" . $id_municipio . ");
+                
+            });
+            $.get('" . CController::createUrl('ValidacionJs/BuscarParroquias') . "', {municipio: " . $id_municipio . "}, function(data){
+                $('#Tblparroquia_clvcodigo').html(data);
+                $('#Tblparroquia_clvcodigo').val(" .$id_parroquia. ");
+            });
+           
+            $.get('" . CController::createUrl('ValidacionJs/BuscarDesarrollo') . "', {desarrollo: " . $id_parroquia . "}, function(data){
+                $('#UnidadHabitacional_desarrollo_id').html(data);
+                $('#UnidadHabitacional_desarrollo_id').val(" . $model->desarrollo_id. ");
+            });
         });
 
 

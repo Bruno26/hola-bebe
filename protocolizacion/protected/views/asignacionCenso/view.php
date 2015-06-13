@@ -13,9 +13,9 @@ array('label'=>'Manage AsignacionCenso','url'=>array('admin')),
 );
 ?>
 
-<h1>View AsignacionCenso #<?php echo $model->id_asignacion_censo; ?></h1>
+<h1>Detalle Asignacion de Censo</h1>
 
-<?php $this->widget('booster.widgets.TbDetailView',array(
+<?php /*$this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
 		'id_asignacion_censo',
@@ -31,4 +31,10 @@ array('label'=>'Manage AsignacionCenso','url'=>array('admin')),
 		'usuario_id_creacion',
 		'usuario_id_actualizacion',
 ),
-)); ?>
+)); */ ?>
+
+<?php $this->widget('booster.widgets.TbPanel', array(
+    'context' => 'primary',
+    'content' => $this->renderPartial('_view', array('model' => $model), TRUE),
+        )
+);

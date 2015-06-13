@@ -12,8 +12,15 @@ array('label'=>'Delete Abogados','url'=>'#','linkOptions'=>array('submit'=>array
 array('label'=>'Manage Abogados','url'=>array('admin')),
 );
 ?>
-<h1>View Abogados #<?php echo $model->id; ?></h1>
-<?php $this->widget('booster.widgets.TbDetailView',array(
+<h1> Detalle Abogado</h1>
+
+<?php $this->widget('booster.widgets.TbPanel', array(
+    'context' => 'primary',
+    'content' => $this->renderPartial('_view', array('model' => $model), TRUE),
+        )
+);
+?>
+<?php /*$this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
 		'id',
@@ -28,4 +35,4 @@ array('label'=>'Manage Abogados','url'=>array('admin')),
 		'usuario_id_creacion',
 		'usuario_id_actualizacion',
 ),
-)); ?>
+)); */?>

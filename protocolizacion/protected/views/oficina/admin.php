@@ -101,13 +101,20 @@ $this->widget('booster.widgets.TbGridView', array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
-            'template' => '{ver}',
+            'template' => '{ver} {pdf}',
             'buttons' => array(
                 'ver' => array(
                     'label' => 'Ver',
                     'icon' => 'eye-open',
                     'size' => 'medium',
                     'url' => 'Yii::app()->createUrl("oficina/view/", array("id"=>$data->id_oficina))',
+                ),
+                'pdf' => array(
+                    'label' => 'Generar PDF',
+                    'icon'  => 'glyphicon glyphicon-file',
+                    'size'  => 'medium',
+                    'url'   => 'Yii::app()->createUrl("oficina/pdf/", array("id"=>$data->id_oficina))',
+//                    'visible' => 'Asignar($data->username);'
                 ),
 //                'modificar' => array(
 //                    'label' => 'Modificar',
@@ -116,7 +123,6 @@ $this->widget('booster.widgets.TbGridView', array(
 ////                    'url' => 'Yii::app()->createUrl("vswSolicitudRecibido/asignar/", array("id"=>$data->id_solicitud))',
 ////                    'visible' => 'Asignar($data->username);'
 //                ),
-
             ),
         ),
     ),
