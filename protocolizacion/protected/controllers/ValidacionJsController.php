@@ -32,7 +32,7 @@ class ValidacionJsController extends Controller {
     }
 
     /**
-     * FUNCION QUE MUESTRA TODOS LOS MUNICIPIO DE ACUERDO A UN ID DE UN ESTADO
+     * FUNCION QUE BUSCA EN TABLA COMUNES EL ID PERSONA , SI NO EXISTE CONSULTA EN SAIME 
      */
     public function actionBuscarPersonas() {
         $cedula = (int) $_POST['cedula'];
