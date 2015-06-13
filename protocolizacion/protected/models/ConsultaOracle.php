@@ -130,7 +130,6 @@ class ConsultaOracle extends CActiveRecord {
                     break;
                 case 3 :
                     if ($caso == 1) {
-//                        $promed = (int) $result[4] + (int) $result[8];
                         $salida = ( $result[4] / (0.03) ) + ($result[8] / (0.03) );
                     } else {
                         $salida = $result[9] + $result[10];

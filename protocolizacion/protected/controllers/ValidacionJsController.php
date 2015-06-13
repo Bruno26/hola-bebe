@@ -228,14 +228,17 @@ class ValidacionJsController extends Controller {
             if (!empty($ExisteGrupoFamiliar))
                 echo json_encode(1);
             else {
-                echo CJSON::encode($result);
+                $faov = ConsultaOracle::getFaov($result['ID'],1);
+                $salida = array('persona'=>$result,'faov'=>$faov);
+                echo CJSON::encode($salida);
             }
         } else {
             $saime = ConsultaOracle::getSaime($nacio, $cedula);
             if ($saime == '1') {
                 echo json_encode(2);
             } else {
-                echo CJSON::encode($saime);
+                $salida = array('persona'=>$saime,'faov'=>'0.00');
+                echo CJSON::encode($salida);
             }
         }
     }

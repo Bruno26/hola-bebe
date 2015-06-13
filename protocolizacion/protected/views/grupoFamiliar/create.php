@@ -21,7 +21,7 @@ Yii::app()->clientScript->registerScript('camara', "
             type: 'POST',
             data: 'cedula=' +cedula + '&nacionalida=' +nacionalidad + '&primerNombre=' + primerNombre +'&segundoNombre=' +segundoNombre + '&primerApellido=' +primerApellido +'&segundoApellido=' +segundoApellido +'&idPersona=' +idPersona +'&parentesco=' +parentesco +'&tipoSujeto=' +tipoSujeto +'&ingresoM='+ ingresoM+ '&faov='+faov,                   
             dataType: 'json',
-            success: function(data) {
+            success: function(data,faov) {
                 if(data == 3){
                     $.fn.yiiGridView.update('listado_familiar');
                 }
