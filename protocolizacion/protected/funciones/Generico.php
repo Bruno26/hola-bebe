@@ -49,6 +49,11 @@ class Generico {
         $SQL = "select * from PERSONA WHERE NACIONALIDAD ='" . $nacionalidad . "' AND CEDULA = " . $cedula;
         
     }
+    
+    public function FormatearBs($monto) {
+        return number_format((int)$monto,2,",",".");
+        
+    }
 
 }
 ?>

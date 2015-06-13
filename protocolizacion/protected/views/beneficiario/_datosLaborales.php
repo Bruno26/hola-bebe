@@ -1,7 +1,31 @@
 
 <p class="help-block">Los Campos con <span class="required">*</span> son obligatorios.</p>
 
-<?php #echo $form->errorSummary($model); ?>
+<?php Yii::app()->clientScript->registerScript('datos', "
+    
+            $('#Beneficiario_condicion_trabajo_id').change(function(){
+                if( $(this).val() == '111' || $(this).val() == '112' || $(this).val() == '114' ||  $(this).val() == '116' ){
+                    $('.relacion').show();
+               
+                } else {
+                    $('.relacion').hide();
+                }
+            }), 
+       
+            $('#Beneficiario_sector_trabajo_id').change(function(){
+                if( $(this).val() == '133'){
+                    $('.empresa').show();
+                    $('.direccion').show();
+               
+                } else {
+                    $('.empresa').hide();
+                    $('.direccion').hide();
+                }
+            }), 
+
+
+");?>
+
 
 <div class="row">
 
@@ -32,7 +56,7 @@
         );
         ?>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 relacion" style="display: none">
 
 
         <?php
@@ -68,7 +92,7 @@
 
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 ">
         <?php
         echo $form->dropDownListGroup($model, 'sector_trabajo_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
             'widgetOptions' => array(
@@ -86,13 +110,13 @@
 
 <div class="row">
 
-    <div class="col-md-6">
+    <div class="col-md-6 empresa"  style="display: none">
 
         <?php echo $form->textFieldGroup($model, 'nombre_empresa', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200)))); ?>
 
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 direccion" style="display: none">
         <?php echo $form->textFieldGroup($model, 'direccion_empresa', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200)))); ?>
 
     </div>
@@ -121,19 +145,18 @@
 
     <div class="col-md-4">
         <?php echo $form->textFieldGroup($model, 'ingreso_declarado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-
     </div>
 
 </div>
 
-<div class="col-md-4">
-    <?php echo $form->textFieldGroup($model, 'ingreso_mensual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-
-</div>
-
 <div class="row">
-    <div class="col-md-4">
-        <?php echo $form->textFieldGroup($model, 'ingreso_promedio_faov', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+
+    <div class="col-md-6">
+        <?php echo $form->textFieldGroup($model, 'ingreso_mensual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readonly' => true)))); ?>
+
+    </div>
+    <div class="col-md-6">
+        <?php echo $form->textFieldGroup($model, 'ingreso_promedio_faov', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readonly' => true)))); ?>
 
     </div>
 

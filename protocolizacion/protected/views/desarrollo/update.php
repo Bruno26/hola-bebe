@@ -29,18 +29,18 @@ if (!empty($model->parroquia_id)) {
                     return false;
                 }
 
-//                if($('#Tblestado_clvcodigo').val()==''){
-//                 alert('Por favor seleccione Estado');
-//                    return false;
-//                }
-//                if($('#Tblmunicipio_clvcodigo').val()==''){
-//                   alert('Por favor seleccione Municipio');
-//                    return false;
-//                }
-//                if($('#Desarrollo_parroquia_id').val()==''){
-//                   alert('Por favor seleccione Parroquia');
-//                    return false;
-//                }
+                if($('#Tblestado_clvcodigo').val()==''){
+                 alert('Por favor seleccione Estado');
+                    return false;
+                }
+                if($('#Tblmunicipio_clvcodigo').val()==''){
+                   alert('Por favor seleccione Municipio');
+                    return false;
+                }
+                if($('#Desarrollo_parroquia_id').val()==''){
+                   alert('Por favor seleccione Parroquia');
+                    return false;
+                }
 
                 });
 
