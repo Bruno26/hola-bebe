@@ -153,7 +153,7 @@ class Beneficiario extends CActiveRecord
 			'telefono_trabajo' => 'Teléfono Empresa',
 			'gen_cargo_id' => 'Cargo',
 			'ingreso_mensual' => 'Ingreso Mensual',
-			'ingreso_declarado' => 'Ingreso Mensual Personal Bs',
+			'ingreso_declarado' => 'Ingreso Declarado',
 			'ingreso_promedio_faov' => 'Ingreso Promedio FAOV',
 			'cotiza_faov' => 'Cotiza Fondo de Ahorro de Vivienda',
 			'direccion_anterior' => 'Dirección Anterior',
