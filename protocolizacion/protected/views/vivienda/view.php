@@ -1,6 +1,8 @@
 <?php // echo '<pre>';var_dump($model->fecha_creacion);die();?>
 
+
 <center><h1><b>Detalle: </b><?php echo  $model->unidadHabitacional->desarrollo->nombre.' / '.$model->unidadHabitacional->nombre.' / '.$model->nro_vivienda; ?></h1></center>
+
 
 <?php $this->widget('booster.widgets.TbPanel', array(
     'context' => 'primary',

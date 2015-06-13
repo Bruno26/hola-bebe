@@ -1,9 +1,8 @@
+
 <?php
 //echo '<pre>'; var_dump($model);//die();
 $pdf = Yii::createComponent('application.vendors.mpdf.mpdf');
 $cabecera = '<img src="' . Yii::app()->request->baseUrl . '/images/cintillo.jpg"/>';
-
-
 $html="
     <style>
     @page {
@@ -84,7 +83,6 @@ $html.="            <br/></p>
             </div>
         </div>
     </div>
-
     <div class='col-md-12'>
         <div>  
             <h4><i class='glyphicon glyphicon-globe'></i> Ubicación del Desarrollo</h4>
@@ -125,7 +123,6 @@ $html.="           </p>
             </div>
         </div>
     </div>
-
     <div class='col-md-12'>
         <div>
             <h4><i class='glyphicon glyphicon-home'></i> Detalles de la UnidadFamiliar</h4>
@@ -188,13 +185,10 @@ $html.="               Bs.
     </div>
 </div>
 ";
-
 $mpdf = new mPDF('c', 'LETTER');//var_dump($model);die();
 $mpdf->SetTitle('<b>Detalle: </b>'.$model->unidadHabitacional->desarrollo->nombre.' / '.$model->unidadHabitacional->nombre.' / '.$model->nro_vivienda);
 //$mpdf->SetMargins(5, 50, arriba);
 $mpdf->SetMargins(5, 280, 30);
-
-
 $mpdf->SetAuthor('BANAVIH - Banco Nacional de Vivienda y Habitat');
 $mpdf->SetCreator('BANAVIH - Banco Nacional de Vivienda y Habitat');
 $mpdf->SetHTMLHeader($cabecera);

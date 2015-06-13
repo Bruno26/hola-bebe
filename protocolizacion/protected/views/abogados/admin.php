@@ -111,13 +111,20 @@ $this->widget('booster.widgets.TbGridView', array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
-            'template' => '{ver}',
+            'template' => '{ver} {pdf}',
             'buttons' => array(
                 'ver' => array(
                     'label' => 'Ver',
                     'icon' => 'eye-open',
                     'size' => 'medium',
-                    'url' => 'Yii::app()->createUrl("abogado/view/", array("id"=>$data->id))',
+                    'url' => 'Yii::app()->createUrl("abogados/view/", array("id"=>$data->id))',
+                ),
+                'pdf' => array(
+                    'label' => 'Generar PDF',
+                    'icon'  => 'glyphicon glyphicon-file',
+                    'size'  => 'medium',
+                    'url'   => 'Yii::app()->createUrl("abogados/pdf/", array("id"=>$data->id))',
+//                    'visible' => 'Asignar($data->username);'
                 ),
 //                'modificar' => array(
 //                    'label' => 'Modificar',

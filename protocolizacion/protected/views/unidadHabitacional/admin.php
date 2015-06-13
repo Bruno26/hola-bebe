@@ -64,13 +64,19 @@ $this->widget('booster.widgets.TbGridView', array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
-            'template' => '{ver} {modificar}',
+            'template' => '{ver} {modificar} {pdf}',
             'buttons' => array(
                 'ver' => array(
                     'label' => 'Ver',
                     'icon' => 'eye-open',
                     'size' => 'medium',
                     'url' => 'Yii::app()->createUrl("UnidadHabitacional/view/", array("id"=>$data->id_unidad_habitacional))',
+                ),
+                'pdf' => array(
+                    'label' => 'Generar PDF',
+                    'icon' => 'glyphicon glyphicon-file',
+                    'size' => 'medium',
+                    'url' => 'Yii::app()->createUrl("UnidadHabitacional/pdf/", array("id"=>$data->id_unidad_habitacional))',
                 ),
                 'modificar' => array(
                     'label' => 'Modificar',

@@ -28,7 +28,7 @@ class UnidadHabitacionalController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'guardar'),
+                'actions' => array('create', 'update', 'guardar','pdf'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -201,6 +201,18 @@ class UnidadHabitacionalController extends Controller {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+    
+    public function actionPdf($id) {
+      $estado = new Tblestado;
+      $municipio = new Tblmunicipio;
+      $this->render('pdf', array(
+          'model' => $this->loadModel($id),
+          'estado' => $estado ,
+          'municipio' => $municipio ,
+      ));
+
+
     }
 
 }
