@@ -17,9 +17,11 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
 Yii::app()->clientScript->registerScript('telefono', "
         $(document).ready(function(){
             $('#Beneficiario_telefono_trabajo').numeric();  
-            $('#Beneficiario_ingreso_mensual').numeric();  
-    
+            $('#Beneficiario_ingreso_mensual').numeric();         
+        
+  
         }),
+  
         ");?>
 
 <h1 class="text-center">Censo Socio Económico</h1>
@@ -48,7 +50,7 @@ Yii::app()->clientScript->registerScript('telefono', "
         'title' => 'Datos Laborales',
         'context' => 'primary',
         'headerIcon' => 'briefcase',
-        'content' => $this->renderPartial('_datosLaborales', array('form' => $form, 'model' => $model, 'municipio' => $municipio, 'estado' => $estado, 'parroquia' => $parroquia,), TRUE),
+        'content' => $this->renderPartial('_datosLaborales', array('form' => $form, 'model' => $model), TRUE),
             )
     );
     ?>
@@ -65,7 +67,7 @@ Yii::app()->clientScript->registerScript('telefono', "
             'size' => 'large',
             'id' => 'guardar',
             'context' => 'primary',
-            'label' => $model->isNewRecord ? 'Guardar' : 'Save',
+            'label' => $model->isNewRecord ? 'Guardar':'Guardar',
         ));
         ?>
     </div>
