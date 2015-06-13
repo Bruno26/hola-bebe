@@ -126,7 +126,7 @@ class ValidacionJsController extends Controller {
      * FUNCION QUE MUESTRA TODOS LAS PARROQUIAS DE  
      */
     public function actionBuscarDesarrollo() {
-        $Id = (isset($_POST['Tblparroquia']['clvcodigo']) ? $_POST['Tblparroquia']['clvcodigo'] : $_GET['clvcodigo']);
+        $Id = (isset($_POST['Tblparroquia']['clvcodigo']) ? $_POST['Tblparroquia']['clvcodigo'] : $_GET['desarrollo']);
         $Selected = isset($_GET['desarrollo']) ? $_GET['desarrollo'] : '';
 
         if (!empty($Id)) {

@@ -15,11 +15,8 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 if (!empty($model->parroquia_id)) {
     $id_parroquia = Tblparroquia::model()->findByPk($model->parroquia_id); // consulta en la tabla ciudad el id_ciudad y id_estado 
     $id_municipio = $id_parroquia->clvmunicipio0->clvcodigo;
-    
     $id_estado = $id_parroquia->clvmunicipio0->clvestado0->clvcodigo;
-    //echo '<pre>';var_dump($model->parroquia_id,$id_municipio,$id_estado,$id_parroquia); die();
-//    $id_municipio = Tblmunicipio::model()->findByPk($id_parroquia)->id_estado; // consulta en la tabla ciudad el id_ciudad y id_estado 
-//    $id_Estado = Tblestado::model()->findByPk($id_Estado)->clvcodigo; // consulta en la tabla estado el id_estado y id_pais  
+
 }
 ?>
 <?php Yii::app()->clientScript->registerScript('desarrollo', "
