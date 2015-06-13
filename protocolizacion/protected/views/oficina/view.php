@@ -13,9 +13,10 @@ $this->menu = array(
 );
 ?>
 
-<h1>View Oficina #<?php echo $model->id_oficina; ?></h1>
+<center><h1>Detalle de la Oficina <?php echo  $model->nombre.' - ' .date('d/m/Y', strtotime($model->fecha_creacion)); ?></h1></center>
+
 <?php //var_dump($model->parroquia->strdescripcion); ?>
-<?php
+<?php /*
 $this->widget('booster.widgets.TbDetailView', array(
     'data' => $model,
     'attributes' => array(
@@ -31,5 +32,11 @@ $this->widget('booster.widgets.TbDetailView', array(
         'fecha_creacion',
         'fecha_actualizacion',
     ),
-));
+)); */
+?>
+<?php $this->widget('booster.widgets.TbPanel', array(
+    'context' => 'primary',
+    'content' => $this->renderPartial('_view', array('model' => $model, 'estado' => $estado, 'municipio' => $municipio), TRUE),
+        )
+);
 ?>

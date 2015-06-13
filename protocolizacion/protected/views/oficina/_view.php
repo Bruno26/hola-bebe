@@ -1,46 +1,48 @@
-<div class="view">
+<?php
+	function nombre($selec,$iD){
+	    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
+	    return $saime['PRIMER_NOMBRE'];
+	}
+	function apellido($selec,$iD){
+	    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
+	    return $saime['PRIMER_APELLIDO'];
+	}
+        function nacionalidadCedula($selec,$select2,$iD){
+	    $saime = ConsultaOracle::getNacionalidadCedulaPersonaByPk($selec,$select2,(int)$iD);
+	    return $saime['NACIONALIDAD']." - ".$saime['CEDULA'];
+	}
 
-		<b><?php echo CHtml::encode($data->getAttributeLabel('id_oficina')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id_oficina),array('view','id'=>$data->id_oficina)); ?>
-	<br />
+?>
+<div class="row">
+    <div class="col-md-12">
+        <h4><i class="glyphicon glyphicon-home"></i> Oficina</h4>
+        <div class='col-md-6'> 
+            <blockquote>
+                <p>
+                   <b>Nombre de la Oficina:</b> <?php echo $model->nombre ?><br/>
+                   <b>Jefe Asignado:</b> <?php echo nombre('PRIMER_NOMBRE', $model->persona_id_jefe)." ".apellido('PRIMER_APELLIDO', $model->persona_id_jefe) ?><br/>
+                </p>
+    </div>
+        <div class='col-md-6'> 
+            <blockquote>
+                <p>
+                   <b>Observaciones:</b> <?php echo $model->observaciones ?><br/>
+                </p>
+            </blockquote>
+    </div>
+        </div>
+    
+    <div class="col-md-12">
+        <h4><i class="glyphicon glyphicon-globe"></i> Ubicación</h4>
+        <div class='col-md-6'> 
+            <blockquote>
+                <p>
+                    <b> Estado:</b> <?php echo $model->parroquia->clvmunicipio0->clvestado0->strdescripcion ?><br/>
+                    <b> Municipio:</b> <?php echo $model->parroquia->clvmunicipio0->strdescripcion ?><br/>
+                    <b> Parroquia:</b> <?php echo $model->parroquia->strdescripcion ?>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('nombre')); ?>:</b>
-	<?php echo CHtml::encode($data->nombre); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('parroquia_id')); ?>:</b>
-	<?php echo CHtml::encode($data->parroquia_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('persona_id_jefe')); ?>:</b>
-	<?php echo CHtml::encode($data->persona_id_jefe); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('estatus')); ?>:</b>
-	<?php echo CHtml::encode($data->estatus); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('observaciones')); ?>:</b>
-	<?php echo CHtml::encode($data->observaciones); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_creacion')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_creacion); ?>
-	<br />
-
-	<?php /*
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_actualizacion')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_actualizacion); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('usuario_id_creacion')); ?>:</b>
-	<?php echo CHtml::encode($data->usuario_id_creacion); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('usuario_id_actualizacion')); ?>:</b>
-	<?php echo CHtml::encode($data->usuario_id_actualizacion); ?>
-	<br />
-
-	*/ ?>
-
+                </p>
+            </blockquote>
+    </div>
+        </div>    
 </div>
