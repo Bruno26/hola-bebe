@@ -219,7 +219,7 @@ class ValidacionJsController extends Controller {
 
     public function actionBuscarPersonasFamiliar() {
         $cedula = (int) $_POST['cedula'];
-        $nacio = $_POST['nacionalidad'];
+        $nacio = (int)$_POST['nacionalidad'];
 
         $result = ConsultaOracle::getPersona($nacio, $cedula);
 

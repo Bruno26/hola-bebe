@@ -7,8 +7,8 @@
 class ConsultaOracle extends CActiveRecord {
     /*
      * Consulta Tabla Persona de tablas_comunes
-     * Consulta que busca por nacionalidad y cedula
-     * Return ID, NACIONALIDAD , CEDULA, PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO
+     * Consulta que busca por Pk 
+     * Return valores solicitados por el select
      * SI return es 1, indica que no existe en tabla Persona
      */
 
@@ -52,10 +52,10 @@ class ConsultaOracle extends CActiveRecord {
 
     public function getPersona($nacionalidad, $cedula) {
 
-        $nacional = ($nacionalidad == 97) ? '1' : '0';
-        $SLQ = "SELECT ID, NACIONALIDAD , CEDULA, PRIMER_NOMBRE AS PRIMERNOMBRE, SEGUNDO_NOMBRE AS SEGUNDONOMBRE, PRIMER_APELLIDO AS PRIMERAPELLIDO, SEGUNDO_APELLIDO AS SEGUNDOAPELLIDO , FECHA_NACIMIENTO AS FECHANACIMIENTO FROM PERSONA WHERE NACIONALIDAD ='" . $nacional . "' AND CEDULA = " . $cedula;
+        $nacional = ($nacionalidad == 97) ? 1 : 0;
+        $SLQ = "SELECT ID, NACIONALIDAD , CEDULA, PRIMER_NOMBRE AS PRIMERNOMBRE, SEGUNDO_NOMBRE AS SEGUNDONOMBRE, PRIMER_APELLIDO AS PRIMERAPELLIDO, SEGUNDO_APELLIDO AS SEGUNDOAPELLIDO , FECHA_NACIMIENTO AS FECHANACIMIENTO FROM TABLAS_COMUNES.PERSONA WHERE NACIONALIDAD = " . $nacional . " AND CEDULA = " . $cedula;
         $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryRow();
-
+//        echo '<pre>';var_dump($result);die;
         if (empty($result)) {
             return 1;
         } else {
@@ -137,6 +137,41 @@ class ConsultaOracle extends CActiveRecord {
                     break;
             }
             return empty($salida) ? '0.00' : number_format($salida, 2, '.', '');
+        }
+    }
+
+    /*
+     * Funcion que inserta datos en table PERSONA
+     * @param $array, key => value, (donde key es el la columna y el value es el valos que va a tomar la columna)
+     * Return true si se hizo con éxito
+     */
+
+    public function insertPersona($array) {
+        if (empty($array)) {
+            return false;
+        } else {
+            $select = array();
+            $valor = array();
+            foreach ($array as $key => $value) {
+//                if ($key == 'FECHA_NACIMIENTO') {
+//                    //var_dump($key,$value);DIE;
+//                    array_push($select, $key);
+//                    array_push($valor, "to_date('" . $value. "', 'yyyy/mm/dd')");
+//                } else {
+                array_push($select, $key);
+                if (is_numeric($value)) {
+                    array_push($valor, $value);
+                } else {
+                    array_push($valor, "'" . $value . "'");
+                }
+//                }
+            }
+            //echo '<PRE>';var_dump($valor);DIE;
+            $select = implode(',', $select);
+            $valor = implode(',', $valor);
+            $SQL = "INSERT INTO PERSONA (ID, " . $select . ") VALUES ((SELECT MAX(ID)+1 FROM PERSONA)," . $valor . ")";
+            echo '<pre>';var_dump($SQL);die;
+            $result = Yii::app()->dbOarcle->createCommand($SQL)->query();
         }
     }
 
