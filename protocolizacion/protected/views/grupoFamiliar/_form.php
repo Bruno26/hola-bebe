@@ -34,12 +34,12 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
         ?>
     </div>
     <div class="col-md-8"  id="iconLoding" style="display: none">
-        <img src="<?php echo Yii::app()->baseUrl;?>/images/loading.gif" width="50px" height="60px">
+        <img src="<?php echo Yii::app()->baseUrl; ?>/images/loading.gif" width="50px" height="60px">
     </div>
 </div>
 <div class="row">
     <div class='col-md-2'>
-        
+
         <?php echo $form->textFieldGroup($model, 'primer_nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
     </div>
     <div class='col-md-2'>
@@ -71,7 +71,7 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
         <?php echo $form->textFieldGroup($model, 'ingreso_mensual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16)))); ?>
     </div>
     <div class="col-md-2">
-        <?php echo $form->checkBoxGroup($model, 'cotiza_faov'); ?>
+        <?php echo $form->textFieldGroup($model, 'ingreso_mensual_faov', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16, 'readonly'=>'readonly')))); ?>
 
     </div>
 </div>

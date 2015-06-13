@@ -17,6 +17,7 @@
  * @property integer $usuario_id_creacion
  * @property integer $usuario_id_actualizacion
  * @property integer $estatus
+ * @property string $ingreso_mensual_faov
  *
  * The followings are the available model relations:
  * @property Maestro $fuenteDatosEntrada
@@ -53,10 +54,10 @@ class GrupoFamiliar extends CActiveRecord {
             array('unidad_familiar_id, persona_id, gen_parentesco_id, tipo_sujeto_atencion, ingreso_mensual, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, estatus', 'required'),
             array('unidad_familiar_id, persona_id, gen_parentesco_id, tipo_sujeto_atencion, fuente_datos_entrada_id, usuario_id_creacion, usuario_id_actualizacion, estatus', 'numerical', 'integerOnly' => true),
             array('ingreso_mensual', 'length', 'max' => 16),
-            array('cotiza_faov', 'safe'),
+            array('cotiza_faov, ingreso_mensual_faov', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id_grupo_familiar, unidad_familiar_id, persona_id, gen_parentesco_id, tipo_sujeto_atencion, ingreso_mensual, fuente_datos_entrada_id, cotiza_faov, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, estatus,  nacionalidad, cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido', 'safe', 'on' => 'search'),
+            array('ingreso_mensual_faov, id_grupo_familiar, unidad_familiar_id, persona_id, gen_parentesco_id, tipo_sujeto_atencion, ingreso_mensual, fuente_datos_entrada_id, cotiza_faov, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, estatus,  nacionalidad, cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido', 'safe', 'on' => 'search'),
         );
     }
 
@@ -95,6 +96,7 @@ class GrupoFamiliar extends CActiveRecord {
             'usuario_id_actualizacion' => 'Usuario Id Actualizacion',
             'estatus' => 'Estatus',
             'cedula' => 'Cédula',
+            'ingreso_mensual_faov' => 'Ingreso Mensual del Faov',
         );
     }
 
@@ -128,6 +130,7 @@ class GrupoFamiliar extends CActiveRecord {
         $criteria->compare('usuario_id_creacion', $this->usuario_id_creacion);
         $criteria->compare('usuario_id_actualizacion', $this->usuario_id_actualizacion);
         $criteria->compare('estatus', $this->estatus);
+        $criteria->compare('ingreso_mensual_faov', $this->ingreso_mensual_faov, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

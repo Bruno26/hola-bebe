@@ -120,26 +120,22 @@
     </div>
 
     <div class="col-md-4">
-        <?php echo $form->textFieldGroup($model, 'ingreso_mensual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-
+        <?php echo $form->textFieldGroup($model, 'ingreso_declarado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
     </div>
-
 
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <?php echo $form->textFieldGroup($model, 'ingreso_declarado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+
+    <div class="col-md-6">
+        <?php echo $form->textFieldGroup($model, 'ingreso_mensual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readonly' => true)))); ?>
 
     </div>
-    <div class="col-md-4">
-        <?php echo $form->textFieldGroup($model, 'ingreso_promedio_faov', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+    <div class="col-md-6">
+        <?php echo $form->textFieldGroup($model, 'ingreso_promedio_faov', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readonly' => true)))); ?>
 
     </div>
-    <div class="col-md-4">
-        <?php echo $form->textFieldGroup($model, 'cotiza_faov', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
 
-    </div>
 </div>
 
 

@@ -53,19 +53,19 @@ function buscarPersonaOficina(nacionalidad, cedula) {
 //                bootbox.alert('Debe Completar el campo Cédula');
 //            } else {
 //
- 	if (datos == 1) {
-            $('#Oficina_primer_nombre').val(datos.PRIMERNOMBRE);
-            $('#Oficina_persona_id_jefe').val(datos.ID);
-            $('#Oficina_segundo_nombre').val(datos.SEGUNDONOMBRE);
-            $('#Oficina_primer_apellido').val(datos.PRIMERAPELLIDO);
-            $('#Oficina_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
-	}else{
-    	    	$('#Oficina_primer_nombre').val(datos.PRIMERNOMBRE);
-            	$('#Oficina_persona_id_jefe').val(datos.ID);
-            	$('#Oficina_segundo_nombre').val(datos.SEGUNDONOMBRE);
-           	$('#Oficina_primer_apellido').val(datos.PRIMERAPELLIDO);
-           	$('#Oficina_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
-	}
+            if (datos == 1) {
+                $('#Oficina_primer_nombre').val(datos.PRIMERNOMBRE);
+                $('#Oficina_persona_id_jefe').val(datos.ID);
+                $('#Oficina_segundo_nombre').val(datos.SEGUNDONOMBRE);
+                $('#Oficina_primer_apellido').val(datos.PRIMERAPELLIDO);
+                $('#Oficina_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
+            } else {
+                $('#Oficina_primer_nombre').val(datos.PRIMERNOMBRE);
+                $('#Oficina_persona_id_jefe').val(datos.ID);
+                $('#Oficina_segundo_nombre').val(datos.SEGUNDONOMBRE);
+                $('#Oficina_primer_apellido').val(datos.PRIMERAPELLIDO);
+                $('#Oficina_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
+            }
 
         },
         error: function (datos) {
@@ -145,15 +145,15 @@ function buscarPersonaAbogado(nacionalidad, cedula) {
         dataType: 'json',
         success: function (datos) {
 
-	if (datos == 1) {
-            $('#Abogados_primer_nombre').val(datos.PRIMERNOMBRE);
-            $('#Abogados_persona_id').val(datos.ID);
-            $('#Abogados_primer_apellido').val(datos.PRIMERAPELLIDO);
-	}else{
-    	   	$('#Abogados_primer_nombre').val(datos.PRIMERNOMBRE);
-            	$('#Abogados_persona_id').val(datos.ID);
-            	$('#Abogados_primer_apellido').val(datos.PRIMERAPELLIDO);
-	}
+            if (datos == 1) {
+                $('#Abogados_primer_nombre').val(datos.PRIMERNOMBRE);
+                $('#Abogados_persona_id').val(datos.ID);
+                $('#Abogados_primer_apellido').val(datos.PRIMERAPELLIDO);
+            } else {
+                $('#Abogados_primer_nombre').val(datos.PRIMERNOMBRE);
+                $('#Abogados_persona_id').val(datos.ID);
+                $('#Abogados_primer_apellido').val(datos.PRIMERAPELLIDO);
+            }
 
         },
         error: function (datos) {
@@ -234,16 +234,16 @@ function buscarPersonaCensoA(nacionalidad, cedula) {
         dataType: 'json',
         success: function (datos) {
 
- 	if (datos == 1) {
+            if (datos == 1) {
 
-            $('#AsignacionCenso_primer_nombre').val(datos.PRIMERNOMBRE);
-            $('#AsignacionCenso_persona_id').val(datos.ID);
-            $('#AsignacionCenso_primer_apellido').val(datos.PRIMERAPELLIDO);
-	}else{ 
-  	    	$('#AsignacionCenso_primer_nombre').val(datos.PRIMERNOMBRE);
-          	$('#AsignacionCenso_persona_id').val(datos.ID);
-            	$('#AsignacionCenso_primer_apellido').val(datos.PRIMERAPELLIDO);
-		}
+                $('#AsignacionCenso_primer_nombre').val(datos.PRIMERNOMBRE);
+                $('#AsignacionCenso_persona_id').val(datos.ID);
+                $('#AsignacionCenso_primer_apellido').val(datos.PRIMERAPELLIDO);
+            } else {
+                $('#AsignacionCenso_primer_nombre').val(datos.PRIMERNOMBRE);
+                $('#AsignacionCenso_persona_id').val(datos.ID);
+                $('#AsignacionCenso_primer_apellido').val(datos.PRIMERAPELLIDO);
+            }
 
         },
         error: function (datos) {
@@ -278,6 +278,7 @@ function buscarPersonaFamiliar(nacionalidad, cedula) {
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
         success: function (datos) {
+            
             if (datos == 1) {
                 $('#iconLoding').hide();
                 $('#GrupoFamiliar_primer_nombre').val('');
@@ -287,6 +288,7 @@ function buscarPersonaFamiliar(nacionalidad, cedula) {
                 $('#GrupoFamiliar_segundo_apellido').val('');
                 $('#GrupoFamiliar_fecha_nacimiento').val('');
                 $('#GrupoFamiliar_cedula').val('');
+                $('#GrupoFamiliar_ingreso_mensual_faov').val('');
                 bootbox.alert('La Persona ya se encuentra asignada a un grupo Familiar.');
             } else if (datos == 2) {
                 $('#iconLoding').hide();
@@ -297,14 +299,16 @@ function buscarPersonaFamiliar(nacionalidad, cedula) {
                 $('#GrupoFamiliar_primer_apellido').val('');
                 $('#GrupoFamiliar_segundo_apellido').val('');
                 $('#GrupoFamiliar_fecha_nacimiento').val('');
+                $('#GrupoFamiliar_ingreso_mensual_faov').val('');
                 bootbox.alert('La Persona no se encuentra registrada en el Saime.');
             } else {
-                $('#GrupoFamiliar_persona_id').val(datos.ID);
-                $('#GrupoFamiliar_primer_nombre').val(datos.PRIMERNOMBRE);
-                $('#GrupoFamiliar_segundo_nombre').val(datos.SEGUNDONOMBRE);
-                $('#GrupoFamiliar_primer_apellido').val(datos.PRIMERAPELLIDO);
-                $('#GrupoFamiliar_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
-                $('#GrupoFamiliar_fecha_nacimiento').val(datos.FECHANACIMIENTO);
+                $('#GrupoFamiliar_persona_id').val(datos.persona.ID);
+                $('#GrupoFamiliar_primer_nombre').val(datos.persona.PRIMERNOMBRE);
+                $('#GrupoFamiliar_segundo_nombre').val(datos.persona.SEGUNDONOMBRE);
+                $('#GrupoFamiliar_primer_apellido').val(datos.persona.PRIMERAPELLIDO);
+                $('#GrupoFamiliar_segundo_apellido').val(datos.persona.SEGUNDOAPELLIDO);
+                $('#GrupoFamiliar_fecha_nacimiento').val(datos.persona.FECHANACIMIENTO);
+                $('#GrupoFamiliar_ingreso_mensual_faov').val(datos.faov);
                 $('#iconLoding').hide();
             }
         },

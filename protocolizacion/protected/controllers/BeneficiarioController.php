@@ -98,18 +98,37 @@ class BeneficiarioController extends Controller {
         ));
     }
 
+    //ACTUALIZACION DE DATOS DE BENEFICIARIO
     public function actionCreateDatos($id) {
-        $model = new Beneficiario;
-// $model = Beneficiario::mode()->findByPk($id);
+
+        $model = Beneficiario::model()->findByPk($id);
         $estado = new Tblestado;
         $municipio = new Tblmunicipio;
         $parroquia = new Tblparroquia;
+        $faovPromedio = ConsultaOracle::getFaov($id, 1); //consulta la funcion faov por id de persona, para mostrar el calculo de promedio
+        $faovMensual = ConsultaOracle::getFaov($id, 2); //consulta la funcion faov por id de persona, para mostrar el calculo de ingreso mesual
+        $model-> ingreso_mensual= $faovMensual;
+        $model-> ingreso_promedio_faov = $faovPromedio;
 
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
-
-        if (isset($_POST['Beneficiario'])) {
+        if (isset($_POST['Beneficiario']['fuente_ingreso_id'])) {
             $model->attributes = $_POST['Beneficiario'];
+            $model->parroquia_id = $_POST['Beneficiario']['parroquia_id'];
+            $model->urban_barrio = $_POST['Beneficiario']['urban_barrio'];
+            $model->av_call_esq_carr = $_POST['Beneficiario']['av_call_esq_carr'];
+            $model->zona = $_POST['Beneficiario']['zona'];
+            $model->condicion_trabajo_id = $_POST['Beneficiario']['condicion_trabajo_id'];
+            $model->fuente_ingreso_id = $_POST['Beneficiario']['fuente_ingreso_id'];
+            $model->condicion_laboral = $_POST['Beneficiario']['condicion_laboral'];
+            $model->sector_trabajo_id = $_POST['Beneficiario']['sector_trabajo_id'];
+            $model->nombre_empresa = $_POST['Beneficiario']['nombre_empresa'];
+            $model->direccion_empresa = $_POST['Beneficiario']['direccion_empresa'];
+            $model->telefono_trabajo = $_POST['Beneficiario']['telefono_trabajo'];
+            $model->gen_cargo_id = $_POST['Beneficiario']['gen_cargo_id'];
+            $model->ingreso_mensual = $_POST['Beneficiario']['ingreso_mensual'];
+            $model->ingreso_declarado = $_POST['Beneficiario']['ingreso_declarado'];
+            $model->ingreso_promedio_faov = $_POST['Beneficiario']['ingreso_promedio_faov'];
+
+
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id_beneficiario));
         }
@@ -132,7 +151,8 @@ class BeneficiarioController extends Controller {
 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        } else
+        }
+        else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 

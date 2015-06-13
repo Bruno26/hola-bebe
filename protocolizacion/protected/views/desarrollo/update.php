@@ -10,6 +10,18 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     ),
         ));
 ?>
+<?php
+    
+if (!empty($model->parroquia_id)) {
+    $id_parroquia = Tblparroquia::model()->findByPk($model->parroquia_id); // consulta en la tabla ciudad el id_ciudad y id_estado 
+    $id_municipio = $id_parroquia->clvmunicipio0->clvcodigo;
+    
+    $id_estado = $id_parroquia->clvmunicipio0->clvestado0->clvcodigo;
+    //echo '<pre>';var_dump($model->parroquia_id,$id_municipio,$id_estado,$id_parroquia); die();
+//    $id_municipio = Tblmunicipio::model()->findByPk($id_parroquia)->id_estado; // consulta en la tabla ciudad el id_ciudad y id_estado 
+//    $id_Estado = Tblestado::model()->findByPk($id_Estado)->clvcodigo; // consulta en la tabla estado el id_estado y id_pais  
+}
+?>
 <?php Yii::app()->clientScript->registerScript('desarrollo', "
          $('#guardar').click(function(){
                 if($('#Desarrollo_nombre').val()==''){
@@ -17,21 +29,34 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                     return false;
                 }
 
-                if($('#Tblestado_clvcodigo').val()==''){
-                 alert('Por favor seleccione Estado');
-                    return false;
-                }
-                if($('#Tblmunicipio_clvcodigo').val()==''){
-                   alert('Por favor seleccione Municipio');
-                    return false;
-                }
-                if($('#Desarrollo_parroquia_id').val()==''){
-                   alert('Por favor seleccione Parroquia');
-                    return false;
-                }
+//                if($('#Tblestado_clvcodigo').val()==''){
+//                 alert('Por favor seleccione Estado');
+//                    return false;
+//                }
+//                if($('#Tblmunicipio_clvcodigo').val()==''){
+//                   alert('Por favor seleccione Municipio');
+//                    return false;
+//                }
+//                if($('#Desarrollo_parroquia_id').val()==''){
+//                   alert('Por favor seleccione Parroquia');
+//                    return false;
+//                }
 
                 });
 
+        $(document).ready(function(){
+            $('#Tblestado_clvcodigo').val(" . $id_estado . ");
+                    
+            $.get('" . CController::createUrl('ValidacionJs/BuscarMunicipios') . "', {clvcodigo: " . $id_estado . " }, function(data){
+                $('#Tblmunicipio_clvcodigo').html(data);
+                $('#Tblmunicipio_clvcodigo').val(" . $id_municipio . ");
+                
+            });
+            $.get('" . CController::createUrl('ValidacionJs/BuscarParroquias') . "', {municipio: " . $id_municipio . "}, function(data){
+                $('#Desarrollo_parroquia_id').html(data);
+                $('#Desarrollo_parroquia_id').val(" . $model->parroquia_id. ");
+            });
+        });
 
 
         ") ?>
