@@ -17,6 +17,7 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
 Yii::app()->clientScript->registerScript('telefono', "
         $(document).ready(function(){
             $('#Beneficiario_telefono_trabajo').numeric();  
+            $('#Beneficiario_ingreso_mensual').numeric();  
     
         }),
         ");?>
