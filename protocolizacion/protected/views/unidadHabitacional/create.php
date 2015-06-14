@@ -58,6 +58,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     ),
         ));
 ?>
+<h1 class="text-center">Unidad Habitacional</h1>
 
 <?php
 if (isset($sms) && !empty($sms)) {
@@ -78,7 +79,6 @@ if (isset($sms) && !empty($sms)) {
 }
 ?>
 
-<h1 class="text-center">Unidad Habitacional</h1>
 
 
 <div>
