@@ -87,6 +87,7 @@ class OficinaController extends Controller {
                 $model->usuario_id_creacion = Yii::app()->user->id;
                 $model->fecha_creacion = 'now()';
                 $model->fecha_actualizacion = 'now()';  
+                
                     
 //            $model->fk
             if ($model->save())
