@@ -28,7 +28,7 @@ class BeneficiarioController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'createDatos'),
+                'actions' => array('create', 'update', 'createDatos', 'CulminarRegistro'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -49,6 +49,14 @@ class BeneficiarioController extends Controller {
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
+    }
+
+    /**
+     * Displays a particular model.
+     * @param integer $id the ID of the model to be displayed
+     */
+    public function actionCulminarRegistro($id) {
+        Generico::renderTraza($id);
     }
 
     /**
@@ -100,6 +108,10 @@ class BeneficiarioController extends Controller {
 
     //ACTUALIZACION DE DATOS DE BENEFICIARIO
     public function actionCreateDatos($id) {
+        $traza = Traza::VerificarTraza($id); // verifica el guardado de la traza
+        if ($traza != 2) {
+            Generico::renderTraza($id); //renderiza a la traza
+        }
 
         $model = Beneficiario::model()->findByPk($id);
         $estado = new Tblestado;
@@ -128,8 +140,11 @@ class BeneficiarioController extends Controller {
 //            $model->ingreso_declarado = $_POST['Beneficiario']['ingreso_declarado'];
 //            $model->ingreso_promedio_faov = $_POST['Beneficiario']['ingreso_promedio_faov'];
 
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_beneficiario));
+            if ($model->save()){
+                $idtraza = Traza::ObtenerIdTraza($idBeneficiario); // pemite la busqueda de la id de la traza 
+                $delete = Traza::model()->findByPk($idtraza)->delete();
+                $this->redirect(array('beneficiario/admin'));
+            }
         }
 
         $this->render('createDatos', array(
@@ -200,5 +215,4 @@ class BeneficiarioController extends Controller {
             Yii::app()->end();
         }
     }
-
 }

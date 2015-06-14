@@ -21,7 +21,7 @@
 
 		<?php echo $form->textFieldGroup($model,'direccion_empresa',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200)))); ?>
 
-		<?php echo $form->textFieldGroup($model,'telefono_trabajo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>7)))); ?>
+		<?php echo $form->textFieldGroup($model,'telefono_trabajo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>11)))); ?>
 
 		<?php echo $form->textFieldGroup($model,'gen_cargo_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
@@ -35,11 +35,7 @@
 
 		<?php echo $form->textFieldGroup($model,'direccion_anterior',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200)))); ?>
 
-		<?php echo $form->textFieldGroup($model,'geo_estado_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-		<?php echo $form->textFieldGroup($model,'geo_municipio_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-		<?php echo $form->textFieldGroup($model,'geo_parroquia_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'parroquia_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
 		<?php echo $form->textFieldGroup($model,'urban_barrio',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200)))); ?>
 
@@ -62,6 +58,10 @@
 		<?php echo $form->textFieldGroup($model,'estatus_beneficiario_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
 		<?php echo $form->textFieldGroup($model,'codigo_trab',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>4)))); ?>
+
+		<?php echo $form->textFieldGroup($model,'condicion_laboral',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+
+		<?php echo $form->textFieldGroup($model,'beneficiario_temporal_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
 	<div class="form-actions">
 		<?php $this->widget('booster.widgets.TbButton', array(
