@@ -197,6 +197,8 @@ class ConsultaOracle extends CActiveRecord {
             $valor = implode(',', $valor);
             $SQL = "INSERT INTO PERSONA (ID, " . $select . ") VALUES ((SELECT MAX(ID)+1 FROM PERSONA)," . $valor . ")";
             
+            
+            
 //   echo '<pre>';var_dump($SQL);die;
             $result = Yii::app()->dbOarcle->createCommand($SQL)->query();
             echo '<pre>';var_dump($result);die;
