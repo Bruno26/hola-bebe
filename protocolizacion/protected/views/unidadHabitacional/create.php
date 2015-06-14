@@ -64,7 +64,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 if (isset($sms) && !empty($sms)) {
     $user = Yii::app()->getComponent('user');
     $user->setFlash(
-            'warning', "<strong>Ya existe una Unidad Habitacional con este nombre en este Desarrollo.</strong>"
+            'warning', "<strong>Ya existe una Unidad Habitacional con este Nombre en este Desarrollo.</strong>"
     );
     $this->widget('booster.widgets.TbAlert', array(
         'fade' => true,
@@ -78,7 +78,6 @@ if (isset($sms) && !empty($sms)) {
     ));
 }
 ?>
-
 
 
 <div>
