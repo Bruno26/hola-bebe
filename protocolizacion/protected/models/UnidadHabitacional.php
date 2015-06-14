@@ -25,21 +25,25 @@
  * @property integer $usuario_id_actualizacion
  * @property integer $estatus
  * @property integer $num_protocolo
+ * @property string $lindero_norte
+ * @property string $lindero_sur
+ * @property string $lindero_este
+ * @property string $lindero_oeste
  *
  * The followings are the available model relations:
- * @property Desarrollo $desarrollo
- * @property Maestro $estatus0
- * @property Maestro $fuenteDatosEntrada
- * @property Maestro $genTipoInmueble
- * @property Maestro $numProtocolo
+ * @property BeneficiarioTemporal[] $beneficiarioTemporals
  * @property RegistroPublico $registroPublico
  * @property Maestro $tipoDocumento
  * @property UnidadHabitacional $usuarioIdActualizacion
  * @property UnidadHabitacional[] $unidadHabitacionals
  * @property CrugeUser $usuarioIdCreacion
- * @property BeneficiarioTemporal[] $beneficiarioTemporals
- * @property AsignacionCenso[] $asignacionCensos
+ * @property Desarrollo $desarrollo
+ * @property Maestro $estatus0
+ * @property Maestro $fuenteDatosEntrada
+ * @property Maestro $genTipoInmueble
+ * @property Maestro $numProtocolo
  * @property Vivienda[] $viviendas
+ * @property AsignacionCenso[] $asignacionCensos
  */
 class UnidadHabitacional extends CActiveRecord
 {
@@ -64,10 +68,11 @@ class UnidadHabitacional extends CActiveRecord
 			array('nombre, nro_matricula', 'length', 'max'=>100),
 			array('tomo, nro_documento', 'length', 'max'=>50),
 			array('asiento_registral, folio_real', 'length', 'max'=>6),
+			array('lindero_norte, lindero_sur, lindero_este, lindero_oeste', 'length', 'max'=>200),
 			array('fecha_registro', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_unidad_habitacional, nombre, desarrollo_id, gen_tipo_inmueble_id, total_unidades, registro_publico_id, tipo_documento_id, fecha_registro, tomo, ano, nro_documento, asiento_registral, folio_real, nro_matricula, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, estatus, num_protocolo', 'safe', 'on'=>'search'),
+			array('id_unidad_habitacional, nombre, desarrollo_id, gen_tipo_inmueble_id, total_unidades, registro_publico_id, tipo_documento_id, fecha_registro, tomo, ano, nro_documento, asiento_registral, folio_real, nro_matricula, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, estatus, num_protocolo, lindero_norte, lindero_sur, lindero_este, lindero_oeste', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -79,19 +84,19 @@ class UnidadHabitacional extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'desarrollo' => array(self::BELONGS_TO, 'Desarrollo', 'desarrollo_id'),
-			'estatus0' => array(self::BELONGS_TO, 'Maestro', 'estatus'),
-			'fuenteDatosEntrada' => array(self::BELONGS_TO, 'Maestro', 'fuente_datos_entrada_id'),
-			'genTipoInmueble' => array(self::BELONGS_TO, 'Maestro', 'gen_tipo_inmueble_id'),
-			'numProtocolo' => array(self::BELONGS_TO, 'Maestro', 'num_protocolo'),
+			'beneficiarioTemporals' => array(self::HAS_MANY, 'BeneficiarioTemporal', 'unidad_habitacional_id'),
 			'registroPublico' => array(self::BELONGS_TO, 'RegistroPublico', 'registro_publico_id'),
 			'tipoDocumento' => array(self::BELONGS_TO, 'Maestro', 'tipo_documento_id'),
 			'usuarioIdActualizacion' => array(self::BELONGS_TO, 'UnidadHabitacional', 'usuario_id_actualizacion'),
 			'unidadHabitacionals' => array(self::HAS_MANY, 'UnidadHabitacional', 'usuario_id_actualizacion'),
 			'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
-			'beneficiarioTemporals' => array(self::HAS_MANY, 'BeneficiarioTemporal', 'unidad_habitacional_id'),
-			'asignacionCensos' => array(self::HAS_MANY, 'AsignacionCenso', 'unidad_habitacional_id'),
+			'desarrollo' => array(self::BELONGS_TO, 'Desarrollo', 'desarrollo_id'),
+			'estatus0' => array(self::BELONGS_TO, 'Maestro', 'estatus'),
+			'fuenteDatosEntrada' => array(self::BELONGS_TO, 'Maestro', 'fuente_datos_entrada_id'),
+			'genTipoInmueble' => array(self::BELONGS_TO, 'Maestro', 'gen_tipo_inmueble_id'),
+			'numProtocolo' => array(self::BELONGS_TO, 'Maestro', 'num_protocolo'),
 			'viviendas' => array(self::HAS_MANY, 'Vivienda', 'unidad_habitacional_id'),
+			'asignacionCensos' => array(self::HAS_MANY, 'AsignacionCenso', 'unidad_habitacional_id'),
 		);
 	}
 
@@ -102,11 +107,11 @@ class UnidadHabitacional extends CActiveRecord
 	{
 		return array(
 			'id_unidad_habitacional' => 'Id Unidad Habitacional',
-			'nombre' => 'Nombre de Unidad Habitacional',
+			'nombre' => 'Nombre del Unidad Habitacional',
 			'desarrollo_id' => 'Nombre del Desarrollo',
 			'gen_tipo_inmueble_id' => 'Tipo de Inmueble',
-			'total_unidades' => 'Total Unidades',
-			'registro_publico_id' => 'Registro Publico',
+			'total_unidades' => 'Total de Unidades',
+			'registro_publico_id' => 'Registro Público',
 			'tipo_documento_id' => 'Tipo de Documento',
 			'fecha_registro' => 'Fecha Registro',
 			'tomo' => 'Tomo',
@@ -114,14 +119,18 @@ class UnidadHabitacional extends CActiveRecord
 			'nro_documento' => 'Número de Documento',
 			'asiento_registral' => 'Asiento Registral',
 			'folio_real' => 'Folio Real',
-			'nro_matricula' => 'Número Matricula',
+			'nro_matricula' => 'Número de Matricula',
 			'fuente_datos_entrada_id' => 'Fuente Datos Entrada',
 			'fecha_creacion' => 'Fecha Creacion',
 			'fecha_actualizacion' => 'Fecha Actualizacion',
 			'usuario_id_creacion' => 'Usuario Id Creacion',
 			'usuario_id_actualizacion' => 'Usuario Id Actualizacion',
 			'estatus' => 'Estatus',
-			'num_protocolo' => 'Nombre de Protocolo',
+			'num_protocolo' => 'Número de Protocolo',
+			'lindero_norte' => 'Lindero Norte',
+			'lindero_sur' => 'Lindero Sur',
+			'lindero_este' => 'Lindero Este',
+			'lindero_oeste' => 'Lindero Oeste',
 		);
 	}
 
@@ -164,6 +173,10 @@ class UnidadHabitacional extends CActiveRecord
 		$criteria->compare('usuario_id_actualizacion',$this->usuario_id_actualizacion);
 		$criteria->compare('estatus',$this->estatus);
 		$criteria->compare('num_protocolo',$this->num_protocolo);
+		$criteria->compare('lindero_norte',$this->lindero_norte,true);
+		$criteria->compare('lindero_sur',$this->lindero_sur,true);
+		$criteria->compare('lindero_este',$this->lindero_este,true);
+		$criteria->compare('lindero_oeste',$this->lindero_oeste,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
