@@ -55,24 +55,24 @@ class GrupoFamiliarController extends Controller {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate() {
+    public function actionCreate($id) {
         $model = new GrupoFamiliar;
+        $idBeneficiario = UnidadFamiliar::model()->findByPk($id);
+        $traza = Traza::VerificarTraza($idBeneficiario->beneficiario_id); // verifica el guardado de la traza
+        if ($traza != 1) {
+            Generico::renderTraza($idBeneficiario->beneficiario_id); //renderiza a la traza
+        }
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
         if (isset($_POST['GrupoFamiliar'])) {
-            echo '<pre>';
-            var_dump($_POST);
-            die;
-            $model->attributes = $_POST['GrupoFamiliar'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_grupo_familiar));
+            $idtraza = Traza::ObtenerIdTraza($idBeneficiario); // pemite la busqueda de la id de la traza 
+            $guardartraza = Traza::actionInsertUpdateTraza(2, $idBeneficiario, 2, $idtraza); // permite insertar y actualizar la traza segun el caso 
+            $this->redirect(array('beneficiario/createDatos', 'id' => $idBeneficiario));
         }
 
-        $this->render('create', array(
-            'model' => $model,
-        ));
+        $this->render('create', array('model' => $model));
     }
 
     /**
