@@ -167,10 +167,22 @@ class GrupoFamiliarController extends Controller {
 
     public function actionInsertFamiliar() {
         $Familiar = new GrupoFamiliar;
+//        echo '<PRE>';var_dump($_POST);        die;
+//        echo '<pre>';var_dump(date('d/m/y', strtotime(Generico::formatoFecha($_POST['fechaNac']))));die;
         if ($_POST['idPersona'] == '') {
-//            $sql = "insert into logintransLog (user_id, created) values (:user_id, :created)";
-//            $parameters = array(":user_id" => $user->id, ':created' => date('Y-m-d H:i:s'));
-//            Yii::app()->db->createCommand($sql)->execute($parameters);
+            $idPersona = ConsultaOracle::insertPersona(array(
+                        'CEDULA' => $_POST['cedula'],
+                        'NACIONALIDAD' => ($_POST['nacionalida'] == 97) ? 1 : 0,
+                        'PRIMER_NOMBRE' => trim(strtoupper($_POST['primerNombre'])),
+                        'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['segundoNombre'])),
+                        'PRIMER_APELLIDO' => trim(strtoupper($_POST['primerApellido'])),
+                        'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['segundoApellido'])),
+                        'FECHA_NACIMIENTO' => Generico::formatoFecha($_POST['fechaNac']),
+                            )
+            );
+            echo '<pre>';
+            var_dump($idPersona);
+            die;
         } else {
             $idPersona = $_POST['idPersona'];
         }
@@ -192,7 +204,9 @@ class GrupoFamiliarController extends Controller {
             if ($Familiar->save()) {
                 echo CJSON::encode(3);
             } else {
-                echo '<pre>';var_dump($Familiar->Errors);Die;
+                echo '<pre>';
+                var_dump($Familiar->Errors);
+                Die;
                 echo CJSON::encode(2);
             }
         }
