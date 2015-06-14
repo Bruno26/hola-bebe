@@ -177,7 +177,8 @@ class GrupoFamiliarController extends Controller {
                         'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['segundoNombre'])),
                         'PRIMER_APELLIDO' => trim(strtoupper($_POST['primerApellido'])),
                         'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['segundoApellido'])),
-                        'FECHA_NACIMIENTO' => Generico::formatoFecha($_POST['fechaNac']),
+//                        'FECHA_NACIMIENTO' => Generico::formatoFecha($_POST['fechaNac']),
+                        'FECHA_NACIMIENTO' => $_POST['fechaNac'],
                             )
             );
             echo '<pre>';

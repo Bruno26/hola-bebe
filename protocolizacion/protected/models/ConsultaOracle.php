@@ -42,7 +42,7 @@ class ConsultaOracle extends CActiveRecord {
             return $result;
         }
     }
-    
+
     /*
      * Consulta Tabla Persona de tablas_comunes
      * Consulta que busca por nacionalidad y cedula
@@ -50,18 +50,19 @@ class ConsultaOracle extends CActiveRecord {
      * SI return es 1, indica que no existe en tabla Persona
      * El primer parámetro debe ser la nacionalidad, de ser 0 se le asignara el valor E, de lo contrario V
      */
-    public function getNacionalidadCedulaPersonaByPk($select,$select2, $id) {
+
+    public function getNacionalidadCedulaPersonaByPk($select, $select2, $id) {
         //$nacional = ($nacionalidad == 97) ? '1' : '0';
-        $SLQ = "SELECT " . $select . ", ". $select2 ." FROM PERSONA WHERE ID =" . $id;
+        $SLQ = "SELECT " . $select . ", " . $select2 . " FROM PERSONA WHERE ID =" . $id;
         $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryRow();
 
         if (empty($result)) {
             return 1;
         } else {
-            if($result[$select]==0)
-                $result[$select]='E';
+            if ($result[$select] == 0)
+                $result[$select] = 'E';
             else
-                $result[$select]='V';
+                $result[$select] = 'V';
             return $result;
         }
     }
@@ -177,24 +178,28 @@ class ConsultaOracle extends CActiveRecord {
             $valor = array();
             foreach ($array as $key => $value) {
 //                if ($key == 'FECHA_NACIMIENTO') {
-//                    //var_dump($key,$value);DIE;
 //                    array_push($select, $key);
-//                    array_push($valor, "to_date('" . $value. "', 'yyyy/mm/dd')");
+//                    //   array_push($valor, "to_date('" . $value . "', 'yyyy/mm/dd')");
+//                    //array_push($valor, "create_date>to_date('" . $value . "','yyyy-mm-dd')");
+//                    //array_push($valor, "TO_DATE('" . $value . "','YYYY-MM-DD')");
+//
+//                    array_push($valor, "to_date(" . $value . ",'d/m/y')");
 //                } else {
-                array_push($select, $key);
-                if (is_numeric($value)) {
-                    array_push($valor, $value);
-                } else {
-                    array_push($valor, "'" . $value . "'");
-                }
+                    array_push($select, $key);
+                    if (is_numeric($value)) {
+                        array_push($valor, $value);
+                    } else {
+                        array_push($valor, "'" . $value . "'");
+                    }
 //                }
             }
-            //echo '<PRE>';var_dump($valor);DIE;
             $select = implode(',', $select);
             $valor = implode(',', $valor);
             $SQL = "INSERT INTO PERSONA (ID, " . $select . ") VALUES ((SELECT MAX(ID)+1 FROM PERSONA)," . $valor . ")";
-            echo '<pre>';var_dump($SQL);die;
+            
+//   echo '<pre>';var_dump($SQL);die;
             $result = Yii::app()->dbOarcle->createCommand($SQL)->query();
+            echo '<pre>';var_dump($result);die;
         }
     }
 
