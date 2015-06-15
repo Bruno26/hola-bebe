@@ -22,7 +22,7 @@ class ValidacionJsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas','BuscarPersonasBeneficiario'),
+                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas','BuscarPersonasBeneficiario','BuscarDesarrolloBeneficiario'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -55,20 +55,33 @@ class ValidacionJsController extends Controller {
         $cedula = (int) $_POST['cedula'];
         $nacio = $_POST['nacionalidad'];
         $result = ConsultaOracle::getPersonaBeneficiario($nacio, $cedula);
-//        if ($result == 1) {
-//            $saime = ConsultaOracle::getSaime($nacio, $cedula);
-//            var_dump($saime);die;
-//            if ($saime == 1)
-//                echo json_encode(2); //en caso que no exista en saime
-//            else
-//                echo CJSON::encode($saime);
-//        }else {
-
-        echo json_encode($result);
-//        }
-       //var_dump($result);die;
-
+            if ($result == 1) {
+                $saime = ConsultaOracle::getSaimeBeneficiario($nacio, $cedula);
+               //var_dump($saime);die();
+                if ($saime == 1)
+                    echo json_encode(2); //en caso que no exista en saime
+                else
+                    echo CJSON::encode($saime);
+            }else {
+                echo CJSON::encode($result);
+            }
+            
     }
+
+
+        public function actionBuscarBeneficiarioTemp() {
+        $cedula = (int) $_POST['cedula'];
+        $nacio = $_POST['nacionalidad'];
+        $result = BeneficiarioTemporal::getBeneficiarioTemp($nacio, $cedula);
+        if ($result == 1) {
+                      
+                echo CJSON::encode($result);
+        }else {
+            echo CJSON::encode($result);
+        }
+
+        }
+    
 
     public function actionBuscarMunicipios() {
         $Id = (isset($_POST['Tblestado']['clvcodigo']) ? $_POST['Tblestado']['clvcodigo'] : $_GET['clvcodigo']);
@@ -150,6 +163,35 @@ class ValidacionJsController extends Controller {
             echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
         }
     }
+
+
+
+    /**
+    *     Datos del Desarrollo
+    */
+
+    public function actionBuscarDesarrolloBeneficiario() {
+       $id = $_POST['id_desarrollo'];
+
+        if (!empty($id)) {
+
+            $sql = "select des.nombre,des.zona As sector, des.urban_barrio , des.av_call_esq_carr As Av_calle , und_hab.nombre AS nomb_edif
+from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo = und_hab.desarrollo_id ";
+
+        $data = Yii::app()->db->createCommand($sql)->queryRow();
+
+      // var_dump($data); die();
+        if (!empty($data)) {
+            echo json_encode($data);
+        } else {
+            echo json_encode('vacio');
+        }
+             
+        }
+    }
+
+
+
 
     /**
      * FUNCION QUE MUESTRA TODOS LAS PARROQUIAS DE  

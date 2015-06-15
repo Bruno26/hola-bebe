@@ -28,7 +28,7 @@ Yii::app()->clientScript->registerScript('Beneficiario', "
            $('#Beneficiario_estado_civil').attr('readonly', true);
            $('#Beneficiario_telf_habitacion').attr('readonly', true);
            $('#Beneficiario_telf_celular').attr('readonly', true);
-           $('#Beneficiario_correo_electronico').attr('readonly', true);  
+           $('#Beneficiario_correo').attr('readonly', true);  
            
          /*   -------------------------------- */                
              
@@ -85,7 +85,7 @@ Yii::app()->clientScript->registerScript('Beneficiario', "
          <div class="col-md-4">
               <?php
             echo $form->textFieldGroup($model, 'cedula', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8,
-                        'onblur' => "buscarPersonaBeneficiario($('#BeneficiarioTemporal_nacionalidad').val(),$(this).val())"
+                        'onblur' => "buscarBeneficiarioTemporal($('#Beneficiario_nacionalidad').val(),$(this).val())"
             ))));
             ?>
                <?php echo $form->error($model,'cedula'); ?>
