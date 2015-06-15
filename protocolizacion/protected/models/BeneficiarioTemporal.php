@@ -8,6 +8,7 @@
  * @property integer $persona_id
  * @property integer $desarrollo_id
  * @property integer $unidad_habitacional_id
+ * @property integer $vivienda_id
  * @property integer $id_control
  * @property integer $nacionalidad
  * @property integer $cedula
@@ -73,14 +74,14 @@ class BeneficiarioTemporal extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('persona_id, desarrollo_id, unidad_habitacional_id, nacionalidad, cedula, nombre_completo, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
-			array('persona_id, desarrollo_id, unidad_habitacional_id, id_control, nacionalidad, cedula, usuario_id_creacion, usuario_id_actualizacion, estatus', 'numerical', 'integerOnly'=>true),
+			array('persona_id, desarrollo_id, unidad_habitacional_id, vivienda_id, nacionalidad, cedula, nombre_completo, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
+			array('persona_id, desarrollo_id, unidad_habitacional_id, vivienda_id, id_control, nacionalidad, cedula, usuario_id_creacion, usuario_id_actualizacion, estatus', 'numerical', 'integerOnly'=>true),
 			array('nombre_completo, nombre_archivo', 'length', 'max'=>200),
 			array('cedula', 'length', 'max'=>8),
 			array('telf_celular,telf_habitacion', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_beneficiario_temporal, persona_id, desarrollo_id, unidad_habitacional_id, id_control, nacionalidad, cedula, nombre_completo, nombre_archivo, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, estatus', 'safe', 'on'=>'search'),
+			array('id_beneficiario_temporal, persona_id, desarrollo_id, unidad_habitacional_id, vivienda_id, id_control, nacionalidad, cedula, nombre_completo, nombre_archivo, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, estatus', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -94,7 +95,8 @@ class BeneficiarioTemporal extends CActiveRecord
 		return array(
 			'desarrollo' => array(self::BELONGS_TO, 'Desarrollo', 'desarrollo_id'),
 			'unidadHabitacional' => array(self::BELONGS_TO, 'UnidadHabitacional', 'unidad_habitacional_id'),
-			'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
+      'vivienda' => array(self::BELONGS_TO, 'Vivienda', 'vivienda_id'),
+      'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
 			'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
 			'estatus0' => array(self::BELONGS_TO, 'Maestro', 'estatus'),
 		);
@@ -118,6 +120,7 @@ class BeneficiarioTemporal extends CActiveRecord
 			'persona_id' => 'Persona',
 			'desarrollo_id' => 'Desarrollo',
 			'unidad_habitacional_id' => 'Unidad Habitacional',
+      'vivienda_id' => 'Vivienda',
 			'id_control' => 'Id Control',
 			'nacionalidad' => 'Nacionalidad',
 			'cedula' => 'Cedula',
@@ -169,6 +172,7 @@ class BeneficiarioTemporal extends CActiveRecord
 		$criteria->compare('persona_id',$this->persona_id);
 		$criteria->compare('desarrollo_id',$this->desarrollo_id);
 		$criteria->compare('unidad_habitacional_id',$this->unidad_habitacional_id);
+    $criteria->compare('vivienda_id',$this->vivienda_id);
 		$criteria->compare('id_control',$this->id_control);
 		$criteria->compare('nacionalidad',$this->nacionalidad);
 		$criteria->compare('cedula',$this->cedula);
