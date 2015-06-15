@@ -167,28 +167,31 @@ class GrupoFamiliarController extends Controller {
 
     public function actionInsertFamiliar() {
         $Familiar = new GrupoFamiliar;
-//        echo '<PRE>';var_dump($_POST);        die;
-//        echo '<pre>';var_dump(date('d/m/y', strtotime(Generico::formatoFecha($_POST['fechaNac']))));die;
         if ($_POST['idPersona'] == '') {
-            $idPersona = ConsultaOracle::insertPersona(array(
-                        'CEDULA' => $_POST['cedula'],
-                        'NACIONALIDAD' => ($_POST['nacionalida'] == 97) ? 1 : 0,
-                        'PRIMER_NOMBRE' => trim(strtoupper($_POST['primerNombre'])),
-                        'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['segundoNombre'])),
-                        'PRIMER_APELLIDO' => trim(strtoupper($_POST['primerApellido'])),
-                        'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['segundoApellido'])),
-//                        'FECHA_NACIMIENTO' => Generico::formatoFecha($_POST['fechaNac']),
-                        'FECHA_NACIMIENTO' => $_POST['fechaNac'],
-                            )
-            );
-            echo '<pre>';
-            var_dump($idPersona);
-            die;
+            $cedula = (int) $_POST['cedula'];
+            $nacio = (int) $_POST['nacionalida'];
+            $ExistePersona = ConsultaOracle::getPersona($nacio, $cedula);
+            if ($ExistePersona != '1') {
+                $idPersona = $ExistePersona['ID'];
+            } else {
+                $idPersona = ConsultaOracle::insertPersona(array(
+                            'CEDULA' => $_POST['cedula'],
+                            'NACIONALIDAD' => ($_POST['nacionalida'] == 97) ? 1 : 0,
+                            'PRIMER_NOMBRE' => trim(strtoupper($_POST['primerNombre'])),
+                            'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['segundoNombre'])),
+                            'PRIMER_APELLIDO' => trim(strtoupper($_POST['primerApellido'])),
+                            'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['segundoApellido'])),
+                            //                        'FECHA_NACIMIENTO' => Generico::formatoFecha($_POST['fechaNac']),
+                            'FECHA_NACIMIENTO' => $_POST['fechaNac'],
+                                )
+                );
+            }
         } else {
             $idPersona = $_POST['idPersona'];
         }
+        $ExisteBeneficiario = Beneficiario::model()->findByAttributes(array('persona_id' => $idPersona));
         $ExisteFamiliar = $this->FindByIdPersona($idPersona);
-        if ($ExisteFamiliar) {
+        if (!empty($ExisteFamiliar) && !empty($ExisteBeneficiario)) {
             echo CJSON::encode(1);
         } else {
             $Familiar->persona_id = $idPersona;
@@ -205,9 +208,7 @@ class GrupoFamiliarController extends Controller {
             if ($Familiar->save()) {
                 echo CJSON::encode(3);
             } else {
-                echo '<pre>';
-                var_dump($Familiar->Errors);
-                Die;
+                //echo '<pre>';var_dump($Familiar->Errors);die;
                 echo CJSON::encode(2);
             }
         }
