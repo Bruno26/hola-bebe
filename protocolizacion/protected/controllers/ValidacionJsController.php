@@ -234,6 +234,7 @@ class ValidacionJsController extends Controller {
             }
         } else {
             $saime = ConsultaOracle::getSaime($nacio, $cedula);
+            
             if ($saime == '1') {
                 echo json_encode(2);
             } else {

@@ -58,17 +58,16 @@ class GrupoFamiliarController extends Controller {
     public function actionCreate($id) {
         $model = new GrupoFamiliar;
         $idBeneficiario = UnidadFamiliar::model()->findByPk($id);
-        $traza = Traza::VerificarTraza($idBeneficiario->beneficiario_id); // verifica el guardado de la traza
-        if ($traza != 1) {
-            Generico::renderTraza($idBeneficiario->beneficiario_id); //renderiza a la traza
-        }
-
+//        $traza = Traza::VerificarTraza($idBeneficiario->beneficiario_id); // verifica el guardado de la traza
+//        if ($traza != 1) {
+//            Generico::renderTraza($idBeneficiario->beneficiario_id); //renderiza a la traza
+//        }
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
         if (isset($_POST['GrupoFamiliar'])) {
-            $idtraza = Traza::ObtenerIdTraza($idBeneficiario); // pemite la busqueda de la id de la traza 
-            $guardartraza = Traza::actionInsertUpdateTraza(2, $idBeneficiario, 2, $idtraza); // permite insertar y actualizar la traza segun el caso 
+//            $idtraza = Traza::ObtenerIdTraza($idBeneficiario); // pemite la busqueda de la id de la traza 
+//            $guardartraza = Traza::actionInsertUpdateTraza(2, $idBeneficiario, 2, $idtraza); // permite insertar y actualizar la traza segun el caso 
             $this->redirect(array('beneficiario/createDatos', 'id' => $idBeneficiario));
         }
 
@@ -169,6 +168,11 @@ class GrupoFamiliarController extends Controller {
         $Familiar = new GrupoFamiliar;
 //        echo '<PRE>';var_dump($_POST);        die;
 //        echo '<pre>';var_dump(date('d/m/y', strtotime(Generico::formatoFecha($_POST['fechaNac']))));die;
+//        $fecha_sin_formato = explode('/',$_POST['fechaNac']);
+//        $fecha_format =  $fecha_sin_formato[2].'/'.$fecha_sin_formato[1].'/'.$fecha_sin_formato[0];
+//        $fecha_nac = date('d/m/Y', strtotime($fecha_format));
+//        $fecha_nac =  to_date("'".$fecha_format."'", 'DD/MM/YY');
+//        var_dump($fecha_nac);die();
         if ($_POST['idPersona'] == '') {
             $idPersona = ConsultaOracle::insertPersona(array(
                         'CEDULA' => $_POST['cedula'],
@@ -177,13 +181,12 @@ class GrupoFamiliarController extends Controller {
                         'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['segundoNombre'])),
                         'PRIMER_APELLIDO' => trim(strtoupper($_POST['primerApellido'])),
                         'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['segundoApellido'])),
-//                        'FECHA_NACIMIENTO' => Generico::formatoFecha($_POST['fechaNac']),
                         'FECHA_NACIMIENTO' => $_POST['fechaNac'],
+//                        'FECHA_NACIMIENTO' =>$fecha_nac,
                             )
             );
-            echo '<pre>';
-            var_dump($idPersona);
-            die;
+            
+            echo '<pre>';var_dump($idPersona);die;
         } else {
             $idPersona = $_POST['idPersona'];
         }
