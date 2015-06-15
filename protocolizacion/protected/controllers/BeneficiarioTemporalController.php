@@ -59,28 +59,68 @@ $this->render('view',array(
 * Creates a new model.
 * If creation is successful, the browser will be redirected to the 'view' page.
 */
-public function actionCreate()
-{
-$model      = new BeneficiarioTemporal;
-$desarrollo = new Desarrollo;
-$estado = new Tblestado;
-$municipio = new Tblmunicipio;
-$parroquia = new Tblparroquia;
+public function actionCreate(){
+	$model      = new BeneficiarioTemporal;
+	$desarrollo = new Desarrollo;
+	$estado = new Tblestado;
+	$municipio = new Tblmunicipio;
+	$parroquia = new Tblparroquia;
 
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-if(isset($_POST['BeneficiarioTemporal']))
-{
-$model->attributes=$_POST['BeneficiarioTemporal'];
-if($model->save())
-$this->redirect(array('view','id'=>$model->id_beneficiario_temporal));
-}
+	if(isset($_POST['BeneficiarioTemporal'])){
 
-$this->render('create',array(
-'model'=>$model,'desarrollo'=>$desarrollo,'municipio'=>$municipio,'estado'=>$estado,'parroquia'=>$parroquia,
-));
+		var_dump($_POST); //die();
+
+	  /*  - - - -- Persona - - -- - - - */
+      
+
+      /*   -- - -  --  - - - -- - - - - --  */
+
+         /* -------------- Unidad Habitacional    --------------------- */
+
+
+        /* ----------------------------------------------------------- */
+	
+		 
+     /*  - - - -- Beneficiario - - -- - - - */
+         $nombre_completo = $_POST["BeneficiarioTemporal"]["primer_apellido"].' ';
+         $nombre_completo .= $_POST["BeneficiarioTemporal"]["segundo_apellido"].' ';
+         $nombre_completo .= $_POST["BeneficiarioTemporal"]["primer_nombre"].' ';
+         $nombre_completo .= $_POST["BeneficiarioTemporal"]["segundo_nombre"];
+
+
+
+                $beneficiarioTemp = new BeneficiarioTemporal;
+
+				$beneficiarioTemp->persona_id = $_POST["BeneficiarioTemporal"]["persona_id"];
+				$beneficiarioTemp->desarrollo_id = $_POST["Desarrollo"]["id_desarrollo"];
+			    $beneficiarioTemp->unidad_habitacional_id = $_POST["BeneficiarioTemporal"]["unidad_habitacional_id"];
+			
+				$beneficiarioTemp->nacionalidad = $_POST["BeneficiarioTemporal"]["nacionalidad"];
+				$beneficiarioTemp->cedula = $_POST["BeneficiarioTemporal"]["cedula"];
+				$beneficiarioTemp->nombre_completo = $nombre_completo;
+				$beneficiarioTemp->fecha_creacion = date('Y-m-d H:i:s');
+				$beneficiarioTemp->usuario_id_creacion = Yii::app()->user->id;
+				$beneficiarioTemp->estatus = 1;  
+
+      /*   -- - -  --  - - - -- - - - - --  */
+
+   
+     var_dump($beneficiarioTemp); die();
+
+     
+	}
+
+	$this->render('create',array(
+		'model'=>$model,
+		'desarrollo'=>$desarrollo,'municipio'=>$municipio,
+		'estado'=>$estado,'parroquia'=>$parroquia,
+
+		)
+	);
 }
 
 /**

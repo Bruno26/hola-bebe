@@ -166,13 +166,6 @@ class GrupoFamiliarController extends Controller {
 
     public function actionInsertFamiliar() {
         $Familiar = new GrupoFamiliar;
-//        echo '<PRE>';var_dump($_POST);        die;
-//        echo '<pre>';var_dump(date('d/m/y', strtotime(Generico::formatoFecha($_POST['fechaNac']))));die;
-//        $fecha_sin_formato = explode('/',$_POST['fechaNac']);
-//        $fecha_format =  $fecha_sin_formato[2].'/'.$fecha_sin_formato[1].'/'.$fecha_sin_formato[0];
-//        $fecha_nac = date('d/m/Y', strtotime($fecha_format));
-//        $fecha_nac =  to_date("'".$fecha_format."'", 'DD/MM/YY');
-//        var_dump($fecha_nac);die();
         if ($_POST['idPersona'] == '') {
             $idPersona = ConsultaOracle::insertPersona(array(
                         'CEDULA' => $_POST['cedula'],
@@ -182,16 +175,16 @@ class GrupoFamiliarController extends Controller {
                         'PRIMER_APELLIDO' => trim(strtoupper($_POST['primerApellido'])),
                         'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['segundoApellido'])),
                         'FECHA_NACIMIENTO' => $_POST['fechaNac'],
-//                        'FECHA_NACIMIENTO' =>$fecha_nac,
                             )
             );
-            
+
             echo '<pre>';var_dump($idPersona);die;
         } else {
             $idPersona = $_POST['idPersona'];
         }
+        $ExisteBeneficiario = Beneficiario::model()->findByAttributes(array('persona_id' => $idPersona));
         $ExisteFamiliar = $this->FindByIdPersona($idPersona);
-        if ($ExisteFamiliar) {
+        if (!empty($ExisteFamiliar) && !empty($ExisteBeneficiario)) {
             echo CJSON::encode(1);
         } else {
             $Familiar->persona_id = $idPersona;
@@ -208,9 +201,7 @@ class GrupoFamiliarController extends Controller {
             if ($Familiar->save()) {
                 echo CJSON::encode(3);
             } else {
-                echo '<pre>';
-                var_dump($Familiar->Errors);
-                Die;
+                //echo '<pre>';var_dump($Familiar->Errors);die;
                 echo CJSON::encode(2);
             }
         }

@@ -77,6 +77,7 @@ class BeneficiarioTemporal extends CActiveRecord
 			array('persona_id, desarrollo_id, unidad_habitacional_id, id_control, nacionalidad, cedula, usuario_id_creacion, usuario_id_actualizacion, estatus', 'numerical', 'integerOnly'=>true),
 			array('nombre_completo, nombre_archivo', 'length', 'max'=>200),
 			array('cedula', 'length', 'max'=>8),
+			array('telf_celular,telf_habitacion', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_beneficiario_temporal, persona_id, desarrollo_id, unidad_habitacional_id, id_control, nacionalidad, cedula, nombre_completo, nombre_archivo, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, estatus', 'safe', 'on'=>'search'),
@@ -129,6 +130,22 @@ class BeneficiarioTemporal extends CActiveRecord
 			'estatus' => 'Estatus',
 		);
 	}
+
+/* --------------------------------------------- */
+
+  public function getBeneficiarioTemp($nacionalidad, $cedula) {
+
+        $SLQ = "SELECT  FROM PERSONA WHERE NACIONALIDAD ='" . $nacional . "' AND CEDULA = " . $cedula;
+        $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryRow();
+
+        if (empty($result)) {
+            return 1;
+        } else {
+            return $result;
+        }
+  }
+
+/* ---------------------------------------------- */
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
