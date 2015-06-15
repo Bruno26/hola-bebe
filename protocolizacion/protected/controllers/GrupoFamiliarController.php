@@ -24,7 +24,7 @@ class GrupoFamiliarController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
+                'actions' => array('index', 'view', 'InsertFamiliar'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -55,24 +55,24 @@ class GrupoFamiliarController extends Controller {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate() {
+    public function actionCreate($id) {
         $model = new GrupoFamiliar;
+        $idBeneficiario = UnidadFamiliar::model()->findByPk($id);
+        $traza = Traza::VerificarTraza($idBeneficiario->beneficiario_id); // verifica el guardado de la traza
+        if ($traza != 1) {
+            Generico::renderTraza($idBeneficiario->beneficiario_id); //renderiza a la traza
+        }
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
         if (isset($_POST['GrupoFamiliar'])) {
-            echo '<pre>';
-            var_dump($_POST);
-            die;
-            $model->attributes = $_POST['GrupoFamiliar'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_grupo_familiar));
+            $idtraza = Traza::ObtenerIdTraza($idBeneficiario); // pemite la busqueda de la id de la traza 
+            $guardartraza = Traza::actionInsertUpdateTraza(2, $idBeneficiario, 2, $idtraza); // permite insertar y actualizar la traza segun el caso 
+            $this->redirect(array('beneficiario/createDatos', 'id' => $idBeneficiario));
         }
 
-        $this->render('create', array(
-            'model' => $model,
-        ));
+        $this->render('create', array('model' => $model));
     }
 
     /**
@@ -158,6 +158,59 @@ class GrupoFamiliarController extends Controller {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'grupo-familiar-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
+        }
+    }
+
+    /*
+     * Funcion que ingresa en tabla grupo familiar
+     */
+
+    public function actionInsertFamiliar() {
+        $Familiar = new GrupoFamiliar;
+        if ($_POST['idPersona'] == '') {
+            $cedula = (int) $_POST['cedula'];
+            $nacio = (int) $_POST['nacionalida'];
+            $ExistePersona = ConsultaOracle::getPersona($nacio, $cedula);
+            if ($ExistePersona != '1') {
+                $idPersona = $ExistePersona['ID'];
+            } else {
+                $idPersona = ConsultaOracle::insertPersona(array(
+                            'CEDULA' => $_POST['cedula'],
+                            'NACIONALIDAD' => ($_POST['nacionalida'] == 97) ? 1 : 0,
+                            'PRIMER_NOMBRE' => trim(strtoupper($_POST['primerNombre'])),
+                            'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['segundoNombre'])),
+                            'PRIMER_APELLIDO' => trim(strtoupper($_POST['primerApellido'])),
+                            'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['segundoApellido'])),
+                            //                        'FECHA_NACIMIENTO' => Generico::formatoFecha($_POST['fechaNac']),
+                            'FECHA_NACIMIENTO' => $_POST['fechaNac'],
+                                )
+                );
+            }
+        } else {
+            $idPersona = $_POST['idPersona'];
+        }
+        $ExisteBeneficiario = Beneficiario::model()->findByAttributes(array('persona_id' => $idPersona));
+        $ExisteFamiliar = $this->FindByIdPersona($idPersona);
+        if (!empty($ExisteFamiliar) && !empty($ExisteBeneficiario)) {
+            echo CJSON::encode(1);
+        } else {
+            $Familiar->persona_id = $idPersona;
+            $Familiar->gen_parentesco_id = $_POST['parentesco'];
+            $Familiar->tipo_sujeto_atencion = $_POST['tipoSujeto'];
+            $Familiar->cotiza_faov = $_POST['faov'];
+            $Familiar->ingreso_mensual = $_POST['ingresoM'];
+            $Familiar->unidad_familiar_id = 1;
+            $Familiar->estatus = 41;
+            $Familiar->fuente_datos_entrada_id = 5;
+            $Familiar->fecha_creacion = 'now()';
+            $Familiar->fecha_actualizacion = 'now()';
+            $Familiar->usuario_id_creacion = Yii::app()->user->id;
+            if ($Familiar->save()) {
+                echo CJSON::encode(3);
+            } else {
+                //echo '<pre>';var_dump($Familiar->Errors);die;
+                echo CJSON::encode(2);
+            }
         }
     }
 

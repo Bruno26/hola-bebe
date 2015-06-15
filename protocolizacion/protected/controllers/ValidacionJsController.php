@@ -32,7 +32,7 @@ class ValidacionJsController extends Controller {
     }
 
     /**
-     * FUNCION QUE MUESTRA TODOS LOS MUNICIPIO DE ACUERDO A UN ID DE UN ESTADO
+     * FUNCION QUE BUSCA EN TABLA COMUNES EL ID PERSONA , SI NO EXISTE CONSULTA EN SAIME 
      */
     public function actionBuscarPersonas() {
         $cedula = (int) $_POST['cedula'];
@@ -69,21 +69,23 @@ class ValidacionJsController extends Controller {
     }
 
 
+
         public function actionBuscarBeneficiarioTemp() {
-        $cedula = (int) $_POST['cedula'];
-        $nacio = $_POST['nacionalidad'];
-        $result = BeneficiarioTemporal::getBeneficiarioTemp($nacio, $cedula);
-        if ($result == 1) {
-                      
-                echo CJSON::encode($result);
-        }else {
-            echo CJSON::encode($result);
-        }
+            $cedula = (int) $_POST['cedula'];
+            $nacio = $_POST['nacionalidad'];
+            $result = BeneficiarioTemporal::getBeneficiarioTemp($nacio, $cedula);
+                if ($result == 1) {
+                              
+                        echo CJSON::encode($result);
+                }else {
+                    echo CJSON::encode($result);
+                }
 
         }
     
 
-    public function actionBuscarMunicipios() {
+
+        public function actionBuscarMunicipios() {
         $Id = (isset($_POST['Tblestado']['clvcodigo']) ? $_POST['Tblestado']['clvcodigo'] : $_GET['clvcodigo']);
         $Selected = isset($_GET['municipio']) ? $_GET['municipio'] : '';
 
@@ -140,7 +142,7 @@ class ValidacionJsController extends Controller {
      * FUNCION QUE MUESTRA TODOS LAS PARROQUIAS DE  
      */
     public function actionBuscarDesarrollo() {
-        $Id = (isset($_POST['Tblparroquia']['clvcodigo']) ? $_POST['Tblparroquia']['clvcodigo'] : $_GET['clvcodigo']);
+        $Id = (isset($_POST['Tblparroquia']['clvcodigo']) ? $_POST['Tblparroquia']['clvcodigo'] : $_GET['desarrollo']);
         $Selected = isset($_GET['desarrollo']) ? $_GET['desarrollo'] : '';
 
         if (!empty($Id)) {
@@ -260,27 +262,31 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
 //            echo json_encode(1);
 //    }
 
-     public function actionBuscarPersonasFamiliar() {
+    public function actionBuscarPersonasFamiliar() {
         $cedula = (int) $_POST['cedula'];
-        $nacio = $_POST['nacionalidad'];
+        $nacio = (int)$_POST['nacionalidad'];
 
         $result = ConsultaOracle::getPersona($nacio, $cedula);
+
         if ($result != '1') {
-            $ExisteGrupoFamiliar = GrupoFamiliarController::FindByIdPersona($result->ID);
-            var_dump($ExisteGrupoFamiliar);die;
-            if ($ExisteGrupoFamiliar === null)
+            $ExisteGrupoFamiliar = GrupoFamiliarController::FindByIdPersona($result['ID']);
+            if (!empty($ExisteGrupoFamiliar))
                 echo json_encode(1);
-            else
-                echo CJSON::encode($result);
+            else {
+                $faov = ConsultaOracle::getFaov($result['ID'],1);
+                $salida = array('persona'=>$result,'faov'=>$faov);
+                echo CJSON::encode($salida);
+            }
         } else {
             $saime = ConsultaOracle::getSaime($nacio, $cedula);
-            if ($saime === null) {
+            if ($saime == '1') {
                 echo json_encode(2);
             } else {
-                echo CJSON::encode($saime);
+                $salida = array('persona'=>$saime,'faov'=>'0.00');
+                echo CJSON::encode($salida);
             }
         }
     }
-
-
+    
+   
 }

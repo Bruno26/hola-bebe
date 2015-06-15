@@ -1,110 +1,111 @@
-<div class="view">
+<?php //  echo '<pre>';var_dump($model);die();  ?>
 
-		<b><?php echo CHtml::encode($data->getAttributeLabel('id_vivienda')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id_vivienda),array('view','id'=>$data->id_vivienda)); ?>
-	<br />
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <h4><i class="glyphicon glyphicon-home"></i> Unidad Multifamiliar</h4>
+            <div class='col-md-6'> 
+                <blockquote>
+                    <p>
+                        <b>Nombre del Desarrollo: </b><?php echo $model->unidadHabitacional->desarrollo->nombre; ?><br/>
+                        <b>Nombre de la Unidad Habitacional:</b> <?php echo $model->unidadHabitacional->nombre; ?><br/>
+                    </p>
+                </blockquote>
+            </div>
+            <div class='col-md-6'>
+                <div class='text-right' style='margin-right: 1em;'><img src="<?php echo Yii::app()->baseUrl; ?>/images/banavih_ndice1.png" style="width: 25%;"/></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div>  
+            <h4><i class="glyphicon glyphicon-globe"></i> Ubicación del Desarrollo</h4>
+            <div class='col-md-6'> 
+                <blockquote>
+                    <p>
+                        <b> Estado:</b> <?php echo $model->unidadHabitacional->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion ?><br/>
+                        <b> Municipio:</b> <?php echo $model->unidadHabitacional->desarrollo->fkParroquia->clvmunicipio0->strdescripcion ?><br/>
+                        <b> Parroquia:</b> <?php echo $model->unidadHabitacional->desarrollo->fkParroquia->strdescripcion ?>
+                    </p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div>  
+            <h4><i class="glyphicon glyphicon-globe"></i> Linderos</h4>
+            <div class='col-md-6'> 
+                <blockquote>
+                    <p>
+                        <b> Lindero Norte:</b> <?php echo $model->lindero_norte ?><br/>
+                        <b> Lindero Sur:</b> <?php echo $model->lindero_sur; ?><br/>
+                        <b> Lindero Este:</b> <?php echo $model->lindero_este; ?>
+                    </p>
+                </blockquote>
+            </div>
+            <div class='col-md-6'> 
+                <blockquote>
+                    <p>
+                        <b> Lindero Oeste:</b> <?php echo $model->lindero_oeste; ?><br/>
+                        <b> Coordenadas:</b> <?php echo $model->coordenadas; ?>
+                    </p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('tipo_vivienda_id')); ?>:</b>
-	<?php echo CHtml::encode($data->tipo_vivienda_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('unidad_habitacional_id')); ?>:</b>
-	<?php echo CHtml::encode($data->unidad_habitacional_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('construccion_mt2')); ?>:</b>
-	<?php echo CHtml::encode($data->construccion_mt2); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('nro_piso')); ?>:</b>
-	<?php echo CHtml::encode($data->nro_piso); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('nro_vivienda')); ?>:</b>
-	<?php echo CHtml::encode($data->nro_vivienda); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('sala')); ?>:</b>
-	<?php echo CHtml::encode($data->sala); ?>
-	<br />
-
-	<?php /*
-	<b><?php echo CHtml::encode($data->getAttributeLabel('comedor')); ?>:</b>
-	<?php echo CHtml::encode($data->comedor); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('lavandero')); ?>:</b>
-	<?php echo CHtml::encode($data->lavandero); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('lindero_norte')); ?>:</b>
-	<?php echo CHtml::encode($data->lindero_norte); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('lindero_sur')); ?>:</b>
-	<?php echo CHtml::encode($data->lindero_sur); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('lindero_este')); ?>:</b>
-	<?php echo CHtml::encode($data->lindero_este); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('lindero_oeste')); ?>:</b>
-	<?php echo CHtml::encode($data->lindero_oeste); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('coordenadas')); ?>:</b>
-	<?php echo CHtml::encode($data->coordenadas); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('precio_vivienda')); ?>:</b>
-	<?php echo CHtml::encode($data->precio_vivienda); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('nro_estacionamientos')); ?>:</b>
-	<?php echo CHtml::encode($data->nro_estacionamientos); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('descripcion_estac')); ?>:</b>
-	<?php echo CHtml::encode($data->descripcion_estac); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('nro_habitaciones')); ?>:</b>
-	<?php echo CHtml::encode($data->nro_habitaciones); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('nro_banos')); ?>:</b>
-	<?php echo CHtml::encode($data->nro_banos); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fuente_datos_entrada_id')); ?>:</b>
-	<?php echo CHtml::encode($data->fuente_datos_entrada_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('estatus_vivienda_id')); ?>:</b>
-	<?php echo CHtml::encode($data->estatus_vivienda_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('cocina')); ?>:</b>
-	<?php echo CHtml::encode($data->cocina); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_creacion')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_creacion); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_actualizacion')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_actualizacion); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('usuario_id_creacion')); ?>:</b>
-	<?php echo CHtml::encode($data->usuario_id_creacion); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('usuario_id_actualizacion')); ?>:</b>
-	<?php echo CHtml::encode($data->usuario_id_actualizacion); ?>
-	<br />
-
-	*/ ?>
-
+    <div class="col-md-12">
+        <div>
+            <h4><i class="glyphicon glyphicon-home"></i> Detalles de la UnidadFamiliar</h4>
+            <div class='col-md-6'> 
+                <blockquote>
+                    <p>
+                        <b>Tipo Vivienda:</b> <?php echo $model->tipoVivienda->descripcion; ?><br/>
+                        <b>Piso:</b> <?php echo $model->nro_piso; ?><br/>
+                        <b>N° de Vivienda:</b> <?php echo $model->nro_vivienda; ?><br/>
+                        <b>Sala:</b> 
+                            <?php
+                            if ($model->sala = TRUE): echo'SI';
+                            else: echo 'NO';
+                            endif;
+                            ?>
+                        <br/>
+                        <b>Comedor:</b> 
+                            <?php
+                            if ($model->comedor = TRUE): echo'SI';
+                            else: echo 'NO';
+                            endif;
+                            ?>
+                        <br/>
+                        <b>Cocina:</b> 
+                            <?php
+                            if ($model->cocina = TRUE): echo'SI';
+                            else: echo 'NO';
+                            endif;
+                            ?>
+                    </p>
+                </blockquote>
+            </div>
+            <div class='col-md-6'> 
+                <blockquote>
+                    <p>
+                        <b>Lavandero: </b>
+                            <?php
+                            if ($model->lavandero = TRUE): echo'SI';
+                            else: echo 'NO';
+                            endif;
+                            ?>
+                        <br/>
+                        <b>N° de Habitantes: </b><?php echo $model->nro_habitaciones; ?><br/>
+                        <b>N° de Baños: </b><?php echo $model->nro_banos; ?><br/>
+                        <b>Puesto de Estacionamiento: </b><?php echo $model->descripcion_estac; ?><br/>
+                        <b>N° de Estacionamiento: </b><?php echo $model->nro_estacionamientos; ?><br/>
+                        <b>Precio de Vivienda: </b><?php echo Generico::FormatearBs($model->precio_vivienda);?> Bs<br/>
+                    </p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
 </div>
+
+

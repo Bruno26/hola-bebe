@@ -28,7 +28,7 @@ class OficinaController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
+                'actions' => array('create', 'update', 'pdf'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -47,9 +47,12 @@ class OficinaController extends Controller {
      */
     public function actionView($id) {
         
-        
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
         $this->render('view', array(
             'model' => $this->loadModel($id),
+            'estado' => $estado ,
+            'municipio' => $municipio ,
         ));
     }
 
@@ -70,18 +73,35 @@ class OficinaController extends Controller {
 
         if (isset($_POST['Oficina'])) {
             //print_r($_POST['Oficina']);die;
-            $model->attributes = $_POST['Oficina'];
-            $model->persona_id_jefe = $_POST['Oficina']['persona_id_jefe'];;
-            $model->estatus = 44;
-            $model->usuario_id_creacion = Yii::app()->user->id;
-            $model->fecha_creacion = 'now()';
-            $model->fecha_actualizacion = 'now()';
-                    
+            
+            $nombre = trim(strtoupper($_POST['Oficina']['nombre']));
+            $parroquia_id = trim(strtoupper($_POST['Oficina']['parroquia_id']));
+            
+            $consulta = Oficina::model()->findByAttributes(array('nombre' => $nombre, 'parroquia_id' => $parroquia_id));
+            
+            if (empty($consulta)) {
+                $model->attributes = $_POST['Oficina'];
+                $model->nombre = $nombre;
+                $model->persona_id_jefe = $_POST['Oficina']['persona_id_jefe'];;
+                $model->estatus = 44;
+                $model->usuario_id_creacion = Yii::app()->user->id;
+                $model->fecha_creacion = 'now()';
+                $model->fecha_actualizacion = 'now()';  
+                
                     
 //            $model->fk
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id_oficina));
+        }else{
+            $this->render('create', array(
+                    'model' => $model, 'estado' => $estado,
+                    'municipio' => $municipio, 'parroquia' => $parroquia,
+                    'sms' => 1
+                ));
+                Yii::app()->end();
         }
+        
+       }
 
         $this->render('create', array(
             'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia
@@ -172,6 +192,18 @@ class OficinaController extends Controller {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+    
+    public function actionPdf($id) {
+      $estado = new Tblestado;
+      $municipio = new Tblmunicipio;
+      $this->render('pdf', array(
+          'model' => $this->loadModel($id),
+          'estado' => $estado ,
+          'municipio' => $municipio ,
+      ));
+
+
     }
 
 }

@@ -54,11 +54,20 @@ $this->widget('booster.widgets.TbGridView', array(
 //    ),
     'columns' => array(
         'id_desarrollo' => array(
+            'header' => 'N°',
             'name' => 'id_desarrollo',
             'value' => '$data->id_desarrollo',
+            'htmlOptions' => array('width' => '80', 'style' => 'text-align: center;'),
+
         ),
         'nombre' => array(
-            'header' => 'Descripción de Desarrollo',
+            'header' => 'Nombre',
+            'name' => 'nombre',
+            'value' => '$data->nombre',
+//            'filter' => Maestro::FindMaestrosByPadreSelect(71),
+        ),
+        'descripcion' => array(
+            'header' => 'Descripción',
             'name' => 'descripcion',
             'value' => '$data->descripcion',
 //            'filter' => Maestro::FindMaestrosByPadreSelect(71),
@@ -88,7 +97,7 @@ $this->widget('booster.widgets.TbGridView', array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
-            'template' => '{ver} {modificar}',
+            'template' => '{ver} {modificar} {pdf}',
             'buttons' => array(
                 'ver' => array(
                     'label' => 'Ver',
@@ -101,6 +110,13 @@ $this->widget('booster.widgets.TbGridView', array(
                     'icon' => 'glyphicon glyphicon-pencil',
                     'size' => 'medium',
                     'url' => 'Yii::app()->createUrl("desarrollo/update/", array("id"=>$data->id_desarrollo))',
+//                    'visible' => 'Asignar($data->username);'
+                ),
+                'pdf' => array(
+                    'label' => 'Generar PDF',
+                    'icon'  => 'glyphicon glyphicon-file',
+                    'size'  => 'medium',
+                    'url'   => 'Yii::app()->createUrl("desarrollo/pdf/", array("id"=>$data->id_desarrollo))',
 //                    'visible' => 'Asignar($data->username);'
                 ),
 

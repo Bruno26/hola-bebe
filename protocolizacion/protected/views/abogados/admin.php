@@ -56,23 +56,38 @@
 //),
 //),
 //)); ?>
-
+<?php
+	function nombre($selec,$iD){
+	    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
+	    return $saime['PRIMER_NOMBRE'];
+	}
+	function apellido($selec,$iD){
+	    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
+	    return $saime['PRIMER_APELLIDO'];
+	}
+?>
 <?php
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'abogados-grid',
     'dataProvider' => $model->search(),
-    'filter' => $model,
+   // 'filter' => $model,
     'columns' => array(
         'id' => array(
             'header' => 'id_Abogado',
             'name' => 'id',
             'value' => '$data->id',
         ),
-        'persona_id' => array(
-            'name' => 'persona_id',
-            'value' => '$data->persona_id',
-
+	'primer_nombre' => array(
+            'header' => 'Nombre',
+            'name' => 'primer_nombre',
+	    'value' => 'nombre("PRIMER_NOMBRE",$data->persona_id)',     
         ),
+            'primer_apellido' => array(
+            'header' => 'Apellido',
+            'name' => 'primer_nombre',
+	    'value' => 'apellido("PRIMER_APELLIDO",$data->persona_id)',    
+        ),
+
         'tipo_abogado_id' => array(
             'header' => 'Tipo de Abogado',
             'name' => 'tipo_abogado_id',
@@ -96,13 +111,20 @@ $this->widget('booster.widgets.TbGridView', array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
-            'template' => '{ver}',
+            'template' => '{ver} {pdf}',
             'buttons' => array(
                 'ver' => array(
                     'label' => 'Ver',
                     'icon' => 'eye-open',
                     'size' => 'medium',
-                    'url' => 'Yii::app()->createUrl("abogado/view/", array("id"=>$data->id))',
+                    'url' => 'Yii::app()->createUrl("abogados/view/", array("id"=>$data->id))',
+                ),
+                'pdf' => array(
+                    'label' => 'Generar PDF',
+                    'icon'  => 'glyphicon glyphicon-file',
+                    'size'  => 'medium',
+                    'url'   => 'Yii::app()->createUrl("abogados/pdf/", array("id"=>$data->id))',
+//                    'visible' => 'Asignar($data->username);'
                 ),
 //                'modificar' => array(
 //                    'label' => 'Modificar',

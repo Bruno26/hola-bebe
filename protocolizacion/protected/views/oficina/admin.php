@@ -58,43 +58,63 @@
 //    ),
 //));
 ?>
+<?php
+function nombre($selec,$iD){
+    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
+    return $saime['PRIMER_NOMBRE'];
+}
+function apellido($selec,$iD){
+    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
+    return $saime['PRIMER_APELLIDO'];
+}
+?>
 
 <?php
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'oficina-grid',
     'dataProvider' => $model->search(),
-    'filter' => $model,
+    //'filter' => $model,
     'columns' => array(
         'id_oficina' => array(
             'name' => 'id_oficina',
             'value' => '$data->id_oficina',
         ),
         'nombre' => array(
-            'header' => 'Nombre oficina',
+            'header' => 'Nombre  de oficina',
             'name' => 'nombre',
             'value' => '$data->nombre',
-//            'filter' => Maestro::FindMaestrosByPadreSelect(71),
         ),
-        'persona_id_jefe' => array(
-            'header' => 'id_Persona',
-            'name' => 'persona_id_jefe',
-            'value' => '$data->persona_id_jefe',
-//            'filter' => Maestro::FindMaestrosByPadreSelect(71),
+        'primer_nombre' => array(
+            'header' => 'Nombre',
+            'name' => 'primer_nombre',
+	    'value' => 'nombre("PRIMER_NOMBRE",$data->persona_id_jefe)',
+            // 'value' => '$data->persona_id_jefe',
         ),
-     
-       
+             'primer_apellido' => array(
+            'header' => 'Apellido',
+            'name' => 'primer_nombre',
+	    'value' => 'apellido("PRIMER_APELLIDO",$data->persona_id_jefe)',
+            // 'value' => '$data->persona_id_jefe',
+        ),
 
         array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
-            'template' => '{ver}',
+            'template' => '{ver} {pdf}',
             'buttons' => array(
                 'ver' => array(
                     'label' => 'Ver',
                     'icon' => 'eye-open',
                     'size' => 'medium',
                     'url' => 'Yii::app()->createUrl("oficina/view/", array("id"=>$data->id_oficina))',
+                ),
+                'pdf' => array(
+                    'label' => 'Generar PDF',
+                    'icon'  => 'glyphicon glyphicon-file',
+                    'size'  => 'medium',
+                    'url'   => 'Yii::app()->createUrl("oficina/pdf/", array("id"=>$data->id_oficina))',
+//                    'visible' => 'Asignar($data->username);'
                 ),
 //                'modificar' => array(
 //                    'label' => 'Modificar',
@@ -103,7 +123,6 @@ $this->widget('booster.widgets.TbGridView', array(
 ////                    'url' => 'Yii::app()->createUrl("vswSolicitudRecibido/asignar/", array("id"=>$data->id_solicitud))',
 ////                    'visible' => 'Asignar($data->username);'
 //                ),
-
             ),
         ),
     ),

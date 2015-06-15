@@ -28,7 +28,9 @@ class ViviendaController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
+
+                'actions' => array('create', 'update' , 'pdf'),
+
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -112,6 +114,10 @@ class ViviendaController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
+        $desarrollo = new Desarrollo;
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
@@ -122,8 +128,8 @@ class ViviendaController extends Controller {
                 $this->redirect(array('view', 'id' => $model->id_vivienda));
         }
 
-        $this->render('update', array(
-            'model' => $model,
+        $this->render('update', array( 'model' => $model, 'estado' => $estado,
+            'municipio' => $municipio, 'parroquia' => $parroquia, 'desarrollo' => $desarrollo
         ));
     }
 
@@ -189,6 +195,18 @@ class ViviendaController extends Controller {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+    
+    public function actionPdf($id) {
+      $estado = new Tblestado;
+      $municipio = new Tblmunicipio;
+      $this->render('pdf', array(
+          'model' => $this->loadModel($id),
+          'estado' => $estado ,
+          'municipio' => $municipio ,
+      ));
+
+
     }
 
 }
