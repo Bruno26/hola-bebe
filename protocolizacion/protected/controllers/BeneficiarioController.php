@@ -122,8 +122,6 @@ class BeneficiarioController extends Controller {
         $model->ingreso_mensual = ($faovMensual) ? $faovMensual : '0.00';
         $model->ingreso_promedio_faov = ($faovPromedio) ? $faovPromedio : '0.00';
 
-
-
 //        $consulta = UnidadFamiliar::model()->findByAttributes(array('beneficiario_id' => $id)); // consulta a Unidad Familiar por el id_beneficiario 
 //
 //        $sqlIngreso = "select sum(ingreso_mensual) as ingreso from grupo_familiar where unidad_familiar_id=".$consulta->id_unidad_familiar.""; //consulta que suma cuanto es el ingreso de grupo familiar por id_beneficiario
