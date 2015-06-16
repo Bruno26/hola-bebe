@@ -9,9 +9,7 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
 ");
 ?>
 <p class="help-block">Los campos marcados con <span class="required">*</span> son requeridos.</p>
-
 <?php // echo $form->errorSummary($model); ?>
-
 <div class="row">
     <?php echo $form->hiddenField($model, 'persona_id'); ?>
     <?php echo $form->hiddenField($model, 'fecha_nacimiento'); ?>
