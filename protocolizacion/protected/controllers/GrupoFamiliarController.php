@@ -55,20 +55,20 @@ class GrupoFamiliarController extends Controller {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate($id) {
+    public function actionCreate($id = 1, $caso = NULL) {
         $model = new GrupoFamiliar;
         $idBeneficiario = UnidadFamiliar::model()->findByPk($id);
-//        $traza = Traza::VerificarTraza($idBeneficiario->beneficiario_id); // verifica el guardado de la traza
-//        if ($traza != 1) {
-//            Generico::renderTraza($idBeneficiario->beneficiario_id); //renderiza a la traza
-//        }
+        $traza = Traza::VerificarTraza($idBeneficiario->beneficiario_id); // verifica el guardado de la traza
+        if ($traza != 1) {
+            Generico::renderTraza($idBeneficiario->beneficiario_id); //renderiza a la traza
+        }
 // Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
+//    $this->performAjaxValidation($model);
 
-        if (isset($_POST['GrupoFamiliar'])) {
-//            $idtraza = Traza::ObtenerIdTraza($idBeneficiario); // pemite la busqueda de la id de la traza 
-//            $guardartraza = Traza::actionInsertUpdateTraza(2, $idBeneficiario, 2, $idtraza); // permite insertar y actualizar la traza segun el caso 
-            $this->redirect(array('beneficiario/createDatos', 'id' => $idBeneficiario));
+        if (!empty($caso)) {
+            $idtraza = Traza::ObtenerIdTraza($idBeneficiario->beneficiario_id); // pemite la busqueda de la id de la traza 
+            $guardartraza = Traza::actionInsertUpdateTraza(2, $idBeneficiario->beneficiario_id, 2, $idtraza); // permite insertar y actualizar la traza segun el caso 
+            $this->redirect(array('beneficiario/createDatos', 'id' => $idBeneficiario->beneficiario_id));
         }
 
         $this->render('create', array('model' => $model));
@@ -177,8 +177,6 @@ class GrupoFamiliarController extends Controller {
                         'FECHA_NACIMIENTO' => $_POST['fechaNac'],
                             )
             );
-
-            echo '<pre>';var_dump($idPersona);die;
         } else {
             $idPersona = $_POST['idPersona'];
         }

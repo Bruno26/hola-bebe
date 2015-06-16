@@ -54,7 +54,6 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                 'booster.widgets.TbPanel', array(
             'title' => 'Grupo Familiar',
             'context' => 'primary',
-            // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
             'headerIcon' => 'user',
             'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
                 )
@@ -78,20 +77,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     </div>
 </div>
 
-<div class="well">
-    <div class="pull-center" style="text-align: right;">
-        <?php
-        $this->widget('booster.widgets.TbButton', array(
-            'buttonType' => 'button',
-            'icon' => 'glyphicon glyphicon-floppy-saved',
-            'size' => 'large',
-            'id' => 'GuardarFamiliar',
-            'context' => 'primary',
-            'label' => 'Agregar Familiar',
-        ));
-        ?>
-    </div>
-</div>
+
 
 <?php //echo $this->renderPartial('_form', array('model'=>$model));  ?>
 
