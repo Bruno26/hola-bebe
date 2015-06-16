@@ -23,7 +23,7 @@
 //");
 ?>
 
-<h1>Listado de Unidad Habitacional</h1>
+<h1>Gestión de Unidades Multifamiliares</h1>
 <?php
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'unidad-habitacional-grid',

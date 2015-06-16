@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1 class="text-center">Listado de Viviendas</h1>
+<h1 class="text-center">Gestión de Unidades Familiares</h1>
 
 
 <?php // echo CHtml::link('Advanced Search', '#', array('class' => 'search-button btn')); ?>

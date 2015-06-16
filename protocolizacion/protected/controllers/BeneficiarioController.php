@@ -122,6 +122,21 @@ class BeneficiarioController extends Controller {
         $model->ingreso_mensual = ($faovMensual) ? $faovMensual : '0.00';
         $model->ingreso_promedio_faov = ($faovPromedio) ? $faovPromedio : '0.00';
 
+
+
+        $consulta = UnidadFamiliar::model()->findByAttributes(array('beneficiario_id' => $id)); // consulta a Unidad Familiar por el id_beneficiario 
+
+        $sqlIngreso = "select sum(ingreso_mensual) as ingreso from grupo_familiar where unidad_familiar_id=".$consulta->id_unidad_familiar.""; //consulta que suma cuanto es el ingreso de grupo familiar por id_beneficiario
+        $rowingreso = Yii::app()->db->createCommand($sqlIngreso)->queryRow();
+//        echo '<pre>'; var_dump($rowingreso); die(); 
+        $consulta->ingreso_total_familiar=$rowingreso['ingreso'];  //insert para unidad familiar ingreso_total_familiar
+        
+        $sqlFaov = "select count(*) as faov from grupo_familiar where unidad_familiar_id=".$consulta->id_unidad_familiar.""; //consulta que suma cuantos cotizan en faov del grupo familiar por id_beneficiario
+        $rowFaov = Yii::app()->db->createCommand($sqlFaov)->queryRow();
+        
+        $consulta->total_personas_cotizando=$rowFaov['faov'];  //insert para unidad familiar total de personas cotizando
+        
+
         if (isset($_POST['Beneficiario']['fuente_ingreso_id'])) {
             $model->attributes = $_POST['Beneficiario'];
             $model->parroquia_id = $_POST['Beneficiario']['parroquia_id'];
@@ -143,6 +158,7 @@ class BeneficiarioController extends Controller {
             if ($model->save()) {
                 $idtraza = Traza::ObtenerIdTraza($idBeneficiario); // pemite la busqueda de la id de la traza 
                 $delete = Traza::model()->findByPk($idtraza)->delete();
+
                 $this->redirect(array('beneficiario/admin'));
             }
         }
