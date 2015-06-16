@@ -14,6 +14,20 @@ Yii::app()->clientScript->registerScript('desarollo', "
 
       });  
 
+
+   /*  +++++++++++++++++++++++++++++++++++++++ */
+
+    $('#BeneficiarioTemporal_vivienda_nro').focusout(function(){
+
+                                                           /*   ---- para seleccionar el tipo de vivienda  ----  */
+
+                                                     });
+
+   /*  ++++++++++++++++++++++++++++++++++++++++ */
+
+
+
+
    /* -----------  Validacion de desarrollo habitacional   ----------------- */
          $('#Desarrollo_id_desarrollo').focusout(function(){
 
@@ -171,27 +185,75 @@ Yii::app()->clientScript->registerScript('desarollo', "
            <?php
             echo $form->dropDownListGroup($model, 'unidad_habitacional_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
                 'widgetOptions' => array(
-                    //   'data' => Maestro::FindMaestrosByPadreSelect(694, 'descripcion ASC'),
-                    'htmlOptions' => array('empty' => 'SELECCIONE',
-                    ),
-                )
-                    )
-            );
+                                            'htmlOptions' => array(
+                                                        'ajax' => array(
+                                                        'type' => 'POST',
+                                                        'url' => CController::createUrl('ValidacionJs/BuscarPisoVivienda'),
+                                                        'update' => '#' . CHtml::activeId($model, 'piso')
+                                                        ),
+                                            )
+                                        )
+            ));
         ?>
         </div>
  </div>
 
 
  <div class="row-fluid">
+
+        <div class='col-md-5'>
+
+             <?php
+            echo $form->dropDownListGroup($model, 'piso', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+                'widgetOptions' => array(
+                    //   'data' => Maestro::FindMaestrosByPadreSelect(694, 'descripcion ASC'),
+                    'htmlOptions' => array( 'ajax' => array(
+                                                        'type' => 'POST',
+                                                        'url' => CController::createUrl('ValidacionJs/BuscarVivienda'),
+                                                        'update' => '#' . CHtml::activeId($model, 'vivienda_nro')
+                                                        ),
+                                            'empty' => 'SELECCIONE',
+                    ),
+                )
+                    )
+            );
+        ?>
+            
+        </div>
        
         <div class='col-md-5'>
 
-        	<?php /* echo $form->textAreaGroup($model,'observacion',array('wrapperHtmlOptions' => array('class' => 'col-sm-5'),'widgetOptions' => array('htmlOptions' => array('rows' => 5),)
-			) ); */ ?>
+        	  <?php
+            echo $form->dropDownListGroup($model, 'vivienda_nro', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+                'widgetOptions' => array(
+                    //   'data' => Maestro::FindMaestrosByPadreSelect(694, 'descripcion ASC'),
+                    'htmlOptions' => array('empty' => 'SELECCIONE',
+                    ),
+                )
+                    )
+            );
+            ?>
             
         </div>
  </div>
 
+
+<div class="row-fluid">
+        <div class='col-md-5'>
+
+             <?php
+                    echo $form->dropDownListGroup($model, 'tipo_vivienda', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
+                        'widgetOptions' => array(
+                            'data' => Maestro::FindMaestrosByPadreSelect(92, 'descripcion ASC'),
+                            'htmlOptions' => array('empty' => 'SELECCIONE'),
+                        )
+                    )
+            );
+            ?>
+            
+        </div>
+
+</div>    
 
 </div>
 </div>

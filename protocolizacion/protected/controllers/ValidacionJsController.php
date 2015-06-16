@@ -22,7 +22,7 @@ class ValidacionJsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario'),
+                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario', 'BuscarPisoVivienda', 'BuscarVivienda', 'BuscarTipoVivienda'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -71,13 +71,71 @@ class ValidacionJsController extends Controller {
         $cedula = (int) $_POST['cedula'];
         $nacio = $_POST['nacionalidad'];
         $result = BeneficiarioTemporal::getBeneficiarioTemp($nacio, $cedula);
-        if ($result == 1) {
+        echo CJSON::encode($result);
+    }
 
-            echo CJSON::encode($result);
+    /*  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+    public function actionBuscarPisoVivienda() {
+
+
+
+        $Id = (isset($_POST['BeneficiarioTemporal']['unidad_habitacional_id']) ? $_POST['BeneficiarioTemporal']['unidad_habitacional_id'] : $_GET['piso']);
+        $Selected = isset($_GET['piso']) ? $_GET['piso'] : '';
+
+        if (!empty($Id)) {
+            $criteria = new CDbCriteria;
+            $criteria->addCondition('t.unidad_habitacional_id = :id_unidad_habitacional');
+            $criteria->params = array(':id_unidad_habitacional' => $Id);
+            $criteria->order = 't.nro_piso ASC';
+            $criteria->select = 'nro_piso';
+
+            $data = CHtml::listData(Vivienda::model()->findAll($criteria), 'nro_piso', 'nro_piso');
+            echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
+            foreach ($data as $id => $value) {
+                if ($Selected == $id) {
+                    echo CHtml::tag('option', array('value' => $id, 'selected' => true), CHtml::encode($value), true);
+                } else {
+                    echo CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
+                }
+            }
         } else {
-            echo CJSON::encode($result);
+            echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
         }
     }
+
+    /*  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+    /*  /////////////////////////////////////////////////////////////////////// */
+
+    public function actionBuscarVivienda() {
+
+
+
+        $Id = (isset($_POST['BeneficiarioTemporal']['unidad_habitacional_id']) ? $_POST['BeneficiarioTemporal']['unidad_habitacional_id'] : $_GET['vivienda_nro']);
+        $Selected = isset($_GET['vivienda_nro']) ? $_GET['vivienda_nro'] : '';
+
+        if (!empty($Id)) {
+            $criteria = new CDbCriteria;
+            $criteria->addCondition('t.unidad_habitacional_id = :id_unidad_habitacional');
+            $criteria->params = array(':id_unidad_habitacional' => $Id);
+            $criteria->order = 't.nro_vivienda ASC';
+            $criteria->select = 'nro_vivienda';
+
+            $data = CHtml::listData(Vivienda::model()->findAll($criteria), 'nro_vivienda', 'nro_vivienda');
+            echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
+            foreach ($data as $id => $value) {
+                if ($Selected == $id) {
+                    echo CHtml::tag('option', array('value' => $id, 'selected' => true), CHtml::encode($value), true);
+                } else {
+                    echo CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
+                }
+            }
+        } else {
+            echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
+        }
+    }
+
+    /*  /////////////////////////////////////////////////////////////////////// */
 
     public function actionBuscarMunicipios() {
         $Id = (isset($_POST['Tblestado']['clvcodigo']) ? $_POST['Tblestado']['clvcodigo'] : $_GET['clvcodigo']);
