@@ -78,7 +78,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 ?>
 
 
-<h1>Vivienda</h1>
+<h1>Unidades Familiares</h1>
 
 <div class="row">
     <div class="col-md-12">
