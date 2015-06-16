@@ -157,7 +157,7 @@ class ConsultaOracle extends CActiveRecord {
         //$valNacionalidad = array('valNacionalidad' => ($nacionalidad == 97) ? '1' : '0');
         $nacional = ($nacionalidad == 97) ? 'V' : 'E';
 
-        $SLQ = "SELECT NACIONALIDAD, CEDULA, PRIMERNOMBRE, SEGUNDONOMBRE, PRIMERAPELLIDO, SEGUNDOAPELLIDO, TO_CHAR(FECHANACIMIENTO, 'DD-MM-YYYY' ) As FECHANACIMIENTO FROM ORGANISMOS_PUBLICOS.SAIME_ORIGINAL WHERE NACIONALIDAD ='" . $nacional . "' AND CEDULA = " . $cedula;
+        $SLQ = "SELECT NACIONALIDAD, CEDULA, PRIMERNOMBRE, SEGUNDONOMBRE, PRIMERAPELLIDO, SEGUNDOAPELLIDO, TO_DATE(FECHANACIMIENTO, 'DD-MM-RR' ) As FECHANACIMIENTO FROM ORGANISMOS_PUBLICOS.SAIME_ORIGINAL WHERE NACIONALIDAD ='" . $nacional . "' AND CEDULA = " . $cedula;
         $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryRow();
 
         if (empty($result)) {

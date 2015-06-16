@@ -15,8 +15,41 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'id' => 'unidad-habitacional-form',
     'enableAjaxValidation' => false,
         ));
+
+
+
+
+    $this->widget('booster.widgets.TbProgress',
+        array(
+            'striped' => true,
+            'animated' => true,            
+            'stacked' => array(
+                array(
+                    'context' => 'warning',
+                    'percent' => 30,             
+                    
+                    'htmlOptions' => array(
+                        'data-toggle' => 'tooltip',
+                        'data'=>'Paso 1',
+                        'title' => 'Paso 1'
+                    )
+                ), /* 
+                 array('context' => 'info',
+                    'percent' => 35,               
+                    'htmlOptions' => array(
+                        'data-toggle' => 'tooltip',
+                        'title' => 'Paso 2'
+                    )), 
+
+                   array('context' => 'danger', 'percent' => 35,'animated' => true,'htmlOptions' => array(
+                        'data-toggle' => 'tooltip',
+                        'title' => 'Paso 3'
+                    )),  */
+            )
+        )
+    );
 ?>
-<h1 class="text-center">Censo Socio Económico</h1>
+<h1 class="text-center">Censo Socioeconómico</h1>
 
 
 <div>

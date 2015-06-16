@@ -1,221 +1,212 @@
 <?php
 
-class BeneficiarioTemporalController extends Controller
-{
-/**
-* @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-* using two-column layout. See 'protected/views/layouts/column2.php'.
-*/
+class BeneficiarioTemporalController extends Controller {
+    /**
+     * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
+     * using two-column layout. See 'protected/views/layouts/column2.php'.
+     */
 //public $layout='//layouts/column2';
 
-/**
-* @return array action filters
-*/
-public function filters()
-{
-return array(
-'accessControl', // perform access control for CRUD operations
-);
-}
+    /**
+     * @return array action filters
+     */
+    public function filters() {
+        return array(
+            'accessControl', // perform access control for CRUD operations
+        );
+    }
 
-/**
-* Specifies the access control rules.
-* This method is used by the 'accessControl' filter.
-* @return array access control rules
-*/
-public function accessRules()
-{
-return array(
-array('allow',  // allow all users to perform 'index' and 'view' actions
-'actions'=>array('index','view'),
-'users'=>array('*'),
-),
-array('allow', // allow authenticated user to perform 'create' and 'update' actions
-'actions'=>array('create','update'),
-'users'=>array('@'),
-),
-array('allow', // allow admin user to perform 'admin' and 'delete' actions
-'actions'=>array('admin','delete'),
-'users'=>array('admin'),
-),
-array('deny',  // deny all users
-'users'=>array('*'),
-),
-);
-}
+    /**
+     * Specifies the access control rules.
+     * This method is used by the 'accessControl' filter.
+     * @return array access control rules
+     */
+    public function accessRules() {
+        return array(
+            array('allow', // allow all users to perform 'index' and 'view' actions
+                'actions' => array('index', 'view'),
+                'users' => array('*'),
+            ),
+            array('allow', // allow authenticated user to perform 'create' and 'update' actions
+                'actions' => array('create', 'update'),
+                'users' => array('@'),
+            ),
+            array('allow', // allow admin user to perform 'admin' and 'delete' actions
+                'actions' => array('admin', 'delete'),
+                'users' => array('admin'),
+            ),
+            array('deny', // deny all users
+                'users' => array('*'),
+            ),
+        );
+    }
 
-/**
-* Displays a particular model.
-* @param integer $id the ID of the model to be displayed
-*/
-public function actionView($id)
-{
-$this->render('view',array(
-'model'=>$this->loadModel($id),
-));
-}
+    /**
+     * Displays a particular model.
+     * @param integer $id the ID of the model to be displayed
+     */
+    public function actionView($id) {
+        $this->render('view', array(
+            'model' => $this->loadModel($id),
+        ));
+    }
 
-/**
-* Creates a new model.
-* If creation is successful, the browser will be redirected to the 'view' page.
-*/
-public function actionCreate(){
-	$model      = new BeneficiarioTemporal;
-	$desarrollo = new Desarrollo;
-	$estado = new Tblestado;
-	$municipio = new Tblmunicipio;
-	$parroquia = new Tblparroquia;
+    /**
+     * Creates a new model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     */
+    public function actionCreate() {
+        $model = new BeneficiarioTemporal;
+        $desarrollo = new Desarrollo;
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
 
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-	if(isset($_POST['BeneficiarioTemporal'])){
-
-		var_dump($_POST); //die();
-
-	  /*  - - - -- Persona - - -- - - - */
-      
-
-      /*   -- - -  --  - - - -- - - - - --  */
-
-         /* -------------- Unidad Habitacional    --------------------- */
+        if (isset($_POST['BeneficiarioTemporal'])) {
 
 
-        /* ----------------------------------------------------------- */
-	
-		 
-     /*  - - - -- Beneficiario - - -- - - - */
-         $nombre_completo = $_POST["BeneficiarioTemporal"]["primer_apellido"].' ';
-         $nombre_completo .= $_POST["BeneficiarioTemporal"]["segundo_apellido"].' ';
-         $nombre_completo .= $_POST["BeneficiarioTemporal"]["primer_nombre"].' ';
-         $nombre_completo .= $_POST["BeneficiarioTemporal"]["segundo_nombre"];
+            /*  - - - -- Persona - - -- - - - */
+
+
+            /*   -- - -  --  - - - -- - - - - --  */
+
+            /* -------------- Unidad Habitacional    --------------------- */
+
+
+            /* ----------------------------------------------------------- */
+
+
+            /*  - - - -- Beneficiario - - -- - - - */
+
+            $nombre_completo = $_POST["BeneficiarioTemporal"]["primer_apellido"] . ' ';
+            $nombre_completo .= $_POST["BeneficiarioTemporal"]["segundo_apellido"] . ' ';
+            $nombre_completo .= $_POST["BeneficiarioTemporal"]["primer_nombre"] . ' ';
+            $nombre_completo .= $_POST["BeneficiarioTemporal"]["segundo_nombre"];
 
 
 
-                $beneficiarioTemp = new BeneficiarioTemporal;
+            $beneficiarioTemp = new BeneficiarioTemporal;
 
-				$beneficiarioTemp->persona_id = $_POST["BeneficiarioTemporal"]["persona_id"];
-				$beneficiarioTemp->desarrollo_id = $_POST["Desarrollo"]["id_desarrollo"];
-			    $beneficiarioTemp->unidad_habitacional_id = $_POST["BeneficiarioTemporal"]["unidad_habitacional_id"];
-			
-				$beneficiarioTemp->nacionalidad = $_POST["BeneficiarioTemporal"]["nacionalidad"];
-				$beneficiarioTemp->cedula = $_POST["BeneficiarioTemporal"]["cedula"];
-				$beneficiarioTemp->nombre_completo = $nombre_completo;
-				$beneficiarioTemp->fecha_creacion = date('Y-m-d H:i:s');
-				$beneficiarioTemp->usuario_id_creacion = Yii::app()->user->id;
-				$beneficiarioTemp->estatus = 1;  
+            $beneficiarioTemp->persona_id = $_POST["BeneficiarioTemporal"]["persona_id"];
+            $beneficiarioTemp->desarrollo_id = $_POST["Desarrollo"]["id_desarrollo"];
+            $beneficiarioTemp->unidad_habitacional_id = $_POST["BeneficiarioTemporal"]["unidad_habitacional_id"];
+            $beneficiarioTemp->vivienda_id = $_POST["BeneficiarioTemporal"]["vivienda_nro"];
 
-      /*   -- - -  --  - - - -- - - - - --  */
+            $beneficiarioTemp->nacionalidad = $_POST["BeneficiarioTemporal"]["nacionalidad"];
+            $beneficiarioTemp->cedula = $_POST["BeneficiarioTemporal"]["cedula"];
+            $beneficiarioTemp->nombre_completo = $nombre_completo;
+            $beneficiarioTemp->fecha_creacion = date('Y-m-d H:i:s');
+            $beneficiarioTemp->usuario_id_creacion = Yii::app()->user->id;
+            $beneficiarioTemp->estatus = 14;
 
-   
-     var_dump($beneficiarioTemp); die();
+            /*   -- - -  --  - - - -- - - - - --  */
 
-     
-	}
+            if ($beneficiarioTemp->save()) {
 
-	$this->render('create',array(
-		'model'=>$model,
-		'desarrollo'=>$desarrollo,'municipio'=>$municipio,
-		'estado'=>$estado,'parroquia'=>$parroquia,
+                $id_beneficiarioTemp = $beneficiarioTemp->id_beneficiario_temporal;
 
-		)
-	);
-}
+                $this->redirect(array('admin'));
+            } else {
+                var_dump($beneficiarioTemp->Errors);
+            }
+        }
 
-/**
-* Updates a particular model.
-* If update is successful, the browser will be redirected to the 'view' page.
-* @param integer $id the ID of the model to be updated
-*/
-public function actionUpdate($id)
-{
-$model=$this->loadModel($id);
+        $this->render('create', array(
+            'model' => $model,
+            'desarrollo' => $desarrollo, 'municipio' => $municipio,
+            'estado' => $estado, 'parroquia' => $parroquia,
+                )
+        );
+    }
+
+    /**
+     * Updates a particular model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id the ID of the model to be updated
+     */
+    public function actionUpdate($id) {
+        $model = $this->loadModel($id);
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-if(isset($_POST['BeneficiarioTemporal']))
-{
-$model->attributes=$_POST['BeneficiarioTemporal'];
-if($model->save())
-$this->redirect(array('view','id'=>$model->id_beneficiario_temporal));
-}
+        if (isset($_POST['BeneficiarioTemporal'])) {
+            $model->attributes = $_POST['BeneficiarioTemporal'];
+            if ($model->save())
+                $this->redirect(array('view', 'id' => $model->id_beneficiario_temporal));
+        }
 
-$this->render('update',array(
-'model'=>$model,
-));
-}
+        $this->render('update', array(
+            'model' => $model,
+        ));
+    }
 
-/**
-* Deletes a particular model.
-* If deletion is successful, the browser will be redirected to the 'admin' page.
-* @param integer $id the ID of the model to be deleted
-*/
-public function actionDelete($id)
-{
-if(Yii::app()->request->isPostRequest)
-{
+    /**
+     * Deletes a particular model.
+     * If deletion is successful, the browser will be redirected to the 'admin' page.
+     * @param integer $id the ID of the model to be deleted
+     */
+    public function actionDelete($id) {
+        if (Yii::app()->request->isPostRequest) {
 // we only allow deletion via POST request
-$this->loadModel($id)->delete();
+            $this->loadModel($id)->delete();
 
 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-if(!isset($_GET['ajax']))
-$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-}
-else
-throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-}
+            if (!isset($_GET['ajax']))
+                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+        } else
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+    }
 
-/**
-* Lists all models.
-*/
-public function actionIndex()
-{
-$dataProvider=new CActiveDataProvider('BeneficiarioTemporal');
-$this->render('index',array(
-'dataProvider'=>$dataProvider,
-));
-}
+    /**
+     * Lists all models.
+     */
+    public function actionIndex() {
+        $dataProvider = new CActiveDataProvider('BeneficiarioTemporal');
+        $this->render('index', array(
+            'dataProvider' => $dataProvider,
+        ));
+    }
 
-/**
-* Manages all models.
-*/
-public function actionAdmin()
-{
-$model=new BeneficiarioTemporal('search');
-$model->unsetAttributes();  // clear any default values
-if(isset($_GET['BeneficiarioTemporal']))
-$model->attributes=$_GET['BeneficiarioTemporal'];
+    /**
+     * Manages all models.
+     */
+    public function actionAdmin() {
+        $model = new BeneficiarioTemporal('search');
+        $model->unsetAttributes();  // clear any default values
+        if (isset($_GET['BeneficiarioTemporal']))
+            $model->attributes = $_GET['BeneficiarioTemporal'];
 
-$this->render('admin',array(
-'model'=>$model,
-));
-}
+        $this->render('admin', array(
+            'model' => $model,
+        ));
+    }
 
-/**
-* Returns the data model based on the primary key given in the GET variable.
-* If the data model is not found, an HTTP exception will be raised.
-* @param integer the ID of the model to be loaded
-*/
-public function loadModel($id)
-{
-$model=BeneficiarioTemporal::model()->findByPk($id);
-if($model===null)
-throw new CHttpException(404,'The requested page does not exist.');
-return $model;
-}
+    /**
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     * @param integer the ID of the model to be loaded
+     */
+    public function loadModel($id) {
+        $model = BeneficiarioTemporal::model()->findByPk($id);
+        if ($model === null)
+            throw new CHttpException(404, 'The requested page does not exist.');
+        return $model;
+    }
 
-/**
-* Performs the AJAX validation.
-* @param CModel the model to be validated
-*/
-protected function performAjaxValidation($model)
-{
-if(isset($_POST['ajax']) && $_POST['ajax']==='beneficiario-temporal-form')
-{
-echo CActiveForm::validate($model);
-Yii::app()->end();
-}
-}
+    /**
+     * Performs the AJAX validation.
+     * @param CModel the model to be validated
+     */
+    protected function performAjaxValidation($model) {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'beneficiario-temporal-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+    }
+
 }

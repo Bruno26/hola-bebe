@@ -73,7 +73,7 @@ class Traza extends CActiveRecord {
                 }
                 break;
             case 2:
-                $traza = Traza::model()->findByPk($id_entidad);
+                $traza = Traza::model()->findByPk($idTraza);
                 $traza->traza = $nu_traza;
                 if ($traza->save()) {
                     return true;
