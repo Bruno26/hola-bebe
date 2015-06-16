@@ -49,7 +49,7 @@ class BeneficiarioTemporal extends CActiveRecord
          public $municipio;
          public $nomb_edif;
          public $piso;
-         public $numero;
+         public $vivienda_nro;
          public $area_vivienda;
          public $tipo_vivienda;
          public $observacion;
@@ -106,24 +106,24 @@ class BeneficiarioTemporal extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'telf_habitacion'=>'Teléfono Habitación',
-			'telf_celular'=>'Teléfono Celular',
-			'correo_electronico'=>'Correo Electrónico',
-			'nomb_edif' => 'Nombre Edificación',
-			'numero' =>  'Número',
+			'telf_habitacion'    => 'Teléfono Habitación',
+			'telf_celular'       => 'Teléfono Celular',
+			'correo_electronico' => 'Correo Electrónico',
+			'nomb_edif'          => 'Nombre Edificación',
+			'numero'             => 'Número',
 			'area_vivienda' =>'Área de Vivienda mt2',
-
+            'vivienda_nro'  => 'Número de Vivienda',
 
 			'id_beneficiario_temporal' => 'Id Beneficiario Temporal',
-			'persona_id' => 'Persona',
+			'persona_id'    => 'Persona',
 			'desarrollo_id' => 'Desarrollo',
 			'unidad_habitacional_id' => 'Unidad Habitacional',
-			'id_control' => 'Id Control',
+			'id_control'   => 'Id Control',
 			'nacionalidad' => 'Nacionalidad',
-			'cedula' => 'Cedula',
+			'cedula'       => 'Cedula',
 			'nombre_completo' => 'Nombre Completo',
-			'nombre_archivo' => 'Nombre Archivo',
-			'fecha_creacion' => 'Fecha Creacion',
+			'nombre_archivo'  => 'Nombre Archivo',
+			'fecha_creacion'  => 'Fecha Creacion',
 			'fecha_actualizacion' => 'Fecha Actualizacion',
 			'usuario_id_creacion' => 'Usuario Id Creacion',
 			'usuario_id_actualizacion' => 'Usuario Id Actualizacion',

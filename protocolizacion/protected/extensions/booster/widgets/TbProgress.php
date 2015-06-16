@@ -22,6 +22,8 @@ class TbProgress extends TbWidget {
 	 */
 	public $striped = false;
 
+	public $texto;
+
 	/**
 	 * @var boolean indicates whether the bar is animated.
 	 */
@@ -117,7 +119,7 @@ class TbProgress extends TbWidget {
 				}
 				$options['class'] .= 'progress-bar progress-bar-' . $bar['context'];
 
-				echo '<div ' . CHtml::renderAttributes($options) . '>' . @$bar['content'] . '</div>';
+				echo '<div ' . CHtml::renderAttributes($options) . '>' . @$bar['content'] .' '.$this->texto .'</div>';
 			}
 		}
 		echo CHtml::closeTag('div');

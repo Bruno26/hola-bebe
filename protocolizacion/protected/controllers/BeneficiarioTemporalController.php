@@ -62,7 +62,7 @@ $this->render('view',array(
 public function actionCreate(){
 	$model      = new BeneficiarioTemporal;
 	$desarrollo = new Desarrollo;
-	$estado = new Tblestado;
+	$estado     = new Tblestado;
 	$municipio = new Tblmunicipio;
 	$parroquia = new Tblparroquia;
 
@@ -72,20 +72,20 @@ public function actionCreate(){
 
 	if(isset($_POST['BeneficiarioTemporal'])){
 
-		var_dump($_POST); //die();
-
-	  /*  - - - -- Persona - - -- - - - */
+	
+	 /*  - - - -- Persona - - -- - - - */
       
 
-      /*   -- - -  --  - - - -- - - - - --  */
+     /*   -- - -  --  - - - -- - - - - --  */
 
-         /* -------------- Unidad Habitacional    --------------------- */
+     /* -------------- Unidad Habitacional    --------------------- */
 
 
-        /* ----------------------------------------------------------- */
+     /* ----------------------------------------------------------- */
 	
 		 
      /*  - - - -- Beneficiario - - -- - - - */
+
          $nombre_completo = $_POST["BeneficiarioTemporal"]["primer_apellido"].' ';
          $nombre_completo .= $_POST["BeneficiarioTemporal"]["segundo_apellido"].' ';
          $nombre_completo .= $_POST["BeneficiarioTemporal"]["primer_nombre"].' ';
@@ -98,18 +98,26 @@ public function actionCreate(){
 				$beneficiarioTemp->persona_id = $_POST["BeneficiarioTemporal"]["persona_id"];
 				$beneficiarioTemp->desarrollo_id = $_POST["Desarrollo"]["id_desarrollo"];
 			    $beneficiarioTemp->unidad_habitacional_id = $_POST["BeneficiarioTemporal"]["unidad_habitacional_id"];
-			
+			    $beneficiarioTemp->vivienda_id = $_POST["BeneficiarioTemporal"]["vivienda_nro"];
+
 				$beneficiarioTemp->nacionalidad = $_POST["BeneficiarioTemporal"]["nacionalidad"];
 				$beneficiarioTemp->cedula = $_POST["BeneficiarioTemporal"]["cedula"];
 				$beneficiarioTemp->nombre_completo = $nombre_completo;
 				$beneficiarioTemp->fecha_creacion = date('Y-m-d H:i:s');
 				$beneficiarioTemp->usuario_id_creacion = Yii::app()->user->id;
-				$beneficiarioTemp->estatus = 1;  
+				$beneficiarioTemp->estatus = 14;  
 
       /*   -- - -  --  - - - -- - - - - --  */
 
-   
-     var_dump($beneficiarioTemp); die();
+          if($beneficiarioTemp->save()){
+          	
+             $id_beneficiarioTemp = $beneficiarioTemp->id_beneficiario_temporal;
+             
+             $this->redirect(array('admin'));
+         }else{ 
+            var_dump($beneficiarioTemp->Errors);          
+         }
+                
 
      
 	}

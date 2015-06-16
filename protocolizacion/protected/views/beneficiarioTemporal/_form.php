@@ -127,9 +127,17 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
 
     <div class="row-fluid">           
            <div class='col-md-5'>
-                <?php
-                 echo $form->textFieldGroup($model,'estado_civil',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>100))));
-                ?>
+               
+           <?php
+                    echo $form->dropDownListGroup($model, 'estado_civil', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
+                        'widgetOptions' => array(
+                            'data' => Maestro::FindMaestrosByPadreSelect(162, 'descripcion ASC'),
+                            'htmlOptions' => array('empty' => 'SELECCIONE'),
+                        )
+                    )
+            );
+            ?>
+            
            </div>
 
            <div class='col-md-5'>
