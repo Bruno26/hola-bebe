@@ -1,13 +1,14 @@
 <?php
-$this->breadcrumbs = array(
-    'Beneficiarios' => array('index'),
-    'Manage',
-);
 
-$this->menu = array(
-    array('label' => 'List Beneficiario', 'url' => array('index')),
-    array('label' => 'Create Beneficiario', 'url' => array('create')),
-);
+function nombre($selec, $iD) {
+    $saime = ConsultaOracle::getPersonaByPk($selec, (int) $iD);
+    return $saime['PRIMER_NOMBRE'];
+}
+
+function apellido($selec, $iD) {
+    $saime = ConsultaOracle::getPersonaByPk($selec, (int) $iD);
+    return $saime['PRIMER_APELLIDO'];
+}
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -23,35 +24,41 @@ return false;
 ");
 ?>
 
-<h1>Manage Beneficiarios</h1>
+<h1 class="text-center">Gestión de Censo</h1>
 
-<p>
-    You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
-        &lt;&gt;</b>
-    or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
 
-<?php echo CHtml::link('Advanced Search', '#', array('class' => 'search-button btn')); ?>
-<div class="search-form" style="display:none">
-    <?php
-    $this->renderPartial('_search', array(
-        'model' => $model,
-    ));
-    ?>
-</div><!-- search-form -->
+
+<?php // echo CHtml::link('Advanced Search', '#', array('class' => 'search-button btn'));  ?>
+<!--<div class="search-form" style="display:none">-->
+<?php
+//    $this->renderPartial('_search', array(
+//        'model' => $model,
+//    ));
+?>
+<!--</div> search-form -->
 
 <?php
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'beneficiario-grid',
     'dataProvider' => $model->search(),
-    'filter' => $model,
+//    'filter' => $model,
     'columns' => array(
-        'id_beneficiario',
-        'persona_id',
-        'rif',
-        'condicion_trabajo_id',
+        array(
+            'name' => 'persona_id',
+            'header' => 'Nombre',
+            'value' => 'nombre("PRIMER_NOMBRE",$data->persona_id)',
+        ),
+        array(
+            'name' => 'persona_id',
+            'header' => 'Apellido',
+            'value' => 'apellido("PRIMER_APELLIDO",$data->persona_id)',
+        ),
+//        'id_beneficiario',
+//        'persona_id',
+//        'rif',
+//        'condicion_trabajo_id',
         'fuente_ingreso_id',
-        'relacion_trabajo_id',
+//        'relacion_trabajo_id',
         /*
           'sector_trabajo_id',
           'nombre_empresa',

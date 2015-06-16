@@ -1,6 +1,10 @@
 <?php
+$Validacion = Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/js_jquery.numeric.js');
 Yii::app()->clientScript->registerScript('camara', "
-    
+   $(document).ready(function(){
+        $('#GrupoFamiliar_tipo_sujeto_atencion').numeric(); 
+        $('#GrupoFamiliar_ingreso_mensual').numeric(); 
+    });
     $('#GuardarFamiliar').click(function(){
         var idPersona = $('#GrupoFamiliar_persona_id').val();
         var cedula = $('#GrupoFamiliar_cedula').val();
@@ -13,11 +17,20 @@ Yii::app()->clientScript->registerScript('camara', "
         var tipoSujeto = $('#GrupoFamiliar_tipo_sujeto_atencion').val();
         var ingresoM = $('#GrupoFamiliar_ingreso_mensual').val();
         var fechaNac = $('#GrupoFamiliar_fecha_nacimiento').val();
-        var IdUnidadF = '".$_GET['id']."';
+        var IdUnidadF = '" . $_GET['id'] . "';
         
         if(cedula == ''){
-             bootbox.alert('Ingrese un número de cédula!');
+            bootbox.alert('Ingrese un número de cédula!');
             $('#GrupoFamiliar_gen_parentesco_id').val('');
+            return false;
+        }
+        
+        if(ingresoM == ''){
+            bootbox.alert('Indique el Ingreso Mensual.');
+            return false;
+        }
+        if(tipoSujeto == ''){
+            bootbox.alert('Indique el Tipo Sujeto.');
             return false;
         }
         
@@ -26,55 +39,64 @@ Yii::app()->clientScript->registerScript('camara', "
         contadorMadre = parseInt(0);
         contadorSuegro = parseInt(0);
         contadorAbuelo = parseInt(0);
+        contadorConcubina = parseInt(0);
         $('#listado_familiar tr').each(function () {
-            var parentesco = $(this).find('td:eq(2)').html();
-            alert(parentesco);
-            if (parentesco == 'PADRE') {
+            var parentescoTable = $(this).find('td:eq(2)').html();
+            if (parentescoTable == 'PADRE') {
                 contadorPadre++
             }
-            if (parentesco == 'CONYUGE') {
-                contadorConyuge++
-            }
-            if (parentesco == 'MADRE') {
+            if (parentescoTable == 'MADRE') {
                 contadorMadre++
             }
-            if (parentesco == 'SUEGRO(A)') {
+            if (parentescoTable == 'CÓNYUGE') {
+                contadorConyuge++
+            }
+            if (parentescoTable == 'ABUELO(A)') {
+                contadorAbuelo++
+            }
+            if (parentescoTable == 'SUEGRO') {
                 contadorSuegro++
             }
-            if (parentesco == 'ABUELO(A)') {
-                contadorAbuelo++
+            if (parentescoTable == 'CONCUBINO(A)') {
+                contadorConcubina++
             }
         });
 
 
-        if (valor == 'C') {
+        if (parentesco == 161) {
             if (contadorConyuge > 0) {
                 bootbox.alert('Usted ya tiene registrado un Conyuge.');
-                $('#Familiar_parentesco').val('');
+                $('#GrupoFamiliar_gen_parentesco_id').val('');
                 return false;
             }
-        } else if (valor == 'M') {
+        } else if (parentesco == 152) {
             if (contadorMadre > 0) {
                 bootbox.alert('Usted ya tiene registrado a su Madre.');
-                $('#Familiar_parentesco').val('');
+                $('#GrupoFamiliar_gen_parentesco_id').val('');
                 return false;
             }
-        } else if (valor == 'P') {
+        } else if (parentesco == 150) {
             if (contadorPadre > 0) {
                 bootbox.alert('Usted ya tiene registrado a su Padre.');
-                $('#Familiar_parentesco').val('');
+                $('#GrupoFamiliar_gen_parentesco_id').val('');
                 return false;
             }
-        } else if (valor == 'S') {
+        } else if (parentesco == 157) {
             if (contadorSuegro >= 2) {
                 bootbox.alert('Usted ya posee asociado dos Suegros.');
-                $('#Familiar_parentesco').val('');
+                $('#GrupoFamiliar_gen_parentesco_id').val('');
                 return false;
             }
-        } else if (valor == 'A') {
+        } else if (parentesco == 156) {
             if (contadorAbuelo >= 4) {
                 bootbox.alert('Usted ya posee asociado cuatro Abuelos.');
-                $('#Familiar_parentesco').val('');
+                $('#GrupoFamiliar_gen_parentesco_id').val('');
+                return false;
+            }
+        } else if (parentesco == 161) {
+            if (contadorConcubina > 0) {
+                bootbox.alert('Usted ya posee una Concubina(o) asociada(o).');
+                $('#GrupoFamiliar_gen_parentesco_id').val('');
                 return false;
             }
         }
@@ -89,6 +111,17 @@ Yii::app()->clientScript->registerScript('camara', "
             dataType: 'json',
             success: function(data,faov) {
                 if(data == 3){
+                    $('#GrupoFamiliar_primer_nombre').val('');
+                    $('#GrupoFamiliar_cedula').val('');
+                    $('#GrupoFamiliar_segundo_nombre').val('');
+                    $('#GrupoFamiliar_persona_id').val('');
+                    $('#GrupoFamiliar_primer_apellido').val('');
+                    $('#GrupoFamiliar_segundo_apellido').val('');
+                    $('#GrupoFamiliar_fecha_nacimiento').val('');
+                    $('#GrupoFamiliar_ingreso_mensual_faov').val('');
+                    $('#GrupoFamiliar_gen_parentesco_id').val('');
+                    $('#GrupoFamiliar_tipo_sujeto_atencion').val('');
+                    $('#GrupoFamiliar_ingreso_mensual').val('');
                     $.fn.yiiGridView.update('listado_familiar');
                 }
             },
