@@ -79,8 +79,7 @@ class ValidacionJsController extends Controller {
             
 
         }
-    
-
+   
 
 
     /*  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -261,7 +260,7 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
      * FUNCION QUE MUESTRA TODOS LAS PARROQUIAS DE  
      */
     public function actionBuscarUnidadHabitacional() {
-        $Id = (isset($_POST['Desarrollo']['id_desarrollo']) ? $_POST['Desarrollo']['id_desarrollo'] : $_GET['clvcodigo']);
+        $Id = (isset($_POST['Desarrollo']['id_desarrollo']) ? $_POST['Desarrollo']['id_desarrollo'] : $_GET['unidad']);
         $Selected = isset($_GET['unidadHabitacion']) ? $_GET['unidadHabitacion'] : '';
 
         if (!empty($Id)) {
@@ -341,6 +340,7 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
             }
         } else {
             $saime = ConsultaOracle::getSaime($nacio, $cedula);
+            
             if ($saime == '1') {
                 echo json_encode(2);
             } else {

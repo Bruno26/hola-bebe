@@ -9,9 +9,7 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
 ");
 ?>
 <p class="help-block">Los campos marcados con <span class="required">*</span> son requeridos.</p>
-
 <?php // echo $form->errorSummary($model); ?>
-
 <div class="row">
     <?php echo $form->hiddenField($model, 'persona_id'); ?>
     <?php echo $form->hiddenField($model, 'fecha_nacimiento'); ?>
@@ -71,7 +69,34 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
         <?php echo $form->textFieldGroup($model, 'ingreso_mensual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16)))); ?>
     </div>
     <div class="col-md-2">
-        <?php echo $form->textFieldGroup($model, 'ingreso_mensual_faov', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16, 'readonly'=>'readonly')))); ?>
+        <?php echo $form->textFieldGroup($model, 'ingreso_mensual_faov', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16, 'readonly' => 'readonly')))); ?>
 
+    </div>
+</div>
+<div style="margin-bottom: 1%"></div>
+<div class="row">
+    <div class="pull-center text-right col-md-6">
+        <?php
+        $this->widget('booster.widgets.TbButton', array(
+            'buttonType' => 'button',
+            'icon' => 'glyphicon glyphicon-log-in',
+            'context' => 'success',
+            'label' => 'Siguiente',
+            'htmlOptions' => array(
+                'onclick' => 'document.location.href ="' . $this->createUrl('grupoFamiliar/create/', array('id' => $_GET['id'], 'caso' => 1)) . '";'
+            )
+        ));
+        ?>
+    </div>
+    <div class="pull-center text-left col-md-6">
+        <?php
+        $this->widget('booster.widgets.TbButton', array(
+            'buttonType' => 'button',
+            'icon' => 'glyphicon glyphicon-plus',
+            'id' => 'GuardarFamiliar',
+            'context' => 'primary',
+            'label' => 'Agregar Familiar',
+        ));
+        ?>
     </div>
 </div>

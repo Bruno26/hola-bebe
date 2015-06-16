@@ -167,11 +167,12 @@
                             </li>
                             <li class="sub-menu">
                                 <a href="<?php echo $this->createUrl('#'); ?>">
-                                    <i class="glyphicon glyphicon-home"></i>
-                                    <span>Gestión Adjudicatorio</span>
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    <span>Gestión Adjudicados</span>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="<?php echo $this->createUrl('beneficiarioTemporal/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Carga por Sistema</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('beneficiarioTemporal/create'); ?>"><i class="glyphicon glyphicon-user"></i><span>Cargar Adjudicados</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('beneficiarioTemporal/admin'); ?>"><i class="glyphicon glyphicon-user"></i><span>Listado de Adjudicados</span></a></li>
                                     <!--<li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Carga Masiva</span></a></li>-->
                                 </ul>
                             </li>

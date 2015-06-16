@@ -109,7 +109,7 @@ class UnidadHabitacionalController extends Controller {
 
                 if ($model->save()) {
 
-                    $this->redirect(array('/site/index'));
+                    $this->redirect(array('admin'));
                 }
             } else {
                 $this->render('create', array('model' => $model, 
