@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1 class="text-center">Listado de Viviendas</h1>
+<h1 class="text-center">Gestión de Unidades Familiares</h1>
 
 
 <?php // echo CHtml::link('Advanced Search', '#', array('class' => 'search-button btn')); ?>
@@ -152,13 +152,13 @@ $this->widget('booster.widgets.TbGridView', array(
  //                    'visible' => 'Asignar($data->username);'
                  ),
                  'pdf' => array(
+
                     'label' => 'Generar PDF',
                     'icon'  => 'glyphicon glyphicon-file',
                     'size'  => 'medium',
                     'url'   => 'Yii::app()->createUrl("vivienda/pdf/", array("id"=>$data->id_vivienda))',
 //                    'visible' => 'Asignar($data->username);'
                 ),
-
              ),
          ),
     ),

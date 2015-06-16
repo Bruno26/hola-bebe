@@ -28,7 +28,7 @@ class UnidadHabitacionalController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'guardar'),
+                'actions' => array('create', 'update', 'guardar','pdf'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -81,22 +81,24 @@ class UnidadHabitacionalController extends Controller {
 
             $nombre = trim(strtoupper($_POST['UnidadHabitacional']['nombre']));
             $id_desarrollo = $_POST['UnidadHabitacional']['desarrollo_id'];
-            $consulta = UnidadHabitacional ::model()->findByAttributes(array('nombre' => $nombre, 'desarrollo_id' => $id_desarrollo));
+            $consulta = UnidadHabitacional::model()->findByAttributes(array('nombre' => $nombre, 'desarrollo_id' => $id_desarrollo));
 
             if (empty($consulta)) {
                 $model->attributes = $_POST['UnidadHabitacional'];
                 $model->desarrollo_id = $_POST['UnidadHabitacional']['desarrollo_id'];
                 $model->nombre = $nombre;
                 $model->gen_tipo_inmueble_id = $_POST['UnidadHabitacional']['gen_tipo_inmueble_id'];
+                $model->lindero_norte = $_POST['UnidadHabitacional']['lindero_norte'];
+                $model->lindero_sur = $_POST['UnidadHabitacional']['lindero_sur'];
+                $model->lindero_este = $_POST['UnidadHabitacional']['lindero_este'];
+                $model->lindero_oeste = $_POST['UnidadHabitacional']['lindero_oeste'];
                 $model->total_unidades = 0;
 //                $model->fecha_registro = Generico::formatoFecha($_POST['UnidadHabitacional']['fecha_registro']);
 //                $model->ano = $_POST['UnidadHabitacional']['ano'];
 //                $model->registro_publico_id = $_POST['UnidadHabitacional']['registro_publico_id'];
 //                $model->tipo_documento_id = $_POST['UnidadHabitacional']['tipo_documento_id'];
 //                $model->num_protocolo = $_POST['UnidadHabitacional']['num_protocolo'];
-                $model->fecha_registro = 'now';
-                $model->folio_real = 1;
-                $model->asiento_registral = 1;
+//                $model->fecha_registro = 'now';
 //                $model->tomo = $_POST['UnidadHabitacional']['tomo'];
 //                $model->nro_matricula = $_POST['UnidadHabitacional']['nro_matricula'];
                 $model->fuente_datos_entrada_id = 90;
@@ -107,10 +109,13 @@ class UnidadHabitacionalController extends Controller {
 
                 if ($model->save()) {
 
-                    $this->redirect(array('/site/index'));
+                    $this->redirect(array('admin'));
                 }
             } else {
-                //$this->render('create', array('model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'sms' => 1));
+                $this->render('create', array('model' => $model, 
+                    'estado' => $estado, 'municipio' => $municipio, 
+                    'parroquia' => $parroquia, 'sms' => 1));
+                 Yii::app()->end();
             }
         }
 
@@ -201,6 +206,18 @@ class UnidadHabitacionalController extends Controller {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+    
+    public function actionPdf($id) {
+      $estado = new Tblestado;
+      $municipio = new Tblmunicipio;
+      $this->render('pdf', array(
+          'model' => $this->loadModel($id),
+          'estado' => $estado ,
+          'municipio' => $municipio ,
+      ));
+
+
     }
 
 }

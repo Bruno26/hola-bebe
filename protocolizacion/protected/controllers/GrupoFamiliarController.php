@@ -55,24 +55,23 @@ class GrupoFamiliarController extends Controller {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate() {
+    public function actionCreate($id = 2, $caso = NULL) {
         $model = new GrupoFamiliar;
-
+        $idBeneficiario = UnidadFamiliar::model()->findByPk($id);
+        $traza = Traza::VerificarTraza($idBeneficiario->beneficiario_id); // verifica el guardado de la traza
+        if ($traza != 1) {
+            Generico::renderTraza($idBeneficiario->beneficiario_id); //renderiza a la traza
+        }
 // Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
+//    $this->performAjaxValidation($model);
 
-        if (isset($_POST['GrupoFamiliar'])) {
-            echo '<pre>';
-            var_dump($_POST);
-            die;
-            $model->attributes = $_POST['GrupoFamiliar'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_grupo_familiar));
+        if (!empty($caso)) {
+            $idtraza = Traza::ObtenerIdTraza($idBeneficiario->beneficiario_id); // pemite la busqueda de la id de la traza 
+            $guardartraza = Traza::actionInsertUpdateTraza(2, $idBeneficiario->beneficiario_id, 2, $idtraza); // permite insertar y actualizar la traza segun el caso 
+            $this->redirect(array('beneficiario/createDatos', 'id' => $idBeneficiario->beneficiario_id));
         }
 
-        $this->render('create', array(
-            'model' => $model,
-        ));
+        $this->render('create', array('model' => $model));
     }
 
     /**
@@ -168,14 +167,22 @@ class GrupoFamiliarController extends Controller {
     public function actionInsertFamiliar() {
         $Familiar = new GrupoFamiliar;
         if ($_POST['idPersona'] == '') {
-//            $sql = "insert into logintransLog (user_id, created) values (:user_id, :created)";
-//            $parameters = array(":user_id" => $user->id, ':created' => date('Y-m-d H:i:s'));
-//            Yii::app()->db->createCommand($sql)->execute($parameters);
+            $idPersona = ConsultaOracle::insertPersona(array(
+                        'CEDULA' => $_POST['cedula'],
+                        'NACIONALIDAD' => ($_POST['nacionalida'] == 97) ? 1 : 0,
+                        'PRIMER_NOMBRE' => trim(strtoupper($_POST['primerNombre'])),
+                        'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['segundoNombre'])),
+                        'PRIMER_APELLIDO' => trim(strtoupper($_POST['primerApellido'])),
+                        'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['segundoApellido'])),
+                        'FECHA_NACIMIENTO' => $_POST['fechaNac'],
+                            )
+            );
         } else {
             $idPersona = $_POST['idPersona'];
         }
+        $ExisteBeneficiario = Beneficiario::model()->findByAttributes(array('persona_id' => $idPersona));
         $ExisteFamiliar = $this->FindByIdPersona($idPersona);
-        if ($ExisteFamiliar) {
+        if (!empty($ExisteFamiliar) && !empty($ExisteBeneficiario)) {
             echo CJSON::encode(1);
         } else {
             $Familiar->persona_id = $idPersona;
@@ -183,7 +190,7 @@ class GrupoFamiliarController extends Controller {
             $Familiar->tipo_sujeto_atencion = $_POST['tipoSujeto'];
             $Familiar->cotiza_faov = $_POST['faov'];
             $Familiar->ingreso_mensual = $_POST['ingresoM'];
-            $Familiar->unidad_familiar_id = 1;
+            $Familiar->unidad_familiar_id = $_POST['IdUnidadF'];
             $Familiar->estatus = 41;
             $Familiar->fuente_datos_entrada_id = 5;
             $Familiar->fecha_creacion = 'now()';
@@ -192,7 +199,7 @@ class GrupoFamiliarController extends Controller {
             if ($Familiar->save()) {
                 echo CJSON::encode(3);
             } else {
-                echo '<pre>';var_dump($Familiar->Errors);Die;
+                //echo '<pre>';var_dump($Familiar->Errors);die;
                 echo CJSON::encode(2);
             }
         }

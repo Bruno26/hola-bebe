@@ -1,10 +1,12 @@
 <?php
-function nombre($selec,$iD){
-    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
+
+function nombre($selec, $iD) {
+    $saime = ConsultaOracle::getPersonaByPk($selec, (int) $iD);
     return $saime['PRIMER_NOMBRE'];
 }
-function apellido($selec,$iD){
-    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
+
+function apellido($selec, $iD) {
+    $saime = ConsultaOracle::getPersonaByPk($selec, (int) $iD);
     return $saime['PRIMER_APELLIDO'];
 }
 
@@ -53,13 +55,12 @@ function parentesco($valor) {
             'id' => 'listado_familiar',
             'dataProvider' => new CActiveDataProvider('GrupoFamiliar', array(
                 'criteria' => array(
-                    'condition' => 'unidad_familiar_id=1',
+                    'condition' => 'unidad_familiar_id=' . $_GET['id'],
                 ),
                 'pagination' => false,
                     )),
 //            'template' => "{items}",
             'columns' => array(
-             
                 array(
                     'name' => 'persona_id',
                     'header' => 'Nombre',
@@ -74,17 +75,6 @@ function parentesco($valor) {
                     'name' => 'persona_id',
                     'header' => 'Parentesco',
                     'value' => '$data->genParentesco->descripcion',
-                ),
-                array(
-                    'class' => 'booster.widgets.TbButtonColumn',
-                    'header' => 'Acción',
-                    'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
-                    'template' => '{update}',
-                    'buttons' => array(
-                        'update' => array(
-//                            'url' => '$this->grid->controller->createUrl("familiar/update", array("id"=>$data->id_familiar))',
-                        ),
-                    ),
                 ),
             )
                 )

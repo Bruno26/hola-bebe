@@ -1,7 +1,4 @@
-<?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
-	'id'=>'beneficiarioTemporal-form',
-	'enableAjaxValidation'=>false,
-));  ?>
+
 
 <?php
  $baseUrl = Yii::app()->baseUrl;
@@ -15,19 +12,21 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
 
     $(document).ready(function(){
          $('#BeneficiarioTemporal_cedula').numeric();
+         $('#BeneficiarioTemporal_telf_habitacion').numeric();
+         $('#BeneficiarioTemporal_telf_celular').numeric();
 
          /*  ------  Bloqueo campos    ------- */
 
-           $('#BeneficiarioTemporal_primer_apellido').attr('readonly', true);
-           $('#BeneficiarioTemporal_segundo_apellido').attr('readonly', true);
-           $('#BeneficiarioTemporal_primer_nombre').attr('readonly', true);
-           $('#BeneficiarioTemporal_segundo_nombre').attr('readonly', true);
-           $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', true);
-           $('#BeneficiarioTemporal_sexo').attr('disabled', true);
-           $('#BeneficiarioTemporal_estado_civil').attr('readonly', true);
-           $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', true);
-           $('#BeneficiarioTemporal_telf_celular').attr('readonly', true);
-           $('#BeneficiarioTemporal_correo_electronico').attr('readonly', true);  
+            $('#BeneficiarioTemporal_primer_apellido').attr('readonly', true);
+            $('#BeneficiarioTemporal_segundo_apellido').attr('readonly', true);
+            $('#BeneficiarioTemporal_primer_nombre').attr('readonly', true);
+            $('#BeneficiarioTemporal_segundo_nombre').attr('readonly', true);
+            $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', true);
+            $('#BeneficiarioTemporal_sexo').attr('readonly', true);
+            $('#BeneficiarioTemporal_estado_civil').attr('readonly', true);
+            $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', true);
+            $('#BeneficiarioTemporal_telf_celular').attr('readonly', true);
+            $('#BeneficiarioTemporal_correo_electronico').attr('readonly', true); 
            
          /*   -------------------------------- */     
 
@@ -58,8 +57,10 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
            <div class='col-md-5'>
                 <?php
             echo $form->textFieldGroup($model, 'cedula', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8,
-                        'onblur' => "buscarPersonaBeneficiario($('#BeneficiarioTemporal_nacionalidad').val(),$(this).val())"
+                        'onblur' => "buscarPersonaBeneficiarioTemp($('#BeneficiarioTemporal_nacionalidad').val(),$(this).val())"
             ))));
+
+              echo $form->hiddenField($model,'persona_id',array('type'=>"hidden",'size'=>2,'maxlength'=>2)); 
             ?>
                <?php echo $form->error($model,'cedula'); ?>
                <span hidden="hidden" class="cargar"><?php echo CHtml::image(Yii::app()->request->baseUrl."/images/loading.gif"); ?></span>
@@ -126,9 +127,17 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
 
     <div class="row-fluid">           
            <div class='col-md-5'>
-                <?php
-                 echo $form->textFieldGroup($model,'estado_civil',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>100))));
-                ?>
+               
+           <?php
+                    echo $form->dropDownListGroup($model, 'estado_civil', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
+                        'widgetOptions' => array(
+                            'data' => Maestro::FindMaestrosByPadreSelect(162, 'descripcion ASC'),
+                            'htmlOptions' => array('empty' => 'SELECCIONE'),
+                        )
+                    )
+            );
+            ?>
+            
            </div>
 
            <div class='col-md-5'>
@@ -156,31 +165,5 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
     
 </div>           	
 
-	<?php // echo $form->textFieldGroup($model,'persona_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php // echo $form->textFieldGroup($model,'desarrollo_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php // echo $form->textFieldGroup($model,'unidad_habitacional_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php // echo $form->textFieldGroup($model,'id_control',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php // echo $form->textFieldGroup($model,'nacionalidad',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php // echo $form->textFieldGroup($model,'cedula',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php // echo $form->textFieldGroup($model,'nombre_completo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200)))); ?>
-
-	<?php // echo $form->textFieldGroup($model,'nombre_archivo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200)))); ?>
-
-	<?php // echo $form->textFieldGroup($model,'fecha_creacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php // echo $form->textFieldGroup($model,'fecha_actualizacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php // echo $form->textFieldGroup($model,'usuario_id_creacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php // echo $form->textFieldGroup($model,'usuario_id_actualizacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-
-	<?php // echo $form->textFieldGroup($model,'estatus',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
 
-<?php $this->endWidget(); ?>

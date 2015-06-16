@@ -15,11 +15,57 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'id' => 'unidad-habitacional-form',
     'enableAjaxValidation' => false,
         ));
+
+
+
+
+    $this->widget('booster.widgets.TbProgress',
+        array(
+            'striped' => true,
+            'animated' => true,            
+            'stacked' => array(
+                array(
+                    'context' => 'warning',
+                    'percent' => 30,             
+                    
+                    'htmlOptions' => array(
+                        'data-toggle' => 'tooltip',
+                        'data'=>'Paso 1',
+                        'title' => 'Paso 1'
+                    )
+                ), /* 
+                 array('context' => 'info',
+                    'percent' => 35,               
+                    'htmlOptions' => array(
+                        'data-toggle' => 'tooltip',
+                        'title' => 'Paso 2'
+                    )), 
+
+                   array('context' => 'danger', 'percent' => 35,'animated' => true,'htmlOptions' => array(
+                        'data-toggle' => 'tooltip',
+                        'title' => 'Paso 3'
+                    )),  */
+            )
+        )
+    );
 ?>
-<h1 class="text-center">Censo Socio Económico</h1>
+<h1 class="text-center">Censo Socioeconómico</h1>
 
 
 <div>
+
+    <?php 
+        $this->widget(
+                'booster.widgets.TbLabel', array(
+            'context' => 'warning',
+            'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
+            // 'success', 'warning', 'important', 'info' or 'inverse'
+            'label' => 'Los campos marcados con * son requeridos',
+                )
+        ); ?>
+        <br><br>
+  
+
     <?php 
 
     /* ------------  Datos Beneficiario  --------- */
@@ -69,15 +115,13 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
    <div class="well">
     <div class="pull-center" style="text-align: right;">
         <?php
-        $this->widget('booster.widgets.TbButton', array(            
-            'icon' => 'glyphicon glyphicon-log-in',
+        $this->widget('booster.widgets.TbButton', array(
+            'buttonType' => 'submit',
+            'icon' => 'glyphicon glyphicon-floppy-saved',
             'size' => 'large',
             'id' => 'guardar',
             'context' => 'primary',
-            'label' => 'Siguiente',
-             'htmlOptions' => array(
-                    'onclick' => 'document.location.href ="' . $this->createUrl('grupoFamiliar/create') . '";'
-                )
+            'label' => $model->isNewRecord ? 'Guardar' : 'Save',
         ));
         ?>
 

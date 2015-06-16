@@ -47,12 +47,30 @@ class Generico {
 
     public function BurcarPersona($nacionalidad, $cedula) {
         $SQL = "select * from PERSONA WHERE NACIONALIDAD ='" . $nacionalidad . "' AND CEDULA = " . $cedula;
-        
     }
-    
+
     public function FormatearBs($monto) {
-        return number_format((int)$monto,2,",",".");
-        
+        return number_format((int) $monto, 2, ",", ".");
+    }
+
+    public function renderTraza($idBeneficiario) {
+        $traza = Traza::VerificarTraza($idBeneficiario);
+        //evalúo la session traza para saber a que pantalla debo redirigir.
+        switch ($traza) {
+            case 1:// TERMINO LA ACTUALIZACION DE LA VISTA PERSONAL
+                $idUnidad = UnidadFamiliar::model()->findByAttributes(array('beneficiario_id' => $idBeneficiario));
+                $this->redirect(array('grupoFamiliar/create', 'id' => $idUnidad->id_unidad_familiar));
+                break;
+            case 2: // TERMINO LA ACTUALIZACIOND DE LA VISTA EDUCACION
+                $this->redirect(array('beneficiario/createDatos', 'id' => $idBeneficiario));
+                break;
+            case 4: // INDICA QUE YA CULMINO LA ACTUALIZACION
+                $this->redirect(array('/site/culmino'));
+                break;
+            case 0: // INICA QUE NO HA INICIADO LA ACTUALIZACION
+                $this->redirect(array('personal/create'));
+                break;
+        }
     }
 
 }

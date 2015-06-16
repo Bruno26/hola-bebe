@@ -1,3 +1,4 @@
+
 <?php
 //echo '<pre>'; var_dump($model);//die();
 $pdf = Yii::createComponent('application.vendors.mpdf.mpdf');
@@ -106,16 +107,79 @@ $cabecera = '<img src="' . Yii::app()->request->baseUrl . '/images/cintillo.jpg"
 //    </style>";
 //    
 
-$html.="<table align='right' width='25%'>
-                <tr>
-                    <td></td>
-                    <td><img src='".Yii::app()->baseUrl."/images/banavih_ndice1.png' style='width: 25%;'/>
-                    </td>
-                </tr>
-            </table>";
+//$html.="<table align='right' width='25%'>
+//                <tr>
+//                    <td></td>
+//                    <td><img src='".Yii::app()->baseUrl."/images/banavih_ndice1.png' style='width: 25%;'/>
+//                    </td>
+//                </tr>
+//            </table>";
 
-$html.="<div class='row' style ='margin-left: 1%; margin-right: 1%;'>
-    <div class='col-md-12' style ='margin-left: 0.1%; margin-right: 0.1%;'>
+//$html.="<div class='row' style ='margin-left: 1%; margin-right: 1%;'>
+//    <div class='col-md-12' style ='margin-left: 0.1%; margin-right: 0.1%;'>
+$html="
+    <style>
+    @page {
+  size: 8.5in 11in;  <length>{1,2} | auto | portrait | landscape  ('em' 'ex' and % are not allowed; length values are width height
+  margin: 10%; <any of the usual CSS values for margins> (% of page-box width for LR, of height for TB)
+  margin-header: 5mm; <any of the usual CSS values for margins>
+  margin-footer: 5mm; <any of the usual CSS values for margins>
+  marks: crop | cross | none
+  header: html_myHTMLHeaderOdd;
+  footer: html_myHTMLFooterOdd;
+  background: ...
+  background-image: ...
+  background-position ...
+  background-repeat ...
+  background-color ...
+  background-gradient: ...
+}
+    .row {
+        margin-left: -15px;
+        margin-right: -15px;
+        box-sizing: border-box;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+     }
+     .col-md-12 {
+        width: 100%;
+        float: left;
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+     }
+     .col-md-6 {
+       width: 50%;
+       float: left;
+       position: relative;
+       min-height: 1px;
+       padding-left: 15px;
+       padding-right: 15px;
+       font-size: 100%;
+       font: inherit;
+       box-sizing: border-box;
+       vertical-align: baseline;
+     }
+     .blockquote {
+       padding: 10px 20px;
+       margin: 0 0 20px;
+       font-size: 17.5px;
+       border-left: 5px solid #eee;
+       color: #666;
+       font-style: italic;
+       font: inherit;
+       vertical-align: baseline;
+       box-sizing: border-box;
+     }
+    </style>";
+    
+$html.="<div class='row' style ='margin-left: -15px; margin-right: -15px; box-sizing: border-box; margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline;'>
+    <div class='col-md-12'>
         <div>
             <h4><i class='glyphicon glyphicon-home'></i> Unidad Multifamiliar</h4>
             <div class='col-md-6' style ='margin-left: 0.1%; margin-right: 20%; width: 40%;'> 
@@ -128,7 +192,6 @@ $html.="            <br/></p>
             </div>
         </div>
     </div>
-
     <div class='col-md-12'>
         <div>  
             <h4><i class='glyphicon glyphicon-globe'></i> Ubicación del Desarrollo</h4>
@@ -169,7 +232,6 @@ $html.="           </p>
             </div>
         </div>
     </div>
-
     <div class='col-md-12'>
         <div>
             <h4><i class='glyphicon glyphicon-home'></i> Detalles de la UnidadFamiliar</h4>
@@ -232,13 +294,10 @@ $html.="               Bs.
     </div>
 </div>
 ";
-
 $mpdf = new mPDF('c', 'LETTER');//var_dump($model);die();
 $mpdf->SetTitle('<b>Detalle: </b>'.$model->unidadHabitacional->desarrollo->nombre.' / '.$model->unidadHabitacional->nombre.' / '.$model->nro_vivienda);
 //$mpdf->SetMargins(5, 50, arriba);
 $mpdf->SetMargins(5, 280, 30);
-
-
 $mpdf->SetAuthor('BANAVIH - Banco Nacional de Vivienda y Habitat');
 $mpdf->SetCreator('BANAVIH - Banco Nacional de Vivienda y Habitat');
 $mpdf->SetHTMLHeader($cabecera);

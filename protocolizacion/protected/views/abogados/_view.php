@@ -1,50 +1,54 @@
-<div class="view">
+<?php
+	function nombre($selec,$iD){
+	    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
+	    return $saime['PRIMER_NOMBRE'];
+	}
+	function apellido($selec,$iD){
+	    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
+	    return $saime['PRIMER_APELLIDO'];
+	}
+        function nacionalidadCedula($selec,$select2,$iD){
+	    $saime = ConsultaOracle::getNacionalidadCedulaPersonaByPk($selec,$select2,(int)$iD);
+	    return $saime['NACIONALIDAD']." - ".$saime['CEDULA'];
+	}
 
-		<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id),array('view','id'=>$data->id)); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('persona_id')); ?>:</b>
-	<?php echo CHtml::encode($data->persona_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('inpreabogado')); ?>:</b>
-	<?php echo CHtml::encode($data->inpreabogado); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('tipo_abogado_id')); ?>:</b>
-	<?php echo CHtml::encode($data->tipo_abogado_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('oficina_id')); ?>:</b>
-	<?php echo CHtml::encode($data->oficina_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('observaciones')); ?>:</b>
-	<?php echo CHtml::encode($data->observaciones); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('estatus')); ?>:</b>
-	<?php echo CHtml::encode($data->estatus); ?>
-	<br />
-
-	<?php /*
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_creacion')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_creacion); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_actualizacion')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_actualizacion); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('usuario_id_creacion')); ?>:</b>
-	<?php echo CHtml::encode($data->usuario_id_creacion); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('usuario_id_actualizacion')); ?>:</b>
-	<?php echo CHtml::encode($data->usuario_id_actualizacion); ?>
-	<br />
-
-	*/ ?>
-
+?>
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <h4><i class="glyphicon glyphicon-home"></i> Datos Personales</h4>
+            <div class='col-md-6'> 
+                <blockquote>
+                    <p>
+                        <b>Nombre:</b> <?php echo nombre('PRIMER_NOMBRE', $model->persona_id) ?><br/>
+                        <b>Apellido:</b> <?php echo apellido('PRIMER_APELLIDO', $model->persona_id)  ?><br/>
+                        <b>Cedula de Identidad:</b> <?php echo nacionalidadCedula('NACIONALIDAD','CEDULA', $model->persona_id)  ?>
+                    </p>
+                    <p>
+                        <b>Inpreabogado:</b> <?php echo $model->inpreabogado ?><br/>
+                        <b>Tipo de Abogado:</b> <?php echo $model->tipoAbogado->descripcion ?><br/>
+                    </p>
+                </blockquote>
+            </div>
+     
+               
+        </div>
+    </div>
+    <div class="col-md-12">
+        <h4><i class="glyphicon glyphicon-globe"></i> Oficina Asignada</h4>
+        <div class='col-md-6'> 
+            <blockquote>
+                <p>
+                    <b> Oficina:</b> <?php echo $model->oficinaId->nombre ?><br/>
+                </p>
+            </blockquote>
+        </div>
+        <div class='col-md-6'> 
+            <blockquote>
+                <p>
+                    <b> Observaciones:</b> <?php echo $model->observaciones ?><br/>
+                </p>
+            </blockquote>
+        </div>
+    </div>
 </div>

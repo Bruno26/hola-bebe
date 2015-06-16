@@ -28,7 +28,7 @@ class BeneficiarioController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'createDatos'),
+                'actions' => array('create', 'update', 'createDatos', 'CulminarRegistro'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -52,6 +52,14 @@ class BeneficiarioController extends Controller {
     }
 
     /**
+     * Displays a particular model.
+     * @param integer $id the ID of the model to be displayed
+     */
+    public function actionCulminarRegistro($id) {
+        Generico::renderTraza($id);
+    }
+
+    /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
@@ -64,11 +72,24 @@ class BeneficiarioController extends Controller {
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
-
+         
         if (isset($_POST['Beneficiario'])) {
-            $model->attributes = $_POST['Beneficiario'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_beneficiario));
+                           var_dump('Entrro');
+
+                      /*   ********* Inserto Beneficiario *************  */
+
+                      /*   ********************************************  */
+
+                      /*   ********* Unidad Familiar  *************  */
+
+                      /*   ********************************************  */
+
+                      /*   ********* Inserto traza        *************  */
+
+                      /*   ********************************************  */
+
+
+                      $this->redirect(array('grupoFamiliar/create','id'=>2));
         }
 
         $this->render('create', array(
@@ -100,6 +121,10 @@ class BeneficiarioController extends Controller {
 
     //ACTUALIZACION DE DATOS DE BENEFICIARIO
     public function actionCreateDatos($id) {
+        $traza = Traza::VerificarTraza($id); // verifica el guardado de la traza
+        if ($traza != 2) {
+            Generico::renderTraza($id); //renderiza a la traza
+        }
 
         $model = Beneficiario::model()->findByPk($id);
         $estado = new Tblestado;
@@ -107,8 +132,21 @@ class BeneficiarioController extends Controller {
         $parroquia = new Tblparroquia;
         $faovPromedio = ConsultaOracle::getFaov($id, 1); //consulta la funcion faov por id de persona, para mostrar el calculo de promedio
         $faovMensual = ConsultaOracle::getFaov($id, 2); //consulta la funcion faov por id de persona, para mostrar el calculo de ingreso mesual
-        $model-> ingreso_mensual= $faovMensual;
-        $model-> ingreso_promedio_faov = $faovPromedio;
+        $model->ingreso_mensual = ($faovMensual) ? $faovMensual : '0.00';
+        $model->ingreso_promedio_faov = ($faovPromedio) ? $faovPromedio : '0.00';
+
+//        $consulta = UnidadFamiliar::model()->findByAttributes(array('beneficiario_id' => $id)); // consulta a Unidad Familiar por el id_beneficiario 
+//
+//        $sqlIngreso = "select sum(ingreso_mensual) as ingreso from grupo_familiar where unidad_familiar_id=".$consulta->id_unidad_familiar.""; //consulta que suma cuanto es el ingreso de grupo familiar por id_beneficiario
+//        $rowingreso = Yii::app()->db->createCommand($sqlIngreso)->queryRow();
+////        echo '<pre>'; var_dump($rowingreso); die(); 
+//        $consulta->ingreso_total_familiar=$rowingreso['ingreso'];  //insert para unidad familiar ingreso_total_familiar
+//        
+//        $sqlFaov = "select count(*) as faov from grupo_familiar where unidad_familiar_id=".$consulta->id_unidad_familiar.""; //consulta que suma cuantos cotizan en faov del grupo familiar por id_beneficiario
+//        $rowFaov = Yii::app()->db->createCommand($sqlFaov)->queryRow();
+//        
+//        $consulta->total_personas_cotizando=$rowFaov['faov'];  //insert para unidad familiar total de personas cotizando
+        
 
         if (isset($_POST['Beneficiario']['fuente_ingreso_id'])) {
             $model->attributes = $_POST['Beneficiario'];
@@ -124,13 +162,16 @@ class BeneficiarioController extends Controller {
             $model->direccion_empresa = $_POST['Beneficiario']['direccion_empresa'];
             $model->telefono_trabajo = $_POST['Beneficiario']['telefono_trabajo'];
             $model->gen_cargo_id = $_POST['Beneficiario']['gen_cargo_id'];
-            $model->ingreso_mensual = $_POST['Beneficiario']['ingreso_mensual'];
-            $model->ingreso_declarado = $_POST['Beneficiario']['ingreso_declarado'];
-            $model->ingreso_promedio_faov = $_POST['Beneficiario']['ingreso_promedio_faov'];
+//            $model->ingreso_mensual = $_POST['Beneficiario']['ingreso_mensual'];
+//            $model->ingreso_declarado = $_POST['Beneficiario']['ingreso_declarado'];
+//            $model->ingreso_promedio_faov = $_POST['Beneficiario']['ingreso_promedio_faov'];
 
+            if ($model->save()) {
+                $idtraza = Traza::ObtenerIdTraza($idBeneficiario); // pemite la busqueda de la id de la traza 
+                $delete = Traza::model()->findByPk($idtraza)->delete();
 
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_beneficiario));
+                $this->redirect(array('beneficiario/admin'));
+            }
         }
 
         $this->render('createDatos', array(
@@ -151,8 +192,7 @@ class BeneficiarioController extends Controller {
 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        }
-        else
+        } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 

@@ -24,6 +24,25 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         )));
 ?>
 
+<?php
+if (isset($sms) && !empty($sms)) {
+    $user = Yii::app()->getComponent('user');
+    $user->setFlash(
+            'warning', "<strong>Ya existe una oficina con este nombre.</strong>"
+    );
+    $this->widget('booster.widgets.TbAlert', array(
+        'fade' => true,
+        'closeText' => '&times;', // false equals no close link
+        'events' => array(),
+        'htmlOptions' => array(),
+        'userComponentId' => 'user',
+        'alerts' => array(// configurations per alert type
+            'warning' => array('closeText' => false),
+        ),
+    ));
+}
+?>
+
 <h1 class="text-center">Registrar Oficina</h1>
 
 <?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>

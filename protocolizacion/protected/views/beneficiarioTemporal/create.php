@@ -1,6 +1,6 @@
 <?php
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
-    'id' => 'desarrollo-form',
+    'id' => 'beneficiario-temporal-form',
     'enableAjaxValidation' => false,
     'enableClientValidation' => true,
     'clientOptions' => array(
@@ -11,32 +11,33 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         ));
 ?>
 <?php Yii::app()->clientScript->registerScript('BeneficiarioTemporal', "
-         $('#guardar').click(function(){
+          $('#guardar').click(function(){
                
-                if($('#Tblestado_clvcodigo').val()==''){
-                 alert('Por favor seleccione Estado');
-                    return false;
-                }
-                if($('#Tblmunicipio_clvcodigo').val()==''){
-                   alert('Por favor seleccione Municipio');
-                    return false;
-                }
-                if($('#Desarrollo_parroquia_id').val()==''){
-                   alert('Por favor seleccione Parroquia');
-                    return false;
-                }
                 
-                });
+                 if($('#BeneficiarioTemporal_nacionalidad').val() === 'SELECCIONE'){
+                    bootbox.alert('Por favor seleccione Nacionalidad');
+                     return false;
+                 }
+
+                 if($('#BeneficiarioTemporal_cedula').val() === 'SELECCIONE'){
+                    bootbox.alert('Por favor Ingrese Cedula ');
+                     return false;
+                 }
+                
+
+                 if($('#Desarrollo_id_desarrollo').val() === ''){
+                  bootbox.alert('Por favor seleccione Nombre del Desarrollo');
+                     return false;
+                 }
+
+                 });
          
          
         
         ") ?>
 
 
-
-
 <h1>Registro Beneficiario Temporal</h1>
-
 <br><br>
 
 
@@ -71,16 +72,19 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     /*  *******  Caracteristicas del Desarrollo   ****** */
 
 
-            $this->widget(
-                            'booster.widgets.TbPanel', array(
-                            'title' => 'Caracteristicas del Desarrollo',
-                            'context' => 'primary',
-                            'headerIcon' => 'home',
-                           /*  'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'), */
-                            'content' => $this->renderPartial('_desarrollo', array('form' => $form, 'desarrollo' => $desarrollo,'model' => $model,'estado' => $estado,'municipio' => $municipio,'parroquia'=>$parroquia), TRUE),
-                            #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
-                                )
-                        );
+    $this->widget(
+        'booster.widgets.TbPanel', array(
+        'title' => 'Caracteristicas del Desarrollo',
+        'headerIcon' => 'user',
+        'context' => 'primary',
+        'headerIcon' => 'home',
+        'content' => $this->renderPartial('_desarrollo', array(
+            'form' => $form, 'model' => $model,
+            'estado' => $estado,'municipio' => $municipio,
+            'parroquia'=>$parroquia,'desarrollo'=>$desarrollo
+            ), TRUE),
+        )
+    );
 
     /*  *********************************************** */
 

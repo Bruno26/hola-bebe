@@ -57,8 +57,8 @@
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu extended logout">
-                              <li><a class="glyphicon glyphicon-lock" href="<?php echo $this->createUrl('/cruge/ui/usermanagementupdate'); ?>"><i class="fa fa-key"></i>Cambiar Clave</a></li>
-                              <li><a class="glyphicon glyphicon-off" href="<?php echo $this->createUrl('/site/logout'); ?>"><i class="fa fa-key"></i>Salir</a></li>
+                                <li><a class="glyphicon glyphicon-lock" href="<?php echo $this->createUrl('/cruge/ui/usermanagementupdate'); ?>"><i class="fa fa-key"></i>Cambiar Clave</a></li>
+                                <li><a class="glyphicon glyphicon-off" href="<?php echo $this->createUrl('/site/logout'); ?>"><i class="fa fa-key"></i>Salir</a></li>
                             </ul>
                         </li>
                         <!-- user login dropdown end -->
@@ -79,7 +79,7 @@
                             <li class="sub-menu">
                                 <a href="javascript:;">
                                     <i class="glyphicon glyphicon-stats"></i>
-                                    <span>Distribución Jurídica</span>
+                                    <span>Parametros del Sistema</span>
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="sub-menu">
@@ -137,7 +137,7 @@
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/desarrollo/create'); ?>">Cargar Nuevo</a></li>
                                             <li><a href="<?php echo $this->createUrl('/programa/create'); ?>">Programa</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/enteEjecutor/create'); ?>">Ente Ejecutor</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/enteEjecutor/create'); ?>">Ente  Ejecutor</a></li>
                                             <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Funtes</a></li>
                                             <li><a href="<?php echo $this->createUrl('/desarrollo/admin'); ?>">Listado Desarrollo</a></li>
                                         </ul>
@@ -167,11 +167,12 @@
                             </li>
                             <li class="sub-menu">
                                 <a href="<?php echo $this->createUrl('#'); ?>">
-                                    <i class="glyphicon glyphicon-home"></i>
-                                    <span>Gestión Adjudicatorio</span>
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    <span>Gestión Adjudicados</span>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="<?php echo $this->createUrl('beneficiarioTemporal/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Carga por Sistema</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('beneficiarioTemporal/create'); ?>"><i class="glyphicon glyphicon-user"></i><span>Cargar Adjudicados</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('beneficiarioTemporal/admin'); ?>"><i class="glyphicon glyphicon-user"></i><span>Listado de Adjudicados</span></a></li>
                                     <!--<li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Carga Masiva</span></a></li>-->
                                 </ul>
                             </li>
@@ -183,10 +184,9 @@
                                 <ul class="sub">
                                     <li><a href="<?php echo $this->createUrl('/asignacionCenso/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Asignación de Censo</span></a></li>
 
-                                    <li><a href="<?php echo $this->createUrl('/asignacionCenso/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestipon de Asignación</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('/asignacionCenso/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Asignación</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('/beneficiario/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Censo</span></a></li>
-                                    <li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestipon  de Censo</span></a></li>
-
+                                    <li><a href="<?php echo $this->createUrl('/beneficiario/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Censo</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('/reasignacionVivienda/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Reasignación de Vivienda</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Reasignación</span></a></li>
                                 </ul>
@@ -208,7 +208,7 @@
             <div id="expirado"></div>
 
             <!--            <footer class='container col-md-12 col-xs-12 text-center'>
-                            Copyright &copy; <?php // echo date('Y');                                                                                ?> by My Company.<br/>
+                            Copyright &copy; <?php // echo date('Y');                                                                                 ?> by My Company.<br/>
                             All Rights Reserved.<br/>
             <?php // echo Yii::powered(); ?>
                         </footer>-->
@@ -258,7 +258,6 @@ function actividad() {
         kill_session();
     }
 }
-
 $( document ).ready(function() {
     // Handler for .ready() called.
     document.body.addEventListener('mousemove', function() {
