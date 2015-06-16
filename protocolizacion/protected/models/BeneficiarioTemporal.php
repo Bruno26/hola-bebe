@@ -139,7 +139,10 @@ class BeneficiarioTemporal extends CActiveRecord
 
   public function getBeneficiarioTemp($nacionalidad, $cedula) {
 
-        $SLQ = "SELECT  FROM PERSONA WHERE NACIONALIDAD ='" . $nacional . "' AND CEDULA = " . $cedula;
+        $SLQ = "select bt.desarrollo_id,bt.vivienda_id,bt.nacionalidad,bt.cedula,uh.nombre As nombre_unidad,des.nombre As Desarrollo from beneficiario_temporal bt 
+inner join unidad_habitacional uh on bt.unidad_habitacional_id = uh.id_unidad_habitacional
+left  join desarrollo des on uh.desarrollo_id = des.id_desarrollo
+inner join vivienda on bt.vivienda_id = vivienda.id_vivienda WHERE bt.nacionalidad ='" . $nacionalidad . "' AND bt.cedula = " . $cedula;
         $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryRow();
 
         if (empty($result)) {
@@ -173,7 +176,7 @@ class BeneficiarioTemporal extends CActiveRecord
 		$criteria->compare('persona_id',$this->persona_id);
 		$criteria->compare('desarrollo_id',$this->desarrollo_id);
 		$criteria->compare('unidad_habitacional_id',$this->unidad_habitacional_id);
-    $criteria->compare('vivienda_id',$this->vivienda_id);
+        $criteria->compare('vivienda_id',$this->vivienda_id);
 		$criteria->compare('id_control',$this->id_control);
 		$criteria->compare('nacionalidad',$this->nacionalidad);
 		$criteria->compare('cedula',$this->cedula);

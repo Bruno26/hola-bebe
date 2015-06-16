@@ -53,6 +53,19 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 
 
 <div>
+
+    <?php 
+        $this->widget(
+                'booster.widgets.TbLabel', array(
+            'context' => 'warning',
+            'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
+            // 'success', 'warning', 'important', 'info' or 'inverse'
+            'label' => 'Los campos marcados con * son requeridos',
+                )
+        ); ?>
+        <br><br>
+  
+
     <?php 
 
     /* ------------  Datos Beneficiario  --------- */
@@ -102,15 +115,13 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
    <div class="well">
     <div class="pull-center" style="text-align: right;">
         <?php
-        $this->widget('booster.widgets.TbButton', array(            
-            'icon' => 'glyphicon glyphicon-log-in',
+        $this->widget('booster.widgets.TbButton', array(
+            'buttonType' => 'submit',
+            'icon' => 'glyphicon glyphicon-floppy-saved',
             'size' => 'large',
             'id' => 'guardar',
             'context' => 'primary',
-            'label' => 'Siguiente',
-             'htmlOptions' => array(
-                    'onclick' => 'document.location.href ="' . $this->createUrl('grupoFamiliar/create') . '";'
-                )
+            'label' => $model->isNewRecord ? 'Guardar' : 'Save',
         ));
         ?>
 

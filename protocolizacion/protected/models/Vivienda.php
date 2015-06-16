@@ -30,6 +30,7 @@
  * @property string $fecha_actualizacion
  * @property integer $usuario_id_creacion
  * @property integer $usuario_id_actualizacion
+ * @property boolean $asignada
  *
  * The followings are the available model relations:
  * @property AnalisisCredito[] $analisisCreditos
@@ -59,7 +60,7 @@ class Vivienda extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('tipo_vivienda_id, unidad_habitacional_id, construccion_mt2, nro_piso, nro_vivienda, precio_vivienda, nro_estacionamientos, nro_habitaciones, nro_banos, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
+			array('tipo_vivienda_id, unidad_habitacional_id, construccion_mt2, nro_piso, nro_vivienda, precio_vivienda, nro_estacionamientos, nro_habitaciones, nro_banos, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion,asignada', 'required'),
 			array('tipo_vivienda_id, unidad_habitacional_id, nro_estacionamientos, nro_habitaciones, nro_banos, fuente_datos_entrada_id, estatus_vivienda_id, usuario_id_creacion, usuario_id_actualizacion', 'numerical', 'integerOnly'=>true),
 			array('construccion_mt2', 'length', 'max'=>4),
 			array('nro_piso', 'length', 'max'=>4),
@@ -70,10 +71,10 @@ class Vivienda extends CActiveRecord
 			array('lindero_norte, lindero_sur, lindero_este, lindero_oeste, coordenadas', 'length', 'max'=>200),
 			array('precio_vivienda', 'length', 'max'=>16),
 			array('descripcion_estac', 'length', 'max'=>15),
-			array('sala, comedor, lavandero, cocina', 'safe'),
+			array('sala, comedor, lavandero, cocina, asignada', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_vivienda, tipo_vivienda_id, unidad_habitacional_id, construccion_mt2, nro_piso, nro_vivienda, sala, comedor, lavandero, lindero_norte, lindero_sur, lindero_este, lindero_oeste, coordenadas, precio_vivienda, nro_estacionamientos, descripcion_estac, nro_habitaciones, nro_banos, fuente_datos_entrada_id, estatus_vivienda_id, cocina, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion', 'safe', 'on'=>'search'),
+			array('id_vivienda, tipo_vivienda_id, unidad_habitacional_id, construccion_mt2, nro_piso, nro_vivienda, sala, comedor, lavandero, lindero_norte, lindero_sur, lindero_este, lindero_oeste, coordenadas, precio_vivienda, nro_estacionamientos, descripcion_estac, nro_habitaciones, nro_banos, fuente_datos_entrada_id, estatus_vivienda_id, cocina, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion,asignada', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -128,6 +129,7 @@ class Vivienda extends CActiveRecord
 			'fecha_actualizacion' => 'Fecha Actualizacion',
 			'usuario_id_creacion' => 'Usuario Id Creacion',
 			'usuario_id_actualizacion' => 'Usuario Id Actualizacion',
+			'asignada' => 'Esta asignada', 
 		);
 	}
 
@@ -177,6 +179,7 @@ class Vivienda extends CActiveRecord
 		$criteria->compare('fecha_actualizacion',$this->fecha_actualizacion,true);
 		$criteria->compare('usuario_id_creacion',$this->usuario_id_creacion);
 		$criteria->compare('usuario_id_actualizacion',$this->usuario_id_actualizacion);
+		$criteria->compare('asignada',$this->asignada);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -72,18 +72,35 @@ public function actionCreate(){
 
 	if(isset($_POST['BeneficiarioTemporal'])){
 
-	
+	       // var_dump($_POST); die();
 	 /*  - - - -- Persona - - -- - - - */
-      
+               if($_POST["BeneficiarioTemporal"]["persona_id"] == ''){
+
+                       /*    $idPersona = ConsultaOracle::insertPersona(array(
+													                        'CEDULA' => $_POST['cedula'],
+													                        'NACIONALIDAD' => ($_POST['nacionalida'] == 97) ? 1 : 0,
+													                        'PRIMER_NOMBRE' => trim(strtoupper($_POST['primerNombre'])),
+													                        'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['segundoNombre'])),
+													                        'PRIMER_APELLIDO' => trim(strtoupper($_POST['primerApellido'])),
+													                        'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['segundoApellido'])),
+													                        'FECHA_NACIMIENTO' => $_POST['fechaNac'],
+													                        )
+                          );
+*/
+
+
+
+               }else{
+                   /*   ----------  UPDATE    -------------------  */
+
+
+                   /*   -----------------------------------------  */
+
+               	  $idPersona = $_POST["BeneficiarioTemporal"]["persona_id"];
+               }
 
      /*   -- - -  --  - - - -- - - - - --  */
-
-     /* -------------- Unidad Habitacional    --------------------- */
-
-
-     /* ----------------------------------------------------------- */
-	
-		 
+	 
      /*  - - - -- Beneficiario - - -- - - - */
 
          $nombre_completo = $_POST["BeneficiarioTemporal"]["primer_apellido"].' ';
@@ -95,7 +112,7 @@ public function actionCreate(){
 
                 $beneficiarioTemp = new BeneficiarioTemporal;
 
-				$beneficiarioTemp->persona_id = $_POST["BeneficiarioTemporal"]["persona_id"];
+				$beneficiarioTemp->persona_id = $idPersona;
 				$beneficiarioTemp->desarrollo_id = $_POST["Desarrollo"]["id_desarrollo"];
 			    $beneficiarioTemp->unidad_habitacional_id = $_POST["BeneficiarioTemporal"]["unidad_habitacional_id"];
 			    $beneficiarioTemp->vivienda_id = $_POST["BeneficiarioTemporal"]["vivienda_nro"];
@@ -110,7 +127,7 @@ public function actionCreate(){
       /*   -- - -  --  - - - -- - - - - --  */
 
           if($beneficiarioTemp->save()){
-          	
+
              $id_beneficiarioTemp = $beneficiarioTemp->id_beneficiario_temporal;
              
              $this->redirect(array('admin'));

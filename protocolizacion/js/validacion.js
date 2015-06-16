@@ -289,6 +289,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                 $('#BeneficiarioTemporal_segundo_nombre').val(datos.SEGUNDONOMBRE);
                 $('#BeneficiarioTemporal_primer_apellido').val(datos.PRIMERAPELLIDO);
                 $('#BeneficiarioTemporal_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
+                $('#BeneficiarioTemporal_persona_id').val(datos.ID);
 
                 if (datos.FECHANACIMIENTO == null) {
                     $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', false);
@@ -361,6 +362,90 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
 }
 
 /*  +++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+/*  /////////////////  PARA CENSO ////////////////////// */
+function buscarBeneficiarioTemporal(nacionalidad, cedula) {
+
+    if (nacionalidad == 'SELECCIONE') {
+        bootbox.alert('Verifique que la nacionalidad no esten vacios');
+        return false;
+    }
+
+    if (cedula == '') {
+        bootbox.alert('Verifique que la cédula no esten vacios');
+        return false;
+    }
+
+
+    $.ajax({
+        url: baseUrl + "/ValidacionJs/BuscarPersonasBeneficiario",
+        async: true,
+        type: 'POST',
+        data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
+        dataType: 'json',
+        success: function (datos) {
+                                      /* ++++ solo verifico en Persona  ++++  */
+
+                                        if (datos.PROCEDENCIA == 1) {
+                                                                                                                                                                                                                                                                                       // Datos de la variable proceden de Persona si algun campo esta en blanco de puede actualizar solo una vez
+                                                                        $('#Beneficiario_primer_nombre').val(datos.PRIMERNOMBRE);
+
+                                                                        $('#Beneficiario_segundo_nombre').val(datos.SEGUNDONOMBRE);
+                                                                        $('#Beneficiario_primer_apellido').val(datos.PRIMERAPELLIDO);
+                                                                        $('#Beneficiario_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
+                                                                        $('#Beneficiario_persona_id').val(datos.ID);
+
+                                                                        $('#Beneficiario_fecha_nacimiento').val(datos.FECHANACIMIENTO);
+                                                                        
+                                                                        $('#Beneficiario_sexo').val(datos.SEXO);
+                                                                        
+                                                                        $('#Beneficiario_estado_civil').val(datos.EDO_CIVIL);
+                                                                              
+                                                                            $('#Beneficiario_telf_habitacion').val(datos.TELEFONO_HAB);
+
+                                                                            $('#Beneficiario_telf_celular').val(datos.TELEFONO_MOVIL);
+                                                                           
+                                                                            $('#Beneficiario_correo_electronico').val(datos.CORREO_PRINCIPAL);
+                                                                            
+                                                                    }else{
+
+                                                                         bootbox.alert('Cedula No Pertenece a un Beneficiario Temporal');
+                                                                    }
+
+                                      /* +++++++++++++++++++++++++++++++++++  */
+
+                                  }
+
+        });                          
+
+
+
+   /*  -------- */
+
+    $.ajax({
+        url: baseUrl + "/ValidacionJs/BuscarBeneficiarioTemp",
+        async: true,
+        type: 'POST',
+        data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
+        dataType: 'json',
+        success: function (datos) {
+
+
+   
+        },
+        error: function (datos) {
+          //  bootbox.alert('Ocurrio un error');
+        }
+    });  
+
+}
+
+/* ////////////////////////////////////////////// */
+
+
+
+
 
 function buscarPersonaBeneficiario(nacionalidad, cedula) {
 
@@ -441,44 +526,7 @@ function buscarPersonaBeneficiario(nacionalidad, cedula) {
 
 }
 
-/*  ///////////////////////////////////////////// */
-function buscarBeneficiarioTemporal(nacionalidad, cedula) {
 
-    if (nacionalidad == 'SELECCIONE') {
-        bootbox.alert('Verifique que la nacionalidad no esten vacios');
-        return false;
-    }
-
-    if (cedula == '') {
-        bootbox.alert('Verifique que la cédula no esten vacios');
-        return false;
-    }
-
-
-    $.ajax({
-        url: baseUrl + "/ValidacionJs/BuscarBeneficiarioTemp",
-        async: true,
-        type: 'POST',
-        data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
-        dataType: 'json',
-        success: function (datos) {
-//            alert(datos);
-//            if (datos == 1) {
-//                bootbox.alert('Debe Completar el campo Cédula');
-//            } else {
-//
-
-//                
-//            }
-        },
-        error: function (datos) {
-            bootbox.alert('Ocurrio un error');
-        }
-    });
-
-}
-
-/* ////////////////////////////////////////////// */
 
 
 /*  -------------------------------------------- */
