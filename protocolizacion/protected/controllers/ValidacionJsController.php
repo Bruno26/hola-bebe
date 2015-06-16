@@ -82,8 +82,7 @@ class ValidacionJsController extends Controller {
                 }
 
         }
-    
-
+   
 
         public function actionBuscarMunicipios() {
         $Id = (isset($_POST['Tblestado']['clvcodigo']) ? $_POST['Tblestado']['clvcodigo'] : $_GET['clvcodigo']);
@@ -199,7 +198,7 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
      * FUNCION QUE MUESTRA TODOS LAS PARROQUIAS DE  
      */
     public function actionBuscarUnidadHabitacional() {
-        $Id = (isset($_POST['Desarrollo']['id_desarrollo']) ? $_POST['Desarrollo']['id_desarrollo'] : $_GET['clvcodigo']);
+        $Id = (isset($_POST['Desarrollo']['id_desarrollo']) ? $_POST['Desarrollo']['id_desarrollo'] : $_GET['unidad']);
         $Selected = isset($_GET['unidadHabitacion']) ? $_GET['unidadHabitacion'] : '';
 
         if (!empty($Id)) {

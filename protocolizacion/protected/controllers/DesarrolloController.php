@@ -104,6 +104,7 @@ class DesarrolloController extends Controller {
                 $model->urban_barrio = $_POST['Desarrollo']['urban_barrio'];
                 $model->av_call_esq_carr = $_POST['Desarrollo']['av_call_esq_carr'];
                 $model->zona = $_POST['Desarrollo']['zona'];
+                $model->lote_terreno_mt2 = ($_POST['Desarrollo']['lote_terreno_mt2'])?$_POST['Desarrollo']['lote_terreno_mt2']: '0';
                 $model->lindero_norte = $_POST['Desarrollo']['lindero_norte'];
                 $model->lindero_este = $_POST['Desarrollo']['lindero_este'];
                 $model->lindero_oeste = $_POST['Desarrollo']['lindero_oeste'];
@@ -125,10 +126,10 @@ class DesarrolloController extends Controller {
                     $this->redirect(array('admin'));
                 }
 
-//                else {
-//                    var_dump($model->errors);
-//                    die();
-//                }
+                else {
+                    var_dump($model->errors);
+                    die();
+                }
             } else {
                 $this->render('create', array(
                     'model' => $model, 'estado' => $estado,
