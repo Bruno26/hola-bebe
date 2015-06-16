@@ -82,8 +82,7 @@ class ValidacionJsController extends Controller {
                 }
 
         }
-    
-
+   
 
         public function actionBuscarMunicipios() {
         $Id = (isset($_POST['Tblestado']['clvcodigo']) ? $_POST['Tblestado']['clvcodigo'] : $_GET['clvcodigo']);
