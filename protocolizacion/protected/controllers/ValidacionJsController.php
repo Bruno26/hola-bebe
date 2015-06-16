@@ -279,6 +279,7 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
             }
         } else {
             $saime = ConsultaOracle::getSaime($nacio, $cedula);
+            
             if ($saime == '1') {
                 echo json_encode(2);
             } else {

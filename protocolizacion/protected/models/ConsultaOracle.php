@@ -159,6 +159,7 @@ class ConsultaOracle extends CActiveRecord {
 
         $SLQ = "SELECT NACIONALIDAD, CEDULA, PRIMERNOMBRE, SEGUNDONOMBRE, PRIMERAPELLIDO, SEGUNDOAPELLIDO, TO_CHAR(FECHANACIMIENTO, 'DD-MM-YYYY' ) As FECHANACIMIENTO FROM ORGANISMOS_PUBLICOS.SAIME_ORIGINAL WHERE NACIONALIDAD ='" . $nacional . "' AND CEDULA = " . $cedula;
         $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryRow();
+
         if (empty($result)) {
             return 1;
         } else {
@@ -219,31 +220,31 @@ class ConsultaOracle extends CActiveRecord {
             $select = array();
             $valor = array();
             foreach ($array as $key => $value) {
-//                if ($key == 'FECHA_NACIMIENTO') {
-//                    array_push($select, $key);
-//                    //   array_push($valor, "to_date('" . $value . "', 'yyyy/mm/dd')");
-//                    //array_push($valor, "create_date>to_date('" . $value . "','yyyy-mm-dd')");
-//                    //array_push($valor, "TO_DATE('" . $value . "','YYYY-MM-DD')");
-//
-//                    array_push($valor, "to_date(" . $value . ",'d/m/y')");
-//                } else {
+                if ($key == 'FECHA_NACIMIENTO') {
+                    array_push($select, $key);
+                    array_push($valor, "to_date('$value','DD/MM/RR')");
+                } else {
                     array_push($select, $key);
                     if (is_numeric($value)) {
                         array_push($valor, $value);
                     } else {
                         array_push($valor, "'" . $value . "'");
                     }
-//                }
+                }
             }
             $select = implode(',', $select);
             $valor = implode(',', $valor);
-            $SQL = "INSERT INTO PERSONA (ID, " . $select . ") VALUES ((SELECT MAX(ID)+1 FROM PERSONA)," . $valor . ")";
-            
-            
-            
-//   echo '<pre>';var_dump($SQL);die;
+            $SQL = "INSERT INTO TABLAS_COMUNES.PERSONA (ID, " . $select . ") VALUES ((SELECT MAX(ID)+1 FROM TABLAS_COMUNES.PERSONA)," . $valor . ")";
             $result = Yii::app()->dbOarcle->createCommand($SQL)->query();
-            echo '<pre>';var_dump($result);die;
+
+            $SQL1 = "SELECT ID FROM TABLAS_COMUNES.PERSONA WHERE NACIONALIDAD = " . (int) $array['NACIONALIDAD'] . " AND CEDULA = " . (int) $array['CEDULA'];
+            $ExistePersona = Yii::app()->dbOarcle->createCommand($SQL1)->queryRow();
+
+            if (empty($ExistePersona)) {
+                return false;
+            } else {
+                return $ExistePersona['ID'];
+            }
         }
     }
 
