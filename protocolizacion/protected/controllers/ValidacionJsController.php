@@ -88,12 +88,13 @@ class ValidacionJsController extends Controller {
             
             
             $Id = (isset($_POST['BeneficiarioTemporal']['unidad_habitacional_id']) ? $_POST['BeneficiarioTemporal']['unidad_habitacional_id'] : $_GET['piso']);
-                $Selected = isset($_GET['piso']) ? $_GET['piso'] : '';
+            $Selected = isset($_GET['piso']) ? $_GET['piso'] : '';
 
                 if (!empty($Id)) {
                     $criteria = new CDbCriteria;
                     $criteria->addCondition('t.unidad_habitacional_id = :id_unidad_habitacional');
                     $criteria->params = array(':id_unidad_habitacional' => $Id);
+                   //  $criteria->params = array(':asignada' => FALSE);                    
                     $criteria->order = 't.nro_piso ASC';
                     $criteria->select = 'nro_piso';
 
@@ -117,15 +118,25 @@ class ValidacionJsController extends Controller {
                
             
             
-            $Id = (isset($_POST['BeneficiarioTemporal']['unidad_habitacional_id']) ? $_POST['BeneficiarioTemporal']['unidad_habitacional_id'] : $_GET['vivienda_nro']);
+            $Id   = (isset($_POST['BeneficiarioTemporal']['unidad_habitacional_id']) ? $_POST['BeneficiarioTemporal']['unidad_habitacional_id'] : $_GET['vivienda_nro']);
+           
+
+            $piso = (isset($_POST['BeneficiarioTemporal']['piso']) ? $_POST['BeneficiarioTemporal']['piso'] : 'x');  
+
+            //var_dump($piso); die(); 
                 $Selected = isset($_GET['vivienda_nro']) ? $_GET['vivienda_nro'] : '';
 
                 if (!empty($Id)) {
                     $criteria = new CDbCriteria;
                     $criteria->addCondition('t.unidad_habitacional_id = :id_unidad_habitacional');
                     $criteria->params = array(':id_unidad_habitacional' => $Id);
+
+                    
+
                     $criteria->order = 't.nro_vivienda ASC';
                     $criteria->select = 'nro_vivienda';
+                      
+                     // var_dump($criteria); die(); 
 
                     $data = CHtml::listData(Vivienda::model()->findAll($criteria), 'nro_vivienda', 'nro_vivienda');
                     echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);

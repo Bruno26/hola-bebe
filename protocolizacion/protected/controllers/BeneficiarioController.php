@@ -72,11 +72,24 @@ class BeneficiarioController extends Controller {
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
-
+         
         if (isset($_POST['Beneficiario'])) {
-            $model->attributes = $_POST['Beneficiario'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_beneficiario));
+                           var_dump('Entrro');
+
+                      /*   ********* Inserto Beneficiario *************  */
+
+                      /*   ********************************************  */
+
+                      /*   ********* Unidad Familiar  *************  */
+
+                      /*   ********************************************  */
+
+                      /*   ********* Inserto traza        *************  */
+
+                      /*   ********************************************  */
+
+
+                      $this->redirect(array('grupoFamiliar/create','id'=>2));
         }
 
         $this->render('create', array(
