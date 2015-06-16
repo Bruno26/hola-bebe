@@ -55,7 +55,7 @@ class GrupoFamiliarController extends Controller {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate($id = 1, $caso = NULL) {
+    public function actionCreate($id = 2, $caso = NULL) {
         $model = new GrupoFamiliar;
         $idBeneficiario = UnidadFamiliar::model()->findByPk($id);
         $traza = Traza::VerificarTraza($idBeneficiario->beneficiario_id); // verifica el guardado de la traza
@@ -190,7 +190,7 @@ class GrupoFamiliarController extends Controller {
             $Familiar->tipo_sujeto_atencion = $_POST['tipoSujeto'];
             $Familiar->cotiza_faov = $_POST['faov'];
             $Familiar->ingreso_mensual = $_POST['ingresoM'];
-            $Familiar->unidad_familiar_id = 1;
+            $Familiar->unidad_familiar_id = $_POST['IdUnidadF'];
             $Familiar->estatus = 41;
             $Familiar->fuente_datos_entrada_id = 5;
             $Familiar->fecha_creacion = 'now()';

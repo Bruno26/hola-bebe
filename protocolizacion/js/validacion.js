@@ -550,7 +550,7 @@ function buscarPersonaFamiliar(nacionalidad, cedula) {
             if (datos == 1) {
                 $('#iconLoding').hide();
                 $('#GrupoFamiliar_primer_nombre').val('');
-                $('#GrupoFamiliar_segundor_nombre').val('');
+                $('#GrupoFamiliar_segundo_nombre').val('');
                 $('#GrupoFamiliar_persona_id').val('');
                 $('#GrupoFamiliar_primer_apellido').val('');
                 $('#GrupoFamiliar_segundo_apellido').val('');
@@ -585,3 +585,75 @@ function buscarPersonaFamiliar(nacionalidad, cedula) {
         }
     })
 }
+
+/*
+ * FUNCTION QUE VALIDA CANTIDAD DE PERENTEZCO 
+ */
+
+function Parentesco(valor) {
+
+    if ($('#Familiar_cedula_familiar').val() == '') {
+        bootbox.alert('Ingrese un número de cédula!');
+        $('#Familiar_parentesco').val('');
+        return false;
+    }
+
+    contadorPadre = parseInt(0);
+    contadorConyuge = parseInt(0);
+    contadorMadre = parseInt(0);
+    contadorSuegro = parseInt(0);
+    contadorAbuelo = parseInt(0);
+    $('#listado_familiar tr').each(function () {
+        var parentesco = $(this).find('td:eq(6)').html();
+        if (parentesco == 'PADRE') {
+            contadorPadre++
+        }
+        if (parentesco == 'CONYUGE') {
+            contadorConyuge++
+        }
+        if (parentesco == 'MADRE') {
+            contadorMadre++
+        }
+        if (parentesco == 'SUEGRO(A)') {
+            contadorSuegro++
+        }
+        if (parentesco == 'ABUELO(A)') {
+            contadorAbuelo++
+        }
+    });
+
+
+    if (valor == 'C') {
+        if (contadorConyuge > 0) {
+            bootbox.alert('Usted ya tiene registrado un Conyuge.');
+            $('#Familiar_parentesco').val('');
+            return false;
+        }
+    } else if (valor == 'M') {
+        if (contadorMadre > 0) {
+            bootbox.alert('Usted ya tiene registrado a su Madre.');
+            $('#Familiar_parentesco').val('');
+            return false;
+        }
+    } else if (valor == 'P') {
+        if (contadorPadre > 0) {
+            bootbox.alert('Usted ya tiene registrado a su Padre.');
+            $('#Familiar_parentesco').val('');
+            return false;
+        }
+    } else if (valor == 'S') {
+        if (contadorSuegro >= 2) {
+            bootbox.alert('Usted ya posee asociado dos Suegros.');
+            $('#Familiar_parentesco').val('');
+            return false;
+        }
+    } else if (valor == 'A') {
+        if (contadorAbuelo >= 4) {
+            bootbox.alert('Usted ya posee asociado cuatro Abuelos.');
+            $('#Familiar_parentesco').val('');
+            return false;
+        }
+    }
+
+}
+
