@@ -259,7 +259,6 @@ function actividad() {
         kill_session();
     }
 }
-
 $( document ).ready(function() {
     // Handler for .ready() called.
     document.body.addEventListener('mousemove', function() {
