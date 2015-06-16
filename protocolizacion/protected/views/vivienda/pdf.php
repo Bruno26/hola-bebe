@@ -3,84 +3,128 @@
 $pdf = Yii::createComponent('application.vendors.mpdf.mpdf');
 $cabecera = '<img src="' . Yii::app()->request->baseUrl . '/images/cintillo.jpg"/>';
 
+//
+//
+//$html.= "<style>
+//            #prueba{
+//               border:2px solid;
+//               border-radius:10px;
+//               margin-left: -15px;
+//        margin-right: -15px;
+//        box-sizing: border-box;
+//        font-size: 100%;
+//        font: inherit;
+//        vertical-align: baseline;
+//            } 
+//            #prueba1{
+//               border:2px solid;
+//               border-radius:10px;
+//            } 
+//            .negrillas{
+//               font-weight: bold;
+//               color:blue;
+//            }
+//        </style>";
+///**
+// * ESTILO DE LA TABLA
+// */
+//
+//$n = dirname(dirname(dirname(__DIR__))) . '/img/banner.png';
+//$html.= '<img src="' . $n . '"/>';
+//$html.="<div style='text-align:center; font-size:20px; margin-top:50px; border: solid 0px #000;'>";
+//$html.="<b></b>";
+//$html.="<br>";
+//$html.="<br/></div>";
+//$html.= '<table>        
+//        <tr>
+//        <td colspan="2" align="justify" class="negrillas" id="prueba">
+//            Reporte del Sistema de Atención al Ciudadano.
+//               </td>           
+//           </tr>
+//        </table>';
+//
+//$html.='<div id="prueba">
+//<style type="text/css">
+//.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
+//.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
+//.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
+//.tg .tg-gyhc{background-color:#fd6864}
+//.tg .tg-rpj7{background-color:#fd6864}
+//</style>';
 
-$html="
-    <style>
-    @page {
-  size: 8.5in 11in;  <length>{1,2} | auto | portrait | landscape  ('em' 'ex' and % are not allowed; length values are width height
-  margin: 10%; <any of the usual CSS values for margins> (% of page-box width for LR, of height for TB)
-  margin-header: 5mm; <any of the usual CSS values for margins>
-  margin-footer: 5mm; <any of the usual CSS values for margins>
-  marks: crop | cross | none
-  header: html_myHTMLHeaderOdd;
-  footer: html_myHTMLFooterOdd;
-  background: ...
-  background-image: ...
-  background-position ...
-  background-repeat ...
-  background-color ...
-  background-gradient: ...
-}
-    .row {
-        margin-left: -15px;
-        margin-right: -15px;
-        box-sizing: border-box;
-        font-size: 100%;
-        font: inherit;
-        vertical-align: baseline;
-     }
-     .col-md-12 {
-        width: 100%;
-        float: left;
-        position: relative;
-        min-height: 1px;
-        padding-left: 15px;
-        padding-right: 15px;
-        font-size: 100%;
-        font: inherit;
-        vertical-align: baseline;
-     }
-     .col-md-6 {
-       width: 50%;
-       float: left;
-       position: relative;
-       min-height: 1px;
-       padding-left: 15px;
-       padding-right: 15px;
-       font-size: 100%;
-       font: inherit;
-       box-sizing: border-box;
-       vertical-align: baseline;
-     }
-     .blockquote {
-       padding: 10px 20px;
-       margin: 0 0 20px;
-       font-size: 17.5px;
-       border-left: 5px solid #eee;
-       color: #666;
-       font-style: italic;
-       font: inherit;
-       vertical-align: baseline;
-       box-sizing: border-box;
-     }
-    </style>";
-    
-$html.="<div class='row' style ='margin-left: -15px; margin-right: -15px; box-sizing: border-box; margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline;'>
-    <div class='col-md-12'>
+
+//$html.="
+//    <style>
+//
+//    .row {
+//        margin-left: -15px;
+//        margin-right: -15px;
+//        box-sizing: border-box;
+//        font-size: 100%;
+//        font: inherit;
+//        vertical-align: baseline;
+//     }
+//     .col-md-12 {
+//        width: 100%;
+//        float: left;
+//        position: relative;
+//        min-height: 1px;
+//        padding-left: 15px;margin-left: -15px;
+//        margin-right: -15px;
+//        box-sizing: border-box;
+//        font-size: 100%;
+//        font: inherit;
+//        vertical-align: baseline;
+//        padding-right: 15px;
+//        font-size: 100%;
+//        font: inherit;
+//        vertical-align: baseline;
+//     }
+//     .col-md-6 {
+//       width: 50%;
+//       float: left;
+//       position: relative;
+//       min-height: 1px;
+//       padding-left: 15px;
+//       padding-right: 15px;
+//       font-size: 100%;
+//       font: inherit;
+//       box-sizing: border-box;
+//       vertical-align: baseline;
+//     }
+//     .blockquote {
+//       padding: 10px 20px;
+//       margin: 0 0 20px;
+//       font-size: 17.5px;
+//       border-left: 5px solid #eee;
+//       color: #666;
+//       font-style: italic;
+//       font: inherit;
+//       vertical-align: baseline;
+//       box-sizing: border-box;
+//     }
+//    </style>";
+//    
+
+$html.="<table align='right' width='25%'>
+                <tr>
+                    <td></td>
+                    <td><img src='".Yii::app()->baseUrl."/images/banavih_ndice1.png' style='width: 25%;'/>
+                    </td>
+                </tr>
+            </table>";
+
+$html.="<div class='row' style ='margin-left: 1%; margin-right: 1%;'>
+    <div class='col-md-12' style ='margin-left: 0.1%; margin-right: 0.1%;'>
         <div>
             <h4><i class='glyphicon glyphicon-home'></i> Unidad Multifamiliar</h4>
-            <div class='col-md-6'> 
-                <blockquote>
+            <div class='col-md-6' style ='margin-left: 0.1%; margin-right: 20%; width: 40%;'> 
+                <blockquote style='padding: 10px 20px;   margin: 0 0 20px;   font-size: 17.5px;   border-left: 5px solid #eee;'>
                     <p><b>Nombre del Desarrollo: </b>".$model->unidadHabitacional->desarrollo->nombre;
 $html.="            <br/>
                     <b>Nombre de la Unidad Habitacional:</b> ".$model->unidadHabitacional->nombre;
 $html.="            <br/></p>
                 </blockquote>
-            </div>
-            <div class='col-md-6'>
-                <div class='text-right' style='margin-right: 1em;'>
-                    <img src='".Yii::app()->baseUrl."/images/banavih_ndice1.png' style='width: 25%;'/>              
-                </div>
             </div>
         </div>
     </div>
@@ -88,7 +132,7 @@ $html.="            <br/></p>
     <div class='col-md-12'>
         <div>  
             <h4><i class='glyphicon glyphicon-globe'></i> Ubicación del Desarrollo</h4>
-            <div class='col-md-6'> 
+            
                 <blockquote>
                     <p>
                         <b> Estado:</b> ".$model->unidadHabitacional->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion;
@@ -98,7 +142,7 @@ $html.="               <br/>
                         <b> Parroquia:</b> ".$model->unidadHabitacional->desarrollo->fkParroquia->strdescripcion;
 $html.="           </p>
                 </blockquote>
-            </div>
+            
         </div>
     </div>
     <div class='col-md-12'>
@@ -199,7 +243,10 @@ $mpdf->SetAuthor('BANAVIH - Banco Nacional de Vivienda y Habitat');
 $mpdf->SetCreator('BANAVIH - Banco Nacional de Vivienda y Habitat');
 $mpdf->SetHTMLHeader($cabecera);
 $mpdf->SetFooter('Generado desde el Sistema de Protocolización el ' . date('d-m-Y') . ' a las ' . date('h:i:A') .'' . Yii::app()->user->name .' |                        Página {PAGENO}/{nbpg}');
-$mpdf->WriteHTML($html);
-$mpdf->Output('Desarrollo-Habitacional-'.$model->id_vivienda. ' .pdf','D');var_dump($html);die();
+$n = dirname(dirname(dirname(__DIR__))) . '/css/style_pdf.css';
+$stylesheet = file_get_contents('/var/www/hola-bebe/protocolizacion/css/stylepdf.css');
+$mpdf->WriteHTML($stylesheet,1);
+$mpdf->WriteHTML($html,2);var_dump($html);die();
+$mpdf->Output('Desarrollo-Habitacional-'.$model->id_vivienda. ' .pdf','D');
 exit;
 ?>
