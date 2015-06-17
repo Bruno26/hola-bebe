@@ -1,7 +1,7 @@
 <?php
 
 $pdf = Yii::createComponent('application.vendors.mpdf.mpdf');
-$cabecera = '<img src="' . Yii::app()->request->baseUrl . '/images/cintillo_200_admirable.jpg"/>';
+$cabecera = '<img src="' . Yii::app()->request->baseUrl . '/images/cintillo.jpg"/>';
 
 
 $html.=
