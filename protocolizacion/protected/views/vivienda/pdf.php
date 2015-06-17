@@ -169,9 +169,6 @@ $html.= "<br/>
             </tr>
         </table>";
 
-
-
-
 $mpdf = new mPDF('c', 'LETTER');
 $mpdf->SetTitle('<b>Detalle: </b>' . $model->unidadHabitacional->desarrollo->nombre . ' / ' . $model->unidadHabitacional->nombre . ' / ' . $model->nro_vivienda);
 $mpdf->SetMargins(5, 280, 30);
