@@ -1,13 +1,7 @@
-<?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
-	'id'=>'beneficiario-form',
-	'enableAjaxValidation'=>false,
-));  ?>
-
-
 <?php
- $baseUrl = Yii::app()->baseUrl;
- $numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
- $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
+$baseUrl = Yii::app()->baseUrl;
+$numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
+$Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
 
 
 Yii::app()->clientScript->registerScript('Beneficiario', "
@@ -36,17 +30,15 @@ Yii::app()->clientScript->registerScript('Beneficiario', "
 
 
   ");
-
 ?>
 
-<?php #echo $form->errorSummary($model); ?>
-
+<?php #echo $form->errorSummary($model);  ?>
 <div class="row">
     <div class="row-fluid">
 
         <div class='col-md-4'>
             <?php
-            #echo $form->textFieldGroup($model,'fecha_creacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5'))));
+            echo $form->textFieldGroup($model,'beneficiario_temporal_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','value'=>4))));
             echo $form->datePickerGroup($model, 'fecha_censo', array('widgetOptions' =>
                 array(
                     'options' => array(
@@ -60,7 +52,7 @@ Yii::app()->clientScript->registerScript('Beneficiario', "
                         'autoclose' => true,
                     ),
                     'htmlOptions' => array(
-                       /* 'class' => 'span5 limpiar', */
+                        /* 'class' => 'span5 limpiar', */
                         'readonly' => true,
                     ),
                 ),
@@ -71,7 +63,7 @@ Yii::app()->clientScript->registerScript('Beneficiario', "
             ?>
         </div>
         <div class="col-md-4">
-          <?php
+            <?php
             echo $form->dropDownListGroup($model, 'nacionalidad', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
                 'widgetOptions' => array(
                     'data' => Maestro::FindMaestrosByPadreSelect(96, 'descripcion DESC'),
@@ -81,42 +73,42 @@ Yii::app()->clientScript->registerScript('Beneficiario', "
             );
             ?>
         </div>
-         <div class="col-md-4">
-              <?php
+        <div class="col-md-4">
+            <?php
             echo $form->textFieldGroup($model, 'cedula', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8,
                         'onblur' => "buscarBeneficiarioTemporal($('#Beneficiario_nacionalidad').val(),$(this).val())"
             ))));
             ?>
-               <?php echo $form->error($model,'cedula'); ?>
+            <?php echo $form->error($model, 'cedula'); ?>
         </div>
-  </div>
+    </div>
 
-     <div class="row-fluid">
+    <div class="row-fluid">
         <div class='col-md-5'>
             <?php
-           echo $form->textFieldGroup($model,'primer_apellido',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
+            echo $form->textFieldGroup($model, 'primer_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));
             ?>
         </div>
         <div class='col-md-5'>
             <?php
-            echo $form->textFieldGroup($model,'segundo_apellido',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
+            echo $form->textFieldGroup($model, 'segundo_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));
             ?>
         </div>
     </div>
 
-     <div class="row-fluid">
+    <div class="row-fluid">
         <div class='col-md-5'>
             <?php
-           echo $form->textFieldGroup($model,'primer_nombre',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
+            echo $form->textFieldGroup($model, 'primer_nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));
             ?>
         </div>
         <div class='col-md-5'>
             <?php
-            echo $form->textFieldGroup($model,'segundo_nombre',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
+            echo $form->textFieldGroup($model, 'segundo_nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));
             ?>
         </div>
     </div>
- </div>
+</div>
 
 
 <div class="row">
@@ -149,7 +141,7 @@ Yii::app()->clientScript->registerScript('Beneficiario', "
         </div>
 
         <div class='col-md-5'>
-         
+
             <?php echo CHtml::activeLabel($model, 'sexo'); ?><br>
             <?php
             $this->widget('booster.widgets.TbSwitch', array(
@@ -160,13 +152,13 @@ Yii::app()->clientScript->registerScript('Beneficiario', "
                     'offText' => 'Femenino',
                 ),
                 'htmlOptions' => array(
-                      'class' => 'span5',
+                    'class' => 'span5',
                 // 'onChange' => '',
                 )
                     )
             );
             ?> 
-   
+
         </div>    
     </div>
 </div>
@@ -174,15 +166,15 @@ Yii::app()->clientScript->registerScript('Beneficiario', "
 <div class="row">
     <div class="row-fluid">
         <div class='col-md-5'>
-             <?php
-                 echo $form->textFieldGroup($model,'estado_civil',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>100))));
-                ?>
+            <?php
+            echo $form->textFieldGroup($model, 'estado_civil', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100))));
+            ?>
         </div>
-         <div class='col-md-5'>
-                <?php
-                 echo $form->textFieldGroup($model,'telf_habitacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
-                ?>
-           </div>
+        <div class='col-md-5'>
+            <?php
+            echo $form->textFieldGroup($model, 'telf_habitacion', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));
+            ?>
+        </div>
     </div>
 </div>
 
@@ -191,49 +183,47 @@ Yii::app()->clientScript->registerScript('Beneficiario', "
 <div class="row">
     <div class="row-fluid">
         <div class='col-md-5'>
-                <?php
-                 echo $form->textFieldGroup($model,'telf_celular',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
-                 ?>
-           </div>
+            <?php
+            echo $form->textFieldGroup($model, 'telf_celular', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));
+            ?>
+        </div>
 
 
         <div class='col-md-5'>
-        <?php echo $form->labelEx($model, 'correo'); ?>
-        <?php
-        $this->widget(
-                'booster.widgets.TbSelect2', array(
-            'asDropDownList' => false,
-            'name' => CHtml::activeId($model, 'correo'),
-            'attribute' => 'correo',
-            'htmlOptions' => array(
-                'onchange' => 'emailCheck(this.value,this.id);',
-            ),
-            'options' => array(
-                'tags' => array(),
-                'placeholder' => 'Ingrese su Correo Electrónico!',
-                'width' => '100%',
-                'tokenSeparators' => array(',', ' '),
-                'multiple' => true,
-                'maximumInputLength' => 150,
-                //'minimumInputLength' => ,
-                'maximumSelectionSize' => 2,
-                'allowClear' => true,
-                'items' => 4,
-            )
+            <?php echo $form->labelEx($model, 'correo'); ?>
+            <?php
+            $this->widget(
+                    'booster.widgets.TbSelect2', array(
+                'asDropDownList' => false,
+                'name' => CHtml::activeId($model, 'correo'),
+                'attribute' => 'correo',
+                'htmlOptions' => array(
+                    'onchange' => 'emailCheck(this.value,this.id);',
+                ),
+                'options' => array(
+                    'tags' => array(),
+                    'placeholder' => 'Ingrese su Correo Electrónico!',
+                    'width' => '100%',
+                    'tokenSeparators' => array(',', ' '),
+                    'multiple' => true,
+                    'maximumInputLength' => 150,
+                    //'minimumInputLength' => ,
+                    'maximumSelectionSize' => 2,
+                    'allowClear' => true,
+                    'items' => 4,
                 )
-        );
-        ?>
-         <?php echo $form->error($model,'correo'); ?>
+                    )
+            );
+            ?>
+            <?php echo $form->error($model, 'correo'); ?>
         </div>
     </div> 
 </div>           
 
 <div class="form-actions">
-	<?php /*$this->widget('booster.widgets.TbButton', array(
-			'buttonType'=>'submit',
-			'context'=>'primary',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
-		)); */ ?>
+    <?php /* $this->widget('booster.widgets.TbButton', array(
+      'buttonType'=>'submit',
+      'context'=>'primary',
+      'label'=>$model->isNewRecord ? 'Create' : 'Save',
+      )); */ ?>
 </div>
-
-<?php $this->endWidget(); ?>

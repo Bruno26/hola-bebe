@@ -72,24 +72,33 @@ class BeneficiarioController extends Controller {
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
-         
+
         if (isset($_POST['Beneficiario'])) {
-                           var_dump('Entrro');
+            $model->attributes = $_POST['Beneficiario'];
 
-                      /*   ********* Inserto Beneficiario *************  */
+            $Existe = BeneficiarioTemporal::model()->findByPk($model->beneficiario_temporal_id);
+            if (empty($Existe)) {
+                $this->render('create', array(
+                    'model' => $model, 'desarrollo' => $desarrollo, 'municipio' => $municipio, 'estado' => $estado, 'parroquia' => $parroquia, 'error' => 1
+                ));
+                Yii::app()->end();
+            } else {
+                echo '<pre>';var_dump($model);die;
+                $this->redirect(array('grupoFamiliar/create', 'id' => 2));
+            }
 
-                      /*   ********************************************  */
 
-                      /*   ********* Unidad Familiar  *************  */
+            /*             * ******** Inserto Beneficiario *************  */
 
-                      /*   ********************************************  */
+            /*             * *******************************************  */
 
-                      /*   ********* Inserto traza        *************  */
+            /*             * ******** Unidad Familiar  *************  */
 
-                      /*   ********************************************  */
+            /*             * *******************************************  */
 
+            /*             * ******** Inserto traza        *************  */
 
-                      $this->redirect(array('grupoFamiliar/create','id'=>2));
+            /*             * *******************************************  */
         }
 
         $this->render('create', array(
@@ -146,7 +155,7 @@ class BeneficiarioController extends Controller {
 //        $rowFaov = Yii::app()->db->createCommand($sqlFaov)->queryRow();
 //        
 //        $consulta->total_personas_cotizando=$rowFaov['faov'];  //insert para unidad familiar total de personas cotizando
-        
+
 
         if (isset($_POST['Beneficiario']['fuente_ingreso_id'])) {
             $model->attributes = $_POST['Beneficiario'];
@@ -192,7 +201,8 @@ class BeneficiarioController extends Controller {
 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        } else
+        }
+        else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
