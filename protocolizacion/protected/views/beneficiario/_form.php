@@ -1,7 +1,7 @@
 
 
 
-<?php echo $form->hiddenField($model, 'id_beneficiario');  ?>
+<?php echo $form->hiddenField($model, 'beneficiario_temporal_id', array('value' => 7)); ?>
 
 
 <div class="row">
@@ -31,7 +31,7 @@
         );
         ?>
     </div>
-      <div class='col-md-3'>
+    <div class='col-md-3'>
         <?php
         echo $form->textFieldGroup($model, 'rif', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20,))));
         ?>
@@ -121,7 +121,6 @@
             ),
             'htmlOptions' => array(
                 'class' => 'span5',
-            
             )
                 )
         );
@@ -139,7 +138,7 @@
 <div class="row">
     <div class='col-md-4'>
         <?php
-        echo $form->textFieldGroup($model, 'telf_habitacion', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200,'readonly' => true))));
+        echo $form->textFieldGroup($model, 'telf_habitacion', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200, 'readonly' => true))));
         ?>
     </div>
     <div class='col-md-4'>

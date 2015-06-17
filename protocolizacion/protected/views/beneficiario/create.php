@@ -27,29 +27,9 @@ $baseUrl = Yii::app()->baseUrl;
 $numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
 $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
 
-
 Yii::app()->clientScript->registerScript('Beneficiario', "
-
-
-
     $(document).ready(function(){
          $('#Beneficiario_cedula').numeric();
-
-         /*  ------  Bloqueo campos    ------- */
-
-//           $('#Beneficiario_primer_apellido').attr('readonly', true);
-//           $('#Beneficiario_segundo_apellido').attr('readonly', true);
-//           $('#Beneficiario_primer_nombre').attr('readonly', true);
-//           $('#Beneficiario_segundo_nombre').attr('readonly', true);
-//           $('#Beneficiario_fecha_nacimiento').attr('readonly', true);
-//           $('#Beneficiario_sexo').attr('disabled', true);
-//           $('#Beneficiario_estado_civil').attr('readonly', true);
-//           $('#Beneficiario_telf_habitacion').attr('readonly', true);
-//           $('#Beneficiario_telf_celular').attr('readonly', true);
-           $('#Beneficiario_correo').attr('readonly', true);  
-           
-         /*   -------------------------------- */                
-             
     }); 
 
 
