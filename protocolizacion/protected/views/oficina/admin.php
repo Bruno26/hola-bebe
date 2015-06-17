@@ -73,6 +73,7 @@ function apellido($selec,$iD){
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'oficina-grid',
     'dataProvider' => $model->search(),
+    'type' => 'striped bordered condensed',
     //'filter' => $model,
     'columns' => array(
         'id_oficina' => array(

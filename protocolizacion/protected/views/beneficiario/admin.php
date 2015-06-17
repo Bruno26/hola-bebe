@@ -41,6 +41,7 @@ return false;
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'beneficiario-grid',
     'dataProvider' => $model->search(),
+    'type' => 'striped bordered condensed',
 //    'filter' => $model,
     'columns' => array(
         array(
