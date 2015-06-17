@@ -1,23 +1,50 @@
 <?php
-$this->breadcrumbs=array(
-	'Beneficiarios'=>array('index'),
-	'Create',
-);
-$this->menu=array(
-array('label'=>'List Beneficiario','url'=>array('index')),
-array('label'=>'Manage Beneficiario','url'=>array('admin')),
-);
+$form = $this->beginWidget('booster.widgets.TbActiveForm', array(
+    'id' => 'datosLaborales-form',
+    'enableAjaxValidation' => false,
+    'enableClientValidation' => true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true,
+        'validateOnChange' => true,
+        'validateOnType' => true,
+    ),
+        ));
+?>
+<?php
+$baseUrl = Yii::app()->baseUrl;
+$numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
+$Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
+
+
+Yii::app()->clientScript->registerScript('Beneficiario', "
+
+
+
+    $(document).ready(function(){
+         $('#Beneficiario_cedula').numeric();
+
+         /*  ------  Bloqueo campos    ------- */
+
+//           $('#Beneficiario_primer_apellido').attr('readonly', true);
+//           $('#Beneficiario_segundo_apellido').attr('readonly', true);
+//           $('#Beneficiario_primer_nombre').attr('readonly', true);
+//           $('#Beneficiario_segundo_nombre').attr('readonly', true);
+//           $('#Beneficiario_fecha_nacimiento').attr('readonly', true);
+//           $('#Beneficiario_sexo').attr('disabled', true);
+//           $('#Beneficiario_estado_civil').attr('readonly', true);
+//           $('#Beneficiario_telf_habitacion').attr('readonly', true);
+//           $('#Beneficiario_telf_celular').attr('readonly', true);
+           $('#Beneficiario_correo').attr('readonly', true);  
+           
+         /*   -------------------------------- */                
+             
+    }); 
+
+
+  ");
 ?>
 
-
 <?php
-$form = $this->beginWidget('booster.widgets.TbActiveForm', array(
-    'id' => 'unidad-habitacional-form',
-    'enableAjaxValidation' => false,
-        ));
-
-
-
 
     $this->widget('booster.widgets.TbProgress',
         array(
