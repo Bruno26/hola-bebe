@@ -115,7 +115,9 @@ class OficinaController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
@@ -126,7 +128,7 @@ class OficinaController extends Controller {
         }
 
         $this->render('update', array(
-            'model' => $model,
+            'model' => $model,  'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia
         ));
     }
 

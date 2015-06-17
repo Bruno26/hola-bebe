@@ -1,7 +1,6 @@
 <?php
 
 class AbogadosController extends Controller {
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -29,7 +28,7 @@ class AbogadosController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update','pdf'),
+                'actions' => array('create', 'update', 'pdf'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -84,9 +83,17 @@ class AbogadosController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
+        $consulta = ConsultaOracle::setPersona('nacionalidad,cedula,primer_nombre,primer_apellido', $model->persona_id);
+//        var_dump($consulta);die;
+        $nacio = ($consulta['NACIONALIDAD'] == 1) ? 'V-' : 'E-';
+        $model->cedula = $nacio . '' . $consulta['CEDULA'];
+        $model->primer_nombre = $consulta['PRIMER_NOMBRE'];
+        $model->primer_apellido = $consulta['PRIMER_APELLIDO'];
 
         if (isset($_POST['Abogados'])) {
             $model->attributes = $_POST['Abogados'];
@@ -96,6 +103,7 @@ class AbogadosController extends Controller {
 
         $this->render('update', array(
             'model' => $model,
+            'consulta' => $consulta,
         ));
     }
 
@@ -162,13 +170,11 @@ class AbogadosController extends Controller {
             Yii::app()->end();
         }
     }
-    
+
     public function actionPdf($id) {
-      $this->render('pdf', array(
-          'model' => $this->loadModel($id),
-      ));
-
-
+        $this->render('pdf', array(
+            'model' => $this->loadModel($id),
+        ));
     }
 
 }

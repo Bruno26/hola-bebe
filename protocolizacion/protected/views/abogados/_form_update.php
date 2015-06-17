@@ -11,20 +11,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 
         <div class='col-md-3'>
             <?php
-            echo $form->dropDownListGroup($model, 'nacionalidad', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
-                'widgetOptions' => array(
-                    'data' => Maestro::FindMaestrosByPadreSelect(96, 'descripcion DESC'),
-                    'htmlOptions' => array('empty' => 'SELECCIONE'),
-                )
-                    )
-            );
-            ?>
-        </div>
-        <div class='col-md-3'>
-            <?php
-            echo $form->textFieldGroup($model, 'cedula',  array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8,
-                        'onblur' => "buscarPersonaAbogado($('#Abogados_nacionalidad').val(),$(this).val())"
-            ))));
+            echo $form->textFieldGroup($model, 'cedula', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8, 'readonly' => true))));
             ?>
         </div>
         <div class='col-md-3'>

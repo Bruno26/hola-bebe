@@ -71,7 +71,7 @@
                     <div class="leftside-navigation">
                         <ul class="sidebar-menu" id="nav-accordion">
                             <li>
-                                <a href="<?php echo $this->createUrl('/site/index'); ?>">
+                                <a href="<?php echo $this->createUrl('/site/indexAdmin'); ?>">
                                     <i class="glyphicon glyphicon-home"></i>
                                     <span>Inicio</span>
                                 </a>
