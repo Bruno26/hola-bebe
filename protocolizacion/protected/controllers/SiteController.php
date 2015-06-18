@@ -37,7 +37,6 @@ class SiteController extends Controller {
             ),
         );
     }
-
     /**
      * This is the default 'index' action that is invoked
      * when an action is not explicitly requested by users.
@@ -46,11 +45,11 @@ class SiteController extends Controller {
         $TypeUser = Generico::TipoUsuario();
         if ($TypeUser == 2) {
             $this->layout = 'main';
-            $this->render('index');
+            $this->render('indexAdmin');
             Yii::app()->end();
         } else {
             $this->layout = 'principal';
-            $this->render('indexAdmin');
+            $this->render('index');
         }
     }
 
