@@ -98,11 +98,13 @@ $this->widget('booster.widgets.TbGridView',array(
             'filter' => Maestro::FindMaestrosByPadreSelect(99),
             //'htmlOptions' => array('style' => 'text-align: center', 'width' => '10px'),
         ),
+        
     'oficina_id' => array(
         'header' => 'Oficina',
         'name' => 'oficina_id',
         'value' => '$data->oficinaId->nombre',
-        'filter' => CHtml::listData(Abogados::model()->findall(), 'oficina_id', 'nombre'),
+        'filter' => CHtml::listData(Abogados::model()->findall(), 'oficina_id', 'oficina_id'),
+//        'filter' => CHtml::listData(Abogados::model()->findall(), 'oficina_id', 'nombre'),
          ),   
         
         'observaciones' => array(

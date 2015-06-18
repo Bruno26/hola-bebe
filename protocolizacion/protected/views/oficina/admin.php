@@ -128,7 +128,7 @@ $this->widget('booster.widgets.TbGridView', array(
         ),
     
 )));
-?>
+?> 
 
 
 <?php /*

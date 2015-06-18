@@ -109,7 +109,7 @@ if (isset($sms) && !empty($sms)) {
             'context' => 'danger',
             // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
             'headerIcon' => 'globe',
-            'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
+            'content' => $this->renderPartial('_form_update', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'consulta' => $consulta), TRUE),
                 )
         );
         ?>
