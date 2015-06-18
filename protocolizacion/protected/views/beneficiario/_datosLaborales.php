@@ -133,7 +133,7 @@
         <?php
         echo $form->dropDownListGroup($model, 'gen_cargo_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
             'widgetOptions' => array(
-                'data' => Maestro::FindMaestrosByPadreSelect(132, 'descripcion DESC'),
+                'data' => Maestro::FindMaestrosByPadreSelect(167, 'descripcion DESC'),
                 'htmlOptions' => array('empty' => 'SELECCIONE',
                 ),
             )

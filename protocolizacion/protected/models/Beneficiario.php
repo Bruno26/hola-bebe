@@ -74,6 +74,7 @@ class Beneficiario extends CActiveRecord {
     public $area_vivienda;
     public $tipo_vivienda;
     public $parroquia;
+    public $nombre_desarrollo;
 
     /*   ---------------------------------------------------------------- */
 
@@ -134,6 +135,7 @@ class Beneficiario extends CActiveRecord {
             'estado' => 'Estado',
             'municipio' => 'Municipio',
             'parroquia' => 'Parroquia',
+            'nombre_desarrollo' => 'Nombre del Desarrollo',
             'telf_habitacion' => 'Teléfono Habitación',
             'telf_celular' => 'Teléfono Celular',
             'correo_electronico' => 'Correo Electrónico',
@@ -145,20 +147,20 @@ class Beneficiario extends CActiveRecord {
             'rif' => 'Rif',
             'condicion_trabajo_id' => 'Condicion Trabajo',
             'fuente_ingreso_id' => 'Fuente Ingreso',
-            'relacion_trabajo_id' => 'Relacion Trabajo',
+            'relacion_trabajo_id' => 'Relación Trabajo',
             'sector_trabajo_id' => 'Sector Trabajo',
             'nombre_empresa' => 'Nombre Empresa',
-            'direccion_empresa' => 'Direccion Empresa',
+            'direccion_empresa' => 'Dirección Empresa',
             'telefono_trabajo' => 'Telefono Trabajo',
-            'gen_cargo_id' => 'Gen Cargo',
+            'gen_cargo_id' => 'Cargo',
             'ingreso_mensual' => 'Ingreso Mensual',
             'ingreso_declarado' => 'Ingreso Declarado',
             'ingreso_promedio_faov' => 'Ingreso Promedio Faov',
             'cotiza_faov' => 'Cotiza Faov',
-            'direccion_anterior' => 'Direccion Anterior',
+            'direccion_anterior' => 'Dirección Anterior',
             'parroquia_id' => 'Parroquia',
-            'urban_barrio' => 'Urban Barrio',
-            'av_call_esq_carr' => 'Av Call Esq Carr',
+            'urban_barrio' => 'Urbanización/Barrio',
+            'av_call_esq_carr' => 'Avenida/Calle/Esquina/Carretera',
             'zona' => 'Zona',
             'fecha_ultimo_censo' => 'Fecha Censo',
             'protocolizado' => 'Protocolizado',

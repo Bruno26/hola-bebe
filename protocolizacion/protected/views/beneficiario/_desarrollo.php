@@ -27,7 +27,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 
     <div class='col-md-4'>
         <?php
-        echo $form->textFieldGroup($desarrollo, 'nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200,'readonly' => true))));
+        echo $form->textFieldGroup($model, 'nombre_desarrollo', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200,'readonly' => true))));
         ?>
     </div>
     <div class='col-md-4'>
@@ -85,7 +85,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
     </div>
     <div class='col-md-3'>
         <?php
-        echo $form->textFieldGroup($vivienda, 'construccion_mt2', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));
+        echo $form->textFieldGroup($vivienda, 'construccion_mt2', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 4))));
         
         ?>
     </div>

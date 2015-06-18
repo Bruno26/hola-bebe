@@ -364,6 +364,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
 /*  +++++++++++++++++++++++++++++++++++++++++++++ */
 
 
+
 /*  /////////////////  PARA CENSO ////////////////////// */
 function buscarBeneficiarioTemporal(nacionalidad, cedula) {
 
@@ -376,7 +377,6 @@ function buscarBeneficiarioTemporal(nacionalidad, cedula) {
         bootbox.alert('Verifique que la cédula no esten vacios');
         return false;
     }
-
 
     $.ajax({
         url: baseUrl + "/ValidacionJs/BuscarPersonasBeneficiario",
@@ -399,10 +399,10 @@ function buscarBeneficiarioTemporal(nacionalidad, cedula) {
                 $('#Beneficiario_telf_celular').val(datos.persona.TELEFONOMOVIL);
                 $('#Beneficiario_correo_electronico').val(datos.persona.CORREO);
                 //datos de desarrollo 
-                $('#Tblestado_clvcodigo').val(datos.desarrollo.estado);
-                $('#Tblmunicipio_clvcodigo').val(datos.desarrollo.municipio);
-                $('#Desarrollo_parroquia_id').val(datos.desarrollo.parroquia_id);
-                $('#Desarrollo_nombre').val(datos.desarrollo.nombre);
+                $('#Beneficiario_estado').val(datos.desarrollo.estado);
+                $('#Beneficiario_municipio').val(datos.desarrollo.municipio);
+                $('#Beneficiario_parroquia').val(datos.desarrollo.parroquia_id);
+                $('#Beneficiario_nombre_desarrollo').val(datos.desarrollo.nombre);
                 $('#Desarrollo_urban_barrio').val(datos.desarrollo.urban_barrio);
                 $('#Desarrollo_av_call_esq_carr').val(datos.desarrollo.av_call_esq_carr);
                 $('#Desarrollo_zona').val(datos.desarrollo.zona);
@@ -411,6 +411,7 @@ function buscarBeneficiarioTemporal(nacionalidad, cedula) {
                 $('#Beneficiario_piso').val(datos.desarrollo.nro_piso);
                 $('#Beneficiario_numero_vivienda').val(datos.desarrollo.nro_vivienda);
                 $('#Beneficiario_tipo_vivienda').val(datos.desarrollo.tipo_vivienda_id);
+                $('#Beneficiario_beneficiario_temporal_id').val(datos.desarrollo.Temp);
 
             } else {
 
