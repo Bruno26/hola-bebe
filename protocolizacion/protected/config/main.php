@@ -7,7 +7,7 @@
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Protocolización',
-    'defaultController' => 'site/indexAdmin',
+    'defaultController' => 'vivienda/create',
     // preloading 'log' component
     'preload' => array(
         'log',
@@ -19,6 +19,8 @@ return array(
         'application.components.*',
         'application.modules.cruge.components.*',
         'application.modules.cruge.extensions.crugemailer.*',
+        'application.funciones.*',
+        'application.controllers.*',
     ),
     'modules' => array(
         'cruge' => array(
@@ -66,9 +68,9 @@ return array(
 //            // requerirá de un portlet para desplegar un menu con las opciones de administrador.
 //            //
             'generalUserManagementLayout' => 'ui',
-//            // permite indicar un array con los nombres de campos personalizados,
-//            // incluyendo username y/o email para personalizar la respuesta de una consulta a:
-//            // $usuario->getUserDescription();
+//            // permite indicar un array con los nombres de campos personalizados, 
+//            // incluyendo username y/o email para personalizar la respuesta de una consulta a: 
+//            // $usuario->getUserDescription(); 
             'userDescriptionFieldsArray' => array('email'),
         ),
         // uncomment the following to enable the Gii tool
@@ -84,6 +86,16 @@ return array(
     ),
     // application components
     'components' => array(
+        //Configuracion de session 
+        'session' => array(
+            'class' => 'CDbHttpSession',
+            'autoStart' => false,
+            'connectionID' => 'db',
+            'sessionTableName' => 'tblsession',
+            'timeout' => 900, // el timeout se asigna en el evento beforeAction del controlador Comprar, se toma el valor especificacado en el parametro "timeoutCompra" de este mismo archivo (params)
+            'cookieMode' => 'only',
+        ),
+        // Fin Configuracion de session 
         'user' => array(
             'allowAutoLogin' => true,
             'class' => 'application.modules.cruge.components.CrugeWebUser',
@@ -98,7 +110,7 @@ return array(
             'subjectprefix' => 'Tu Encabezado del asunto - ',
             'debug' => true,
         ),
-        //
+        // 
         // uncomment the following to enable URLs in path-format
         'urlManager' => array(
             'urlFormat' => 'path',
@@ -112,24 +124,24 @@ return array(
             'errorAction' => 'site/error',
         ),
         'db' => array(
-            'connectionString' => 'pgsql:host=xxx.xxx.x.xxx;dbname=xxxxxxxxxx', //cambiar host
+            'connectionString' => 'pgsql:host=xxx.xxx.x.xxx;dbname=xxxxxxxxxxxxxxx', //cambiar host
             'emulatePrepare' => false,
-            'username' => 'xxxxxxx',
-            'password' => 'xxxxxxx',
+            'username' => 'xxxxxxxx',
+            'password' => 'xxxxxxxx',
         ),
         'dbOarcle' => array(
             'class' => 'application.extensions.PHPPDO.CPdoDbConnection',
             'pdoClass' => 'PHPPDO',
             'connectionString' => 'oci:dbname=//xxx.xxx.x.xxx/xxxxx',
-            'username' => 'xxxxxxxxxx',
-            'password' => 'xxxxxxxxxx',
+            'username' => 'xxxxxxxxxxxxxxx',
+            'password' => 'xxxxxxxxxxxxxxx',
         ),
         'db3' => array(
-            'connectionString' => 'pgsql:host=xxx.xxx.x.xxx;dbname=xxxxxxx', //cambiar host
+            'connectionString' => 'pgsql:host=xxx.xxx.x.xxx;dbname=xxxxxxxxx', //cambiar host
             'class' => 'CDbConnection',
             'emulatePrepare' => false,
-            'username' => 'xxxxxxx',
-            'password' => 'xxxxxxx',
+            'username' => 'xxxxxxxx',
+            'password' => 'xxxxxxxx',
             'schemaCachingDuration' => 3600,
             'charset' => 'utf8',
         ),
@@ -137,45 +149,6 @@ return array(
             'class' => 'ext.booster.components.Booster',
             'responsiveCss' => true,
         ),
-
-        'ePdf' => array(
-            'class' => 'ext.yii-pdf.EYiiPdf',
-            'params' => array(
-                'mpdf' => array(
-                    'librarySourcePath' => 'application.vendors.mpdf.*',
-                    'constants' => array(
-                        '_MPDF_TEMP_PATH' => Yii::getPathOfAlias('application.runtime'),
-                    ),
-                    'class' => 'mpdf', // the literal class filename to be loaded from the vendors folder
-                /* 'defaultParams'     => array( // More info: http://mpdf1.com/manual/index.php?tid=184
-                  'mode'              => '', //  This parameter specifies the mode of the new document.
-                  'format'            => 'A4', // format A4, A5, ...
-                  'default_font_size' => 0, // Sets the default document font size in points (pt)
-                  'default_font'      => '', // Sets the default font-family for the new document.
-                  'mgl'               => 15, // margin_left. Sets the page margins for the new document.
-                  'mgr'               => 15, // margin_right
-                  'mgt'               => 16, // margin_top
-                  'mgb'               => 16, // margin_bottom
-                  'mgh'               => 9, // margin_header
-                  'mgf'               => 9, // margin_footer
-                  'orientation'       => 'P', // landscape or portrait orientation
-                  ) */
-                ),
-                'HTML2PDF' => array(
-                    'librarySourcePath' => 'application.vendors.html2pdf.*',
-                    'classFile' => 'html2pdf.class.php', // For adding to Yii::$classMap
-                /* 'defaultParams'     => array( // More info: http://wiki.spipu.net/doku.php?id=html2pdf:en:v4:accueil
-                  'orientation' => 'P', // landscape or portrait orientation
-                  'format'      => 'A4', // format A4, A5, ...
-                  'language'    => 'en', // language: fr, en, it ...
-                  'unicode'     => true, // TRUE means clustering the input text IS unicode (default = true)
-                  'encoding'    => 'UTF-8', // charset encoding; Default is UTF-8
-                  'marges'      => array(5, 5, 5, 8), // margins by default, in order (left, top, right, bottom)
-                  ) */
-                )
-            ),
-        ),
-
         'log' => array(
             'class' => 'CLogRouter',
             'routes' => array(
