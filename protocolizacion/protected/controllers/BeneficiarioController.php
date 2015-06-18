@@ -92,7 +92,7 @@ class BeneficiarioController extends Controller {
                 $model->persona_id = $Existe->persona_id;
                 if ($model->save()) {
                     $viviendaUpdate = ViviendaController::loadModel($Existe->vivienda_id);
-                    $viviendaUpdate->construccion_mt2 = $_POST['vivienda']['construccion_mt2'];
+                    $viviendaUpdate->construccion_mt2 = $_POST['Vivienda']['construccion_mt2'];
                     if ($viviendaUpdate->save()) {
                         $unidad_familiar->nombre = $Existe->nombre_completo;
                         $unidad_familiar->beneficiario_id = $model->id_beneficiario;
