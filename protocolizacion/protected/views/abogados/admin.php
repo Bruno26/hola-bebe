@@ -21,7 +21,7 @@ return false;
 ");
 ?>
 
-<h1>Listado de Abogados</h1>
+<h1>Listado de Agente de Documentación</h1>
 
 
 

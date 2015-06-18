@@ -104,6 +104,7 @@ class BeneficiarioController extends Controller {
                         $unidad_familiar->fecha_creacion = 'now()';
                         $unidad_familiar->fecha_actualizacion = 'now()';
                         $unidad_familiar->usuario_id_creacion = Yii::app()->user->id;
+                        $unidad_familiar->estatus = 77;
                         if ($unidad_familiar->save()) {
                             $traza = Traza::actionInsertUpdateTraza(1, $model->id_beneficiario, 1);
                             $this->redirect(array('grupoFamiliar/create', 'id' => $unidad_familiar->id_unidad_familiar));
