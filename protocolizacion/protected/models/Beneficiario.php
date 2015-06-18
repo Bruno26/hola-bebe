@@ -74,7 +74,6 @@ class Beneficiario extends CActiveRecord {
     public $area_vivienda;
     public $tipo_vivienda;
     public $parroquia;
-   
 
     /*   ---------------------------------------------------------------- */
 
