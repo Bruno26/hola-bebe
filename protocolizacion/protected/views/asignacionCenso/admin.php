@@ -46,7 +46,7 @@ return false;
 <h1>Listado de Asignacion de Censos</h1>
 
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
+<?php echo CHtml::link('Búsqueda Avanzada','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
 	<?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -54,7 +54,8 @@ return false;
 </div><!-- search-form -->
 
 <?php $this->widget('booster.widgets.TbGridView',array(
-'id'=>'asignacion-censo-grid',
+'id'=>'beneficiario-temporal-grid',
+'type' => 'striped bordered condensed',
 'dataProvider'=>$model->search(),
 'filter'=>$model,
 //'columns'=>array(

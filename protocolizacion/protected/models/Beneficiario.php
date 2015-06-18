@@ -59,7 +59,7 @@ class Beneficiario extends CActiveRecord {
     public $primer_apellido;
     public $segundo_nombre;
     public $segundo_apellido;
-    public $fecha_censo;
+//    public $fecha_censo;
     public $fecha_nacimiento;
     public $estado_civil;
     public $sexo;
@@ -90,7 +90,7 @@ class Beneficiario extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('persona_id, rif, fecha_ultimo_censo, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
+            array('persona_id, rif, fecha_ultimo_censo, fecha_creacion, fecha_actualizacion, usuario_id_creacion,cedula', 'required'),
             array('persona_id, condicion_trabajo_id, fuente_ingreso_id, relacion_trabajo_id, sector_trabajo_id, gen_cargo_id, parroquia_id, usuario_id_creacion, usuario_id_actualizacion, estatus_beneficiario_id, condicion_laboral, beneficiario_temporal_id', 'numerical', 'integerOnly' => true),
             array('rif', 'length', 'max' => 10),
             array('nombre_empresa, direccion_empresa, direccion_anterior, urban_barrio, av_call_esq_carr, zona, observacion', 'length', 'max' => 200),
@@ -156,7 +156,7 @@ class Beneficiario extends CActiveRecord {
             'urban_barrio' => 'Urban Barrio',
             'av_call_esq_carr' => 'Av Call Esq Carr',
             'zona' => 'Zona',
-            'fecha_ultimo_censo' => 'Fecha Ultimo Censo',
+            'fecha_ultimo_censo' => 'Fecha Censo',
             'protocolizado' => 'Protocolizado',
             'fecha_creacion' => 'Fecha Creacion',
             'fecha_actualizacion' => 'Fecha Actualizacion',

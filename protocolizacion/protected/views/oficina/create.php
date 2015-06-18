@@ -74,6 +74,18 @@ if (isset($sms) && !empty($sms)) {
             'label' => $model->isNewRecord ? 'Guardar' : 'Save',
         ));
         ?>
+        <?php
+            $this->widget('booster.widgets.TbButton', array(
+                'context' => 'danger',
+                'label' => 'Cancelar',
+                'size' => 'large',
+                'id' => 'CancelarForm',
+                'icon' => 'ban-circle',
+                'htmlOptions' => array(
+                    'onclick' => 'document.location.href ="' . $this->createUrl('/') . '";'
+                )
+            ));
+        ?>
     </div>
 </div>
 <?php  $this->endWidget(); ?>

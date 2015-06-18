@@ -5,7 +5,7 @@
 </style>
 <section class="row">
     <div class="col-lg-12">
-        <h1 class="page-header" style="text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);">Visión General de Protocolización</h1>
+        <h1 class="page-header">Visión General de Protocolización</h1>
     </div>
 </section>
 

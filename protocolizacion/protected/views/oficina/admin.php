@@ -135,6 +135,7 @@ $this->widget('booster.widgets.TbGridView', array(
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'oficina-grid',
     'dataProvider' => $model->search(),
+    'type' => 'striped bordered condensed',
     //'filter' => $model,
     'columns' => array(
         'id_oficina' => array(

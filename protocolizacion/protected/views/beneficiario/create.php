@@ -70,16 +70,16 @@ $this->widget('booster.widgets.TbProgress', array(
 
 <div>
 
-<?php
-$this->widget(
-        'booster.widgets.TbLabel', array(
-    'context' => 'warning',
-    'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
-    // 'success', 'warning', 'important', 'info' or 'inverse'
-    'label' => 'Los campos marcados con * son requeridos',
-        )
-);
-?>
+    <?php
+    $this->widget(
+            'booster.widgets.TbLabel', array(
+        'context' => 'warning',
+        'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
+        // 'success', 'warning', 'important', 'info' or 'inverse'
+        'label' => 'Los campos marcados con * son requeridos',
+            )
+    );
+    ?>
     <br><br>
 
 
@@ -94,7 +94,7 @@ $this->widget(
         'context' => 'primary',
         'headerIcon' => 'user',
         /*  'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'), */
-        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
+        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model,'unidad_familiar' => $unidad_familiar), TRUE),
             #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
             )
     );
@@ -110,8 +110,7 @@ $this->widget(
         'context' => 'primary',
         'headerIcon' => 'home',
         /*  'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'), */
-        'content' => $this->renderPartial('_desarrollo', array('form' => $form, 'desarrollo' => $desarrollo, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
-            #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
+        'content' => $this->renderPartial('_desarrollo', array('form' => $form, 'desarrollo' => $desarrollo, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia,'vivienda' => $vivienda ), TRUE),
             )
     );
 
@@ -126,16 +125,16 @@ $this->widget(
 
     <div class="well">
         <div class="pull-center" style="text-align: right;">
-    <?php
-    $this->widget('booster.widgets.TbButton', array(
-        'buttonType' => 'submit',
-        'icon' => 'glyphicon glyphicon-floppy-saved',
-        'size' => 'large',
-        'id' => 'guardar',
-        'context' => 'primary',
-        'label' => $model->isNewRecord ? 'Guardar' : 'Save',
-    ));
-    ?>
+            <?php
+            $this->widget('booster.widgets.TbButton', array(
+                'buttonType' => 'submit',
+                'icon' => 'glyphicon glyphicon-floppy-saved',
+                'size' => 'large',
+                'id' => 'guardar',
+                'context' => 'primary',
+                'label' => $model->isNewRecord ? 'Guardar' : 'Save',
+            ));
+            ?>
 
             <?php
             $this->widget('booster.widgets.TbButton', array(
@@ -158,4 +157,4 @@ $this->widget(
 
 </div>
 
-            <?php $this->endWidget(); ?>
+<?php $this->endWidget(); ?>

@@ -1,14 +1,47 @@
-
-
-
 <?php echo $form->hiddenField($model, 'beneficiario_temporal_id', array('value' => 7)); ?>
 
-
 <div class="row">
-
-    <div class='col-md-3'>
+    <div class='col-md-4'>
         <?php
-        echo $form->datePickerGroup($model, 'fecha_censo', array('widgetOptions' =>
+        echo $form->textFieldGroup($model, 'rif', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20,))));
+        ?>
+    </div>
+    <div class="col-md-4">
+        <?php
+        echo $form->dropDownListGroup($model, 'nacionalidad', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
+            'widgetOptions' => array(
+                'data' => Maestro::FindMaestrosByPadreSelect(96, 'descripcion DESC'),
+                'htmlOptions' => array('empty' => 'SELECCIONE'),
+            )
+                )
+        );
+        ?>
+    </div>
+    <div class="col-md-4">
+        <?php
+        echo $form->textFieldGroup($model, 'cedula', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8,
+                    'onblur' => "buscarBeneficiarioTemporal($('#Beneficiario_nacionalidad').val(),$(this).val())"
+        ))));
+        ?>
+        <?php echo $form->error($model, 'cedula'); ?>
+    </div>
+</div>
+<div class="row">
+    <div class='col-md-6'>
+        <?php
+        echo $form->dropDownListGroup($unidad_familiar, 'condicion_unidad_familiar_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
+            'widgetOptions' => array(
+                'data' => Maestro::FindMaestrosByPadreSelect(139, 'descripcion DESC'),
+                'htmlOptions' => array('empty' => 'SELECCIONE'),
+            )
+                )
+        );
+        ?>
+    </div>
+    <div class='col-md-6'>
+
+        <?php
+        echo $form->datePickerGroup($model, 'fecha_ultimo_censo', array('widgetOptions' =>
             array(
                 'options' => array(
                     'language' => 'es',
@@ -30,32 +63,7 @@
         );
         ?>
     </div>
-    <div class='col-md-3'>
-        <?php
-        echo $form->textFieldGroup($model, 'rif', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20,))));
-        ?>
-    </div>
-    <div class="col-md-3">
-        <?php
-        echo $form->dropDownListGroup($model, 'nacionalidad', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
-            'widgetOptions' => array(
-                'data' => Maestro::FindMaestrosByPadreSelect(96, 'descripcion DESC'),
-                'htmlOptions' => array('empty' => 'SELECCIONE'),
-            )
-                )
-        );
-        ?>
-    </div>
-    <div class="col-md-3">
-        <?php
-        echo $form->textFieldGroup($model, 'cedula', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8,
-                    'onblur' => "buscarBeneficiarioTemporal($('#Beneficiario_nacionalidad').val(),$(this).val())"
-        ))));
-        ?>
-        <?php echo $form->error($model, 'cedula'); ?>
-    </div>
 </div>
-
 <div class="row">
     <div class='col-md-3'>
         <?php
