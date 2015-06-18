@@ -62,6 +62,7 @@ class Beneficiario extends CActiveRecord {
 //    public $fecha_censo;
     public $fecha_nacimiento;
     public $estado_civil;
+    public $sexo;
     public $telf_habitacion;
     public $telf_celular;
     public $correo_electronico;
@@ -69,7 +70,7 @@ class Beneficiario extends CActiveRecord {
     public $municipio;
     public $nomb_edif;
     public $piso;
-    public $numero;
+    public $numero_vivienda;
     public $area_vivienda;
     public $tipo_vivienda;
 
@@ -133,7 +134,7 @@ class Beneficiario extends CActiveRecord {
             'telf_celular' => 'Teléfono Celular',
             'correo_electronico' => 'Correo Electrónico',
             'nomb_edif' => 'Nombre Edificación',
-            'numero' => 'Número',
+            'numero_vivienda' => 'Número de Vivienda',
             'area_vivienda' => 'Área de Vivienda mt2',
             'id_beneficiario' => 'Id Beneficiario',
             'persona_id' => 'Persona',

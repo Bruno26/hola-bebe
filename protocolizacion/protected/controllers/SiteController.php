@@ -50,7 +50,7 @@ class SiteController extends Controller {
             Yii::app()->end();
         } else {
             $this->layout = 'principal';
-            $this->render('index');
+            $this->render('indexAdmin');
         }
     }
 

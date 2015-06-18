@@ -66,6 +66,7 @@ class BeneficiarioController extends Controller {
     public function actionCreate() {
         $model = new Beneficiario;
         $desarrollo = new Desarrollo;
+        $vivienda = new Vivienda;
         $unidad_familiar = new UnidadFamiliar;
         $estado = new Tblestado;
         $municipio = new Tblmunicipio;
@@ -74,7 +75,7 @@ class BeneficiarioController extends Controller {
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Beneficiario']['fecha_censo'])) {
+        if (isset($_POST['Beneficiario']['fecha_ultimo_censo'])) {
             $model->attributes = $_POST['Beneficiario'];
 
             $Existe = BeneficiarioTemporal::model()->findByPk($model->beneficiario_temporal_id);
@@ -86,31 +87,35 @@ class BeneficiarioController extends Controller {
             } else {
                 $model->fecha_creacion = 'now()';
                 $model->fecha_actualizacion = 'now()';
-                $model->fecha_ultimo_censo =  Generico::formatoFecha($_POST['Beneficiario']['fecha_censo']);
+                $model->fecha_ultimo_censo = Generico::formatoFecha($_POST['Beneficiario']['fecha_ultimo_censo']);
                 $model->usuario_id_creacion = Yii::app()->user->id;
-
                 $model->persona_id = $Existe->persona_id;
                 if ($model->save()) {
-                    $unidad_familiar->nombre = $Existe->nombre_completo;
-                    $unidad_familiar->beneficiario_id = $model->id_beneficiario;
-                    $unidad_familiar->ingreso_total_familiar = '0.00';
-                    $unidad_familiar->procedencia_beneficio_id = 140; //INIDICAR EN QUE MOMENTO SE CARGA ESTE DATO
-                    $unidad_familiar->fuente_datos_entrada_id = 90;
-                    $unidad_familiar->condicion_unidad_familiar_id = $_POST['UnidadFamiliar']['condicion_unidad_familiar_id']; //Berifivar cual es el id
-                    $unidad_familiar->total_personas_cotizando = 0;
-                    $unidad_familiar->fecha_creacion = 'now()';
-                    $unidad_familiar->fecha_actualizacion = 'now()';
-                    $unidad_familiar->usuario_id_creacion = Yii::app()->user->id;
-                    if ($unidad_familiar->save()) {
-                        $traza = Traza::actionInsertUpdateTraza(1, $model->id_beneficiario, 1);
-                        $this->redirect(array('grupoFamiliar/create', 'id' => $unidad_familiar->id_unidad_familiar));
-                        Yii::app()->end();
+                    $viviendaUpdate = ViviendaController::loadModel($Existe->vivienda_id);
+                    $viviendaUpdate->construccion_mt2 = $_POST['vivienda']['construccion_mt2'];
+                    if ($viviendaUpdate->save()) {
+                        $unidad_familiar->nombre = $Existe->nombre_completo;
+                        $unidad_familiar->beneficiario_id = $model->id_beneficiario;
+                        $unidad_familiar->ingreso_total_familiar = '0.00';
+                        $unidad_familiar->procedencia_beneficio_id = 140; //INIDICAR EN QUE MOMENTO SE CARGA ESTE DATO
+                        $unidad_familiar->fuente_datos_entrada_id = 90;
+                        $unidad_familiar->condicion_unidad_familiar_id = $_POST['UnidadFamiliar']['condicion_unidad_familiar_id']; //Berifivar cual es el id
+                        $unidad_familiar->total_personas_cotizando = 0;
+                        $unidad_familiar->fecha_creacion = 'now()';
+                        $unidad_familiar->fecha_actualizacion = 'now()';
+                        $unidad_familiar->usuario_id_creacion = Yii::app()->user->id;
+                        $unidad_familiar->estatus = 77;
+                        if ($unidad_familiar->save()) {
+                            $traza = Traza::actionInsertUpdateTraza(1, $model->id_beneficiario, 1);
+                            $this->redirect(array('grupoFamiliar/create', 'id' => $unidad_familiar->id_unidad_familiar));
+                            Yii::app()->end();
+                        }
                     }
                 }
             }
         }
         $this->render('create', array(
-            'model' => $model, 'desarrollo' => $desarrollo, 'municipio' => $municipio, 'estado' => $estado, 'parroquia' => $parroquia, 'unidad_familiar' => $unidad_familiar
+            'model' => $model, 'desarrollo' => $desarrollo, 'municipio' => $municipio, 'estado' => $estado, 'parroquia' => $parroquia, 'unidad_familiar' => $unidad_familiar, 'vivienda' => $vivienda
         ));
     }
 
@@ -122,9 +127,8 @@ class BeneficiarioController extends Controller {
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
 
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
-
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
         if (isset($_POST['Beneficiario'])) {
             $model->attributes = $_POST['Beneficiario'];
             if ($model->save())
