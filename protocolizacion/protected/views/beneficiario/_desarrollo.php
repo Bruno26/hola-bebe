@@ -111,7 +111,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 
     <div class='col-md-3'>
         <?php
-        echo $form->textFieldGroup($model, 'area_vivienda', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));
+        echo $form->textFieldGroup($vivienda, 'construccion_mt2', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));
         ?>
     </div>
     <div class='col-md-3'>

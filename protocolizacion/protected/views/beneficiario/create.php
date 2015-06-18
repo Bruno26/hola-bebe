@@ -110,7 +110,7 @@ $this->widget('booster.widgets.TbProgress', array(
         'context' => 'primary',
         'headerIcon' => 'home',
         /*  'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'), */
-        'content' => $this->renderPartial('_desarrollo', array('form' => $form, 'desarrollo' => $desarrollo, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, ), TRUE),
+        'content' => $this->renderPartial('_desarrollo', array('form' => $form, 'desarrollo' => $desarrollo, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia,'vivienda' => $vivienda ), TRUE),
             )
     );
 
