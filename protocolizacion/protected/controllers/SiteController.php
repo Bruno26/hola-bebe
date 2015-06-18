@@ -46,11 +46,11 @@ class SiteController extends Controller {
         $TypeUser = Generico::TipoUsuario();
         if ($TypeUser == 2) {
             $this->layout = 'main';
-            $this->render('index');
+            $this->render('indexAdmin');
             Yii::app()->end();
         } else {
             $this->layout = 'principal';
-            $this->render('indexAdmin');
+            $this->render('index');
         }
     }
 
