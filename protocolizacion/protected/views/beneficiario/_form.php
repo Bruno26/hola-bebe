@@ -1,4 +1,4 @@
-<?php echo $form->hiddenField($model, 'beneficiario_temporal_id', array('value' => 7)); ?>
+<?php echo $form->hiddenField($model, 'beneficiario_temporal_id'); ?>
 
 <div class="row">
     <div class='col-md-4'>

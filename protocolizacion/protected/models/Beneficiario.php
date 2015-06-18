@@ -74,6 +74,7 @@ class Beneficiario extends CActiveRecord {
     public $area_vivienda;
     public $tipo_vivienda;
     public $parroquia;
+    public $nombre_desarrollo;
 
     /*   ---------------------------------------------------------------- */
 
@@ -134,6 +135,7 @@ class Beneficiario extends CActiveRecord {
             'estado' => 'Estado',
             'municipio' => 'Municipio',
             'parroquia' => 'Parroquia',
+            'nombre_desarrollo' => 'Nombre del Desarrollo',
             'telf_habitacion' => 'Teléfono Habitación',
             'telf_celular' => 'Teléfono Celular',
             'correo_electronico' => 'Correo Electrónico',
