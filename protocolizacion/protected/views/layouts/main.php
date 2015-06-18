@@ -95,10 +95,10 @@
                                     <li class="sub-menu">
                                         <a href="javascript:;">
                                             <i class="glyphicon glyphicon-map-marker"></i>
-                                            <span>Abogados</span>
+                                            <span>Agente de Documentación</span>
                                         </a>
                                         <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/abogados/create'); ?>">Cargar Nuevo Abogado</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/abogados/create'); ?>">Cargar Nuevo Agente de Documentación</a></li>
                                             <li><a href="<?php echo $this->createUrl('/abogados/admin'); ?>">Listado</a></li>
                                         </ul>
                                     </li>

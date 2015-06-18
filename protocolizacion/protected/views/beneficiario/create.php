@@ -26,10 +26,12 @@ if (isset($error) && !empty($error)) {
 $baseUrl = Yii::app()->baseUrl;
 $numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
 $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
+$mascara = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/jquery.mask.min.js');
 
 Yii::app()->clientScript->registerScript('Beneficiario', "
     $(document).ready(function(){
          $('#Beneficiario_cedula').numeric();
+          $('#Beneficiario_rif').mask('A-BBBBBBBB-9', {translation: { 'A': {pattern: /[VEve]/}, 'B':{pattern: /[0-9]/}}, clearIfNotMatch: true});
     }); 
 
 

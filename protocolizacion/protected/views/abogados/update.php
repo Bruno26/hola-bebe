@@ -47,7 +47,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                 });
 
         ") ?>
-<h1>Abogados</h1>
+<h1>Agente de Documentación</h1>
 
 <div class="row">
     <div class="col-md-12">
