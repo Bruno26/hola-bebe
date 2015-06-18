@@ -22,7 +22,6 @@
                 ),
                 'htmlOptions' => array(
                     /* 'class' => 'span5 limpiar', */
-                    'readonly' => true,
                 ),
             ),
             'prepend' => '<i class="glyphicon glyphicon-calendar"></i>',
@@ -60,22 +59,22 @@
 <div class="row">
     <div class='col-md-3'>
         <?php
-        echo $form->textFieldGroup($model, 'primer_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200, 'readonly' => true))));
+        echo $form->textFieldGroup($model, 'primer_nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20, 'readonly' => true))));
         ?>
     </div>
     <div class='col-md-3'>
         <?php
-        echo $form->textFieldGroup($model, 'segundo_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200, 'readonly' => true))));
+        echo $form->textFieldGroup($model, 'segundo_nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20, 'readonly' => true))));
         ?>
     </div>
     <div class='col-md-3'>
         <?php
-        echo $form->textFieldGroup($model, 'primer_nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200, 'readonly' => true))));
+        echo $form->textFieldGroup($model, 'primer_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20, 'readonly' => true))));
         ?>
     </div>
     <div class='col-md-3'>
         <?php
-        echo $form->textFieldGroup($model, 'segundo_nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200, 'readonly' => true))));
+        echo $form->textFieldGroup($model, 'segundo_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20, 'readonly' => true))));
         ?>
     </div>
 </div>
@@ -84,48 +83,16 @@
 <div class="row">
     <div class='col-md-4'>
         <?php
-        echo $form->datePickerGroup($model, 'fecha_nacimiento', array('widgetOptions' =>
-            array(
-                'options' => array(
-                    'language' => 'es',
-                    'format' => 'dd/mm/yyyy',
-                    'startView' => 0,
-                    'minViewMode' => 0,
-                    'todayBtn' => 'linked',
-                    'weekStart' => 0,
-                    'endDate' => 'now()',
-                    'autoclose' => true,
-                ),
-                'htmlOptions' => array(
-                    'class' => 'span5 limpiar',
-                    'readonly' => true,
-                ),
-            ),
-            'prepend' => '<i class="glyphicon glyphicon-calendar"></i>',
-            'beforeShowDay' => 'DisableDays',
-                )
-        );
+        echo $form->textFieldGroup($model, 'fecha_nacimiento', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20, 'readonly' => true))));
         ?>
+
     </div>
 
     <div class='col-md-4'>
 
-        <?php echo CHtml::activeLabel($model, 'sexo'); ?><br>
         <?php
-        $this->widget('booster.widgets.TbSwitch', array(
-            'name' => 'sexo',
-            'options' => array(
-                'size' => 'large',
-                'onText' => 'Masculino',
-                'offText' => 'Femenino',
-            ),
-            'htmlOptions' => array(
-                'class' => 'span5',
-            )
-                )
-        );
-        ?> 
-
+        echo $form->textFieldGroup($model, 'sexo', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20, 'readonly' => true))));
+        ?>
     </div>    
     <div class='col-md-4'>
         <?php
@@ -147,32 +114,10 @@
         ?>
     </div>
     <div class='col-md-4'>
-        <?php echo $form->labelEx($model, 'correo'); ?>
         <?php
-        $this->widget(
-                'booster.widgets.TbSelect2', array(
-            'asDropDownList' => false,
-            'name' => CHtml::activeId($model, 'correo'),
-            'attribute' => 'correo',
-            'htmlOptions' => array(
-                'onchange' => 'emailCheck(this.value,this.id);',
-            ),
-            'options' => array(
-                'tags' => array(),
-                'placeholder' => 'Ingrese su Correo Electrónico!',
-                'width' => '100%',
-                'tokenSeparators' => array(',', ' '),
-                'multiple' => true,
-                'maximumInputLength' => 150,
-                //'minimumInputLength' => ,
-                'maximumSelectionSize' => 2,
-                'allowClear' => true,
-                'items' => 4,
-            )
-                )
-        );
+        echo $form->textFieldGroup($model, 'correo_electronico', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200, 'readonly' => true))));
         ?>
-        <?php // echo $form->error($model, 'correo'); ?>
+       
     </div>
 
 </div>
