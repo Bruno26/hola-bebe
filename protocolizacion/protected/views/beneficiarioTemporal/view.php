@@ -13,7 +13,7 @@ array('label'=>'Manage BeneficiarioTemporal','url'=>array('admin')),
 );
 ?>
 
-<h1>View BeneficiarioTemporal #<?php echo $model->id_beneficiario_temporal; ?></h1>
+<h1>Detalle de Adjudicado Temporal #<?php echo $model->id_beneficiario_temporal; ?></h1>
 
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
