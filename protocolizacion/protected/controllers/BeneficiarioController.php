@@ -170,6 +170,7 @@ class BeneficiarioController extends Controller {
 
 
         if (isset($_POST['Beneficiario']['parroquia_id'])) {
+            $model->cedula = 'campo';
             $model->attributes = $_POST['Beneficiario'];
             $model->parroquia_id = $_POST['Beneficiario']['parroquia_id'];
             $model->urban_barrio = $_POST['Beneficiario']['urban_barrio'];
@@ -186,12 +187,12 @@ class BeneficiarioController extends Controller {
 
 
             if ($model->save()) {
-                $idtraza = Traza::ObtenerIdTraza($idBeneficiario); // pemite la busqueda de la id de la traza 
+                $idtraza = Traza::ObtenerIdTraza($model->id_beneficiario); // pemite la busqueda de la id de la traza 
                 $delete = Traza::model()->findByPk($idtraza)->delete();
 
                 $this->redirect(array('admin'));
                 Yii::app()->end();
-            }
+            } 
         }
 
         $this->render('createDatos', array(
