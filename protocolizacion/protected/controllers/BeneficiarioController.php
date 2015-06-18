@@ -169,7 +169,7 @@ class BeneficiarioController extends Controller {
 //        $consulta->total_personas_cotizando=$rowFaov['faov'];  //insert para unidad familiar total de personas cotizando
 
 
-        if (isset($_POST['Beneficiario']['fuente_ingreso_id'])) {
+        if (isset($_POST['Beneficiario']['parroquia_id'])) {
             $model->attributes = $_POST['Beneficiario'];
             $model->parroquia_id = $_POST['Beneficiario']['parroquia_id'];
             $model->urban_barrio = $_POST['Beneficiario']['urban_barrio'];
@@ -183,15 +183,14 @@ class BeneficiarioController extends Controller {
             $model->direccion_empresa = $_POST['Beneficiario']['direccion_empresa'];
             $model->telefono_trabajo = $_POST['Beneficiario']['telefono_trabajo'];
             $model->gen_cargo_id = $_POST['Beneficiario']['gen_cargo_id'];
-//            $model->ingreso_mensual = $_POST['Beneficiario']['ingreso_mensual'];
-//            $model->ingreso_declarado = $_POST['Beneficiario']['ingreso_declarado'];
-//            $model->ingreso_promedio_faov = $_POST['Beneficiario']['ingreso_promedio_faov'];
+
 
             if ($model->save()) {
                 $idtraza = Traza::ObtenerIdTraza($idBeneficiario); // pemite la busqueda de la id de la traza 
                 $delete = Traza::model()->findByPk($idtraza)->delete();
 
-                $this->redirect(array('beneficiario/admin'));
+                $this->redirect(array('admin'));
+                Yii::app()->end();
             }
         }
 
@@ -263,4 +262,5 @@ class BeneficiarioController extends Controller {
             Yii::app()->end();
         }
     }
+
 }
