@@ -364,6 +364,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
 /*  +++++++++++++++++++++++++++++++++++++++++++++ */
 
 
+
 /*  /////////////////  PARA CENSO ////////////////////// */
 function buscarBeneficiarioTemporal(nacionalidad, cedula) {
 
@@ -376,7 +377,6 @@ function buscarBeneficiarioTemporal(nacionalidad, cedula) {
         bootbox.alert('Verifique que la cédula no esten vacios');
         return false;
     }
-
 
     $.ajax({
         url: baseUrl + "/ValidacionJs/BuscarPersonasBeneficiario",
