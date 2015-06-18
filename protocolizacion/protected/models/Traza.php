@@ -63,8 +63,7 @@ class Traza extends CActiveRecord {
             case 1:
                 $traza = new Traza;
                 $traza->id_entidad = $id_entidad;
-                $traza->n_traza = $nu_traza;
-                $traza->fecha_traza = 'now()';
+                $traza->traza = $nu_traza;
 
                 if ($traza->save()) {
                     return true;

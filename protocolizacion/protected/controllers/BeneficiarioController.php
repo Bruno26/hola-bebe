@@ -86,9 +86,8 @@ class BeneficiarioController extends Controller {
             } else {
                 $model->fecha_creacion = 'now()';
                 $model->fecha_actualizacion = 'now()';
-                $model->fecha_ultimo_censo = 'now()';
+                $model->fecha_ultimo_censo =  Generico::formatoFecha($_POST['Beneficiario']['fecha_censo']);
                 $model->usuario_id_creacion = Yii::app()->user->id;
-                $model->fecha_censo = Generico::formatoFecha($_POST['Beneficiario']['fecha_censo']);
 
                 $model->persona_id = $Existe->persona_id;
                 if ($model->save()) {
@@ -97,27 +96,21 @@ class BeneficiarioController extends Controller {
                     $unidad_familiar->ingreso_total_familiar = '0.00';
                     $unidad_familiar->procedencia_beneficio_id = 140; //INIDICAR EN QUE MOMENTO SE CARGA ESTE DATO
                     $unidad_familiar->fuente_datos_entrada_id = 90;
-                    $unidad_familiar->condicion_unidad_familiar_id = 40; //Berifivar cual es el id
+                    $unidad_familiar->condicion_unidad_familiar_id = $_POST['UnidadFamiliar']['condicion_unidad_familiar_id']; //Berifivar cual es el id
                     $unidad_familiar->total_personas_cotizando = 0;
                     $unidad_familiar->fecha_creacion = 'now()';
                     $unidad_familiar->fecha_actualizacion = 'now()';
                     $unidad_familiar->usuario_id_creacion = Yii::app()->user->id;
                     if ($unidad_familiar->save()) {
-                        $traza = Traza::InsertUpdateTraza(1, $model->id_beneficiario, 1);
+                        $traza = Traza::actionInsertUpdateTraza(1, $model->id_beneficiario, 1);
                         $this->redirect(array('grupoFamiliar/create', 'id' => $unidad_familiar->id_unidad_familiar));
                         Yii::app()->end();
-                    } else {
-                        var_dump($unidad_familiar->Errors);die;
                     }
-                } else {
-                    echo '<pre>';var_dump($model->Errors);die;
                 }
             }
-
         }
-
         $this->render('create', array(
-            'model' => $model, 'desarrollo' => $desarrollo, 'municipio' => $municipio, 'estado' => $estado, 'parroquia' => $parroquia,
+            'model' => $model, 'desarrollo' => $desarrollo, 'municipio' => $municipio, 'estado' => $estado, 'parroquia' => $parroquia, 'unidad_familiar' => $unidad_familiar
         ));
     }
 
@@ -216,8 +209,7 @@ class BeneficiarioController extends Controller {
 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        }
-        else
+        } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
