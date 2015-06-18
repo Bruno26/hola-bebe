@@ -263,5 +263,4 @@ class BeneficiarioController extends Controller {
             Yii::app()->end();
         }
     }
-
 }
