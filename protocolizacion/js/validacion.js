@@ -386,36 +386,36 @@ function buscarBeneficiarioTemporal(nacionalidad, cedula) {
         dataType: 'json',
         success: function (datos) {
             /* ++++ solo verifico en Persona  ++++  */
-            if (datos!=2){
+            if (datos != 2) {
                 //datos de beneficiario temporal
-            $('#Beneficiario_primer_nombre').val(datos.persona.PRIMERNOMBRE);
-            $('#Beneficiario_segundo_nombre').val(datos.persona.SEGUNDONOMBRE);
-            $('#Beneficiario_primer_apellido').val(datos.persona.PRIMERAPELLIDO);
-            $('#Beneficiario_segundo_apellido').val(datos.persona.SEGUNDOAPELLIDO);
-            $('#Beneficiario_fecha_nacimiento').val(datos.persona.FECHANACIMIENTO);
-            $('#Beneficiario_sexo').val(datos.persona.SEXO);
-            $('#Beneficiario_estado_civil').val(datos.persona.EDOCIVIL);
-            $('#Beneficiario_telf_habitacion').val(datos.persona.TELEFONOHAB);
-            $('#Beneficiario_telf_celular').val(datos.persona.TELEFONOMOVIL);
-            $('#Beneficiario_correo_electronico').val(datos.persona.CORREO);
-            //datos de desarrollo 
-            $('#Tblestado_clvcodigo').val(datos.desarrollo.estado);
-            $('#Tblmunicipio_clvcodigo').val(datos.desarrollo.municipio);
-            $('#Desarrollo_parroquia_id').val(datos.desarrollo.parroquia_id);
-            $('#Desarrollo_nombre').val(datos.desarrollo.nombre);
-            $('#Desarrollo_urban_barrio').val(datos.desarrollo.urban_barrio);
-            $('#Desarrollo_av_call_esq_carr').val(datos.desarrollo.av_call_esq_carr);
-            $('#Desarrollo_zona').val(datos.desarrollo.zona);
-            $('#Desarrollo_lote_terreno_mt2').val(datos.desarrollo.lote_terreno_mt2);
-            $('#Beneficiario_nomb_edif').val(datos.desarrollo.nomb_edif);
-            $('#Beneficiario_piso').val(datos.desarrollo.nro_piso);
-            $('#Beneficiario_numero_vivienda').val(datos.desarrollo.nro_vivienda);
-            $('#Beneficiario_tipo_vivienda').val(datos.desarrollo.tipo_vivienda_id);
+                $('#Beneficiario_primer_nombre').val(datos.persona.PRIMERNOMBRE);
+                $('#Beneficiario_segundo_nombre').val(datos.persona.SEGUNDONOMBRE);
+                $('#Beneficiario_primer_apellido').val(datos.persona.PRIMERAPELLIDO);
+                $('#Beneficiario_segundo_apellido').val(datos.persona.SEGUNDOAPELLIDO);
+                $('#Beneficiario_fecha_nacimiento').val(datos.persona.FECHANACIMIENTO);
+                $('#Beneficiario_sexo').val(datos.persona.SEXO);
+                $('#Beneficiario_estado_civil').val(datos.persona.EDOCIVIL);
+                $('#Beneficiario_telf_habitacion').val(datos.persona.TELEFONOHAB);
+                $('#Beneficiario_telf_celular').val(datos.persona.TELEFONOMOVIL);
+                $('#Beneficiario_correo_electronico').val(datos.persona.CORREO);
+                //datos de desarrollo 
+                $('#Tblestado_clvcodigo').val(datos.desarrollo.estado);
+                $('#Tblmunicipio_clvcodigo').val(datos.desarrollo.municipio);
+                $('#Desarrollo_parroquia_id').val(datos.desarrollo.parroquia_id);
+                $('#Desarrollo_nombre').val(datos.desarrollo.nombre);
+                $('#Desarrollo_urban_barrio').val(datos.desarrollo.urban_barrio);
+                $('#Desarrollo_av_call_esq_carr').val(datos.desarrollo.av_call_esq_carr);
+                $('#Desarrollo_zona').val(datos.desarrollo.zona);
+                $('#Desarrollo_lote_terreno_mt2').val(datos.desarrollo.lote_terreno_mt2);
+                $('#Beneficiario_nomb_edif').val(datos.desarrollo.nomb_edif);
+                $('#Beneficiario_piso').val(datos.desarrollo.nro_piso);
+                $('#Beneficiario_numero_vivienda').val(datos.desarrollo.nro_vivienda);
+                $('#Beneficiario_tipo_vivienda').val(datos.desarrollo.tipo_vivienda_id);
 
             } else {
-               
-                bootbox.alert('Cedula No Pertenece a un Beneficiario Temporal');
-                
+
+                bootbox.alert('Disculpe.Esta persona no se encuentra Adjudicada a una vivienda');
+
             }
         }
 

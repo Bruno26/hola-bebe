@@ -73,6 +73,8 @@ class Beneficiario extends CActiveRecord {
     public $numero_vivienda;
     public $area_vivienda;
     public $tipo_vivienda;
+    public $parroquia;
+   
 
     /*   ---------------------------------------------------------------- */
 
@@ -92,7 +94,7 @@ class Beneficiario extends CActiveRecord {
         return array(
             array('persona_id, rif, fecha_ultimo_censo, fecha_creacion, fecha_actualizacion, usuario_id_creacion,cedula', 'required'),
             array('persona_id, condicion_trabajo_id, fuente_ingreso_id, relacion_trabajo_id, sector_trabajo_id, gen_cargo_id, parroquia_id, usuario_id_creacion, usuario_id_actualizacion, estatus_beneficiario_id, condicion_laboral, beneficiario_temporal_id', 'numerical', 'integerOnly' => true),
-            array('rif', 'length', 'max' => 10),
+            array('rif', 'length', 'max' => 12),
             array('nombre_empresa, direccion_empresa, direccion_anterior, urban_barrio, av_call_esq_carr, zona, observacion', 'length', 'max' => 200),
             array('telefono_trabajo', 'length', 'max' => 11),
             array('codigo_trab', 'length', 'max' => 4),
@@ -130,6 +132,9 @@ class Beneficiario extends CActiveRecord {
      */
     public function attributeLabels() {
         return array(
+            'estado' => 'Estado',
+            'municipio' => 'Municipio',
+            'parroquia' => 'Parroquia',
             'telf_habitacion' => 'Teléfono Habitación',
             'telf_celular' => 'Teléfono Celular',
             'correo_electronico' => 'Correo Electrónico',
