@@ -12,7 +12,7 @@ array('label'=>'Delete Abogados','url'=>'#','linkOptions'=>array('submit'=>array
 array('label'=>'Manage Abogados','url'=>array('admin')),
 );
 ?>
-<h1> Detalle Abogado</h1>
+<h1> Detalle de Agente de Documentación</h1>
 
 <?php $this->widget('booster.widgets.TbPanel', array(
     'context' => 'primary',

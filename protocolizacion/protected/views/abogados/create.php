@@ -11,7 +11,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         )));
 ?>
 
-<h1>Registrar Abogados</h1>
+<h1>Registrar de Agentes de Documentación</h1>
 
 <div class="row">
     <div class="col-md-12">
