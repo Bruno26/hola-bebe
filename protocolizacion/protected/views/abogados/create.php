@@ -30,7 +30,6 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     </div>
 </div>
 <?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
-
 <div class="well">
     <div class="pull-center" style="text-align: right;">
         <?php
