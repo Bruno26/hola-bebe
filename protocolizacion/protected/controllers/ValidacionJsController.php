@@ -129,18 +129,32 @@ class ValidacionJsController extends Controller {
     public function actionBuscarVivienda() {
 
 
-
-        $Id = (isset($_POST['BeneficiarioTemporal']['unidad_habitacional_id']) ? $_POST['BeneficiarioTemporal']['unidad_habitacional_id'] : $_GET['vivienda_nro']);
+        $Id = (isset($_POST['BeneficiarioTemporal']['piso']) ? $_POST['BeneficiarioTemporal']['piso'] : $_GET['piso']);
         $Selected = isset($_GET['vivienda_nro']) ? $_GET['vivienda_nro'] : '';
+
+        $PISO = (int) (isset($_POST['BeneficiarioTemporal']['piso']) ? $_POST['BeneficiarioTemporal']['piso'] : 0);
+
+       // var_dump($PISO); die();
 
         if (!empty($Id)) {
             $criteria = new CDbCriteria;
-            $criteria->addCondition('t.unidad_habitacional_id = :id_unidad_habitacional');
-            $criteria->params = array(':id_unidad_habitacional' => $Id);
-            $criteria->order = 't.nro_vivienda ASC';
-            $criteria->select = 'nro_vivienda';
+            //$criteria->addCondition('t.unidad_habitacional_id = :id_unidad_habitacional');
+              $criteria->addCondition('nro_piso=:nro_piso');
+              $criteria->params['nro_piso']=$Id;
 
-            $data = CHtml::listData(Vivienda::model()->findAll($criteria), 'nro_vivienda', 'nro_vivienda');
+              $criteria->addCondition('asignada=:asignada');
+              $criteria->params['asignada']=0;
+
+              // $criteria->params = array(':asignada' => 0);
+             /* if($PISO != '')
+               $criteria->params = array('nro_piso' => (int) $PISO);   */
+
+            $criteria->order = 'nro_vivienda ASC';
+            $criteria->select = 'nro_vivienda,id_vivienda';
+
+          //  var_dump($criteria); die();
+
+            $data = CHtml::listData(Vivienda::model()->findAll($criteria), 'id_vivienda', 'nro_vivienda');
             echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
             foreach ($data as $id => $value) {
                 if ($Selected == $id) {
@@ -155,6 +169,11 @@ class ValidacionJsController extends Controller {
     }
 
     /*  /////////////////////////////////////////////////////////////////////// */
+
+   
+
+
+
 
     public function actionBuscarMunicipios() {
         $Id = (isset($_POST['Tblestado']['clvcodigo']) ? $_POST['Tblestado']['clvcodigo'] : $_GET['clvcodigo']);

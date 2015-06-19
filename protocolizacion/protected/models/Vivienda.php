@@ -43,7 +43,6 @@
  * @property ReasignacionVivienda[] $reasignacionViviendas
  */
 class Vivienda extends CActiveRecord {
-
     /**
      * @return string the associated database table name
      */
@@ -51,30 +50,32 @@ class Vivienda extends CActiveRecord {
         return 'vivienda';
     }
 
-    /**
-     * @return array validation rules for model attributes.
-     */
-    public function rules() {
-        // NOTE: you should only define rules for those attributes that
-        // will receive user inputs.
-        return array(
-            array('tipo_vivienda_id, unidad_habitacional_id, construccion_mt2, nro_piso, nro_vivienda, precio_vivienda, nro_estacionamientos, nro_habitaciones, nro_banos, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion,asignada', 'required'),
-            array('tipo_vivienda_id, unidad_habitacional_id, nro_estacionamientos, nro_habitaciones, nro_banos, fuente_datos_entrada_id, estatus_vivienda_id, usuario_id_creacion, usuario_id_actualizacion', 'numerical', 'integerOnly' => true),
-            array('construccion_mt2', 'length', 'max' => 4),
-            array('nro_piso', 'length', 'max' => 4),
-            array('nro_vivienda', 'length', 'max' => 4),
-            array('nro_estacionamientos', 'length', 'max' => 4),
-            array('nro_banos', 'length', 'max' => 4),
-            array('nro_habitaciones', 'length', 'max' => 4),
-            array('lindero_norte, lindero_sur, lindero_este, lindero_oeste, coordenadas', 'length', 'max' => 200),
-            array('precio_vivienda', 'length', 'max' => 16),
-            array('descripcion_estac', 'length', 'max' => 15),
-            array('sala, comedor, lavandero, cocina, asignada', 'safe'),
-            // The following rule is used by search().
-            // @todo Please remove those attributes that should not be searched.
-            array('id_vivienda, tipo_vivienda_id, unidad_habitacional_id, construccion_mt2, nro_piso, nro_vivienda, sala, comedor, lavandero, lindero_norte, lindero_sur, lindero_este, lindero_oeste, coordenadas, precio_vivienda, nro_estacionamientos, descripcion_estac, nro_habitaciones, nro_banos, fuente_datos_entrada_id, estatus_vivienda_id, cocina, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion,asignada', 'safe', 'on' => 'search'),
-        );
-    }
+	/**
+	 * @return array validation rules for model attributes.
+	 */
+	public function rules()
+	{
+		// NOTE: you should only define rules for those attributes that
+		// will receive user inputs.
+		return array(
+			array('tipo_vivienda_id, unidad_habitacional_id,  nro_piso, nro_vivienda, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion,asignada', 'required'),
+			array('tipo_vivienda_id, unidad_habitacional_id, nro_estacionamientos, nro_habitaciones, nro_banos, fuente_datos_entrada_id, estatus_vivienda_id, usuario_id_creacion, usuario_id_actualizacion', 'numerical', 'integerOnly'=>true),
+			array('construccion_mt2', 'length', 'max'=>4),
+			array('nro_piso', 'length', 'max'=>4),
+			array('nro_vivienda', 'length', 'max'=>4),
+			array('nro_estacionamientos', 'length', 'max'=>4),
+			array('nro_banos', 'length', 'max'=>4),
+			array('nro_habitaciones', 'length', 'max'=>4),
+			array('lindero_norte, lindero_sur, lindero_este, lindero_oeste, coordenadas', 'length', 'max'=>200),
+			array('precio_vivienda', 'length', 'max'=>16),
+			array('descripcion_estac', 'length', 'max'=>15),
+			array('sala, comedor, lavandero, cocina, asignada', 'safe'),
+			// The following rule is used by search().
+			// @todo Please remove those attributes that should not be searched.
+			array('id_vivienda, tipo_vivienda_id, unidad_habitacional_id, construccion_mt2, nro_piso, nro_vivienda, sala, comedor, lavandero, lindero_norte, lindero_sur, lindero_este, lindero_oeste, coordenadas, precio_vivienda, nro_estacionamientos, descripcion_estac, nro_habitaciones, nro_banos, fuente_datos_entrada_id, estatus_vivienda_id, cocina, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion,asignada', 'safe', 'on'=>'search'),
+		);
+	}
+
 
     /**
      * @return array relational rules.

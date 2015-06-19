@@ -57,7 +57,7 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
            <div class='col-md-5'>
                 <?php
             echo $form->textFieldGroup($model, 'cedula', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8,
-                        'onblur' => "buscarPersonaBeneficiarioTemp($('#BeneficiarioTemporal_nacionalidad').val(),$(this).val())"
+                       'onblur' => "buscarPersonaBeneficiarioTemp($('#BeneficiarioTemporal_nacionalidad').val(),$(this).val())"
             ))));
 
               echo $form->hiddenField($model,'persona_id',array('type'=>"hidden",'size'=>2,'maxlength'=>2)); 

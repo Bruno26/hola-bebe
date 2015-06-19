@@ -126,28 +126,6 @@ class ConsultaOracle extends CActiveRecord {
 
     /*  //////////////////////////////////////////////////////  */
 
-    /*   +++++++++++++++++++++++++++++++++++++++++++ */
-
-    public function insertPersonaBeneficiario($arreglo_variables) {
-
-
-
-
-        $SLQ = "insert into PERSONA  () values ()";
-
-
-        $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryRow();
-        // var_dump($result); die();
-        if (empty($result)) {
-            return 1;
-        } else {
-            return $result;
-        }
-    }
-
-    /*   +++++++++++++++++++++++++++++++++++++++++++ */
-
-
 
 
     /*
