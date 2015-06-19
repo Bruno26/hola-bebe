@@ -14,7 +14,7 @@
 
 
     body {
-        background-image: url("<?php echo Yii::app()->baseUrl; ?>/img/header.jpg") !important;
+        background-image: url("<?php echo Yii::app()->baseUrl; ?>/images/azul2.png") !important;
         height: 100% !important;
         width: 100% !important;
         background-size: cover !important;
