@@ -12,7 +12,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         )));
 ?>
 
-<h1>Registro Público</h1>
+<h1>Cargar Nuevo Registro Público</h1>
 
 <?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
 

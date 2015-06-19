@@ -43,7 +43,7 @@ if (isset($sms) && !empty($sms)) {
 }
 ?>
 
-<h1 class="text-center">Registrar Oficina</h1>
+<h1 class="text-center">Cargar Nueva Oficina</h1>
 
 <?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
 
@@ -82,7 +82,7 @@ if (isset($sms) && !empty($sms)) {
                 'id' => 'CancelarForm',
                 'icon' => 'ban-circle',
                 'htmlOptions' => array(
-                    'onclick' => 'document.location.href ="' . $this->createUrl('/') . '";'
+                    'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
                 )
             ));
         ?>

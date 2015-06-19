@@ -40,6 +40,18 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'label' => $model->isNewRecord ? 'Guardar' : 'Save',
         ));
         ?>
+        <?php
+            $this->widget('booster.widgets.TbButton', array(
+                'context' => 'danger',
+                'label' => 'Cancelar',
+                'size' => 'large',
+                'id' => 'CancelarForm',
+                'icon' => 'ban-circle',
+                'htmlOptions' => array(
+                    'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
+                )
+            ));
+        ?>
     </div>
 </div>
 <?php $this->endWidget(); ?>

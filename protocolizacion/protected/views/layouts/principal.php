@@ -4,7 +4,7 @@
     <head>
     <style type="text/css">
         body {
-            /*background-image: url("<?php //echo Yii::app()->baseUrl; ?>/img/cintillo.jpg") !important;*/
+            background-image: url("<?php echo Yii::app()->baseUrl; ?>/images/azul2.png") !important;
             background-color: #C4E17F !important;
             height: 100% !important;
             width: 100% !important;
@@ -62,7 +62,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <div class="navbar-brand page-scroll" style="height: auto;color: transparent;">dfg
-                            <a href="<?php echo $this->createUrl('/site/index'); ?>"><img src="<?php echo Yii::app()->baseUrl; ?>/img/logo1.png" style="width: 65%;margin-left: -3em;"/></a>
+                            <a href="<?php echo $this->createUrl('/site/index'); ?>"><img src="<?php echo Yii::app()->baseUrl; ?>/images/logo1.png" style="width: 18%;margin-left: -4em;"/></a>
                         </div>
                     </div>
 
@@ -72,7 +72,7 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
-                                    <a class="page-scroll glyphicon glyphicon-off" href="<?php echo Yii::app()->baseUrl; ?>/cruge/ui/login"></a>
+                                    <a class="page-scroll glyphicon glyphicon-lock" href="<?php echo Yii::app()->baseUrl; ?>/cruge/ui/login"></a>
                                 </li>
                             </ul>
                         </div>
@@ -124,7 +124,7 @@ $url_valida_sesion = CHtml::normalizeUrl(array('/cruge/ui/login'));
 $url_destroy_session = CHtml::normalizeUrl(array('/site/logout'));
 Yii::app()->getClientScript()->registerScript("core_cruge", "
 var tstampActual = 0;
-var comprobar = 1200000;
+var comprobar = 900000;
         
     function kill_session() {
         if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari

@@ -25,7 +25,7 @@ Yii::app()->clientScript->registerScript('search', "
 
 
 <?php //echo CHtml::link('Advanced Search', '#', array('class' => 'search-button btn btn-info')); ?>
-<h1>Listado de Desarrollos</h1>
+<h1>Gestión de Desarrollos</h1>
 
 <?php // echo CHtml::link('Busqueda Avanzada', '#', array('class' => 'search-button btn')); ?>
 <!--<div class="search-form" style="display:none">-->

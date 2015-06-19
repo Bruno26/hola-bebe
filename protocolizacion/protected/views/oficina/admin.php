@@ -22,7 +22,7 @@ return false;
 ");
 ?>
 
-<h1>Listado Oficina</h1>
+<h1>Gestión de Oficinas</h1>
 
 
 <?php // echo CHtml::link('Advanced Search', '#', array('class' => 'search-button btn')); ?>

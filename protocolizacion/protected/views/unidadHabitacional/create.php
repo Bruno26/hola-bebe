@@ -58,7 +58,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     ),
         ));
 ?>
-<h1 class="text-center">Unidad Multifamiliar</h1>
+<h1 class="text-center">Cargar Nueva Unidad Multifamiliar</h1>
 
 <?php
 if (isset($sms) && !empty($sms)) {
@@ -105,6 +105,18 @@ if (isset($sms) && !empty($sms)) {
             'context' => 'primary',
             'label' => $model->isNewRecord ? 'Guardar' : 'Save',
         ));
+        ?>
+        <?php
+            $this->widget('booster.widgets.TbButton', array(
+                'context' => 'danger',
+                'label' => 'Cancelar',
+                'size' => 'large',
+                'id' => 'CancelarForm',
+                'icon' => 'ban-circle',
+                'htmlOptions' => array(
+                    'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
+                )
+            ));
         ?>
     </div>
 </div>

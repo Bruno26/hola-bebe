@@ -30,9 +30,39 @@ $mascara = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/jqu
 
 Yii::app()->clientScript->registerScript('Beneficiario', "
     $(document).ready(function(){
+         $('#Beneficiario_rif').mask('A-BBBBBBBB-9', {translation: { 'A': {pattern: /[VEve]/}, 'B':{pattern: /[0-9]/}}, clearIfNotMatch: true});
          $('#Beneficiario_cedula').numeric();
-          $('#Beneficiario_rif').mask('A-BBBBBBBB-9', {translation: { 'A': {pattern: /[VEve]/}, 'B':{pattern: /[0-9]/}}, clearIfNotMatch: true});
+         $('#Vivienda_construccion_mt2').numeric();
     }); 
+
+    $('#guardar').click(function(){
+         if($('#Beneficiario_rif').val()==''){
+                    bootbox.alert('Por favor indique Rif');
+                    return false;
+         }    
+         
+         if($('#Beneficiario_cedula').val()==''){
+                    bootbox.alert('Por favor indique cedula');
+                    return false;
+         }    
+         
+        if($('#UnidadFamiliar_condicion_unidad_familiar_id').val()==''){
+            bootbox.alert('Por favor indique Condición de la Unidad Familiar');
+            return false;
+         }   
+         
+        if($('#Beneficiario_fecha_ultimo_censo').val()==''){
+            bootbox.alert('Por favor indique Fecha del censo');
+            return false;
+         }   
+        
+        if($('#Vivienda_construccion_mt2').val()==''){
+            bootbox.alert('Por favor indique Construcción metros cuadrados de la vivienda');
+            return false;
+         }   
+         
+
+    });
 
 
   ");
@@ -96,7 +126,7 @@ $this->widget('booster.widgets.TbProgress', array(
         'context' => 'primary',
         'headerIcon' => 'user',
         /*  'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'), */
-        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model,'unidad_familiar' => $unidad_familiar), TRUE),
+        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'unidad_familiar' => $unidad_familiar), TRUE),
             #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
             )
     );
@@ -112,7 +142,7 @@ $this->widget('booster.widgets.TbProgress', array(
         'context' => 'primary',
         'headerIcon' => 'home',
         /*  'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'), */
-        'content' => $this->renderPartial('_desarrollo', array('form' => $form, 'desarrollo' => $desarrollo, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia,'vivienda' => $vivienda ), TRUE),
+        'content' => $this->renderPartial('_desarrollo', array('form' => $form, 'desarrollo' => $desarrollo, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'vivienda' => $vivienda), TRUE),
             )
     );
 
@@ -153,9 +183,7 @@ $this->widget('booster.widgets.TbProgress', array(
         </div>
     </div>
 
-
     <!-- *********** -->
-
 
 </div>
 
