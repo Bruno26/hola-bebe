@@ -92,14 +92,3 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 </div>
 
 
-<div class="row">
-
-    <div class='col-md-12'>
-
-        <?php
-        echo $form->textAreaGroup($model, 'observacion', array('wrapperHtmlOptions' => array('class' => 'col-sm-5'), 'widgetOptions' => array('htmlOptions' => array('maxlength' => 200),)
-        ));
-        ?>
-
-    </div>
-</div>

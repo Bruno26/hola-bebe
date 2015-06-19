@@ -58,10 +58,10 @@ class ViviendaController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new Vivienda;
-        $estado = new Tblestado;
-        $municipio = new Tblmunicipio;
-        $parroquia = new Tblparroquia;
+        $model      = new Vivienda;
+        $estado     = new Tblestado;
+        $municipio  = new Tblmunicipio;
+        $parroquia  = new Tblparroquia;
         $desarrollo = new Desarrollo;
 
 // Uncomment the following line if AJAX validation is needed

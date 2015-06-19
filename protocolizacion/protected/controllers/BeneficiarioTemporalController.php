@@ -65,29 +65,29 @@ class BeneficiarioTemporalController extends Controller {
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
-
+ //var_dump($_POST); // die();
         if (isset($_POST['BeneficiarioTemporal'])) {
 
-
-            /*  - - - -- Persona - - -- - - - */
-
-
-
-	       // var_dump($_POST); die();
-	 /*  - - - -- Persona - - -- - - - */
+	        /*  - - - -- Persona - - -- - - - */
                if($_POST["BeneficiarioTemporal"]["persona_id"] == ''){
+              
+                           $idPersona = ConsultaOracle::insertPersona(array(
+													                        'CEDULA'           => $_POST["BeneficiarioTemporal"]["cedula"],
+													                        'NACIONALIDAD'     => ($_POST["BeneficiarioTemporal"]['nacionalida'] == 97) ? 1 : 0,
+													                        'PRIMER_NOMBRE'    => trim(strtoupper($_POST["BeneficiarioTemporal"]['primer_nombre'])),
+													                        'SEGUNDO_NOMBRE'   => trim(strtoupper($_POST["BeneficiarioTemporal"]['segundo_nombre'])),
+													                        'PRIMER_APELLIDO'  => trim(strtoupper($_POST["BeneficiarioTemporal"]['primer_apellido'])),
+													                        'SEGUNDO_APELLIDO' => trim(strtoupper($_POST["BeneficiarioTemporal"]['segundo_apellido'])),
+													                        'FECHA_NACIMIENTO' => $_POST["BeneficiarioTemporal"]['fecha_nacimiento'],
+                                                                            'GEN_SEXO_ID'      => $_POST["BeneficiarioTemporal"]['sexo'],
+                                                                            'GEN_EDO_CIVIL_ID' => $_POST["BeneficiarioTemporal"]['estado_civil'],
+                                                                            'TELEFONO_HAB'     => $_POST["BeneficiarioTemporal"]['telf_habitacion'],
+                                                                            'TELEFONO_MOVIL'   => $_POST["BeneficiarioTemporal"]['telf_celular'],
+                                                                            'CORREO_PRINCIPAL' => $_POST["BeneficiarioTemporal"]['correo_electronico'],
 
-                       /*    $idPersona = ConsultaOracle::insertPersona(array(
-													                        'CEDULA' => $_POST['cedula'],
-													                        'NACIONALIDAD' => ($_POST['nacionalida'] == 97) ? 1 : 0,
-													                        'PRIMER_NOMBRE' => trim(strtoupper($_POST['primerNombre'])),
-													                        'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['segundoNombre'])),
-													                        'PRIMER_APELLIDO' => trim(strtoupper($_POST['primerApellido'])),
-													                        'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['segundoApellido'])),
-													                        'FECHA_NACIMIENTO' => $_POST['fechaNac'],
 													                        )
                           );
-*/
+
 
 
 
@@ -97,62 +97,63 @@ class BeneficiarioTemporalController extends Controller {
 
                    /*   -----------------------------------------  */
 
-               	  $idPersona = $_POST["BeneficiarioTemporal"]["persona_id"];
+               	   $idPersona = $_POST["BeneficiarioTemporal"]["persona_id"];
                }
 
      /*   -- - -  --  - - - -- - - - - --  */
 	 
-     /*  - - - -- Beneficiario - - -- - - - */
+     /*  - - - --  Vivienda  Update  - - -- - - - */
+           $vivienda = ViviendaController::loadModel($_POST["BeneficiarioTemporal"]["vivienda_nro"]);
+           $vivienda->asignada = 1;
+
+           if($vivienda->save()){
+              echo "Ingreso vivienda !!";
+           }else{
+                var_dump($vivienda->Errors);
+           }
+
+            
+     /*   - - - - - - - -- - - - - - - - - */
 
 
             /*  - - - -- Beneficiario - - -- - - - */
 
-            $nombre_completo = $_POST["BeneficiarioTemporal"]["primer_apellido"] . ' ';
+            $beneficiarioTemp = new BeneficiarioTemporal;
+
+            $nombre_completo  = $_POST["BeneficiarioTemporal"]["primer_apellido"] . ' ';
             $nombre_completo .= $_POST["BeneficiarioTemporal"]["segundo_apellido"] . ' ';
             $nombre_completo .= $_POST["BeneficiarioTemporal"]["primer_nombre"] . ' ';
             $nombre_completo .= $_POST["BeneficiarioTemporal"]["segundo_nombre"];
 
-
-
-
-				$beneficiarioTemp->persona_id = $idPersona;
-				$beneficiarioTemp->desarrollo_id = $_POST["Desarrollo"]["id_desarrollo"];
-			    $beneficiarioTemp->unidad_habitacional_id = $_POST["BeneficiarioTemporal"]["unidad_habitacional_id"];
-			    $beneficiarioTemp->vivienda_id = $_POST["BeneficiarioTemporal"]["vivienda_nro"];
-
-
-            $beneficiarioTemp->persona_id = $_POST["BeneficiarioTemporal"]["persona_id"];
-            $beneficiarioTemp->desarrollo_id = $_POST["Desarrollo"]["id_desarrollo"];
-            $beneficiarioTemp->unidad_habitacional_id = $_POST["BeneficiarioTemporal"]["unidad_habitacional_id"];
-            $beneficiarioTemp->vivienda_id = $_POST["BeneficiarioTemporal"]["vivienda_nro"];
-
-            $beneficiarioTemp->nacionalidad = $_POST["BeneficiarioTemporal"]["nacionalidad"];
-            $beneficiarioTemp->cedula = $_POST["BeneficiarioTemporal"]["cedula"];
-            $beneficiarioTemp->nombre_completo = $nombre_completo;
-            $beneficiarioTemp->fecha_creacion = date('Y-m-d H:i:s');
+			$beneficiarioTemp->persona_id    = (int) $idPersona;
+			$beneficiarioTemp->desarrollo_id = (int) $_POST["Desarrollo"]["id_desarrollo"];
+		    $beneficiarioTemp->unidad_habitacional_id = (int) $_POST["BeneficiarioTemporal"]["unidad_habitacional_id"];
+		    $beneficiarioTemp->vivienda_id   = (int) $_POST["BeneficiarioTemporal"]["vivienda_nro"];
+            
+            $beneficiarioTemp->nacionalidad    = (int) $_POST["BeneficiarioTemporal"]["nacionalidad"];
+            $beneficiarioTemp->cedula          = (int) $_POST["BeneficiarioTemporal"]["cedula"];
+            $beneficiarioTemp->nombre_completo = strtoupper($nombre_completo);
+            $beneficiarioTemp->fecha_creacion  = date('Y-m-d H:i:s');
             $beneficiarioTemp->usuario_id_creacion = Yii::app()->user->id;
+            $beneficiarioTemp->usuario_id_actualizacion  = Yii::app()->user->id;
+            $beneficiarioTemp->fecha_actualizacion = date('Y-m-d H:i:s');
+
             $beneficiarioTemp->estatus = 14;
-
-
-          if($beneficiarioTemp->save()){
-
-             $id_beneficiarioTemp = $beneficiarioTemp->id_beneficiario_temporal;
-             
-             $this->redirect(array('admin'));
-         }else{ 
-            var_dump($beneficiarioTemp->Errors);          
-         }
-                
-
-
+        
+            // var_dump($beneficiarioTemp); // die();
+           
+          
             if ($beneficiarioTemp->save()) {
 
-                $id_beneficiarioTemp = $beneficiarioTemp->id_beneficiario_temporal;
+                  $id_beneficiarioTemp = $beneficiarioTemp->id_beneficiario_temporal;
 
+                  Yii::app()->user->setFlash('error', "Beneficiario Temporal ".$nombre_completo." Registrado !!"); 
+                 // die();
                 $this->redirect(array('admin'));
             } else {
                 var_dump($beneficiarioTemp->Errors);
             }
+            die();
         }
 
         $this->render('create', array(

@@ -5,12 +5,12 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'enableClientValidation' => true,
     'clientOptions' => array(
         'validateOnSubmit' => true,
-        'validateOnChange' => true,
+        // 'validateOnChange' => true,
         'validateOnType' => true,
     ),
         ));
 ?>
-<?php Yii::app()->clientScript->registerScript('BeneficiarioTemporal', "
+<?php /* Yii::app()->clientScript->registerScript('BeneficiarioTemporal', "
           $('#guardar').click(function(){
                
                 
@@ -33,8 +33,8 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                  });
          
          
-        
-        ") ?>
+                 return true;
+        ")  */ ?>
 
 
 <h1>Cargar Nuevo Adjudicado Temporal</h1>
