@@ -1,6 +1,6 @@
 
 
-<h1>Registrar Ente Ejecutor</h1>
+<h1>Cargar Nuevo Ente Ejecutor</h1>
 
 
 <?php

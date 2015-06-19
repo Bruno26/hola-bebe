@@ -79,7 +79,7 @@ if (isset($sms) && !empty($sms)) {
 }
 ?>
 
-<h1 class="text-center">Desarrollo</h1>
+<h1 class="text-center">Cargar Nuevo Desarrollo</h1>
 
 <div class="row">
     <div class="col-md-12">
@@ -107,6 +107,18 @@ if (isset($sms) && !empty($sms)) {
             'context' => 'primary',
             'label' => $model->isNewRecord ? 'Guardar' : 'Save',
         ));
+        ?>
+        <?php
+            $this->widget('booster.widgets.TbButton', array(
+                'context' => 'danger',
+                'label' => 'Cancelar',
+                'size' => 'large',
+                'id' => 'CancelarForm',
+                'icon' => 'ban-circle',
+                'htmlOptions' => array(
+                    'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
+                )
+            ));
         ?>
     </div>
 </div>

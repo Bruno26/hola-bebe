@@ -11,7 +11,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         )));
 ?>
 
-<h1>Registrar de Agentes de Documentación</h1>
+<h1>Cargar Nuevo Agente de Documentación</h1>
 
 <div class="row">
     <div class="col-md-12">
@@ -41,6 +41,18 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'context' => 'primary',
             'label' => $model->isNewRecord ? 'Guardar' : 'Save',
         ));
+        ?>
+        <?php
+            $this->widget('booster.widgets.TbButton', array(
+                'context' => 'danger',
+                'label' => 'Cancelar',
+                'size' => 'large',
+                'id' => 'CancelarForm',
+                'icon' => 'ban-circle',
+                'htmlOptions' => array(
+                    'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
+                )
+            ));
         ?>
     </div>
 </div>

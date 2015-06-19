@@ -33,7 +33,7 @@ if (isset($error) && !empty($error)) {
     ));
 }
 ?>
-<h1 class="text-center">Fuente de Financiamiento</h1>
+<h1 class="text-center">Cargar Nueva Fuente de Financiamiento</h1>
 
 
 <div>

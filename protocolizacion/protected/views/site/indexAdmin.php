@@ -15,7 +15,7 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="glyphicon glyphicon-home" style=" font-size: 75px;"></i>
+                        <i class="glyphicon glyphicon-tree-deciduous" style=" font-size: 75px;"></i>
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"><?php echo $count_desarrollo; ?></div>
@@ -30,11 +30,11 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="glyphicon glyphicon-home" style=" font-size: 75px;"></i>
+                        <i class="glyphicon glyphicon-map-marker" style=" font-size: 75px;"></i>
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"><?php echo $count_unidades_habitacionales; ?></div>
-                        <div>Unidades Habitacionales</div>
+                        <div>Unidades Multifamiliares</div>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge"><?php echo $count_viviendas; ?></div>
-                        <div>Viviendas</div>
+                        <div>Unidades Familiares</div>
                     </div>
                 </div>
             </div>

@@ -23,7 +23,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         )));
 ?>
 
-<h1>Registrar Programa</h1>
+<h1>Cargar Nuevo Programa</h1>
 
 <?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
 

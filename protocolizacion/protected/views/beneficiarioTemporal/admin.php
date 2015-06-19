@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1>Gestión de Adjudicado Temporales</h1>
+<h1>Gestión de Adjudicados Temporales</h1>
 
 <?php $this->widget('booster.widgets.TbGridView',array(
 'id'=>'beneficiario-temporal-grid',

@@ -72,7 +72,7 @@
                         <ul class="sidebar-menu" id="nav-accordion">
                             <li>
                                 <a href="<?php echo $this->createUrl('/site/indexAdmin'); ?>">
-                                    <i class="glyphicon glyphicon-home"></i>
+                                    <i class="glyphicon glyphicon-asterisk"></i>
                                     <span>Inicio</span>
                                 </a>
                             </li>
@@ -84,83 +84,83 @@
                                 <ul class="sub-menu">
                                     <li class="sub-menu">
                                         <a href="javascript:;">
-                                            <i class="glyphicon glyphicon-map-marker"></i>
-                                            <span>Oficina</span>
+                                            <i class="glyphicon glyphicon-book"></i>
+                                            <span>Oficinas</span>
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/oficina/create'); ?>">Cargar Nueva Oficina</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/oficina/admin'); ?>">Listado</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/oficina/admin'); ?>">Gestión de Oficinas</a></li>
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
                                         <a href="javascript:;">
-                                            <i class="glyphicon glyphicon-map-marker"></i>
+                                            <i class="glyphicon glyphicon-th-list"></i>
                                             <span>Agente de Documentación</span>
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/abogados/create'); ?>">Cargar Nuevo Agente de Documentación</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/abogados/admin'); ?>">Listado</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/abogados/admin'); ?>">Gestión de Agente de Documentación</a></li>
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
                                         <a href="javascript:;">
-                                            <i class="glyphicon glyphicon-map-marker"></i>
+                                            <i class="glyphicon glyphicon-briefcase"></i>
                                             <span>Registro Público</span>
                                         </a>
                                         <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/registroPublico/create'); ?>">Crear Registro Público</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/registroPublico/create'); ?>">Cargar Nuevo Registro Público</a></li>
 
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
                                         <a href="javascript:;">
-                                            <i class="glyphicon glyphicon-map-marker"></i>
-                                            <span>Registro Documento</span>
+                                            <i class="glyphicon glyphicon-list-alt"></i>
+                                            <span>Registro de Documentos</span>
                                         </a>
                                         <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/registroDocumento/create'); ?>">Crear Registro Documento</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/registroDocumento/create'); ?>">Cargar Nuevo Registro de Documento</a></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </li>
                             <li class="sub-menu">
                                 <a href="javascript:;">
-                                    <i class="glyphicon glyphicon-stats"></i>
+                                    <i class="glyphicon glyphicon-globe"></i>
                                     <span>Desarrollo Habitacional</span>
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="sub-menu">
                                         <a href="javascript:;">
-                                            <i class="glyphicon glyphicon-map-marker"></i>
-                                            <span>Desarrollo</span>
+                                            <i class="glyphicon glyphicon-tree-deciduous"></i>
+                                            <span>Desarrollos</span>
                                         </a>
                                         <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/desarrollo/create'); ?>">Cargar Nuevo</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/programa/create'); ?>">Programa</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/enteEjecutor/create'); ?>">Ente  Ejecutor</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Funtes</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/desarrollo/admin'); ?>">Listado Desarrollo</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/desarrollo/create'); ?>">Cargar Nuevo Desarrollo</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/programa/create'); ?>">Cargar Nuevo Programa</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/enteEjecutor/create'); ?>">Cargar Ente Ejecutor</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Cargar Funtes de Financiamiento</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/desarrollo/admin'); ?>">Gestión de Desarrollo Habitacional</a></li>
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
                                         <a href="javascript:;">
                                             <i class="glyphicon glyphicon-map-marker"></i>
-                                            <span>Unidad Habitacional</span>
+                                            <span>Unidad Multifamiliar</span>
                                         </a>
 
                                         <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/unidadHabitacional/create'); ?>">Cargar Nuevo</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/unidadHabitacional/admin'); ?>">Listado</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/unidadHabitacional/create'); ?>">Cargar Nueva Unidad Multifamiliar</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/unidadHabitacional/admin'); ?>">Gestión de Unidades Multifamiliares</a></li>
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
                                         <a href="javascript:;">
-                                            <i class="glyphicon glyphicon-map-marker"></i>
-                                            <span>Vivienda</span>
+                                            <i class="glyphicon glyphicon-home"></i>
+                                            <span>Unidad Familiar</span>
                                         </a>
                                         <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/vivienda/create'); ?>">Cargar Nuevo</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/vivienda/admin'); ?>">Listado</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/vivienda/create'); ?>">Cargar Nueva Unidad Familiar</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/vivienda/admin'); ?>">Gestión de Unidad Familiar</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -168,17 +168,17 @@
                             <li class="sub-menu">
                                 <a href="<?php echo $this->createUrl('#'); ?>">
                                     <i class="glyphicon glyphicon-user"></i>
-                                    <span>Gestión Adjudicados</span>
+                                    <span>Gestión de Adjudicados</span>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="<?php echo $this->createUrl('beneficiarioTemporal/create'); ?>"><i class="glyphicon glyphicon-user"></i><span>Cargar Adjudicados</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('beneficiarioTemporal/create'); ?>"><i class="glyphicon glyphicon-user"></i><span>Cargar Nuevo Adjudicado</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('beneficiarioTemporal/admin'); ?>"><i class="glyphicon glyphicon-user"></i><span>Listado de Adjudicados</span></a></li>
                                     <!--<li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Carga Masiva</span></a></li>-->
                                 </ul>
                             </li>
                             <li class="sub-menu">
                                 <a href="<?php echo $this->createUrl('#'); ?>">
-                                    <i class="glyphicon glyphicon-home"></i>
+                                    <i class="glyphicon glyphicon-tasks"></i>
                                     <span>Censo Socioeconómico</span>
                                 </a>
                                 <ul class="sub">
