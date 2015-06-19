@@ -36,3 +36,16 @@ array('label'=>'Manage Abogados','url'=>array('admin')),
 		'usuario_id_actualizacion',
 ),
 )); */?>
+<div class="row text-right" style="margin-right: 1em">
+    <?php
+    $this->widget('booster.widgets.TbButton', array(
+        'buttonType' => 'button',
+        'context' => 'danger',
+        'size' => 'large',
+        'label' => 'Regresar',
+        'htmlOptions' => array(
+            'onclick' => 'document.location.href ="' . $this->createUrl('/abogados/admin') . '"',
+        )
+    ));
+    ?>
+    </div>

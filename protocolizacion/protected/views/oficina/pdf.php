@@ -32,7 +32,24 @@ $html.="<table align='right' width='100%' border='0'>
             <tr><td colspan='2'></td></tr><tr><td colspan='2'></td></tr>
             <tr>
             </tr>
-
+            <tr>
+                <td colspan='2' align='center'>
+                    <b>Oficina</b>
+                </td>
+            </tr>
+            <tr>
+		<td><span class='subtitulo'>Nombre de la Oficina:</span> $model->nombre<br><span class='subtitulo'>Jefe Asignado:</span> ".nombre('PRIMER_NOMBRE', $model->persona_id_jefe)." ".apellido('PRIMER_APELLIDO', $model->persona_id_jefe).
+                "<br>"."<span class='subtitulo'>Observaciones:</span> $model->observaciones</td>
+                <td colspan='1' align='right'><img src='" . Yii::app()->baseUrl . "/images/banavih_ndice1.png' style='width: 25%;'/></td>
+            </tr>
+            <tr>
+                <td colspan='2' align='center'>
+                    <b>Ubicación</b>
+                </td>
+            </tr>
+            <tr>
+		<td colspan='2'><span class='subtitulo'>Estado:</span> ".$model->parroquia->clvmunicipio0->clvestado0->strdescripcion."<br><span class='subtitulo'>Municipio:</span> ".$model->parroquia->clvmunicipio0->strdescripcion."<br><span class='subtitulo'>Parroquia:</span> ".$model->parroquia->strdescripcion."</td>
+            </tr>
 
 
 
@@ -41,57 +58,6 @@ $html.="<table align='right' width='100%' border='0'>
 
 </table>
 ";
-
-$html.=
-
-        "<div style='text-align:center; width:100%; margin-left:0%;margin-top:4%'>
-            <br><br><br>
-<h2><strong><FONT COLOR='#000080'>Oficina: $model->nombre /" . date('d-m-Y') . "</FONT></strong></h2><br/>
-</div>
-
-
-";
-
-$html.="
-        <style type='text/css'>
-            table{
-		width:90%;
-            }
-            table tr th{
-		text-align: left;
-		font-size: 18px;
-		padding-bottom: 10px;
-		padding-top: 10px;
-            }
-            table tr td{
-		padding-left: 20px;
-		width: 50%;
-            }
-            .subtitulo{
-		font-weight: bold;
-		font-size: 16px;
-		font-style: italic;
-            }
-            .td2{
-		text-align: left;
-            }
-	</style>
-        <table>
-            <tr>
-		<th colspan='2'>Oficina</th>
-            </tr>
-            <tr>
-		<td><span class='subtitulo'>Nombre de la Oficina:</span> $model->nombre<br><span class='subtitulo'>Jefe Asignado:</span> ".nombre('PRIMER_NOMBRE', $model->persona_id_jefe)." ".apellido('PRIMER_APELLIDO', $model->persona_id_jefe)." </td>
-		<td><span class='subtitulo td2'>Observaciones:</span> asdasda</td>
-            </tr>
-            <tr>
-		<th colspan='2'>Ubicación</th>
-            </tr>
-            <tr>
-		<td colspan='2'><span class='subtitulo'>Estado:</span> ".$model->parroquia->clvmunicipio0->clvestado0->strdescripcion."<br><span class='subtitulo'>Municipio:</span> ".$model->parroquia->clvmunicipio0->strdescripcion."<br><span class='subtitulo'>Parroquia:</span> ".$model->parroquia->strdescripcion."</td>
-            </tr>
-	</table>
-        ";
 
 $mpdf = new mPDF('c', 'LETTER');
 $mpdf->SetTitle(' Desarrollo Habitacional N° '.$model->id_oficina.' - '.$model->nombre.' '.date('h:i:A') .'');
