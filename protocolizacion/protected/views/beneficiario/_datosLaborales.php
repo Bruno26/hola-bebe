@@ -142,6 +142,8 @@
         ?>
 
     </div>
+    
+    
 
     <div class="col-md-4">
         <?php echo $form->textFieldGroup($model, 'ingreso_declarado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 12)))); ?>
