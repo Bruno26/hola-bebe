@@ -184,6 +184,7 @@ class BeneficiarioController extends Controller {
             $model->direccion_empresa = $_POST['Beneficiario']['direccion_empresa'];
             $model->telefono_trabajo = $_POST['Beneficiario']['telefono_trabajo'];
             $model->gen_cargo_id = $_POST['Beneficiario']['gen_cargo_id'];
+            $model->observacion = $_POST['Beneficiario']['observacion'];
 
 
             if ($model->save()) {
