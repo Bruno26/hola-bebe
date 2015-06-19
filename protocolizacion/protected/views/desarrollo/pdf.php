@@ -4,58 +4,40 @@ $titularidad_del_terreno = ($model->titularidad_del_terreno == TRUE)? "SI":"NO";
 <?php
 
 $pdf = Yii::createComponent('application.vendors.mpdf.mpdf');
-$cabecera = '<img src="' . Yii::app()->request->baseUrl . '/images/cintillo_200_admirable.jpg"/>';
+$cabecera = '<img src="' . Yii::app()->request->baseUrl . '/images/cintillo.jpg"/>';
 
 
-$html.=
 
-        "<div style='text-align:center; width:100%; margin-left:0%;margin-top:4%'>
-            <br>
-<h2><strong><FONT COLOR='#000080'>Reporte del Desarrollo Habitacional $model->nombre /" . date('d-m-Y') . "</FONT></strong></h2><br/>
-</div>
-
-
-";
-
-
-$html.="
-    <style type='text/css'>
-		table{
-			width:95%;
-		}
-		table tr th{
-			text-align: left;
-			font-size: 18px;
-			padding-bottom: 15px;
-			padding-top: 15px;
-		}
-		table tr td{
-			padding-left: 20px;
-			width: 50%;
-		}
-		.subtitulo{
-			font-weight: bold;
-			font-size: 16px;
-			font-style: italic;
-		}
-		.td2{
-			text-align: left;
-		}
-	</style>
-	<center>
-		<table>
+$html.="<table align='right' width='100%' border='0'>       
+                        <tr>
+                                    <td colspan='4' align='center'><b><font size='6' color='#B40404'>Desarrollo Habitacional: </br></br></font><font size='6'> ".$model->nombre ."/". date('d-m-Y') ." </font>
+                        <br/>
+                       <br/>
+                        </td>
+            </tr>
+                                    <tr><td colspan='2'></td></tr><tr><td colspan='2'></td></tr>
+                                    <tr><td colspan='2'></td></tr><tr><td colspan='2'></td></tr>
+                                    <tr><td colspan='2'></td></tr><tr><td colspan='2'></td></tr>
+                                    <tr><td colspan='2'></td></tr><tr><td colspan='2'></td></tr>
+            <tr>
+            </tr>
 			<tr>
-				<th colspan='2'> Desarrollo Habitacional</th>
+				<b><td colspan='4' align='center'> Desarrollo Habitacional</td></b>
 			</tr>
 			<tr>
-				<td colspan='2'>
+				<td colspan='3'>
 					<span class='subtitulo'>Nombre del Desarrollo:</span> $model->nombre
+                                            
 					<br>
 					<span class='subtitulo'>Descripción del Desarrollo:</span> $model->descripcion
 				</td>
+                                <td colspan='1' align='right'>
+                                        <img src='" . Yii::app()->baseUrl . "/images/banavih_ndice1.png' style='width: 25%;'/>
+                                 </td>
+                                
 				</tr>
 			<tr>
-				<th colspan='2'> Ubicación del Desarrollo</th>
+				<td colspan='4'> Ubicación del Desarrollo</td>
 			</tr>
 			<tr>
 				<td>
@@ -74,8 +56,8 @@ $html.="
 				</td>
 			</tr>
 			<tr>
-				<th> Linderos</th>
-				<th> Coordenadas</th>
+				<td colspan='2'> Linderos</td>
+				<td colspan='2'> Coordenadas</td>
 			</tr>
 			<tr>
 				<td>
@@ -94,7 +76,7 @@ $html.="
                                 </td>
 			</tr>
 			<tr>
-				<th colspan='2'> Programa</th>
+				<td colspan='4'> Programa</td>
 			</tr>
 			<tr>
 				<td>
@@ -109,7 +91,7 @@ $html.="
 				</td>
 			</tr>
 		</table>
-	</center>
+
 ";
 
 $mpdf = new mPDF('c', 'LETTER');

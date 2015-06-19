@@ -67,6 +67,6 @@ $mpdf->SetCreator('BANAVIH - Banco Nacional de Vivienda y Habitat');
 $mpdf->SetHTMLHeader($cabecera);
 $mpdf->SetFooter('Generado desde el Sistema de Protocolización el ' . date('d-m-Y') . ' a las ' . date('h:i:A') . '' . Yii::app()->user->name . ' |                        Página {PAGENO}/{nbpg}');
 $mpdf->WriteHTML($html);
-$mpdf->Output('Desarrollo-Habitacional-'.$model->id_oficina. ' .pdf','D');
+$mpdf->Output('Oficina-'.$model->id_oficina. ' .pdf','D');
 exit;
 ?>
