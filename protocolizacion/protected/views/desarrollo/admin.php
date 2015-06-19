@@ -3,7 +3,7 @@ $this->breadcrumbs = array(
     'Desarrollos' => array('index'),
     'Manage',
 );
-
+   
 $this->menu = array(
     array('label' => 'List Desarrollo', 'url' => array('index')),
     array('label' => 'Create Desarrollo', 'url' => array('create')),
@@ -39,6 +39,7 @@ Yii::app()->clientScript->registerScript('search', "
 <?php
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'desarrollo-grid',
+    'type' => 'striped bordered condensed',
     'dataProvider' => $model->search(),
     'filter' => $model,
 //    'columns' => array(
@@ -66,12 +67,12 @@ $this->widget('booster.widgets.TbGridView', array(
             'value' => '$data->nombre',
 //            'filter' => Maestro::FindMaestrosByPadreSelect(71),
         ),
-        'descripcion' => array(
-            'header' => 'Descripción',
-            'name' => 'descripcion',
-            'value' => '$data->descripcion',
-//            'filter' => Maestro::FindMaestrosByPadreSelect(71),
-        ),
+//        'descripcion' => array(
+//            'header' => 'Descripción',
+//            'name' => 'descripcion',
+//            'value' => '$data->descripcion',
+////            'filter' => Maestro::FindMaestrosByPadreSelect(71),
+//        ),
         'ente_ejecutor_id' => array(
             'name' => 'ente_ejecutor_id',
             'value' => '$data->enteEjecutor->nombre_ente_ejecutor',
@@ -86,13 +87,14 @@ $this->widget('booster.widgets.TbGridView', array(
             'header' => 'Estado',
             'name' => 'nombre',
             'value' => '$data->fkParroquia->clvmunicipio0->clvestado0->strdescripcion',
+            'filter' => CHtml::listData(Tblestado::model()->findall(), 'strdescripcion', 'strdescripcion'),
 //            'filter' => Maestro::FindMaestrosByPadreSelect(71),
         ),
-        array(
-            'name' => 'fecha_creacion',
-            'value' => 'Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($data->fecha_creacion))',
-        //'header' => 'Creación',
-        ),
+//        array(
+//            'name' => 'fecha_creacion',
+//            'value' => 'Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($data->fecha_creacion))',
+//        //'header' => 'Creación',
+//        ),
         array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',

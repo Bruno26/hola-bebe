@@ -89,13 +89,18 @@ class ConsultaOracle extends CActiveRecord {
 
     /*  -------------------------------------------- */
 
-
     public function getPersonaBeneficiario($nacionalidad, $cedula) {
 
-        $nacional = ($nacionalidad == 97) ? '1' : '0';
-        $SLQ = "SELECT P.ID, P.NACIONALIDAD , P.CEDULA, P.PRIMER_NOMBRE AS PRIMERNOMBRE, P.SEGUNDO_NOMBRE AS SEGUNDONOMBRE, P.PRIMER_APELLIDO AS PRIMERAPELLIDO, P.SEGUNDO_APELLIDO AS SEGUNDOAPELLIDO ,TO_CHAR(P.FECHA_NACIMIENTO, 'DD-MM-YYYY' ) AS FECHANACIMIENTO ,GEN_SEXO.NOMBRE AS SEXO, GEN_EDO_CIVIL.NOMBRE AS EDO_CIVIL , P.TELEFONO_HAB , P.TELEFONO_MOVIL, P.CORREO_PRINCIPAL AS CORREO,1 AS PROCEDENCIA FROM PERSONA P LEFT JOIN  GEN_SEXO ON P.GEN_SEXO_ID = GEN_SEXO.ID  LEFT JOIN GEN_EDO_CIVIL ON P.GEN_EDO_CIVIL_ID = GEN_EDO_CIVIL.ID WHERE P.NACIONALIDAD ='" . $nacional . "' AND P.CEDULA = " . $cedula;
+        $nacional = ($nacionalidad == 97) ? 1 : 0;
+        $SLQ = "SELECT P.ID, P.NACIONALIDAD , P.CEDULA, P.PRIMER_NOMBRE AS PRIMERNOMBRE, P.SEGUNDO_NOMBRE AS SEGUNDONOMBRE, P.PRIMER_APELLIDO AS PRIMERAPELLIDO,
+                P.SEGUNDO_APELLIDO AS SEGUNDOAPELLIDO ,TO_CHAR(P.FECHA_NACIMIENTO, 'DD-MM-YYYY' ) AS FECHANACIMIENTO, GEN_SEXO.NOMBRE AS SEXO, GEN_EDO_CIVIL.NOMBRE AS EDOCIVIL,
+                P.TELEFONO_HAB AS TELEFONOHAB, P.TELEFONO_MOVIL AS TELEFONOMOVIL, P.CORREO_PRINCIPAL AS CORREO,1 AS PROCEDENCIA
+                FROM TABLAS_COMUNES.PERSONA P 
+                LEFT JOIN  GEN_SEXO ON P.GEN_SEXO_ID = GEN_SEXO.ID  
+                LEFT JOIN GEN_EDO_CIVIL ON P.GEN_EDO_CIVIL_ID = GEN_EDO_CIVIL.ID WHERE P.NACIONALIDAD = '" . $nacional . "' AND P.CEDULA = " . $cedula;
+        
         $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryRow();
-        // var_dump($result); die();
+//        var_dump($result); die();
         if (empty($result)) {
             return 1;
         } else {
@@ -119,10 +124,7 @@ class ConsultaOracle extends CActiveRecord {
         }
     }
 
-
     /*  //////////////////////////////////////////////////////  */
-
-
 
 
 

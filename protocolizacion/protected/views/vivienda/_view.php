@@ -20,15 +20,13 @@
     <div class="col-md-12">
         <div>  
             <h4><i class="glyphicon glyphicon-globe"></i> Ubicación del Desarrollo</h4>
-            <div class='col-md-6'> 
-                <blockquote>
-                    <p>
-                        <b> Estado:</b> <?php echo $model->unidadHabitacional->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion ?><br/>
-                        <b> Municipio:</b> <?php echo $model->unidadHabitacional->desarrollo->fkParroquia->clvmunicipio0->strdescripcion ?><br/>
-                        <b> Parroquia:</b> <?php echo $model->unidadHabitacional->desarrollo->fkParroquia->strdescripcion ?>
-                    </p>
-                </blockquote>
-            </div>
+            <blockquote>
+                <p>
+                    <b> Estado:</b> <?php echo $model->unidadHabitacional->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion ?><br/>
+                    <b> Municipio:</b> <?php echo $model->unidadHabitacional->desarrollo->fkParroquia->clvmunicipio0->strdescripcion ?><br/>
+                    <b> Parroquia:</b> <?php echo $model->unidadHabitacional->desarrollo->fkParroquia->strdescripcion ?>
+                </p>
+            </blockquote>
         </div>
     </div>
     <div class="col-md-12">

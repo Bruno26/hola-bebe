@@ -53,26 +53,44 @@ class ValidacionJsController extends Controller {
 
     public function actionBuscarPersonasBeneficiario() {
         $cedula = (int) $_POST['cedula'];
-        $nacio = $_POST['nacionalidad'];
-        $result = ConsultaOracle::getPersonaBeneficiario($nacio, $cedula);
-        if ($result == 1) {
-            $saime = ConsultaOracle::getSaimeBeneficiario($nacio, $cedula);
-            //var_dump($saime);die();
-            if ($saime == 1)
-                echo json_encode(2); //en caso que no exista en saime
-            else
-                echo CJSON::encode($saime);
-        }else {
-            echo CJSON::encode($result);
+        $nacio = (int) $_POST['nacionalidad'];
+
+        $existeTemporal = BeneficiarioTemporal::model()->findByAttributes(array('nacionalidad' => $nacio, 'cedula' => $cedula));
+
+        if (!empty($existeTemporal)) {
+            $consultaPer = ConsultaOracle::getPersonaBeneficiario($nacio, $cedula);
+            if ($consultaPer == 1) {
+                echo CJSON::encode(3); // existe en Persona
+            } else {
+                $desarrollo = array(
+                    'nro_vivienda' => $existeTemporal->vivienda->nro_vivienda,
+                    'nro_piso' => $existeTemporal->vivienda->nro_piso,
+                    'tipo_vivienda_id' => $existeTemporal->vivienda->tipoVivienda->descripcion,
+                    'nomb_edif' => $existeTemporal->unidadHabitacional->nombre,
+                    'lote_terreno_mt2' => $existeTemporal->desarrollo->lote_terreno_mt2,
+                    'zona' => $existeTemporal->desarrollo->zona,
+                    'av_call_esq_carr' => $existeTemporal->desarrollo->av_call_esq_carr,
+                    'urban_barrio' => $existeTemporal->desarrollo->urban_barrio,
+                    'nombre' => $existeTemporal->desarrollo->nombre,
+                    'parroquia_id' => $existeTemporal->desarrollo->fkParroquia->strdescripcion,
+                    'municipio' => $existeTemporal->desarrollo->fkParroquia->clvmunicipio0->strdescripcion,
+                    'estado' => $existeTemporal->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion,
+                    'Temp' => $existeTemporal->id_beneficiario_temporal,
+                );
+                $salida = array('persona' => $consultaPer, 'desarrollo' => $desarrollo);
+                echo CJSON::encode($salida);
+            }
+        } else {
+            echo CJSON::encode(2); //no existe en temporal
         }
     }
 
-    public function actionBuscarBeneficiarioTemp() {
-        $cedula = (int) $_POST['cedula'];
-        $nacio = $_POST['nacionalidad'];
-        $result = BeneficiarioTemporal::getBeneficiarioTemp($nacio, $cedula);
-        echo CJSON::encode($result);
-    }
+//    public function actionBuscarBeneficiarioTemp() {
+//        $cedula = (int) $_POST['cedula'];
+//        $nacio = $_POST['nacionalidad'];
+//        $result = BeneficiarioTemporal::getBeneficiarioTemp($nacio, $cedula);
+//        echo CJSON::encode($result);
+//    }
 
     /*  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
@@ -96,7 +114,6 @@ class ValidacionJsController extends Controller {
             foreach ($data as $id => $value) {
                 if ($Selected == $id) {
                     echo CHtml::tag('option', array('value' => $id, 'selected' => true), CHtml::encode($value), true);
-
                 } else {
                     echo CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
                 }
@@ -108,7 +125,6 @@ class ValidacionJsController extends Controller {
 
     /*  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
     /*  /////////////////////////////////////////////////////////////////////// */
-
 
     public function actionBuscarVivienda() {
 
@@ -143,7 +159,6 @@ class ValidacionJsController extends Controller {
             foreach ($data as $id => $value) {
                 if ($Selected == $id) {
                     echo CHtml::tag('option', array('value' => $id, 'selected' => true), CHtml::encode($value), true);
-
                 } else {
                     echo CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
                 }

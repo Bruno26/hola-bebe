@@ -16,7 +16,31 @@
 <?php
 
 $pdf = Yii::createComponent('application.vendors.mpdf.mpdf');
-$cabecera = '<img src="' . Yii::app()->request->baseUrl . '/images/cintillo_200_admirable.jpg"/>';
+$cabecera = '<img src="' . Yii::app()->request->baseUrl . '/images/cintillo.jpg"/>';
+
+
+$html.="<table align='right' width='100%' border='0'>       
+    <tr>
+                <td colspan='2' align='center'><b><font size='6' color='#B40404'>Oficina: </br></br></font><font size='6'> ".$model->nombre ."/". date('d-m-Y') ." </font>
+        <br/>
+                <br/>
+                </td>
+            </tr>
+            <tr><td colspan='2'></td></tr><tr><td colspan='2'></td></tr>
+            <tr><td colspan='2'></td></tr><tr><td colspan='2'></td></tr>
+            <tr><td colspan='2'></td></tr><tr><td colspan='2'></td></tr>
+            <tr><td colspan='2'></td></tr><tr><td colspan='2'></td></tr>
+            <tr>
+            </tr>
+
+
+
+
+        
+
+
+</table>
+";
 
 $html.=
 
@@ -75,6 +99,7 @@ $mpdf->SetMargins(5, 50, 30);
 $mpdf->SetAuthor('BANAVIH - Banco Nacional de Vivienda y Habitat');
 $mpdf->SetCreator('BANAVIH - Banco Nacional de Vivienda y Habitat');
 $mpdf->SetHTMLHeader($cabecera);
+$mpdf->SetFooter('Generado desde el Sistema de Protocolización el ' . date('d-m-Y') . ' a las ' . date('h:i:A') . '' . Yii::app()->user->name . ' |                        Página {PAGENO}/{nbpg}');
 $mpdf->WriteHTML($html);
 $mpdf->Output('Desarrollo-Habitacional-'.$model->id_oficina. ' .pdf','D');
 exit;

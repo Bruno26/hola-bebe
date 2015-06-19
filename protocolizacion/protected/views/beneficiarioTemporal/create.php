@@ -37,7 +37,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         ")  */ ?>
 
 
-<h1>Registro Beneficiario Temporal</h1>
+<h1>Registro Adjudicado Temporal</h1>
 <br><br>
 
 
@@ -124,7 +124,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                 'id' => 'CancelarForm',
                 'icon' => 'ban-circle',
                 'htmlOptions' => array(
-                    'onclick' => 'document.location.href ="' . $this->createUrl('site/index') . '";'
+                    'onclick' => 'document.location.href ="' . $this->createUrl('/') . '";'
                 )
             ));
         ?>

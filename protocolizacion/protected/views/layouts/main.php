@@ -71,7 +71,7 @@
                     <div class="leftside-navigation">
                         <ul class="sidebar-menu" id="nav-accordion">
                             <li>
-                                <a href="<?php echo $this->createUrl('/site/index'); ?>">
+                                <a href="<?php echo $this->createUrl('/site/indexAdmin'); ?>">
                                     <i class="glyphicon glyphicon-home"></i>
                                     <span>Inicio</span>
                                 </a>
@@ -95,10 +95,10 @@
                                     <li class="sub-menu">
                                         <a href="javascript:;">
                                             <i class="glyphicon glyphicon-map-marker"></i>
-                                            <span>Abogados</span>
+                                            <span>Agente de Documentación</span>
                                         </a>
                                         <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/abogados/create'); ?>">Cargar Nuevo Abogado</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/abogados/create'); ?>">Cargar Nuevo Agente de Documentación</a></li>
                                             <li><a href="<?php echo $this->createUrl('/abogados/admin'); ?>">Listado</a></li>
                                         </ul>
                                     </li>
@@ -232,9 +232,7 @@ $url_valida_sesion = CHtml::normalizeUrl(array('/cruge/ui/login'));
 $url_destroy_session = CHtml::normalizeUrl(array('/site/logout'));
 Yii::app()->getClientScript()->registerScript("core_cruge", "
 var tstampActual = 0;
-var comprobar = 1200000;
-
-
+var comprobar = 900000;
 
     function kill_session() {
         if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari

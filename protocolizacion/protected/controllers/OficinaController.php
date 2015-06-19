@@ -115,10 +115,17 @@ class OficinaController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
-
+    $consulta = ConsultaOracle::setPersona('nacionalidad,cedula,primer_nombre,primer_apellido', $model->persona_id_jefe);
+        $nacio = ($consulta['NACIONALIDAD'] == 1) ? 'V-' : 'E-';
+        $model->cedula = $nacio . '' . $consulta['CEDULA'];
+        $model->primer_nombre = $consulta['PRIMER_NOMBRE'];
+        $model->primer_apellido = $consulta['PRIMER_APELLIDO'];
+        
         if (isset($_POST['Oficina'])) {
             $model->attributes = $_POST['Oficina'];
             if ($model->save())
@@ -127,6 +134,10 @@ class OficinaController extends Controller {
 
         $this->render('update', array(
             'model' => $model,
+            'estado' => $estado,
+            'municipio' => $municipio,
+            'parroquia' => $parroquia,
+            'consulta' => $consulta,
         ));
     }
 

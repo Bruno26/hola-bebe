@@ -65,14 +65,13 @@ class Generico {
                 $this->redirect(array('beneficiario/createDatos', 'id' => $idBeneficiario));
                 break;
             case 4: // INDICA QUE YA CULMINO LA ACTUALIZACION
-                $this->redirect(array('/site/culmino'));
+                $this->redirect(array('/beneficiario/admin'));
                 break;
             case 0: // INICA QUE NO HA INICIADO LA ACTUALIZACION
                 $this->redirect(array('personal/create'));
                 break;
         }
     }
-
 }
 ?>
 

@@ -42,15 +42,13 @@
  * @property Maestro $fuenteDatosEntrada
  * @property ReasignacionVivienda[] $reasignacionViviendas
  */
-class Vivienda extends CActiveRecord
-{
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return 'vivienda';
-	}
+class Vivienda extends CActiveRecord {
+    /**
+     * @return string the associated database table name
+     */
+    public function tableName() {
+        return 'vivienda';
+    }
 
 	/**
 	 * @return array validation rules for model attributes.
@@ -78,122 +76,120 @@ class Vivienda extends CActiveRecord
 		);
 	}
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-			'analisisCreditos' => array(self::HAS_MANY, 'AnalisisCredito', 'vivienda_id'),
-			'estatusVivienda' => array(self::BELONGS_TO, 'Maestro', 'estatus_vivienda_id'),
-			'tipoVivienda' => array(self::BELONGS_TO, 'Maestro', 'tipo_vivienda_id'),
-			'unidadHabitacional' => array(self::BELONGS_TO, 'UnidadHabitacional', 'unidad_habitacional_id'),
-			'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
-			'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
-			'fuenteDatosEntrada' => array(self::BELONGS_TO, 'Maestro', 'fuente_datos_entrada_id'),
-			'reasignacionViviendas' => array(self::HAS_MANY, 'ReasignacionVivienda', 'vivienda_id'),
-		);
-	}
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'id_vivienda' => 'Id Vivienda',
-			'tipo_vivienda_id' => 'Tipo Vivienda',
-			'unidad_habitacional_id' => 'Nombre Unidad Habitacional',
-			'construccion_mt2' => 'Construcción Mt2',
-			'nro_piso' => 'Número Piso',
-			'nro_vivienda' => 'Número Vivienda',
-			'sala' => 'Sala',
-			'comedor' => 'Comedor',
-			'lavandero' => 'Lavandero',
-			'lindero_norte' => 'Lindero Norte',
-			'lindero_sur' => 'Lindero Sur',
-			'lindero_este' => 'Lindero Este',
-			'lindero_oeste' => 'Lindero Oeste',
-			'coordenadas' => 'Coordenadas',
-			'precio_vivienda' => 'Precio Vivienda',
-			'nro_estacionamientos' => 'Puesto de Estacionamiento',
-			'descripcion_estac' => 'Número de Estacionamiento',
-			'nro_habitaciones' => 'Número Habitaciones',
-			'nro_banos' => 'Número Banos',
-			'fuente_datos_entrada_id' => 'Fuente Datos Entrada',
-			'estatus_vivienda_id' => 'Estatus Vivienda',
-			'cocina' => 'Cocina',
-			'fecha_creacion' => 'Fecha Creacion',
-			'fecha_actualizacion' => 'Fecha Actualizacion',
-			'usuario_id_creacion' => 'Usuario Id Creacion',
-			'usuario_id_actualizacion' => 'Usuario Id Actualizacion',
-			'asignada' => 'Esta asignada', 
-		);
-	}
+    /**
+     * @return array relational rules.
+     */
+    public function relations() {
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return array(
+            'analisisCreditos' => array(self::HAS_MANY, 'AnalisisCredito', 'vivienda_id'),
+            'estatusVivienda' => array(self::BELONGS_TO, 'Maestro', 'estatus_vivienda_id'),
+            'tipoVivienda' => array(self::BELONGS_TO, 'Maestro', 'tipo_vivienda_id'),
+            'unidadHabitacional' => array(self::BELONGS_TO, 'UnidadHabitacional', 'unidad_habitacional_id'),
+            'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
+            'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
+            'fuenteDatosEntrada' => array(self::BELONGS_TO, 'Maestro', 'fuente_datos_entrada_id'),
+            'reasignacionViviendas' => array(self::HAS_MANY, 'ReasignacionVivienda', 'vivienda_id'),
+        );
+    }
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels() {
+        return array(
+            'id_vivienda' => 'Id Vivienda',
+            'tipo_vivienda_id' => 'Tipo Vivienda',
+            'unidad_habitacional_id' => 'Nombre Unidad Habitacional',
+            'construccion_mt2' => 'Área de Vivienda mt2',
+            'nro_piso' => 'Número Piso',
+            'nro_vivienda' => 'Número Vivienda',
+            'sala' => 'Sala',
+            'comedor' => 'Comedor',
+            'lavandero' => 'Lavandero',
+            'lindero_norte' => 'Lindero Norte',
+            'lindero_sur' => 'Lindero Sur',
+            'lindero_este' => 'Lindero Este',
+            'lindero_oeste' => 'Lindero Oeste',
+            'coordenadas' => 'Coordenadas',
+            'precio_vivienda' => 'Precio Vivienda',
+            'nro_estacionamientos' => 'Puesto de Estacionamiento',
+            'descripcion_estac' => 'Número de Estacionamiento',
+            'nro_habitaciones' => 'Número Habitaciones',
+            'nro_banos' => 'Número Banos',
+            'fuente_datos_entrada_id' => 'Fuente Datos Entrada',
+            'estatus_vivienda_id' => 'Estatus Vivienda',
+            'cocina' => 'Cocina',
+            'fecha_creacion' => 'Fecha Creacion',
+            'fecha_actualizacion' => 'Fecha Actualizacion',
+            'usuario_id_creacion' => 'Usuario Id Creacion',
+            'usuario_id_actualizacion' => 'Usuario Id Actualizacion',
+            'asignada' => 'Esta asignada',
+        );
+    }
 
-		$criteria=new CDbCriteria;
+    /**
+     * Retrieves a list of models based on the current search/filter conditions.
+     *
+     * Typical usecase:
+     * - Initialize the model fields with values from filter form.
+     * - Execute this method to get CActiveDataProvider instance which will filter
+     * models according to data in model fields.
+     * - Pass data provider to CGridView, CListView or any similar widget.
+     *
+     * @return CActiveDataProvider the data provider that can return the models
+     * based on the search/filter conditions.
+     */
+    public function search() {
+        // @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria->order = 'id_vivienda DESC';
+        $criteria = new CDbCriteria;
 
-		$criteria->compare('id_vivienda',$this->id_vivienda);
-		$criteria->compare('tipo_vivienda_id',$this->tipo_vivienda_id);
-		$criteria->compare('unidad_habitacional_id',$this->unidad_habitacional_id);
-		$criteria->compare('construccion_mt2',$this->construccion_mt2,true);
-		$criteria->compare('nro_piso',$this->nro_piso,true);
-		$criteria->compare('nro_vivienda',$this->nro_vivienda,true);
-		$criteria->compare('sala',$this->sala);
-		$criteria->compare('comedor',$this->comedor);
-		$criteria->compare('lavandero',$this->lavandero);
-		$criteria->compare('lindero_norte',$this->lindero_norte,true);
-		$criteria->compare('lindero_sur',$this->lindero_sur,true);
-		$criteria->compare('lindero_este',$this->lindero_este,true);
-		$criteria->compare('lindero_oeste',$this->lindero_oeste,true);
-		$criteria->compare('coordenadas',$this->coordenadas,true);
-		$criteria->compare('precio_vivienda',$this->precio_vivienda,true);
-		$criteria->compare('nro_estacionamientos',$this->nro_estacionamientos);
-		$criteria->compare('descripcion_estac',$this->descripcion_estac,true);
-		$criteria->compare('nro_habitaciones',$this->nro_habitaciones);
-		$criteria->compare('nro_banos',$this->nro_banos);
-		$criteria->compare('fuente_datos_entrada_id',$this->fuente_datos_entrada_id);
-		$criteria->compare('estatus_vivienda_id',$this->estatus_vivienda_id);
-		$criteria->compare('cocina',$this->cocina);
-		$criteria->compare('fecha_creacion',$this->fecha_creacion,true);
-		$criteria->compare('fecha_actualizacion',$this->fecha_actualizacion,true);
-		$criteria->compare('usuario_id_creacion',$this->usuario_id_creacion);
-		$criteria->compare('usuario_id_actualizacion',$this->usuario_id_actualizacion);
-		$criteria->compare('asignada',$this->asignada);
+        $criteria->order = 'id_vivienda DESC';
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
+        $criteria->compare('id_vivienda', $this->id_vivienda);
+        $criteria->compare('tipo_vivienda_id', $this->tipo_vivienda_id);
+        $criteria->compare('unidad_habitacional_id', $this->unidad_habitacional_id);
+        $criteria->compare('construccion_mt2', $this->construccion_mt2, true);
+        $criteria->compare('nro_piso', $this->nro_piso, true);
+        $criteria->compare('nro_vivienda', $this->nro_vivienda, true);
+        $criteria->compare('sala', $this->sala);
+        $criteria->compare('comedor', $this->comedor);
+        $criteria->compare('lavandero', $this->lavandero);
+        $criteria->compare('lindero_norte', $this->lindero_norte, true);
+        $criteria->compare('lindero_sur', $this->lindero_sur, true);
+        $criteria->compare('lindero_este', $this->lindero_este, true);
+        $criteria->compare('lindero_oeste', $this->lindero_oeste, true);
+        $criteria->compare('coordenadas', $this->coordenadas, true);
+        $criteria->compare('precio_vivienda', $this->precio_vivienda, true);
+        $criteria->compare('nro_estacionamientos', $this->nro_estacionamientos);
+        $criteria->compare('descripcion_estac', $this->descripcion_estac, true);
+        $criteria->compare('nro_habitaciones', $this->nro_habitaciones);
+        $criteria->compare('nro_banos', $this->nro_banos);
+        $criteria->compare('fuente_datos_entrada_id', $this->fuente_datos_entrada_id);
+        $criteria->compare('estatus_vivienda_id', $this->estatus_vivienda_id);
+        $criteria->compare('cocina', $this->cocina);
+        $criteria->compare('fecha_creacion', $this->fecha_creacion, true);
+        $criteria->compare('fecha_actualizacion', $this->fecha_actualizacion, true);
+        $criteria->compare('usuario_id_creacion', $this->usuario_id_creacion);
+        $criteria->compare('usuario_id_actualizacion', $this->usuario_id_actualizacion);
+        $criteria->compare('asignada', $this->asignada);
 
-	/**
-	 * Returns the static model of the specified AR class.
-	 * Please note that you should have this exact method in all your CActiveRecord descendants!
-	 * @param string $className active record class name.
-	 * @return Vivienda the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+        ));
+    }
+
+    /**
+     * Returns the static model of the specified AR class.
+     * Please note that you should have this exact method in all your CActiveRecord descendants!
+     * @param string $className active record class name.
+     * @return Vivienda the static model class
+     */
+    public static function model($className = __CLASS__) {
+        return parent::model($className);
+    }
+
 }
