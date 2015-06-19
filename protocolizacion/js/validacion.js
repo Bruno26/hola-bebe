@@ -369,6 +369,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
 
 
 
+
 /*  /////////////////  PARA CENSO ////////////////////// */
 function buscarBeneficiarioTemporal(nacionalidad, cedula) {
 
