@@ -17,11 +17,7 @@ Yii::app()->clientScript->registerScript('desarollo', "
 
    /*  +++++++++++++++++++++++++++++++++++++++ */
 
-    $('#BeneficiarioTemporal_vivienda_nro').focusout(function(){
 
-                                                           /*   ---- para seleccionar el tipo de vivienda  ----  */
-
-                                                     });
 
    /*  ++++++++++++++++++++++++++++++++++++++++ */
 
