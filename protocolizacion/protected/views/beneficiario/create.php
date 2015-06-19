@@ -183,9 +183,7 @@ $this->widget('booster.widgets.TbProgress', array(
         </div>
     </div>
 
-
     <!-- *********** -->
-
 
 </div>
 
