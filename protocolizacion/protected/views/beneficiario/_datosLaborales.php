@@ -144,7 +144,7 @@
     </div>
 
     <div class="col-md-4">
-        <?php echo $form->textFieldGroup($model, 'ingreso_declarado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+        <?php echo $form->textFieldGroup($model, 'ingreso_declarado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 12)))); ?>
     </div>
 
 </div>
@@ -162,8 +162,16 @@
 
 </div>
 
+<div class="row">
 
+    <div class='col-md-12'>
 
+        <?php
+        echo $form->textAreaGroup($model, 'observacion', array('wrapperHtmlOptions' => array('class' => 'col-sm-5'), 'widgetOptions' => array('htmlOptions' => array('maxlength' => 200),)
+        ));
+        ?>
 
+    </div>
+</div>
 
 
