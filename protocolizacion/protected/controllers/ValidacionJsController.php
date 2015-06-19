@@ -22,7 +22,7 @@ class ValidacionJsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario', 'BuscarPisoVivienda', 'BuscarVivienda', 'BuscarTipoVivienda'),
+                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario', 'BuscarPisoVivienda', 'BuscarVivienda', 'BuscarTipoVivienda','BuscarPersonasBeneficiarioTemp'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -85,12 +85,31 @@ class ValidacionJsController extends Controller {
         }
     }
 
-//    public function actionBuscarBeneficiarioTemp() {
-//        $cedula = (int) $_POST['cedula'];
-//        $nacio = $_POST['nacionalidad'];
-//        $result = BeneficiarioTemporal::getBeneficiarioTemp($nacio, $cedula);
-//        echo CJSON::encode($result);
-//    }
+    public function actionBuscarPersonasBeneficiarioTemp() {
+        $cedula = (int) $_POST['cedula'];
+        $nacio = (int) $_POST['nacionalidad'];
+
+        $existeTemporal = BeneficiarioTemporal::model()->findByAttributes(array('nacionalidad' => $nacio, 'cedula' => $cedula));
+
+        if (empty($existeTemporal)) {
+         
+      
+            $result = ConsultaOracle::getPersonaBeneficiario($nacio, $cedula);
+            if ($result == 1) {
+                $saime = ConsultaOracle::getSaimeBeneficiario($nacio, $cedula);
+                //var_dump($saime);die();
+                if ($saime == 1)
+                    echo json_encode(2); //en caso que no exista en saime
+                else
+                    echo CJSON::encode($saime);
+            }else {
+                echo CJSON::encode($result);
+             }
+
+        } else {
+            echo CJSON::encode(3); // Existe en temporal
+        }
+   }
 
     /*  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 

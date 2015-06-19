@@ -180,13 +180,13 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
 
 
     $.ajax({
-        url: baseUrl + "/ValidacionJs/BuscarPersonasBeneficiario",
+        url: baseUrl + "/ValidacionJs/BuscarPersonasBeneficiarioTemp",
         async: true,
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
         success: function (datos) {
-
+          //  alert(datos);
             if (datos == 2) {
                 //  No Existe en Saime habilito todos los campos para que se llenen a pedal
 
@@ -223,6 +223,10 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                 $('#BeneficiarioTemporal_correo_electronico').val('');
 
                 /*   -------------------------------- */
+
+            }else if(datos == 3){
+                 bootbox.alert('Beneficiario Se encuentra Registrado !');
+                  return false;
 
             } else if (datos.PROCEDENCIA == 2) {
                 //  Datos de la variable proceden de Saime 
