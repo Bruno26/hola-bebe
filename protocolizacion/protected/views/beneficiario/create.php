@@ -153,7 +153,7 @@ $this->widget('booster.widgets.TbProgress', array(
                 'size' => 'large',
                 'id' => 'guardar',
                 'context' => 'primary',
-                'label' => $model->isNewRecord ? 'Guardar' : 'Save',
+                'label' => $model->isNewRecord ? 'Guardar y Continuar' : 'Save',
             ));
             ?>
 
@@ -165,7 +165,7 @@ $this->widget('booster.widgets.TbProgress', array(
                 'id' => 'CancelarForm',
                 'icon' => 'ban-circle',
                 'htmlOptions' => array(
-                    'onclick' => 'document.location.href ="' . $this->createUrl('site/index') . '";'
+                    'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
                 )
             ));
             ?>
