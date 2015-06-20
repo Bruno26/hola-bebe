@@ -148,7 +148,7 @@ Yii::app()->clientScript->registerScript('telefono', "
             'size' => 'large',
             'id' => 'guardar',
             'context' => 'primary',
-            'label' => $model->isNewRecord ? 'Guardar' : 'Guardar',
+            'label' => $model->isNewRecord ? 'Finalizar' : 'Finalizar',
         ));
         ?>
     </div>

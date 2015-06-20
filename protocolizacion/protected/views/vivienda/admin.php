@@ -90,48 +90,13 @@ $this->widget('booster.widgets.TbGridView', array(
             //'filter' => CHtml::listData(Tblestado::model()->findall(), 'clvcodigo', 'strdescripcion'),
 //            'filter' => Maestro::FindMaestrosByPadreSelect(71),
         ),
-        array(
-            'name' => 'construccion_mt2',
-            'htmlOptions' => array('style' => 'text-align: center', 'width' => '10px'),
-        ),
-        array(
-            'name' => 'nro_piso',
-            'htmlOptions' => array('style' => 'text-align: center', 'width' => '10px'),
-        ),
-        array(
-            'name' => 'nro_vivienda',
-            'htmlOptions' => array('style' => 'text-align: center', 'width' => '10px'),
-        ),
-
-        array(
-            'name' => 'precio_vivienda',
-            'htmlOptions' => array('style' => 'text-align: center', 'width' => '10px'),
-        ),
+   
         array(
             'name' => 'fecha_creacion',
             'value' => 'Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($data->fecha_creacion))',
         //'header' => 'Creación',
         ),
-        /*
-          'sala',
-          'comedor',
-          'lavandero',
-          'lindero_norte',
-          'lindero_sur',
-          'lindero_este',
-          'lindero_oeste',
-          'coordenadas',
-          'nro_estacionamientos',
-          'descripcion_estac',
-          'nro_habitaciones',
-          'nro_banos',
-          'fuente_datos_entrada_id',
-          'estatus_vivienda_id',
-          'cocina',
-          'fecha_actualizacion',
-          'usuario_id_creacion',
-          'usuario_id_actualizacion',
-         */
+     
          array(
              'class' => 'booster.widgets.TbButtonColumn',
              'header' => 'Acciones',

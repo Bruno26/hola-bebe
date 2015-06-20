@@ -102,7 +102,7 @@ class Vivienda extends CActiveRecord {
         return array(
             'id_vivienda' => 'Id Vivienda',
             'tipo_vivienda_id' => 'Tipo Vivienda',
-            'unidad_habitacional_id' => 'Nombre Unidad Habitacional',
+            'unidad_habitacional_id' => 'Nombre de la Unidad Multifamiliar',
             'construccion_mt2' => 'Área de Vivienda mt2',
             'nro_piso' => 'Número Piso',
             'nro_vivienda' => 'Número Vivienda',

@@ -169,43 +169,8 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
 
     </div>
 </div>
-<div class="row">
-    <div class="col-md-3">
-        <?php
-        echo $form->dropDownListGroup($model, 'tipo_vivienda', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
-            'widgetOptions' => array(
-                'data' => Maestro::FindMaestrosByPadreSelect(92, 'descripcion ASC'),
-                'htmlOptions' => array('empty' => 'SELECCIONE',
-                ),
-            )
-                )
-        );
-        ?>
-    </div>
-    <div class="col-md-3">
-        <?php
-        echo $form->textFieldGroup($model, 'cant_vivienda', array('widgetOptions' => array('htmlOptions' => array('class' => '',))));
-        ?>
-    </div>
-    <div class="col-md-3">
-        <?php
-        echo $form->textFieldGroup($model, 'cant_vivienda_piso', array('widgetOptions' => array('htmlOptions' => array('class' => '',))));
-        ?>
-    </div>
-    <div class="col-md-3">
-        <?php
-        echo $form->dropDownListGroup($model, 'nomenclatura', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
-            'widgetOptions' => array(
-                'data' => Maestro::FindMaestrosByPadreSelect(92, 'descripcion ASC'),
-                'htmlOptions' => array('empty' => 'SELECCIONE',
-                ),
-            )
-                )
-        );
-        ?>
-    </div>
 
-</div>
+
 
 <div class='row'>
     <div class='col-md-4'>
