@@ -11,12 +11,10 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         ));
 ?>
 <?php
-    
 if (!empty($model->parroquia_id)) {
     $id_parroquia = Tblparroquia::model()->findByPk($model->parroquia_id); // consulta en la tabla ciudad el id_ciudad y id_estado 
     $id_municipio = $id_parroquia->clvmunicipio0->clvcodigo;
     $id_estado = $id_parroquia->clvmunicipio0->clvestado0->clvcodigo;
-
 }
 ?>
 <?php Yii::app()->clientScript->registerScript('desarrollo', "
@@ -51,7 +49,7 @@ if (!empty($model->parroquia_id)) {
             });
             $.get('" . CController::createUrl('ValidacionJs/BuscarParroquias') . "', {municipio: " . $id_municipio . "}, function(data){
                 $('#Desarrollo_parroquia_id').html(data);
-                $('#Desarrollo_parroquia_id').val(" . $model->parroquia_id. ");
+                $('#Desarrollo_parroquia_id').val(" . $model->parroquia_id . ");
             });
         });
 
@@ -85,7 +83,7 @@ if (isset($sms) && !empty($sms)) {
         $this->widget(
                 'booster.widgets.TbPanel', array(
             'title' => 'Caracteristica del Desarrollo Habitacional',
-            'context' => 'danger',
+            'context' => 'info',
             // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
             'headerIcon' => 'globe',
             'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'enteEjecutor' => $enteEjecutor, 'fuenteFinacimiento' => $fuenteFinacimiento), TRUE),
@@ -97,21 +95,20 @@ if (isset($sms) && !empty($sms)) {
 
 <div class="well">
     <div class="pull-center" style="text-align: right;">
-			<?php
-			$this->widget('booster.widgets.TbButton', array(
-					'buttonType' => 'submit',
-					'icon' => 'glyphicon glyphicon glyphicon-step-backward',
-					'size' => 'large',
-					'id' => 'cancelar',
-					'context' => 'danger',
-					'label' => 'Cancelar',
-					//'url' => $this->createURL('/desarrollo/admin'),
-					'htmlOptions' => array(
-		'onclick' => 'document.location.href ="' . $this->createUrl('desarrollo/admin') . '"'),
-
-			));
-			?>
-			<?php
+        <?php
+        $this->widget('booster.widgets.TbButton', array(
+            'buttonType' => 'submit',
+            'icon' => 'glyphicon glyphicon glyphicon-step-backward',
+            'size' => 'large',
+            'id' => 'cancelar',
+            'context' => 'danger',
+            'label' => 'Cancelar',
+            //'url' => $this->createURL('/desarrollo/admin'),
+            'htmlOptions' => array(
+                'onclick' => 'document.location.href ="' . $this->createUrl('desarrollo/admin') . '"'),
+        ));
+        ?>
+        <?php
         $this->widget('booster.widgets.TbButton', array(
             'buttonType' => 'submit',
             'icon' => 'glyphicon glyphicon-floppy-saved',
@@ -124,6 +121,6 @@ if (isset($sms) && !empty($sms)) {
     </div>
 </div>
 
-<?php //echo $this->renderPartial('_form', array('model'=>$model));  ?>
+<?php //echo $this->renderPartial('_form', array('model'=>$model));   ?>
 
 <?php $this->endWidget(); ?>

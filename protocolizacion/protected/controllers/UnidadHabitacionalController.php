@@ -76,17 +76,20 @@ class UnidadHabitacionalController extends Controller {
                 $model->total_unidades = 0;
 //                $model->fecha_registro = Generico::formatoFecha($_POST['UnidadHabitacional']['fecha_registro']);
 //                $model->ano = $_POST['UnidadHabitacional']['ano'];
-//                $model->registro_publico_id = $_POST['UnidadHabitacional']['registro_publico_id'];
-//                $model->tipo_documento_id = $_POST['UnidadHabitacional']['tipo_documento_id'];
-//                $model->num_protocolo = $_POST['UnidadHabitacional']['num_protocolo'];
-//                $model->fecha_registro = 'now';
-//                $model->tomo = $_POST['UnidadHabitacional']['tomo'];
-//                $model->nro_matricula = $_POST['UnidadHabitacional']['nro_matricula'];
+                $model->asiento_registral =1;
+//                $model->registro_publico_id =0;
+//                $model->tipo_documento_id = 0;
+//                $model->num_protocolo =0;
+                $model->fecha_registro = 'now';
+                $model->tomo = 0;
+                $model->folio_real = 1;
+                $model->nro_matricula = 1;
                 $model->fuente_datos_entrada_id = 90;
                 $model->fecha_creacion = 'now()';
                 $model->fecha_actualizacion = 'now()';
                 $model->usuario_id_creacion = Yii::app()->user->id;
                 $model->estatus = 77;
+//                echo '<pre>';var_dump($model); die();
 
                 if ($model->save()) {
 

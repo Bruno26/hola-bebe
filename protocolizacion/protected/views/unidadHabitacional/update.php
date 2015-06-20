@@ -80,13 +80,6 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     ),
         ));
 
-
-	$this->menu=array(
-	array('label'=>'List UnidadHabitacional','url'=>array('index')),
-	array('label'=>'Create UnidadHabitacional','url'=>array('create')),
-	array('label'=>'View UnidadHabitacional','url'=>array('view','id'=>$model->id_unidad_habitacional)),
-	array('label'=>'Manage UnidadHabitacional','url'=>array('admin')),
-	);
 	?>
 
 	<h1>Actualizar la Unidad Habitacional N° <?php echo $model->id_unidad_habitacional; ?></h1>
@@ -96,7 +89,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 	    $this->widget(
 	            'booster.widgets.TbPanel', array(
 	        'title' => 'Unidad Habitacional',
-	        'context' => 'danger',
+	        'context' => 'info',
 	        'headerIcon' => 'user',
 	//        'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
 	        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),

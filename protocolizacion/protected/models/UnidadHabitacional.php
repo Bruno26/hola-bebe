@@ -47,10 +47,7 @@
  * @property AsignacionCenso[] $asignacionCensos
  */
 class UnidadHabitacional extends CActiveRecord {
-    public $tipo_vivienda;
-    public $cant_vivienda;
-    public $cant_vivienda_piso;
-    public $nomenclatura;
+
 
         /**
      * @return string the associated database table name
@@ -70,7 +67,6 @@ class UnidadHabitacional extends CActiveRecord {
             array('desarrollo_id, gen_tipo_inmueble_id, total_unidades, registro_publico_id, tipo_documento_id, ano, fuente_datos_entrada_id, usuario_id_creacion, usuario_id_actualizacion, estatus, num_protocolo', 'numerical', 'integerOnly' => true),
             array('nombre, nro_matricula', 'length', 'max' => 100),
             array('tomo, nro_documento', 'length', 'max' => 50),
-            array('cant_vivienda_piso, cant_vivienda', 'length', 'max' => 10),
             array('asiento_registral, folio_real', 'length', 'max' => 6),
             array('lindero_norte, lindero_sur, lindero_este, lindero_oeste', 'length', 'max' => 200),
             array('fecha_registro', 'safe'),
@@ -109,7 +105,7 @@ class UnidadHabitacional extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id_unidad_habitacional' => 'Id Unidad Habitacional',
-            'nombre' => 'Nombre del Unidad Habitacional',
+            'nombre' => 'Nombre de la Unidad Multifamiliar',
             'desarrollo_id' => 'Nombre del Desarrollo',
             'gen_tipo_inmueble_id' => 'Tipo de Inmueble',
             'total_unidades' => 'Total de Unidades',
@@ -133,10 +129,7 @@ class UnidadHabitacional extends CActiveRecord {
             'lindero_sur' => 'Lindero Sur',
             'lindero_este' => 'Lindero Este',
             'lindero_oeste' => 'Lindero Oeste',
-            'tipo_vivienda' => 'Tipo de vivienda',
-            'cant_vivienda_piso' => 'Cantidad de vivienda por Piso',
-            'cant_vivienda' => 'Cantidad de Vivienda',
-            'nomenclatura' => 'Nomenclatura de Vivienda',
+
         );
     }
 

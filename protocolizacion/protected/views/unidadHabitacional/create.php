@@ -84,7 +84,7 @@ if (isset($sms) && !empty($sms)) {
     <?php
     $this->widget(
             'booster.widgets.TbPanel', array(
-        'title' => 'Unidad Habitacional',
+        'title' => 'Unidad Multifamiliar',
         'context' => 'danger',
         'headerIcon' => 'user',
 //        'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
