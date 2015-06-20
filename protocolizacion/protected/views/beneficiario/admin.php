@@ -41,13 +41,32 @@ return false;
 ?>
 <!--</div> search-form -->
 
+<div style="text-align: right;vertical-align: middle;">
+    <div align="right" class="row">
+        <?php
+        $this->widget('application.extensions.PageSize.PageSize', array(
+            'mGridId' => 'beneficiario-grid', //Gridview id
+            'mPageSize' => @$_GET['pageSize'],
+            'mDefPageSize' => Yii::app()->params['defaultPageSize'],
+        ));
+        ?>
+    </div>
+</div>
+
 <?php
+
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'beneficiario-grid',
     'dataProvider' => $model->search(),
     'type' => 'striped bordered condensed',
-//    'filter' => $model,
+    'filter' => $model,
     'columns' => array(
+        array(
+            'name' => 'id_beneficiario',
+            'header' => 'N°',
+            'value' => '$data->id_beneficiario',
+            'htmlOptions' => array('style' => 'text-align: center', 'width' => '90px'),            
+        ),
         array(
             'name' => 'persona_id',
             'header' => 'Nombre',
@@ -58,11 +77,44 @@ $this->widget('booster.widgets.TbGridView', array(
             'header' => 'Apellido',
             'value' => 'apellido("PRIMER_APELLIDO",$data->persona_id)',
         ),
-         array(
+        'Estado' => array(
+            'header' => 'Estado',
+            'name' => 'beneficiarioTemporal',
+            'value' => 'Tblparroquia::model()->findByPK(Desarrollo::model()->findByPK($data->beneficiarioTemporal->desarrollo_id)->parroquia_id)->clvmunicipio0->clvestado0->strdescripcion',
+            'filter' => CHtml::listData(Tblestado::model()->findall(), 'clvcodigo', 'strdescripcion'),
+        ),
+        'Desarrollo' => array(
+            'header' => 'Desarrollo',
+            'name' => 'beneficiarioTemporal',
+            'value' => '$data->beneficiarioTemporal->desarrollo->nombre',
+            'filter' => CHtml::listData(Desarrollo::model()->findall(), 'id_desarrollo', 'nombre'),
+        ),
+        'Grupo Familiar' => array(
+            'header' => 'Grupo Familiar',
+            'name' => 'beneficiarioTemporal',
+           // "type" => "raw",
+
+            //'value' => 'UnidadFamiliar::model()->findByAttributes(array("beneficiario_id"=>"27"))->id_unidad_familiar',
+            'value' => 'GrupoFamiliar::model()->countByAttributes(array("unidad_familiar_id"=> UnidadFamiliar::model()->findByAttributes(array("beneficiario_id"=>27))->id_unidad_familiar))',
+            //'filter' => CHtml::listData(Desarrollo::model()->findall(), 'id_desarrollo', 'nombre'),
+            'htmlOptions' => array('style' => 'text-align: center', 'width' => '50px'),
+
+        ),
+        array(
+            'name' => 'fecha_ultimo_censo',
+            'value' => 'Yii::app()->dateFormatter->format("d/MM/y", strtotime($data->fecha_ultimo_censo))',
+            'htmlOptions' => array('style' => 'text-align: center', 'width' => '100px'),
+
+        //'header' => 'Creación',
+        ),
+        array(
              'name' => 'id_beneficiario',
-             'header' => 'Porcentaje de Avance',
+             'header' => 'Avance',
              'value' => 'traza($data->id_beneficiario)',
+             'htmlOptions' => array('style' => 'text-align: center', 'width' => '10px'),
+
          ),
+
 //        'id_beneficiario',
 //        'persona_id',
 //        'rif',
@@ -84,7 +136,7 @@ $this->widget('booster.widgets.TbGridView', array(
           'urban_barrio',
           'av_call_esq_carr',
           'zona',
-          'fecha_ultimo_censo',
+          
           'protocolizado',
           'fecha_creacion',
           'fecha_actualizacion',
@@ -99,20 +151,26 @@ $this->widget('booster.widgets.TbGridView', array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
-            'template' => '{editar}{ver}',
+            'template' => '{ver} {continuar}',
             'buttons' => array(
-                'editar' => array(
-                    'label' => 'Editar',
-                    'icon' => 'edit',
-                    'size' => 'medium',
-                    'url' => 'Yii::app()->createUrl("/Beneficiario/culminarRegistro", array("id"=>$data->id_beneficiario))',
-                ),
+
+
                 'ver' => array(
                     'label' => 'Ver',
-                    'icon' => 'list',
+                    'icon' => 'eye-open',
                     'size' => 'medium',
-                //                  'url' => 'Yii::app()->createUrl("/VswUsuariosActualizados/Historico", array("id"=>$data->id_personal, "caso"=>3))',
+                    'url' => 'Yii::app()->createUrl("beneficiario/view/", array("id"=>$data->id_beneficiario))',
                 ),
+
+                'continuar' => array(
+                    'label' => 'Continuar Censo',
+                    'icon' => 'play',
+                    'size' => 'medium',
+                    'url' => 'Yii::app()->createUrl("/Beneficiario/culminarRegistro", array("id"=>$data->id_beneficiario))',
+                    'visible' => 'traza($data->id_beneficiario)!=100'
+
+                ),
+
             ),
         ),
     ),
