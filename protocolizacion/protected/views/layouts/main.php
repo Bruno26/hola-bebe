@@ -76,6 +76,12 @@
                                     <span>Inicio</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="<?php echo $this->createUrl('/cruge/ui/usermanagementadmin'); ?>">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    <span>Administrador</span>
+                                </a>
+                            </li>
                             <li class="sub-menu">
                                 <a href="javascript:;">
                                     <i class="glyphicon glyphicon-stats"></i>

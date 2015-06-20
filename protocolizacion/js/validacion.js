@@ -225,7 +225,8 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                 /*   -------------------------------- */
 
             }else if(datos == 3){
-                 bootbox.alert('Beneficiario Se encuentra Registrado !');
+                  bootbox.alert('Beneficiario Se encuentra Registrado !');
+                  // $('#BeneficiarioTemporal_cedula').val('');
                   return false;
 
             } else if (datos.PROCEDENCIA == 2) {

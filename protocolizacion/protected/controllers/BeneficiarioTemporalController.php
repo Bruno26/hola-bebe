@@ -147,7 +147,7 @@ class BeneficiarioTemporalController extends Controller {
 
                   $id_beneficiarioTemp = $beneficiarioTemp->id_beneficiario_temporal;
 
-                  Yii::app()->user->setFlash('error', "Beneficiario Temporal ".$nombre_completo." Registrado !!"); 
+                  Yii::app()->user->setFlash('success', "Beneficiario Temporal ".$nombre_completo." Registrado !!"); 
                  // die();
                 $this->redirect(array('admin'));
             } else {
