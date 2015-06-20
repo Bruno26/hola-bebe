@@ -1,4 +1,8 @@
 <?php
+ function traza($iD) {
+     $traza = Traza::getTraza($iD);
+     return $traza;
+ }
 
 function nombre($selec, $iD) {
     $saime = ConsultaOracle::getPersonaByPk($selec, (int) $iD);
@@ -54,11 +58,16 @@ $this->widget('booster.widgets.TbGridView', array(
             'header' => 'Apellido',
             'value' => 'apellido("PRIMER_APELLIDO",$data->persona_id)',
         ),
+         array(
+             'name' => 'id_beneficiario',
+             'header' => 'Porcentaje de Avance',
+             'value' => 'traza($data->id_beneficiario)',
+         ),
 //        'id_beneficiario',
 //        'persona_id',
 //        'rif',
 //        'condicion_trabajo_id',
-        'fuente_ingreso_id',
+        // 'fuente_ingreso_id',
 //        'relacion_trabajo_id',
         /*
           'sector_trabajo_id',

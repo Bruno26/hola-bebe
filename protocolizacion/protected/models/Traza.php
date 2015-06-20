@@ -154,4 +154,27 @@ class Traza extends CActiveRecord {
         return parent::model($className);
     }
 
+    public function getTraza($beneficiario) {
+        $traza = Traza::model()->findByAttributes(array('id_entidad' => $beneficiario));
+        if (!empty($traza)) {
+            switch ($traza->traza) {
+                case 1:
+                     return '30%' ;
+                    break;
+                case 2:
+                    return '60%' ;
+                break;
+            }
+        } else {
+            $beneficiarioConsul = Beneficiario::model()->findByAttributes(array('id_beneficiario' => $beneficiario));
+            if (!empty($beneficiarioConsul->ingreso_promedio_faov)) {
+                return '100%'; // INDICA QUE SE TERMINO LA ACTUALIZACION
+            } else {
+                return '0%'; // INDICA QUE NO SE A INICIADO LA ACTUALIZACION
+            }
+        }
+        
+    }
+
+
 }

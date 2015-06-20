@@ -81,18 +81,7 @@ $this->widget('booster.widgets.TbProgress', array(
                 'data' => 'Paso 1',
                 'title' => 'Paso 1'
             )
-        ), /*
-      array('context' => 'info',
-      'percent' => 35,
-      'htmlOptions' => array(
-      'data-toggle' => 'tooltip',
-      'title' => 'Paso 2'
-      )),
-
-      array('context' => 'danger', 'percent' => 35,'animated' => true,'htmlOptions' => array(
-      'data-toggle' => 'tooltip',
-      'title' => 'Paso 3'
-      )), */
+        ), 
     )
         )
 );

@@ -22,6 +22,11 @@ return false;
 });
 ");
 ?>
+<?php if(Yii::app()->user->hasFlash('success')):?>
+    <div class="alert alert-success">
+        <?php echo Yii::app()->user->getFlash('success'); ?>
+    </div>
+<?php endif; ?>
 
 <h1>Gestión de Adjudicados Temporales</h1>
 

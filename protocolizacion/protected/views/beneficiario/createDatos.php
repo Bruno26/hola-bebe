@@ -9,6 +9,39 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         'validateOnType' => true,
     ),
         ));
+
+$this->widget('booster.widgets.TbProgress', array(
+    'striped' => true,
+    'animated' => true,
+    'stacked' => array(
+        array(
+            'context' => 'warning',
+            'percent' => 30,
+            'htmlOptions' => array(
+                'data-toggle' => 'tooltip',
+                'data' => 'Paso 1',
+                'title' => 'Paso 1'
+            )
+        ), 
+        array('context' => 'info',
+            'percent' => 35,
+            'htmlOptions' => array(
+                'data-toggle' => 'tooltip',
+                'title' => 'Paso 2'
+            )
+        ),
+
+        array('context' => 'danger', 
+            'percent' => 35,
+            'animated' => true,
+            'htmlOptions' => array(
+                'data-toggle' => 'tooltip',
+                'title' => 'Paso 3'
+            )
+        ), 
+    )
+        )
+);
 ?>
 <?php
 $baseUrl = Yii::app()->baseUrl;
