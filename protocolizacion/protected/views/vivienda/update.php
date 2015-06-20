@@ -63,7 +63,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         $this->widget(
                 'booster.widgets.TbPanel', array(
             'title' => 'Actualización de la vivienda N° ' . $model->id_vivienda,
-            'context' => 'danger',
+            'context' => 'info',
             // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
             'headerIcon' => 'globe',
             'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'desarrollo' => $desarrollo), TRUE),

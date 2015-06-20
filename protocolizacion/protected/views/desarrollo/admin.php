@@ -3,7 +3,7 @@ $this->breadcrumbs = array(
     'Desarrollos' => array('index'),
     'Manage',
 );
-   
+
 $this->menu = array(
     array('label' => 'List Desarrollo', 'url' => array('index')),
     array('label' => 'Create Desarrollo', 'url' => array('create')),
@@ -29,11 +29,11 @@ Yii::app()->clientScript->registerScript('search', "
 
 <?php // echo CHtml::link('Busqueda Avanzada', '#', array('class' => 'search-button btn')); ?>
 <!--<div class="search-form" style="display:none">-->
-    <?php
+<?php
 //    $this->renderPartial('_search', array(
 //        'model' => $model,
 //    ));
-    ?>
+?>
 <!----></div><!-- search-form -->
 
 <?php
@@ -42,37 +42,20 @@ $this->widget('booster.widgets.TbGridView', array(
     'type' => 'striped bordered condensed',
     'dataProvider' => $model->search(),
     'filter' => $model,
-//    'columns' => array(
-//        'id_desarrollo',
-//        'nombre',
-//        'parroquia_id',
-//        'descripcion',
-//        'urban_barrio',
-//        'av_call_esq_carr',
-//        array(
-//            'class' => 'booster.widgets.TbButtonColumn',
-//        ),
-//    ),
     'columns' => array(
         'id_desarrollo' => array(
             'header' => 'N°',
             'name' => 'id_desarrollo',
             'value' => '$data->id_desarrollo',
             'htmlOptions' => array('width' => '80', 'style' => 'text-align: center;'),
-
         ),
         'nombre' => array(
             'header' => 'Nombre',
             'name' => 'nombre',
             'value' => '$data->nombre',
+//            'filter' => CHtml::listData(Desarrollo::model()->findall(), 'id_desarrollo', 'nombre'),
 //            'filter' => Maestro::FindMaestrosByPadreSelect(71),
         ),
-//        'descripcion' => array(
-//            'header' => 'Descripción',
-//            'name' => 'descripcion',
-//            'value' => '$data->descripcion',
-////            'filter' => Maestro::FindMaestrosByPadreSelect(71),
-//        ),
         'ente_ejecutor_id' => array(
             'name' => 'ente_ejecutor_id',
             'value' => '$data->enteEjecutor->nombre_ente_ejecutor',
@@ -116,12 +99,11 @@ $this->widget('booster.widgets.TbGridView', array(
                 ),
                 'pdf' => array(
                     'label' => 'Generar PDF',
-                    'icon'  => 'glyphicon glyphicon-file',
-                    'size'  => 'medium',
-                    'url'   => 'Yii::app()->createUrl("desarrollo/pdf/", array("id"=>$data->id_desarrollo))',
+                    'icon' => 'glyphicon glyphicon-file',
+                    'size' => 'medium',
+                    'url' => 'Yii::app()->createUrl("desarrollo/pdf/", array("id"=>$data->id_desarrollo))',
 //                    'visible' => 'Asignar($data->username);'
                 ),
-
             ),
         ),
     ),
