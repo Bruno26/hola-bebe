@@ -78,6 +78,8 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 ?>
 
 
+
+
 <h1>Cargar Nueva Unidad Familiar</h1>
 
 <div class="row">
