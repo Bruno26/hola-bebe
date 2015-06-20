@@ -11,49 +11,16 @@ class DesarrolloController extends Controller {
     /**
      * @return array action filters
      */
-//    public function filters() {
-//        return array('accessControl', array('CrugeAccessControlFilter'), // perform access control for CRUD operations
-//        );
-//    }
-//
-//    public function accessRules() {
-//        return array(
-//            array('allow', // allow all users to perform 'index' and 'view' actions
-//                //'actions' => array('*'),
-//                'users' => array('*'),
-//            ),
-//            array('deny', // deny all users
-//                'users' => array('*'),
-//            ),
-//        );
-//    }
     public function filters() {
-        return array(
-            'accessControl', // perform access control for CRUD operations
+        return array('accessControl', array('CrugeAccessControlFilter'), // perform access control for CRUD operations
         );
     }
 
-    /**
-     * Specifies the access control rules.
-     * This method is used by the 'accessControl' filter.
-     * @return array access control rules
-     */
     public function accessRules() {
         return array(
-            array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
-                'users' => array('*'),
-            ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'pdf'),
+            array('allow',
+                'actions' => array('*'),
                 'users' => array('@'),
-            ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete'),
-                'users' => array('admin'),
-            ),
-            array('deny', // deny all users
-                'users' => array('*'),
             ),
         );
     }
@@ -73,8 +40,8 @@ class DesarrolloController extends Controller {
         $municipio = new Tblmunicipio;
         $this->render('view', array(
             'model' => $this->loadModel($id),
-            'estado' => $estado ,
-            'municipio' => $municipio ,
+            'estado' => $estado,
+            'municipio' => $municipio,
         ));
     }
 
@@ -105,7 +72,7 @@ class DesarrolloController extends Controller {
                 $model->urban_barrio = $_POST['Desarrollo']['urban_barrio'];
                 $model->av_call_esq_carr = $_POST['Desarrollo']['av_call_esq_carr'];
                 $model->zona = $_POST['Desarrollo']['zona'];
-                $model->lote_terreno_mt2 = ($_POST['Desarrollo']['lote_terreno_mt2'])?$_POST['Desarrollo']['lote_terreno_mt2']: '0';
+                $model->lote_terreno_mt2 = ($_POST['Desarrollo']['lote_terreno_mt2']) ? $_POST['Desarrollo']['lote_terreno_mt2'] : '0';
                 $model->lindero_norte = $_POST['Desarrollo']['lindero_norte'];
                 $model->lindero_este = $_POST['Desarrollo']['lindero_este'];
                 $model->lindero_oeste = $_POST['Desarrollo']['lindero_oeste'];
@@ -125,9 +92,7 @@ class DesarrolloController extends Controller {
                 if ($model->save()) {
 
                     $this->redirect(array('admin'));
-                }
-
-                else {
+                } else {
                     var_dump($model->errors);
                     die();
                 }
@@ -171,7 +136,7 @@ class DesarrolloController extends Controller {
         }
 
         $this->render('update', array(
-          'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'enteEjecutor' => $enteEjecutor, 'fuenteFinacimiento' => $fuenteFinacimiento
+            'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'enteEjecutor' => $enteEjecutor, 'fuenteFinacimiento' => $fuenteFinacimiento
         ));
     }
 
@@ -204,17 +169,14 @@ class DesarrolloController extends Controller {
     }
 
     public function actionPdf($id) {
-      $estado = new Tblestado;
-      $municipio = new Tblmunicipio;
-      $this->render('pdf', array(
-          'model' => $this->loadModel($id),
-          'estado' => $estado ,
-          'municipio' => $municipio ,
-      ));
-
-
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $this->render('pdf', array(
+            'model' => $this->loadModel($id),
+            'estado' => $estado,
+            'municipio' => $municipio,
+        ));
     }
-
 
     public function actionAdmin() {
         $model = new Desarrollo('search');

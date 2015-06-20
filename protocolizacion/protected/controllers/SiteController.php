@@ -6,16 +6,19 @@ class SiteController extends Controller {
      * @return array action filters
      */
     public function filters() {
-        return array(
-            'accessControl', // perform access control for CRUD operations
-        );
+        return array(array('CrugeAccessControlFilter'));
     }
 
+    /**
+     * Specifies the access control rules.
+     * This method is used by the 'accessControl' filter.
+     * @return array access control rules
+     */
     public function accessRules() {
         return array(
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('indexAdmin'),
-                'users' => array('admin'),
+            array('allow',
+                'actions' => array('*'),
+                'users' => array('@'),
             ),
         );
     }
@@ -37,19 +40,31 @@ class SiteController extends Controller {
             ),
         );
     }
+
     /**
      * This is the default 'index' action that is invoked
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
         $TypeUser = Generico::TipoUsuario();
-        if ($TypeUser == 2) {
+        var_dump($TypeUser);
+        if ($TypeUser == 2 || $TypeUser == 3) {
             $this->layout = 'main';
             $this->render('indexAdmin');
             Yii::app()->end();
+        } else if ($TypeUser == 1) {
+            $this->layout = 'principal';
+            $this->redirect(array('/cruge/ui/login'));
+            Yii::app()->end();
+        }
+    }
+
+    public function actionAccessDenied() {
+        if (!Yii::app()->user->isGuest) {
+            $this->render('accessDenied');
         } else {
             $this->layout = 'principal';
-            $this->render('index');
+            $this->render('accessDenied');
         }
     }
 

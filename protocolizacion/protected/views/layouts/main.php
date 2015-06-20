@@ -57,7 +57,7 @@
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu extended logout">
-                                <li><a class="glyphicon glyphicon-lock" href="<?php echo $this->createUrl('/cruge/ui/usermanagementupdate'); ?>"><i class="fa fa-key"></i>Cambiar Clave</a></li>
+                                <li><a class="glyphicon glyphicon-lock" href="<?php echo $this->createUrl('/cruge/ui/usermanagementupdate', array('id' => Yii::app()->user->id)); ?>"><i class="fa fa-key"></i>Cambiar Clave</a></li>
                                 <li><a class="glyphicon glyphicon-off" href="<?php echo $this->createUrl('/site/logout'); ?>"><i class="fa fa-key"></i>Salir</a></li>
                             </ul>
                         </li>
@@ -177,8 +177,8 @@
                                     <span>Gestión de Adjudicados</span>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="<?php echo $this->createUrl('beneficiarioTemporal/create'); ?>"><i class="glyphicon glyphicon-user"></i><span>Cargar Nuevo Adjudicado</span></a></li>
-                                    <li><a href="<?php echo $this->createUrl('beneficiarioTemporal/admin'); ?>"><i class="glyphicon glyphicon-user"></i><span>Listado de Adjudicados</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('/beneficiarioTemporal/create'); ?>"><i class="glyphicon glyphicon-user"></i><span>Cargar Nuevo Adjudicado</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('/beneficiarioTemporal/admin'); ?>"><i class="glyphicon glyphicon-user"></i><span>Listado de Adjudicados</span></a></li>
                                     <!--<li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Carga Masiva</span></a></li>-->
                                 </ul>
                             </li>
@@ -214,7 +214,7 @@
             <div id="expirado"></div>
 
             <!--            <footer class='container col-md-12 col-xs-12 text-center'>
-                            Copyright &copy; <?php // echo date('Y');                                                                                 ?> by My Company.<br/>
+                            Copyright &copy; <?php // echo date('Y');                                                                                  ?> by My Company.<br/>
                             All Rights Reserved.<br/>
             <?php // echo Yii::powered(); ?>
                         </footer>-->

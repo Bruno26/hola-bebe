@@ -11,34 +11,15 @@ class ViviendaController extends Controller {
      * @return array action filters
      */
     public function filters() {
-        return array(
-            'accessControl', // perform access control for CRUD operations
+        return array('accessControl', array('CrugeAccessControlFilter'), // perform access control for CRUD operations
         );
     }
 
-    /**
-     * Specifies the access control rules.
-     * This method is used by the 'accessControl' filter.
-     * @return array access control rules
-     */
     public function accessRules() {
         return array(
-            array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
-                'users' => array('*'),
-            ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-
-                'actions' => array('create', 'update' , 'pdf'),
-
+            array('allow',
+                'actions' => array('*'),
                 'users' => array('@'),
-            ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete'),
-                'users' => array('admin'),
-            ),
-            array('deny', // deny all users
-                'users' => array('*'),
             ),
         );
     }
@@ -58,10 +39,10 @@ class ViviendaController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model      = new Vivienda;
-        $estado     = new Tblestado;
-        $municipio  = new Tblmunicipio;
-        $parroquia  = new Tblparroquia;
+        $model = new Vivienda;
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
         $desarrollo = new Desarrollo;
 
 // Uncomment the following line if AJAX validation is needed
@@ -93,7 +74,7 @@ class ViviendaController extends Controller {
             $model->fecha_creacion = 'now';
             $model->fecha_actualizacion = 'now';
             $model->usuario_id_creacion = Yii::app()->user->id;
-           // $model->usuario_id_actualizacion = 5;
+            // $model->usuario_id_actualizacion = 5;
 
 
             if ($model->save()) {
@@ -128,7 +109,7 @@ class ViviendaController extends Controller {
                 $this->redirect(array('view', 'id' => $model->id_vivienda));
         }
 
-        $this->render('update', array( 'model' => $model, 'estado' => $estado,
+        $this->render('update', array('model' => $model, 'estado' => $estado,
             'municipio' => $municipio, 'parroquia' => $parroquia, 'desarrollo' => $desarrollo
         ));
     }
@@ -196,17 +177,15 @@ class ViviendaController extends Controller {
             Yii::app()->end();
         }
     }
-    
+
     public function actionPdf($id) {
-      $estado = new Tblestado;
-      $municipio = new Tblmunicipio;
-      $this->render('pdf', array(
-          'model' => $this->loadModel($id),
-          'estado' => $estado ,
-          'municipio' => $municipio ,
-      ));
-
-
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $this->render('pdf', array(
+            'model' => $this->loadModel($id),
+            'estado' => $estado,
+            'municipio' => $municipio,
+        ));
     }
 
 }

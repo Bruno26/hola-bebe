@@ -11,32 +11,15 @@ class OficinaController extends Controller {
      * @return array action filters
      */
     public function filters() {
-        return array(
-            'accessControl', // perform access control for CRUD operations
+        return array('accessControl', array('CrugeAccessControlFilter'), // perform access control for CRUD operations
         );
     }
 
-    /**
-     * Specifies the access control rules.
-     * This method is used by the 'accessControl' filter.
-     * @return array access control rules
-     */
     public function accessRules() {
         return array(
-            array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
-                'users' => array('*'),
-            ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'pdf'),
+            array('allow',
+                'actions' => array('*'),
                 'users' => array('@'),
-            ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete'),
-                'users' => array('admin'),
-            ),
-            array('deny', // deny all users
-                'users' => array('*'),
             ),
         );
     }
@@ -46,13 +29,13 @@ class OficinaController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
-        
+
         $estado = new Tblestado;
         $municipio = new Tblmunicipio;
         $this->render('view', array(
             'model' => $this->loadModel($id),
-            'estado' => $estado ,
-            'municipio' => $municipio ,
+            'estado' => $estado,
+            'municipio' => $municipio,
         ));
     }
 
@@ -61,7 +44,7 @@ class OficinaController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        
+
         $model = new Oficina;
         $estado = new Tblestado;
         $municipio = new Tblmunicipio;
@@ -73,35 +56,35 @@ class OficinaController extends Controller {
 
         if (isset($_POST['Oficina'])) {
             //print_r($_POST['Oficina']);die;
-            
+
             $nombre = trim(strtoupper($_POST['Oficina']['nombre']));
             $parroquia_id = trim(strtoupper($_POST['Oficina']['parroquia_id']));
-            
+
             $consulta = Oficina::model()->findByAttributes(array('nombre' => $nombre, 'parroquia_id' => $parroquia_id));
-            
+
             if (empty($consulta)) {
                 $model->attributes = $_POST['Oficina'];
                 $model->nombre = $nombre;
-                $model->persona_id_jefe = $_POST['Oficina']['persona_id_jefe'];;
+                $model->persona_id_jefe = $_POST['Oficina']['persona_id_jefe'];
+                ;
                 $model->estatus = 44;
                 $model->usuario_id_creacion = Yii::app()->user->id;
                 $model->fecha_creacion = 'now()';
-                $model->fecha_actualizacion = 'now()';  
-                
-                    
+                $model->fecha_actualizacion = 'now()';
+
+
 //            $model->fk
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_oficina));
-        }else{
-            $this->render('create', array(
+                if ($model->save())
+                    $this->redirect(array('view', 'id' => $model->id_oficina));
+            }else {
+                $this->render('create', array(
                     'model' => $model, 'estado' => $estado,
                     'municipio' => $municipio, 'parroquia' => $parroquia,
                     'sms' => 1
                 ));
                 Yii::app()->end();
+            }
         }
-        
-       }
 
         $this->render('create', array(
             'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia
@@ -120,12 +103,12 @@ class OficinaController extends Controller {
         $parroquia = new Tblparroquia;
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
-    $consulta = ConsultaOracle::setPersona('nacionalidad,cedula,primer_nombre,primer_apellido', $model->persona_id_jefe);
+        $consulta = ConsultaOracle::setPersona('nacionalidad,cedula,primer_nombre,primer_apellido', $model->persona_id_jefe);
         $nacio = ($consulta['NACIONALIDAD'] == 1) ? 'V-' : 'E-';
         $model->cedula = $nacio . '' . $consulta['CEDULA'];
         $model->primer_nombre = $consulta['PRIMER_NOMBRE'];
         $model->primer_apellido = $consulta['PRIMER_APELLIDO'];
-        
+
         if (isset($_POST['Oficina'])) {
             $model->attributes = $_POST['Oficina'];
             if ($model->save())
@@ -204,17 +187,15 @@ class OficinaController extends Controller {
             Yii::app()->end();
         }
     }
-    
+
     public function actionPdf($id) {
-      $estado = new Tblestado;
-      $municipio = new Tblmunicipio;
-      $this->render('pdf', array(
-          'model' => $this->loadModel($id),
-          'estado' => $estado ,
-          'municipio' => $municipio ,
-      ));
-
-
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $this->render('pdf', array(
+            'model' => $this->loadModel($id),
+            'estado' => $estado,
+            'municipio' => $municipio,
+        ));
     }
 
 }

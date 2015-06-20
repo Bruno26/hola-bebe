@@ -11,32 +11,15 @@ class UnidadHabitacionalController extends Controller {
      * @return array action filters
      */
     public function filters() {
-        return array(
-            'accessControl', // perform access control for CRUD operations
+        return array('accessControl', array('CrugeAccessControlFilter'), // perform access control for CRUD operations
         );
     }
 
-    /**
-     * Specifies the access control rules.
-     * This method is used by the 'accessControl' filter.
-     * @return array access control rules
-     */
     public function accessRules() {
         return array(
-            array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
-                'users' => array('*'),
-            ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'guardar','pdf'),
+            array('allow',
+                'actions' => array('*'),
                 'users' => array('@'),
-            ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete'),
-                'users' => array('admin'),
-            ),
-            array('deny', // deny all users
-                'users' => array('*'),
             ),
         );
     }
@@ -51,13 +34,11 @@ class UnidadHabitacionalController extends Controller {
         $municipio = new Tblmunicipio;
         $this->render('view', array(
             'model' => $this->loadModel($id),
-            'estado' => $estado ,
-            'municipio' => $municipio ,
-            
-            
+            'estado' => $estado,
+            'municipio' => $municipio,
         ));
-        
-        
+
+
         //$this->render('view', array(
         //    'model' => $this->loadModel($id),
         //));
@@ -112,10 +93,10 @@ class UnidadHabitacionalController extends Controller {
                     $this->redirect(array('admin'));
                 }
             } else {
-                $this->render('create', array('model' => $model, 
-                    'estado' => $estado, 'municipio' => $municipio, 
+                $this->render('create', array('model' => $model,
+                    'estado' => $estado, 'municipio' => $municipio,
                     'parroquia' => $parroquia, 'sms' => 1));
-                 Yii::app()->end();
+                Yii::app()->end();
             }
         }
 
@@ -207,17 +188,15 @@ class UnidadHabitacionalController extends Controller {
             Yii::app()->end();
         }
     }
-    
+
     public function actionPdf($id) {
-      $estado = new Tblestado;
-      $municipio = new Tblmunicipio;
-      $this->render('pdf', array(
-          'model' => $this->loadModel($id),
-          'estado' => $estado ,
-          'municipio' => $municipio ,
-      ));
-
-
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $this->render('pdf', array(
+            'model' => $this->loadModel($id),
+            'estado' => $estado,
+            'municipio' => $municipio,
+        ));
     }
 
 }

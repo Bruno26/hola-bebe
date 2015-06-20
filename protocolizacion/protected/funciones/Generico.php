@@ -29,19 +29,14 @@ class Generico {
             if (Yii::app()->user->name != "admin") {
                 $rol = Yii::app()->db->createCommand('select itemname from cruge_authassignment where userid = ' . Yii::app()->user->id)->queryAll();
                 $rol = (object) $rol[0];
-                if ($rol->itemname == 'registrador') {
-
-                    return 1;
-                } else {
-                    return 2;
-                    Yii::app()->end();
-                }
+                if ($rol->itemname == 'censo') {
+                    return 3;
+                } 
             } else {
-                return 2;
-                Yii::app()->end();
+                return 2;//admin
             }
         } else {
-            return 1;
+            return 1;// no logeado
         }
     }
 
@@ -72,6 +67,7 @@ class Generico {
                 break;
         }
     }
+
 }
 ?>
 

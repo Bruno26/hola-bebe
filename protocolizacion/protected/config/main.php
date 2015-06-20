@@ -6,7 +6,7 @@
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Protocolización',
-    'defaultController' => 'vivienda/create',
+//    'defaultController' => 'cruge/ui/login',
     // preloading 'log' component
     'preload' => array(
         'log',
@@ -53,8 +53,8 @@ return array(
 //            //		'afterLoginUrl'=>array('/site/welcome'),  ( !!! no olvidar el slash inicial / )
 //            //		'afterLogoutUrl'=>array('/site/page','view'=>'about'),
 //            //
-            'afterLoginUrl' => null,
-            'afterLogoutUrl' => null,
+            'afterLoginUrl' => array('/site/indexAdmin'),
+            'afterLogoutUrl' => array('/cruge/ui/login'),
             'afterSessionExpiredUrl' => array('/cruge/ui/login'),
 //            // manejo del layout con cruge.
 //            //
@@ -122,7 +122,7 @@ return array(
             // use 'site/error' action to display errors
             'errorAction' => 'site/error',
         ),
-        'db' => array(
+           'db' => array(
             'connectionString' => 'pgsql:host=xxx.xxx.x.xxx;dbname=xxxxxxxxxxxxxxx', //cambiar host
             'emulatePrepare' => false,
             'username' => 'xxxxxxxx',
@@ -131,7 +131,7 @@ return array(
         'dbOarcle' => array(
             'class' => 'application.extensions.PHPPDO.CPdoDbConnection',
             'pdoClass' => 'PHPPDO',
-            'connectionString' => 'oci:dbname=//xxx.xxx.x.xxx/xxxxx',
+            'connectionString' => 'oci:dbname=//xxx.xxx.x.xxx.xxxxx',
             'username' => 'xxxxxxxxxxxxxxx',
             'password' => 'xxxxxxxxxxxxxxx',
         ),
@@ -141,7 +141,7 @@ return array(
             'emulatePrepare' => false,
             'username' => 'xxxxxxxx',
             'password' => 'xxxxxxxx',
-            'schemaCachingDuration' => 3600,
+//            'schemaCachingDuration' => 3600,
             'charset' => 'utf8',
         ),
         'booster' => array(
