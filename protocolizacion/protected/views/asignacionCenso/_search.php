@@ -5,7 +5,7 @@
 
 		<?php echo $form->textFieldGroup($model,'id_asignacion_censo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-		<?php echo $form->textFieldGroup($model,'unidad_habitacional_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'desarrollo_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
 		<?php echo $form->textFieldGroup($model,'oficina_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
