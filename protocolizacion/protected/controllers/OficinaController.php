@@ -55,23 +55,27 @@ class OficinaController extends Controller {
 
 
         if (isset($_POST['Oficina'])) {
-            //print_r($_POST['Oficina']);die;
 
             $nombre = trim(strtoupper($_POST['Oficina']['nombre']));
             $parroquia_id = trim(strtoupper($_POST['Oficina']['parroquia_id']));
+            $cod_estado = $_POST['Tblestado']['clvcodigo'];
 
-            $consulta = Oficina::model()->findByAttributes(array('nombre' => $nombre, 'parroquia_id' => $parroquia_id));
+            $sql = "SELECT ofi.nombre 
+                    FROM oficina ofi
+                    LEFT JOIN vsw_sector sec ON sec.cod_parroquia = ofi.parroquia_id 
+                    WHERE ofi.nombre ILIKE '" . $nombre . "' AND sec.cod_estado = " . $cod_estado . " AND ofi.estatus = 44
+                    GROUP BY  ofi.id_oficina, ofi.nombre,  sec.cod_estado, sec.estado, ofi.parroquia_id
+                    ORDER BY estado ASC";
 
+            $consulta = Yii::app()->db->createCommand($sql)->queryAll();
             if (empty($consulta)) {
                 $model->attributes = $_POST['Oficina'];
                 $model->nombre = $nombre;
                 $model->persona_id_jefe = $_POST['Oficina']['persona_id_jefe'];
-                ;
                 $model->estatus = 44;
                 $model->usuario_id_creacion = Yii::app()->user->id;
                 $model->fecha_creacion = 'now()';
                 $model->fecha_actualizacion = 'now()';
-
 
 //            $model->fk
                 if ($model->save())
