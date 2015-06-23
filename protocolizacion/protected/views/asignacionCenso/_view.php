@@ -35,7 +35,6 @@
         </div>
     </div>
 </div>
-
 <div class="row">
     <div class="col-md-12">
         <h4><i class="glyphicon glyphicon-user"></i> Persona Asignada</h4>
