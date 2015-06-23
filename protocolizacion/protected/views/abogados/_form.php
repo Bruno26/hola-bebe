@@ -70,12 +70,20 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 </div>
 <div class="row">
     <div class="col-md-6">
+
+        <?php echo $form->labelEx($model, 'oficina_id'); ?>
         <?php
-        echo $form->dropDownListGroup($model, 'oficina_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
-            'widgetOptions' => array(
-                'data' => CHtml::listData(Oficina::model()->findAll(), 'id_oficina', 'nombre'),
-                'htmlOptions' => array('empty' => 'SELECCIONE'),
-            )
+        $this->widget(
+                'booster.widgets.TbSelect2', array(
+            'name' => CHtml::activeId($model, 'oficina_id'),
+            'attribute' => 'oficina_id',
+            'data' => CHtml::listData(Oficina::model()->findAll(), 'id_oficina', 'nombre'),
+            'htmlOptions' => array(
+                'style' => 'width: 100%',
+                'placeholder' => 'Este campo es de autocompletar',
+                'multiple' => false,
+                'id' => CHtml::activeId($model, 'oficina_id'),
+            ),
                 )
         );
         ?>

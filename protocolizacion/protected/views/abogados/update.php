@@ -1,21 +1,21 @@
 <?php /*
-$this->breadcrumbs=array(
-	'Abogadoses'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
+  $this->breadcrumbs=array(
+  'Abogadoses'=>array('index'),
+  $model->id=>array('view','id'=>$model->id),
+  'Update',
+  );
 
-	$this->menu=array(
-	array('label'=>'List Abogados','url'=>array('index')),
-	array('label'=>'Create Abogados','url'=>array('create')),
-	array('label'=>'View Abogados','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage Abogados','url'=>array('admin')),
-	);
-	?>
+  $this->menu=array(
+  array('label'=>'List Abogados','url'=>array('index')),
+  array('label'=>'Create Abogados','url'=>array('create')),
+  array('label'=>'View Abogados','url'=>array('view','id'=>$model->id)),
+  array('label'=>'Manage Abogados','url'=>array('admin')),
+  );
+  ?>
 
-	<h1>Update Abogados <?php echo $model->id; ?></h1>
+  <h1>Update Abogados <?php echo $model->id; ?></h1>
 
-<?php echo $this->renderPartial('_form',array('model'=>$model)); */?>
+  <?php echo $this->renderPartial('_form',array('model'=>$model)); */ ?>
 
 <?php
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
@@ -47,16 +47,16 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                 });
 
         ") ?>
-<h1>Agente de Documentación</h1>
+<h1>Modificar Jefe de Documentación y Cobranzas</h1>
 
 <div class="row">
     <div class="col-md-12">
         <?php
         $this->widget(
                 'booster.widgets.TbPanel', array(
-            'title' => 'Caracteristica del Abogado',
+            'title' => 'Jefe de Documentación y Cobranzas',
             'context' => 'danger',
-            // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'headerIcon' => 'globe',
             'content' => $this->renderPartial('_form_update', array('form' => $form, 'model' => $model, 'consulta' => $consulta), TRUE),
                 )
@@ -67,21 +67,19 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 
 <div class="well">
     <div class="pull-center" style="text-align: right;">
-			<?php
-			$this->widget('booster.widgets.TbButton', array(
-					'buttonType' => 'submit',
-					'icon' => 'glyphicon glyphicon glyphicon-step-backward',
-					'size' => 'large',
-					'id' => 'cancelar',
-					'context' => 'danger',
-					'label' => 'Cancelar',
-					//'url' => $this->createURL('/desarrollo/admin'),
-					'htmlOptions' => array(
-		'onclick' => 'document.location.href ="' . $this->createUrl('desarrollo/admin') . '"'),
-
-			));
-			?>
-			<?php
+        <?php
+        $this->widget('booster.widgets.TbButton', array(
+            'context' => 'danger',
+            'label' => 'Cancelar',
+            'size' => 'large',
+            'id' => 'CancelarForm',
+            'icon' => 'ban-circle',
+            'htmlOptions' => array(
+                'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
+            )
+        ));
+        ?>
+        <?php
         $this->widget('booster.widgets.TbButton', array(
             'buttonType' => 'submit',
             'icon' => 'glyphicon glyphicon-floppy-saved',
@@ -94,6 +92,6 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     </div>
 </div>
 
-<?php //echo $this->renderPartial('_form', array('model'=>$model));  ?>
+<?php //echo $this->renderPartial('_form', array('model'=>$model));   ?>
 
 <?php $this->endWidget(); ?>

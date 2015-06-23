@@ -1,32 +1,35 @@
 <?php
-	function nombre($selec,$iD){
-	    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
-	    return $saime['PRIMER_NOMBRE'];
-	}
-	function apellido($selec,$iD){
-	    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
-	    return $saime['PRIMER_APELLIDO'];
-	}
-        function nacionalidadCedula($selec,$select2,$iD){
-	    $saime = ConsultaOracle::getNacionalidadCedulaPersonaByPk($selec,$select2,(int)$iD);
-	    return $saime['NACIONALIDAD']." - ".$saime['CEDULA'];
-	}
+
+function nombre($selec, $iD) {
+    $saime = ConsultaOracle::getPersonaByPk($selec, (int) $iD);
+    return $saime['PRIMER_NOMBRE'];
+}
+
+function apellido($selec, $iD) {
+    $saime = ConsultaOracle::getPersonaByPk($selec, (int) $iD);
+    return $saime['PRIMER_APELLIDO'];
+}
+
+function nacionalidadCedula($selec, $select2, $iD) {
+    $saime = ConsultaOracle::getNacionalidadCedulaPersonaByPk($selec, $select2, (int) $iD);
+    return $saime['NACIONALIDAD'] . " - " . $saime['CEDULA'];
+}
+
 //        $fecha_asignacion = substr($model->fecha_asignacion,0,10);
 //        $invert = explode("-",$fecha_asignacion); 
 //
 //        $fecha_invert = $invert[2]."-".$invert[1]."-".$invert[0]; 
-
 ?>
 
 <?php
-$this->breadcrumbs=array(
-	'Asignacion Censos'=>array('index'),
-	'Manage',
+$this->breadcrumbs = array(
+    'Asignacion Censos' => array('index'),
+    'Manage',
 );
 
-$this->menu=array(
-array('label'=>'List AsignacionCenso','url'=>array('index')),
-array('label'=>'Create AsignacionCenso','url'=>array('create')),
+$this->menu = array(
+    array('label' => 'List AsignacionCenso', 'url' => array('index')),
+    array('label' => 'Create AsignacionCenso', 'url' => array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -46,48 +49,31 @@ return false;
 <h1>Listado de Asignacion de Censos</h1>
 
 
-<?php echo CHtml::link('Búsqueda Avanzada','#',array('class'=>'search-button btn')); ?>
+<?php // echo CHtml::link('Búsqueda Avanzada', '#', array('class' => 'search-button btn')); ?>
 <div class="search-form" style="display:none">
-	<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
+    <?php
+//    $this->renderPartial('_search', array(
+//        'model' => $model,
+//    ));
+    ?>
 </div><!-- search-form -->
 
-<?php $this->widget('booster.widgets.TbGridView',array(
-'id'=>'beneficiario-temporal-grid',
-'type' => 'striped bordered condensed',
-'dataProvider'=>$model->search(),
-'filter'=>$model,
-//'columns'=>array(
-//		'id_asignacion_censo',
-//		'unidad_habitacional_id',
-//		'oficina_id',
-//		'persona_id',
-//		'fecha_asignacion',
-//		'censado',
-		/*
-		'estatus',
-		'observaciones',
-		'fecha_creacion',
-		'fecha_actualizacion',
-		'usuario_id_creacion',
-		'usuario_id_actualizacion',
-		*/
-//array(
-//'class'=>'booster.widgets.TbButtonColumn',
-//),
-//),
+<?php
+$this->widget('booster.widgets.TbGridView', array(
+//    'id' => 'beneficiario-temporal-grid',
+    'type' => 'striped bordered condensed',
+    'dataProvider' => $model->search(),
+    'filter' => $model,
     'columns' => array(
         'id_asignacion_censo' => array(
             'header' => 'N°',
             'name' => 'id_asignacion_censo',
             'value' => '$data->id_asignacion_censo',
             'htmlOptions' => array('width' => '80', 'style' => 'text-align: center;'),
-
         ),
-        'unidad_habitacional_id' => array(
-            'name' => 'unidad_habitacional_id',
-            'value' => '$data->unidadHabitacional->nombre',
+        'desarrollo_id' => array(
+            'name' => 'desarrollo_id',
+            'value' => '$data->desarrollo->nombre',
 //            'filter' => Maestro::FindMaestrosByPadreSelect(71),
         ),
         'oficina_id' => array(
@@ -129,13 +115,13 @@ return false;
                 ),
                 'pdf' => array(
                     'label' => 'Generar PDF',
-                    'icon'  => 'glyphicon glyphicon-file',
-                    'size'  => 'medium',
-                    'url'   => 'Yii::app()->createUrl("asignacionCenso/pdf/", array("id"=>$data->id_asignacion_censo))',
+                    'icon' => 'glyphicon glyphicon-file',
+                    'size' => 'medium',
+                    'url' => 'Yii::app()->createUrl("asignacionCenso/pdf/", array("id"=>$data->id_asignacion_censo))',
 //                    'visible' => 'Asignar($data->username);'
                 ),
-
             ),
         ),
     ),
-)); ?>
+));
+?>

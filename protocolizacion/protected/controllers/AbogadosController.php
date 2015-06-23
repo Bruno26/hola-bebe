@@ -52,6 +52,7 @@ class AbogadosController extends Controller {
 
         if (isset($_POST['Abogados'])) {
             $model->attributes = $_POST['Abogados'];
+            $model->oficina_id = $_POST['Abogados_oficina_id'];
             $model->estatus = 2;
             $model->usuario_id_creacion = Yii::app()->user->id;
             $model->fecha_creacion = 'now()';
