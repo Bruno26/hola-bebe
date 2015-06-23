@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'asignacion_censo':
  * @property integer $id_asignacion_censo
- * @property integer $unidad_habitacional_id
+ * @property integer $desarrollo_id
  * @property integer $oficina_id
  * @property integer $persona_id
  * @property string $fecha_asignacion
@@ -19,10 +19,10 @@
  *
  * The followings are the available model relations:
  * @property Maestro $estatus0
- * @property UnidadHabitacional $unidadHabitacional
+ * @property Oficina $oficina
  * @property CrugeUser $usuarioIdActualizacion
  * @property CrugeUser $usuarioIdCreacion
- * @property Oficina $oficina
+ * @property Desarrollo $desarrollo
  */
 class AsignacionCenso extends CActiveRecord {
 
@@ -34,7 +34,6 @@ class AsignacionCenso extends CActiveRecord {
     public $segundo_apellido;
 
     /**
-      /**
      * @return string the associated database table name
      */
     public function tableName() {
@@ -48,13 +47,13 @@ class AsignacionCenso extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('unidad_habitacional_id, oficina_id, persona_id, fecha_asignacion, estatus, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
-            array('unidad_habitacional_id, oficina_id, persona_id, estatus, usuario_id_creacion, usuario_id_actualizacion', 'numerical', 'integerOnly' => true),
+            array('desarrollo_id, oficina_id, persona_id, fecha_asignacion, estatus, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
+            array('desarrollo_id, oficina_id, persona_id, estatus, usuario_id_creacion, usuario_id_actualizacion', 'numerical', 'integerOnly' => true),
             array('observaciones', 'length', 'max' => 200),
             array('censado', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id_asignacion_censo, unidad_habitacional_id, oficina_id, persona_id, fecha_asignacion, censado, estatus, observaciones, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, nacionalidad, cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido', 'safe', 'on' => 'search'),
+            array('id_asignacion_censo, desarrollo_id, oficina_id, persona_id, fecha_asignacion, censado, estatus, observaciones, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion', 'safe', 'on' => 'search'),
         );
     }
 
@@ -66,10 +65,10 @@ class AsignacionCenso extends CActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'estatus0' => array(self::BELONGS_TO, 'Maestro', 'estatus'),
-            'unidadHabitacional' => array(self::BELONGS_TO, 'UnidadHabitacional', 'unidad_habitacional_id'),
+            'oficina' => array(self::BELONGS_TO, 'Oficina', 'oficina_id'),
             'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
             'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
-            'oficina' => array(self::BELONGS_TO, 'Oficina', 'oficina_id'),
+            'desarrollo' => array(self::BELONGS_TO, 'Desarrollo', 'desarrollo_id'),
         );
     }
 
@@ -79,10 +78,10 @@ class AsignacionCenso extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id_asignacion_censo' => 'Id Asignacion Censo',
-            'unidad_habitacional_id' => 'Nombre de Unidad Habitacional',
-            'oficina_id' => 'Oficina',
+            'desarrollo_id' => 'Nombre del Desarrollo Habitacional',
+            'oficina_id' => 'Nombre de la Oficina',
             'persona_id' => 'Persona',
-            'fecha_asignacion' => 'Fecha Asignación',
+            'fecha_asignacion' => 'Fecha Asignacion',
             'censado' => 'Censado',
             'estatus' => 'Estatus',
             'observaciones' => 'Observaciones',
@@ -117,7 +116,7 @@ class AsignacionCenso extends CActiveRecord {
         $criteria = new CDbCriteria;
 
         $criteria->compare('id_asignacion_censo', $this->id_asignacion_censo);
-        $criteria->compare('unidad_habitacional_id', $this->unidad_habitacional_id);
+        $criteria->compare('desarrollo_id', $this->desarrollo_id);
         $criteria->compare('oficina_id', $this->oficina_id);
         $criteria->compare('persona_id', $this->persona_id);
         $criteria->compare('fecha_asignacion', $this->fecha_asignacion, true);

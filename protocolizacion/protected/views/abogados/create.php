@@ -11,17 +11,17 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         )));
 ?>
 
-<h1>Cargar Nuevo Agente de Documentación</h1>
+<h1>Cargar Nuevo Jefe de Documentación y Cobranzas</h1>
 
 <div class="row">
     <div class="col-md-12">
     <?php 
     $this->widget(
             'booster.widgets.TbPanel', array(
-        'title' => 'Abogados',
+        'title' => 'Jefe de Documentación y Cobranza',
         'context' => 'info',
         'headerIcon' => 'user',
-        //'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
+        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
         'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
         #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
             )

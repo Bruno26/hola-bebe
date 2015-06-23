@@ -23,7 +23,7 @@
         <div class='col-md-6'> 
             <blockquote>
                 <p>
-                   <b>Unidad Habitacional:</b> <?php echo $model->unidadHabitacional->nombre ?><br/>
+                   <b>Nombre del Desarrollo:</b> <?php echo $model->desarrollo->nombre ?><br/>
                 </p>
                 <p>
                    <b>Nombre de la Oficina:</b> <?php echo $model->oficina->nombre ?><br/>

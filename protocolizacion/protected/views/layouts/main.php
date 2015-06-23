@@ -127,6 +127,17 @@
                                             <li><a href="<?php echo $this->createUrl('/registroDocumento/create'); ?>">Cargar Nuevo Registro de Documento</a></li>
                                         </ul>
                                     </li>
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="glyphicon glyphicon-briefcase"></i>
+                                            <span>Asignación de Censo</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a href="<?php echo $this->createUrl('/asignacionCenso/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Asignación de Censo</span></a></li>
+                                            <li><a href="<?php echo $this->createUrl('/asignacionCenso/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Asignación</span></a></li>
+
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="sub-menu">
@@ -146,6 +157,7 @@
                                             <li><a href="<?php echo $this->createUrl('/enteEjecutor/create'); ?>">Cargar Ente Ejecutor</a></li>
                                             <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Cargar Funtes de Financiamiento</a></li>
                                             <li><a href="<?php echo $this->createUrl('/desarrollo/admin'); ?>">Gestión de Desarrollo Habitacional</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/reasignacionVivienda/create'); ?>">Reasignación de Vivienda</a></li>
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -162,11 +174,11 @@
                                     <li class="sub-menu">
                                         <a href="javascript:;">
                                             <i class="glyphicon glyphicon-home"></i>
-                                            <span>Unidad Familiar</span>
+                                            <span>Unidad Unifamiliar</span>
                                         </a>
                                         <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/vivienda/create'); ?>">Cargar Nueva Unidad Familiar</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/vivienda/admin'); ?>">Gestión de Unidad Familiar</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/vivienda/create'); ?>">Cargar Nueva Unidad Unifamiliar</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/vivienda/admin'); ?>">Gestión de Unidad Unifamiliar</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -188,13 +200,10 @@
                                     <span>Censo Socioeconómico</span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="<?php echo $this->createUrl('/asignacionCenso/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Asignación de Censo</span></a></li>
 
-                                    <li><a href="<?php echo $this->createUrl('/asignacionCenso/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Asignación</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('/beneficiario/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Censo</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('/beneficiario/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Censo</span></a></li>
-                                    <li><a href="<?php echo $this->createUrl('/reasignacionVivienda/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Reasignación de Vivienda</span></a></li>
-                                    <li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Reasignación</span></a></li>
+                                    <!--<li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Reasignación</span></a></li>-->
                                 </ul>
                             </li>
 
@@ -214,7 +223,7 @@
             <div id="expirado"></div>
 
             <!--            <footer class='container col-md-12 col-xs-12 text-center'>
-                            Copyright &copy; <?php // echo date('Y');                                                                                  ?> by My Company.<br/>
+                            Copyright &copy; <?php // echo date('Y');                                                                                            ?> by My Company.<br/>
                             All Rights Reserved.<br/>
             <?php // echo Yii::powered(); ?>
                         </footer>-->

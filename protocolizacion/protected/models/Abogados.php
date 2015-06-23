@@ -71,7 +71,7 @@ class Abogados extends CActiveRecord {
             'id' => 'ID',
             'persona_id' => 'Persona',
             'inpreabogado' => 'Inpreabogado',
-            'tipo_abogado_id' => 'Tipo Abogado',
+            'tipo_abogado_id' => 'Tipo de Agente',
             'oficina_id' => 'Oficina',
             'observaciones' => 'Observaciones',
             'estatus' => 'Estatus',

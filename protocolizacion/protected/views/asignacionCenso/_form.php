@@ -7,9 +7,9 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
     <div class="col-md-6">
 
         <?php
-        echo $form->dropDownListGroup($model, 'unidad_habitacional_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+        echo $form->dropDownListGroup($model, 'desarrollo_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
             'widgetOptions' => array(
-                'data' => CHtml::listData(UnidadHabitacional::model()->findAll(), 'id_unidad_habitacional', 'nombre'),
+                'data' => CHtml::listData(Desarrollo::model()->findAll(), 'id_desarrollo', 'nombre'),
                 'htmlOptions' => array('empty' => 'SELECCIONE',
                 ),
             )
