@@ -47,7 +47,7 @@ function buscarPersonaOficina(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function (datos) {
+        success: function(datos) {
 //            alert(datos);
 //            if (datos == 1) {
 //                bootbox.alert('Debe Completar el campo Cédula');
@@ -68,7 +68,7 @@ function buscarPersonaOficina(nacionalidad, cedula) {
             }
 
         },
-        error: function (datos) {
+        error: function(datos) {
             bootbox.alert('Ocurrio un error');
         }
     })
@@ -94,7 +94,7 @@ function buscarBenefAnterior(nacionalidad, cedula, caso) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function (datos) {
+        success: function(datos) {
             if (caso == 1) {
                 if (datos == 1) {
                     $('#ReasignacionVivienda_nombreCompletoAnterior').val('');
@@ -120,7 +120,7 @@ function buscarBenefAnterior(nacionalidad, cedula, caso) {
 
             }
         },
-        error: function (datos) {
+        error: function(datos) {
             bootbox.alert('Ocurrio un error');
         }
 
@@ -128,6 +128,13 @@ function buscarBenefAnterior(nacionalidad, cedula, caso) {
 }
 
 function buscarPersonaAbogado(nacionalidad, cedula) {
+    $('#Abogados_persona_id').val('');
+    $('#Abogados_primer_nombre').val('');
+    $('#Abogados_segundo_nombre').val('')
+    $('#Abogados_primer_apellido').val('');
+    $('#Abogados_segundo_apellido').val('');
+    $('#fecha_nac').val('');
+    $('#iconLoding').show();
 
     if (nacionalidad == 'SELECCIONE') {
         bootbox.alert('Verifique que la nacionalidad no esten vacios');
@@ -138,25 +145,43 @@ function buscarPersonaAbogado(nacionalidad, cedula) {
         return false;
     }
     $.ajax({
-        url: baseUrl + "/ValidacionJs/BuscarPersonas",
+        url: baseUrl + "/ValidacionJs/BuscarPersonaAbogado",
         async: true,
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function (datos) {
+        success: function(datos) {
 
             if (datos == 1) {
-                $('#Abogados_primer_nombre').val(datos.PRIMERNOMBRE);
-                $('#Abogados_persona_id').val(datos.ID);
-                $('#Abogados_primer_apellido').val(datos.PRIMERAPELLIDO);
+                $('#iconLoding').hide();
+                $('#Abogados_persona_id').val('');
+                $('#Abogados_primer_nombre').val('');
+                $('#Abogados_segundo_nombre').val('');
+                $('#Abogados_primer_apellido').val('');
+                $('#Abogados_segundo_apellido').val('');
+                $('#fecha_nac').val('');
+                bootbox.alert('La Persona ya se encuentra registrada como Abogado.');
+            } else if (datos == 2) {
+                $('#iconLoding').hide();
+                $('#Abogados_persona_id').val('');
+                $('#Abogados_primer_nombre').val('');
+                $('#Abogados_segundo_nombre').val('');
+                $('#Abogados_primer_apellido').val('');
+                $('#Abogados_segundo_apellido').val('');
+                $('#fecha_nac').val('');
+                bootbox.alert('La Persona no se encuentra registrada en el Saime.');
             } else {
-                $('#Abogados_primer_nombre').val(datos.PRIMERNOMBRE);
                 $('#Abogados_persona_id').val(datos.ID);
+                $('#Abogados_primer_nombre').val(datos.PRIMERNOMBRE);
+                $('#Abogados_segundo_nombre').val(datos.SEGUNDONOMBRE);
                 $('#Abogados_primer_apellido').val(datos.PRIMERAPELLIDO);
+                $('#Abogados_segundo_apellido').val(datos.SEGUNDOPELLIDO);
+                $('#fecha_nac').val(datos.FECHANACIMIENTO);
+                $('#iconLoding').hide();
             }
 
         },
-        error: function (datos) {
+        error: function(datos) {
             bootbox.alert('Ocurrio un error');
         }
     })
@@ -185,8 +210,8 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function (datos) {
-          //  alert(datos);
+        success: function(datos) {
+            //  alert(datos);
             if (datos == 2) {
                 //  No Existe en Saime habilito todos los campos para que se llenen a pedal
 
@@ -224,10 +249,10 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
 
                 /*   -------------------------------- */
 
-            }else if(datos == 3){
-                  bootbox.alert('Beneficiario Se encuentra Registrado !');
-                  // $('#BeneficiarioTemporal_cedula').val('');
-                  return false;
+            } else if (datos == 3) {
+                bootbox.alert('Beneficiario Se encuentra Registrado !');
+                // $('#BeneficiarioTemporal_cedula').val('');
+                return false;
 
             } else if (datos.PROCEDENCIA == 2) {
                 //  Datos de la variable proceden de Saime 
@@ -358,7 +383,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
 //                
 //            }
         },
-        error: function (datos) {
+        error: function(datos) {
             bootbox.alert('CEDULA NO ES VALIDA VERIFIQUE');
         }
     })
@@ -390,7 +415,7 @@ function buscarBeneficiarioTemporal(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function (datos) {
+        success: function(datos) {
             /* ++++ solo verifico en Persona  ++++  */
             if (datos != 2) {
                 //datos de beneficiario temporal
@@ -535,7 +560,7 @@ function buscarPersonaCensoA(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function (datos) {
+        success: function(datos) {
 
             if (datos == 1) {
 
@@ -549,7 +574,7 @@ function buscarPersonaCensoA(nacionalidad, cedula) {
             }
 
         },
-        error: function (datos) {
+        error: function(datos) {
             bootbox.alert('Ocurrio un error');
         }
     })
@@ -580,7 +605,7 @@ function buscarPersonaFamiliar(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function (datos) {
+        success: function(datos) {
 
             if (datos == 1) {
                 $('#iconLoding').hide();
@@ -615,7 +640,7 @@ function buscarPersonaFamiliar(nacionalidad, cedula) {
                 $('#iconLoding').hide();
             }
         },
-        error: function (datos) {
+        error: function(datos) {
             bootbox.alert('Ocurrio un error');
         }
     })
@@ -638,7 +663,7 @@ function Parentesco(valor) {
     contadorMadre = parseInt(0);
     contadorSuegro = parseInt(0);
     contadorAbuelo = parseInt(0);
-    $('#listado_familiar tr').each(function () {
+    $('#listado_familiar tr').each(function() {
         var parentesco = $(this).find('td:eq(6)').html();
         if (parentesco == 'PADRE') {
             contadorPadre++

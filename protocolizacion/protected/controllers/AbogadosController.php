@@ -1,13 +1,11 @@
 <?php
 
 class AbogadosController extends Controller {
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
 //    public $layout = '//layouts/column2';
-    
 
     /**
      * @return array action filters
@@ -47,11 +45,23 @@ class AbogadosController extends Controller {
     public function actionCreate() {
         $model = new Abogados;
 
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
-
         if (isset($_POST['Abogados'])) {
+            if ($_POST['idPersona'] == '') {
+                $idPersona = ConsultaOracle::insertPersona(array(
+                            'CEDULA' => $_POST['Abogado']['cedula'],
+                            'NACIONALIDAD' => ($_POST['Abogado']['nacionalida'] == 97) ? 1 : 0,
+                            'PRIMER_NOMBRE' => trim(strtoupper($_POST['Abogado']['primerNombre'])),
+                            'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['Abogado']['segundoNombre'])),
+                            'PRIMER_APELLIDO' => trim(strtoupper($_POST['Abogado']['primerApellido'])),
+                            'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['Abogado']['segundoApellido'])),
+                            'FECHA_NACIMIENTO' => $_POST['Abogado']['fechaNac'],
+                                )
+                );
+            } else {
+                $idPersona = $_POST['idPersona'];
+            }
             $model->attributes = $_POST['Abogados'];
+            $model->persona_id = $idPersona;
             $model->oficina_id = $_POST['Abogados_oficina_id'];
             $model->estatus = 2;
             $model->usuario_id_creacion = Yii::app()->user->id;
@@ -165,6 +175,13 @@ class AbogadosController extends Controller {
         $this->render('pdf', array(
             'model' => $this->loadModel($id),
         ));
+    }
+
+    public function FindByIdPersona($id) {
+        $model = GrupoFamiliar::model()->findByAttributes(array('persona_id' => $id));
+        if ($model === null)
+            return FALSE;
+        return $model;
     }
 
 }
