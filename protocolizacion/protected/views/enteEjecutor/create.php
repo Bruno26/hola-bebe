@@ -2,6 +2,16 @@
 
 <h1>Cargar Nuevo Ente Ejecutor</h1>
 
+<?php 
+        $this->widget(
+                'booster.widgets.TbLabel', array(
+            'context' => 'warning',
+            'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
+            // 'success', 'warning', 'important', 'info' or 'inverse'
+            'label' => 'Los campos marcados con * son requeridos',
+                )
+        ); ?>
+        <br><br>
 
 <?php
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(

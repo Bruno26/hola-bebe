@@ -80,7 +80,7 @@ $this->widget('booster.widgets.TbGridView', array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
-            'template' => '{ver} {modificar} {pdf}',
+            'template' => '{ver} {pdf}',
             'buttons' => array(
                 'ver' => array(
                     'label' => 'Ver',
@@ -88,13 +88,13 @@ $this->widget('booster.widgets.TbGridView', array(
                     'size' => 'medium',
                     'url' => 'Yii::app()->createUrl("asignacionCenso/view/", array("id"=>$data->id_asignacion_censo))',
                 ),
-                'modificar' => array(
-                    'label' => 'Modificar',
-                    'icon' => 'glyphicon glyphicon-pencil',
-                    'size' => 'medium',
-                    'url' => 'Yii::app()->createUrl("asignacionCenso/update/", array("id"=>$data->id_asignacion_censo))',
-//                    'visible' => 'Asignar($data->username);'
-                ),
+//                'modificar' => array(
+//                    'label' => 'Modificar',
+//                    'icon' => 'glyphicon glyphicon-pencil',
+//                    'size' => 'medium',
+//                    'url' => 'Yii::app()->createUrl("asignacionCenso/update/", array("id"=>$data->id_asignacion_censo))',
+////                    'visible' => 'Asignar($data->username);'
+//                ),
                 'pdf' => array(
                     'label' => 'Generar PDF',
                     'icon' => 'glyphicon glyphicon-file',

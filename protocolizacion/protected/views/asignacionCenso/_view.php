@@ -23,7 +23,16 @@
         <div class='col-md-6'> 
             <blockquote>
                 <p>
-                   <b>Nombre del Desarrollo:</b> <?php echo $model->desarrollo->nombre ?><br/>
+                   <b>Estado:</b> <?php echo $model->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion?><br/>
+                </p>
+                <p>
+                   <b>Municipio:</b> <?php echo $model->desarrollo->fkParroquia->clvmunicipio0->strdescripcion ?><br/>
+                </p>
+                <p>
+                   <b>Parroquia:</b> <?php echo $model->desarrollo->fkParroquia->strdescripcion ?><br/>
+                </p>
+                <p>
+                   <b>Nombre del Desarrollo Habitacional:</b> <?php echo $model->desarrollo->nombre ?><br/>
                 </p>
                 <p>
                    <b>Nombre de la Oficina:</b> <?php echo $model->oficina->nombre ?><br/>

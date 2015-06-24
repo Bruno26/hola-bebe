@@ -24,6 +24,16 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 
 <h1>Cargar Nuevo Registro de Documento</h1>
 
+<?php 
+        $this->widget(
+                'booster.widgets.TbLabel', array(
+            'context' => 'warning',
+            'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
+            // 'success', 'warning', 'important', 'info' or 'inverse'
+            'label' => 'Los campos marcados con * son requeridos',
+                )
+        ); ?>
+        <br><br>
 
 <div class="row">
     <div class="col-md-12">
