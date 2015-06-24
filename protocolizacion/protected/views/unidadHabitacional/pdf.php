@@ -8,7 +8,7 @@ $html.=
 
         "<div style='text-align:center; width:100%; margin-left:0%;margin-top:4%'>
             <br><br><br>
-<h2><strong><FONT COLOR='#000080'>Reporte De La Unidad Habitacional: $model->nombre /" . date('d-m-Y') . "</FONT></strong></h2><br/>
+<h2><strong><FONT COLOR='#000080'>Reporte De La Unidad Multifamiliar:<br> $model->nombre /" . date('d-m-Y') . "</FONT></strong></h2><br/>
 </div>
 
 
@@ -43,15 +43,43 @@ $html.="
 	<center>
 		<table>
 			<tr>
-				<th colspan='2'> Unidad Habitacional</th>
+				<th colspan='2'> Ubicación del Desarrollo Habitacional</th>
 			</tr>
 			<tr>
 				<td>
-					<span class='subtitulo'>Nombre del Desarollo:</span> ".$model->desarrollo->nombre ."
+					<span>Estado:</span> ".$model->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion ."
 					<br>
-					<span class='subtitulo'>Nombre de Unidad Habitacional:</span> $model->nombre
+					<span>Municipio:</span>". $model->desarrollo->fkParroquia->clvmunicipio0->strdescripcion ."
+					<br>
+                                        <span>Parroquia:</span> ".$model->desarrollo->fkParroquia->strdescripcion."
 				</td>
-				<td><span class='subtitulo'>Tipo de Inmueble:</span> ".$model->genTipoInmueble->descripcion."</td>
+			</tr>
+			<tr>
+				<th colspan='2' > Unidad Multifamiliar</th>
+			</tr>
+			<tr>
+				<td>
+					<span>Nombre del Desarollo:</span> ".$model->desarrollo->nombre ."
+					<br>
+					<span>Nombre de Unidad Multifamiliar:</span> $model->nombre
+					<br>
+                                        <span>Tipo de Inmueble:</span> ".$model->genTipoInmueble->descripcion."
+				</td>
+			</tr>
+                        
+			<tr>
+				<th colspan='2'> Linderos</th>
+			</tr>
+			<tr>
+				<td>
+					<span>Lindero Norte:</span> ".$model->lindero_norte ."
+					<br>
+					<span>Lindero Sur:</span>". $model->lindero_sur ."
+					<br>
+                                        <span>Lindero Este:</span> ".$model->lindero_este."
+					<br>
+                                        <span>Lindero Oeste:</span> ".$model->lindero_oeste."
+				</td>
 			</tr>
 		</table>
 	</center>
