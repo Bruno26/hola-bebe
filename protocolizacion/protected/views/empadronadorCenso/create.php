@@ -23,21 +23,35 @@ $this->widget(
         )
 );
 ?>
-<br><br>
+<div style="margin-bottom: 1%"></div>
 <div class="row">
     <div class="col-md-12">
         <?php
         $this->widget(
                 'booster.widgets.TbPanel', array(
-            'title' => 'Asingación',
+            'title' => 'Asingación del Censo',
             'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'headerIcon' => 'home',
-            'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
+            'content' => $this->renderPartial('_asignacion', array('form' => $form, 'model' => $model, 'asignacionC' => $asignacionC, 'unidadHab' => $unidadHab), TRUE),
                 )
         );
         ?>
     </div>
 </div>
+<!--<div class="row">
+    <div class="col-md-12">
+<?php
+//        $this->widget(
+//                'booster.widgets.TbPanel', array(
+//            'title' => 'Empadronador',
+//            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
+//            'headerIcon' => 'home',
+//            'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
+//                )
+//        );
+?>
+    </div>
+</div>-->
 
 
 
@@ -65,7 +79,7 @@ $this->widget(
                 'id' => 'CancelarForm',
                 'icon' => 'ban-circle',
                 'htmlOptions' => array(
-                    'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
+                    'onclick' => 'document.location.href ="' . $this->createUrl('asignacionCenso/admin') . '";'
                 )
             ));
             ?>

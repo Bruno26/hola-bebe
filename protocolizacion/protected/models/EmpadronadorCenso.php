@@ -23,6 +23,14 @@
  */
 class EmpadronadorCenso extends CActiveRecord {
 
+    public $edoDes;
+    public $munDes;
+    public $parqDes;
+    public $Des;
+    public $UnidadMultifamiliar;
+    public $UnidadUnifamiliar;
+    public $BeneficiarioAdju;
+
     /**
      * @return string the associated database table name
      */
@@ -74,6 +82,13 @@ class EmpadronadorCenso extends CActiveRecord {
             'fecha_creacion' => 'Fecha Creacion',
             'usuario_modificacion' => 'Usuario Modificacion',
             'fecha_actualizacion' => 'Fecha Actualizacion',
+            'Des' => 'Desarrollo Habitacional',
+            'edoDes' => 'Estado',
+            'munDes' => 'Municipio',
+            'parqDes' => 'Parroquia',
+            'UnidadMultifamiliar' => 'Unidad MultiFamiliar',
+            'UnidadUnifamiliar' => 'Unidad UniFamiliar',
+            'BeneficiarioAdju' => 'Beneficiario Adjudicado',
         );
     }
 

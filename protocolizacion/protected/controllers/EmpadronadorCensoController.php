@@ -33,11 +33,20 @@ class EmpadronadorCensoController extends Controller {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate() {
+    public function actionCreate($id) {
         $model = new EmpadronadorCenso;
+        $asignacionC = AsignacionCenso::model()->findByPk($id);
 
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
+        $model->Des = $asignacionC->desarrollo->nombre;
+        $model->parqDes = $asignacionC->desarrollo->fkParroquia->strdescripcion;
+        $model->munDes = $asignacionC->desarrollo->fkParroquia->clvmunicipio0->strdescripcion;
+        $model->edoDes = $asignacionC->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion;
+
+        $unidadHab = new CDbCriteria;
+        $unidadHab->addCondition('t.desarrollo_id= :desarrollo_id');
+        $unidadHab->params = array(':desarrollo_id' => $asignacionC->desarrollo_id);
+        $unidadHab->order = 't.nombre ASC';
+
 
         if (isset($_POST['EmpadronadorCenso'])) {
             $model->attributes = $_POST['EmpadronadorCenso'];
@@ -46,7 +55,8 @@ class EmpadronadorCensoController extends Controller {
         }
 
         $this->render('create', array(
-            'model' => $model,
+            'model' => $model, 'asignacionC' => $asignacionC,
+            'unidadHab' => $unidadHab
         ));
     }
 
@@ -87,16 +97,6 @@ class EmpadronadorCensoController extends Controller {
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
         } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
-    }
-
-    /**
-     * Lists all models.
-     */
-    public function actionIndex() {
-        $dataProvider = new CActiveDataProvider('EmpadronadorCenso');
-        $this->render('index', array(
-            'dataProvider' => $dataProvider,
-        ));
     }
 
     /**
