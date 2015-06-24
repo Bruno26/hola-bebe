@@ -66,7 +66,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
             )
     );
-
+echo '<br>';
     /*  ------------------------------------------ */
 
     /*  *******  Caracteristicas del Desarrollo   ****** */
@@ -74,7 +74,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 
     $this->widget(
         'booster.widgets.TbPanel', array(
-        'title' => 'Caracteristicas del Desarrollo',
+        'title' => 'Características del Desarrollo',
         'headerIcon' => 'user',
         'context' => 'primary',
         'headerIcon' => 'home',

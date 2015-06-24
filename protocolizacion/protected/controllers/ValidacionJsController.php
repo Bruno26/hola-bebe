@@ -97,7 +97,7 @@ class ValidacionJsController extends Controller {
             $result = ConsultaOracle::getPersonaBeneficiario($nacio, $cedula);
             if ($result == 1) {
                 $saime = ConsultaOracle::getSaimeBeneficiario($nacio, $cedula);
-                //var_dump($saime);die();
+                // var_dump($saime);die();
                 if ($saime == 1)
                     echo json_encode(2); //en caso que no exista en saime
                 else
