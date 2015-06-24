@@ -99,7 +99,6 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     ?>
 </div>
 
-
 <div class="well">
     <div class="pull-center" style="text-align: right;">
         <?php
