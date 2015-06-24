@@ -114,7 +114,7 @@ $this->widget('booster.widgets.TbProgress', array(
         'title' => 'Beneficiario',
         'context' => 'primary',
         'headerIcon' => 'user',
-        /*  'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'), */
+        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
         'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'unidad_familiar' => $unidad_familiar), TRUE),
             #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
             )
@@ -130,7 +130,7 @@ $this->widget('booster.widgets.TbProgress', array(
         'title' => 'Caracteristicas del Desarrollo',
         'context' => 'primary',
         'headerIcon' => 'home',
-        /*  'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'), */
+        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
         'content' => $this->renderPartial('_desarrollo', array('form' => $form, 'desarrollo' => $desarrollo, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'vivienda' => $vivienda), TRUE),
             )
     );

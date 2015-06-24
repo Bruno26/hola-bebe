@@ -22,7 +22,7 @@ class ValidacionJsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario', 'BuscarPisoVivienda', 'BuscarVivienda', 'BuscarTipoVivienda', 'BuscarPersonasBeneficiarioTemp', 'BuscarEncargadoOficina'),
+                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario', 'BuscarPisoVivienda', 'BuscarVivienda', 'BuscarTipoVivienda', 'BuscarPersonasBeneficiarioTemp', 'BuscarEncargadoOficina', 'BuscarPersonaAbogado'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -97,7 +97,7 @@ class ValidacionJsController extends Controller {
             $result = ConsultaOracle::getPersonaBeneficiario($nacio, $cedula);
             if ($result == 1) {
                 $saime = ConsultaOracle::getSaimeBeneficiario($nacio, $cedula);
-                //var_dump($saime);die();
+                // var_dump($saime);die();
                 if ($saime == 1)
                     echo json_encode(2); //en caso que no exista en saime
                 else
@@ -386,7 +386,7 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
     }
 
     /**
-     * FUNCION QUE BUSCA EN TABLA COMUNES EL ID PERSONA , SI NO EXISTE CONSULTA EN SAIME 
+     * FUNCION QUE BUSCA EN TABLA PERSONA Y SAIME. ASI COM TAMBIEN VALIDA QUE NO EXISTA EN TABLA OFICINA
      */
     public function actionBuscarEncargadoOficina() {
         $cedula = (int) $_POST['cedula'];
@@ -405,6 +405,30 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
                 echo json_encode(2); //en caso que no exista en saime
             else
                 echo CJSON::encode($saime);
+        }
+    }
+
+    /*
+     * FUNCION QUE BUSCA EN TABLA PERSONA Y SAIME. ASI COM TAMBIEN VALIDA QUE NO EXISTA EN TABLA ABOGADO
+     */
+
+    public function actionBuscarPersonaAbogado() {
+        $cedula = (int) $_POST['cedula'];
+        $nacio = (int) $_POST['nacionalidad'];
+        $result = ConsultaOracle::getPersona($nacio, $cedula);
+        if ($result != '1') {
+            $exiteAbogado = Abogados::FindByIdPersona($result['ID']);
+            if (!empty($exiteAbogado))
+                echo json_encode(1); //alert que ya existe
+            else
+                echo CJSON::encode($result); //devuelve los datos de persona
+        }else {
+            $saime = ConsultaOracle::getSaime($nacio, $cedula);
+            if ($saime == '1') {
+                echo json_encode(2); //alert que ya existe
+            } else {
+                echo CJSON::encode($saime);
+            }
         }
     }
 

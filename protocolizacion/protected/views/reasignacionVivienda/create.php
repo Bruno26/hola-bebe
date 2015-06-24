@@ -30,6 +30,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'title' => 'Beneficiario Anterior',
             'context' => 'info',
             'headerIcon' => 'user',
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'content' => $this->renderPartial('_beneficiarioAnterior', array('form' => $form, 'model' => $model), TRUE),
                 )
         );
@@ -44,6 +45,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'title' => 'Beneficiario Actual',
             'context' => 'info',
             'headerIcon' => 'user',
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'content' => $this->renderPartial('_beneficiarioActual', array('form' => $form, 'model' => $model), TRUE),
                 )
         );
@@ -58,6 +60,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'title' => 'Re-Asignación ',
             'context' => 'info',
             'headerIcon' => 'user',
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
                 )
         );

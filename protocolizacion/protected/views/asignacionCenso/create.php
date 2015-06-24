@@ -21,8 +21,10 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'booster.widgets.TbPanel', array(
         'title' => 'Asignación de Censo',
         'context' => 'danger',
+        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
         'headerIcon' => 'user',
-        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
+        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
+        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
             )
     );
     ?>
@@ -41,16 +43,16 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         ));
         ?>
         <?php
-            $this->widget('booster.widgets.TbButton', array(
-                'context' => 'danger',
-                'label' => 'Cancelar',
-                'size' => 'large',
-                'id' => 'CancelarForm',
-                'icon' => 'ban-circle',
-                'htmlOptions' => array(
-                    'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
-                )
-            ));
+        $this->widget('booster.widgets.TbButton', array(
+            'context' => 'danger',
+            'label' => 'Cancelar',
+            'size' => 'large',
+            'id' => 'CancelarForm',
+            'icon' => 'ban-circle',
+            'htmlOptions' => array(
+                'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
+            )
+        ));
         ?>
     </div>
 </div>

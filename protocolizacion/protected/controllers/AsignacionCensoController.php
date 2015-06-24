@@ -44,6 +44,9 @@ class AsignacionCensoController extends Controller {
      */
     public function actionCreate() {
         $model = new AsignacionCenso;
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
@@ -66,7 +69,7 @@ class AsignacionCensoController extends Controller {
             }
         }
         $this->render('create', array(
-            'model' => $model,
+            'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia
         ));
     }
 
