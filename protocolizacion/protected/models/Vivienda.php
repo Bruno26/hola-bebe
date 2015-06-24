@@ -94,7 +94,6 @@ class Vivienda extends CActiveRecord {
             'reasignacionViviendas' => array(self::HAS_MANY, 'ReasignacionVivienda', 'vivienda_id'),
         );
     }
-
     /**
      * @return array customized attribute labels (name=>label)
      */

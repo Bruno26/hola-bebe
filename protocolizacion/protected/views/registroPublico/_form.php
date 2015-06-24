@@ -3,7 +3,6 @@
 	#'enableAjaxValidation'=>false,
 #)); ?>
 
-<p class="help-block">Los Campos con <span class="required">*</span> son obligatorios.</p>
 
 <?php #echo $form->errorSummary($model); ?>
 
