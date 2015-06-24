@@ -58,13 +58,6 @@
                             <?php echo $form->passwordFieldGroup($model, 'password', array('prepend' => '<i class="glyphicon glyphicon-lock"></i>')); ?>
                         </div>
 
-                        <div class="form-group">
-
-                            <?php echo $form->checkboxGroup($model, 'rememberMe'); ?>
-
-                        </div>
-
-
                         <hr class="colorgraph">
                         <div class="row text-center">
                             <div class="col-xs-12 col-sm-12 col-md-12">

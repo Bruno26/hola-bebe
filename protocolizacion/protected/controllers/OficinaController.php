@@ -94,7 +94,7 @@ class OficinaController extends Controller {
                 $model->fecha_actualizacion = 'now()';
 
                 if ($model->save())
-                    $this->redirect(array('admin'));
+                    $this->redirect(array('view', 'id' => $model->id_oficina));
             }else {
                 $this->render('create', array(
                     'model' => $model, 'estado' => $estado,
