@@ -88,7 +88,7 @@ if (isset($sms) && !empty($sms)) {
                 'booster.widgets.TbPanel', array(
             'title' => 'Desarrollo Habitacional',
             'context' => 'info',
-            // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'headerIcon' => 'globe',
              'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'enteEjecutor' => $enteEjecutor, 'fuenteFinacimiento' => $fuenteFinacimiento), TRUE),
                 )

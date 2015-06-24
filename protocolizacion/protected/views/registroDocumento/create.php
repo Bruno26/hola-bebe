@@ -32,7 +32,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                 'booster.widgets.TbPanel', array(
             'title' => 'Registro Documento',
             'context' => 'info',
-            // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'headerIcon' => 'file',
             'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
                 )

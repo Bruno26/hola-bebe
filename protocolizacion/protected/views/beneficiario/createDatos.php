@@ -118,6 +118,7 @@ Yii::app()->clientScript->registerScript('telefono', "
             'title' => 'Dirección Anterior del Beneficiario',
             'context' => 'primary',
             'headerIcon' => 'globe',
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'content' => $this->renderPartial('_direccionAnterior', array('form' => $form, 'model' => $model, 'municipio' => $municipio, 'estado' => $estado, 'parroquia' => $parroquia,), TRUE),
                 )
         );
@@ -129,6 +130,7 @@ Yii::app()->clientScript->registerScript('telefono', "
         $this->widget(
                 'booster.widgets.TbPanel', array(
             'title' => 'Datos Laborales',
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),                        
             'context' => 'primary',
             'headerIcon' => 'briefcase',
             'content' => $this->renderPartial('_datosLaborales', array('form' => $form, 'model' => $model), TRUE),

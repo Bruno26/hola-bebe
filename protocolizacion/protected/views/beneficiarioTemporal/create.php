@@ -61,7 +61,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         'title' => 'Beneficiario',
         'context' => 'primary',
         'headerIcon' => 'user',
-       /*  'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'), */
+        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
         'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
         #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
             )
@@ -78,6 +78,7 @@ echo '<br>';
         'headerIcon' => 'user',
         'context' => 'primary',
         'headerIcon' => 'home',
+        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
         'content' => $this->renderPartial('_desarrollo', array(
             'form' => $form, 'model' => $model,
             'estado' => $estado,'municipio' => $municipio,
