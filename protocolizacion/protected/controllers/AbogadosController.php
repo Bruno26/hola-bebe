@@ -1,13 +1,11 @@
 <?php
 
 class AbogadosController extends Controller {
-
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
 //    public $layout = '//layouts/column2';
-    
 
     /**
      * @return array action filters
@@ -47,11 +45,23 @@ class AbogadosController extends Controller {
     public function actionCreate() {
         $model = new Abogados;
 
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
-
         if (isset($_POST['Abogados'])) {
+            if ($_POST['Abogados']['persona_id'] == '') {
+                $idPersona = ConsultaOracle::insertPersona(array(
+                            'CEDULA' => $_POST['Abogados']['cedula'],
+                            'NACIONALIDAD' => ($_POST['Abogados']['nacionalidad'] == 97) ? 1 : 0,
+                            'PRIMER_NOMBRE' => trim(strtoupper($_POST['Abogados']['primer_nombre'])),
+                            'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['Abogados']['segundo_nombre'])),
+                            'PRIMER_APELLIDO' => trim(strtoupper($_POST['Abogados']['primer_apellido'])),
+                            'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['Abogados']['segundo_apellido'])),
+                            'FECHA_NACIMIENTO' => $_POST['Abogados']['fecha_nac'],
+                                )
+                );
+            } else {
+                $idPersona = $_POST['Abogados']['persona_id'];
+            }
             $model->attributes = $_POST['Abogados'];
+            $model->persona_id = $idPersona;
             $model->oficina_id = $_POST['Abogados_oficina_id'];
             $model->estatus = 2;
             $model->usuario_id_creacion = Yii::app()->user->id;
@@ -165,6 +175,13 @@ class AbogadosController extends Controller {
         $this->render('pdf', array(
             'model' => $this->loadModel($id),
         ));
+    }
+
+    public function FindByIdPersona($id) {
+        $model = Abogados::model()->findByAttributes(array('persona_id' => $id));
+        if ($model === null)
+            return FALSE;
+        return $model;
     }
 
 }

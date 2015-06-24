@@ -1,5 +1,4 @@
 <?php
-
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'id' => 'oficina-form',
     'enableAjaxValidation' => false,
@@ -10,6 +9,27 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         'validateOnType' => true,
         )));
 ?>
+<?php Yii::app()->clientScript->registerScript('abogado', "  
+        $('#guardar').click(function(){
+            if($('#Abogados_tipo_abogado_id').val()==''){
+              bootbox.alert('Por favor indique el tipo de agente');
+                    return false;
+            }
+            if($('#Abogados_nacionalidad').val()==''){
+              bootbox.alert('Por favor indique Nacionalidad');
+                    return false;
+            }
+            if($('#Abogados_cedula').val()==''){
+              bootbox.alert('Por favor indique la cédula');
+                    return false;
+            }
+            if($('#Abogados_oficina_id').val()==''){
+              bootbox.alert('Por favor indique la Oficina');
+                    return false;
+            }
+        })
+        "); ?>
+
 
 <h1>Cargar Nuevo Jefe de Documentación y Cobranzas</h1>
 
@@ -26,21 +46,21 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 
 <div class="row">
     <div class="col-md-12">
-    <?php 
-    $this->widget(
-            'booster.widgets.TbPanel', array(
-        'title' => 'Jefe de Documentación y Cobranza',
-        'context' => 'info',
-        'headerIcon' => 'user',
-        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
-        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
-        #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
-            )
-    );
-    ?>
+        <?php
+        $this->widget(
+                'booster.widgets.TbPanel', array(
+            'title' => 'Jefe de Documentación y Cobranza',
+            'context' => 'info',
+            'headerIcon' => 'user',
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
+            'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
+                #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
+                )
+        );
+        ?>
     </div>
 </div>
-<?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php #echo $this->renderPartial('_form', array('model'=>$model));  ?>
 <div class="well">
     <div class="pull-center" style="text-align: right;">
         <?php
@@ -54,17 +74,17 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         ));
         ?>
         <?php
-            $this->widget('booster.widgets.TbButton', array(
-                'context' => 'danger',
-                'label' => 'Cancelar',
-                'size' => 'large',
-                'id' => 'CancelarForm',
-                'icon' => 'ban-circle',
-                'htmlOptions' => array(
-                    'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
-                )
-            ));
+        $this->widget('booster.widgets.TbButton', array(
+            'context' => 'danger',
+            'label' => 'Cancelar',
+            'size' => 'large',
+            'id' => 'CancelarForm',
+            'icon' => 'ban-circle',
+            'htmlOptions' => array(
+                'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
+            )
+        ));
         ?>
     </div>
 </div>
-<?php  $this->endWidget(); ?>
+<?php $this->endWidget(); ?>

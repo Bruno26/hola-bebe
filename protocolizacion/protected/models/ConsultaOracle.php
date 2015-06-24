@@ -115,8 +115,10 @@ class ConsultaOracle extends CActiveRecord {
     public function getSaimeBeneficiario($nacionalidad, $cedula) {
         //$valNacionalidad = array('valNacionalidad' => ($nacionalidad == 97) ? '1' : '0');
         $nacional = ($nacionalidad == 97) ? 'V' : 'E';
-        $SLQ = "SELECT NACIONALIDAD, CEDULA, PRIMERNOMBRE, SEGUNDONOMBRE, PRIMERAPELLIDO, SEGUNDOAPELLIDO, TO_CHAR(FECHANACIMIENTO,'DD-MM-YYYY') As FECHANACIMIENTO,2 AS PROCEDENCIA  FROM ORGANISMOS_PUBLICOS.SAIME_ORIGINAL WHERE NACIONALIDAD ='" . $nacional . "' AND CEDULA = " . $cedula;
+
+        $SLQ = "SELECT NACIONALIDAD, CEDULA, PRIMERNOMBRE, SEGUNDONOMBRE, PRIMERAPELLIDO, SEGUNDOAPELLIDO, TO_DATE(FECHANACIMIENTO, 'DD-MM-YYYY' ) As FECHANACIMIENTO,2 AS PROCEDENCIA FROM ORGANISMOS_PUBLICOS.SAIME_ORIGINAL WHERE NACIONALIDAD ='" . $nacional . "' AND CEDULA = " . $cedula;
         $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryRow();
+
         if (empty($result)) {
             return 1;
         } else {
@@ -229,5 +231,50 @@ class ConsultaOracle extends CActiveRecord {
             }
         }
     }
+
+  
+    /*  =========================================== */
+
+    public function updatePersona($array) {
+
+        if (empty($array)) {
+            return false;
+        } else {
+                $select = array();
+                $valor = array();
+                $campos = '';
+
+                foreach ($array as $key => $value) {
+
+                    if ($key == 'FECHA_NACIMIENTO') {
+                        $campos .= $key." = to_date('$value','DD/MM/RR')";                        
+                    } else {
+                        
+                        if (is_numeric($value)) {                            
+                            $campos .= $key."=".$value;                           
+                        } else {
+                            $campos .= $key."='".$value."'";
+                        }
+                    }
+                }
+                
+                  var_dump($campos); die();
+
+                $SQL = "UPDATE TABLAS_COMUNES.PERSONA SET " . $campos . " WHERE " . $valor . ")";
+                $result = Yii::app()->dbOarcle->createCommand($SQL)->query();
+
+                $SQL1 = "SELECT ID FROM TABLAS_COMUNES.PERSONA WHERE NACIONALIDAD = " . (int) $array['NACIONALIDAD'] . " AND CEDULA = " . (int) $array['CEDULA'];
+                $ExistePersona = Yii::app()->dbOarcle->createCommand($SQL1)->queryRow();
+
+                if (empty($ExistePersona)) {
+                    return false;
+                } else {
+                    return $ExistePersona['ID'];
+                }
+        }
+
+    }    
+
+    /*  ===========================================  */
 
 }

@@ -72,7 +72,7 @@ Yii::app()->clientScript->registerScript('desarollo', "
 
 <div class="row">
 <div class="row-fluid">
-   <div class='col-md-5'>
+   <div class='col-md-4'>
           <?php
             $criteria = new CDbCriteria;
             $criteria->order = 'strdescripcion ASC';
@@ -92,7 +92,7 @@ Yii::app()->clientScript->registerScript('desarollo', "
             );
             ?>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <?php
             echo $form->dropDownListGroup($municipio, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12',),
                 'widgetOptions' => array(
@@ -111,9 +111,8 @@ Yii::app()->clientScript->registerScript('desarollo', "
             );
             ?>
         </div>
-</div>
-        <div class="row-fluid">
-                <div class="col-md-5">
+       
+                <div class="col-md-4">
 
                     <?php
                     echo $form->dropDownListGroup($parroquia, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar',),
@@ -132,72 +131,65 @@ Yii::app()->clientScript->registerScript('desarollo', "
                     );
                     ?>
                 </div>
-                <div class='col-md-5'>
+</div>
+<div class="row-fluid">
+                <div class='col-md-4'>
+                     <?php
+                            echo $form->dropDownListGroup($desarrollo, 'id_desarrollo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar',),
+                                'widgetOptions' => array(
+                                                            'htmlOptions' => array(
+                                                                                    'ajax' => array(
+                                                                                                        'type'   => 'POST',
+                                                                                                        'url'    => CController::createUrl('ValidacionJs/BuscarUnidadHabitacional'),
+                                                                                                        'update' => '#' . CHtml::activeId($model, 'unidad_habitacional_id'),
+                                                                                                    ),
+                                                                                    'empty' => 'SELECCIONE',
+                                                                                        
+                                                                                   ),
+                                                            )
+                                                        )
+                            );
+                     ?>
+                          
+                </div>
+
+                <div class='col-md-4'>
                     <?php
-                    echo $form->textFieldGroup($desarrollo,'urban_barrio',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
+                      echo $form->textFieldGroup($desarrollo,'urban_barrio',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
                     ?>
                 </div>
-     </div>
-
-
- <div class="row-fluid">
-        <div class='col-md-5'>
-             <?php
-                    echo $form->dropDownListGroup($desarrollo, 'id_desarrollo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar',),
-                        'widgetOptions' => array(
-                            'htmlOptions' => array(
-                                'ajax' => array(
-                                'type' => 'POST',
-                                'url' => CController::createUrl('ValidacionJs/BuscarUnidadHabitacional'),
-                                'update' => '#' . CHtml::activeId($model, 'unidad_habitacional_id'),
-                            ),
-                                'empty' => 'SELECCIONE',
-                                
-                            ),
-                        )
-                            )
-                    );
+               
+                <div class='col-md-4'>
+                    <?php
+                       echo $form->textFieldGroup($desarrollo,'zona',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
                     ?>
-                  
-        </div>
-        <div class='col-md-5'>
-            <?php
-            echo $form->textFieldGroup($desarrollo,'zona',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
-            ?>
-        </div>
- </div>
+                </div>
+</div>
 
  
-
-
-
  <div class="row-fluid">
-        <div class='col-md-5'>
+        <div class='col-md-4'>
             <?php
-           echo $form->textFieldGroup($desarrollo,'av_call_esq_carr',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
+                  echo $form->textFieldGroup($desarrollo,'av_call_esq_carr',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
             ?>
         </div>
-        <div class='col-md-5'>
+        <div class='col-md-4'>
            <?php
             echo $form->dropDownListGroup($model, 'unidad_habitacional_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
                 'widgetOptions' => array(
                                             'htmlOptions' => array(
-                                                        'ajax' => array(
-                                                        'type' => 'POST',
-                                                        'url' => CController::createUrl('ValidacionJs/BuscarPisoVivienda'),
-                                                        'update' => '#' . CHtml::activeId($model, 'piso')
-                                                        ),
-                                            )
+                                                                    'ajax' => array(
+                                                                                    'type' => 'POST',
+                                                                                    'url' => CController::createUrl('ValidacionJs/BuscarPisoVivienda'),
+                                                                                    'update' => '#' . CHtml::activeId($model, 'piso')
+                                                                                   ),
+                                                                  )
                                         )
             ));
         ?>
         </div>
- </div>
 
-
- <div class="row-fluid">
-
-        <div class='col-md-5'>
+        <div class='col-md-4'>
 
              <?php
             echo $form->dropDownListGroup($model, 'piso', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
@@ -216,8 +208,10 @@ Yii::app()->clientScript->registerScript('desarollo', "
         ?>
             
         </div>
-       
-        <div class='col-md-5'>
+</div>
+
+ <div class="row-fluid">       
+        <div class='col-md-4'>
 
         	  <?php
             echo $form->dropDownListGroup($model, 'vivienda_nro', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
@@ -231,11 +225,8 @@ Yii::app()->clientScript->registerScript('desarollo', "
             ?>
             
         </div>
- </div>
 
-
-<div class="row-fluid">
-        <div class='col-md-5'>
+        <div class='col-md-4'>
 
              <?php
                     echo $form->dropDownListGroup($model, 'tipo_vivienda', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),

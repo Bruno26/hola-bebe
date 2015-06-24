@@ -1,18 +1,21 @@
 <?php
-#$this->breadcrumbs=array(
-#	'Oficinas'=>array('index'),
-#	'Create',
-#);
-
-#$this->menu=array(
-#array('label'=>'List Oficina','url'=>array('index')),
-#array('label'=>'Manage Oficina','url'=>array('admin')),
-#);
-?>
-
-
-
-<?php
+Yii::app()->clientScript->registerScript('camara', "
+   $('#guardar').click(function(){
+        if( $.trim($('#Oficina_nombre').val())  == ''){
+            $('#Oficina_nombre').val('');
+            bootbox.alert('Indique el nombre de la Oficina.');
+            return false;
+        }
+        if( $('#Oficina_cedula').val() == ''){
+            bootbox.alert('Indique el nombre de la Oficina.');
+            return false;
+        }
+        if( $('#Oficina_cedula').val() == ''){
+            bootbox.alert('Indique la Cédula del Jefe de la Oficina.');
+            return false;
+        }
+   });
+");
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'id' => 'oficina-form',
     'enableAjaxValidation' => false,
@@ -60,18 +63,18 @@ if (isset($sms) && !empty($sms)) {
 
 <div class="row">
     <div class="col-md-12">
-    <?php 
-    $this->widget(
-            'booster.widgets.TbPanel', array(
-        'title' => 'Oficina',
-        'context' => 'info',
-        'headerIcon' => 'home',
-        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
-        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
-            )
-    );
-    ?>
-        </div>
+        <?php
+        $this->widget(
+                'booster.widgets.TbPanel', array(
+            'title' => 'Oficina',
+            'context' => 'info',
+            'headerIcon' => 'home',
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
+            'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
+                )
+        );
+        ?>
+    </div>
 </div>
 
 <div class="well">
@@ -87,17 +90,17 @@ if (isset($sms) && !empty($sms)) {
         ));
         ?>
         <?php
-            $this->widget('booster.widgets.TbButton', array(
-                'context' => 'danger',
-                'label' => 'Cancelar',
-                'size' => 'large',
-                'id' => 'CancelarForm',
-                'icon' => 'ban-circle',
-                'htmlOptions' => array(
-                    'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
-                )
-            ));
+        $this->widget('booster.widgets.TbButton', array(
+            'context' => 'danger',
+            'label' => 'Cancelar',
+            'size' => 'large',
+            'id' => 'CancelarForm',
+            'icon' => 'ban-circle',
+            'htmlOptions' => array(
+                'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
+            )
+        ));
         ?>
     </div>
 </div>
-<?php  $this->endWidget(); ?>
+<?php $this->endWidget(); ?>

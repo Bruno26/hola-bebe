@@ -23,7 +23,9 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
             $('#BeneficiarioTemporal_segundo_nombre').attr('readonly', true);
             $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', true);
             $('#BeneficiarioTemporal_sexo').attr('readonly', true);
+            $('#BeneficiarioTemporal_sexo').attr('disabled', true);
             $('#BeneficiarioTemporal_estado_civil').attr('readonly', true);
+            $('#BeneficiarioTemporal_estado_civil').attr('disabled', true);
             $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', true);
             $('#BeneficiarioTemporal_telf_celular').attr('readonly', true);
             $('#BeneficiarioTemporal_correo_electronico').attr('readonly', true); 
@@ -41,7 +43,7 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
 
 <div class="row">
     <div class="row-fluid"> 
-           <div class='col-md-5'>
+           <div class='col-md-4'>
                    
         		  <?php
                     echo $form->dropDownListGroup($model, 'nacionalidad', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
@@ -54,7 +56,7 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
             ?>
 
            </div>
-           <div class='col-md-5'>
+           <div class='col-md-4'>
                 <?php
             echo $form->textFieldGroup($model, 'cedula', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8,
                        'onblur' => "buscarPersonaBeneficiarioTemp($('#BeneficiarioTemporal_nacionalidad').val(),$(this).val())"
@@ -65,45 +67,53 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
                <?php echo $form->error($model,'cedula'); ?>
                <span hidden="hidden" class="cargar"><?php echo CHtml::image(Yii::app()->request->baseUrl."/images/loading.gif"); ?></span>
            </div>
+ 
+           <div class='col-md-4'>
+            <br><br>
+           </div>
+           <div class='col-md-4'>
+            <br><br>
+           </div> 
     </div>
 
 
      <div class="row-fluid">
-        <div class='col-md-5'>
-            <?php
-           echo $form->textFieldGroup($model,'primer_apellido',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
-            ?>
-        </div>
-        <div class='col-md-5'>
-            <?php
-            echo $form->textFieldGroup($model,'segundo_apellido',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
-            ?>
-        </div>
-    </div>
+          <div class='col-md-3'>
+              <?php
+             echo $form->textFieldGroup($model,'primer_nombre',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
+              ?>
+          </div>
+          <div class='col-md-3'>
+              <?php
+              echo $form->textFieldGroup($model,'segundo_nombre',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
+              ?>
+          </div>
 
-     <div class="row-fluid">
-        <div class='col-md-5'>
-            <?php
-           echo $form->textFieldGroup($model,'primer_nombre',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
-            ?>
-        </div>
-        <div class='col-md-5'>
-            <?php
-            echo $form->textFieldGroup($model,'segundo_nombre',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
-            ?>
-        </div>
+
+          <div class='col-md-3'>
+              <?php
+             echo $form->textFieldGroup($model,'primer_apellido',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
+              ?>
+          </div>
+          <div class='col-md-3'>
+              <?php
+              echo $form->textFieldGroup($model,'segundo_apellido',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
+              ?>
+          </div>
+
+
     </div>
 
 
 
 
     <div class="row-fluid"> 
-           <div class='col-md-5'>
+           <div class='col-md-4'>
                 <?php
                  echo $form->textFieldGroup($model,'fecha_nacimiento',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
             ?>
            </div>
-           <div class='col-md-5'>
+           <div class='col-md-4'>
                  <?php echo CHtml::activeLabel($model, 'sexo'); ?><br>
 	            <?php
 			            $this->widget('booster.widgets.TbSwitch', array(
@@ -115,6 +125,7 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
 			                ),
 			                'htmlOptions' => array(
 			                      'class' => 'span4',
+                          //  'disabled'=>true,
 			                // 'onChange' => '',
 			                )
 			                    )
@@ -122,11 +133,8 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
 	            ?> 
    
            </div>
-    </div>
-
-
-    <div class="row-fluid">           
-           <div class='col-md-5'>
+            
+           <div class='col-md-4'>
                
            <?php
                     echo $form->dropDownListGroup($model, 'estado_civil', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
@@ -139,31 +147,30 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
             ?>
             
            </div>
+    </div> 
 
-           <div class='col-md-5'>
+    <div class="row-fluid">
+           <div class='col-md-4'>
                 <?php
                  echo $form->textFieldGroup($model,'telf_habitacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
                 ?>
            </div>
-    </div>
-
-    <div class="row-fluid"> 
-           
-
-            <div class='col-md-5'>
+    
+           <div class='col-md-4'>
                 <?php
                  echo $form->textFieldGroup($model,'telf_celular',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
                  ?>
            </div>
 
-            <div class='col-md-5'>
+            <div class='col-md-4'>
                 <?php
                  echo $form->textFieldGroup($model,'correo_electronico',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
                 ?>
            </div>
     </div>
     
-</div>           	
+ 	
+</div> 
 
 
 
