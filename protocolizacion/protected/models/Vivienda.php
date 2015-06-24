@@ -118,7 +118,7 @@ class Vivienda extends CActiveRecord {
             'nro_estacionamientos' => 'Puesto de Estacionamiento',
             'descripcion_estac' => 'Número de Estacionamiento',
             'nro_habitaciones' => 'Número Habitaciones',
-            'nro_banos' => 'Número Banos',
+            'nro_banos' => 'Número Baños',
             'fuente_datos_entrada_id' => 'Fuente Datos Entrada',
             'estatus_vivienda_id' => 'Estatus Vivienda',
             'cocina' => 'Cocina',
