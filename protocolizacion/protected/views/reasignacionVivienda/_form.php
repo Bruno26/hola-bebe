@@ -1,5 +1,4 @@
 
-<p class="help-block">Fields with <span class="required">*</span> are required.</p>
 <div class="row">
     <div class="row-fluid">
         <div class="col-md-3">

@@ -2,7 +2,6 @@
 $baseUrl = Yii::app()->baseUrl;
 $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
 ?>
-<p class="help-block">Fields with <span class="required">*</span> are required.</p>
 <div class="row">
     <div class="col-md-6">
 
