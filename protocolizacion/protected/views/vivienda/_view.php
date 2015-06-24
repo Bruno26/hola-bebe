@@ -8,7 +8,7 @@
                 <blockquote>
                     <p>
                         <b>Nombre del Desarrollo: </b><?php echo $model->unidadHabitacional->desarrollo->nombre; ?><br/>
-                        <b>Nombre de la Unidad Habitacional:</b> <?php echo $model->unidadHabitacional->nombre; ?><br/>
+                        <b>Nombre de la Unidad Multifamiliar:</b> <?php echo $model->unidadHabitacional->nombre; ?><br/>
                     </p>
                 </blockquote>
             </div>
@@ -54,7 +54,7 @@
 
     <div class="col-md-12">
         <div>
-            <h4><i class="glyphicon glyphicon-home"></i> Detalles de la UnidadFamiliar</h4>
+            <h4><i class="glyphicon glyphicon-home"></i> Detalles de la Unidad Unifamiliar</h4>
             <div class='col-md-6'> 
                 <blockquote>
                     <p>

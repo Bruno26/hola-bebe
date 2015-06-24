@@ -7,13 +7,12 @@ $this->breadcrumbs = array(
 ?>
 <?php
 if (!empty($model->unidad_habitacional_id)) {
-    $id_unidad = UnidadHabitacional::model()->findByPk($model->unidad_habitacional_id); 
+    $id_unidad = UnidadHabitacional::model()->findByPk($model->unidad_habitacional_id);
     $id_desarrollo = $id_unidad->desarrollo_id; // consulta en la tabla ciudad el id_ciudad y id_estado 
     $id_parroquia = $id_unidad->desarrollo->parroquia_id;
     $id_municipio = $id_unidad->desarrollo->fkParroquia->clvmunicipio0->clvcodigo;
     $id_estado = $id_unidad->desarrollo->fkParroquia->clvmunicipio0->clvestado0->clvcodigo;
 //    var_dump($id_parroquia);die;
-
 // var_dump($id_desarrollo); die();
 }
 ?>
@@ -25,19 +24,19 @@ Yii::app()->clientScript->registerScript('vivienda', "
          $('#Tblestado_clvcodigo').val(" . $id_estado . ");
           $.get('" . CController::createUrl('ValidacionJs/BuscarMunicipios') . "', {clvcodigo: " . $id_estado . "}, function(data){
                 $('#Tblmunicipio_clvcodigo').html(data);
-                $('#Tblmunicipio_clvcodigo').val(" . $id_municipio. ");
+                $('#Tblmunicipio_clvcodigo').val(" . $id_municipio . ");
             });
           $.get('" . CController::createUrl('ValidacionJs/BuscarParroquias') . "', {municipio: " . $id_municipio . "}, function(data){
                 $('#Tblparroquia_clvcodigo').html(data);
-                $('#Tblparroquia_clvcodigo').val(" . $id_parroquia. ");
+                $('#Tblparroquia_clvcodigo').val(" . $id_parroquia . ");
             });
           $.get('" . CController::createUrl('ValidacionJs/BuscarDesarrollo') . "', {desarrollo: " . $id_parroquia . "}, function(data){
                 $('#Desarrollo_id_desarrollo').html(data);
-                $('#Desarrollo_id_desarrollo').val(" . $id_desarrollo. ");
+                $('#Desarrollo_id_desarrollo').val(" . $id_desarrollo . ");
             });
             $.get('" . CController::createUrl('ValidacionJs/BuscarUnidadHabitacional') . "', {unidad: " . $id_desarrollo . "}, function(data){
                 $('#Vivienda_unidad_habitacional_id').html(data);
-                $('#Vivienda_unidad_habitacional_id').val(" . $model->unidad_habitacional_id. ");
+                $('#Vivienda_unidad_habitacional_id').val(" . $model->unidad_habitacional_id . ");
             });
         });
 
@@ -64,7 +63,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                 'booster.widgets.TbPanel', array(
             'title' => 'Actualización de la vivienda N° ' . $model->id_vivienda,
             'context' => 'info',
-            // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'headerIcon' => 'globe',
             'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'desarrollo' => $desarrollo), TRUE),
                 )
@@ -101,6 +100,6 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     </div>
 </div>
 
-<?php //echo $this->renderPartial('_form', array('model'=>$model));  ?>
+<?php //echo $this->renderPartial('_form', array('model'=>$model));   ?>
 
 <?php $this->endWidget(); ?>
