@@ -76,7 +76,7 @@ class CrugeLogon extends CFormModel
         //
         return array(
             //'username' => $this->_getUsernameLabel(),
-            'username' => 'Usurio del Sistema',
+            'username' => 'Usuario del Sistema',
             'password' => ucfirst(CrugeTranslator::t('logon', 'Password') . ":"),
             'rememberMe' => ucfirst(CrugeTranslator::t('logon', 'Remember this machine') . ":"),
             'verifyCode' => ucfirst(CrugeTranslator::t('logon', 'Security code') . ":"),
