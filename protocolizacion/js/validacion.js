@@ -32,8 +32,17 @@ function Terreno() {
  * FUNCION QUE BUSCA EN SAIME Y EN PERSONA POR NUMERO DE CEDULA Y NACIONALIDAD
  */
 function buscarPersonaOficina(nacionalidad, cedula) {
-
-    if (nacionalidad == 'SELECCIONE') {
+    $('#Oficina_primer_nombre').val('');
+    $('#Oficina_persona_id_jefe').val('');
+    $('#Oficina_segundo_nombre').val('');
+    $('#Oficina_primer_apellido').val('');
+    $('#Oficina_segundo_apellido').val('');
+    $('#Oficina_fechaNac').val('');
+    $('#Oficina_primer_nombre').attr('readonly', true);
+    $('#Oficina_segundo_nombre').attr('readonly', true);
+    $('#Oficina_primer_apellido').attr('readonly', true);
+    $('#Oficina_segundo_apellido').attr('readonly', true);
+    if (nacionalidad == '') {
         bootbox.alert('Verifique que la nacionalidad no esten vacios');
         return false;
     }
@@ -42,31 +51,39 @@ function buscarPersonaOficina(nacionalidad, cedula) {
         return false;
     }
     $.ajax({
-        url: baseUrl + "/ValidacionJs/BuscarPersonas",
+        url: baseUrl + "/ValidacionJs/BuscarEncargadoOficina",
         async: true,
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
         success: function (datos) {
-//            alert(datos);
-//            if (datos == 1) {
-//                bootbox.alert('Debe Completar el campo Cédula');
-//            } else {
-//
-            if (datos == 1) {
-                $('#Oficina_primer_nombre').val(datos.PRIMERNOMBRE);
-                $('#Oficina_persona_id_jefe').val(datos.ID);
-                $('#Oficina_segundo_nombre').val(datos.SEGUNDONOMBRE);
-                $('#Oficina_primer_apellido').val(datos.PRIMERAPELLIDO);
-                $('#Oficina_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
+            if (datos == 1 || datos == 2) {
+                $('#Oficina_primer_nombre').val('');
+                $('#Oficina_persona_id_jefe').val('');
+                $('#Oficina_segundo_nombre').val('');
+                $('#Oficina_primer_apellido').val('');
+                $('#Oficina_segundo_apellido').val('');
+                $('#Oficina_fechaNac').val('');
+                if (datos == 1) {
+                    $('#Oficina_cedula').val('');
+                    $('#Oficina_nacionalidad').val('');
+                    bootbox.alert('Esta persona ya se encuentra asignada a una Oficina.');
+                    return false;
+                } else if (datos == 2) {
+                    $('#Oficina_persona_id_jefe').val('');
+                    $('#Oficina_primer_nombre').attr('readonly', false);
+                    $('#Oficina_segundo_nombre').attr('readonly', false);
+                    $('#Oficina_primer_apellido').attr('readonly', false);
+                    $('#Oficina_segundo_apellido').attr('readonly', false);
+                }
             } else {
                 $('#Oficina_primer_nombre').val(datos.PRIMERNOMBRE);
                 $('#Oficina_persona_id_jefe').val(datos.ID);
                 $('#Oficina_segundo_nombre').val(datos.SEGUNDONOMBRE);
                 $('#Oficina_primer_apellido').val(datos.PRIMERAPELLIDO);
                 $('#Oficina_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
+                $('#Oficina_fechaNac').val(datos.FECHANACIMIENTO);
             }
-
         },
         error: function (datos) {
             bootbox.alert('Ocurrio un error');
@@ -186,7 +203,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
         success: function (datos) {
-          //  alert(datos);
+            //  alert(datos);
             if (datos == 2) {
                 //  No Existe en Saime habilito todos los campos para que se llenen a pedal
 
@@ -224,10 +241,10 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
 
                 /*   -------------------------------- */
 
-            }else if(datos == 3){
-                  bootbox.alert('Beneficiario Se encuentra Registrado !');
-                  // $('#BeneficiarioTemporal_cedula').val('');
-                  return false;
+            } else if (datos == 3) {
+                bootbox.alert('Beneficiario Se encuentra Registrado !');
+                // $('#BeneficiarioTemporal_cedula').val('');
+                return false;
 
             } else if (datos.PROCEDENCIA == 2) {
                 //  Datos de la variable proceden de Saime 

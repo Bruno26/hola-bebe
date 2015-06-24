@@ -22,7 +22,7 @@ class ValidacionJsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario', 'BuscarPisoVivienda', 'BuscarVivienda', 'BuscarTipoVivienda','BuscarPersonasBeneficiarioTemp'),
+                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario', 'BuscarPisoVivienda', 'BuscarVivienda', 'BuscarTipoVivienda', 'BuscarPersonasBeneficiarioTemp', 'BuscarEncargadoOficina'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -92,8 +92,8 @@ class ValidacionJsController extends Controller {
         $existeTemporal = BeneficiarioTemporal::model()->findByAttributes(array('nacionalidad' => $nacio, 'cedula' => $cedula));
 
         if (empty($existeTemporal)) {
-         
-      
+
+
             $result = ConsultaOracle::getPersonaBeneficiario($nacio, $cedula);
             if ($result == 1) {
                 $saime = ConsultaOracle::getSaimeBeneficiario($nacio, $cedula);
@@ -104,12 +104,11 @@ class ValidacionJsController extends Controller {
                     echo CJSON::encode($saime);
             }else {
                 echo CJSON::encode($result);
-             }
-
+            }
         } else {
             echo CJSON::encode(3); // Existe en temporal
         }
-   }
+    }
 
     /*  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
@@ -153,25 +152,25 @@ class ValidacionJsController extends Controller {
 
         $PISO = (int) (isset($_POST['BeneficiarioTemporal']['piso']) ? $_POST['BeneficiarioTemporal']['piso'] : 0);
 
-       // var_dump($PISO); die();
+        // var_dump($PISO); die();
 
         if (!empty($Id)) {
             $criteria = new CDbCriteria;
             //$criteria->addCondition('t.unidad_habitacional_id = :id_unidad_habitacional');
-              $criteria->addCondition('nro_piso=:nro_piso');
-              $criteria->params['nro_piso']=$Id;
+            $criteria->addCondition('nro_piso=:nro_piso');
+            $criteria->params['nro_piso'] = $Id;
 
-              $criteria->addCondition('asignada=:asignada');
-              $criteria->params['asignada']=0;
+            $criteria->addCondition('asignada=:asignada');
+            $criteria->params['asignada'] = 0;
 
-              // $criteria->params = array(':asignada' => 0);
-             /* if($PISO != '')
-               $criteria->params = array('nro_piso' => (int) $PISO);   */
+            // $criteria->params = array(':asignada' => 0);
+            /* if($PISO != '')
+              $criteria->params = array('nro_piso' => (int) $PISO); */
 
             $criteria->order = 'nro_vivienda ASC';
             $criteria->select = 'nro_vivienda,id_vivienda';
 
-          //  var_dump($criteria); die();
+            //  var_dump($criteria); die();
 
             $data = CHtml::listData(Vivienda::model()->findAll($criteria), 'id_vivienda', 'nro_vivienda');
             echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
@@ -188,11 +187,6 @@ class ValidacionJsController extends Controller {
     }
 
     /*  /////////////////////////////////////////////////////////////////////// */
-
-   
-
-
-
 
     public function actionBuscarMunicipios() {
         $Id = (isset($_POST['Tblestado']['clvcodigo']) ? $_POST['Tblestado']['clvcodigo'] : $_GET['clvcodigo']);
@@ -388,6 +382,29 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
                 $salida = array('persona' => $saime, 'faov' => '0.00');
                 echo CJSON::encode($salida);
             }
+        }
+    }
+
+    /**
+     * FUNCION QUE BUSCA EN TABLA COMUNES EL ID PERSONA , SI NO EXISTE CONSULTA EN SAIME 
+     */
+    public function actionBuscarEncargadoOficina() {
+        $cedula = (int) $_POST['cedula'];
+        $nacio = (int) $_POST['nacionalidad'];
+        $result = ConsultaOracle::getPersona($nacio, $cedula); // Consulta de persona 
+        if ($result != 1) {
+            $ExisteJefeOficina = OficinaController::FindByIdPersona($result['ID']);
+            if (!empty($ExisteJefeOficina)) {
+                echo json_encode(1); // INDICA QUE LA PERSONA YA ASIGNADA A ALGUNA OFICINA
+            } else {
+                echo CJSON::encode($result);
+            }
+        } else {
+            $saime = ConsultaOracle::getSaime($nacio, $cedula);
+            if ($saime == 1)
+                echo json_encode(2); //en caso que no exista en saime
+            else
+                echo CJSON::encode($saime);
         }
     }
 

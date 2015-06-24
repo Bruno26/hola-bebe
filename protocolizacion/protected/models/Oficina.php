@@ -35,6 +35,7 @@ class Oficina extends CActiveRecord {
     public $segundo_nombre;
     public $primer_apellido;
     public $segundo_apellido;
+    public $fechaNac;
     /**
      * @return string the associated database table name
      */
@@ -90,10 +91,10 @@ class Oficina extends CActiveRecord {
             'usuario_id_creacion' => 'Usuario Id Creación',
             'usuario_id_actualizacion' => 'Usuario Id Actualización',
             'nacionalidad' => 'Nacionalidad',
-            'cedula' => 'Cedula',
-            'primer_nombre' => 'Nombre',
-            'segundo_nombre' => 'Nombre',
-            'primer_apellido' => 'Apellido',
+            'cedula' => 'Cédula',
+            'primer_nombre' => 'Primer Nombre',
+            'segundo_nombre' => 'Segundo Nombre',
+            'primer_apellido' => 'Primer Apellido',
             'segundo_apellido' => 'Segundo Apellido',
         );
     }
