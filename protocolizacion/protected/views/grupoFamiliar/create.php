@@ -178,6 +178,7 @@ $this->widget('booster.widgets.TbProgress', array(
             'title' => 'Grupo Familiar',
             'context' => 'primary',
             'headerIcon' => 'user',
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
                 )
         );
@@ -191,7 +192,7 @@ $this->widget('booster.widgets.TbProgress', array(
                 'booster.widgets.TbPanel', array(
             'title' => 'Listar Grupo Familiar',
             'context' => 'primary',
-            // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'headerIcon' => 'user',
             'content' => $this->renderPartial('_listardatos', array('form' => $form), TRUE),
                 )

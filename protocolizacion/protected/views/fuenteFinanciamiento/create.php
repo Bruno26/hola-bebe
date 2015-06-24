@@ -43,7 +43,7 @@ if (isset($error) && !empty($error)) {
         'title' => 'Fuente de Financiamiento',
         'context' => 'primary',
         'headerIcon' => 'user',
-        'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
+        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
         'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
             )
     );

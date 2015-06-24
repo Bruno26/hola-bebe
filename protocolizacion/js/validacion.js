@@ -210,8 +210,10 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function(datos) {
-            //  alert(datos);
+
+        success: function (datos) {
+          //  alert(datos.PROCEDENCIA);
+
             if (datos == 2) {
                 //  No Existe en Saime habilito todos los campos para que se llenen a pedal
 
@@ -256,6 +258,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
 
             } else if (datos.PROCEDENCIA == 2) {
                 //  Datos de la variable proceden de Saime 
+                // alert('entrooo');
                 if (datos.PRIMERNOMBRE == null) {
                     $('#BeneficiarioTemporal_primer_nombre').attr('readonly', false);
                     $('#BeneficiarioTemporal_primer_nombre').val('');
@@ -297,9 +300,10 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                 }
 
                 //  habilito los campos que se llenan en persona
+                $('#BeneficiarioTemporal_sexo').attr('readonly', false);
                 $('#BeneficiarioTemporal_sexo').attr('disabled', false);
-                $('#BeneficiarioTemporal_sexo').val('');
-
+               
+                $('#BeneficiarioTemporal_estado_civil').attr('disabled', false);
                 $('#BeneficiarioTemporal_estado_civil').attr('readonly', false);
                 $('#BeneficiarioTemporal_estado_civil').val('');
 
@@ -338,15 +342,16 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                     $('#BeneficiarioTemporal_sexo').attr('readonly', true);
                 }
 
-                if (datos.EDO_CIVIL === null) {
+                if (datos.EDO_CIVIL == null) {
                     $('#BeneficiarioTemporal_estado_civil').attr('readonly', false);
+                    $('#BeneficiarioTemporal_estado_civil').attr('disabled', false);
                     $('#BeneficiarioTemporal_estado_civil').val('');
                 } else {
                     $('#BeneficiarioTemporal_estado_civil').val(datos.EDO_CIVIL);
                     $('#BeneficiarioTemporal_estado_civil').attr('readonly', true);
                 }
 
-                if (datos.TELEFONO_HAB === null) {
+                if (datos.TELEFONO_HAB == null) {
                     $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', false);
                     $('#BeneficiarioTemporal_telf_habitacion').val('');
                 } else {
@@ -354,7 +359,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                     $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', true);
                 }
 
-                if (datos.TELEFONO_MOVIL === null) {
+                if (datos.TELEFONO_MOVIL == null) {
                     $('#BeneficiarioTemporal_telf_celular').attr('readonly', false);
                     $('#BeneficiarioTemporal_telf_celular').val('');
                 } else {
@@ -364,7 +369,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
 
 
 
-                if (datos.CORREO === null) {
+                if (datos.CORREO == null) {
                     $('#BeneficiarioTemporal_correo_electronico').attr('readonly', false);
                     $('#BeneficiarioTemporal_correo_electronico').val('');
                 } else {
