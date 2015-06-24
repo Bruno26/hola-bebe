@@ -46,19 +46,19 @@ class AbogadosController extends Controller {
         $model = new Abogados;
 
         if (isset($_POST['Abogados'])) {
-            if ($_POST['idPersona'] == '') {
+            if ($_POST['Abogados']['persona_id'] == '') {
                 $idPersona = ConsultaOracle::insertPersona(array(
-                            'CEDULA' => $_POST['Abogado']['cedula'],
-                            'NACIONALIDAD' => ($_POST['Abogado']['nacionalida'] == 97) ? 1 : 0,
-                            'PRIMER_NOMBRE' => trim(strtoupper($_POST['Abogado']['primerNombre'])),
-                            'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['Abogado']['segundoNombre'])),
-                            'PRIMER_APELLIDO' => trim(strtoupper($_POST['Abogado']['primerApellido'])),
-                            'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['Abogado']['segundoApellido'])),
-                            'FECHA_NACIMIENTO' => $_POST['Abogado']['fechaNac'],
+                            'CEDULA' => $_POST['Abogados']['cedula'],
+                            'NACIONALIDAD' => ($_POST['Abogados']['nacionalidad'] == 97) ? 1 : 0,
+                            'PRIMER_NOMBRE' => trim(strtoupper($_POST['Abogados']['primer_nombre'])),
+                            'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['Abogados']['segundo_nombre'])),
+                            'PRIMER_APELLIDO' => trim(strtoupper($_POST['Abogados']['primer_apellido'])),
+                            'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['Abogados']['segundo_apellido'])),
+                            'FECHA_NACIMIENTO' => $_POST['Abogados']['fecha_nac'],
                                 )
                 );
             } else {
-                $idPersona = $_POST['idPersona'];
+                $idPersona = $_POST['Abogados']['persona_id'];
             }
             $model->attributes = $_POST['Abogados'];
             $model->persona_id = $idPersona;
@@ -178,7 +178,7 @@ class AbogadosController extends Controller {
     }
 
     public function FindByIdPersona($id) {
-        $model = GrupoFamiliar::model()->findByAttributes(array('persona_id' => $id));
+        $model = Abogados::model()->findByAttributes(array('persona_id' => $id));
         if ($model === null)
             return FALSE;
         return $model;

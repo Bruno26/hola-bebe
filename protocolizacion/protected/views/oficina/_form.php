@@ -89,8 +89,9 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
             ))));
             ?>
         </div>
-
-
+        <div class="col-md-3"  id="iconLoding" style="display: none">
+            <img src="<?php echo Yii::app()->baseUrl; ?>/images/loading.gif" width="50px" height="60px">
+        </div>
     </div>
 </div>
 <div class="row">

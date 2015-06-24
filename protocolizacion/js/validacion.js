@@ -32,6 +32,7 @@ function Terreno() {
  * FUNCION QUE BUSCA EN SAIME Y EN PERSONA POR NUMERO DE CEDULA Y NACIONALIDAD
  */
 function buscarPersonaOficina(nacionalidad, cedula) {
+    $('#iconLoding').show();
     $('#Oficina_primer_nombre').val('');
     $('#Oficina_persona_id_jefe').val('');
     $('#Oficina_segundo_nombre').val('');
@@ -64,6 +65,7 @@ function buscarPersonaOficina(nacionalidad, cedula) {
                 $('#Oficina_primer_apellido').val('');
                 $('#Oficina_segundo_apellido').val('');
                 $('#Oficina_fechaNac').val('');
+                $('#iconLoding').hide();
                 if (datos == 1) {
                     $('#Oficina_cedula').val('');
                     $('#Oficina_nacionalidad').val('');
@@ -83,6 +85,7 @@ function buscarPersonaOficina(nacionalidad, cedula) {
                 $('#Oficina_primer_apellido').val(datos.PRIMERAPELLIDO);
                 $('#Oficina_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
                 $('#Oficina_fechaNac').val(datos.FECHANACIMIENTO);
+                $('#iconLoding').hide();
             }
         },
         error: function (datos) {
@@ -192,7 +195,7 @@ function buscarPersonaAbogado(nacionalidad, cedula) {
                 $('#Abogados_primer_nombre').val(datos.PRIMERNOMBRE);
                 $('#Abogados_segundo_nombre').val(datos.SEGUNDONOMBRE);
                 $('#Abogados_primer_apellido').val(datos.PRIMERAPELLIDO);
-                $('#Abogados_segundo_apellido').val(datos.SEGUNDOPELLIDO);
+                $('#Abogados_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
                 $('#fecha_nac').val(datos.FECHANACIMIENTO);
                 $('#iconLoding').hide();
             }

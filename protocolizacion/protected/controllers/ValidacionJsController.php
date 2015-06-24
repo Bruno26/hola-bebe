@@ -417,7 +417,7 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
         $nacio = (int) $_POST['nacionalidad'];
         $result = ConsultaOracle::getPersona($nacio, $cedula);
         if ($result != '1') {
-            $exiteAbogado = Abogados::FindByIdPersona($result['ID']);
+            $exiteAbogado = AbogadosController::FindByIdPersona($result['ID']);
             if (!empty($exiteAbogado))
                 echo json_encode(1); //alert que ya existe
             else
