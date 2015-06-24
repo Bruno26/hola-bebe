@@ -30,7 +30,7 @@ $html.="<table align='right' width='100%' border='0'>
                             <blockquote style='padding: 10px 20px;   margin: 0 0 20px;   font-size: 17.5px;   border-left: 5px solid #eee;'>
                                 <p><b> Nombre del Desarrollo: </b>" . $model->unidadHabitacional->desarrollo->nombre .
         "<br/>
-                                <b> Nombre de la Unidad Habitacional:</b> " . $model->unidadHabitacional->nombre .
+                                <b> Nombre de la Unidad Multifamiliar:</b> " . $model->unidadHabitacional->nombre .
         "<br/></p>
                             </blockquote>
                 </td>
@@ -103,7 +103,7 @@ $html.="<table align='right' width='100%' border='0'>
             <tr><td colspan='2'></td></tr><tr><td colspan='2'></td></tr>
             <tr>
                 <td colspan='2' align='center'>
-                    <b>Detalles de la UnidadFamiliar</b>
+                    <b>Detalles de la Unidad Unifamiliar</b>
                 </td>
             </tr>
             <tr>

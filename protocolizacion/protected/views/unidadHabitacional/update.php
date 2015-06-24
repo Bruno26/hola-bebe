@@ -1,19 +1,21 @@
 <?php
-$this->breadcrumbs=array(
-	'Actualizar la Unidad Habitacional N°'=>array('index'),
-	$model->id_unidad_habitacional=>array('view','id'=>$model->id_unidad_habitacional),
-	'Update',
-);  ?>
+$this->breadcrumbs = array(
+    'Actualizar la Unidad Habitacional N°' => array('index'),
+    $model->id_unidad_habitacional => array('view', 'id' => $model->id_unidad_habitacional),
+    'Update',
+);
+?>
 
-    <?php
-    if (!empty($model->desarrollo_id)) {
-        $id_desarrollo = Desarrollo::model()->findByPk($model->desarrollo_id); // consulta en la tabla ciudad el id_ciudad y id_estado 
-        $id_parroquia = $id_desarrollo->parroquia_id;
-        $id_municipio = $id_desarrollo->fkParroquia->clvmunicipio0->clvcodigo;
-        $id_estado = $id_desarrollo->fkParroquia->clvmunicipio0->clvestado0->clvcodigo; 
+<?php
+if (!empty($model->desarrollo_id)) {
+    $id_desarrollo = Desarrollo::model()->findByPk($model->desarrollo_id); // consulta en la tabla ciudad el id_ciudad y id_estado 
+    $id_parroquia = $id_desarrollo->parroquia_id;
+    $id_municipio = $id_desarrollo->fkParroquia->clvmunicipio0->clvcodigo;
+    $id_estado = $id_desarrollo->fkParroquia->clvmunicipio0->clvestado0->clvcodigo;
 
 //    var_dump($model->desarrollo_id); die();
-    } ?>
+}
+?>
 
 <?php
 Yii::app()->clientScript->registerScript('unidadHabitacional', "
@@ -56,12 +58,12 @@ Yii::app()->clientScript->registerScript('unidadHabitacional', "
             });
             $.get('" . CController::createUrl('ValidacionJs/BuscarParroquias') . "', {municipio: " . $id_municipio . "}, function(data){
                 $('#Tblparroquia_clvcodigo').html(data);
-                $('#Tblparroquia_clvcodigo').val(" .$id_parroquia. ");
+                $('#Tblparroquia_clvcodigo').val(" . $id_parroquia . ");
             });
            
             $.get('" . CController::createUrl('ValidacionJs/BuscarDesarrollo') . "', {desarrollo: " . $id_parroquia . "}, function(data){
                 $('#UnidadHabitacional_desarrollo_id').html(data);
-                $('#UnidadHabitacional_desarrollo_id').val(" . $model->desarrollo_id. ");
+                $('#UnidadHabitacional_desarrollo_id').val(" . $model->desarrollo_id . ");
             });
         });
 
@@ -79,54 +81,51 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         'validateOnType' => true,
     ),
         ));
+?>
 
-	?>
+<h1>Actualizar la Unidad Habitacional N° <?php echo $model->id_unidad_habitacional; ?></h1>
 
-	<h1>Actualizar la Unidad Habitacional N° <?php echo $model->id_unidad_habitacional; ?></h1>
+<div>
+    <?php
+    $this->widget(
+            'booster.widgets.TbPanel', array(
+        'title' => 'Unidad Habitacional',
+        'context' => 'info',
+        'headerIcon' => 'user',
+        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
+        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
+            )
+    );
+    ?>
+</div>
 
-	<div>
-	    <?php
-	    $this->widget(
-	            'booster.widgets.TbPanel', array(
-	        'title' => 'Unidad Habitacional',
-	        'context' => 'info',
-	        'headerIcon' => 'user',
-	//        'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
-	        'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
-	            )
-	    );
-	    ?>
-	</div>
-
-
-	<div class="well">
-	    <div class="pull-center" style="text-align: right;">
-				<?php
-				$this->widget('booster.widgets.TbButton', array(
-						'buttonType' => 'submit',
-						'icon' => 'glyphicon glyphicon glyphicon-step-backward',
-						'size' => 'large',
-						'id' => 'cancelar',
-						'context' => 'danger',
-						'label' => 'Cancelar',
-						//'url' => $this->createURL('/desarrollo/admin'),
-						'htmlOptions' => array(
-			'onclick' => 'document.location.href ="' . $this->createUrl('unidadHabitacional/admin') . '"'),
-
-				));
-				?>
-				<?php
-	        $this->widget('booster.widgets.TbButton', array(
-	            'buttonType' => 'submit',
-	            'icon' => 'glyphicon glyphicon-floppy-saved',
-	            'size' => 'large',
-	            'id' => 'guardar',
-	            'context' => 'primary',
-	            'label' => $model->isNewRecord ? 'Guardar' : 'Actualizar',
-	        ));
-	        ?>
-	    </div>
-	</div>
+<div class="well">
+    <div class="pull-center" style="text-align: right;">
+        <?php
+        $this->widget('booster.widgets.TbButton', array(
+            'buttonType' => 'submit',
+            'icon' => 'glyphicon glyphicon glyphicon-step-backward',
+            'size' => 'large',
+            'id' => 'cancelar',
+            'context' => 'danger',
+            'label' => 'Cancelar',
+            //'url' => $this->createURL('/desarrollo/admin'),
+            'htmlOptions' => array(
+                'onclick' => 'document.location.href ="' . $this->createUrl('unidadHabitacional/admin') . '"'),
+        ));
+        ?>
+        <?php
+        $this->widget('booster.widgets.TbButton', array(
+            'buttonType' => 'submit',
+            'icon' => 'glyphicon glyphicon-floppy-saved',
+            'size' => 'large',
+            'id' => 'guardar',
+            'context' => 'primary',
+            'label' => $model->isNewRecord ? 'Guardar' : 'Actualizar',
+        ));
+        ?>
+    </div>
+</div>
 
 
-	<?php $this->endWidget(); ?>
+<?php $this->endWidget(); ?>

@@ -154,6 +154,11 @@ function buscarPersonaAbogado(nacionalidad, cedula) {
     $('#Abogados_primer_apellido').val('');
     $('#Abogados_segundo_apellido').val('');
     $('#Abogados_fecha_nac').val('');
+    $('#Abogados_primer_nombre').attr('readonly', true);
+    $('#Abogados_segundo_nombre').attr('readonly', true);
+    $('#Abogados_primer_apellido').attr('readonly', true);
+    $('#Abogados_segundo_apellido').attr('readonly', true);
+
     $('#iconLoding').show();
 
     if (nacionalidad == 'SELECCIONE') {
@@ -184,10 +189,10 @@ function buscarPersonaAbogado(nacionalidad, cedula) {
             } else if (datos == 2) {
                 $('#iconLoding').hide();
                 $('#Abogados_persona_id').val('');
-                $('#Abogados_primer_nombre').val('');
-                $('#Abogados_segundo_nombre').val('');
-                $('#Abogados_primer_apellido').val('');
-                $('#Abogados_segundo_apellido').val('');
+                $('#Abogados_primer_nombre').attr('readonly', false);
+                $('#Abogados_segundo_nombre').attr('readonly', false);
+                $('#Abogados_primer_apellido').attr('readonly', false);
+                $('#Abogados_segundo_apellido').attr('readonly', false);
                 $('#Abogados_fecha_nac').val('');
                 bootbox.alert('La Persona no se encuentra registrada en el Saime.');
             } else {
@@ -575,6 +580,10 @@ function buscarPersonaAsignacionCenso(nacionalidad, cedula) {
     $('#AsignacionCenso_primer_apellido').val('');
     $('#AsignacionCenso_segundo_apellido').val('');
     $('#AsignacionCenso_fecha_nac').val('');
+    $('#AsignacionCenso_primer_nombre').attr('readonly', true);
+    $('#AsignacionCenso_segundo_nombre').attr('readonly', true);
+    $('#AsignacionCenso_primer_apellido').attr('readonly', true);
+    $('#AsignacionCenso_segundo_apellido').attr('readonly', true);
 
     if (nacionalidad == 'SELECCIONE') {
         bootbox.alert('Verifique que la nacionalidad no esten vacios');
@@ -605,11 +614,11 @@ function buscarPersonaAsignacionCenso(nacionalidad, cedula) {
             } else if (datos == 2) {
                 $('#iconLoding').hide();
                 $('#AsignacionCenso_persona_id').val('');
-                $('#AsignacionCenso_primer_nombre').val('');
-                $('#AsignacionCenso_segundo_nombre').val('');
-                $('#AsignacionCenso_primer_apellido').val('');
-                $('#AsignacionCenso_segundo_apellido').val('');
-                $('#fecha_nac').val('');
+                $('#AsignacionCenso_primer_nombre').attr('readonly', false);
+                $('#AsignacionCenso_segundo_nombre').attr('readonly', false);
+                $('#AsignacionCenso_primer_apellido').attr('readonly', false);
+                $('#AsignacionCenso_segundo_apellido').attr('readonly', false);
+                $('#AsignacionCenso_fecha_nac').val('');
                 bootbox.alert('La Persona no se encuentra registrada en el Saime.');
             } else {
                 $('#AsignacionCenso_persona_id').val(datos.ID);

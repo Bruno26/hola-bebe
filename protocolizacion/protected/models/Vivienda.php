@@ -43,6 +43,7 @@
  * @property ReasignacionVivienda[] $reasignacionViviendas
  */
 class Vivienda extends CActiveRecord {
+
     /**
      * @return string the associated database table name
      */
@@ -50,32 +51,30 @@ class Vivienda extends CActiveRecord {
         return 'vivienda';
     }
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('tipo_vivienda_id, unidad_habitacional_id,  nro_piso, nro_vivienda, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, asignada', 'required'),
-			array('tipo_vivienda_id, unidad_habitacional_id, nro_estacionamientos, nro_habitaciones, nro_banos, fuente_datos_entrada_id, estatus_vivienda_id, usuario_id_creacion, usuario_id_actualizacion', 'numerical', 'integerOnly'=>true),
-			array('construccion_mt2', 'length', 'max'=>4),
-			array('nro_piso', 'length', 'max'=>4),
-			array('nro_vivienda', 'length', 'max'=>4),
-			array('nro_estacionamientos', 'length', 'max'=>4),
-			array('nro_banos', 'length', 'max'=>4),
-			array('nro_habitaciones', 'length', 'max'=>4),
-			array('lindero_norte, lindero_sur, lindero_este, lindero_oeste, coordenadas', 'length', 'max'=>200),
-			array('precio_vivienda', 'length', 'max'=>16),
-			array('descripcion_estac', 'length', 'max'=>15),
-			array('sala, comedor, lavandero, cocina, asignada', 'safe'),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('id_vivienda, tipo_vivienda_id, unidad_habitacional_id, construccion_mt2, nro_piso, nro_vivienda, sala, comedor, lavandero, lindero_norte, lindero_sur, lindero_este, lindero_oeste, coordenadas, precio_vivienda, nro_estacionamientos, descripcion_estac, nro_habitaciones, nro_banos, fuente_datos_entrada_id, estatus_vivienda_id, cocina, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion,asignada', 'safe', 'on'=>'search'),
-		);
-	}
-
+    /**
+     * @return array validation rules for model attributes.
+     */
+    public function rules() {
+        // NOTE: you should only define rules for those attributes that
+        // will receive user inputs.
+        return array(
+            array('tipo_vivienda_id, unidad_habitacional_id,  nro_piso, nro_vivienda, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, asignada', 'required'),
+            array('tipo_vivienda_id, unidad_habitacional_id, nro_estacionamientos, nro_habitaciones, nro_banos, fuente_datos_entrada_id, estatus_vivienda_id, usuario_id_creacion, usuario_id_actualizacion', 'numerical', 'integerOnly' => true),
+            array('construccion_mt2', 'length', 'max' => 4),
+            array('nro_piso', 'length', 'max' => 4),
+            array('nro_vivienda', 'length', 'max' => 4),
+            array('nro_estacionamientos', 'length', 'max' => 4),
+            array('nro_banos', 'length', 'max' => 4),
+            array('nro_habitaciones', 'length', 'max' => 4),
+            array('lindero_norte, lindero_sur, lindero_este, lindero_oeste, coordenadas', 'length', 'max' => 200),
+            array('precio_vivienda', 'length', 'max' => 16),
+            array('descripcion_estac', 'length', 'max' => 15),
+            array('sala, comedor, lavandero, cocina, asignada', 'safe'),
+            // The following rule is used by search().
+            // @todo Please remove those attributes that should not be searched.
+            array('id_vivienda, tipo_vivienda_id, unidad_habitacional_id, construccion_mt2, nro_piso, nro_vivienda, sala, comedor, lavandero, lindero_norte, lindero_sur, lindero_este, lindero_oeste, coordenadas, precio_vivienda, nro_estacionamientos, descripcion_estac, nro_habitaciones, nro_banos, fuente_datos_entrada_id, estatus_vivienda_id, cocina, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion,asignada', 'safe', 'on' => 'search'),
+        );
+    }
 
     /**
      * @return array relational rules.
@@ -94,17 +93,18 @@ class Vivienda extends CActiveRecord {
             'reasignacionViviendas' => array(self::HAS_MANY, 'ReasignacionVivienda', 'vivienda_id'),
         );
     }
+
     /**
      * @return array customized attribute labels (name=>label)
      */
     public function attributeLabels() {
         return array(
             'id_vivienda' => 'Id Vivienda',
-            'tipo_vivienda_id' => 'Tipo Vivienda',
+            'tipo_vivienda_id' => 'Tipo de Vivienda',
             'unidad_habitacional_id' => 'Nombre de la Unidad Multifamiliar',
             'construccion_mt2' => 'Área de Vivienda mt2',
-            'nro_piso' => 'Número Piso',
-            'nro_vivienda' => 'Número Vivienda',
+            'nro_piso' => 'Número de Piso',
+            'nro_vivienda' => 'Número de la Vivienda',
             'sala' => 'Sala',
             'comedor' => 'Comedor',
             'lavandero' => 'Lavandero',
@@ -113,11 +113,11 @@ class Vivienda extends CActiveRecord {
             'lindero_este' => 'Lindero Este',
             'lindero_oeste' => 'Lindero Oeste',
             'coordenadas' => 'Coordenadas',
-            'precio_vivienda' => 'Precio Vivienda',
+            'precio_vivienda' => 'Precio de la Vivienda',
             'nro_estacionamientos' => 'Puesto de Estacionamiento',
             'descripcion_estac' => 'Número de Estacionamiento',
-            'nro_habitaciones' => 'Número Habitaciones',
-            'nro_banos' => 'Número Baños',
+            'nro_habitaciones' => 'Número de Habitaciones',
+            'nro_banos' => 'Número de Baños',
             'fuente_datos_entrada_id' => 'Fuente Datos Entrada',
             'estatus_vivienda_id' => 'Estatus Vivienda',
             'cocina' => 'Cocina',
@@ -129,7 +129,6 @@ class Vivienda extends CActiveRecord {
         );
     }
 
-    
     /**
      * Retrieves a list of models based on the current search/filter conditions.
      *

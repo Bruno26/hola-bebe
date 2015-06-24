@@ -81,6 +81,11 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                     'header' => 'Listado de Ente Ejecutor',
                     'value' => '$data->nombre_ente_ejecutor',
                 ),
+                array(
+                    'name' => 'observaciones',
+                    'header' => 'Observaciones',
+                    'value' => '$data->observaciones',
+                ),
             )
                 )
         );
