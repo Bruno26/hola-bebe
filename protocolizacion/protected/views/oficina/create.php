@@ -55,6 +55,7 @@ if (isset($sms) && !empty($sms)) {
         'title' => 'Oficina',
         'context' => 'info',
         'headerIcon' => 'home',
+        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
         'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
             )
     );

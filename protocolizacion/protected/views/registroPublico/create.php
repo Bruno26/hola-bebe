@@ -24,7 +24,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         'title' => 'Registro Público',
         'context' => 'info',
         'headerIcon' => 'user',
-        //'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
+        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
         'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
         #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
             )

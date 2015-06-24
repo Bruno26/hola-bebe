@@ -32,10 +32,10 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     <?php 
     $this->widget(
             'booster.widgets.TbPanel', array(
-        'title' => 'Oficina',
+        'title' => 'Programa',
         'context' => 'primary',
         'headerIcon' => 'user',
-        //'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
+        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
         'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
         #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
             )
