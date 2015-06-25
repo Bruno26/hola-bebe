@@ -35,6 +35,16 @@ if (isset($error) && !empty($error)) {
 ?>
 <h1 class="text-center">Cargar Nueva Fuente de Financiamiento</h1>
 
+<?php 
+        $this->widget(
+                'booster.widgets.TbLabel', array(
+            'context' => 'warning',
+            'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
+            // 'success', 'warning', 'important', 'info' or 'inverse'
+            'label' => 'Los campos marcados con * son requeridos',
+                )
+        ); ?>
+        <br><br>
 
 <div>
     <?php
@@ -43,7 +53,7 @@ if (isset($error) && !empty($error)) {
         'title' => 'Fuente de Financiamiento',
         'context' => 'primary',
         'headerIcon' => 'user',
-        'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
+        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
         'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
             )
     );

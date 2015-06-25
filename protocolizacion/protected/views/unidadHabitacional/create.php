@@ -60,6 +60,17 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 ?>
 <h1 class="text-center">Cargar Nueva Unidad Multifamiliar</h1>
 
+<?php 
+        $this->widget(
+                'booster.widgets.TbLabel', array(
+            'context' => 'warning',
+            'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
+            // 'success', 'warning', 'important', 'info' or 'inverse'
+            'label' => 'Los campos marcados con * son requeridos',
+                )
+        ); ?>
+        <br><br>
+
 <?php
 if (isset($sms) && !empty($sms)) {
     $user = Yii::app()->getComponent('user');
@@ -87,7 +98,7 @@ if (isset($sms) && !empty($sms)) {
         'title' => 'Unidad Multifamiliar',
         'context' => 'danger',
         'headerIcon' => 'user',
-//        'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
+        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
         'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
             )
     );

@@ -22,16 +22,6 @@ function nacionalidadCedula($selec, $select2, $iD) {
 ?>
 
 <?php
-$this->breadcrumbs = array(
-    'Asignacion Censos' => array('index'),
-    'Manage',
-);
-
-$this->menu = array(
-    array('label' => 'List AsignacionCenso', 'url' => array('index')),
-    array('label' => 'Create AsignacionCenso', 'url' => array('create')),
-);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 $('.search-form').toggle();
@@ -46,17 +36,9 @@ return false;
 ");
 ?>
 
-<h1>Listado de Asignacion de Censos</h1>
+<h1>Listado de Asignación de Censos</h1>
 
 
-<?php // echo CHtml::link('Búsqueda Avanzada', '#', array('class' => 'search-button btn')); ?>
-<div class="search-form" style="display:none">
-    <?php
-//    $this->renderPartial('_search', array(
-//        'model' => $model,
-//    ));
-    ?>
-</div><!-- search-form -->
 
 <?php
 $this->widget('booster.widgets.TbGridView', array(
@@ -98,7 +80,7 @@ $this->widget('booster.widgets.TbGridView', array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
-            'template' => '{ver} {modificar} {pdf}',
+            'template' => '{ver} {pdf}{empadronador}',
             'buttons' => array(
                 'ver' => array(
                     'label' => 'Ver',
@@ -106,18 +88,18 @@ $this->widget('booster.widgets.TbGridView', array(
                     'size' => 'medium',
                     'url' => 'Yii::app()->createUrl("asignacionCenso/view/", array("id"=>$data->id_asignacion_censo))',
                 ),
-                'modificar' => array(
-                    'label' => 'Modificar',
-                    'icon' => 'glyphicon glyphicon-pencil',
-                    'size' => 'medium',
-                    'url' => 'Yii::app()->createUrl("asignacionCenso/update/", array("id"=>$data->id_asignacion_censo))',
-//                    'visible' => 'Asignar($data->username);'
-                ),
                 'pdf' => array(
                     'label' => 'Generar PDF',
                     'icon' => 'glyphicon glyphicon-file',
                     'size' => 'medium',
                     'url' => 'Yii::app()->createUrl("asignacionCenso/pdf/", array("id"=>$data->id_asignacion_censo))',
+//                    'visible' => 'Asignar($data->username);'
+                ),
+                'empadronador' => array(
+                    'label' => 'Modificar',
+                    'icon' => 'glyphicon glyphicon-pencil',
+                    'size' => 'medium',
+                    'url' => 'Yii::app()->createUrl("/empadronadorCenso/create/", array("id"=>$data->id_asignacion_censo))',
 //                    'visible' => 'Asignar($data->username);'
                 ),
             ),

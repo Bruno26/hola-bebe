@@ -30,9 +30,10 @@
                     </p>
                 </blockquote>
             </div>
-             <div class='col-md-6'>
-                <div class='text-right' style='margin-right: 1em;'><img src="<?php echo Yii::app()->baseUrl; ?>/images/banavih_ndice1.png" style="width: 25%;"/></div>
+           <div class='col-md-6'>
+                <div class='text-right' style='margin-right: 1em;'><img src="<?php echo Yii::app()->baseUrl; ?>/images/LOGO_BANAVIH-1.jpg" style="width: 25%;"/></div>
             </div>
+        </div>
         </div>
   
     </div>

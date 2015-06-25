@@ -11,7 +11,6 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
         });
         
 "); ?>
-<p class="help-block">Los Campos con <span class="required">*</span> son obligatorios.</p>
 <div class="row">
     <div class="col-md-4">
 

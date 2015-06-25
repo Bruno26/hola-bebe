@@ -44,15 +44,33 @@ class AsignacionCensoController extends Controller {
      */
     public function actionCreate() {
         $model = new AsignacionCenso;
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
         if (isset($_POST['AsignacionCenso'])) {
+            if ($_POST['AsignacionCenso']['persona_id'] == '') {
+                $idPersona = ConsultaOracle::insertPersona(array(
+                            'CEDULA' => $_POST['AsignacionCenso']['cedula'],
+                            'NACIONALIDAD' => ($_POST['AsignacionCenso']['nacionalidad'] == 97) ? 1 : 0,
+                            'PRIMER_NOMBRE' => trim(strtoupper($_POST['AsignacionCenso']['primer_nombre'])),
+                            'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['AsignacionCenso']['segundo_nombre'])),
+                            'PRIMER_APELLIDO' => trim(strtoupper($_POST['AsignacionCenso']['primer_apellido'])),
+                            'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['AsignacionCenso']['segundo_apellido'])),
+                            'FECHA_NACIMIENTO' => $_POST['AsignacionCenso']['fecha_nac'],
+                                )
+                );
+            } else {
+                $idPersona = $_POST['AsignacionCenso']['persona_id'];
+            }
+
             $model->attributes = $_POST['AsignacionCenso'];
-            $model->unidad_habitacional_id = $_POST['AsignacionCenso']['unidad_habitacional_id'];
-            $model->persona_id = $_POST['AsignacionCenso']['persona_id'];
-            $model->oficina_id = $_POST['AsignacionCenso']['oficina_id'];
+            $model->desarrollo_id = $_POST['AsignacionCenso_desarrollo_id'];
+            $model->persona_id = $idPersona;
+            $model->oficina_id = $_POST['AsignacionCenso_oficina_id'];
             $model->censado = isset($_POST['censado']) ? true : false;
             $model->fecha_asignacion = Generico::formatoFecha($_POST['AsignacionCenso']['fecha_asignacion']);
             $model->observaciones = $_POST['AsignacionCenso']['observaciones'];
@@ -66,7 +84,7 @@ class AsignacionCensoController extends Controller {
             }
         }
         $this->render('create', array(
-            'model' => $model,
+            'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia
         ));
     }
 
@@ -164,6 +182,13 @@ class AsignacionCensoController extends Controller {
             'estado' => $estado,
             'municipio' => $municipio,
         ));
+    }
+
+    public function FindByIdPersona($id) {
+        $model = AsignacionCenso::model()->findByAttributes(array('persona_id' => $id));
+        if ($model === null)
+            return FALSE;
+        return $model;
     }
 
 }

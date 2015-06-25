@@ -71,6 +71,7 @@ class ViviendaController extends Controller {
             $model->descripcion_estac = $_POST['Vivienda']['descripcion_estac'];
             $model->fuente_datos_entrada_id = 90;
             $model->estatus_vivienda_id = 74;
+            $model->asignada = '0';
             $model->fecha_creacion = 'now';
             $model->fecha_actualizacion = 'now';
             $model->usuario_id_creacion = Yii::app()->user->id;

@@ -41,7 +41,7 @@ $this->widget('booster.widgets.TbGridView', array(
 //            'filter' => Maestro::FindMaestrosByPadreSelect(71),
       ),
         'nombre' => array(
-            'header' => 'Unidad Habitacional',
+            'header' => 'Unidad Multifamiliar',
             'name' => 'nombre',
             'value' => '$data->nombre',
 //            'filter' => Maestro::FindMaestrosByPadreSelect(71),

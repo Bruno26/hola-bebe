@@ -20,6 +20,17 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 
 <h1 class="text-center">Re-Asignación de Vivienda</h1>
 
+<?php 
+        $this->widget(
+                'booster.widgets.TbLabel', array(
+            'context' => 'warning',
+            'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
+            // 'success', 'warning', 'important', 'info' or 'inverse'
+            'label' => 'Los campos marcados con * son requeridos',
+                )
+        ); ?>
+        <br><br>
+
 <?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
 
 <div class="row">
@@ -30,6 +41,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'title' => 'Beneficiario Anterior',
             'context' => 'info',
             'headerIcon' => 'user',
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'content' => $this->renderPartial('_beneficiarioAnterior', array('form' => $form, 'model' => $model), TRUE),
                 )
         );
@@ -44,6 +56,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'title' => 'Beneficiario Actual',
             'context' => 'info',
             'headerIcon' => 'user',
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'content' => $this->renderPartial('_beneficiarioActual', array('form' => $form, 'model' => $model), TRUE),
                 )
         );
@@ -58,6 +71,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'title' => 'Re-Asignación ',
             'context' => 'info',
             'headerIcon' => 'user',
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
                 )
         );

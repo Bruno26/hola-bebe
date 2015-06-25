@@ -25,9 +25,9 @@
     <body>
         <section id="container">
             <header class="header fixed-top clearfix">
-                <div class="brand">
-                    <a href="<?php echo $this->createUrl('/site/index'); ?>" class="logo">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/banavih_ndice1.png" alt="" width="168px" height="48px">
+                <div class="brand" style="height: 60%;">
+                    <a href="<?php echo $this->createUrl('/site/indexAdmin'); ?>" class="logo">
+                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/banavih_ndice1.png" alt="" width="180px"  style="margin-top: -6%;margin-bottom: 4%;margin-left: -8%;">
                     </a>
                     <div class="sidebar-toggle-box">
                         <div class="fa fa-bars glyphicon glyphicon-list"></div>
@@ -68,7 +68,7 @@
             </header>
             <aside>
                 <div id="sidebar" class="nav-collapse">
-                    <div class="leftside-navigation">
+                    <div class="leftside-navigation" style ="margin-top: 19%;">
                         <ul class="sidebar-menu" id="nav-accordion">
                             <li>
                                 <a href="<?php echo $this->createUrl('/site/indexAdmin'); ?>">
@@ -108,25 +108,24 @@
                                             <li><a href="<?php echo $this->createUrl('/abogados/admin'); ?>">Gestión de Agente de Documentación</a></li>
                                         </ul>
                                     </li>
-                                    <li class="sub-menu">
+<!--                                    <li class="sub-menu">
                                         <a href="javascript:;">
                                             <i class="glyphicon glyphicon-briefcase"></i>
                                             <span>Registro Público</span>
                                         </a>
                                         <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/registroPublico/create'); ?>">Cargar Nuevo Registro Público</a></li>
-
+                                            <li><a href="<?php // echo $this->createUrl('/registroPublico/create'); ?>">Cargar Nuevo Registro Público</a></li>
                                         </ul>
-                                    </li>
-                                    <li class="sub-menu">
+                                    </li>-->
+<!--                                    <li class="sub-menu">
                                         <a href="javascript:;">
                                             <i class="glyphicon glyphicon-list-alt"></i>
                                             <span>Registro de Documentos</span>
                                         </a>
                                         <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/registroDocumento/create'); ?>">Cargar Nuevo Registro de Documento</a></li>
+                                            <li><a href="<?php // echo $this->createUrl('/registroDocumento/create'); ?>">Cargar Nuevo Registro de Documento</a></li>
                                         </ul>
-                                    </li>
+                                    </li>-->
                                     <li class="sub-menu">
                                         <a href="javascript:;">
                                             <i class="glyphicon glyphicon-briefcase"></i>

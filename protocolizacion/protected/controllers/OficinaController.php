@@ -69,15 +69,30 @@ class OficinaController extends Controller {
 
             $consulta = Yii::app()->db->createCommand($sql)->queryAll();
             if (empty($consulta)) {
+                if ($_POST['Oficina']['persona_id_jefe'] == '') {
+                    $idPersona = ConsultaOracle::insertPersona(array(
+                                'CEDULA' => $_POST['Oficina']['cedula'],
+                                'NACIONALIDAD' => ($_POST['Oficina']['nacionalidad'] == 97) ? 1 : 0,
+                                'PRIMER_NOMBRE' => trim(strtoupper($_POST['Oficina']['primer_nombre'])),
+                                'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['Oficina']['segundo_nombre'])),
+                                'PRIMER_APELLIDO' => trim(strtoupper($_POST['Oficina']['primer_apellido'])),
+                                'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['Oficina']['segundo_apellido'])),
+                                'FECHA_NACIMIENTO' => $_POST['Oficina']['fechaNac'],
+                                    )
+                    );
+                } else {
+                    $idPersona = $_POST['Oficina']['persona_id_jefe'];
+                }
+
                 $model->attributes = $_POST['Oficina'];
+                $model->observaciones = trim(strtoupper($_POST['Oficina']['observaciones']));
                 $model->nombre = $nombre;
-                $model->persona_id_jefe = $_POST['Oficina']['persona_id_jefe'];
+                $model->persona_id_jefe = $idPersona;
                 $model->estatus = 44;
                 $model->usuario_id_creacion = Yii::app()->user->id;
                 $model->fecha_creacion = 'now()';
                 $model->fecha_actualizacion = 'now()';
 
-//            $model->fk
                 if ($model->save())
                     $this->redirect(array('view', 'id' => $model->id_oficina));
             }else {
@@ -141,7 +156,8 @@ class OficinaController extends Controller {
 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        } else
+        }
+        else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
@@ -200,6 +216,16 @@ class OficinaController extends Controller {
             'estado' => $estado,
             'municipio' => $municipio,
         ));
+    }
+
+    /**
+     * @param integer the ID of the model to be loaded
+     */
+    public function FindByIdPersona($id) {
+        $model = Oficina::model()->findByAttributes(array('persona_id_jefe' => $id));
+        if ($model === null)
+            return FALSE;
+        return $model;
     }
 
 }

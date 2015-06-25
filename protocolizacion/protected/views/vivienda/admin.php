@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1 class="text-center">Gestión de Unidades Familiares</h1>
+<h1 class="text-center">Gestión de Unidades UniFamiliares</h1>
 
 
 <?php // echo CHtml::link('Advanced Search', '#', array('class' => 'search-button btn')); ?>
@@ -58,16 +58,17 @@ $this->widget('booster.widgets.TbGridView', array(
 
         'unidad_habitacional_id' => array(
             'name' => 'unidad_habitacional_id',
-            'header' => 'Unidad Habitacional',
+            'header' => 'Unidad Multifamiliar',
             'value' => '$data->unidadHabitacional->nombre',
             'filter' => CHtml::listData(UnidadHabitacional::model()->findall(), 'id_unidad_habitacional', 'nombre'),
         ),
 
         'tipo_vivienda_id' => array(
             'name' => 'tipo_vivienda_id',
+            'header' => 'Tipo de Vivienda',
             'value' => '$data->tipoVivienda->descripcion',
             'filter' => Maestro::FindMaestrosByPadreSelect(92),
-            'htmlOptions' => array('style' => 'text-align: center', 'width' => '10px'),
+
         ),
         'Estado' => array(
             'header' => 'Estado',
@@ -91,12 +92,7 @@ $this->widget('booster.widgets.TbGridView', array(
 //            'filter' => Maestro::FindMaestrosByPadreSelect(71),
         ),
    
-        array(
-            'name' => 'fecha_creacion',
-            'value' => 'Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($data->fecha_creacion))',
-        //'header' => 'Creación',
-        ),
-     
+
          array(
              'class' => 'booster.widgets.TbButtonColumn',
              'header' => 'Acciones',

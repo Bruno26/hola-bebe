@@ -16,6 +16,17 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 
 <?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
 
+<?php 
+        $this->widget(
+                'booster.widgets.TbLabel', array(
+            'context' => 'warning',
+            'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
+            // 'success', 'warning', 'important', 'info' or 'inverse'
+            'label' => 'Los campos marcados con * son requeridos',
+                )
+        ); ?>
+        <br><br>
+
 <div class="row">
     <div class="col-md-12">
     <?php 
@@ -24,7 +35,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         'title' => 'Registro Público',
         'context' => 'info',
         'headerIcon' => 'user',
-        //'headerHtmlOptions' => array('style' => 'background-color: #B2D4F1 !important;color: #000000 !important;'),
+        'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
         'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
         #'content' => $this->renderPartial('_form', array('model'=>$model),TRUE),
             )

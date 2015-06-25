@@ -32,6 +32,7 @@ class AsignacionCenso extends CActiveRecord {
     public $segundo_nombre;
     public $primer_apellido;
     public $segundo_apellido;
+    public $fecha_nac;
 
     /**
      * @return string the associated database table name
@@ -91,10 +92,11 @@ class AsignacionCenso extends CActiveRecord {
             'usuario_id_actualizacion' => 'Usuario Id Actualizacion',
             'nacionalidad' => 'Nacionalidad',
             'cedula' => 'Cedula',
-            'primer_nombre' => 'Nombre',
+            'primer_nombre' => 'Primer Nombre',
             'segundo_nombre' => 'Segundo Nombre',
-            'primer_apellido' => 'Apellido',
+            'primer_apellido' => 'Primer Apellido',
             'segundo_apellido' => 'Segundo Apellido',
+            'fecha_nac' => 'Fecha Nacimiento',
         );
     }
 

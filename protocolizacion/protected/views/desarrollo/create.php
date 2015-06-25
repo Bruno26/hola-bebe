@@ -81,6 +81,17 @@ if (isset($sms) && !empty($sms)) {
 
 <h1 class="text-center">Cargar Nuevo Desarrollo</h1>
 
+<?php 
+        $this->widget(
+                'booster.widgets.TbLabel', array(
+            'context' => 'warning',
+            'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
+            // 'success', 'warning', 'important', 'info' or 'inverse'
+            'label' => 'Los campos marcados con * son requeridos',
+                )
+        ); ?>
+        <br><br>
+
 <div class="row">
     <div class="col-md-12">
         <?php
@@ -88,7 +99,7 @@ if (isset($sms) && !empty($sms)) {
                 'booster.widgets.TbPanel', array(
             'title' => 'Desarrollo Habitacional',
             'context' => 'info',
-            // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'headerIcon' => 'globe',
              'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'enteEjecutor' => $enteEjecutor, 'fuenteFinacimiento' => $fuenteFinacimiento), TRUE),
                 )
