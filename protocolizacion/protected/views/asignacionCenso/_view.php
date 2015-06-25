@@ -1,21 +1,24 @@
 <?php
-	function nombre($selec,$iD){
-	    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
-	    return $saime['PRIMER_NOMBRE'];
-	}
-	function apellido($selec,$iD){
-	    $saime = ConsultaOracle::getPersonaByPk($selec,(int)$iD);
-	    return $saime['PRIMER_APELLIDO'];
-	}
-        function nacionalidadCedula($selec,$select2,$iD){
-	    $saime = ConsultaOracle::getNacionalidadCedulaPersonaByPk($selec,$select2,(int)$iD);
-	    return $saime['NACIONALIDAD']." - ".$saime['CEDULA'];
-	}
-        $fecha_asignacion = substr($model->fecha_asignacion,0,10);
-        $invert = explode("-",$fecha_asignacion); 
 
-        $fecha_invert = $invert[2]."-".$invert[1]."-".$invert[0]; 
+function nombre($selec, $iD) {
+    $saime = ConsultaOracle::getPersonaByPk($selec, (int) $iD);
+    return $saime['PRIMER_NOMBRE'];
+}
 
+function apellido($selec, $iD) {
+    $saime = ConsultaOracle::getPersonaByPk($selec, (int) $iD);
+    return $saime['PRIMER_APELLIDO'];
+}
+
+function nacionalidadCedula($selec, $select2, $iD) {
+    $saime = ConsultaOracle::getNacionalidadCedulaPersonaByPk($selec, $select2, (int) $iD);
+    return $saime['NACIONALIDAD'] . " - " . $saime['CEDULA'];
+}
+
+$fecha_asignacion = substr($model->fecha_asignacion, 0, 10);
+$invert = explode("-", $fecha_asignacion);
+
+$fecha_invert = $invert[2] . "-" . $invert[1] . "-" . $invert[0];
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -23,24 +26,27 @@
         <div class='col-md-6'> 
             <blockquote>
                 <p>
-                   <b>Estado:</b> <?php echo $model->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion?><br/>
+                    <b>Estado:</b> <?php echo $model->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion ?><br/>
                 </p>
                 <p>
-                   <b>Municipio:</b> <?php echo $model->desarrollo->fkParroquia->clvmunicipio0->strdescripcion ?><br/>
+                    <b>Municipio:</b> <?php echo $model->desarrollo->fkParroquia->clvmunicipio0->strdescripcion ?><br/>
                 </p>
                 <p>
-                   <b>Parroquia:</b> <?php echo $model->desarrollo->fkParroquia->strdescripcion ?><br/>
+                    <b>Parroquia:</b> <?php echo $model->desarrollo->fkParroquia->strdescripcion ?><br/>
                 </p>
                 <p>
-                   <b>Nombre del Desarrollo Habitacional:</b> <?php echo $model->desarrollo->nombre ?><br/>
+                    <b>Nombre del Desarrollo Habitacional:</b> <?php echo $model->desarrollo->nombre ?><br/>
                 </p>
                 <p>
-                   <b>Nombre de la Oficina:</b> <?php echo $model->oficina->nombre ?><br/>
+                    <b>Nombre de la Oficina:</b> <?php echo $model->oficina->nombre ?><br/>
                 </p>
                 <p>
-                   <b>Censado:</b> <?php echo ($model->censado)?"SI":"NO" ?><br/>
+                    <b>Censado:</b> <?php echo ($model->censado) ? "SI" : "NO" ?><br/>
                 </p>
             </blockquote>
+        </div>
+        <div class='col-md-6'>
+            <div class='text-right' style='margin-right: 1em;'><img src="<?php echo Yii::app()->baseUrl; ?>/images/LOGO_BANAVIH-1.jpg" style="width: 25%;"/></div>
         </div>
     </div>
 </div>
@@ -51,14 +57,14 @@
             <blockquote>
                 <p>
                     <b>Nombre:</b> <?php echo nombre('PRIMER_NOMBRE', $model->persona_id) ?><br/>
-                    <b>Apellido:</b> <?php echo apellido('PRIMER_APELLIDO', $model->persona_id)  ?><br/>
-                    <b>Cedula de Identidad:</b> <?php echo nacionalidadCedula('NACIONALIDAD','CEDULA', $model->persona_id)  ?>
+                    <b>Apellido:</b> <?php echo apellido('PRIMER_APELLIDO', $model->persona_id) ?><br/>
+                    <b>Cedula de Identidad:</b> <?php echo nacionalidadCedula('NACIONALIDAD', 'CEDULA', $model->persona_id) ?>
                 </p>
             </blockquote>
         </div>
         <div class='col-md-6'> 
             <blockquote>
-                   <b>Fecha de Asignación:</b> <?php echo Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($model->fecha_asignacion)) ?><br/>
+                <b>Fecha de Asignación:</b> <?php echo Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($model->fecha_asignacion)) ?><br/>
                 </p>
             </blockquote>
         </div>
