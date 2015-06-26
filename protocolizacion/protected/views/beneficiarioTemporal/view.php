@@ -15,7 +15,7 @@ array('label'=>'Manage BeneficiarioTemporal','url'=>array('admin')),
 
 <h1>Detalle de Adjudicado Temporal #<?php echo $model->id_beneficiario_temporal; ?></h1>
 
-<?php $this->widget('booster.widgets.TbDetailView',array(
+<?php /*$this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
 		'id_beneficiario_temporal',
@@ -33,4 +33,23 @@ array('label'=>'Manage BeneficiarioTemporal','url'=>array('admin')),
 		'usuario_id_actualizacion',
 		'estatus',
 ),
-)); ?>
+)); */?>
+<?php $this->widget('booster.widgets.TbPanel', array(
+    'context' => 'primary',
+    'content' => $this->renderPartial('_view', array('model' => $model, 'desarrollo' => $desarrollo), TRUE),
+        )
+);
+?>
+<div class="row text-right" style="margin-right: 1em">
+    <?php
+    $this->widget('booster.widgets.TbButton', array(
+        'buttonType' => 'button',
+        'context' => 'danger',
+        'size' => 'large',
+        'label' => 'Regresar',
+        'htmlOptions' => array(
+            'onclick' => 'document.location.href ="' . $this->createUrl('/beneficiarioTemporal/admin') . '"',
+        )
+    ));
+    ?>
+    </div>

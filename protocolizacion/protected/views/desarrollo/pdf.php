@@ -8,7 +8,7 @@ $cabecera = '<img src="' . Yii::app()->request->baseUrl . '/images/cintillo.jpg"
 
 
 
-$html.="<table align='right' width='100%' border='0'>       
+$html="<table align='right' width='100%' border='0'>       
                         <tr>
                                     <td colspan='4' align='center'><b><font size='6' color='#B40404'>Desarrollo Habitacional: </br></br></font><font size='6'> ".$model->nombre ."/". date('d-m-Y') ." </font>
                         <br/>
@@ -21,6 +21,7 @@ $html.="<table align='right' width='100%' border='0'>
                                     <tr><td colspan='2'></td></tr><tr><td colspan='2'></td></tr>
             <tr>
             </tr>
+
 			<tr>
 				<b><td colspan='4' align='center'> Desarrollo Habitacional</td></b>
 			</tr>
@@ -37,8 +38,10 @@ $html.="<table align='right' width='100%' border='0'>
                                 
 				</tr>
 			<tr>
-				<td colspan='4'> Ubicación del Desarrollo</td>
+				<b><td colspan='4' align='center'> Ubicación del Desarrollo</td></b>
 			</tr>
+                        <br>
+                        <br>
 			<tr>
 				<td>
 					<span class='subtitulo'>Estado:</span> ".$model->fkParroquia->clvmunicipio0->clvestado0->strdescripcion."
@@ -55,10 +58,13 @@ $html.="<table align='right' width='100%' border='0'>
 					<span class='subtitulo'>Zona:</span> $model->zona
 				</td>
 			</tr>
+                        <br>
+                        <br>
 			<tr>
-				<td colspan='2'> Linderos</td>
-				<td colspan='2'> Coordenadas</td>
+				<b><td colspan='4' align='center'> Linderos</td></b>
 			</tr>
+                        <br>
+                        <br>
 			<tr>
 				<td>
 					<span class='subtitulo'>Lindero Norte:</span> $model->lindero_norte
@@ -76,8 +82,10 @@ $html.="<table align='right' width='100%' border='0'>
                                 </td>
 			</tr>
 			<tr>
-				<td colspan='4'> Programa</td>
+				<b><td colspan='4' align='center'> Programa</td></b>
 			</tr>
+                        <br>
+                        <br>
 			<tr>
 				<td>
 					<span class='subtitulo'>Programa:</span> ".$model->programa->nombre_programa."
@@ -95,11 +103,11 @@ $html.="<table align='right' width='100%' border='0'>
 ";
 
 $mpdf = new mPDF('c', 'LETTER');
-$mpdf->SetTitle(' Desarrollo Habitacional N° '.$model->id_desarrollo.' - '.$model->nombre.' '.date('h:i:A') .'');
 $mpdf->SetMargins(5, 50, 30);
 $mpdf->SetAuthor('BANAVIH - Banco Nacional de Vivienda y Habitat');
 $mpdf->SetCreator('BANAVIH - Banco Nacional de Vivienda y Habitat');
 $mpdf->SetHTMLHeader($cabecera);
+$mpdf->SetTitle(' Desarrollo Habitacional N° '.$model->id_desarrollo.' - '.$model->nombre.' '.date('h:i:A') .'');
 $mpdf->WriteHTML($html);
 $mpdf->Output('Desarrollo-Habitacional-'.$model->id_desarrollo. ' .pdf','D');
 exit;
