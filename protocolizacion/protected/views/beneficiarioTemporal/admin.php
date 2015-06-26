@@ -48,7 +48,7 @@ return false;
 				'header' => 'Nombre',
 				'name' => 'nombre_completo',
 				'value' => '$data->nombre_completo',
-				'htmlOptions' => array('width' => '80', 'style' => 'text-align: center;'),
+				'htmlOptions' => array('width' => '300', 'style' => 'text-align: center;'),
 
 		),
 

@@ -144,14 +144,77 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
     <div class="row-fluid">
            <div class='col-md-4'>
                 <?php
-                 echo $form->textFieldGroup($model,'telf_habitacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
+                // echo $form->textFieldGroup($model,'telf_habitacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
                 ?>
+
+                  <?php
+        echo $form->labelEx($model, 'telf_habitacion'); 
+        //Inicio Campo de Número de Telefono
+        ?><br>
+        <?php
+      
+        $this->widget(
+                'booster.widgets.TbSelect2', array(
+            'asDropDownList' => false,
+            'name' => CHtml::activeId($model, 'telf_habitacion'),
+            'attribute' => 'telf_habitacion',
+            'htmlOptions' => array(
+                'onchange' => 'telfCheck(this.id);',
+            ),
+            'options' => array(
+                'tags' => array(),
+                'class' => 'Limpiar',
+                'placeholder' => 'Número teléfonico!',
+                'width' => '80%',
+                'tokenSeparators' => array(',', ' '),
+                'multiple' => true,
+                'maximumInputLength' => 11,
+                //'minimumInputLength' => 11,
+                'maximumSelectionSize' => 1,
+                'allowClear' => true,
+                'items' => 1,
+            )
+                )
+        );
+        ?>
+            <?php echo $form->error($model,'telf_habitacion'); ?>
            </div>
     
            <div class='col-md-4'>
                 <?php
-                 echo $form->textFieldGroup($model,'telf_celular',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
+                 // echo $form->textFieldGroup($model,'telf_celular',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>200))));
                  ?>
+                                   <?php
+        echo $form->labelEx($model, 'telf_celular'); 
+        //Inicio Campo de Número de Telefono
+        ?><br>
+        <?php
+      
+        $this->widget(
+                'booster.widgets.TbSelect2', array(
+            'asDropDownList' => false,
+            'name' => CHtml::activeId($model, 'telf_celular'),
+            'attribute' => 'telf_celular',
+            'htmlOptions' => array(
+                'onchange' => 'telfCheck(this.id);',
+            ),
+            'options' => array(
+                'tags' => array(),
+                'class' => 'Limpiar',
+                'placeholder' => 'Número teléfonico!',
+                'width' => '60%',
+                'tokenSeparators' => array(',', ' '),
+                'multiple' => true,
+                'maximumInputLength' => 11,
+                //'minimumInputLength' => 11,
+                'maximumSelectionSize' => 1,
+                'allowClear' => true,
+                'items' => 1,
+            )
+                )
+        );
+        ?>
+            <?php echo $form->error($model,'telf_celular'); ?>
            </div>
 
             <div class='col-md-4'>

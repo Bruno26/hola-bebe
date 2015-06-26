@@ -60,7 +60,7 @@ class Vivienda extends CActiveRecord {
         return array(
             array('tipo_vivienda_id, unidad_habitacional_id,  nro_piso, nro_vivienda, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, asignada', 'required'),
             array('tipo_vivienda_id, unidad_habitacional_id, nro_estacionamientos, nro_habitaciones, nro_banos, fuente_datos_entrada_id, estatus_vivienda_id, usuario_id_creacion, usuario_id_actualizacion', 'numerical', 'integerOnly' => true),
-            array('construccion_mt2', 'length', 'max' => 4),
+            array('construccion_mt2', 'length', 'max' => 10),
             array('nro_piso', 'length', 'max' => 4),
             array('nro_vivienda', 'length', 'max' => 4),
             array('nro_estacionamientos', 'length', 'max' => 4),

@@ -53,12 +53,20 @@ class BeneficiarioTemporalController extends Controller {
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
-      //   var_dump($_POST); // die();
+        // var_dump($_POST); // die();
         if (isset($_POST['BeneficiarioTemporal'])) {
    
        //  var_dump($_POST["BeneficiarioTemporal"]["persona_id"]); die();
             /*  - - - -- Persona - - -- - - - */
             if ($_POST["BeneficiarioTemporal"]["persona_id"] == '') {
+
+                              
+                $codigo_hab = substr($_POST["BeneficiarioTemporal_telf_habitacion"],0,4);
+                $telf_habitacion = substr($_POST["BeneficiarioTemporal_telf_habitacion"], 5,11);
+
+                $codigo_movil = substr($_POST["BeneficiarioTemporal_telf_celular"],0,4);
+                $telf_movil = substr($_POST["BeneficiarioTemporal_telf_celular"], 5,11);
+
 
                 $idPersona = ConsultaOracle::insertPersona(array(
                             'CEDULA'           => $_POST["BeneficiarioTemporal"]["cedula"],
@@ -69,29 +77,40 @@ class BeneficiarioTemporalController extends Controller {
                             'SEGUNDO_APELLIDO' => trim(strtoupper($_POST["BeneficiarioTemporal"]['segundo_apellido'])),
                             'FECHA_NACIMIENTO' => $_POST["BeneficiarioTemporal"]['fecha_nacimiento'],
                             'GEN_SEXO_ID'      => $_POST["BeneficiarioTemporal"]['sexo'],
-                            'GEN_EDO_CIVIL_ID' => $_POST["BeneficiarioTemporal"]['estado_civil'],
-                            'TELEFONO_HAB'     => $_POST["BeneficiarioTemporal"]['telf_habitacion'],
-                            'TELEFONO_MOVIL'   => $_POST["BeneficiarioTemporal"]['telf_celular'],
+                            // 'GEN_EDO_CIVIL_ID' => $_POST["BeneficiarioTemporal"]['estado_civil'],
+                            'CODIGO_HAB'       => (string) $codigo_hab,
+                            'TELEFONO_HAB'     => (string) $telf_habitacion,
+                            'CODIGO_MOVIL'     => (string) $codigo_movil,
+                            'TELEFONO_MOVIL'   => (string) $telf_movil,
                             'CORREO_PRINCIPAL' => $_POST["BeneficiarioTemporal"]['correo_electronico'],
                                 )
                 );
             } else {
 
                 $idPersona = $_POST["BeneficiarioTemporal"]["persona_id"];
+               
+                $codigo_hab = substr($_POST["BeneficiarioTemporal_telf_habitacion"],0,4);
+                $telf_habitacion = substr($_POST["BeneficiarioTemporal_telf_habitacion"], 4,11);
+
+                $codigo_movil = substr($_POST["BeneficiarioTemporal_telf_celular"],0,4);
+                $telf_movil = substr($_POST["BeneficiarioTemporal_telf_celular"], 4,11);
+
 
                 /*   ----------  UPDATE    -------------------  */
                          $idPersona = ConsultaOracle::updatePersona(array(
-                            'CEDULA'           => $_POST["BeneficiarioTemporal"]["cedula"],
-                            'NACIONALIDAD'     => ($_POST["BeneficiarioTemporal"]['nacionalidad'] == 97) ? 1 : 0,
+                          //  'CEDULA'           => $_POST["BeneficiarioTemporal"]["cedula"],
+                           // 'NACIONALIDAD'     => ($_POST["BeneficiarioTemporal"]['nacionalidad'] == 97) ? 1 : 0,
                             'PRIMER_NOMBRE'    => trim(strtoupper($_POST["BeneficiarioTemporal"]['primer_nombre'])),
                             'SEGUNDO_NOMBRE'   => trim(strtoupper($_POST["BeneficiarioTemporal"]['segundo_nombre'])),
                             'PRIMER_APELLIDO'  => trim(strtoupper($_POST["BeneficiarioTemporal"]['primer_apellido'])),
                             'SEGUNDO_APELLIDO' => trim(strtoupper($_POST["BeneficiarioTemporal"]['segundo_apellido'])),
                             'FECHA_NACIMIENTO' => $_POST["BeneficiarioTemporal"]['fecha_nacimiento'],
                             'GEN_SEXO_ID'      => $_POST["BeneficiarioTemporal"]['sexo'],
-                            'GEN_EDO_CIVIL_ID' => $_POST["BeneficiarioTemporal"]['estado_civil'],
-                            'TELEFONO_HAB'     => $_POST["BeneficiarioTemporal"]['telf_habitacion'],
-                            'TELEFONO_MOVIL'   => $_POST["BeneficiarioTemporal"]['telf_celular'],
+                          //  'GEN_EDO_CIVIL_ID' => $_POST["BeneficiarioTemporal"]['estado_civil'],
+                            'CODIGO_HAB'       => (string) $codigo_hab,
+                            'TELEFONO_HAB'     => (string) $telf_habitacion,
+                            'CODIGO_MOVIL'     => (string) $codigo_movil,
+                            'TELEFONO_MOVIL'   => (string) $telf_movil,
                             'CORREO_PRINCIPAL' => $_POST["BeneficiarioTemporal"]['correo_electronico'],
                                 ),$idPersona
                         );
@@ -106,14 +125,15 @@ class BeneficiarioTemporalController extends Controller {
             /*  - - - --  Vivienda  Update  - - -- - - - */
             $vivienda = ViviendaController::loadModel($_POST["BeneficiarioTemporal"]["vivienda_nro"]);
             $vivienda->asignada = 1;
-
+             
+            // var_dump($vivienda); die(); 
             if ($vivienda->save()) {
                 echo "Ingreso vivienda !!";
-            } else {
+            }else {
                 var_dump($vivienda->Errors);
             }
 
-
+//die();
             /*   - - - - - - - -- - - - - - - - - */
 
 

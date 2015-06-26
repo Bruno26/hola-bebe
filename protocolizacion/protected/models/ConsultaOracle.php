@@ -246,7 +246,36 @@ class ConsultaOracle extends CActiveRecord {
 
                 foreach ($array as $key => $value) {
 
-                    if ($key == 'FECHA_NACIMIENTO') {
+                   /*  --------------------------- */
+
+                         switch ($key) {
+                                            case 'FECHA_NACIMIENTO':
+                                                                     if($cont != 1) $campos .= ',';
+                                                                     $campos .= $key." = to_date('$value','DD/MM/RR') ";  
+                                                                    break;
+                                            case 'CODIGO_HAB':                                                   
+                                            case 'TELEFONO_HAB':                                                     
+                                            case 'CODIGO_MOVIL':                                                    
+                                            case 'TELEFONO_MOVIL':
+                                                                 if($cont != 1) $campos .= ',';
+                                                                  $campos .= $key."='".$value."' ";
+                                                                 break;
+
+                                            default:
+                                                        if($cont != 1) $campos .= ',';
+                                                        if (is_numeric($value)) { 
+
+                                                            $campos .= $key."=".$value;                           
+                                                        } else {
+                                                            $campos .= $key."='".$value."' ";
+                                                        }
+                         } 
+                         $cont++; 
+                }
+
+                   /*  ------------------------------ */
+
+                    /*if ($key == 'FECHA_NACIMIENTO') {
                         if($cont != 1) $campos .= ',';
                         $campos .= $key." = to_date('$value','DD/MM/RR') ";                        
                     } else {
@@ -260,24 +289,20 @@ class ConsultaOracle extends CActiveRecord {
                     }
 
                     $cont++; 
-                }
+                }*/
                 
                  // var_dump($campos); die();
 
-                $SQL = "UPDATE TABLAS_COMUNES.PERSONA SET " . $campos . " WHERE ID = " . $id_persona . "";
+                $SQL = "UPDATE TABLAS_COMUNES.PERSONA SET " . $campos . " WHERE ID = " . $id_persona ;
 
 
-                // var_dump($SQL); die();
+                 // var_dump($SQL); die();
                 $result = Yii::app()->dbOarcle->createCommand($SQL)->query();
+            
 
-                $SQL1 = "SELECT ID FROM TABLAS_COMUNES.PERSONA WHERE NACIONALIDAD = " . (int) $array['NACIONALIDAD'] . " AND CEDULA = " . (int) $array['CEDULA'];
-                $ExistePersona = Yii::app()->dbOarcle->createCommand($SQL1)->queryRow();
+                    return  $id_persona;
+               
 
-                if (empty($ExistePersona)) {
-                    return false;
-                } else {
-                    return $ExistePersona['ID'];
-                }
         }
 
     }    

@@ -278,7 +278,7 @@ class ValidacionJsController extends Controller {
         if (!empty($id)) {
 
             $sql = "select des.nombre,des.zona As sector, des.urban_barrio , des.av_call_esq_carr As Av_calle , und_hab.nombre AS nomb_edif
-from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo = und_hab.desarrollo_id ";
+from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo = und_hab.desarrollo_id  where  des.id_desarrollo = ".$id;
 
             $data = Yii::app()->db->createCommand($sql)->queryRow();
 
