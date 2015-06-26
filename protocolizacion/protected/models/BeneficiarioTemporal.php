@@ -50,6 +50,7 @@ class BeneficiarioTemporal extends CActiveRecord {
     public $area_vivienda;
     public $tipo_vivienda;
     public $observacion;
+    public $sexo;
 
     /*   ---------------------------------------------------------------- */
 

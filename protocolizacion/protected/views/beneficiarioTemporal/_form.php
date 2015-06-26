@@ -23,7 +23,7 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
             $('#BeneficiarioTemporal_segundo_nombre').attr('readonly', true);
             $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', true);
             $('#BeneficiarioTemporal_sexo').attr('readonly', true);
-            $('#BeneficiarioTemporal_sexo').attr('disabled', true);
+           /* $('#BeneficiarioTemporal_sexo').attr('disabled', true); */
             $('#BeneficiarioTemporal_estado_civil').attr('readonly', true);
             $('#BeneficiarioTemporal_estado_civil').attr('disabled', true);
             $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', true);
@@ -114,23 +114,15 @@ Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
             ?>
            </div>
            <div class='col-md-4'>
-                 <?php echo CHtml::activeLabel($model, 'sexo'); ?><br>
-	            <?php
-			            $this->widget('booster.widgets.TbSwitch', array(
-			                'name' => 'sexo',
-			                'options' => array(
-			                    'size' => 'large',
-			                    'onText' => 'Masculino',
-			                    'offText' => 'Femenino',
-			                ),
-			                'htmlOptions' => array(
-			                      'class' => 'span4',
-                          //  'disabled'=>true,
-			                // 'onChange' => '',
-			                )
-			                    )
-			            );
-	            ?> 
+                 <?php
+                    echo $form->dropDownListGroup($model, 'sexo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
+                        'widgetOptions' => array(
+                            'data' => array('1' => 'FEMENINO','2' => 'MASCULINO'),
+                            'htmlOptions' => array('empty' => 'SELECCIONE'),
+                        )
+                    )
+            );
+            ?>
    
            </div>
             
