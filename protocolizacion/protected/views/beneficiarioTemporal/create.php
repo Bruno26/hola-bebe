@@ -51,6 +51,8 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                 )
         ); ?>
         <br><br>
+<div class="row">
+    <div class="col-md-12">
   <?php      
     /* ------------  Datos Beneficiario  --------- */
 
@@ -89,7 +91,7 @@ echo '<br>';
 
     /*  *********************************************** */
 
-
+   
     /*  +++++++++++++  Grupo Familiar    +++++++++ */
 
 
@@ -97,6 +99,7 @@ echo '<br>';
     /*  ++++++++++++++++++++++++++++++++++++++++++ */
 
     ?>
+</div>
 </div>
 
 <br>

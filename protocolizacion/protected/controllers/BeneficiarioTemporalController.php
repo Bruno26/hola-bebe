@@ -53,16 +53,16 @@ class BeneficiarioTemporalController extends Controller {
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
-        //var_dump($_POST); // die();
+      //   var_dump($_POST); // die();
         if (isset($_POST['BeneficiarioTemporal'])) {
    
-         var_dump($_POST["BeneficiarioTemporal"]["persona_id"]); die();
+       //  var_dump($_POST["BeneficiarioTemporal"]["persona_id"]); die();
             /*  - - - -- Persona - - -- - - - */
             if ($_POST["BeneficiarioTemporal"]["persona_id"] == '') {
 
                 $idPersona = ConsultaOracle::insertPersona(array(
                             'CEDULA'           => $_POST["BeneficiarioTemporal"]["cedula"],
-                            'NACIONALIDAD'     => ($_POST["BeneficiarioTemporal"]['nacionalida'] == 97) ? 1 : 0,
+                            'NACIONALIDAD'     => ($_POST["BeneficiarioTemporal"]['nacionalidad'] == 97) ? 1 : 0,
                             'PRIMER_NOMBRE'    => trim(strtoupper($_POST["BeneficiarioTemporal"]['primer_nombre'])),
                             'SEGUNDO_NOMBRE'   => trim(strtoupper($_POST["BeneficiarioTemporal"]['segundo_nombre'])),
                             'PRIMER_APELLIDO'  => trim(strtoupper($_POST["BeneficiarioTemporal"]['primer_apellido'])),
@@ -76,10 +76,13 @@ class BeneficiarioTemporalController extends Controller {
                                 )
                 );
             } else {
+
+                $idPersona = $_POST["BeneficiarioTemporal"]["persona_id"];
+
                 /*   ----------  UPDATE    -------------------  */
                          $idPersona = ConsultaOracle::updatePersona(array(
                             'CEDULA'           => $_POST["BeneficiarioTemporal"]["cedula"],
-                            'NACIONALIDAD'     => ($_POST["BeneficiarioTemporal"]['nacionalida'] == 97) ? 1 : 0,
+                            'NACIONALIDAD'     => ($_POST["BeneficiarioTemporal"]['nacionalidad'] == 97) ? 1 : 0,
                             'PRIMER_NOMBRE'    => trim(strtoupper($_POST["BeneficiarioTemporal"]['primer_nombre'])),
                             'SEGUNDO_NOMBRE'   => trim(strtoupper($_POST["BeneficiarioTemporal"]['segundo_nombre'])),
                             'PRIMER_APELLIDO'  => trim(strtoupper($_POST["BeneficiarioTemporal"]['primer_apellido'])),
@@ -90,12 +93,12 @@ class BeneficiarioTemporalController extends Controller {
                             'TELEFONO_HAB'     => $_POST["BeneficiarioTemporal"]['telf_habitacion'],
                             'TELEFONO_MOVIL'   => $_POST["BeneficiarioTemporal"]['telf_celular'],
                             'CORREO_PRINCIPAL' => $_POST["BeneficiarioTemporal"]['correo_electronico'],
-                                )
+                                ),$idPersona
                         );
 
                 /*   -----------------------------------------  */
 
-                $idPersona = $_POST["BeneficiarioTemporal"]["persona_id"];
+                
             }
 
             /*   -- - -  --  - - - -- - - - - --  */

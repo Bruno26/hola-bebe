@@ -235,32 +235,38 @@ class ConsultaOracle extends CActiveRecord {
   
     /*  =========================================== */
 
-    public function updatePersona($array) {
+    public function updatePersona($array,$id_persona) {
 
         if (empty($array)) {
             return false;
         } else {
-                $select = array();
-                $valor = array();
-                $campos = '';
+                $select = array();               
+                $campos = ' ';
+                $cont = 1 ; 
 
                 foreach ($array as $key => $value) {
 
                     if ($key == 'FECHA_NACIMIENTO') {
-                        $campos .= $key." = to_date('$value','DD/MM/RR')";                        
+                        if($cont != 1) $campos .= ',';
+                        $campos .= $key." = to_date('$value','DD/MM/RR') ";                        
                     } else {
-                        
-                        if (is_numeric($value)) {                            
+                           if($cont != 1) $campos .= ',';
+                        if (is_numeric($value)) { 
+
                             $campos .= $key."=".$value;                           
                         } else {
-                            $campos .= $key."='".$value."'";
+                            $campos .= $key."='".$value."' ";
                         }
                     }
+
+                    $cont++; 
                 }
                 
-                  var_dump($campos); die();
+                 // var_dump($campos); die();
 
-                $SQL = "UPDATE TABLAS_COMUNES.PERSONA SET " . $campos . " WHERE " . $valor . ")";
+                $SQL = "UPDATE TABLAS_COMUNES.PERSONA SET " . $campos . " WHERE ID = " . $id_persona . "";
+
+                // var_dump($SQL); die();
                 $result = Yii::app()->dbOarcle->createCommand($SQL)->query();
 
                 $SQL1 = "SELECT ID FROM TABLAS_COMUNES.PERSONA WHERE NACIONALIDAD = " . (int) $array['NACIONALIDAD'] . " AND CEDULA = " . (int) $array['CEDULA'];
