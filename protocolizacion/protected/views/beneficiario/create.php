@@ -11,13 +11,23 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 
 if (isset($error) && !empty($error)) {
     $user = Yii::app()->getComponent('user');
+    switch ($error) {
+        case 1:
+            $tipo = 'warning';
+            $sms = "<strong>Disculpe.Esta persona no se encuentra Adjudicada a una vivienda.</strong> ";
+            break;
+        case 2:
+            $tipo = 'info';
+            $sms = "<strong>Esta persona ya se encuentra registrada.</strong> ";
+            break;
+    }
     $user->setFlash(
-            'warning', "<strong>Disculpe.Esta persona no se encuentra Adjudicada a una vivienda.</strong> "
+            $tipo, $sms
     );
     $this->widget('booster.widgets.TbAlert', array(
         'userComponentId' => 'user',
         'alerts' => array(// configurations per alert type
-            'warning' => array('closeText' => false),
+            $tipo => array('closeText' => false),
         ),
     ));
 }
@@ -81,7 +91,7 @@ $this->widget('booster.widgets.TbProgress', array(
                 'data' => 'Paso 1',
                 'title' => 'Paso 1'
             )
-        ), 
+        ),
     )
         )
 );
