@@ -266,6 +266,7 @@ class ConsultaOracle extends CActiveRecord {
 
                 $SQL = "UPDATE TABLAS_COMUNES.PERSONA SET " . $campos . " WHERE ID = " . $id_persona . "";
 
+
                 // var_dump($SQL); die();
                 $result = Yii::app()->dbOarcle->createCommand($SQL)->query();
 
