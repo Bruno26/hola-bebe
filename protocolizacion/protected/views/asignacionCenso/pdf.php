@@ -22,74 +22,54 @@ $pdf = Yii::createComponent('application.vendors.mpdf.mpdf');
 $cabecera = '<img src="' . Yii::app()->request->baseUrl . '/images/cintillo.jpg"/>';
 
 
-$html.=
-
-        "<div style='text-align:center; width:100%; margin-left:0%;margin-top:4%'>
-            <br>
-<h2><strong><FONT COLOR='#000080'>Reporte de Asignación de Censo <br> Desarrollo Habitacional: " . $model->desarrollo->nombre . " /" . date('d-m-Y') . "</FONT></strong></h2><br/>
-</div>
 
 
-";
-
-
-$html.="
-    <style type='text/css'>
-		table{
-			width:95%;
-		}
-		table tr th{
-			text-align: left;
-			font-size: 18px;
-			padding-bottom: 15px;
-			padding-top: 15px;
-		}
-		table tr td{
-			padding-left: 20px;
-			width: 50%;
-		}
-		.subtitulo{
-			font-weight: bold;
-			font-size: 16px;
-			font-style: italic;
-		}
-		.td2{
-			text-align: left;
-		}
-	</style>
-	<center>
-		<table>
-			<tr>
-				<th colspan='2'> Lugar a Censar</th>
-			</tr>
+$html.="<table align='right' width='100%' border='0'>       
+                            <tr>
+                                        <td colspan='3' align='center'><b><font size='6' color='#B40404'>Reporte de Asignación de Censo:</font><font size='6'> ".nombre('PRIMER_NOMBRE',$model->persona_id)." ".apellido('PRIMER_APELLIDO',$model->persona_id)." /" . date('d-m-Y') ." </font></td>
+                                <br/>
+                                <br/>
+                            </tr>
+                                        <tr><td colspan='3'></td></tr><tr><td colspan='3'></td></tr>
+                                        <tr><td colspan='3'></td></tr><tr><td colspan='3'></td></tr>
+                                        <tr><td colspan='3'></td></tr><tr><td colspan='3'></td></tr>
+                                        <tr><td colspan='3'></td></tr><tr><td colspan='3'></td></tr>
+            
+                             <tr>
+                                        <td colspan='3' align='center'><b>Lugar a Censar</b></td>
+                             </tr>
 			<tr>
 				<td>
-					<span class='subtitulo'>Estado:</span> " . $model->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion . "
+					<span class='subtitulo'><b>Estado:</b></span> " . $model->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion . "
 					<br>
-					<span class='subtitulo'>Municipio:</span> " . $model->desarrollo->fkParroquia->clvmunicipio0->strdescripcion . "
+					<span class='subtitulo'><b>Municipio:</b></span> " . $model->desarrollo->fkParroquia->clvmunicipio0->strdescripcion . "
 					<br>
-					<span class='subtitulo'>Parroquia:</span> " . $model->desarrollo->fkParroquia->strdescripcion . "
+					<span class='subtitulo'><b>Parroquia:</b></span> " . $model->desarrollo->fkParroquia->strdescripcion . "
 					<br>
-					<span class='subtitulo'>Nombre del Desarrollo Habitacional:</span> " . $model->desarrollo->nombre . "
+					<span class='subtitulo'><b>Nombre del Desarrollo Habitacional:</b></span> " . $model->desarrollo->nombre . "
 					<br>
-					<span class='subtitulo'>Nombre de la Oficina:</span> " . $model->oficina->nombre . "
+					<span class='subtitulo'><b>Nombre de la Oficina:</b></span> " . $model->oficina->nombre . "
 					<br>
-					<span class='subtitulo'>Censado:</span> " . (($model->censado) ? 'SI' : 'NO') . "
+					<span class='subtitulo'><b>Censado:</b></span> " . (($model->censado) ? 'SI' : 'NO') . "
 					<br>
-					<span class='subtitulo'>Fecha de Asignación:</span> " . Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($data->fecha_asignacion)) . "
+					<span class='subtitulo'><b>Fecha de Asignación:</b></span> " . Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($data->fecha_asignacion)) . "
 				</td>
-                                
+                                 <td colspan='2' align='right'><img src='" . Yii::app()->baseUrl . "/images/banavih_ndice1.png' style='width: 25%;'/></td>
 				</tr>
+                                <br/>
+                                <br/>
 			<tr>
-				<th colspan='2'> Persona Asignada</th>
+                                 <td colspan='3' align='center'><b>Persona Asignada</b></td>
 			</tr>
+                        <br/>
+                                <br/>
 			<tr>
 				<td>
-					<span class='subtitulo'>Nombre:</span> " . nombre('PRIMER_NOMBRE', $model->persona_id) . "
+					<span class='subtitulo'><b>Nombre:</b></span> " . nombre('PRIMER_NOMBRE', $model->persona_id) . "
 					<br>
-					<span class='subtitulo'>Apellido:</span> " . apellido('PRIMER_APELLIDO', $model->persona_id) . "
+					<span class='subtitulo'><b>Apellido:</b></span> " . apellido('PRIMER_APELLIDO', $model->persona_id) . "
 					<br>
-					<span class='subtitulo'>Cedula de Identidad:</span> " . nacionalidadCedula('NACIONALIDAD', 'CEDULA', $model->persona_id) . "
+					<span class='subtitulo'><b>Cedula de Identidad:</b></span> " . nacionalidadCedula('NACIONALIDAD', 'CEDULA', $model->persona_id) . "
 				</td>
 				
 				

@@ -275,5 +275,13 @@ class BeneficiarioTemporalController extends Controller {
             Yii::app()->end();
         }
     }
+    
+       public function actionPdf($id) {
+           $desarrollo = new Desarrollo;
+        $this->render('pdf', array(
+            'model' => $this->loadModel($id),
+            'desarrollo' => $desarrollo,
+        ));
+    }
 
 }
