@@ -62,10 +62,10 @@ class BeneficiarioTemporalController extends Controller {
 
                               
                 $codigo_hab = substr($_POST["BeneficiarioTemporal_telf_habitacion"],0,4);
-                $telf_habitacion = substr($_POST["BeneficiarioTemporal_telf_habitacion"], 5,11);
+                $telf_habitacion = substr($_POST["BeneficiarioTemporal_telf_habitacion"], 4,11);
 
                 $codigo_movil = substr($_POST["BeneficiarioTemporal_telf_celular"],0,4);
-                $telf_movil = substr($_POST["BeneficiarioTemporal_telf_celular"], 5,11);
+                $telf_movil = substr($_POST["BeneficiarioTemporal_telf_celular"], 4,11);
 
 
                 $idPersona = ConsultaOracle::insertPersona(array(
