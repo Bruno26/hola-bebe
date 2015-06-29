@@ -80,7 +80,7 @@ $this->widget('booster.widgets.TbGridView', array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
-            'template' => '{ver} {pdf}{empadronador}',
+            'template' => '{ver} {empadronador} {pdf}',
             'buttons' => array(
                 'ver' => array(
                     'label' => 'Ver',

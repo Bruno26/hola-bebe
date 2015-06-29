@@ -34,8 +34,13 @@ class BeneficiarioTemporalController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+       
+        
+         
+        $desarrollo = new Desarrollo;
         $this->render('view', array(
             'model' => $this->loadModel($id),
+        'desarrollo' => $desarrollo,
         ));
     }
 
@@ -269,6 +274,14 @@ class BeneficiarioTemporalController extends Controller {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+    
+       public function actionPdf($id) {
+           $desarrollo = new Desarrollo;
+        $this->render('pdf', array(
+            'model' => $this->loadModel($id),
+            'desarrollo' => $desarrollo,
+        ));
     }
 
 }
