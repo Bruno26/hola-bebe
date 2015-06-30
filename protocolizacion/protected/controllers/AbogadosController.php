@@ -88,12 +88,14 @@ class AbogadosController extends Controller {
         $parroquia = new Tblparroquia;
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
-        $consulta = ConsultaOracle::setPersona('nacionalidad,cedula,primer_nombre,primer_apellido', $model->persona_id);
+        $consulta = ConsultaOracle::setPersona('nacionalidad,cedula,primer_nombre,segundo_nombre, primer_apellido, segundo_apellido', $model->persona_id);
 //        var_dump($consulta);die;
         $nacio = ($consulta['NACIONALIDAD'] == 1) ? 'V-' : 'E-';
         $model->cedula = $nacio . '' . $consulta['CEDULA'];
         $model->primer_nombre = $consulta['PRIMER_NOMBRE'];
+        $model->segundo_nombre = $consulta['SEGUNDO_NOMBRE'];
         $model->primer_apellido = $consulta['PRIMER_APELLIDO'];
+        $model->segundo_apellido = $consulta['SEGUNDO_APELLIDO'];
 
         if (isset($_POST['Abogados'])) {
             $model->attributes = $_POST['Abogados'];

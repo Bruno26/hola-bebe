@@ -4,7 +4,7 @@
 )); */ ?>
 
 
-<?php echo $form->errorSummary($model); ?>
+<?php // echo $form->errorSummary($model); ?>
 
 <div class="row">
     <div class="row-fluid">
