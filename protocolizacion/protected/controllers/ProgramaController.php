@@ -40,20 +40,29 @@ class ProgramaController extends Controller {
      */
     public function actionCreate() {
         $model = new Programa;
-
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
-
         if (isset($_POST['Programa'])) {
-            $model->attributes = $_POST['Programa'];
-            $model->estatus = 47;
-            $model->usuario_id_creacion = Yii::app()->user->id;
-            $model->fecha_creacion = 'now()';
-            $model->fecha_actualizacion = 'now()';
-            if ($model->save())
-                $this->redirect(array('create', 'id' => $model->id_programa));
+            $nombre_programa = trim(strtoupper($_POST['Programa']['nombre_programa']));
+            if (!empty($nombre_programa)) {
+                $consulta = Programa::model()->findByAttributes(array('nombre_programa' => $nombre_programa));
+                if (empty($consulta)) {
+                    $model->attributes = $_POST['Programa'];
+                    $model->nombre_programa = $nombre_programa;
+                    $model->estatus = 47;
+                    $model->usuario_id_creacion = Yii::app()->user->id;
+                    $model->fecha_creacion = 'now()';
+                    $model->fecha_actualizacion = 'now()';
+                    if ($model->save()) {
+                        $this->redirect(array('create'));
+                    }
+                } else {
+                    $this->render('create', array('model' => $model, 'error' => 1));
+                    Yii::app()->end();
+                }
+            } else {
+                $this->render('create', array('model' => $model, 'error' => 2));
+                Yii::app()->end();
+            }
         }
-
         $this->render('create', array(
             'model' => $model,
         ));
