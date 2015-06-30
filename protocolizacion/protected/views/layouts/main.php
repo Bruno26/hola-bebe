@@ -181,12 +181,15 @@
                                     </li>
                                     <li class="sub-menu">
                                         <a href="javascript:;">
+
                                             <i class="glyphicon glyphicon-home"></i>
                                             <span>Reasignación Vivienda</span>
                                         </a>
 
+                                  
                                         <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/reasignacionVivienda/create'); ?>">Reasignación de Vivienda</a></li>     
+                                            <li><a href="<?php echo $this->createUrl('/reasignacionVivienda/create'); ?>">Reasignar Vivienda</a></li>
+
                                         </ul>
                                     </li>
                                 </ul>
@@ -221,7 +224,7 @@
                 </div>
             </aside>
             <section id="main-content">
-                <section class="wrapper">
+                <section class="wrapper" style='margin-top: 8%;'>
                     <!--mini statistics start-->
                     <?php echo $content; ?>
                     <!--mini statistics end-->

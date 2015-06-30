@@ -120,15 +120,12 @@ if (isset($sms) && !empty($sms)) {
     <div class="pull-center" style="text-align: right;">
 			<?php
 			$this->widget('booster.widgets.TbButton', array(
-					'buttonType' => 'submit',
 					'icon' => 'glyphicon glyphicon glyphicon-step-backward',
 					'size' => 'large',
 					'id' => 'cancelar',
 					'context' => 'danger',
 					'label' => 'Cancelar',
-					//'url' => $this->createURL('/oficina/admin'),
-					'htmlOptions' => array(
-		'onclick' => 'document.location.href ="' . $this->createUrl('oficina/admin') . '"'),
+					'htmlOptions' => array( 'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";' )
 
 			));
 			?>

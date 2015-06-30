@@ -1,5 +1,5 @@
 
-<h1> Detalle de Jefe de Documentación y Cobranzas</h1>
+<h1> Detalle de Agente de Documentación y Cobranzas</h1>
 
 <?php
 $this->widget('booster.widgets.TbPanel', array(
