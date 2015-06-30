@@ -54,7 +54,7 @@ $html.="<table align='right' width='100%' border='0'>
 					<br>
 					<span class='subtitulo'><b>Fecha de Asignación:</b></span> " . Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($data->fecha_asignacion)) . "
 				</td>
-                                 <td colspan='2' align='right'><img src='" . Yii::app()->baseUrl . "/images/banavih_ndice1.png' style='width: 25%;'/></td>
+                                 <td colspan='2' align='right'><img src='" . Yii::app()->baseUrl . "/images/LOGO_BANAVIH-1.jpg' style='width: 25%;'/></td>
 				</tr>
                                 <br/>
                                 <br/>

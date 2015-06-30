@@ -44,7 +44,7 @@ $html.="<table align='right' width='100%' border='0'>
                             <span class='subtitulo'>Inpreabogado:</span> $model->inpreabogado<br>
                             <span class='subtitulo'>Tipo de Abogado:</span> ".$model->tipoAbogado->descripcion."
                     </td>
-                    <td colspan='2' align='right'><img src='" . Yii::app()->baseUrl . "/images/banavih_ndice1.png' style='width: 25%;'/></td>
+                    <td colspan='2' align='right'><img src='" . Yii::app()->baseUrl . "/images/LOGO_BANAVIH-1.jpg' style='width: 25%;'/></td>
             </tr>
             <br>
             <br>

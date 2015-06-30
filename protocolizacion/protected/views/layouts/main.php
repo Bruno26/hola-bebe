@@ -156,7 +156,6 @@
                                             <li><a href="<?php echo $this->createUrl('/enteEjecutor/create'); ?>">Cargar Ente Ejecutor</a></li>
                                             <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Cargar Funtes de Financiamiento</a></li>
                                             <li><a href="<?php echo $this->createUrl('/desarrollo/admin'); ?>">Gestión de Desarrollo Habitacional</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/reasignacionVivienda/create'); ?>">Reasignación de Vivienda</a></li>
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -178,6 +177,15 @@
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/vivienda/create'); ?>">Cargar Nueva Unidad Unifamiliar</a></li>
                                             <li><a href="<?php echo $this->createUrl('/vivienda/admin'); ?>">Gestión de Unidad Unifamiliar</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="glyphicon glyphicon-step-forward"></i>
+                                            <span>Reasignación de Vivienda</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a href="<?php echo $this->createUrl('/reasignacionVivienda/create'); ?>">Reasignar Vivienda</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -212,7 +220,7 @@
                 </div>
             </aside>
             <section id="main-content">
-                <section class="wrapper">
+                <section class="wrapper" style='margin-top: 8%;'>
                     <!--mini statistics start-->
                     <?php echo $content; ?>
                     <!--mini statistics end-->

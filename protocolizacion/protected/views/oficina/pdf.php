@@ -40,7 +40,7 @@ $html.="<table align='right' width='100%' border='0'>
             <tr>
 		<td><span class='subtitulo'>Nombre de la Oficina:</span> $model->nombre<br><span class='subtitulo'>Jefe Asignado:</span> ".nombre('PRIMER_NOMBRE', $model->persona_id_jefe)." ".apellido('PRIMER_APELLIDO', $model->persona_id_jefe).
                 "<br>"."<span class='subtitulo'>Observaciones:</span> $model->observaciones</td>
-                <td colspan='1' align='right'><img src='" . Yii::app()->baseUrl . "/images/banavih_ndice1.png' style='width: 25%;'/></td>
+                <td colspan='1' align='right'><img src='" . Yii::app()->baseUrl . "/images/LOGO_BANAVIH-1.jpg' style='width: 25%;'/></td>
             </tr>
             <tr>
                 <td colspan='2' align='center'>
