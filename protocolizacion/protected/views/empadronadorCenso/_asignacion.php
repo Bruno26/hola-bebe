@@ -1,8 +1,3 @@
-<?php Yii::app()->clientScript->registerScript('desarrolloVal', "
-//    $('#EmpadronadorCenso_UnidadMultifamiliar').change(function(){
-//        $('#EmpadronadorCenso_UnidadMultifamiliar').select2('val', '');
-//    });
-"); ?>
 <div class="row">
     <div class="col-md-4">
         <?php echo $form->textFieldGroup($model, 'edoDes', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
