@@ -51,12 +51,14 @@ class FuenteFinanciamientoController extends Controller {
                 $consulta = FuenteFinanciamiento::model()->findByAttributes(array('nombre_fuente_financiamiento' => $nombre_fuente));
                 if (empty($consulta)) {
                     $model->nombre_fuente_financiamiento = $nombre_fuente;
+                    $model->attributes = $_POST['FuenteFinanciamiento'];
+                    $model->fecha_creacion = 'now()';
                     $model->fecha_creacion = 'now()';
                     $model->fecha_actualizacion = 'now()';
                     $model->usuario_id_creacion = Yii::app()->user->id;
                     $model->estatus = 35;
                     if ($model->save()) {
-                        $this->redirect(array('admin'));
+                        $this->redirect(array('create'));
                     }
                 } else {
                     $this->render('create', array('model' => $model, 'error' => 1));
