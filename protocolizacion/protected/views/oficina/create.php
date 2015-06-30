@@ -48,9 +48,7 @@ if (isset($sms) && !empty($sms)) {
         ),
     ));
 }
-?>
 
-<?php 
         $this->widget(
                 'booster.widgets.TbLabel', array(
             'context' => 'warning',
