@@ -509,5 +509,4 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
 //        var_dump($BeneficiarioTemp);
 //        die;
     }
-
 }
