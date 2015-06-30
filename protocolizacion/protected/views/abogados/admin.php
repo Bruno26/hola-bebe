@@ -21,7 +21,7 @@ return false;
 ");
 ?>
 
-<h1>Gestión de Agente de Documentación</h1>
+<h1>Gestión de Agente de Documentación y Cobranzas</h1>
 
 
 

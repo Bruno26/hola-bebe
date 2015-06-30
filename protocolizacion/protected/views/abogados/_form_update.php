@@ -1,4 +1,4 @@
-<p class="help-block">Los campos con <span class="required">*</span> son obligatorios.</p>
+
 <?php
 $baseUrl = Yii::app()->baseUrl;
 $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
