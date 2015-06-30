@@ -76,7 +76,7 @@ class EmpadronadorCenso extends CActiveRecord {
         return array(
             'id_empadronador_censo' => 'Id Empadronador Censo',
             'asignacion_censo_id' => 'Asignacion Censo',
-            'empadronador_usuario_id' => 'campo vinculado con los usuarios del cruge',
+            'empadronador_usuario_id' => 'Empadronador',
             'estatus' => 'Estatus',
             'usuario_creacion' => 'Usuario Creacion',
             'fecha_creacion' => 'Fecha Creacion',
