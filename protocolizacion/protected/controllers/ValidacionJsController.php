@@ -22,7 +22,7 @@ class ValidacionJsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario', 'BuscarPisoVivienda', 'BuscarVivienda', 'BuscarTipoVivienda', 'BuscarPersonasBeneficiarioTemp', 'BuscarEncargadoOficina', 'BuscarPersonaAbogado', 'BuscarPersonaAsignacionCenso'),
+                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario', 'BuscarPisoVivienda', 'BuscarVivienda', 'BuscarTipoVivienda', 'BuscarPersonasBeneficiarioTemp', 'BuscarEncargadoOficina', 'BuscarPersonaAbogado', 'BuscarPersonaAsignacionCenso', 'BuscarBeneficiariosTemporalEmpadronador', 'AgregarAsignacionesEmpa'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -461,18 +461,17 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
      */
 
     public function actionBuscarBeneficiariosTemporalEmpadronador() {
-        $Id = (isset($_POST['BeneficiarioTemporal']['unidad_habitacional_id']) ? $_POST['BeneficiarioTemporal']['unidad_habitacional_id'] : $_GET['piso']);
+        $Id = (isset($_POST['EmpadronadorCenso']['UnidadMultifamiliar']) ? $_POST['EmpadronadorCenso']['UnidadMultifamiliar'] : $_GET['UnidadMultifamiliar']);
         $Selected = isset($_GET['piso']) ? $_GET['piso'] : '';
-
 
         if (!empty($Id)) {
             $criteria = new CDbCriteria;
-            $criteria->addCondition('t.unidad_habitacional_id = :id_unidad_habitacional');
-            $criteria->params = array(':id_unidad_habitacional' => $Id);
-            $criteria->order = 't.nro_piso ASC';
-            $criteria->select = 'nro_piso';
+            $criteria->addCondition('t.unidad_habitacional_id= :unidad_habitacional_id');
+            $criteria->params = array(':unidad_habitacional_id' => $Id);
+//            $criteria->order = 't.nro_piso ASC';
+//            $criteria->select = 'nro_piso';
 
-            $data = CHtml::listData(Vivienda::model()->findAll($criteria), 'nro_piso', 'nro_piso');
+            $data = CHtml::listData(BeneficiarioTemporal::model()->findAll($criteria), 'id_beneficiario_temporal', 'nombre_completo');
             echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
             foreach ($data as $id => $value) {
                 if ($Selected == $id) {
@@ -484,6 +483,31 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
         } else {
             echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
         }
+    }
+
+    /*
+     * 
+     */
+
+    public function actionAgregarAsignacionesEmpa() {
+
+        $unidadMulti = $_POST['UnidaMulti'];
+        if ($_POST['BeneficiarioTemp'] != '') {
+            $BeneficiarioTemp = $_POST['BeneficiarioTemp'];
+        }
+
+        if (!empty($BeneficiarioTemp)) {
+            
+            $Adjudicado = BeneficiarioTemporal::model()->findByPk($BeneficiarioTemp);
+            echo '<pre>';var_dump($Adjudicado);die;
+        }
+//        $criteria = new CDbCriteria;
+//        $criteria->addCondition('t.unidad_habitacional_id= :unidad_habitacional_id');
+//        $criteria->params = array(':unidad_habitacional_id' => $Id);
+//
+//        echo '<pre>';
+//        var_dump($BeneficiarioTemp);
+//        die;
     }
 
 }
