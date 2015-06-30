@@ -84,23 +84,27 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 </div>
 <div class="row">
     <div class="row-fluid">
-       
-        <div class='col-md-3'>
+
+        <div class='col-md-2'>
             <?php
-                echo $form->textFieldGroup($model, 'cedula', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8, 'readonly' => true))));
-                        //'onblur' => "buscarPersonaOficina($('#Oficina_nacionalidad').val(),$(this).val())"
+            echo $form->textFieldGroup($model, 'cedula', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8, 'readonly' => true))));
+            //'onblur' => "buscarPersonaOficina($('#Oficina_nacionalidad').val(),$(this).val())"
             ?>
         </div>
 
         <div class='col-md-3'>
             <?php echo $form->textFieldGroup($model, 'primer_nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
         </div>
-
+        <div class='col-md-2'>
+            <?php echo $form->textFieldGroup($model, 'segundo_nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
+        </div>
 
         <div class='col-md-3'>
             <?php echo $form->textFieldGroup($model, 'primer_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
         </div>
-
+        <div class='col-md-2'>
+            <?php echo $form->textFieldGroup($model, 'segundo_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
+        </div>
 
     </div>
 </div>

@@ -76,6 +76,22 @@ if (isset($sms) && !empty($sms)) {
         ?>
     </div>
 </div>
+        
+<div class="row">
+    <div class="col-md-12">
+        <?php
+        $this->widget(
+                'booster.widgets.TbPanel', array(
+            'title' => 'Datos del Jefe de Oficina',
+            'context' => 'info',
+            'headerIcon' => 'home',
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
+            'content' => $this->renderPartial('_form_jefe_oficina', array('form' => $form, 'model' => $model), TRUE),
+                )
+        );
+        ?>
+    </div>
+</div>
 
 <div class="well">
     <div class="pull-center" style="text-align: right;">
