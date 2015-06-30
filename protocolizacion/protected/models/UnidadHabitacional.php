@@ -149,7 +149,7 @@ class UnidadHabitacional extends CActiveRecord {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-
+        $criteria->order = 'id_unidad_habitacional DESC';
         $criteria->compare('id_unidad_habitacional', $this->id_unidad_habitacional);
         $criteria->compare('nombre', $this->nombre, true);
         $criteria->compare('desarrollo_id', $this->desarrollo_id);

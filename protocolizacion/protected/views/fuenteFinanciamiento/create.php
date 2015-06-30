@@ -1,9 +1,5 @@
-<?php
-$form = $this->beginWidget('booster.widgets.TbActiveForm', array(
-    'id' => 'fuente-financiamiento-form',
-    'enableAjaxValidation' => false,
-        ));
-?>
+
+<h1 class="text-center">Cargar Nueva Fuente de Financiamiento</h1>
 
 <?php
 if (isset($error) && !empty($error)) {
@@ -33,18 +29,31 @@ if (isset($error) && !empty($error)) {
     ));
 }
 ?>
-<h1 class="text-center">Cargar Nueva Fuente de Financiamiento</h1>
 
-<?php 
-        $this->widget(
-                'booster.widgets.TbLabel', array(
-            'context' => 'warning',
-            'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
-            // 'success', 'warning', 'important', 'info' or 'inverse'
-            'label' => 'Los campos marcados con * son requeridos',
-                )
-        ); ?>
-        <br><br>
+<?php
+$this->widget(
+        'booster.widgets.TbLabel', array(
+    'context' => 'warning',
+    'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
+    // 'success', 'warning', 'important', 'info' or 'inverse'
+    'label' => 'Los campos marcados con * son requeridos',
+        )
+);
+?>
+<br>
+<br>
+<?php
+$form = $this->beginWidget('booster.widgets.TbActiveForm', array(
+    'id' => 'fuente-financiamiento-form',
+    'enableAjaxValidation' => false,
+    'enableClientValidation' => true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true,
+        'validateOnChange' => true,
+        'validateOnType' => true,
+    ),
+        ));
+?>
 
 <div>
     <?php
@@ -84,8 +93,11 @@ $this->endWidget();
             'responsiveTable' => true,
             'id' => 'listado_servicios',
             'dataProvider' => new CActiveDataProvider('FuenteFinanciamiento', array(
+                'pagination' => array(
+                    'pageSize' => 5,
+                ),
                     )),
-            'template' => "{items}",
+//            'template' => "{items}",
             'columns' => array(
                 array(
                     'name' => 'nombre_fuente_financiamiento',

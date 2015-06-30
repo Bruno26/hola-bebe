@@ -89,17 +89,17 @@ $this->widget('booster.widgets.TbGridView', array(
             'value' => '$data->beneficiarioTemporal->desarrollo->nombre',
             'filter' => CHtml::listData(Desarrollo::model()->findall(), 'id_desarrollo', 'nombre'),
         ),
-        'Grupo Familiar' => array(
-            'header' => 'Grupo Familiar',
-            'name' => 'beneficiarioTemporal',
-           // "type" => "raw",
-
-            //'value' => 'UnidadFamiliar::model()->findByAttributes(array("beneficiario_id"=>"27"))->id_unidad_familiar',
-            'value' => 'GrupoFamiliar::model()->countByAttributes(array("unidad_familiar_id"=> UnidadFamiliar::model()->findByAttributes(array("beneficiario_id"=>27))->id_unidad_familiar))',
-            //'filter' => CHtml::listData(Desarrollo::model()->findall(), 'id_desarrollo', 'nombre'),
-            'htmlOptions' => array('style' => 'text-align: center', 'width' => '50px'),
-
-        ),
+//        'Grupo Familiar' => array(
+//            'header' => 'Grupo Familiar',
+//            'name' => 'beneficiarioTemporal',
+//           // "type" => "raw",
+////
+//            //'value' => 'UnidadFamiliar::model()->findByAttributes(array("beneficiario_id"=>"27"))->id_unidad_familiar',
+//            'value' => 'GrupoFamiliar::model()->countByAttributes(array("unidad_familiar_id"=> UnidadFamiliar::model()->findByAttributes(array("beneficiario_id"=>$data))->id_unidad_familiar))',
+////            //'filter' => CHtml::listData(Desarrollo::model()->findall(), 'id_desarrollo', 'nombre'),
+//            'htmlOptions' => array('style' => 'text-align: center', 'width' => '50px'),
+////
+//        ),
         array(
             'name' => 'fecha_ultimo_censo',
             'value' => 'Yii::app()->dateFormatter->format("d/MM/y", strtotime($data->fecha_ultimo_censo))',

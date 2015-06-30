@@ -116,7 +116,7 @@ class AsignacionCenso extends CActiveRecord {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-
+        $criteria->order = 'id_asignacion_censo DESC';
         $criteria->compare('id_asignacion_censo', $this->id_asignacion_censo);
         $criteria->compare('desarrollo_id', $this->desarrollo_id);
         $criteria->compare('oficina_id', $this->oficina_id);

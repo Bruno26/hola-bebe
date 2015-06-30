@@ -192,7 +192,7 @@ class Beneficiario extends CActiveRecord {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-
+        $criteria->order = 'id_beneficiario DESC';
         $criteria->compare('id_beneficiario', $this->id_beneficiario);
         $criteria->compare('persona_id', $this->persona_id);
         $criteria->compare('rif', $this->rif, true);

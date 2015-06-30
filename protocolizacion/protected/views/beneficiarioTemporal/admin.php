@@ -48,7 +48,7 @@ return false;
 				'header' => 'Nombre',
 				'name' => 'nombre_completo',
 				'value' => '$data->nombre_completo',
-				'htmlOptions' => array('width' => '80', 'style' => 'text-align: center;'),
+				'htmlOptions' => array('width' => '300', 'style' => 'text-align: center;'),
 
 		),
 
@@ -86,8 +86,34 @@ return false;
 		'usuario_id_actualizacion',
 		'estatus',
 		*/
-array(
-'class'=>'booster.widgets.TbButtonColumn',
-),
-),
+     array(
+            'class' => 'booster.widgets.TbButtonColumn',
+            'header' => 'Acciones',
+            'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
+            'template' => '{ver} {modificar} {pdf}',
+            'buttons' => array(
+                'ver' => array(
+                    'label' => 'Ver',
+                    'icon' => 'eye-open',
+                    'size' => 'medium',
+                    'url' => 'Yii::app()->createUrl("beneficiarioTemporal/view/", array("id"=>$data->id_beneficiario_temporal))',
+                ),
+                'modificar' => array(
+                    'label' => 'Modificar',
+                    'icon' => 'glyphicon glyphicon-pencil',
+                    'size' => 'medium',
+                    'url' => 'Yii::app()->createUrl("beneficiarioTemporal/update/", array("id"=>$data->id_beneficiario_temporal))',
+//                    'visible' => 'Asignar($data->username);'
+                ),
+                'pdf' => array(
+                    'label' => 'Generar PDF',
+                    'icon'  => 'glyphicon glyphicon-file',
+                    'size'  => 'medium',
+                    'url'   => 'Yii::app()->createUrl("beneficiarioTemporal/pdf/", array("id"=>$data->id_beneficiario_temporal))',
+//                    'visible' => 'Asignar($data->username);'
+                ),
+
+            ),
+        ),
+  ),
 )); ?>

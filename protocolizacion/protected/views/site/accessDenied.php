@@ -6,9 +6,12 @@
  */
 ?>
 
-<div class="text-center col-md-12" style="background-color: white">
-    <img src="<?= Yii::app()->baseUrl ?>/images/acceso_denegado.jpg" width="80%"/>
+<div class="text-center col-md-12" >
+    <h1>ACCESO DENEGADO</h1>>
+    <img src="<?= Yii::app()->baseUrl ?>/images/logos.png" width="20%"/>
 </div>
+
+
 
 <?php if (Yii::app()->user->isGuest) { ?>
     <div class="text-center col-md-12" style="margin-top: 1%">

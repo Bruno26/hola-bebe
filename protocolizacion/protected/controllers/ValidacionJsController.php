@@ -278,7 +278,7 @@ class ValidacionJsController extends Controller {
         if (!empty($id)) {
 
             $sql = "select des.nombre,des.zona As sector, des.urban_barrio , des.av_call_esq_carr As Av_calle , und_hab.nombre AS nomb_edif
-from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo = und_hab.desarrollo_id ";
+from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo = und_hab.desarrollo_id  where  des.id_desarrollo = " . $id;
 
             $data = Yii::app()->db->createCommand($sql)->queryRow();
 
@@ -431,6 +431,7 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
             }
         }
     }
+
     /*
      * FUNCION QUE BUSCA EN TABLA PERSONA Y SAIME. ASI COM TAMBIEN VALIDA QUE NO EXISTA EN TABLA ASIGNACION DE CENSO
      */
@@ -452,6 +453,36 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
             } else {
                 echo CJSON::encode($saime);
             }
+        }
+    }
+
+    /*
+     * BUSCAR BENEFICIARIOS DE UNIDA MULTIFAMILIAR
+     */
+
+    public function actionBuscarBeneficiariosTemporalEmpadronador() {
+        $Id = (isset($_POST['BeneficiarioTemporal']['unidad_habitacional_id']) ? $_POST['BeneficiarioTemporal']['unidad_habitacional_id'] : $_GET['piso']);
+        $Selected = isset($_GET['piso']) ? $_GET['piso'] : '';
+
+
+        if (!empty($Id)) {
+            $criteria = new CDbCriteria;
+            $criteria->addCondition('t.unidad_habitacional_id = :id_unidad_habitacional');
+            $criteria->params = array(':id_unidad_habitacional' => $Id);
+            $criteria->order = 't.nro_piso ASC';
+            $criteria->select = 'nro_piso';
+
+            $data = CHtml::listData(Vivienda::model()->findAll($criteria), 'nro_piso', 'nro_piso');
+            echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
+            foreach ($data as $id => $value) {
+                if ($Selected == $id) {
+                    echo CHtml::tag('option', array('value' => $id, 'selected' => true), CHtml::encode($value), true);
+                } else {
+                    echo CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
+                }
+            }
+        } else {
+            echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
         }
     }
 

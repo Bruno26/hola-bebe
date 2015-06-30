@@ -23,6 +23,14 @@
  */
 class EmpadronadorCenso extends CActiveRecord {
 
+    public $edoDes;
+    public $munDes;
+    public $parqDes;
+    public $Des;
+    public $UnidadMultifamiliar;
+    public $UnidadUnifamiliar;
+    public $BeneficiarioAdju;
+
     /**
      * @return string the associated database table name
      */
@@ -68,12 +76,19 @@ class EmpadronadorCenso extends CActiveRecord {
         return array(
             'id_empadronador_censo' => 'Id Empadronador Censo',
             'asignacion_censo_id' => 'Asignacion Censo',
-            'empadronador_usuario_id' => 'campo vinculado con los usuarios del cruge',
+            'empadronador_usuario_id' => 'Empadronador',
             'estatus' => 'Estatus',
             'usuario_creacion' => 'Usuario Creacion',
             'fecha_creacion' => 'Fecha Creacion',
             'usuario_modificacion' => 'Usuario Modificacion',
             'fecha_actualizacion' => 'Fecha Actualizacion',
+            'Des' => 'Desarrollo Habitacional',
+            'edoDes' => 'Estado',
+            'munDes' => 'Municipio',
+            'parqDes' => 'Parroquia',
+            'UnidadMultifamiliar' => 'Unidad MultiFamiliar',
+            'UnidadUnifamiliar' => 'Unidad UniFamiliar',
+            'BeneficiarioAdju' => 'Beneficiario Adjudicado',
         );
     }
 
