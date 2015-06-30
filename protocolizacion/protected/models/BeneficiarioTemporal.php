@@ -160,7 +160,7 @@ inner join vivienda on bt.vivienda_id = vivienda.id_vivienda WHERE bt.nacionalid
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-
+        $criteria->order = 'id_beneficiario_temporal DESC';
         $criteria->compare('id_beneficiario_temporal', $this->id_beneficiario_temporal);
         $criteria->compare('persona_id', $this->persona_id);
         $criteria->compare('desarrollo_id', $this->desarrollo_id);

@@ -115,7 +115,7 @@ class Oficina extends CActiveRecord {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-
+        $criteria->order = 'id_oficina DESC';
         $criteria->compare('id_oficina', $this->id_oficina);
         $criteria->compare('nombre', $this->nombre, true);
         $criteria->compare('parroquia_id', $this->parroquia_id);
