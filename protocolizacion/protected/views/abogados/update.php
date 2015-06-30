@@ -47,14 +47,23 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                 });
 
         ") ?>
-<h1>Modificar Jefe de Documentación y Cobranzas</h1>
-
+<h1>Modificar Agente de Documentación y Cobranzas</h1>
+ <?php  $this->widget(
+                'booster.widgets.TbLabel', array(
+            'context' => 'warning',
+            'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
+            // 'success', 'warning', 'important', 'info' or 'inverse'
+            'label' => 'Los campos marcados con * son requeridos',
+                )
+        ); ?>
+        <br><br>
 <div class="row">
     <div class="col-md-12">
         <?php
+       
         $this->widget(
                 'booster.widgets.TbPanel', array(
-            'title' => 'Jefe de Documentación y Cobranzas',
+            'title' => 'Agente de Documentación y Cobranzas',
             'context' => 'danger',
             'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'headerIcon' => 'globe',

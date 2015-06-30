@@ -5,7 +5,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 <?php Yii::app()->clientScript->registerScript('abogados', "
     
             $('#Abogados_tipo_abogado_id').change(function(){
-                if( $(this).val() == '100'){
+                if( $(this).val() == '101'){
                     $('.inpreabogado').show();
                
                 } else {

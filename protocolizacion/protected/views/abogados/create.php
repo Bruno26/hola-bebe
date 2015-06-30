@@ -31,7 +31,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         "); ?>
 
 
-<h1>Cargar Nuevo Jefe de Documentación y Cobranzas</h1>
+<h1>Cargar Nuevo Agente de Documentación y Cobranzas</h1>
 
 <?php 
         $this->widget(
@@ -49,7 +49,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         <?php
         $this->widget(
                 'booster.widgets.TbPanel', array(
-            'title' => 'Jefe de Documentación y Cobranza',
+            'title' => 'Agente de Documentación y Cobranza',
             'context' => 'info',
             'headerIcon' => 'user',
             'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),

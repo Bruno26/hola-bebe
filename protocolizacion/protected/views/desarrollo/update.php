@@ -83,8 +83,7 @@ if (isset($sms) && !empty($sms)) {
         $this->widget(
                 'booster.widgets.TbPanel', array(
             'title' => 'Caracteristica del Desarrollo Habitacional',
-            'context' => 'info',
-            // 'headerHtmlOptions' => array('style' => 'background:url(' . Yii::app()->request->baseUrl . '/img/fondo_barra.jpg);color:white;'),
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),         
             'headerIcon' => 'globe',
             'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'enteEjecutor' => $enteEjecutor, 'fuenteFinacimiento' => $fuenteFinacimiento), TRUE),
                 )
@@ -97,15 +96,14 @@ if (isset($sms) && !empty($sms)) {
     <div class="pull-center" style="text-align: right;">
         <?php
         $this->widget('booster.widgets.TbButton', array(
-            'buttonType' => 'submit',
+//            'buttonType' => 'submit',
             'icon' => 'glyphicon glyphicon glyphicon-step-backward',
             'size' => 'large',
             'id' => 'cancelar',
             'context' => 'danger',
             'label' => 'Cancelar',
-            //'url' => $this->createURL('/desarrollo/admin'),
             'htmlOptions' => array(
-                'onclick' => 'document.location.href ="' . $this->createUrl('desarrollo/admin') . '"'),
+                'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '"'),
         ));
         ?>
         <?php
