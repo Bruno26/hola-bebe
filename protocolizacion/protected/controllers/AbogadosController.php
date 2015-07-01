@@ -61,6 +61,7 @@ class AbogadosController extends Controller {
                 $idPersona = $_POST['Abogados']['persona_id'];
             }
             $model->attributes = $_POST['Abogados'];
+            $model->observaciones = trim(strtoupper($_POST['Abogados']['observaciones']));
             $model->persona_id = $idPersona;
             $model->oficina_id = $_POST['Abogados_oficina_id'];
             $model->estatus = 2;
@@ -96,9 +97,11 @@ class AbogadosController extends Controller {
         $model->segundo_nombre = $consulta['SEGUNDO_NOMBRE'];
         $model->primer_apellido = $consulta['PRIMER_APELLIDO'];
         $model->segundo_apellido = $consulta['SEGUNDO_APELLIDO'];
+        $model->usuario_id_actualizacion = Yii::app()->user->id;
 
         if (isset($_POST['Abogados'])) {
             $model->attributes = $_POST['Abogados'];
+            $model->observaciones = trim(strtoupper($_POST['Abogados']['observaciones']));
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
