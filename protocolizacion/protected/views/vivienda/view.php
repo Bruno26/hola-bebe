@@ -14,14 +14,13 @@ $this->widget('booster.widgets.TbPanel', array(
 <div class="row text-right" style="margin-right: 1em">
     <?php
     $this->widget('booster.widgets.TbButton', array(
+        'buttonType' => 'button',
         'context' => 'danger',
-        'label' => 'Cancelar',
         'size' => 'large',
-        'id' => 'CancelarForm',
-        'icon' => 'ban-circle',
+        'label' => 'Regresar',
         'htmlOptions' => array(
-            'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
+            'onclick' => 'document.location.href ="' . $this->createUrl('/vivienda/admin') . '"',
         )
     ));
     ?>
-</div>
+    </div>

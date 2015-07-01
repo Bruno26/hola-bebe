@@ -41,7 +41,7 @@ $html.="<table align='right' width='100%' border='0'>
                             <span class='subtitulo'>Apellido:</span> ".apellido('PRIMER_APELLIDO',$model->persona_id)."<br>
                             <span class='subtitulo'>Cédula de Identidad:</span> ".nacionalidadCedula('NACIONALIDAD','CEDULA', $model->persona_id)."<br>
                     </td>
-                    <td colspan='2' align='right'><img src='" . Yii::app()->baseUrl . "/images/banavih_ndice1.png' style='width: 25%;'/></td>
+                    <td colspan='2' align='right'><img src='" . Yii::app()->baseUrl . "/images/LOGO_BANAVIH-1.jpg' style='width: 25%;'/></td>
             </tr>
              <tr>
                     <td colspan='3' align='center'><b>Desarrollo</b></td>

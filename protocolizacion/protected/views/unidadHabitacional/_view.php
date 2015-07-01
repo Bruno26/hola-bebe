@@ -1,6 +1,6 @@
 
 <div class="row">
-    <div class="col-md-12">
+    <div class='col-md-12'> 
         <div>
             <h4><i class="glyphicon glyphicon-globe"></i> Ubicación del Desarrollo</h4>
             <div class='col-md-6'> 
@@ -21,12 +21,12 @@
                 <div class='text-right' style='margin-right: 1em;'><img src="<?php echo Yii::app()->baseUrl; ?>/images/LOGO_BANAVIH-1.jpg" style="width: 25%;"/></div>
             </div>
         </div>
-    </div>
+        </div>
 
 
-    <div class="col-md-12">
+    <div class='col-md-12'> 
         <h4><i class="glyphicon glyphicon-home"></i> Unidad Multifamiliar</h4>
-        <div class='col-md-6'> 
+        <div class='col-md-12'> 
             <blockquote>
                 <p>
                     <b>Nombre del Desarollo:</b> <?php echo $model->desarrollo->nombre ?><br/>
@@ -39,8 +39,10 @@
                 </p>
             </blockquote>
         </div>
+        </div>
+    <div class='col-md-12'> 
          <h4><i class="glyphicon glyphicon-globe"></i> Linderos</h4>
-        <div class='col-md-6'> 
+        <div class='col-md-12'> 
             <blockquote>
                 <p>
                     <b>Lindero Norte:</b> <?php echo $model->lindero_norte ?><br/>
@@ -58,4 +60,4 @@
         </div>
 
     </div>
-</div>
+    </div>
