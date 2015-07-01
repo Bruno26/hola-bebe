@@ -51,7 +51,7 @@ class EnteEjecutorController extends Controller {
                 $consulta = EnteEjecutor::model()->findByAttributes(array('nombre_ente_ejecutor' => $nombre_ente));
                 if (empty($consulta)) {
                     $model->nombre_ente_ejecutor = $nombre_ente;
-                    $model->attributes = $_POST['EnteEjecutor'];
+                    $model->observaciones = trim(strtoupper($_POST['EnteEjecutor']['observaciones']));
                     $model->estatus = 32;
                     $model->usuario_id_creacion = Yii::app()->user->id;
                     $model->fecha_creacion = 'now()';
