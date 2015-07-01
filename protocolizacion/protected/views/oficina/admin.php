@@ -51,23 +51,6 @@ $this->widget('booster.widgets.TbGridView', array(
     'type' => 'striped bordered condensed',
     'dataProvider' => $model->search(),
     'filter' => $model,
-//    'columns' => array(
-//        'id_oficina',
-//        'nombre',
-//        'parroquia_id',
-//        'persona_id_jefe',
-//        'estatus',
-//        'observaciones',
-//        /*
-//          'fecha_creacion',
-//          'fecha_actualizacion',
-//          'usuario_id_creacion',
-//          'usuario_id_actualizacion',
-//         */
-//        array(
-//            'class' => 'booster.widgets.TbButtonColumn',
-//        ),
-//    ),
     'columns' => array(
         'id_oficina' => array(
             'header' => 'N°',
