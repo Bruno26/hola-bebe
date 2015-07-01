@@ -466,8 +466,8 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
 
         if (!empty($Id)) {
             $criteria = new CDbCriteria;
-            $criteria->addCondition('t.unidad_habitacional_id= :unidad_habitacional_id');
-            $criteria->params = array(':unidad_habitacional_id' => $Id);
+            $criteria->addCondition('t.unidad_habitacional_id= :unidad_habitacional_id AND t.estatus= :estatus');
+            $criteria->params = array(':unidad_habitacional_id' => $Id, ':estatus' => 221);
 //            $criteria->order = 't.nro_piso ASC';
 //            $criteria->select = 'nro_piso';
 
@@ -490,23 +490,55 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
      */
 
     public function actionAgregarAsignacionesEmpa() {
+        $asignacion = $_POST['asgnacion_censo'];
+        /* */
+        $existeEmpadronadorCenso = EmpadronadorCenso::model()->findByAttributes(array('asignacion_censo_id' => $asignacion, 'empadronador_usuario_id' => (int) $_POST['empadronador']));
+        if (empty($existeEmpadronadorCenso)) {
+            $empadronador = new EmpadronadorCenso;
+            $empadronador->asignacion_censo_id = $asignacion;
+            $empadronador->empadronador_usuario_id = (int)$_POST['empadronador'];
+            $empadronador->estatus = 218;
+            $empadronador->usuario_creacion = Yii::app()->user->id;
+            $empadronador->fecha_creacion = 'now()';
+            $empadronador->fecha_actualizacion = 'now()';
+            if ($empadronador->save()) {
+                $idEmpadronador = $empadronador->id_empadronador_censo;
+            } 
+        } else {
+            $idEmpadronador = $existeEmpadronadorCenso->id_empadronador_censo;
+        }
 
+        /* Lista A los beneficiarios temporal de la unidad familiar  */
         $unidadMulti = $_POST['UnidaMulti'];
+        $Adjudicado = array();
         if ($_POST['BeneficiarioTemp'] != '') {
             $BeneficiarioTemp = $_POST['BeneficiarioTemp'];
+            $result = BeneficiarioTemporal::model()->findByPk($BeneficiarioTemp);
+            array_push($Adjudicado, $result);
+        } else {
+            $criteria = new CDbCriteria;
+            $criteria->addCondition('t.unidad_habitacional_id= :unidad_habitacional_id AND  t.estatus= :estatus');
+            $criteria->params = array(':unidad_habitacional_id' => $unidadMulti, ':estatus' => 221);
+            $Adjudicado = BeneficiarioTemporal::model()->findAll($criteria);
         }
-
-        if (!empty($BeneficiarioTemp)) {
-            
-            $Adjudicado = BeneficiarioTemporal::model()->findByPk($BeneficiarioTemp);
-            echo '<pre>';var_dump($Adjudicado);die;
+        /* Fin de Consulta */
+        foreach ($Adjudicado AS $data) {
+            $adjudicado_empadronador = new AdjudicadoEmpadronador;
+            $adjudicado_empadronador->empadronador_censo_id = $idEmpadronador;
+            $adjudicado_empadronador->beneficiario_temporal_id = $data->id_beneficiario_temporal;
+            $adjudicado_empadronador->estatus = 214;
+            $adjudicado_empadronador->usuario_creacion = Yii::app()->user->id;
+            $adjudicado_empadronador->fecha_creacion = 'now()';
+            $adjudicado_empadronador->fecha_actualizacion = 'now()';
+            if ($adjudicado_empadronador->save()) {
+                BeneficiarioTemporal::model()->updateByPk($data->id_beneficiario_temporal, array(
+                    'estatus' => 20,
+                    'usuario_id_actualizacion' => Yii::app()->user->id,
+                    'fecha_actualizacion' => 'now()',
+                ));
+            } 
         }
-//        $criteria = new CDbCriteria;
-//        $criteria->addCondition('t.unidad_habitacional_id= :unidad_habitacional_id');
-//        $criteria->params = array(':unidad_habitacional_id' => $Id);
-//
-//        echo '<pre>';
-//        var_dump($BeneficiarioTemp);
-//        die;
+        echo json_encode(2);
     }
+
 }
