@@ -81,7 +81,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'size' => 'large',
             'id' => 'guardar',
             'context' => 'primary',
-              'label' => 'Registrar',
+            'label' => 'Registrar',
         ));
         ?>
     </div>
@@ -101,6 +101,9 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'responsiveTable' => true,
             'id' => 'listado_servicios',
             'dataProvider' => new CActiveDataProvider('EnteEjecutor', array(
+                'criteria' => array(
+                    'order' => 'id_ente_ejecutor DESC',
+                ),
                 'pagination' => array(
                     'pageSize' => 5,
                 ),

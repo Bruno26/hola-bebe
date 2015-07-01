@@ -3,6 +3,21 @@
 $baseUrl = Yii::app()->baseUrl;
 $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
 ?>
+<?php Yii::app()->clientScript->registerScript('abogados', "
+    
+            $('#Abogados_tipo_abogado_id').change(function(){
+                if( $(this).val() == '101'){
+                    $('#Abogados_inpreabogado').val('');
+                    $('.inpreabogado').show();
+               
+                } else {
+                    $('.inpreabogado').hide();
+                    $('#Abogados_inpreabogado').val('');
+                }
+            }), 
+       
+
+"); ?>
 <?php #echo $form->errorSummary($model); ?>
 <div class="row">
     <div class="row-fluid">
@@ -39,9 +54,6 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 <div class="row">
     <div class="row-fluid">
         <div class="col-md-4">
-            <?php echo $form->textFieldGroup($model, 'inpreabogado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20)))); ?>
-        </div>
-        <div class="col-md-4">
 
             <?php
             echo $form->dropDownListGroup($model, 'tipo_abogado_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
@@ -53,6 +65,15 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
             );
             ?>
         </div>
+        <?php if($model->tipo_abogado_id == 101){?>
+        <div class="col-md-4 inpreabogado">
+            <?php echo $form->textFieldGroup($model, 'inpreabogado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20)))); ?>
+        </div>
+        <?php }else{ ?>
+        <div class="col-md-4 inpreabogado" style ="display: none">
+            <?php echo $form->textFieldGroup($model, 'inpreabogado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20)))); ?>
+        </div>
+        <?php } ?>
         <div class="col-md-4">
             <?php
             echo $form->dropDownListGroup($model, 'oficina_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),

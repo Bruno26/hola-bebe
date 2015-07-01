@@ -3,19 +3,29 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
     $( '#enviarAsignacion' ).click(function() {
         var UnidaMulti = $('#EmpadronadorCenso_UnidadMultifamiliar').val();
         var BeneficiarioTemp = $('#EmpadronadorCenso_BeneficiarioAdju').val();
+        var asgnacion_censo = '" . $_GET['id'] . "';
+        var empadronador = $('#EmpadronadorCenso_empadronador_usuario_id').val();
         if(UnidaMulti == ''){
-            alert('Vacio');
+            bootbox.alert('Seleccione una unidad Multifamiliar.');
+            return false;
+        }
+        if(empadronador == ''){
+            bootbox.alert('Seleccione una Empadronador.');
             return false;
         }
         $.ajax({
             url: '" . Yii::app()->createAbsoluteUrl('ValidacionJs/AgregarAsignacionesEmpa') . "',
             async: true,
             type: 'POST',
-            data: 'UnidaMulti=' +UnidaMulti + '&BeneficiarioTemp='+BeneficiarioTemp,
+            data: 'UnidaMulti=' +UnidaMulti + '&BeneficiarioTemp='+BeneficiarioTemp+ '&asgnacion_censo='+asgnacion_censo+ '&empadronador='+empadronador,
             dataType: 'json',
             success: function(data,faov) {
-                if(data == 3){
-                    
+                if(data == 2){
+                    $('#EmpadronadorCenso_empadronador_usuario_id').val('');
+                    $('#EmpadronadorCenso_UnidadMultifamiliar').val('');
+                    html = '<option value=\"\">SELECCIONE</option>';
+                    $('#EmpadronadorCenso_BeneficiarioAdju').html(html);
+                    $.fn.yiiGridView.update('listado_empadronador');
                 }
             },
             error: function(data) {
@@ -46,7 +56,7 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
         <?php
         echo $form->dropDownListGroup($model, 'UnidadMultifamiliar', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
             'widgetOptions' => array(
-                'data' => CHtml::listData(UnidadHabitacional::model()->findAll($unidadHab), 'id_unidad_habitacional', 'nombre'),
+                //'data' => CHtml::listData(UnidadHabitacional::model()->findAll($unidadHab), 'id_unidad_habitacional', 'nombre'),
                 'htmlOptions' => array(
                     'ajax' => array(
                         'type' => 'POST',
@@ -90,5 +100,38 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
         <a>
             <img src="<?php echo Yii::app()->baseUrl; ?>/images/agregar.jpg" width="60px" height="60px" >
         </a>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class='col-md-12'>
+        <?php
+        $this->widget(
+                'booster.widgets.TbExtendedGridView', array(
+            'type' => 'striped bordered',
+            'responsiveTable' => true,
+            'id' => 'listado_empadronador',
+            'dataProvider' => new CActiveDataProvider('AdjudicadoEmpadronador', array(
+                'pagination' => array(
+                    'pageSize' => 5,
+                ),
+                    )),
+//            'template' => "{items}",
+            'columns' => array(
+                array(
+                    'name' => 'beneficiario_temporal_id',
+                    'header' => 'Listado de Programas',
+                    'value' => '$data->beneficiario_temporal_id',
+                ),
+                array(
+                    'name' => 'beneficiarioTemporal->desarrollo->nombre',
+                    'header' => 'Desarrollo',
+                    'value' => '$data->beneficiarioTemporal->desarrollo->nombre',
+                ),
+            ),
+                )
+        );
+        ?>
     </div>
 </div>

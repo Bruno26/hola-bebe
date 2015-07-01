@@ -51,7 +51,6 @@ class FuenteFinanciamientoController extends Controller {
                 $consulta = FuenteFinanciamiento::model()->findByAttributes(array('nombre_fuente_financiamiento' => $nombre_fuente));
                 if (empty($consulta)) {
                     $model->nombre_fuente_financiamiento = $nombre_fuente;
-                    $model->attributes = $_POST['FuenteFinanciamiento'];
                     $model->fecha_creacion = 'now()';
                     $model->fecha_creacion = 'now()';
                     $model->fecha_actualizacion = 'now()';

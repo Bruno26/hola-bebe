@@ -93,6 +93,9 @@ $this->endWidget();
             'responsiveTable' => true,
             'id' => 'listado_servicios',
             'dataProvider' => new CActiveDataProvider('FuenteFinanciamiento', array(
+                'criteria' => array(
+                    'order' => 'id_fuente_financiamiento DESC',
+                ),
                 'pagination' => array(
                     'pageSize' => 5,
                 ),
