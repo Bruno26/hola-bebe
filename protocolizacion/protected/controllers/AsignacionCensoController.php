@@ -95,18 +95,55 @@ class AsignacionCensoController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
-
+        $consulta = ConsultaOracle::setPersona('nacionalidad,cedula,primer_nombre, segundo_nombre,primer_apellido, segundo_apellido', $model->persona_id);
+        $model->nacionalidad = ($consulta['NACIONALIDAD'] == 1) ? 97 : 98;
+        $model->cedula = $consulta['CEDULA'];
+        $model->primer_nombre = $consulta['PRIMER_NOMBRE'];
+        $model->segundo_nombre = $consulta['SEGUNDO_NOMBRE'];
+        $model->primer_apellido = $consulta['PRIMER_APELLIDO'];
+        $model->segundo_apellido = $consulta['SEGUNDO_APELLIDO'];
         if (isset($_POST['AsignacionCenso'])) {
-            $model->attributes = $_POST['AsignacionCenso'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
+            if (empty($_POST['AsignacionCenso']['persona_id'])) {
+                $idAsignacion = ConsultaOracle::insertPersona(array(
+                            'CEDULA' => $_POST['AsignacionCenso']['cedula'],
+                            'NACIONALIDAD' => ($_POST['AsignacionCenso']['nacionalidad'] == 97) ? 1 : 0,
+                            'PRIMER_NOMBRE' => trim(strtoupper($_POST['AsignacionCenso']['primer_nombre'])),
+                            'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['AsignacionCenso']['segundo_nombre'])),
+                            'PRIMER_APELLIDO' => trim(strtoupper($_POST['AsignacionCenso']['primer_apellido'])),
+                            'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['AsignacionCenso']['segundo_apellido'])),
+                            'FECHA_NACIMIENTO' => $_POST['AsignacionCenso']['fechaNac'],
+                                )
+                );
+            } else {
+                $idAsignacion = $_POST['AsignacionCenso']['persona_id'];
+            }
+            $ExisteAsignacion = AsignacionCensoController::FindByIdPersona($idAsignacion);
+//            echo '<pre>';
+//            var_dump($ExisteAsignacion);
+//            die();
+            if (empty($ExisteAsignacion)) {
+                $model->persona_id = $idAsignacion;
+                $model->fecha_asignacion = Generico::formatoFecha($_POST['AsignacionCenso']['fecha_asignacion']);
+                $model->observaciones = trim(strtoupper($_POST['AsignacionCenso']['observaciones']));
+                $model->fecha_actualizacion = 'now()';
+                $model->usuario_id_creacion = Yii::app()->user->id;
+                if ($model->save()) {
+                    $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
+                } else {
+                    var_dump($model->errors);
+                }
+            } else {
+                $this->render('update', array('model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'error' => 1));
+                Yii::app()->end();
+            }
         }
-
         $this->render('update', array(
-            'model' => $model,
+            'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia
         ));
     }
 

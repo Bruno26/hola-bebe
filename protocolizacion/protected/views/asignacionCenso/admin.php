@@ -14,26 +14,21 @@ function nacionalidadCedula($selec, $select2, $iD) {
     $saime = ConsultaOracle::getNacionalidadCedulaPersonaByPk($selec, $select2, (int) $iD);
     return $saime['NACIONALIDAD'] . " - " . $saime['CEDULA'];
 }
-
-//        $fecha_asignacion = substr($model->fecha_asignacion,0,10);
-//        $invert = explode("-",$fecha_asignacion); 
-//
-//        $fecha_invert = $invert[2]."-".$invert[1]."-".$invert[0]; 
 ?>
 
 <?php
 Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-$('.search-form').toggle();
-return false;
-});
-$('.search-form form').submit(function(){
-$.fn.yiiGridView.update('asignacion-censo-grid', {
-data: $(this).serialize()
-});
-return false;
-});
-");
+    $('.search-button').click(function(){
+    $('.search-form').toggle();
+    return false;
+    });
+    $('.search-form form').submit(function(){
+    $.fn.yiiGridView.update('asignacion-censo-grid', {
+    data: $(this).serialize()
+    });
+    return false;
+    });
+    ");
 ?>
 
 <h1>Listado de Asignación de Censos</h1>
@@ -80,7 +75,7 @@ $this->widget('booster.widgets.TbGridView', array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
-            'template' => '{ver} {empadronador} {pdf}',
+            'template' => '{ver} {empadronador} {modificar}{pdf}',
             'buttons' => array(
                 'ver' => array(
                     'label' => 'Ver',
@@ -96,10 +91,17 @@ $this->widget('booster.widgets.TbGridView', array(
 //                    'visible' => 'Asignar($data->username);'
                 ),
                 'empadronador' => array(
+                    'label' => 'Asignar Empadronador',
+                    'icon' => 'glyphicon glyphicon-user',
+                    'size' => 'medium',
+                    'url' => 'Yii::app()->createUrl("/empadronadorCenso/create/", array("id"=>$data->id_asignacion_censo))',
+//                    'visible' => 'Asignar($data->username);'
+                ),
+                'modificar' => array(
                     'label' => 'Modificar',
                     'icon' => 'glyphicon glyphicon-pencil',
                     'size' => 'medium',
-                    'url' => 'Yii::app()->createUrl("/empadronadorCenso/create/", array("id"=>$data->id_asignacion_censo))',
+                    'url' => 'Yii::app()->createUrl("asignacionCenso/update/", array("id"=>$data->id_asignacion_censo))',
 //                    'visible' => 'Asignar($data->username);'
                 ),
             ),

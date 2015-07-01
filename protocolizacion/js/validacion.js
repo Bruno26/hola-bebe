@@ -32,7 +32,6 @@ function Terreno() {
  * FUNCION QUE BUSCA EN SAIME Y EN PERSONA POR NUMERO DE CEDULA Y NACIONALIDAD
  */
 function buscarPersonaOficina(nacionalidad, cedula) {
-    $('#iconLoding').show();
     $('#Oficina_primer_nombre').val('');
     $('#Oficina_persona_id_jefe').val('');
     $('#Oficina_segundo_nombre').val('');
@@ -43,6 +42,7 @@ function buscarPersonaOficina(nacionalidad, cedula) {
     $('#Oficina_segundo_nombre').attr('readonly', true);
     $('#Oficina_primer_apellido').attr('readonly', true);
     $('#Oficina_segundo_apellido').attr('readonly', true);
+    $('#iconLoding').show();
     if (nacionalidad == '') {
         bootbox.alert('Verifique que la nacionalidad no esten vacios');
         return false;
@@ -57,21 +57,22 @@ function buscarPersonaOficina(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function(datos) {
+        success: function (datos) {
             if (datos == 1 || datos == 2) {
+                $('#iconLoding').hide();
                 $('#Oficina_primer_nombre').val('');
                 $('#Oficina_persona_id_jefe').val('');
                 $('#Oficina_segundo_nombre').val('');
                 $('#Oficina_primer_apellido').val('');
                 $('#Oficina_segundo_apellido').val('');
                 $('#Oficina_fechaNac').val('');
-                $('#iconLoding').hide();
                 if (datos == 1) {
                     $('#Oficina_cedula').val('');
                     $('#Oficina_nacionalidad').val('');
                     bootbox.alert('Esta persona ya se encuentra asignada a una Oficina.');
                     return false;
                 } else if (datos == 2) {
+                    $('#iconLoding').hide();
                     $('#Oficina_persona_id_jefe').val('');
                     $('#Oficina_primer_nombre').attr('readonly', false);
                     $('#Oficina_segundo_nombre').attr('readonly', false);
@@ -88,7 +89,7 @@ function buscarPersonaOficina(nacionalidad, cedula) {
                 $('#iconLoding').hide();
             }
         },
-        error: function(datos) {
+        error: function (datos) {
             bootbox.alert('Ocurrio un error');
         }
     })
@@ -114,7 +115,7 @@ function buscarBenefAnterior(nacionalidad, cedula, caso) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function(datos) {
+        success: function (datos) {
             if (caso == 1) {
                 if (datos == 1) {
                     $('#ReasignacionVivienda_nombreCompletoAnterior').val('');
@@ -140,7 +141,7 @@ function buscarBenefAnterior(nacionalidad, cedula, caso) {
 
             }
         },
-        error: function(datos) {
+        error: function (datos) {
             bootbox.alert('Ocurrio un error');
         }
 
@@ -175,7 +176,7 @@ function buscarPersonaAbogado(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function(datos) {
+        success: function (datos) {
 
             if (datos == 1) {
                 $('#iconLoding').hide();
@@ -206,7 +207,7 @@ function buscarPersonaAbogado(nacionalidad, cedula) {
             }
 
         },
-        error: function(datos) {
+        error: function (datos) {
             bootbox.alert('Ocurrio un error');
         }
     })
@@ -235,7 +236,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function(datos) {
+        success: function (datos) {
 
             if (datos == 2) {
                 //  No Existe en Saime habilito todos los campos para que se llenen a pedal
@@ -411,7 +412,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
 //                
 //            }
         },
-        error: function(datos) {
+        error: function (datos) {
             bootbox.alert('CEDULA NO ES VALIDA VERIFIQUE');
         }
     })
@@ -443,7 +444,7 @@ function buscarBeneficiarioTemporal(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function(datos) {
+        success: function (datos) {
             /* ++++ solo verifico en Persona  ++++  */
             if (datos != 2) {
                 //datos de beneficiario temporal
@@ -599,7 +600,7 @@ function buscarPersonaAsignacionCenso(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function(datos) {
+        success: function (datos) {
 
 
             if (datos == 1) {
@@ -631,7 +632,7 @@ function buscarPersonaAsignacionCenso(nacionalidad, cedula) {
             }
 
         },
-        error: function(datos) {
+        error: function (datos) {
             bootbox.alert('Ocurrio un error');
         }
     })
@@ -662,7 +663,7 @@ function buscarPersonaFamiliar(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function(datos) {
+        success: function (datos) {
 
             if (datos == 1) {
                 $('#iconLoding').hide();
@@ -697,7 +698,7 @@ function buscarPersonaFamiliar(nacionalidad, cedula) {
                 $('#iconLoding').hide();
             }
         },
-        error: function(datos) {
+        error: function (datos) {
             bootbox.alert('Ocurrio un error');
         }
     })
@@ -720,7 +721,7 @@ function Parentesco(valor) {
     contadorMadre = parseInt(0);
     contadorSuegro = parseInt(0);
     contadorAbuelo = parseInt(0);
-    $('#listado_familiar tr').each(function() {
+    $('#listado_familiar tr').each(function () {
         var parentesco = $(this).find('td:eq(6)').html();
         if (parentesco == 'PADRE') {
             contadorPadre++

@@ -86,7 +86,7 @@ class OficinaController extends Controller {
 
                 $model->attributes = $_POST['Oficina'];
                 $model->observaciones = trim(strtoupper($_POST['Oficina']['observaciones']));
-                $model->nombre = $nombre;
+                $model->nombre = trim(strtoupper($_POST['Oficina']['nombre']));
                 $model->persona_id_jefe = $idPersona;
                 $model->estatus = 44;
                 $model->usuario_id_creacion = Yii::app()->user->id;
@@ -122,16 +122,45 @@ class OficinaController extends Controller {
         $parroquia = new Tblparroquia;
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
-        $consulta = ConsultaOracle::setPersona('nacionalidad,cedula,primer_nombre,primer_apellido', $model->persona_id_jefe);
-        $nacio = ($consulta['NACIONALIDAD'] == 1) ? 'V-' : 'E-';
-        $model->cedula = $nacio . '' . $consulta['CEDULA'];
+        $consulta = ConsultaOracle::setPersona('nacionalidad,cedula,primer_nombre, segundo_nombre,primer_apellido, segundo_apellido', $model->persona_id_jefe);
+        $model->nacionalidad = ($consulta['NACIONALIDAD'] == 1) ? 97 : 98;
+        $model->cedula = $consulta['CEDULA'];
         $model->primer_nombre = $consulta['PRIMER_NOMBRE'];
+        $model->segundo_nombre = $consulta['SEGUNDO_NOMBRE'];
         $model->primer_apellido = $consulta['PRIMER_APELLIDO'];
+        $model->segundo_apellido = $consulta['SEGUNDO_APELLIDO'];
 
         if (isset($_POST['Oficina'])) {
-            $model->attributes = $_POST['Oficina'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_oficina));
+            if (empty($_POST['Oficina']['persona_id_jefe'])) {
+                $idJefe = ConsultaOracle::insertPersona(array(
+                            'CEDULA' => $_POST['Oficina']['cedula'],
+                            'NACIONALIDAD' => ($_POST['Oficina']['nacionalidad'] == 97) ? 1 : 0,
+                            'PRIMER_NOMBRE' => trim(strtoupper($_POST['Oficina']['primer_nombre'])),
+                            'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['Oficina']['segundo_nombre'])),
+                            'PRIMER_APELLIDO' => trim(strtoupper($_POST['Oficina']['primer_apellido'])),
+                            'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['Oficina']['segundo_apellido'])),
+                            'FECHA_NACIMIENTO' => $_POST['Oficina']['fechaNac'],
+                                )
+                );
+            } else {
+                $idJefe = $_POST['Oficina']['persona_id_jefe'];
+            }
+            $ExisteJefeOficina = OficinaController::FindByIdPersona($idJefe);
+            if (empty($ExisteJefeOficina)) {
+                $model->persona_id_jefe = $idJefe;
+                $model->usuario_id_creacion = Yii::app()->user->id;
+                $model->fecha_actualizacion = 'now()';
+                if ($model->save()) {
+                    $this->redirect(array('view', 'id' => $model->id_oficina));
+                }
+            } else {
+                $this->render('update', array('model' => $model,
+                    'estado' => $estado,
+                    'municipio' => $municipio,
+                    'parroquia' => $parroquia,
+                    'consulta' => $consulta, 'error' => 1));
+                Yii::app()->end();
+            }
         }
 
         $this->render('update', array(
@@ -156,8 +185,7 @@ class OficinaController extends Controller {
 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        }
-        else
+        } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 

@@ -80,10 +80,36 @@ if (!empty($model->parroquia_id)) {
         ") ?>
 
 <?php
-if (isset($sms) && !empty($sms)) {
+//if (isset($sms) && !empty($sms)) {
+//    $user = Yii::app()->getComponent('user');
+//    $user->setFlash(
+//            'warning', "<strong>Ya existe una Oficina con este nombre.</strong>"
+//    );
+//    $this->widget('booster.widgets.TbAlert', array(
+//        'fade' => true,
+//        'closeText' => '&times;', // false equals no close link
+//        'events' => array(),
+//        'htmlOptions' => array(),
+//        'userComponentId' => 'user',
+//        'alerts' => array(// configurations per alert type
+//            'warning' => array('closeText' => false),
+//        ),
+//    ));
+//}
+if (isset($error) && !empty($error)) {
     $user = Yii::app()->getComponent('user');
+    switch ($error) {
+        case 1:
+            $type = 'warning';
+            $sms = "<strong>Ya esta Persona se encuentra Asignada a Una Oficina.</strong>.";
+            break;
+//        case 2:
+//            $type = 'info';
+//            $sms = "<strong>Por Favor Ingrese un nombre.</strong>.";
+//            break;
+    }
     $user->setFlash(
-            'warning', "<strong>Ya existe una Oficina con este nombre.</strong>"
+            $type, $sms
     );
     $this->widget('booster.widgets.TbAlert', array(
         'fade' => true,
@@ -92,11 +118,12 @@ if (isset($sms) && !empty($sms)) {
         'htmlOptions' => array(),
         'userComponentId' => 'user',
         'alerts' => array(// configurations per alert type
-            'warning' => array('closeText' => false),
+            $type => array('closeText' => false),
         ),
     ));
 }
 ?>
+
 
 <h1>Oficina</h1>
 
