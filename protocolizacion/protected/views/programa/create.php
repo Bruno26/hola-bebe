@@ -105,6 +105,9 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'responsiveTable' => true,
             'id' => 'listado_servicios',
             'dataProvider' => new CActiveDataProvider('Programa', array(
+                'criteria' => array(
+                    'order' => 'id_programa DESC',
+                ),
                 'pagination' => array(
                     'pageSize' => 5,
                 ),
