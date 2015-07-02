@@ -540,5 +540,13 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
         }
         echo json_encode(2);
     }
+    
+    /*
+     * SELECT uh.nombre AS nombre_unidad_multifamiliar 
+        FROM unidad_habitacional uh
+        JOIN beneficiario_temporal bt ON bt.unidad_habitacional_id = uh.id_unidad_habitacional AND bt.estatus != 20 and bt.desarrollo_id = 28
+        GROUP BY nombre_unidad_multifamiliar
+     * 
+     */
 
 }
