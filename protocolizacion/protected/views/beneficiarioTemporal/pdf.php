@@ -11,6 +11,8 @@
 	    $saime = ConsultaOracle::getNacionalidadCedulaPersonaByPk($selec,$select2,(int)$iD);
 	    return $saime['NACIONALIDAD']." - ".$saime['CEDULA'];
 	}
+
+    $persona = (object) ConsultaOracle::getPersonaBeneficiario($model->nacionalidad, $model->cedula);
 ?>
 
 <?php
@@ -40,6 +42,9 @@ $html.="<table align='right' width='100%' border='0'>
                             <span class='subtitulo'>Nombre:</span> ".nombre('PRIMER_NOMBRE',$model->persona_id)."<br>
                             <span class='subtitulo'>Apellido:</span> ".apellido('PRIMER_APELLIDO',$model->persona_id)."<br>
                             <span class='subtitulo'>Cédula de Identidad:</span> ".nacionalidadCedula('NACIONALIDAD','CEDULA', $model->persona_id)."<br>
+                            <span class='subtitulo'>Teléfono Habitación:</span> ".$persona->TELEFONOHAB."<br>
+                            <span class='subtitulo'>Teléfono Celular:</span> ".$persona->TELEFONOMOVIL."<br>
+                            <span class='subtitulo'>Correo Electrónico:</span> ".$persona->CORREO."<br>
                     </td>
                     <td colspan='2' align='right'><img src='" . Yii::app()->baseUrl . "/images/LOGO_BANAVIH-1.jpg' style='width: 25%;'/></td>
             </tr>
@@ -51,10 +56,15 @@ $html.="<table align='right' width='100%' border='0'>
             <tr>
                     <td>
                             <span class='subtitulo'>Desarrollo:</span> ".$model->desarrollo->nombre."<br>
+                            <span class='subtitulo'>Estado:</span> ".$model->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion."<br>
+                            <span class='subtitulo'>Municipio:</span> ".$model->desarrollo->fkParroquia->clvmunicipio0->strdescripcion."<br>
+                            <span class='subtitulo'>Parroquia:</span> ".$model->desarrollo->fkParroquia->strdescripcion."<br>
                             <span class='subtitulo'>Unidad Multifamiliar:</span> ".$model->unidadHabitacional->nombre."<br>
                             <span class='subtitulo'>Tipo de Inmueble:</span> ".$model->unidadHabitacional->genTipoInmueble->descripcion."<br>
+                            <span class='subtitulo'>Piso:</span> ".$model->vivienda->nro_piso."<br>
+                            <span class='subtitulo'>Número de Vivienda:</span> ".$model->vivienda->nro_vivienda."<br>
                             <span class='subtitulo'>Fecha de Creación:</span> ".date('d/m/Y', strtotime($model->fecha_creacion))."<br>
-                                
+                            
                                 
                     </td>
             </tr>
