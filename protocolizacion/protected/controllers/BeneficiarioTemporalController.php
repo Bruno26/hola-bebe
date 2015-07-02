@@ -164,7 +164,7 @@ class BeneficiarioTemporalController extends Controller {
             $beneficiarioTemp->usuario_id_actualizacion = Yii::app()->user->id;
             $beneficiarioTemp->fecha_actualizacion = date('Y-m-d H:i:s');
 
-            $beneficiarioTemp->estatus = 14;
+            $beneficiarioTemp->estatus = 221;
 
             // var_dump($beneficiarioTemp); // die();
 
