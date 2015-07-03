@@ -1,5 +1,11 @@
 <?php
 Yii::app()->clientScript->registerScript('grupoFamiliar', "
+    $(document).ready(function(){
+        $.get('" . CController::createUrl('ValidacionJs/BuscarUnidadMulti') . "', {id_desarrollo: " . $asignacionC->desarrollo_id . " }, function(data){
+            $('#EmpadronadorCenso_UnidadMultifamiliar').html(data);
+        });
+     })    
+
     $( '#enviarAsignacion' ).click(function() {
         var UnidaMulti = $('#EmpadronadorCenso_UnidadMultifamiliar').val();
         var BeneficiarioTemp = $('#EmpadronadorCenso_BeneficiarioAdju').val();
@@ -21,6 +27,9 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
             dataType: 'json',
             success: function(data,faov) {
                 if(data == 2){
+                    $.get('" . CController::createUrl('ValidacionJs/BuscarUnidadMulti') . "', {id_desarrollo: " . $asignacionC->desarrollo_id . " }, function(data){
+                        $('#EmpadronadorCenso_UnidadMultifamiliar').html(data);
+                    });
                     $('#EmpadronadorCenso_empadronador_usuario_id').val('');
                     $('#EmpadronadorCenso_UnidadMultifamiliar').val('');
                     html = '<option value=\"\">SELECCIONE</option>';
@@ -56,7 +65,7 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
         <?php
         echo $form->dropDownListGroup($model, 'UnidadMultifamiliar', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
             'widgetOptions' => array(
-                //'data' => CHtml::listData(UnidadHabitacional::model()->findAll($unidadHab), 'id_unidad_habitacional', 'nombre'),
+//                'data' => CHtml::listData(UnidadHabitacional::model()->findAll($unidadHab), 'id_unidad_habitacional', 'nombre'),
                 'htmlOptions' => array(
                     'ajax' => array(
                         'type' => 'POST',
@@ -113,6 +122,13 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
             'responsiveTable' => true,
             'id' => 'listado_empadronador',
             'dataProvider' => new CActiveDataProvider('AdjudicadoEmpadronador', array(
+                'criteria' => array(
+                    'with' => array(
+                        'beneficiarioTemporal' => array(
+                        //'condition' => 'desarrollo_id=' . $_GET['id'] . '',
+                        ),
+                    ),
+                ),
                 'pagination' => array(
                     'pageSize' => 5,
                 ),
@@ -127,7 +143,7 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
                 array(
                     'name' => 'beneficiarioTemporal->desarrollo->nombre',
                     'header' => 'Desarrollo',
-                    'value' => '$data->beneficiarioTemporal->desarrollo->nombre',
+                    'value' => '$data->beneficiarioTemporal->desarrollo_id',
                 ),
             ),
                 )

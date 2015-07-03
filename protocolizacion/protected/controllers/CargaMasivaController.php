@@ -6,7 +6,7 @@ class CargaMasivaController extends Controller
 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 * using two-column layout. See 'protected/views/layouts/column2.php'.
 */
-public $layout='//layouts/column2';
+//public $layout='//layouts/column2';
 
 /**
 * @return array action filters
@@ -59,24 +59,66 @@ $this->render('view',array(
 * Creates a new model.
 * If creation is successful, the browser will be redirected to the 'view' page.
 */
-public function actionCreate()
-{
-$model=new CargaMasiva;
+public function actionCreate(){
 
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
+  $model=new CargaMasiva;
+  $estado = new Tblestado;
+  $municipio = new Tblmunicipio;
+  $parroquia = new Tblparroquia;
+  $desarrollo = new Desarrollo;
+  $error = FALSE;
+  $cant_columnas = 8;
+  // Uncomment the following line if AJAX validation is needed
+  // $this->performAjaxValidation($model);
+  $model->num_lineas = 55;
+  $model->tamano_archivo = 1024;
+  $model->estatus = 100;
+  $model->tipo_carga_masiva = 1;
+  $model->usuario_id_creacion = 1;
 
-if(isset($_POST['CargaMasiva']))
-{
-$model->attributes=$_POST['CargaMasiva'];
-if($model->save())
-$this->redirect(array('view','id'=>$model->id_carga_masiva));
-}
 
-$this->render('create',array(
-'model'=>$model,
-));
-}
+  if(isset($_POST['CargaMasiva']))
+  {
+  $model->attributes=$_POST['CargaMasiva'];
+
+  $model->nombre_archivo = CUploadedFile::getInstance($model, 'nombre_archivo');
+
+  $fp = fopen($model->nombre_archivo->tempName, 'r');
+
+ if(!$fp){
+    echo Yii::app()->user->setFlash('error', "No se pudo abrir el archivo para validarlo, asegurese que tiene permisos de lectura-escritura sobre el archivo.");
+    $error=TRUE;
+    //echo "no se pudo abrir el archivo";die();
+  $this->redirect(array('cargaMasiva/index'));
+  }
+
+  $i=0;
+  while (( $data = fgetcsv ( $fp , 1000 , ";" )) !== FALSE ){
+      if ($i > 0){
+      $j= $i+1;
+        if(count($data) != $cant_columnas){
+          echo Yii::app()->user->setFlash('error', "El archivo no tiene la cantidad de campos requeridos, por favor revise que existan solo $cant_columnas columnas en el archivo.");
+          $error = TRUE;
+          //echo "el archivo debe tener 7 columnas...";die();
+        }
+      } $i++;
+  }
+
+  if ($error == FALSE){
+      $model->nombre_archivo->saveAs(Yii::app()->basePath.'/../images/'.$model->nombre_archivo);
+
+      if($model->save()){
+        $this->redirect(array('view','id'=>$model->id_carga_masiva));
+      }
+
+
+  }
+}//fin del post global de carga masiva
+  $this->render('create',array( 'model'=>$model, 'estado' => $estado,
+  'municipio' => $municipio, 'parroquia' => $parroquia, 'desarrollo' => $desarrollo));
+
+
+}//fin accion create carga
 
 /**
 * Updates a particular model.
