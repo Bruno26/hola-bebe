@@ -89,7 +89,6 @@ $this->widget('booster.widgets.TbGridView', array(
         'id' => 'delete'
     ));
     ?>
-
 </div>
 
 <?php
