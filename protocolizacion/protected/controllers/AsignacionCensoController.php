@@ -95,6 +95,7 @@ class AsignacionCensoController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
+        $model->fecha_asignacion=  date('d/m/Y', strtotime($model->fecha_asignacion));
         $estado = new Tblestado;
         $municipio = new Tblmunicipio;
         $parroquia = new Tblparroquia;
@@ -116,17 +117,17 @@ class AsignacionCensoController extends Controller {
                             'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['AsignacionCenso']['segundo_nombre'])),
                             'PRIMER_APELLIDO' => trim(strtoupper($_POST['AsignacionCenso']['primer_apellido'])),
                             'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['AsignacionCenso']['segundo_apellido'])),
-                            'FECHA_NACIMIENTO' => $_POST['AsignacionCenso']['fechaNac'],
+                            'FECHA_NACIMIENTO' => $_POST['AsignacionCenso']['fecha_nac'],
                                 )
                 );
             } else {
                 $idAsignacion = $_POST['AsignacionCenso']['persona_id'];
             }
-            $ExisteAsignacion = AsignacionCensoController::FindByIdPersona($idAsignacion);
+//            $ExisteAsignacion = AsignacionCensoController::FindByIdPersona($idAsignacion);
 //            echo '<pre>';
 //            var_dump($ExisteAsignacion);
 //            die();
-            if (empty($ExisteAsignacion)) {
+//            if (empty($ExisteAsignacion)) {
                 $model->persona_id = $idAsignacion;
                 $model->fecha_asignacion = Generico::formatoFecha($_POST['AsignacionCenso']['fecha_asignacion']);
                 $model->observaciones = trim(strtoupper($_POST['AsignacionCenso']['observaciones']));
@@ -134,13 +135,15 @@ class AsignacionCensoController extends Controller {
                 $model->usuario_id_creacion = Yii::app()->user->id;
                 if ($model->save()) {
                     $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
-                } else {
-                    var_dump($model->errors);
-                }
-            } else {
-                $this->render('update', array('model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'error' => 1));
-                Yii::app()->end();
-            }
+//                    $this->render(array('admin'));
+                } 
+//                else {
+//                    var_dump($model->errors);
+//                }
+//            } else {
+//                $this->render('update', array('model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'error' => 1));
+//                Yii::app()->end();
+//            }
         }
         $this->render('update', array(
             'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia

@@ -54,7 +54,7 @@ array('label'=>'Manage UnidadHabitacional','url'=>array('admin')),
         'size' => 'large',
         'label' => 'Regresar',
         'htmlOptions' => array(
-            'onclick' => 'document.location.href ="' . $this->createUrl('/UnidadHabitacional/admin') . '"',
+            'onclick' => 'document.location.href ="' . $this->createUrl('/VswMultifamiliar/admin') . '"',
         )
     ));
     ?>

@@ -166,7 +166,7 @@
 
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/unidadHabitacional/create'); ?>">Cargar Nueva Unidad Multifamiliar</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/unidadHabitacional/admin'); ?>">Gestión de Unidades Multifamiliares</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/VswMultifamiliar/admin'); ?>">Gestión de Unidades Multifamiliares</a></li>
                                         </ul>
                                     </li>
                                     <li class="sub-menu">

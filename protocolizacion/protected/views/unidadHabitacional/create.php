@@ -125,7 +125,7 @@ if (isset($sms) && !empty($sms)) {
                 'id' => 'CancelarForm',
                 'icon' => 'ban-circle',
                 'htmlOptions' => array(
-                    'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
+                   'onclick' => 'document.location.href ="' . $this->createUrl('/VswMultifamiliar/admin') . '"',
                 )
             ));
         ?>

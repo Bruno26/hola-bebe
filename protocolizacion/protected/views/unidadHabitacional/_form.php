@@ -177,7 +177,7 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
         echo $form->dropDownListGroup($model, 'registro_publico_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
             'widgetOptions' => array(
                 'data' => CHtml::listData(RegistroPublico::model()->findAll(), 'id_registro_publico', 'nombre_registro_publico'),
-                'htmlOptions' => array('empty' => 'SELECCIONE', 'readonly' => true),
+                'htmlOptions' => array('empty' => 'SELECCIONE', 'disabled' => true),
             )
                 )
         );
@@ -199,7 +199,7 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
                 ),
                 'htmlOptions' => array(
                     'class' => 'span5 limpiar',
-                    'readonly' => true,
+                    'disabled' => true,
                 ),
             ),
             'prepend' => '<i class="glyphicon glyphicon-calendar"></i>',
@@ -214,7 +214,7 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
         echo $form->dropDownListGroup($model, 'num_protocolo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
             'widgetOptions' => array(
                 'data' => Maestro::FindMaestrosByPadreSelect(144, 'descripcion DESC'),
-                'htmlOptions' => array('empty' => 'SELECCIONE', 'readonly' => true),
+                'htmlOptions' => array('empty' => 'SELECCIONE', 'disabled' => true),
             )
                 )
         );
@@ -235,7 +235,7 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
         echo $form->dropDownListGroup($model, 'tipo_documento_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
             'widgetOptions' => array(
                 'data' => Maestro::FindMaestrosByPadreSelect(86, 'descripcion DESC'),
-                'htmlOptions' => array('empty' => 'SELECCIONE', 'readonly' => true),
+                'htmlOptions' => array('empty' => 'SELECCIONE', 'disabled' => true),
             )
                 )
         );
@@ -256,7 +256,7 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
                 ),
                 'htmlOptions' => array(
                     'class' => 'span5 limpiar',
-                    'readonly' => true,
+                    'disabled' => true,
                 ),
             ),
             'prepend' => '<i class="glyphicon glyphicon-calendar"></i>',
