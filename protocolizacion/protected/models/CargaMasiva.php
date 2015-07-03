@@ -39,9 +39,13 @@ class CargaMasiva extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('num_lineas, tamano_archivo, estatus, tipo_carga_masiva, fecha_inicio, usuario_id_creacion', 'required'),
+			//array('num_lineas, tamano_archivo, estatus, tipo_carga_masiva, fecha_inicio, usuario_id_creacion', 'required'),
 			array('num_lineas, estatus, tipo_carga_masiva, usuario_id_creacion', 'numerical', 'integerOnly'=>true),
 			array('nombre_archivo', 'length', 'max'=>200),
+
+			array('nombre_archivo', 'safe'),
+ 			array('nombre_archivo', 'file', 'types' => 'csv', 'maxSize'=>5242880, 'allowEmpty' => true, 'wrongType'=>'Solo se permiten archivos csv.', 'tooLarge'=>'El archivo es demasiado grande! 5MB es el limite'),
+
 			array('observaciones', 'length', 'max'=>400),
 			array('mensajes_carga, fecha_fin', 'safe'),
 			// The following rule is used by search().
