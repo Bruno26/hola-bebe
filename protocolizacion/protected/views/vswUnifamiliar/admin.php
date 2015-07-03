@@ -1,5 +1,6 @@
 
 
+
 <h1 class="text-center">Gestión de Unidades UniFamiliares</h1>
 
 
@@ -13,17 +14,7 @@
 </div><!-- search-form -->
 
 
-<div style="text-align: right;vertical-align: middle;">
-    <div align="right" class="row">
-        <?php
-        $this->widget('application.extensions.PageSize.PageSize', array(
-            'mGridId' => 'vivienda-grid', //Gridview id
-            'mPageSize' => @$_GET['pageSize'],
-            'mDefPageSize' => Yii::app()->params['defaultPageSize'],
-        ));
-        ?>
-    </div>
-</div>
+
 <?php
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'vivienda-grid',
@@ -31,23 +22,33 @@ $this->widget('booster.widgets.TbGridView', array(
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(
-        'id_vivienda',
-        'unidad_habitacional_id' => array(
-            'name' => 'unidad_habitacional_id',
+           'nombre_desarrollo' => array(
+            'header' => 'Nombre de Desarrollo',
+            'name' => 'nombre_desarrollo',
+            'value' => '$data->nombre_desarrollo',
+            'filter' => CHtml::listData(Desarrollo::model()->findAll(array('order' => 'nombre ASC')), 'nombre', 'nombre')
+
+        ),
+
+        'nombre_unidad_habitacional' => array(
+            'name' => 'nombre_unidad_habitacional',
             'header' => 'Unidad Multifamiliar',
-            'value' => '$data->unidadHabitacional->nombre',
-            'filter' => CHtml::listData(UnidadHabitacional::model()->findall(), 'id_unidad_habitacional', 'nombre'),
+            'value' => '$data->nombre_unidad_habitacional',
+            'filter' => CHtml::listData(UnidadHabitacional::model()->findAll(array('order' => 'nombre ASC')), 'nombre', 'nombre'),
         ),
-        'tipo_vivienda_id' => array(
-            'name' => 'tipo_vivienda_id',
+        'tipo_vivienda' => array(
+            'name' => 'tipo_vivienda',
             'header' => 'Tipo de Vivienda',
-            'value' => '$data->tipoVivienda->descripcion',
-            'filter' => Maestro::FindMaestrosByPadreSelect(92),
+            'value' => '$data->tipo_vivienda',
+            'filter' => Maestro::FindMaestrosByPadreSelect(92, 'descripcion'),
         ),
-        'Estado' => array(
+
+        'estado' => array(
             'header' => 'Estado',
-            'name' => 'unidad_habitacional_id',
-            'value' => 'Tblparroquia::model()->findByPK(Desarrollo::model()->findByPK($data->unidadHabitacional->desarrollo_id)->parroquia_id)->clvmunicipio0->clvestado0->strdescripcion',
+            'name' => 'estado',
+            'value' => '$data->estado',
+            'filter' => CHtml::listData(Tblestado::model()->findAll(array('order' => 'strdescripcion ASC')), 'strdescripcion', 'strdescripcion')
+
         ),
         array(
             'class' => 'booster.widgets.TbButtonColumn',
@@ -79,4 +80,30 @@ $this->widget('booster.widgets.TbGridView', array(
         ),
     ),
 ));
+?>
+<?php
+//$this->widget('booster.widgets.TbGridView', array(
+//    'id' => 'vsw-unifamiliar-grid',
+//    'dataProvider' => $model->search(),
+//    'filter' => $model,
+//    'columns' => array(
+//        'id_vivienda',
+//        'nro_vivienda',
+//        'tipo_vivienda_id',
+//        'tipo_vivienda',
+//        'id_unidad_habitacional',
+//        'nombre_unidad_habitacional',
+//        /*
+//          'id_desarrollo',
+//          'nombre_desarrollo',
+//          'cod_estado',
+//          'estado',
+//          'estatus_vivienda_id',
+//          'estatus',
+//         */
+//        array(
+//            'class' => 'booster.widgets.TbButtonColumn',
+//        ),
+//    ),
+//));
 ?>
