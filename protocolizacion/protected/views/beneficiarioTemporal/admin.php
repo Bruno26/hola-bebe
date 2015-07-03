@@ -92,8 +92,6 @@ $this->widget('booster.widgets.TbGridView', array(
 
 </div>
 
-
-
 <?php
 /**********  Revisar codigo para ejecturar accion para impromir                     **********/
 Yii::app()->clientScript->registerScript('delete','
