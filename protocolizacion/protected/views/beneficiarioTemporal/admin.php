@@ -92,23 +92,23 @@ $this->widget('booster.widgets.TbGridView', array(
 </div>
 
 <?php
-/**********  Revisar codigo para ejecturar accion para impromir                     **********/
-Yii::app()->clientScript->registerScript('delete','
-$("#delete").click(function(){
-        var checked=$("#GRID_ID").yiiGridView("getChecked","GRID_ID_c0"); // _c0 means the checkboxes are located in the first column, change if you put the checkboxes somewhere else
+/* * ********  Revisar codigo para ejecturar accion para impromir                     ********* */
+$base64= Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/base64.js');
+Yii::app()->clientScript->registerScript('delete', "
+
+
+    $('#delete').click(function(){
+        var checked=$('#beneficiario-temporal-grid').yiiGridView('getChecked','beneficiario-temporal-grid_c0'); // _c0 means the checkboxes are located in the first column, change if you put the checkboxes somewhere else
         var count=checked.length;
-                if(count==0){
-                alert("No items selected");
-                }
-        if(count>0 && confirm("Do you want to delete these "+count+" item(s)"))
-        {
-                $.ajax({
-                        data:{checked:checked},
-                        url:"'.CHtml::normalizeUrl(array('CONTROLLER_NAME/RemoveChecked')).'",
-                        success:function(data){$("#GRID_ID").yiiGridView("update",{});},              
-                });
+        if(count==0){
+            alert('Seleccione');
+            return false;
         }
-        });
-');
-/**********  Fin Revisar codigo para ejecturar accion para impromir                     **********/
+        if(count>0 && confirm('Do you want to delete these '+count+' item(s)')){
+            alert(checked);
+            $(location).attr('href','" . $this->createUrl('certificadoVarios') . "/id/'+checked).attr('target','_blank');
+        }
+    });
+");
+/* * ********  Fin Revisar codigo para ejecturar accion para impromir                     ********* */
 ?>
