@@ -19,7 +19,7 @@ $this->widget('booster.widgets.TbPanel', array(
         'size' => 'large',
         'label' => 'Regresar',
         'htmlOptions' => array(
-            'onclick' => 'document.location.href ="' . $this->createUrl('/vivienda/admin') . '"',
+            'onclick' => 'document.location.href ="' . $this->createUrl('/vswUnifamiliar/admin') . '"',
         )
     ));
     ?>

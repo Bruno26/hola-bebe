@@ -81,29 +81,3 @@ $this->widget('booster.widgets.TbGridView', array(
     ),
 ));
 ?>
-<?php
-//$this->widget('booster.widgets.TbGridView', array(
-//    'id' => 'vsw-unifamiliar-grid',
-//    'dataProvider' => $model->search(),
-//    'filter' => $model,
-//    'columns' => array(
-//        'id_vivienda',
-//        'nro_vivienda',
-//        'tipo_vivienda_id',
-//        'tipo_vivienda',
-//        'id_unidad_habitacional',
-//        'nombre_unidad_habitacional',
-//        /*
-//          'id_desarrollo',
-//          'nombre_desarrollo',
-//          'cod_estado',
-//          'estado',
-//          'estatus_vivienda_id',
-//          'estatus',
-//         */
-//        array(
-//            'class' => 'booster.widgets.TbButtonColumn',
-//        ),
-//    ),
-//));
-?>
