@@ -203,4 +203,3 @@ $mpdf->SetFooter('Generado desde el Sistema de Protocolización el ' . date('d-m
 $mpdf->Output('Beneficiario.pdf', 'D');
 exit;
 ?>
-
