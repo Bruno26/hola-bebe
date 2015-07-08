@@ -176,7 +176,7 @@
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/vivienda/create'); ?>">Cargar Nueva Unidad Unifamiliar</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/vivienda/admin'); ?>">Gestión de Unidad Unifamiliar</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/vswUnifamiliar/admin'); ?>">Gestión de Unidad Unifamiliar</a></li>
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
