@@ -57,7 +57,7 @@ foreach ($recordBeneTemp as $model) {
             . "<table>"
             . "<tr>"
             . "<td align='left'><b><font size='6' color='#B40404'>"
-                . "Adjudicado:</font><font size='5'> " . nombre('PRIMER_NOMBRE', $model->persona_id) . " " . apellido('PRIMER_APELLIDO', $model->persona_id) . " <br/>Fecha de Adjudicación: " . date('d/m/Y',strtotime($model->fecha_creacion)) . "<br/>Fecha de Censo: _______________________ </font>"
+            . "Adjudicado:</font><font size='5'> " . nombre('PRIMER_NOMBRE', $model->persona_id) . " " . apellido('PRIMER_APELLIDO', $model->persona_id) . " <br/>Fecha de Adjudicación: " . date('d/m/Y', strtotime($model->fecha_creacion)) . "<br/>Fecha de Censo: _______________________ </font>"
             . "</td>"
             . "<td align='right'><img src='" . Yii::app()->baseUrl . "/images/LOGO_BANAVIH-1.jpg' style='width: 25%;'/></td>"
             . "</tr>"
@@ -76,7 +76,7 @@ foreach ($recordBeneTemp as $model) {
                     <span class='subtitulo'>Nombre Completo:</span> " . $model->nombre_completo . "<br>
                 </td>
                 <td class='col-interno border-right'>
-                    <span class='subtitulo'>Municipio:</span> " .nacionalidadCedula('NACIONALIDAD', 'CEDULA', $model->persona_id). "<br>
+                    <span class='subtitulo'>Municipio:</span> " . nacionalidadCedula('NACIONALIDAD', 'CEDULA', $model->persona_id) . "<br>
                 </td>
             </tr>"
             . "<tr>
@@ -141,7 +141,7 @@ foreach ($recordBeneTemp as $model) {
             </tr>"
             . "</table>"
             . "</div>";
-    
+
     $html.="<br/>"
             . "<div><h3 align='center'>Grupo Familiar</h3></div>"
             . "<div id='prueba'>"
@@ -155,16 +155,15 @@ foreach ($recordBeneTemp as $model) {
                 </td>
             </tr>"
             . "<tr>
-                <td colspan='2' class='col-interno border-right'>
-                <span class='subtitulo'>Parentesco: </span>";
+                <td class='col-interno' colspan='3'>
+                <span class='subtitulo'>Parentesco: </span><br>";
+                $i = 0;
                 foreach ($parentesco as $key => $value) {
-                    $html.=" <label>".$value."<input type='checkbox'></label>";
+                    $html.=" <label>" . $value . "&nbsp;<input type='checkbox'></label>";
+                    $i++;
 
                 }
-            $html.="</td>
-                <td class='col-interno border-right'>
-                    <span class='subtitulo'>Avenida/Calle/Esquina/Carretera:</span> " . $model->desarrollo->av_call_esq_carr . "<br>
-                </td>
+                $html.="</td>
             </tr>"
             . "<tr>
                 <td class='col-interno border-right'>
