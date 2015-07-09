@@ -75,7 +75,7 @@ $this->widget('booster.widgets.TbGridView', array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
-            'template' => '{ver} {empadronador} {modificar}{pdf}',
+            'template' => '{ver} {empadronador} {modificar}{pdf}{reasignacionCenso}',
             'buttons' => array(
                 'ver' => array(
                     'label' => 'Ver',
@@ -102,6 +102,13 @@ $this->widget('booster.widgets.TbGridView', array(
                     'icon' => 'glyphicon glyphicon-pencil',
                     'size' => 'medium',
                     'url' => 'Yii::app()->createUrl("asignacionCenso/update/", array("id"=>$data->id_asignacion_censo))',
+//                    'visible' => 'Asignar($data->username);'
+                ),
+                'reasignacionCenso' => array(
+                    'label' => 'Modificar',
+                    'icon' => 'glyphicon glyphicon-new-window',
+                    'size' => 'medium',
+                    'url' => 'Yii::app()->createUrl("asignacionCenso/createReasignacion/", array("id"=>$data->id_asignacion_censo))',
 //                    'visible' => 'Asignar($data->username);'
                 ),
             ),

@@ -21,7 +21,7 @@ if (!empty($model->desarrollo_id)) {
 //    var_dump($model->desarrollo_id); die();
 }
 ?>
-<?php Yii::app()->clientScript->registerScript('asignacionCenso', "
+<?php Yii::app()->clientScript->registerScript('reasignacion', "
          $('#guardarAsignacion').click(function(){
      
                 if ($('#AsignacionCenso_fecha_asignacion').val()==''){
@@ -59,7 +59,7 @@ if (!empty($model->desarrollo_id)) {
 
 ") ?>
 
-<h1 class="text-center">Asignación de Censo</h1>
+<h1 class="text-center">Re-Asignación de Censo</h1>
 
 <?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
 
@@ -79,12 +79,12 @@ $this->widget(
     <?php
     $this->widget(
             'booster.widgets.TbPanel', array(
-        'title' => 'Asignación de Censo',
+        'title' => 'Re-Asignación de Censo',
         'context' => 'danger',
         'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
         'headerIcon' => 'user',
         'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
-        'content' => $this->renderPartial('_form_update', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
+        'content' => $this->renderPartial('_reasignacion_censo', array('form' => $form, 'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia), TRUE),
             )
     );
     ?>
@@ -99,7 +99,7 @@ $this->widget(
             'size' => 'large',
             'id' => 'guardarAsignacion',
             'context' => 'primary',
-            'label' => $model->isNewRecord ? 'Guardar' : 'Actualizar',
+            'label' => $model->isNewRecord ? 'Guardar' : 'Save',
         ));
         ?>
         <?php
