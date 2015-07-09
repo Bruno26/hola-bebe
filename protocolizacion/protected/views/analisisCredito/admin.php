@@ -75,6 +75,7 @@ return false;
 		'fecha_actualizacion',
 		'usuario_id_creacion',
 		'usuario_id_actualizacion',
+		'estatus',
 		*/
 array(
 'class'=>'booster.widgets.TbButtonColumn',

@@ -125,6 +125,10 @@
 	<?php echo CHtml::encode($data->usuario_id_actualizacion); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('estatus')); ?>:</b>
+	<?php echo CHtml::encode($data->estatus); ?>
+	<br />
+
 	*/ ?>
 
 </div>

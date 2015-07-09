@@ -114,7 +114,7 @@
                                                                                 <span>Registro Público</span>
                                                                             </a>
                                                                             <ul class="sub">
-                                                                                <li><a href="<?php // echo $this->createUrl('/registroPublico/create');     ?>">Cargar Nuevo Registro Público</a></li>
+                                                                                <li><a href="<?php // echo $this->createUrl('/registroPublico/create');      ?>">Cargar Nuevo Registro Público</a></li>
                                                                             </ul>
                                                                         </li>-->
                                     <!--                                    <li class="sub-menu">
@@ -123,7 +123,7 @@
                                                                                 <span>Registro de Documentos</span>
                                                                             </a>
                                                                             <ul class="sub">
-                                                                                <li><a href="<?php // echo $this->createUrl('/registroDocumento/create');     ?>">Cargar Nuevo Registro de Documento</a></li>
+                                                                                <li><a href="<?php // echo $this->createUrl('/registroDocumento/create');      ?>">Cargar Nuevo Registro de Documento</a></li>
                                                                             </ul>
                                                                         </li>-->
                                     <li class="sub-menu">
@@ -181,15 +181,11 @@
                                     </li>
                                     <li class="sub-menu">
                                         <a href="javascript:;">
-
                                             <i class="glyphicon glyphicon-home"></i>
                                             <span>Reasignación Vivienda</span>
                                         </a>
-
-                                  
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/reasignacionVivienda/create'); ?>">Reasignar Vivienda</a></li>
-
                                         </ul>
                                     </li>
                                 </ul>
@@ -217,6 +213,12 @@
                                     <!--<li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Reasignación</span></a></li>-->
                                 </ul>
                             </li>
+                            <li>
+                                <a href="<?php echo $this->createUrl('/analisisCredito/create'); ?>">
+                                    <i class="glyphicon glyphicon-asterisk"></i>
+                                    <span>Análisis de Crédito</span>
+                                </a>
+                            </li>
 
                         </ul>
                         <!-- sidebar menu end-->
@@ -234,7 +236,7 @@
             <div id="expirado"></div>
 
             <!--            <footer class='container col-md-12 col-xs-12 text-center'>
-                            Copyright &copy; <?php // echo date('Y');                                                                                                ?> by My Company.<br/>
+                            Copyright &copy; <?php // echo date('Y');                                                                                                 ?> by My Company.<br/>
                             All Rights Reserved.<br/>
             <?php // echo Yii::powered(); ?>
                         </footer>-->

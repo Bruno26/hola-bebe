@@ -1,10 +1,4 @@
-<?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
-	'id'=>'analisis-credito-form',
-	'enableAjaxValidation'=>false,
-)); ?>
-
 <p class="help-block">Fields with <span class="required">*</span> are required.</p>
-
 <?php echo $form->errorSummary($model); ?>
 
 	<?php echo $form->textFieldGroup($model,'nro_serial_bancario',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
@@ -67,12 +61,5 @@
 
 	<?php echo $form->textFieldGroup($model,'usuario_id_actualizacion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-<div class="form-actions">
-	<?php $this->widget('booster.widgets.TbButton', array(
-			'buttonType'=>'submit',
-			'context'=>'primary',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
-		)); ?>
-</div>
+	<?php echo $form->textFieldGroup($model,'estatus',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-<?php $this->endWidget(); ?>
