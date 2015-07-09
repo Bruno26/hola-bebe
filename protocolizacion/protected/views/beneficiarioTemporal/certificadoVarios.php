@@ -64,7 +64,7 @@ foreach ($recordBeneTemp as $model) {
             . "</table>"
             . "</div>"
             . "<br/>"
-            . "<div style='margin-top:2%'></div>";
+            . "<div style='margin-top:1%'></div>";
     $html.="<br/>"
             . "<div id='prueba'>"
             . "<table class='table table-striped' border='0'>"
@@ -75,8 +75,8 @@ foreach ($recordBeneTemp as $model) {
                 <td class='col-interno border-right' colspan='2'>
                     <span class='subtitulo'>Nombre Completo:</span> " . $model->nombre_completo . "<br>
                 </td>
-                <td class='col-interno border-right'>
-                    <span class='subtitulo'>Municipio:</span> " .nacionalidadCedula('NACIONALIDAD', 'CEDULA', $model->persona_id). "<br>
+                <td class='col-interno'>
+                    <span class='subtitulo'>Cédula:</span> " .nacionalidadCedula('NACIONALIDAD', 'CEDULA', $model->persona_id). "<br>
                 </td>
             </tr>"
             . "<tr>
