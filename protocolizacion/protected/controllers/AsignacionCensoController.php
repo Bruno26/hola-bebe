@@ -144,8 +144,6 @@ class AsignacionCensoController extends Controller {
         ));
     }
 
-    
-    
     //FUNCION PARA LA REASIGNACION DE OFICINA 
     public function actionCreateReasignacion($id) {
         $model = new AsignacionCenso;
@@ -201,11 +199,10 @@ class AsignacionCensoController extends Controller {
                 $nuevoInsert->fecha_actualizacion = 'now()';
                 $nuevoInsert->usuario_id_creacion = Yii::app()->user->id;
                 $nuevoInsert->estatus = 11;
-                if ($nuevoInsert->save()){
-                    
-                $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
-                }
+                if ($nuevoInsert->save()) {
 
+                    $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
+                }
             }
         }
         $this->render('createReasignacion', array(
