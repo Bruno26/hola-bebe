@@ -86,14 +86,14 @@ $this->widget('booster.widgets.TbGridView', array(
         'context' => 'info',
         'icon' => 'glyphicon glyphicon-print',
         'size' => 'large',
-        'id' => 'delete'
+        'id' => 'delete',
     ));
     ?>
 </div>
 
 <?php
 /* * ********  Revisar codigo para ejecturar accion para impromir                     ********* */
-$base64= Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/base64.js');
+$base64 = Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/base64.js');
 Yii::app()->clientScript->registerScript('delete', "
 
 

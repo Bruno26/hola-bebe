@@ -23,7 +23,7 @@ function nacionalidadCedula($selec, $select2, $iD) {
     return $saime['NACIONALIDAD'] . " - " . $saime['CEDULA'];
 }
 
-
+$parentesco = Maestro::FindMaestrosByPadreSelect(149);
 $html.='<style>
             p.saltodepagina{
                 page-break-after: always;
@@ -57,7 +57,7 @@ foreach ($recordBeneTemp as $model) {
             . "<table>"
             . "<tr>"
             . "<td align='left'><b><font size='6' color='#B40404'>"
-                . "Adjudicado:</font><font size='5'> " . nombre('PRIMER_NOMBRE', $model->persona_id) . " " . apellido('PRIMER_APELLIDO', $model->persona_id) . " <br/>Fecha de Adjudicación: " . date('d/m/Y',strtotime($model->fecha_creacion)) . "<br/>Fecha de Censo: _______________________ </font>"
+            . "Adjudicado:</font><font size='5'> " . nombre('PRIMER_NOMBRE', $model->persona_id) . " " . apellido('PRIMER_APELLIDO', $model->persona_id) . " <br/>Fecha de Adjudicación: " . date('d/m/Y', strtotime($model->fecha_creacion)) . "<br/>Fecha de Censo: _______________________ </font>"
             . "</td>"
             . "<td align='right'><img src='" . Yii::app()->baseUrl . "/images/LOGO_BANAVIH-1.jpg' style='width: 25%;'/></td>"
             . "</tr>"
@@ -77,6 +77,7 @@ foreach ($recordBeneTemp as $model) {
                 </td>
                 <td class='col-interno'>
                     <span class='subtitulo'>Cédula:</span> " .nacionalidadCedula('NACIONALIDAD', 'CEDULA', $model->persona_id). "<br>
+
                 </td>
             </tr>"
             . "<tr>
@@ -141,7 +142,52 @@ foreach ($recordBeneTemp as $model) {
             </tr>"
             . "</table>"
             . "</div>";
-    $html.="<p class='saltodepagina' />";
+
+    $html.="<br/>"
+            . "<div><h3 align='center'>Grupo Familiar</h3></div>"
+            . "<div id='prueba'>"
+            . "<table class='table table-striped' border='0'>"
+            . "<tr>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Cédula: <label>V<input type='checkbox'></label> <label>E<input type='checkbox'></label></span><br>
+                </td>
+                <td colspan='2' class='col-interno'>
+                    <span class='subtitulo'>Nombre Completo:</span><br>
+                </td>
+            </tr>"
+            . "<tr>
+                <td class='col-interno' colspan='3'>
+                <span class='subtitulo'>Parentesco: </span><br>";
+                $i = 0;
+                foreach ($parentesco as $key => $value) {
+                    $html.=" <label>" . $value . "&nbsp;<input type='checkbox'></label>";
+                    $i++;
+
+                }
+                $html.="</td>
+            </tr>"
+            . "<tr>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Lote Terreno Mt2:</span> " . $model->desarrollo->lote_terreno_mt2 . "<br>
+                </td>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Piso:</span> " . $model->vivienda->nro_piso . "<br>
+                </td>
+                <td class='col-interno'>
+                    <span class='subtitulo'>N° de la Vivienda:</span> " . $model->vivienda->nro_vivienda . "<br>
+                </td>
+            </tr>"
+            . "<tr>
+                <td colspan='2' style=' width: 50%;' class='border-right'>
+                    <span class='subtitulo'>Tipo de Inmueble:</span> " . $model->unidadHabitacional->genTipoInmueble->descripcion . "<br>
+                </td>
+                <td style=' width: 50%;'>
+                    <span class='subtitulo'>Área de Vivienda mt2:</span><br>
+                </td>
+            </tr>"
+            . "</table>"
+            . "</div>";
+    $html.="<p class='saltodepagina'/>";
 }
 
 
@@ -157,4 +203,3 @@ $mpdf->SetFooter('Generado desde el Sistema de Protocolización el ' . date('d-m
 $mpdf->Output('Beneficiario.pdf', 'D');
 exit;
 ?>
-
