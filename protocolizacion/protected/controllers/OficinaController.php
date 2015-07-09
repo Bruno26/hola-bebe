@@ -148,7 +148,8 @@ class OficinaController extends Controller {
             $ExisteJefeOficina = OficinaController::FindByIdPersona($idJefe);
             if (empty($ExisteJefeOficina)) {
                 $model->persona_id_jefe = $idJefe;
-                $model->usuario_id_creacion = Yii::app()->user->id;
+                $model->usuario_id_actualizacion = Yii::app()->user->id;
+                $model->observaciones = trim(strtoupper($_POST['Oficina']['observaciones']));
                 $model->fecha_actualizacion = 'now()';
                 if ($model->save()) {
                     $this->redirect(array('view', 'id' => $model->id_oficina));

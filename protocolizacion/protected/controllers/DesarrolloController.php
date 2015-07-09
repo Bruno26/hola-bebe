@@ -68,15 +68,15 @@ class DesarrolloController extends Controller {
                 $model->attributes = $_POST['Desarrollo'];
                 $model->nombre = $nombre;
                 $model->parroquia_id = $id_parroquia;
-                $model->descripcion = $_POST['Desarrollo']['descripcion'];
-                $model->urban_barrio = $_POST['Desarrollo']['urban_barrio'];
-                $model->av_call_esq_carr = $_POST['Desarrollo']['av_call_esq_carr'];
-                $model->zona = $_POST['Desarrollo']['zona'];
+                $model->descripcion = trim(strtoupper($_POST['Desarrollo']['descripcion']));
+                $model->urban_barrio = trim(strtoupper($_POST['Desarrollo']['urban_barrio']));
+                $model->av_call_esq_carr = trim(strtoupper($_POST['Desarrollo']['av_call_esq_carr']));
+                $model->zona = trim(strtoupper($_POST['Desarrollo']['zona']));
                 $model->lote_terreno_mt2 = ($_POST['Desarrollo']['lote_terreno_mt2']) ? $_POST['Desarrollo']['lote_terreno_mt2'] : '0';
-                $model->lindero_norte = $_POST['Desarrollo']['lindero_norte'];
-                $model->lindero_este = $_POST['Desarrollo']['lindero_este'];
-                $model->lindero_oeste = $_POST['Desarrollo']['lindero_oeste'];
-                $model->lindero_sur = $_POST['Desarrollo']['lindero_sur'];
+                $model->lindero_norte = trim(strtoupper($_POST['Desarrollo']['lindero_norte']));
+                $model->lindero_este = trim(strtoupper($_POST['Desarrollo']['lindero_este']));
+                $model->lindero_oeste = trim(strtoupper($_POST['Desarrollo']['lindero_oeste']));
+                $model->lindero_sur = trim(strtoupper($_POST['Desarrollo']['lindero_sur']));
                 $model->coordenadas = $_POST['Desarrollo']['coordenadas'];
                 $model->ente_ejecutor_id = $_POST['Desarrollo']['ente_ejecutor_id'];
                 $model->fuente_financiamiento_id = $_POST['Desarrollo']['fuente_financiamiento_id'];
@@ -131,6 +131,16 @@ class DesarrolloController extends Controller {
 
         if (isset($_POST['Desarrollo'])) {
             $model->attributes = $_POST['Desarrollo'];
+            $model->descripcion = trim(strtoupper($_POST['Desarrollo']['descripcion']));
+            $model->urban_barrio = trim(strtoupper($_POST['Desarrollo']['urban_barrio']));
+            $model->av_call_esq_carr = trim(strtoupper($_POST['Desarrollo']['av_call_esq_carr']));
+            $model->zona = trim(strtoupper($_POST['Desarrollo']['zona']));
+            $model->lindero_norte = trim(strtoupper($_POST['Desarrollo']['lindero_norte']));
+            $model->lindero_este = trim(strtoupper($_POST['Desarrollo']['lindero_este']));
+            $model->lindero_oeste = trim(strtoupper($_POST['Desarrollo']['lindero_oeste']));
+            $model->lindero_sur = trim(strtoupper($_POST['Desarrollo']['lindero_sur']));
+            $model->usuario_id_actualizacion = Yii::app()->user->id;
+            $model->fecha_actualizacion = 'now()';
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id_desarrollo));
         }
@@ -154,7 +164,8 @@ class DesarrolloController extends Controller {
 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        } else
+        }
+        else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
