@@ -23,7 +23,6 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         ?>
     </div>
 </div>
-
 <div class="row">
     <div class="col-md-12">
         <?php

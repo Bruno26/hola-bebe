@@ -26,6 +26,7 @@
  * @property CrugeUser $usuarioIdCreacion
  * @property CrugeUser $usuarioIdActualizacion
  * @property Maestro $estatus0
+ * @property Maestro $fkNacionalidad
  */
 class BeneficiarioTemporal extends CActiveRecord {
     /*   ---------------  Campos de Persona Necesarios ------------------ */
@@ -92,6 +93,7 @@ class BeneficiarioTemporal extends CActiveRecord {
             'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
             'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
             'estatus0' => array(self::BELONGS_TO, 'Maestro', 'estatus'),
+            'fkNacionalidad' => array(self::BELONGS_TO, 'Maestro', 'nacionalidad'),
         );
     }
 

@@ -36,9 +36,11 @@
  * @property integer $usuario_id_creacion
  * @property integer $usuario_id_actualizacion
  * @property integer $estatus
+ * @property integer $fuente_financiamiento_id
  *
  * The followings are the available model relations:
  * @property RegistroDocumento[] $registroDocumentos
+ * @property Maestro $estatus0
  * @property TasaFongar $tasaFongar
  * @property TasaInteres $tasaInteres
  * @property Maestro $tipoDocumento
@@ -46,9 +48,10 @@
  * @property CrugeUser $usuarioIdActualizacion
  * @property CrugeUser $usuarioIdCreacion
  * @property Vivienda $vivienda
- * @property Maestro $estatus0
+ * @property Maestro $fuenteFinanciamiento
  */
 class AnalisisCredito extends CActiveRecord {
+    public $costo_vivienda;
 
     /**
      * @return string the associated database table name
@@ -64,14 +67,14 @@ class AnalisisCredito extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('nro_serial_bancario, vivienda_id, unidad_familiar_id, tipo_documento_id, ingreso_total_familiar, monto_credito, plazo_credito_ano, nro_cuotas, monto_cuota_financiera, monto_prima_inicial_fg, fecha_protocolizacion, tasa_interes_id, tasa_fongar_id, status_migracion_id, gen_banco_id, tipo_cuenta, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, estatus', 'required'),
-            array('nro_serial_bancario, vivienda_id, unidad_familiar_id, tipo_documento_id, plazo_credito_ano, nro_cuotas, tasa_interes_id, tasa_mora_id, tasa_fongar_id, plazo_gracia, plazo_diferido, status_migracion_id, gen_banco_id, fuente_datos_entrada_id, usuario_id_creacion, usuario_id_actualizacion, estatus', 'numerical', 'integerOnly' => true),
+            array('nro_serial_bancario, vivienda_id, unidad_familiar_id, tipo_documento_id, ingreso_total_familiar, monto_credito, plazo_credito_ano, nro_cuotas, monto_cuota_financiera, monto_prima_inicial_fg, fecha_protocolizacion, tasa_interes_id, tasa_fongar_id, status_migracion_id, gen_banco_id, tipo_cuenta, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, estatus, fuente_financiamiento_id', 'required'),
+            array('nro_serial_bancario, vivienda_id, unidad_familiar_id, tipo_documento_id, plazo_credito_ano, nro_cuotas, tasa_interes_id, tasa_mora_id, tasa_fongar_id, plazo_gracia, plazo_diferido, status_migracion_id, gen_banco_id, fuente_datos_entrada_id, usuario_id_creacion, usuario_id_actualizacion, estatus, fuente_financiamiento_id', 'numerical', 'integerOnly' => true),
             array('tipo_cuenta', 'length', 'max' => 10),
             array('nro_cuenta_bancario', 'length', 'max' => 20),
             array('monto_inicial, sub_directo_habitacional, sub_vivienda_perdida, monto_cuota_f_total, alicuota_fondo_garantia', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id_analisis_credito, nro_serial_bancario, vivienda_id, unidad_familiar_id, tipo_documento_id, ingreso_total_familiar, monto_credito, monto_inicial, sub_directo_habitacional, sub_vivienda_perdida, plazo_credito_ano, nro_cuotas, monto_cuota_financiera, monto_cuota_f_total, monto_prima_inicial_fg, alicuota_fondo_garantia, fecha_protocolizacion, tasa_interes_id, tasa_mora_id, tasa_fongar_id, plazo_gracia, plazo_diferido, status_migracion_id, gen_banco_id, tipo_cuenta, nro_cuenta_bancario, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, estatus', 'safe', 'on' => 'search'),
+            array('id_analisis_credito, nro_serial_bancario, vivienda_id, unidad_familiar_id, tipo_documento_id, ingreso_total_familiar, monto_credito, monto_inicial, sub_directo_habitacional, sub_vivienda_perdida, plazo_credito_ano, nro_cuotas, monto_cuota_financiera, monto_cuota_f_total, monto_prima_inicial_fg, alicuota_fondo_garantia, fecha_protocolizacion, tasa_interes_id, tasa_mora_id, tasa_fongar_id, plazo_gracia, plazo_diferido, status_migracion_id, gen_banco_id, tipo_cuenta, nro_cuenta_bancario, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, estatus, fuente_financiamiento_id', 'safe', 'on' => 'search'),
         );
     }
 
@@ -83,6 +86,7 @@ class AnalisisCredito extends CActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'registroDocumentos' => array(self::HAS_MANY, 'RegistroDocumento', 'analisis_credito_id'),
+            'estatus0' => array(self::BELONGS_TO, 'Maestro', 'estatus'),
             'tasaFongar' => array(self::BELONGS_TO, 'TasaFongar', 'tasa_fongar_id'),
             'tasaInteres' => array(self::BELONGS_TO, 'TasaInteres', 'tasa_interes_id'),
             'tipoDocumento' => array(self::BELONGS_TO, 'Maestro', 'tipo_documento_id'),
@@ -90,7 +94,7 @@ class AnalisisCredito extends CActiveRecord {
             'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
             'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
             'vivienda' => array(self::BELONGS_TO, 'Vivienda', 'vivienda_id'),
-            'estatus0' => array(self::BELONGS_TO, 'Maestro', 'estatus'),
+            'fuenteFinanciamiento' => array(self::BELONGS_TO, 'Maestro', 'fuente_financiamiento_id'),
         );
     }
 
@@ -131,6 +135,8 @@ class AnalisisCredito extends CActiveRecord {
             'usuario_id_creacion' => 'Usuario Id Creacion',
             'usuario_id_actualizacion' => 'Usuario Id Actualizacion',
             'estatus' => 'Estatus',
+            'fuente_financiamiento_id' => 'Fuente Financiamiento',
+            'costo_vivienda' => 'Costo de la Vivienda',
         );
     }
 
@@ -183,6 +189,7 @@ class AnalisisCredito extends CActiveRecord {
         $criteria->compare('usuario_id_creacion', $this->usuario_id_creacion);
         $criteria->compare('usuario_id_actualizacion', $this->usuario_id_actualizacion);
         $criteria->compare('estatus', $this->estatus);
+        $criteria->compare('fuente_financiamiento_id', $this->fuente_financiamiento_id);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

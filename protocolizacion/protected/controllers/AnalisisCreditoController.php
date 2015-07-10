@@ -55,10 +55,10 @@ class AnalisisCreditoController extends Controller {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate() {
+    public function actionCreate($id) {
         $model = new AnalisisCredito;
-        $beneficiario = Beneficiario::model()->findByPk(52);
-
+        $beneficiario = Beneficiario::model()->findByPk($id);
+        
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
@@ -114,11 +114,11 @@ class AnalisisCreditoController extends Controller {
     /**
      * Manages all models.
      */
-    public function actionAdmin() {
-        $model = new AnalisisCredito('search');
+   public function actionAdmin() {
+        $model = new Beneficiario('search');
         $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['AnalisisCredito']))
-            $model->attributes = $_GET['AnalisisCredito'];
+        if (isset($_GET['Beneficiario']))
+            $model->attributes = $_GET['Beneficiario'];
 
         $this->render('admin', array(
             'model' => $model,

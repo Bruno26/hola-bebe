@@ -238,7 +238,7 @@ class BeneficiarioController extends Controller {
         $this->render('admin', array(
             'model' => $model,
         ));
-    }
+    }   
 
     /**
      * Returns the data model based on the primary key given in the GET variable.
