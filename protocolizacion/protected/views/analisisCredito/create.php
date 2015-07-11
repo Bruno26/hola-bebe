@@ -17,13 +17,12 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'context' => 'info',
             'headerIcon' => 'user',
             'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
-            'content' => $this->renderPartial('_beneficiario', array('form' => $form, 'beneficiario' => $beneficiario), TRUE),
+            'content' => $this->renderPartial('_beneficiario', array('form' => $form, 'beneficiario' => $beneficiario, 'model' => $model, 'desarrollo' => $desarrollo), TRUE),
                 )
         );
         ?>
     </div>
 </div>
-
 <div class="row">
     <div class="col-md-12">
         <?php

@@ -42,6 +42,7 @@ class GrupoFamiliarController extends Controller {
         $model = new GrupoFamiliar;
         $idBeneficiario = UnidadFamiliar::model()->findByPk($id);
         $traza = Traza::VerificarTraza($idBeneficiario->beneficiario_id); // verifica el guardado de la traza
+
         if ($traza != 1) {
             Generico::renderTraza($idBeneficiario->beneficiario_id); //renderiza a la traza
         }
@@ -49,6 +50,10 @@ class GrupoFamiliarController extends Controller {
 //    $this->performAjaxValidation($model);
 
         if (!empty($caso)) {
+            $list = Yii::app()->db->createCommand('select sum(ingreso_mensual_faov) as promedio from grupo_familiar where unidad_familiar_id =' . $id)->queryAll();
+            $list = number_format($list[0]['promedio'], 2, '.', '');
+            UnidadFamiliar::model()->updateByPk($id, array('ingreso_total_familiar_suma_faov' => $list));
+
             $idtraza = Traza::ObtenerIdTraza($idBeneficiario->beneficiario_id); // pemite la busqueda de la id de la traza 
             $guardartraza = Traza::actionInsertUpdateTraza(2, $idBeneficiario->beneficiario_id, 2, $idtraza); // permite insertar y actualizar la traza segun el caso 
             $this->redirect(array('beneficiario/createDatos', 'id' => $idBeneficiario->beneficiario_id));
@@ -179,6 +184,7 @@ class GrupoFamiliarController extends Controller {
             $Familiar->fecha_creacion = 'now()';
             $Familiar->fecha_actualizacion = 'now()';
             $Familiar->usuario_id_creacion = Yii::app()->user->id;
+            $Familiar->ingreso_mensual_faov = $_POST['ingresoMFaov'];
             if ($Familiar->save()) {
                 echo CJSON::encode(3);
             } else {

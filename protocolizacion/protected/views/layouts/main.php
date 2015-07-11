@@ -214,7 +214,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="<?php echo $this->createUrl('/analisisCredito/create'); ?>">
+                                <a href="<?php echo $this->createUrl('/analisisCredito/admin'); ?>">
                                     <i class="glyphicon glyphicon-asterisk"></i>
                                     <span>Análisis de Crédito</span>
                                 </a>
