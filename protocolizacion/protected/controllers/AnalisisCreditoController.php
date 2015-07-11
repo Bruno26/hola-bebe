@@ -60,6 +60,22 @@ class AnalisisCreditoController extends Controller {
         $beneficiario = Beneficiario::model()->findByPk($id);
         $desarrollo = $beneficiario->beneficiarioTemporal->desarrollo;
 
+        $totalSueldoDeclarado = array();
+        $totalSueldoFaov = array();
+        $TableSueldo = '<table class="table table-bordered">';
+        $TableSueldo.='<tr><td>Sueldo Declarado</td></tr>';
+        $TableSueldo.='<tr><td>' . number_format($beneficiario->ingreso_declarado, 2, '.', '') . '</td></tr>';
+        array_push($totalSueldoDeclarado, $beneficiario->ingreso_declarado);
+        $TableSueldo.='</table>';
+
+
+        $TableSueldoFaov = '<table class="table table-bordered">';
+        $TableSueldoFaov.='<tr><td>Sueldo Según Faov</td></tr>';
+        $TableSueldoFaov.='<tr><td>' . number_format($beneficiario->ingreso_promedio_faov, 2, '.', '') . '</td></tr>';
+        $TableSueldoFaov.='</table>';
+
+        $grupoFamiliar = GrupoFamiliar::model()->with(array('unidadFamiliar' => array('beneficiario_id' => $id)))->findAll();
+        echo '<pre>';var_dump($grupoFamiliar);Die;
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
@@ -69,7 +85,7 @@ class AnalisisCreditoController extends Controller {
                 $this->redirect(array('view', 'id' => $model->id_analisis_credito));
         }
 
-        $this->render('create', array('model' => $model, 'beneficiario' => $beneficiario, 'desarrollo' => $desarrollo));
+        $this->render('create', array('model' => $model, 'beneficiario' => $beneficiario, 'desarrollo' => $desarrollo, 'TableSueldo' => $TableSueldo, 'TableSueldoFaov' => $TableSueldoFaov));
     }
 
     /**

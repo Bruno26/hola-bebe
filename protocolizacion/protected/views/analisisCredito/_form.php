@@ -11,6 +11,11 @@
     </div>
 </div>
 <div class='row'>
+    <div class='col-md-6' id='ingreso_declarado'> <?php echo $TableSueldo ?></div>
+    <div class='col-md-6' id='ingreso_faov'><?php echo $TableSueldoFaov ?></div>
+</div>
+<div class='row' style="margin-bottom: 1%"></div>
+<div class='row'>
     <div class='col-md-4'>
         <?php echo $form->textFieldGroup($model, 'ultimo_sueldo', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
     </div>
