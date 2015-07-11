@@ -4,33 +4,7 @@
 
 
 
-<?php
-//$this->widget('booster.widgets.TbGridView', array(
-//    'id' => 'vsw-empadronador-censos-grid',
-//    'dataProvider' => $model->search(),
-//    'filter' => $model,
-//    'columns' => array(
-//        'id_desarrollo',
-//        'nombre_desarrollo',
-//        'id_unidad_habitacional',
-//        'nombre_unidad_multifamiliar',
-//        'id_beneficiario_temporal',
-//        'persona_id',
-//        /*
-//          'cedula',
-//          'nombre_adjudicado',
-//          'estatus',
-//          'iduser',
-//          'empadronador_usuario',
-//          'nro_piso',
-//          'nro_vivienda',
-//         */
-//        array(
-//            'class' => 'booster.widgets.TbButtonColumn',
-//        ),
-//    ),
-//));
-?>
+
 
 <?php
 $this->widget('booster.widgets.TbGridView', array(
