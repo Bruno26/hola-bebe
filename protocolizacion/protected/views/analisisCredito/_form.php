@@ -38,14 +38,26 @@
 <div class='row' style="margin-bottom: 1%"></div>
 <div class='row'>
     <div class='col-md-4'>
+        <?php
+        $criteria = new CDbCriteria;
+        $criteria->order = 'id_tasa_interes ASC';
+        echo $form->dropDownListGroup($model, 'tasa_interes_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-4',),
+            'widgetOptions' => array(
+                'data' => CHtml::listData(TasaInteres::model()->findAll($criteria), 'id_tasa_interes', 'nombre_tasa_interes'),
+                'htmlOptions' => array(
+                    'empty' => 'SELECCIONE',
+                ),
+            )
+                )
+        );
+        ?>
+    </div>
+    <div class='col-md-4'>
         <?php echo $form->textFieldGroup($model, 'ultimo_sueldo', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
     </div>
     <div class='col-md-4'>
         <label class="control-label required" for="AnalisisCredito_plazo_credito_ano">Plazo Credito Ano <span class="required"><i>*</i></span></label>
-        <input type="number" step="any" step="5"  max="35" min="25" class="span5 form-control" placeholder="Plazo Credito Ano" name="AnalisisCredito[plazo_credito_ano]" id="AnalisisCredito_plazo_credito_ano">
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'tasa_interes_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readonly' => 'readonly')))); ?>
+        <input type="number" step="any" step="5"  max="35" min="2" class="span5 form-control" placeholder="Plazo Credito Ano" name="AnalisisCredito[plazo_credito_ano]" id="AnalisisCredito_plazo_credito_ano">
     </div>
 </div>
 <div class='row'>
