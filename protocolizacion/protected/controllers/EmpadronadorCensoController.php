@@ -37,7 +37,7 @@ class EmpadronadorCensoController extends Controller {
         $vistaEmpadronador= new VswEmpadronadorCensos;
         $model = new EmpadronadorCenso;
         $asignacionC = AsignacionCenso::model()->findByPk($id);
-
+        
         $model->Des = $asignacionC->desarrollo->nombre;
         $model->parqDes = $asignacionC->desarrollo->fkParroquia->strdescripcion;
         $model->munDes = $asignacionC->desarrollo->fkParroquia->clvmunicipio0->strdescripcion;
