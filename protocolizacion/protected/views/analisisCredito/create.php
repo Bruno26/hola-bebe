@@ -45,7 +45,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'buttonType' => 'submit',
             'icon' => 'glyphicon glyphicon-floppy-saved',
             'size' => 'large',
-            'id' => 'guardar',
+            'id' => 'Generar Tsbla',
             'context' => 'primary',
             'label' => 'Guardar',
         ));

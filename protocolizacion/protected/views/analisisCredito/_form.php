@@ -1,13 +1,34 @@
+<?php $Validacion = Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/js_jquery.numeric.js'); ?>
+<?php Yii::app()->clientScript->registerScript('desarrolloVal', "
+         $(document).ready(function(){
+            $('#AnalisisCredito_plazo_credito_ano').numeric(); 
+        });
+        $('#AnalisisCredito_plazo_credito_ano').keypress(function(event) {
+            return false;
+        });
+        
+"); ?>
+
 <?php echo $form->hiddenField($model, 'vivienda_id'); ?>
 <div class='row'>
     <div class='col-md-4'>
         <?php echo $form->textFieldGroup($model, 'monto_inicial', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
     </div>
     <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'sub_directo_habitacional', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+        <?php echo $form->textFieldGroup($model, 'sub_directo_habitacional', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readonly' => 'readonly')))); ?>
     </div>
     <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'sub_vivienda_perdida', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+        <?php echo CHtml::activeLabel($model, 'sub_vivienda_perdida'); ?><br>
+        <?php
+        $this->widget('booster.widgets.TbSwitch', array('name' => 'sub_vivienda_perdida',
+            'options' => array(
+                'size' => 'large',
+                'onText' => 'SI',
+                'offText' => 'NO',
+            ),
+            'htmlOptions' => array(
+        )));
+        ?> 
     </div>
 </div>
 <div class='row'>
@@ -20,10 +41,11 @@
         <?php echo $form->textFieldGroup($model, 'ultimo_sueldo', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
     </div>
     <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'plazo_credito_ano', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+        <label class="control-label required" for="AnalisisCredito_plazo_credito_ano">Plazo Credito Ano <span class="required"><i>*</i></span></label>
+        <input type="number" step="any" step="5"  max="35" min="25" class="span5 form-control" placeholder="Plazo Credito Ano" name="AnalisisCredito[plazo_credito_ano]" id="AnalisisCredito_plazo_credito_ano">
     </div>
     <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'tasa_interes_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+        <?php echo $form->textFieldGroup($model, 'tasa_interes_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readonly' => 'readonly')))); ?>
     </div>
 </div>
 <div class='row'>
@@ -52,3 +74,5 @@
         ?>
     </div>
 </div>
+
+
