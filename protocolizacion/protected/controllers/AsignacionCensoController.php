@@ -182,28 +182,33 @@ class AsignacionCensoController extends Controller {
                 $idAsignacion = $_POST['AsignacionCenso']['persona_id'];
             }
 
-//            $model->persona_id = $idAsignacion;
-//            $model->fecha_asignacion = Generico::formatoFecha($_POST['AsignacionCenso']['fecha_asignacion']);
-//            $model->observaciones = trim(strtoupper($_POST['AsignacionCenso']['observaciones']));
-//            $model->oficina_id = $_POST['AsignacionCenso_oficina_id'];
             $model->fecha_actualizacion = 'now()';
             $model->usuario_id_creacion = Yii::app()->user->id;
             $model->estatus = 12;
+
             $nuevoInsert = new AsignacionCenso;
+
             if ($model->save()) {
+
+
                 $nuevoInsert->persona_id = $idAsignacion;
+                $nuevoInsert->desarrollo_id = $_POST['AsignacionCenso']['desarrollo_id'];
                 $nuevoInsert->fecha_asignacion = Generico::formatoFecha($_POST['AsignacionCenso']['fecha_asignacion']);
                 $nuevoInsert->observaciones = trim(strtoupper($_POST['AsignacionCenso']['observaciones']));
                 $nuevoInsert->oficina_id = $_POST['AsignacionCenso_oficina_id'];
+                $nuevoInsert->censado = isset($_POST['censado']) ? true : false;
                 $nuevoInsert->fecha_creacion = 'now()';
                 $nuevoInsert->fecha_actualizacion = 'now()';
                 $nuevoInsert->usuario_id_creacion = Yii::app()->user->id;
                 $nuevoInsert->estatus = 11;
+                
                 if ($nuevoInsert->save()) {
-
-                    $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
-                }
-            }
+                
+                    $this->redirect(array('view', 'id' => $nuevoInsert->id_asignacion_censo));
+                
+                    
+                } 
+            } 
         }
         $this->render('createReasignacion', array(
             'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia

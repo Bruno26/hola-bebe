@@ -132,7 +132,7 @@
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/asignacionCenso/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Asignación de Censo</span></a></li>
-                                            <li><a href="<?php echo $this->createUrl('/asignacionCenso/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Asignación</span></a></li>
+                                            <li><a href="<?php echo $this->createUrl('/vswAsignacionCenso/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Asignación</span></a></li>
                                             <li><a href="<?php echo $this->createUrl('/vswEmpadronadorCensos/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Empadronador</span></a></li>
 
                                         </ul>
