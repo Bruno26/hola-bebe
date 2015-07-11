@@ -52,6 +52,7 @@
  */
 class AnalisisCredito extends CActiveRecord {
     public $costo_vivienda;
+    public $ultimo_sueldo;
 
     /**
      * @return string the associated database table name
@@ -111,8 +112,8 @@ class AnalisisCredito extends CActiveRecord {
             'ingreso_total_familiar' => 'Ingreso Total Familiar',
             'monto_credito' => 'Monto Credito',
             'monto_inicial' => 'Monto Inicial',
-            'sub_directo_habitacional' => 'Sub Directo Habitacional',
-            'sub_vivienda_perdida' => 'Sub Vivienda Perdida',
+            'sub_directo_habitacional' => 'Subsidio Directo Habitacional',
+            'sub_vivienda_perdida' => 'Reconocimineto de Vivienda Perdida',
             'plazo_credito_ano' => 'Plazo Credito Ano',
             'nro_cuotas' => 'Nro Cuotas',
             'monto_cuota_financiera' => 'Monto Cuota Financiera',
@@ -120,7 +121,7 @@ class AnalisisCredito extends CActiveRecord {
             'monto_prima_inicial_fg' => 'Monto Prima Inicial Fg',
             'alicuota_fondo_garantia' => 'Alicuota Fondo Garantia',
             'fecha_protocolizacion' => 'Fecha Protocolizacion',
-            'tasa_interes_id' => 'Tasa Interes',
+            'tasa_interes_id' => 'Tasa Interes Aplicable',
             'tasa_mora_id' => 'Tasa Mora',
             'tasa_fongar_id' => 'Tasa Fongar',
             'plazo_gracia' => 'Plazo Gracia',
@@ -137,6 +138,7 @@ class AnalisisCredito extends CActiveRecord {
             'estatus' => 'Estatus',
             'fuente_financiamiento_id' => 'Fuente Financiamiento',
             'costo_vivienda' => 'Costo de la Vivienda',
+            'ultimo_sueldo' => 'Último Sueldo',
         );
     }
 

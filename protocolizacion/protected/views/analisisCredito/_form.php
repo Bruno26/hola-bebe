@@ -1,28 +1,4 @@
-<div class='row'>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'nro_serial_bancario', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'vivienda_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'costo_vivienda', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'unidad_familiar_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-</div>
-<div class='row'>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'tipo_documento_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'ingreso_total_familiar', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'monto_credito', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-</div>
+<?php echo $form->hiddenField($model, 'vivienda_id'); ?>
 <div class='row'>
     <div class='col-md-4'>
         <?php echo $form->textFieldGroup($model, 'monto_inicial', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
@@ -36,64 +12,38 @@
 </div>
 <div class='row'>
     <div class='col-md-4'>
+        <?php echo $form->textFieldGroup($model, 'ultimo_sueldo', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+    </div>
+    <div class='col-md-4'>
         <?php echo $form->textFieldGroup($model, 'plazo_credito_ano', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'nro_cuotas', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'monto_cuota_financiera', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-</div>
-<div class='row'>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'monto_cuota_f_total', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'monto_prima_inicial_fg', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'alicuota_fondo_garantia', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-</div>
-<div class='row'>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'fecha_protocolizacion', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
     </div>
     <div class='col-md-4'>
         <?php echo $form->textFieldGroup($model, 'tasa_interes_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
     </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'tasa_mora_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
 </div>
 <div class='row'>
     <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'tasa_fongar_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'plazo_gracia', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'plazo_diferido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-</div>
-<div class='row'>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'status_migracion_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'gen_banco_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'tipo_cuenta', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 10)))); ?>
-    </div>
-</div>
-<div class='row'>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'nro_cuenta_bancario', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20)))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'fuente_datos_entrada_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+        <?php
+        echo $form->datePickerGroup($model, 'fecha_protocolizacion', array('widgetOptions' =>
+            array(
+                'options' => array(
+                    'language' => 'es',
+                    'format' => 'dd/mm/yyyy',
+                    'startView' => 0,
+                    'minViewMode' => 0,
+                    'todayBtn' => 'linked',
+                    'weekStart' => 0,
+                    'endDate' => 'now()',
+                    'autoclose' => true,
+                ),
+                'htmlOptions' => array(
+                /* 'class' => 'span5 limpiar', */
+                ),
+            ),
+            'prepend' => '<i class="glyphicon glyphicon-calendar"></i>',
+            'beforeShowDay' => 'DisableDays',
+                )
+        );
+        ?>
     </div>
 </div>

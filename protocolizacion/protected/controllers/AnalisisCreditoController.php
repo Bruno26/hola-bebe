@@ -58,7 +58,8 @@ class AnalisisCreditoController extends Controller {
     public function actionCreate($id) {
         $model = new AnalisisCredito;
         $beneficiario = Beneficiario::model()->findByPk($id);
-        
+        $desarrollo = $beneficiario->beneficiarioTemporal->desarrollo;
+
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
@@ -68,7 +69,7 @@ class AnalisisCreditoController extends Controller {
                 $this->redirect(array('view', 'id' => $model->id_analisis_credito));
         }
 
-        $this->render('create', array('model' => $model, 'beneficiario' => $beneficiario));
+        $this->render('create', array('model' => $model, 'beneficiario' => $beneficiario, 'desarrollo' => $desarrollo));
     }
 
     /**
@@ -110,11 +111,10 @@ class AnalisisCreditoController extends Controller {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
-    
     /**
      * Manages all models.
      */
-   public function actionAdmin() {
+    public function actionAdmin() {
         $model = new Beneficiario('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['Beneficiario']))
