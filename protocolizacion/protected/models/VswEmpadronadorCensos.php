@@ -19,17 +19,14 @@
  * @property string $nro_vivienda
  */
 class VswEmpadronadorCensos extends CActiveRecord {
-    /**
-     * @return primary key of the wiew
-     */
-    public function primaryKey(){
-        return 'empadronador_usuario';
-        
-    }
 
     /**
      * @return string the associated database table name
      */
+    public function primaryKey() {
+        return 'empadronador_usuario';
+    }
+
     public function tableName() {
         return 'vsw_empadronador_censos';
     }

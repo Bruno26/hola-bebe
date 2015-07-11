@@ -139,6 +139,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 
     <?php echo $form->hiddenField($model, 'persona_id'); ?>
     <?php echo $form->hiddenField($model, 'fecha_nac'); ?>
+    <?php echo $form->hiddenField($model, 'desarrollo_id'); ?>
 
     <div class='col-md-4'>
         <?php
