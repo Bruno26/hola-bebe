@@ -40,8 +40,6 @@ $this->widget(
 </div>
 
 
-
-
 <div class="form-actions">
 
 
