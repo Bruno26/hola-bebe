@@ -32,7 +32,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'context' => 'info',
             'headerIcon' => 'user',
             'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
-            'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model), TRUE),
+            'content' => $this->renderPartial('_form', array('form' => $form, 'model' => $model, 'TableSueldo' => $TableSueldo, 'TableSueldoFaov'=>$TableSueldoFaov), TRUE),
                 )
         );
         ?>
@@ -45,7 +45,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'buttonType' => 'submit',
             'icon' => 'glyphicon glyphicon-floppy-saved',
             'size' => 'large',
-            'id' => 'guardar',
+            'id' => 'Generar Tsbla',
             'context' => 'primary',
             'label' => 'Guardar',
         ));

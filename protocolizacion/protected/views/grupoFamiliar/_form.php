@@ -63,7 +63,16 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
         ?>
     </div>
     <div class="col-md-4">
-        <?php echo $form->textFieldGroup($model, 'tipo_sujeto_atencion', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+        <?php
+         echo $form->dropDownListGroup($model, 'tipo_sujeto_atencion', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+            'widgetOptions' => array(
+                'data' => Maestro::FindMaestrosByPadreSelect(228, 'descripcion ASC'),
+                'htmlOptions' => array('empty' => 'SELECCIONE',
+                ),
+            )
+                )
+        );
+        ?>
     </div>
     <div class="col-md-2">
         <?php echo $form->textFieldGroup($model, 'ingreso_mensual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16)))); ?>

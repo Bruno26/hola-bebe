@@ -59,7 +59,39 @@ class AnalisisCreditoController extends Controller {
         $model = new AnalisisCredito;
         $beneficiario = Beneficiario::model()->findByPk($id);
         $desarrollo = $beneficiario->beneficiarioTemporal->desarrollo;
+        $desarrollo->fuente_financiamiento_id = $desarrollo->fuente_financiamiento_id;
 
+        $grupoFamiliar = "SELECT gr.ingreso_mensual, gr.ingreso_mensual_faov  FROM grupo_familiar gr
+                        JOIN unidad_familiar fa ON  gr.unidad_familiar_id= fa.id_unidad_familiar AND fa.beneficiario_id = " . $id . "AND fa.estatus = 77
+                        WHERE gr.estatus = 41";
+        $result = Yii::app()->db->createCommand($grupoFamiliar)->queryAll();
+        
+        $totalSueldoDeclarado = array();
+        $totalSueldoFaov = array();
+        $TableSueldo = '<table class="table table-bordered">';
+        $TableSueldo.='<th>Sueldo Declarado</th>';
+        $TableSueldo.='<tr><td>Bs. ' . number_format($beneficiario->ingreso_declarado, 2, '.', '') . '</td></tr>';
+
+
+        $TableSueldoFaov = '<table class="table table-bordered">';
+        $TableSueldoFaov.='<th>Sueldo Según Faov</th>';
+        $TableSueldoFaov.='<tr><td>Bs. ' . number_format($beneficiario->ingreso_promedio_faov, 2, '.', '') . '</td></tr>';
+        array_push($totalSueldoDeclarado, $beneficiario->ingreso_declarado);
+        array_push($totalSueldoFaov, $beneficiario->ingreso_promedio_faov);
+        
+        foreach ($result AS $fila){
+            $TableSueldo.='<tr><td> Bs.'.$fila['ingreso_mensual'].'</td></tr>';
+            $TableSueldoFaov.='<tr><td> Bs.'.$fila['ingreso_mensual_faov'].'</td></tr>';
+            array_push($totalSueldoDeclarado, $fila['ingreso_mensual']);
+            array_push($totalSueldoFaov, $fila['ingreso_mensual_faov']);
+            
+        }
+        $TableSueldo.='<th>Total: Bs.'.array_sum($totalSueldoDeclarado).' <input type="radio" name="opciones" id="opciones_2" checked value="'.array_sum($totalSueldoDeclarado).'"></th>';
+        $TableSueldoFaov.='<th>Total: Bs.'.array_sum($totalSueldoFaov).' <input type="radio" name="opciones" id="opciones_1" value="'.array_sum($totalSueldoFaov).'"></th>';
+
+        $TableSueldo.='</table>';
+        $TableSueldoFaov.='</table>';
+        
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
@@ -69,7 +101,7 @@ class AnalisisCreditoController extends Controller {
                 $this->redirect(array('view', 'id' => $model->id_analisis_credito));
         }
 
-        $this->render('create', array('model' => $model, 'beneficiario' => $beneficiario, 'desarrollo' => $desarrollo));
+        $this->render('create', array('model' => $model, 'beneficiario' => $beneficiario, 'desarrollo' => $desarrollo, 'TableSueldo' => $TableSueldo, 'TableSueldoFaov' => $TableSueldoFaov));
     }
 
     /**
