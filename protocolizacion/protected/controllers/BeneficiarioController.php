@@ -81,6 +81,7 @@ class BeneficiarioController extends Controller {
                     $model->fecha_ultimo_censo = Generico::formatoFecha($_POST['Beneficiario']['fecha_ultimo_censo']);
                     $model->usuario_id_creacion = Yii::app()->user->id;
                     $model->persona_id = $Existe->persona_id;
+                    $model->estatus_beneficiario_id= 223;
                     if ($model->save()) {
                         $viviendaUpdate = ViviendaController::loadModel($Existe->vivienda_id);
                         $viviendaUpdate->construccion_mt2 = $_POST['Vivienda']['construccion_mt2'];
@@ -183,6 +184,9 @@ class BeneficiarioController extends Controller {
             $model->telefono_trabajo = $_POST['Beneficiario']['telefono_trabajo'];
             $model->gen_cargo_id = $_POST['Beneficiario']['gen_cargo_id'];
             $model->observacion = $_POST['Beneficiario']['observacion'];
+            $model->observacion = $_POST['Beneficiario']['observacion'];
+            $model->estatus_beneficiario_id= 222;
+            $model->usuario_id_actualizacion = Yii::app()->user->id;;
 
 
             if ($model->save()) {

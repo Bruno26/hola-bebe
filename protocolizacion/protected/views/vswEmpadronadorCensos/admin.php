@@ -52,7 +52,7 @@ $this->widget('booster.widgets.TbGridView', array(
                     'label' => 'Generar Censo',
                     'icon' => 'glyphicon glyphicon-new-window',
                     'size' => 'medium',
-                    'url' => 'Yii::app()->createUrl("beneficiario/culminarRegistro", array("id"=>$data->id_beneficiario_temporal))',
+                    'url' => 'Yii::app()->createUrl("beneficiario/create", array("id"=>$data->id_beneficiario_temporal))',
                 ),
              
             ),
