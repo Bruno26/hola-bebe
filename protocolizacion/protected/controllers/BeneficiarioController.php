@@ -81,8 +81,11 @@ class BeneficiarioController extends Controller {
                     $model->fecha_ultimo_censo = Generico::formatoFecha($_POST['Beneficiario']['fecha_ultimo_censo']);
                     $model->usuario_id_creacion = Yii::app()->user->id;
                     $model->persona_id = $Existe->persona_id;
-                    $model->estatus_beneficiario_id= 223;
+                    $model->estatus_beneficiario_id = 223;
                     if ($model->save()) {
+//                        $Existe->estatus = 224;
+//                        $Existe->save();
+
                         $viviendaUpdate = ViviendaController::loadModel($Existe->vivienda_id);
                         $viviendaUpdate->construccion_mt2 = $_POST['Vivienda']['construccion_mt2'];
                         if ($viviendaUpdate->save()) {
@@ -99,6 +102,14 @@ class BeneficiarioController extends Controller {
                             $unidad_familiar->estatus = 77;
                             if ($unidad_familiar->save()) {
                                 $traza = Traza::actionInsertUpdateTraza(1, $model->id_beneficiario, 1);
+
+                                $n = BeneficiarioTemporal::model()->updateByPk($model->beneficiario_temporal_id, array(
+                                    'estatus' => 224,
+                                    'usuario_id_actualizacion' => Yii::app()->user->id,
+                                    'fecha_actualizacion' => 'now()'
+                                ));
+                                
+                               
                                 $this->redirect(array('grupoFamiliar/create', 'id' => $unidad_familiar->id_unidad_familiar));
                                 Yii::app()->end();
                             }
@@ -184,18 +195,25 @@ class BeneficiarioController extends Controller {
             $model->telefono_trabajo = $_POST['Beneficiario']['telefono_trabajo'];
             $model->gen_cargo_id = $_POST['Beneficiario']['gen_cargo_id'];
             $model->observacion = $_POST['Beneficiario']['observacion'];
-            $model->observacion = $_POST['Beneficiario']['observacion'];
-            $model->estatus_beneficiario_id= 222;
-            $model->usuario_id_actualizacion = Yii::app()->user->id;;
+            $model->estatus_beneficiario_id = 222;
+            $model->usuario_id_actualizacion = Yii::app()->user->id;
 
 
             if ($model->save()) {
+           
+                $IdBeneficiarioTmp = $model->beneficiario_temporal_id;
+                $n = BeneficiarioTemporal::model()->updateByPk($IdBeneficiarioTmp, array(
+                    'estatus' => 79,
+                    'usuario_id_actualizacion' => Yii::app()->user->id,
+                    'fecha_actualizacion' => 'now()'
+                ));
+
                 $idtraza = Traza::ObtenerIdTraza($model->id_beneficiario); // pemite la busqueda de la id de la traza 
                 $delete = Traza::model()->findByPk($idtraza)->delete();
 
                 $this->redirect(array('admin'));
                 Yii::app()->end();
-            }
+            } 
         }
 
         $this->render('createDatos', array(
@@ -242,7 +260,7 @@ class BeneficiarioController extends Controller {
         $this->render('admin', array(
             'model' => $model,
         ));
-    }   
+    }
 
     /**
      * Returns the data model based on the primary key given in the GET variable.

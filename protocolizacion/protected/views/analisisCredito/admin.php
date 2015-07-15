@@ -50,7 +50,7 @@ return false;
 </div>
 
 <?php
-
+$model->estatus_beneficiario_id=222;
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'beneficiario-grid',
     'dataProvider' => $model->search(),
