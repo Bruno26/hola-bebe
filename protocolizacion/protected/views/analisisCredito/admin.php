@@ -50,7 +50,6 @@ return false;
 </div>
 
 <?php
-
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'beneficiario-grid',
     'dataProvider' => $model->search(),
