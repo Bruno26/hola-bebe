@@ -7,6 +7,7 @@
 <h1>Gestión de Adjudicados Temporales</h1>
 
 <?php
+$model->estatus=20;
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'beneficiario-temporal-grid',
     'type' => 'striped bordered condensed',
