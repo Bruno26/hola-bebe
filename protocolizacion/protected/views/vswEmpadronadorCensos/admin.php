@@ -1,10 +1,14 @@
 
 
+<?php  
+//function traza($iD) {
+//     $traza = Traza::getTraza($iD);
+//     return $traza;
+// }
+
+ ?>
+
 <h1>Gestión de Empadronador</h1>
-
-
-
-
 
 <?php
 $this->widget('booster.widgets.TbGridView', array(
@@ -13,7 +17,7 @@ $this->widget('booster.widgets.TbGridView', array(
     'dataProvider' => $model->search(),
     'columns' => array(
         'id_beneficiario_temporal' => array(
-            'header' => 'Id Beneficiario',
+            'header' => 'Id Beneficiario Temporal',
             'name' => 'id_beneficiario_temporal',
             'value' => '$data->id_beneficiario_temporal',
         ),
@@ -37,6 +41,13 @@ $this->widget('booster.widgets.TbGridView', array(
             'name' => 'nombre_unidad_multifamiliar',
             'value' => '$data->nombre_unidad_multifamiliar',
         ),
+//              array(
+//             'name' => 'id_beneficiario',
+//             'header' => 'Avance',
+//             'value' => 'traza($data->id_beneficiario)',
+//             'htmlOptions' => array('style' => 'text-align: center', 'width' => '10px'),
+//
+//         ),
         array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
@@ -46,13 +57,14 @@ $this->widget('booster.widgets.TbGridView', array(
                     'label' => 'Re-asignacion Vivienda',
                     'icon' => 'glyphicon glyphicon-user',
                     'size' => 'medium',
-                    'url' => 'Yii::app()->createUrl("reasignacionVivienda/create/", array("id"=>$data->id_beneficiario_temporal))',
+                    'url' => 'Yii::app()->createUrl("reasignacionVivienda/create/", array("id"=>$data->id_beneficiario))',
                 ),
                 'censo' => array(
                     'label' => 'Generar Censo',
                     'icon' => 'glyphicon glyphicon-new-window',
                     'size' => 'medium',
-                    'url' => 'Yii::app()->createUrl("beneficiario/create", array("id"=>$data->id_beneficiario_temporal))',
+                    //'url' => 'Yii::app()->createUrl("beneficiario/culminarRegistro", array("id"=>$data->id_beneficiario))',
+                    'url' => 'Yii::app()->createUrl("/Beneficiario/culminarRegistro", array("id"=>$data->id_beneficiario))',
                 ),
              
             ),

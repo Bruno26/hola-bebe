@@ -16,7 +16,7 @@
             ?>
         </div>
         <div class="col-md-6">
-            <?php echo $form->textFieldGroup($model, 'cedulaAnterior', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'onblur' => "buscarBenefAnterior($('#ReasignacionVivienda_nacionalidadAnterior').val(), $(this).val(),1)")))); ?>
+            <?php echo $form->textFieldGroup($model, 'cedulaAnterior', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5',  'readonly' => true )))); ?>
         </div>
     </div>
 </div>

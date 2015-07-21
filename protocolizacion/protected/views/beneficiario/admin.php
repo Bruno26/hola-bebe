@@ -32,26 +32,6 @@ return false;
 
 
 
-<?php // echo CHtml::link('Advanced Search', '#', array('class' => 'search-button btn'));  ?>
-<!--<div class="search-form" style="display:none">-->
-<?php
-//    $this->renderPartial('_search', array(
-//        'model' => $model,
-//    ));
-?>
-<!--</div> search-form -->
-
-<div style="text-align: right;vertical-align: middle;">
-    <div align="right" class="row">
-        <?php
-        $this->widget('application.extensions.PageSize.PageSize', array(
-            'mGridId' => 'beneficiario-grid', //Gridview id
-            'mPageSize' => @$_GET['pageSize'],
-            'mDefPageSize' => Yii::app()->params['defaultPageSize'],
-        ));
-        ?>
-    </div>
-</div>
 
 <?php
 $model->estatus_beneficiario_id=223;
@@ -110,16 +90,16 @@ $this->widget('booster.widgets.TbGridView', array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
-            'template' => '{ver} {continuar}',
+            'template' => '{continuar}',
             'buttons' => array(
 
 
-                'ver' => array(
-                    'label' => 'Ver',
-                    'icon' => 'eye-open',
-                    'size' => 'medium',
-                    'url' => 'Yii::app()->createUrl("beneficiario/view/", array("id"=>$data->id_beneficiario))',
-                ),
+//                'ver' => array(
+//                    'label' => 'Ver',
+//                    'icon' => 'eye-open',
+//                    'size' => 'medium',
+//                    'url' => 'Yii::app()->createUrl("beneficiario/view/", array("id"=>$data->id_beneficiario))',
+//                ),
 
                 'continuar' => array(
                     'label' => 'Continuar Censo',

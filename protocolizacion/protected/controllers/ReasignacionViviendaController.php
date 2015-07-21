@@ -40,6 +40,13 @@ class ReasignacionViviendaController extends Controller {
      */
     public function actionCreate() {
         $model = new ReasignacionVivienda;
+//        $beneficiario = Beneficiario::model()->findByPk($id);
+//        var_dump($beneficiario); die;
+//        
+//        if(!empty($beneficiario)){
+//            $model->nacionalidadAnterior = $beneficiario->beneficiarioTemporal->nacionalidad;
+//            $model->cedulaAnterior = $beneficiario->beneficiarioTemporal->cedula;
+//        }
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
