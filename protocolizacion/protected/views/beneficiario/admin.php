@@ -74,8 +74,6 @@ $this->widget('booster.widgets.TbGridView', array(
             'name' => 'fecha_ultimo_censo',
             'value' => 'Yii::app()->dateFormatter->format("d/MM/y", strtotime($data->fecha_ultimo_censo))',
             'htmlOptions' => array('style' => 'text-align: center', 'width' => '100px'),
-
-        //'header' => 'Creación',
         ),
         array(
              'name' => 'id_beneficiario',
@@ -85,14 +83,12 @@ $this->widget('booster.widgets.TbGridView', array(
 
          ),
 
-
         array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
             'template' => '{continuar}',
             'buttons' => array(
-
 
 //                'ver' => array(
 //                    'label' => 'Ver',

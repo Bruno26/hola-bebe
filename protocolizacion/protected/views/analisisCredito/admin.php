@@ -30,13 +30,6 @@ return false;
 
 <h1 class="text-center">Análisis de Crédito</h1>
 
-<?php
-//    $this->renderPartial('_search', array(
-//        'model' => $model,
-//    ));
-?>
-<!--</div> search-form -->
-
 
 
 <?php

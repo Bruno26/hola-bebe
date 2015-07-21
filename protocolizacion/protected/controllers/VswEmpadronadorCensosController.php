@@ -105,6 +105,8 @@ class VswEmpadronadorCensosController extends Controller {
         ));
     }
 
+    
+    
     /**
      * Manages all models.
      */

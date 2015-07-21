@@ -1,7 +1,6 @@
 
 <h1>Detalle de Adjudicado Temporal #<?php echo $model->id_beneficiario_temporal; ?></h1>
 
- 
 <?php $this->widget('booster.widgets.TbPanel', array(
     'context' => 'primary',
     'content' => $this->renderPartial('_view', array('model' => $model, 'desarrollo' => $desarrollo), TRUE),

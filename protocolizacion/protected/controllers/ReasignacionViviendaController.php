@@ -47,7 +47,6 @@ class ReasignacionViviendaController extends Controller {
 //            $model->nacionalidadAnterior = $beneficiario->beneficiarioTemporal->nacionalidad;
 //            $model->cedulaAnterior = $beneficiario->beneficiarioTemporal->cedula;
 //        }
-
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 

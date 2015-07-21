@@ -1,7 +1,6 @@
 
 <h1>Detalle del Beneficiario #<?php echo $model->id_beneficiario; ?></h1>
 
-
 <?php $this->widget('booster.widgets.TbPanel', array(
     'context' => 'primary',
     'content' => $this->renderPartial('_view', array('model' => $model), TRUE),

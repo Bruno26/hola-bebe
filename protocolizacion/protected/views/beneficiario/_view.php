@@ -19,7 +19,6 @@
     </div>
     
     
-    
 </div>
 
 <?php // echo CHtml::encode($data->getAttributeLabel('id_beneficiario'));      ?>
