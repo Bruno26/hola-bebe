@@ -1,99 +1,90 @@
-<div class='row'>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'nro_serial_bancario', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'vivienda_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'costo_vivienda', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'unidad_familiar_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-</div>
-<div class='row'>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'tipo_documento_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'ingreso_total_familiar', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'monto_credito', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-</div>
+<?php $Validacion = Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/js_jquery.numeric.js'); ?>
+<?php Yii::app()->clientScript->registerScript('desarrolloVal', "
+         $(document).ready(function(){
+            $('#AnalisisCredito_plazo_credito_ano').numeric(); 
+        });
+        $('#AnalisisCredito_plazo_credito_ano').keypress(function(event) {
+            return false;
+        });
+        
+"); ?>
+
+<?php echo $form->hiddenField($model, 'vivienda_id'); ?>
 <div class='row'>
     <div class='col-md-4'>
         <?php echo $form->textFieldGroup($model, 'monto_inicial', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
     </div>
     <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'sub_directo_habitacional', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+        <?php echo $form->textFieldGroup($model, 'sub_directo_habitacional', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readonly' => 'readonly')))); ?>
     </div>
     <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'sub_vivienda_perdida', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+        <?php echo CHtml::activeLabel($model, 'sub_vivienda_perdida'); ?><br>
+        <?php
+        $this->widget('booster.widgets.TbSwitch', array('name' => 'sub_vivienda_perdida',
+            'options' => array(
+                'size' => 'large',
+                'onText' => 'SI',
+                'offText' => 'NO',
+            ),
+            'htmlOptions' => array(
+        )));
+        ?> 
+    </div>
+</div>
+<div class='row'>
+    <div class='col-md-6' id='ingreso_declarado'> <?php echo $TableSueldo ?></div>
+    <div class='col-md-6' id='ingreso_faov'><?php echo $TableSueldoFaov ?></div>
+</div>
+<div class='row' style="margin-bottom: 1%"></div>
+<div class='row'>
+    <div class='col-md-4'>
+        <?php
+        $criteria = new CDbCriteria;
+        $criteria->order = 'id_tasa_interes ASC';
+        echo $form->dropDownListGroup($model, 'tasa_interes_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-4',),
+            'widgetOptions' => array(
+                'data' => CHtml::listData(TasaInteres::model()->findAll($criteria), 'id_tasa_interes', 'nombre_tasa_interes'),
+                'htmlOptions' => array(
+                    'empty' => 'SELECCIONE',
+                ),
+            )
+                )
+        );
+        ?>
+    </div>
+    <div class='col-md-4'>
+        <?php echo $form->textFieldGroup($model, 'ultimo_sueldo', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+    </div>
+    <div class='col-md-4'>
+        <label class="control-label required" for="AnalisisCredito_plazo_credito_ano">Plazo Credito Ano <span class="required"><i>*</i></span></label>
+        <input type="number" step="any" step="5"  max="35" min="2" class="span5 form-control" placeholder="Plazo Credito Ano" name="AnalisisCredito[plazo_credito_ano]" id="AnalisisCredito_plazo_credito_ano">
     </div>
 </div>
 <div class='row'>
     <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'plazo_credito_ano', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'nro_cuotas', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'monto_cuota_financiera', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-</div>
-<div class='row'>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'monto_cuota_f_total', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'monto_prima_inicial_fg', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'alicuota_fondo_garantia', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-</div>
-<div class='row'>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'fecha_protocolizacion', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'tasa_interes_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'tasa_mora_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+        <?php
+        echo $form->datePickerGroup($model, 'fecha_protocolizacion', array('widgetOptions' =>
+            array(
+                'options' => array(
+                    'language' => 'es',
+                    'format' => 'dd/mm/yyyy',
+                    'startView' => 0,
+                    'minViewMode' => 0,
+                    'todayBtn' => 'linked',
+                    'weekStart' => 0,
+                    'endDate' => 'now()',
+                    'autoclose' => true,
+                ),
+                'htmlOptions' => array(
+                /* 'class' => 'span5 limpiar', */
+                ),
+            ),
+            'prepend' => '<i class="glyphicon glyphicon-calendar"></i>',
+            'beforeShowDay' => 'DisableDays',
+                )
+        );
+        ?>
     </div>
 </div>
-<div class='row'>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'tasa_fongar_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'plazo_gracia', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'plazo_diferido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-</div>
-<div class='row'>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'status_migracion_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'gen_banco_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'tipo_cuenta', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 10)))); ?>
-    </div>
-</div>
-<div class='row'>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'nro_cuenta_bancario', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20)))); ?>
-    </div>
-    <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'fuente_datos_entrada_id', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-</div>
+
+

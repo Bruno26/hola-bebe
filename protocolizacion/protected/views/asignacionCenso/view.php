@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1>Detalle Asignacion de Censo</h1>
+<h1>Detalle Asignación de Censo</h1>
 
 
 
@@ -26,7 +26,7 @@ $this->breadcrumbs=array(
         'size' => 'large',
         'label' => 'Regresar',
         'htmlOptions' => array(
-            'onclick' => 'document.location.href ="' . $this->createUrl('/asignacionCenso/admin') . '"',
+            'onclick' => 'document.location.href ="' . $this->createUrl('/vswAsignacionCenso/admin') . '"',
         )
     ));
     ?>

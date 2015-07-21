@@ -1,15 +1,24 @@
 <?php
 
-class EmpadronadorCensoController extends Controller {
+class VswAsignacionCensoController extends Controller {
+    /**
+     * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
+     * using two-column layout. See 'protected/views/layouts/column2.php'.
+     */
+//    public $layout = '//layouts/column2';
 
     /**
      * @return array action filters
      */
     public function filters() {
-        return array('accessControl', array('CrugeAccessControlFilter'), // perform access control for CRUD operations
-        );
+        return array(array('CrugeAccessControlFilter'));
     }
 
+    /**
+     * Specifies the access control rules.
+     * This method is used by the 'accessControl' filter.
+     * @return array access control rules
+     */
     public function accessRules() {
         return array(
             array('allow',
@@ -33,31 +42,20 @@ class EmpadronadorCensoController extends Controller {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate($id) {
-        $vistaEmpadronador= new VswEmpadronadorCensos;
-        $model = new EmpadronadorCenso;
-        $asignacionC = AsignacionCenso::model()->findByPk($id);
-        
-        $model->Des = $asignacionC->desarrollo->nombre;
-        $model->parqDes = $asignacionC->desarrollo->fkParroquia->strdescripcion;
-        $model->munDes = $asignacionC->desarrollo->fkParroquia->clvmunicipio0->strdescripcion;
-        $model->edoDes = $asignacionC->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion;
+    public function actionCreate() {
+        $model = new VswAsignacionCenso;
 
-        $unidadHab = new CDbCriteria;
-        $unidadHab->addCondition('t.desarrollo_id= :desarrollo_id');
-        $unidadHab->params = array(':desarrollo_id' => $asignacionC->desarrollo_id);
-        $unidadHab->order = 't.nombre ASC';
+// Uncomment the following line if AJAX validation is needed
+// $this->performAjaxValidation($model);
 
-
-        if (isset($_POST['EmpadronadorCenso'])) {
-            $model->attributes = $_POST['EmpadronadorCenso'];
+        if (isset($_POST['VswAsignacionCenso'])) {
+            $model->attributes = $_POST['VswAsignacionCenso'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_empadronador_censo));
+                $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
         }
 
         $this->render('create', array(
-            'model' => $model, 'asignacionC' => $asignacionC,
-            'unidadHab' => $unidadHab, 'vistaEmpadronador'=>$vistaEmpadronador
+            'model' => $model,
         ));
     }
 
@@ -72,10 +70,10 @@ class EmpadronadorCensoController extends Controller {
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-        if (isset($_POST['EmpadronadorCenso'])) {
-            $model->attributes = $_POST['EmpadronadorCenso'];
+        if (isset($_POST['VswAsignacionCenso'])) {
+            $model->attributes = $_POST['VswAsignacionCenso'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_empadronador_censo));
+                $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
         }
 
         $this->render('update', array(
@@ -101,13 +99,23 @@ class EmpadronadorCensoController extends Controller {
     }
 
     /**
+     * Lists all models.
+     */
+    public function actionIndex() {
+        $dataProvider = new CActiveDataProvider('VswAsignacionCenso');
+        $this->render('index', array(
+            'dataProvider' => $dataProvider,
+        ));
+    }
+
+    /**
      * Manages all models.
      */
     public function actionAdmin() {
-        $model = new EmpadronadorCenso('search');
+        $model = new VswAsignacionCenso('search');
         $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['EmpadronadorCenso']))
-            $model->attributes = $_GET['EmpadronadorCenso'];
+        if (isset($_GET['VswAsignacionCenso']))
+            $model->attributes = $_GET['VswAsignacionCenso'];
 
         $this->render('admin', array(
             'model' => $model,
@@ -120,7 +128,7 @@ class EmpadronadorCensoController extends Controller {
      * @param integer the ID of the model to be loaded
      */
     public function loadModel($id) {
-        $model = EmpadronadorCenso::model()->findByPk($id);
+        $model = VswAsignacionCenso::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -131,7 +139,7 @@ class EmpadronadorCensoController extends Controller {
      * @param CModel the model to be validated
      */
     protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'empadronador-censo-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'vsw-asignacion-censo-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }

@@ -115,39 +115,40 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
 
 <div class="row">
     <div class='col-md-12'>
+       
+
         <?php
-        $this->widget(
-                'booster.widgets.TbExtendedGridView', array(
-            'type' => 'striped bordered',
-            'responsiveTable' => true,
-            'id' => 'listado_empadronador',
-            'dataProvider' => new CActiveDataProvider('AdjudicadoEmpadronador', array(
+        $this->widget('booster.widgets.TbGridView', array(
+            'id' => 'vsw-empadronador-censos-grid',
+            'type' => 'striped bordered condensed',
+//        'dataProvider' => $vistaEmpadronador->search(),
+            'dataProvider' => new CActiveDataProvider('VswEmpadronadorCensos', array(
                 'criteria' => array(
-                    'with' => array(
-                        'beneficiarioTemporal' => array(
-                        //'condition' => 'desarrollo_id=' . $_GET['id'] . '',
-                        ),
-                    ),
-                ),
-                'pagination' => array(
-                    'pageSize' => 5,
-                ),
-                    )),
-//            'template' => "{items}",
+                    'condition' => 'id_desarrollo=' . $asignacionC->desarrollo_id,
+                ))),
             'columns' => array(
-                array(
-                    'name' => 'beneficiario_temporal_id',
-                    'header' => 'Listado de Programas',
-                    'value' => '$data->beneficiario_temporal_id',
+                'nombre_desarrollo' => array(
+                    'header' => 'Nombre del Desarrollo ',
+                    'name' => 'nombre_desarrollo',
+                    'value' => '$data->nombre_desarrollo',
                 ),
-                array(
-                    'name' => 'beneficiarioTemporal->desarrollo->nombre',
-                    'header' => 'Desarrollo',
-                    'value' => '$data->beneficiarioTemporal->desarrollo_id',
+                'nombre_unidad_multifamiliar' => array(
+                    'header' => 'Unidad Familiar',
+                    'name' => 'nombre_unidad_multifamiliar',
+                    'value' => '$data->nombre_unidad_multifamiliar',
+                ),
+                'cedula' => array(
+                    'header' => 'Cedula',
+                    'name' => 'cedula',
+                    'value' => '$data->cedula',
+                ),
+                'nombre_adjudicado' => array(
+                    'header' => 'Adjudicado',
+                    'name' => 'nombre_adjudicado',
+                    'value' => '$data->nombre_adjudicado',
                 ),
             ),
-                )
-        );
+        ));
         ?>
     </div>
 </div>
