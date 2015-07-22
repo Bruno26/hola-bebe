@@ -104,9 +104,15 @@ public function actionCreate(){
       } $i++;
   }
 
-  if ($error == FALSE){
-      $model->nombre_archivo->saveAs(Yii::app()->basePath.'/../images/'.$model->nombre_archivo);
 
+  if ($error == FALSE){
+      $archivo = Yii::app()->basePath.'/../images/'.$model->nombre_archivo;
+
+      $model->nombre_archivo->saveAs($archivo);
+      $perl = "/usr/bin/perl";
+      $result = 0;
+      $result = shell_exec("$perl /var/www/html/carga-perl/inicio.pl $archivo");
+      $model->observaciones = "$archivo Despues del script: ".$result;
       if($model->save()){
         $this->redirect(array('view','id'=>$model->id_carga_masiva));
       }
