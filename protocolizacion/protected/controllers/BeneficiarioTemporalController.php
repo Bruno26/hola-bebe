@@ -196,19 +196,61 @@ class BeneficiarioTemporalController extends Controller {
      * @param integer $id the ID of the model to be updated
      */
     public function actionUpdate($id) {
-        $model = $this->loadModel($id);
+        $model = $this->loadModel($id);          
+        $desarrollo = new Desarrollo;         
+        $estado     = new Tblestado;
+        $municipio  = new Tblmunicipio;
+        $parroquia  = new Tblparroquia;
+
+       // var_dump($model); die();
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
         if (isset($_POST['BeneficiarioTemporal'])) {
+
+                $idPersona = $_POST["BeneficiarioTemporal"]["persona_id"];
+               
+                $codigo_hab = substr($_POST["BeneficiarioTemporal_telf_habitacion"],0,4);
+                $telf_habitacion = substr($_POST["BeneficiarioTemporal_telf_habitacion"], 4,11);
+
+                $codigo_movil = substr($_POST["BeneficiarioTemporal_telf_celular"],0,4);
+                $telf_movil = substr($_POST["BeneficiarioTemporal_telf_celular"], 4,11);
+
+
+                /*   ----------  UPDATE    -------------------  */
+                         $idPersona = ConsultaOracle::updatePersona(array(
+                          //  'CEDULA'           => $_POST["BeneficiarioTemporal"]["cedula"],
+                           // 'NACIONALIDAD'     => ($_POST["BeneficiarioTemporal"]['nacionalidad'] == 97) ? 1 : 0,
+                            'PRIMER_NOMBRE'    => trim(strtoupper($_POST["BeneficiarioTemporal"]['primer_nombre'])),
+                            'SEGUNDO_NOMBRE'   => trim(strtoupper($_POST["BeneficiarioTemporal"]['segundo_nombre'])),
+                            'PRIMER_APELLIDO'  => trim(strtoupper($_POST["BeneficiarioTemporal"]['primer_apellido'])),
+                            'SEGUNDO_APELLIDO' => trim(strtoupper($_POST["BeneficiarioTemporal"]['segundo_apellido'])),
+                            'FECHA_NACIMIENTO' => $_POST["BeneficiarioTemporal"]['fecha_nacimiento'],
+                            'GEN_SEXO_ID'      => $_POST["BeneficiarioTemporal"]['sexo'],
+                          //  'GEN_EDO_CIVIL_ID' => $_POST["BeneficiarioTemporal"]['estado_civil'],
+                            'CODIGO_HAB'       => (string) $codigo_hab,
+                            'TELEFONO_HAB'     => (string) $telf_habitacion,
+                            'CODIGO_MOVIL'     => (string) $codigo_movil,
+                            'TELEFONO_MOVIL'   => (string) $telf_movil,
+                            'CORREO_PRINCIPAL' => $_POST["BeneficiarioTemporal"]['correo_electronico'],
+                                ),$idPersona
+                        );
+
+                /*   -----------------------------------------  */
+                
+
+
+
+
             $model->attributes = $_POST['BeneficiarioTemporal'];
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id_beneficiario_temporal));
         }
 
         $this->render('update', array(
-            'model' => $model,
+            'model' => $model,'desarrollo' => $desarrollo, 'municipio' => $municipio,
+            'estado' => $estado, 'parroquia' => $parroquia,
         ));
     }
 
