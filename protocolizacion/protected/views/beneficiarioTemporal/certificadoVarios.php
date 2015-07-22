@@ -52,6 +52,7 @@ $html.='<style>
 foreach ($recordBeneTemp as $model) {
     $cabecera = '<img src="' . Yii::app()->request->baseUrl . '/images/cintillo.jpg"/>';
     $persona = (object) ConsultaOracle::getPersonaBeneficiario($model->nacionalidad, $model->cedula);
+//    echo '<pre>';var_dump($persona);die();
     $html.="<div>"
             . "<table>"
             . "<tr>"
@@ -72,11 +73,27 @@ foreach ($recordBeneTemp as $model) {
             . "</tr>"
             . "<tr>
                 <td class='col-interno border-right' colspan='2'>
-                    <span class='subtitulo'>Nombre Completo:</span> " . $model->nombre_completo . "<br>
+                    <span class='subtitulo'>Rif:</span> <br>
                 </td>
-                <td class='col-interno'>
+                <td class='col-interno' colspan='1'>
                     <span class='subtitulo'>Cédula:</span> " .nacionalidadCedula('NACIONALIDAD', 'CEDULA', $model->persona_id). "<br>
 
+                </td>
+            </tr>"
+            . "<tr>
+                <td class='col-interno' colspan='3'>
+                    <span class='subtitulo'>Nombre Completo:</span> " . $model->nombre_completo . "<br>
+                </td>
+            </tr>"
+            . "<tr>
+                <td class='col-interno   border-right'>
+                    <span class='subtitulo'>Fecha de Nacimiento:</span> " .  date('d/m/Y', strtotime($persona->FECHANACIMIENTO)) . "<br>
+                </td>
+                <td class='col-interno  border-right'>
+                    <span class='subtitulo'>Sexo:</span> " . $persona->SEXO . "<br>
+                </td>
+                <td class='col-interno'>
+                    <span class='subtitulo'>Estado Civil:</span> " . $persona->EDOCIVIL . "<br>
                 </td>
             </tr>"
             . "<tr>
@@ -92,7 +109,7 @@ foreach ($recordBeneTemp as $model) {
             </tr>"
             . "</table>"
             . "</div>";
-    $html.="<br/>"
+    $html.="<br/><br/><br/>"
             . "<div id='prueba'>"
             . "<table class='table table-striped' border='0'>"
             . "<tr>"
@@ -110,30 +127,32 @@ foreach ($recordBeneTemp as $model) {
                 </td>
             </tr>"
             . "<tr>
-                <td class='col-interno border-right'>
+                <td class='col-interno border-right' colspan='2'>
                     <span class='subtitulo'>Urbanización/Barrio:</span> " . $model->desarrollo->urban_barrio . "<br>
                 </td>
-                <td class='col-interno border-right'>
+                <td class='col-interno ' colspan='1'>
                     <span class='subtitulo'>Avenida/Calle/Esquina/Carretera:</span> " . $model->desarrollo->av_call_esq_carr . "<br>
                 </td>
-                <td class='col-interno'>
+            </tr>"
+            . "<tr>
+                <td class='col-interno' colspan='3'>
                     <span class='subtitulo'>Zona:</span> " . $model->desarrollo->zona . "<br>
                 </td>
             </tr>"
             . "<tr>
-                <td class='col-interno border-right'>
+                <td colspan='2' style=' width: 50%;' class='col-interno border-right'>
+                    <span class='subtitulo'>Tipo de Inmueble:</span> " . $model->unidadHabitacional->genTipoInmueble->descripcion . "<br>
+                </td>
+                <td class='col-interno '>
                     <span class='subtitulo'>Lote Terreno Mt2:</span> " . $model->desarrollo->lote_terreno_mt2 . "<br>
-                </td>
-                <td class='col-interno border-right'>
-                    <span class='subtitulo'>Piso:</span> " . $model->vivienda->nro_piso . "<br>
-                </td>
-                <td class='col-interno'>
-                    <span class='subtitulo'>N° de la Vivienda:</span> " . $model->vivienda->nro_vivienda . "<br>
                 </td>
             </tr>"
             . "<tr>
-                <td colspan='2' style=' width: 50%;' class='border-right'>
-                    <span class='subtitulo'>Tipo de Inmueble:</span> " . $model->unidadHabitacional->genTipoInmueble->descripcion . "<br>
+                <td class='border-right'>
+                    <span class='subtitulo'>Piso:</span> " . $model->vivienda->nro_piso . "<br>
+                </td>
+                <td class='border-right'>
+                    <span class='subtitulo'>N° de la Vivienda:</span> " . $model->vivienda->nro_vivienda . "<br>
                 </td>
                 <td style=' width: 50%;'>
                     <span class='subtitulo'>Área de Vivienda mt2:</span><br>
