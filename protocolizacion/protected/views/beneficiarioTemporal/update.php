@@ -99,6 +99,7 @@ echo '<br>';
         ));
         ?>
 
+
          <?php
             $this->widget('booster.widgets.TbButton', array(
                 'context' => 'danger',
@@ -113,7 +114,6 @@ echo '<br>';
         ?>
     </div>
 </div>
-
 
     <!-- *********** -->
 
