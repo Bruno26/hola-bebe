@@ -72,5 +72,4 @@ function calcularSueldo(fondo_recuperacion) {
 //            bootbox.alert('Ocurrio un error');
 //        }
 //    })
-
 }
