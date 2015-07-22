@@ -13,9 +13,11 @@ array('label'=>'Manage CargaMasiva','url'=>array('admin')),
 );
 ?>
 
-<h1>View CargaMasiva #<?php echo $model->id_carga_masiva; ?></h1>
+<h1>View CargaMasiva #<?php echo $model->id_carga_masiva;?></h1>
 
-<?php $this->widget('booster.widgets.TbDetailView',array(
+<?php
+echo "Tamaño: ".$model->tamano($model->tamano_archivo); 
+$this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
 		'id_carga_masiva',
