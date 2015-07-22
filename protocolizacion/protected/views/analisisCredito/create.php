@@ -1,4 +1,6 @@
 <?php
+ $Validaciones = Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl . '/js/analisisCredito.js');
+
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'id' => 'analisis-credito-form',
     'enableAjaxValidation' => false,
