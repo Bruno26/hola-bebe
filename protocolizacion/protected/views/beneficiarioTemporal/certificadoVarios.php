@@ -77,7 +77,6 @@ foreach ($recordBeneTemp as $model) {
                 </td>
                 <td class='col-interno' colspan='1'>
                     <span class='subtitulo'>Cédula:</span> " .nacionalidadCedula('NACIONALIDAD', 'CEDULA', $model->persona_id). "<br>
-
                 </td>
             </tr>"
             . "<tr>
