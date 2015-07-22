@@ -28,26 +28,9 @@ return false;
 ");
 ?>
 
-<h1 class="text-center">Gestión de Censo</h1>
+<h1 class="text-center">Análisis de Crédito</h1>
 
-<?php
-//    $this->renderPartial('_search', array(
-//        'model' => $model,
-//    ));
-?>
-<!--</div> search-form -->
 
-<div style="text-align: right;vertical-align: middle;">
-    <div align="right" class="row">
-        <?php
-        $this->widget('application.extensions.PageSize.PageSize', array(
-            'mGridId' => 'beneficiario-grid', //Gridview id
-            'mPageSize' => @$_GET['pageSize'],
-            'mDefPageSize' => Yii::app()->params['defaultPageSize'],
-        ));
-        ?>
-    </div>
-</div>
 
 <?php
 $model->estatus_beneficiario_id=222;
@@ -126,7 +109,7 @@ $this->widget('booster.widgets.TbGridView', array(
                 ),
 
                 'acreditacion' => array(
-                    'label' => 'Continuar Censo',
+                    'label' => 'Análisis de Credito',
                     'icon' => 'glyphicon glyphicon-euro',
                     'size' => 'medium',
                     'url' => 'Yii::app()->createUrl("/analisisCredito/create", array("id"=>$data->id_beneficiario))',

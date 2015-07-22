@@ -62,8 +62,6 @@ class ValidacionJsController extends Controller {
             if ($consultaPer == 1) {
                 echo CJSON::encode(3); // existe en Persona
             } else {
-
-               // var_dump($existeTemporal); die();
                 $desarrollo = array(
                     'nro_vivienda' => $existeTemporal->vivienda->nro_vivienda,
                     'nro_piso' => $existeTemporal->vivienda->nro_piso,
@@ -77,11 +75,7 @@ class ValidacionJsController extends Controller {
                     'parroquia_id' => $existeTemporal->desarrollo->fkParroquia->strdescripcion,
                     'municipio' => $existeTemporal->desarrollo->fkParroquia->clvmunicipio0->strdescripcion,
                     'estado' => $existeTemporal->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion,
-                    'Temp'   => $existeTemporal->id_beneficiario_temporal,
-                    'id_desarrollo' => $existeTemporal->desarrollo->id_desarrollo,
-                    'id_unidadh'  => $existeTemporal->unidadHabitacional->id_unidad_habitacional,
-                    'vivienda_id' => $existeTemporal->vivienda->id_vivienda,
-
+                    'Temp' => $existeTemporal->id_beneficiario_temporal,
                 );
                 $salida = array('persona' => $consultaPer, 'desarrollo' => $desarrollo);
                 echo CJSON::encode($salida);

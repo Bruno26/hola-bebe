@@ -60,12 +60,17 @@ class AnalisisCreditoController extends Controller {
         $beneficiario = Beneficiario::model()->findByPk($id);
         $desarrollo = $beneficiario->beneficiarioTemporal->desarrollo;
         $desarrollo->fuente_financiamiento_id = $desarrollo->fuente_financiamiento_id;
-
+        if ($desarrollo->fuente_financiamiento_id == 2) {
+            $faov = 'AND  gr.tipo_persona_faov = 235 ';
+        } else {
+            $faov = ' ';
+        }
         $grupoFamiliar = "SELECT gr.ingreso_mensual, gr.ingreso_mensual_faov  FROM grupo_familiar gr
                         JOIN unidad_familiar fa ON  gr.unidad_familiar_id= fa.id_unidad_familiar AND fa.beneficiario_id = " . $id . "AND fa.estatus = 77
-                        WHERE gr.estatus = 41";
+                        WHERE gr.estatus = 41 " . $faov;
+
         $result = Yii::app()->db->createCommand($grupoFamiliar)->queryAll();
-        
+
         $totalSueldoDeclarado = array();
         $totalSueldoFaov = array();
         $TableSueldo = '<table class="table table-bordered">';
@@ -78,20 +83,19 @@ class AnalisisCreditoController extends Controller {
         $TableSueldoFaov.='<tr><td>Bs. ' . number_format($beneficiario->ingreso_promedio_faov, 2, '.', '') . '</td></tr>';
         array_push($totalSueldoDeclarado, $beneficiario->ingreso_declarado);
         array_push($totalSueldoFaov, $beneficiario->ingreso_promedio_faov);
-        
-        foreach ($result AS $fila){
-            $TableSueldo.='<tr><td> Bs.'.$fila['ingreso_mensual'].'</td></tr>';
-            $TableSueldoFaov.='<tr><td> Bs.'.$fila['ingreso_mensual_faov'].'</td></tr>';
+
+        foreach ($result AS $fila) {
+            $TableSueldo.='<tr><td> Bs.' . $fila['ingreso_mensual'] . '</td></tr>';
+            $TableSueldoFaov.='<tr><td> Bs.' . $fila['ingreso_mensual_faov'] . '</td></tr>';
             array_push($totalSueldoDeclarado, $fila['ingreso_mensual']);
             array_push($totalSueldoFaov, $fila['ingreso_mensual_faov']);
-            
         }
-        $TableSueldo.='<th>Total: Bs.'.array_sum($totalSueldoDeclarado).' <input type="radio" name="opciones" id="opciones_2" checked value="'.array_sum($totalSueldoDeclarado).'"></th>';
-        $TableSueldoFaov.='<th>Total: Bs.'.array_sum($totalSueldoFaov).' <input type="radio" name="opciones" id="opciones_1" value="'.array_sum($totalSueldoFaov).'"></th>';
+        $TableSueldo.='<th>Total: Bs.' . array_sum($totalSueldoDeclarado) . ' <input type="radio" name="opciones" id="opciones_2" checked value="' . array_sum($totalSueldoDeclarado) . '"></th>';
+        $TableSueldoFaov.='<th>Total: Bs.' . array_sum($totalSueldoFaov) . ' <input type="radio" name="opciones" id="opciones_1" value="' . array_sum($totalSueldoFaov) . '"></th>';
 
         $TableSueldo.='</table>';
         $TableSueldoFaov.='</table>';
-        
+
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
@@ -139,7 +143,8 @@ class AnalisisCreditoController extends Controller {
 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        } else
+        }
+        else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 

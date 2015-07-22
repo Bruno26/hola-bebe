@@ -1,44 +1,57 @@
 
 
 <?php
+
+ // var_dump($_GET["id"]); die();
  $baseUrl = Yii::app()->baseUrl;
  $numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
  $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
 
+if(isset($_GET["id"])){
+
+     // Formulario en estado Update
+
+  Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
+
+                 buscarPersonaBeneficiarioTemp2($('#BeneficiarioTemporal_nacionalidad').val(),$('#BeneficiarioTemporal_cedula').val())
+  ");
+
+
+}else{
 
 Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
 
+    $(document).ready(function(){ 
 
 
-    $(document).ready(function(){
-         $('#BeneficiarioTemporal_cedula').numeric();
-         $('#BeneficiarioTemporal_telf_habitacion').numeric();
-         $('#BeneficiarioTemporal_telf_celular').numeric();
+               $('#BeneficiarioTemporal_cedula').numeric();
+               $('#BeneficiarioTemporal_telf_habitacion').numeric();
+               $('#BeneficiarioTemporal_telf_celular').numeric();
 
-         /*  ------  Bloqueo campos    ------- */
+               /*  ------  Bloqueo campos    ------- */
 
-            $('#BeneficiarioTemporal_primer_apellido').attr('readonly', true);
-            $('#BeneficiarioTemporal_segundo_apellido').attr('readonly', true);
-            $('#BeneficiarioTemporal_primer_nombre').attr('readonly', true);
-            $('#BeneficiarioTemporal_segundo_nombre').attr('readonly', true);
-            $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', true);
-            $('#BeneficiarioTemporal_sexo').attr('readonly', true);
-           /* $('#BeneficiarioTemporal_sexo').attr('disabled', true); */
-            $('#BeneficiarioTemporal_estado_civil').attr('readonly', true);
-            $('#BeneficiarioTemporal_estado_civil').attr('disabled', true);
-            $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', true);
-            $('#BeneficiarioTemporal_telf_celular').attr('readonly', true);
-            $('#BeneficiarioTemporal_correo_electronico').attr('readonly', true); 
-           
-         /*   -------------------------------- */     
-
+                  $('#BeneficiarioTemporal_primer_apellido').attr('readonly', true);
+                  $('#BeneficiarioTemporal_segundo_apellido').attr('readonly', true);
+                  $('#BeneficiarioTemporal_primer_nombre').attr('readonly', true);
+                  $('#BeneficiarioTemporal_segundo_nombre').attr('readonly', true);
+                  $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', true);
+                  $('#BeneficiarioTemporal_sexo').attr('readonly', true);
+                 /* $('#BeneficiarioTemporal_sexo').attr('disabled', true); */
+                  $('#BeneficiarioTemporal_estado_civil').attr('readonly', true);
+                  $('#BeneficiarioTemporal_estado_civil').attr('disabled', true);
+                  $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', true);
+                  $('#BeneficiarioTemporal_telf_celular').attr('readonly', true);
+                  $('#BeneficiarioTemporal_correo_electronico').attr('readonly', true); 
+                 
+               /*   -------------------------------- */     
+        
                     
              
     }); 
 
 
   ");
-
+}
 ?>
 
 <div class="row">
