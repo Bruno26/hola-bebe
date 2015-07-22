@@ -16,6 +16,7 @@ Yii::app()->clientScript->registerScript('camara', "
         var parentesco = $('#GrupoFamiliar_gen_parentesco_id').val();
         var tipoSujeto = $('#GrupoFamiliar_tipo_sujeto_atencion').val();
         var ingresoM = $('#GrupoFamiliar_ingreso_mensual').val();
+        var ingresoMFaov = $('#GrupoFamiliar_ingreso_mensual_faov').val();
         var fechaNac = $('#GrupoFamiliar_fecha_nacimiento').val();
         var IdUnidadF = '" . $_GET['id'] . "';
         
@@ -107,7 +108,7 @@ Yii::app()->clientScript->registerScript('camara', "
             url: '" . Yii::app()->createAbsoluteUrl('GrupoFamiliar/InsertFamiliar') . "',
             async: true,
             type: 'POST',
-            data: 'cedula=' +cedula + '&nacionalida=' +nacionalidad + '&primerNombre=' + primerNombre +'&segundoNombre=' +segundoNombre + '&primerApellido=' +primerApellido +'&segundoApellido=' +segundoApellido +'&idPersona=' +idPersona +'&parentesco=' +parentesco +'&tipoSujeto=' +tipoSujeto +'&ingresoM='+ ingresoM+ '&faov='+faov+'&fechaNac='+fechaNac+'&IdUnidadF='+IdUnidadF,
+            data: 'cedula=' +cedula + '&nacionalida=' +nacionalidad + '&primerNombre=' + primerNombre +'&segundoNombre=' +segundoNombre + '&primerApellido=' +primerApellido +'&segundoApellido=' +segundoApellido +'&idPersona=' +idPersona +'&parentesco=' +parentesco +'&tipoSujeto=' +tipoSujeto +'&ingresoM='+ ingresoM+ '&faov='+faov+'&fechaNac='+fechaNac+'&IdUnidadF='+IdUnidadF+'&ingresoMFaov='+ingresoMFaov,
             dataType: 'json',
             success: function(data,faov) {
                 if(data == 3){

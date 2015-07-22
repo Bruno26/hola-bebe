@@ -21,7 +21,7 @@ if (!empty($model->desarrollo_id)) {
 //    var_dump($model->desarrollo_id); die();
 }
 ?>
-<?php Yii::app()->clientScript->registerScript('desarrollo', "
+<?php Yii::app()->clientScript->registerScript('asignacionCenso', "
          $('#guardarAsignacion').click(function(){
      
                 if ($('#AsignacionCenso_fecha_asignacion').val()==''){

@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Analisis Creditos',
+	'Documentacions',
 );
 
 $this->menu=array(
-array('label'=>'Create AnalisisCredito','url'=>array('create')),
-array('label'=>'Manage AnalisisCredito','url'=>array('admin')),
+array('label'=>'Create Documentacion','url'=>array('create')),
+array('label'=>'Manage Documentacion','url'=>array('admin')),
 );
 ?>
 
-<h1>Analisis Creditos</h1>
+<h1>Documentacions</h1>
 
 <?php $this->widget('booster.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,

@@ -31,22 +31,34 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
         ))));
         ?>
     </div>
-    <div class="col-md-8"  id="iconLoding" style="display: none">
+    <div class="col-md-2"  id="iconLoding" style="display: none">
         <img src="<?php echo Yii::app()->baseUrl; ?>/images/loading.gif" width="50px" height="60px">
+    </div>
+    <div class='col-md-6'>
+        <?php
+         echo $form->dropDownListGroup($model, 'tipo_persona_faov', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+            'widgetOptions' => array(
+                'data' => Maestro::FindMaestrosByPadreSelect(234, 'descripcion ASC'),
+                'htmlOptions' => array('empty' => 'SELECCIONE',
+                ),
+            )
+                )
+        );
+        ?>
     </div>
 </div>
 <div class="row">
-    <div class='col-md-2'>
+    <div class='col-md-3'>
 
         <?php echo $form->textFieldGroup($model, 'primer_nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
     </div>
-    <div class='col-md-2'>
+    <div class='col-md-3'>
         <?php echo $form->textFieldGroup($model, 'segundo_nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
     </div>
-    <div class='col-md-4'>
+    <div class='col-md-3'>
         <?php echo $form->textFieldGroup($model, 'primer_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
     </div>
-    <div class='col-md-4'>
+    <div class='col-md-3'>
         <?php echo $form->textFieldGroup($model, 'segundo_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
     </div>
 </div>
@@ -63,7 +75,16 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
         ?>
     </div>
     <div class="col-md-4">
-        <?php echo $form->textFieldGroup($model, 'tipo_sujeto_atencion', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+        <?php
+         echo $form->dropDownListGroup($model, 'tipo_sujeto_atencion', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+            'widgetOptions' => array(
+                'data' => Maestro::FindMaestrosByPadreSelect(228, 'descripcion ASC'),
+                'htmlOptions' => array('empty' => 'SELECCIONE',
+                ),
+            )
+                )
+        );
+        ?>
     </div>
     <div class="col-md-2">
         <?php echo $form->textFieldGroup($model, 'ingreso_mensual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16)))); ?>

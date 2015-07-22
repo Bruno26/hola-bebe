@@ -1,5 +1,11 @@
 <?php
 Yii::app()->clientScript->registerScript('grupoFamiliar', "
+    $(document).ready(function(){
+        $.get('" . CController::createUrl('ValidacionJs/BuscarUnidadMulti') . "', {id_desarrollo: " . $asignacionC->desarrollo_id . " }, function(data){
+            $('#EmpadronadorCenso_UnidadMultifamiliar').html(data);
+        });
+     })    
+
     $( '#enviarAsignacion' ).click(function() {
         var UnidaMulti = $('#EmpadronadorCenso_UnidadMultifamiliar').val();
         var BeneficiarioTemp = $('#EmpadronadorCenso_BeneficiarioAdju').val();
@@ -21,6 +27,9 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
             dataType: 'json',
             success: function(data,faov) {
                 if(data == 2){
+                    $.get('" . CController::createUrl('ValidacionJs/BuscarUnidadMulti') . "', {id_desarrollo: " . $asignacionC->desarrollo_id . " }, function(data){
+                        $('#EmpadronadorCenso_UnidadMultifamiliar').html(data);
+                    });
                     $('#EmpadronadorCenso_empadronador_usuario_id').val('');
                     $('#EmpadronadorCenso_UnidadMultifamiliar').val('');
                     html = '<option value=\"\">SELECCIONE</option>';
@@ -56,7 +65,7 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
         <?php
         echo $form->dropDownListGroup($model, 'UnidadMultifamiliar', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
             'widgetOptions' => array(
-                //'data' => CHtml::listData(UnidadHabitacional::model()->findAll($unidadHab), 'id_unidad_habitacional', 'nombre'),
+//                'data' => CHtml::listData(UnidadHabitacional::model()->findAll($unidadHab), 'id_unidad_habitacional', 'nombre'),
                 'htmlOptions' => array(
                     'ajax' => array(
                         'type' => 'POST',
@@ -106,32 +115,40 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
 
 <div class="row">
     <div class='col-md-12'>
+       
+
         <?php
-        $this->widget(
-                'booster.widgets.TbExtendedGridView', array(
-            'type' => 'striped bordered',
-            'responsiveTable' => true,
-            'id' => 'listado_empadronador',
-            'dataProvider' => new CActiveDataProvider('AdjudicadoEmpadronador', array(
-                'pagination' => array(
-                    'pageSize' => 5,
-                ),
-                    )),
-//            'template' => "{items}",
+        $this->widget('booster.widgets.TbGridView', array(
+            'id' => 'vsw-empadronador-censos-grid',
+            'type' => 'striped bordered condensed',
+//        'dataProvider' => $vistaEmpadronador->search(),
+            'dataProvider' => new CActiveDataProvider('VswEmpadronadorCensos', array(
+                'criteria' => array(
+                    'condition' => 'id_desarrollo=' . $asignacionC->desarrollo_id,
+                ))),
             'columns' => array(
-                array(
-                    'name' => 'beneficiario_temporal_id',
-                    'header' => 'Listado de Programas',
-                    'value' => '$data->beneficiario_temporal_id',
+                'nombre_desarrollo' => array(
+                    'header' => 'Nombre del Desarrollo ',
+                    'name' => 'nombre_desarrollo',
+                    'value' => '$data->nombre_desarrollo',
                 ),
-                array(
-                    'name' => 'beneficiarioTemporal->desarrollo->nombre',
-                    'header' => 'Desarrollo',
-                    'value' => '$data->beneficiarioTemporal->desarrollo->nombre',
+                'nombre_unidad_multifamiliar' => array(
+                    'header' => 'Unidad Familiar',
+                    'name' => 'nombre_unidad_multifamiliar',
+                    'value' => '$data->nombre_unidad_multifamiliar',
+                ),
+                'cedula' => array(
+                    'header' => 'Cedula',
+                    'name' => 'cedula',
+                    'value' => '$data->cedula',
+                ),
+                'nombre_adjudicado' => array(
+                    'header' => 'Adjudicado',
+                    'name' => 'nombre_adjudicado',
+                    'value' => '$data->nombre_adjudicado',
                 ),
             ),
-                )
-        );
+        ));
         ?>
     </div>
 </div>

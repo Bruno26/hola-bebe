@@ -34,9 +34,10 @@ class EmpadronadorCensoController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate($id) {
+        $vistaEmpadronador= new VswEmpadronadorCensos;
         $model = new EmpadronadorCenso;
         $asignacionC = AsignacionCenso::model()->findByPk($id);
-
+        
         $model->Des = $asignacionC->desarrollo->nombre;
         $model->parqDes = $asignacionC->desarrollo->fkParroquia->strdescripcion;
         $model->munDes = $asignacionC->desarrollo->fkParroquia->clvmunicipio0->strdescripcion;
@@ -56,7 +57,7 @@ class EmpadronadorCensoController extends Controller {
 
         $this->render('create', array(
             'model' => $model, 'asignacionC' => $asignacionC,
-            'unidadHab' => $unidadHab
+            'unidadHab' => $unidadHab, 'vistaEmpadronador'=>$vistaEmpadronador
         ));
     }
 

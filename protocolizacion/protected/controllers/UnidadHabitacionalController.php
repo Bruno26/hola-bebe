@@ -80,7 +80,7 @@ class UnidadHabitacionalController extends Controller {
 //                $model->registro_publico_id =0;
 //                $model->tipo_documento_id = 0;
 //                $model->num_protocolo =0;
-                $model->fecha_registro = 'now';
+                $model->fecha_registro = '0001-01-01 00:00:00';
                 $model->tomo = 0;
                 $model->folio_real = 1;
                 $model->nro_matricula = 1;
@@ -93,7 +93,7 @@ class UnidadHabitacionalController extends Controller {
 
                 if ($model->save()) {
 
-                    $this->redirect(array('admin'));
+                    $this->redirect(array('/VswMultifamiliar/admin'));
                 }
             } else {
                 $this->render('create', array('model' => $model,

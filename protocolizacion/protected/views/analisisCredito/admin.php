@@ -1,13 +1,18 @@
 <?php
-$this->breadcrumbs=array(
-	'Analisis Creditos'=>array('index'),
-	'Manage',
-);
+ function traza($iD) {
+     $traza = Traza::getTraza($iD);
+     return $traza;
+ }
 
-$this->menu=array(
-array('label'=>'List AnalisisCredito','url'=>array('index')),
-array('label'=>'Create AnalisisCredito','url'=>array('create')),
-);
+function nombre($selec, $iD) {
+    $saime = ConsultaOracle::getPersonaByPk($selec, (int) $iD);
+    return $saime['PRIMER_NOMBRE'];
+}
+
+function apellido($selec, $iD) {
+    $saime = ConsultaOracle::getPersonaByPk($selec, (int) $iD);
+    return $saime['PRIMER_APELLIDO'];
+}
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -15,7 +20,7 @@ $('.search-form').toggle();
 return false;
 });
 $('.search-form form').submit(function(){
-$.fn.yiiGridView.update('analisis-credito-grid', {
+$.fn.yiiGridView.update('beneficiario-grid', {
 data: $(this).serialize()
 });
 return false;
@@ -23,61 +28,96 @@ return false;
 ");
 ?>
 
-<h1>Manage Analisis Creditos</h1>
+<h1 class="text-center">Análisis de Crédito</h1>
 
-<p>
-	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
-		&lt;&gt;</b>
-	or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
-<div class="search-form" style="display:none">
-	<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
 
-<?php $this->widget('booster.widgets.TbGridView',array(
-'id'=>'analisis-credito-grid',
-'dataProvider'=>$model->search(),
-'filter'=>$model,
-'columns'=>array(
-		'id_analisis_credito',
-		'nro_serial_bancario',
-		'vivienda_id',
-		'unidad_familiar_id',
-		'tipo_documento_id',
-		'ingreso_total_familiar',
-		/*
-		'monto_credito',
-		'monto_inicial',
-		'sub_directo_habitacional',
-		'sub_vivienda_perdida',
-		'plazo_credito_ano',
-		'nro_cuotas',
-		'monto_cuota_financiera',
-		'monto_cuota_f_total',
-		'monto_prima_inicial_fg',
-		'alicuota_fondo_garantia',
-		'fecha_protocolizacion',
-		'tasa_interes_id',
-		'tasa_mora_id',
-		'tasa_fongar_id',
-		'plazo_gracia',
-		'plazo_diferido',
-		'status_migracion_id',
-		'gen_banco_id',
-		'tipo_cuenta',
-		'nro_cuenta_bancario',
-		'fuente_datos_entrada_id',
-		'fecha_creacion',
-		'fecha_actualizacion',
-		'usuario_id_creacion',
-		'usuario_id_actualizacion',
-		*/
-array(
-'class'=>'booster.widgets.TbButtonColumn',
-),
-),
-)); ?>
+<?php
+$model->estatus_beneficiario_id=222;
+$this->widget('booster.widgets.TbGridView', array(
+    'id' => 'beneficiario-grid',
+    'dataProvider' => $model->search(),
+    'type' => 'striped bordered condensed',
+    'filter' => $model,
+    'columns' => array(
+        array(
+            'name' => 'id_beneficiario',
+            'header' => 'N°',
+            'value' => '$data->id_beneficiario',
+            'htmlOptions' => array('style' => 'text-align: center', 'width' => '90px'),            
+        ),
+        array(
+            'name' => 'persona_id',
+            'header' => 'Nombre',
+            'value' => 'nombre("PRIMER_NOMBRE",$data->persona_id)',
+        ),
+        array(
+            'name' => 'persona_id',
+            'header' => 'Apellido',
+            'value' => 'apellido("PRIMER_APELLIDO",$data->persona_id)',
+        ),
+        'Estado' => array(
+            'header' => 'Estado',
+            'name' => 'beneficiarioTemporal',
+            'value' => 'Tblparroquia::model()->findByPK(Desarrollo::model()->findByPK($data->beneficiarioTemporal->desarrollo_id)->parroquia_id)->clvmunicipio0->clvestado0->strdescripcion',
+            'filter' => CHtml::listData(Tblestado::model()->findall(), 'clvcodigo', 'strdescripcion'),
+        ),
+        'Desarrollo' => array(
+            'header' => 'Desarrollo',
+            'name' => 'beneficiarioTemporal',
+            'value' => '$data->beneficiarioTemporal->desarrollo->nombre',
+            'filter' => CHtml::listData(Desarrollo::model()->findall(), 'id_desarrollo', 'nombre'),
+        ),
+//        'Grupo Familiar' => array(
+//            'header' => 'Grupo Familiar',
+//            'name' => 'beneficiarioTemporal',
+//           // "type" => "raw",
+////
+//            //'value' => 'UnidadFamiliar::model()->findByAttributes(array("beneficiario_id"=>"27"))->id_unidad_familiar',
+//            'value' => 'GrupoFamiliar::model()->countByAttributes(array("unidad_familiar_id"=> UnidadFamiliar::model()->findByAttributes(array("beneficiario_id"=>$data))->id_unidad_familiar))',
+////            //'filter' => CHtml::listData(Desarrollo::model()->findall(), 'id_desarrollo', 'nombre'),
+//            'htmlOptions' => array('style' => 'text-align: center', 'width' => '50px'),
+////
+//        ),
+        array(
+            'name' => 'fecha_ultimo_censo',
+            'value' => 'Yii::app()->dateFormatter->format("d/MM/y", strtotime($data->fecha_ultimo_censo))',
+            'htmlOptions' => array('style' => 'text-align: center', 'width' => '100px'),
+
+        //'header' => 'Creación',
+        ),
+        array(
+             'name' => 'id_beneficiario',
+             'header' => 'Avance',
+             'value' => 'traza($data->id_beneficiario)',
+             'htmlOptions' => array('style' => 'text-align: center', 'width' => '10px'),
+
+         ),
+        array(
+            'class' => 'booster.widgets.TbButtonColumn',
+            'header' => 'Acciones',
+            'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
+            'template' => '{ver}{acreditacion}',
+            'buttons' => array(
+
+
+                'ver' => array(
+                    'label' => 'Ver',
+                    'icon' => 'eye-open',
+                    'size' => 'medium',
+                    'url' => 'Yii::app()->createUrl("beneficiario/view/", array("id"=>$data->id_beneficiario))',
+                ),
+
+                'acreditacion' => array(
+                    'label' => 'Análisis de Credito',
+                    'icon' => 'glyphicon glyphicon-euro',
+                    'size' => 'medium',
+                    'url' => 'Yii::app()->createUrl("/analisisCredito/create", array("id"=>$data->id_beneficiario))',
+                    'visible' => 'traza($data->id_beneficiario)==100'
+                ),
+
+            ),
+        ),
+    ),
+));
+?>

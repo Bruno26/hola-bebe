@@ -49,5 +49,6 @@ array('label'=>'Manage AnalisisCredito','url'=>array('admin')),
 		'fecha_actualizacion',
 		'usuario_id_creacion',
 		'usuario_id_actualizacion',
+		'estatus',
 ),
 )); ?>

@@ -76,7 +76,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     <div class="pull-center" style="text-align: right;">
         <?php
         $this->widget('booster.widgets.TbButton', array(
-            'buttonType' => 'submit',
+            'buttonType' => 'button',
             'icon' => 'glyphicon glyphicon glyphicon-step-backward',
             'size' => 'large',
             'id' => 'cancelar',
@@ -84,7 +84,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'label' => 'Cancelar',
             //'url' => $this->createURL('/desarrollo/admin'),
             'htmlOptions' => array(
-                'onclick' => 'document.location.href ="' . $this->createUrl('vivienda/admin') . '"'),
+                'onclick' => 'document.location.href ="' . $this->createUrl('vswUnifamiliar/admin') . '"'),
         ));
         ?>
         <?php

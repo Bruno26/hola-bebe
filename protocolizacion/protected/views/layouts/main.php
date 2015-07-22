@@ -19,7 +19,6 @@
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/menu.css" />
 
-
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     </head>
     <body>
@@ -108,13 +107,14 @@
                                             <li><a href="<?php echo $this->createUrl('/abogados/admin'); ?>">Gestión de Agente de Documentación</a></li>
                                         </ul>
                                     </li>
+
                                     <!--                                    <li class="sub-menu">
                                                                             <a href="javascript:;">
                                                                                 <i class="glyphicon glyphicon-briefcase"></i>
                                                                                 <span>Registro Público</span>
                                                                             </a>
                                                                             <ul class="sub">
-                                                                                <li><a href="<?php // echo $this->createUrl('/registroPublico/create');     ?>">Cargar Nuevo Registro Público</a></li>
+                                                                                <li><a href="<?php // echo $this->createUrl('/registroPublico/create');                    ?>">Cargar Nuevo Registro Público</a></li>
                                                                             </ul>
                                                                         </li>-->
                                     <!--                                    <li class="sub-menu">
@@ -123,22 +123,12 @@
                                                                                 <span>Registro de Documentos</span>
                                                                             </a>
                                                                             <ul class="sub">
-                                                                                <li><a href="<?php // echo $this->createUrl('/registroDocumento/create');     ?>">Cargar Nuevo Registro de Documento</a></li>
+                                                                                <li><a href="<?php // echo $this->createUrl('/registroDocumento/create');                    ?>">Cargar Nuevo Registro de Documento</a></li>
                                                                             </ul>
                                                                         </li>-->
-                                    <li class="sub-menu">
-                                        <a href="javascript:;">
-                                            <i class="glyphicon glyphicon-briefcase"></i>
-                                            <span>Asignación de Censo</span>
-                                        </a>
-                                        <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/asignacionCenso/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Asignación de Censo</span></a></li>
-                                            <li><a href="<?php echo $this->createUrl('/asignacionCenso/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Asignación</span></a></li>
-
-                                        </ul>
-                                    </li>
                                 </ul>
                             </li>
+
                             <li class="sub-menu">
                                 <a href="javascript:;">
                                     <i class="glyphicon glyphicon-globe"></i>
@@ -166,7 +156,7 @@
 
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/unidadHabitacional/create'); ?>">Cargar Nueva Unidad Multifamiliar</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/unidadHabitacional/admin'); ?>">Gestión de Unidades Multifamiliares</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/VswMultifamiliar/admin'); ?>">Gestión de Unidades Multifamiliares</a></li>
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
@@ -176,46 +166,58 @@
                                         </a>
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/vivienda/create'); ?>">Cargar Nueva Unidad Unifamiliar</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/vivienda/admin'); ?>">Gestión de Unidad Unifamiliar</a></li>
+                                            <li><a href="<?php echo $this->createUrl('/vswUnifamiliar/admin'); ?>">Gestión de Unidad Unifamiliar</a></li>
                                         </ul>
                                     </li>
                                     <li class="sub-menu">
                                         <a href="javascript:;">
-
                                             <i class="glyphicon glyphicon-home"></i>
                                             <span>Reasignación Vivienda</span>
                                         </a>
-
-                                  
                                         <ul class="sub">
                                             <li><a href="<?php echo $this->createUrl('/reasignacionVivienda/create'); ?>">Reasignar Vivienda</a></li>
-
                                         </ul>
                                     </li>
                                 </ul>
                             </li>
                             <li class="sub-menu">
-                                <a href="<?php echo $this->createUrl('#'); ?>">
+                                <a href="javascript:;">
                                     <i class="glyphicon glyphicon-user"></i>
                                     <span>Gestión de Adjudicados</span>
                                 </a>
                                 <ul class="sub-menu">
                                     <li><a href="<?php echo $this->createUrl('/beneficiarioTemporal/create'); ?>"><i class="glyphicon glyphicon-user"></i><span>Cargar Nuevo Adjudicado</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('/beneficiarioTemporal/admin'); ?>"><i class="glyphicon glyphicon-user"></i><span>Listado de Adjudicados</span></a></li>
-                                    <!--<li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Carga Masiva</span></a></li>-->
+
                                 </ul>
                             </li>
                             <li class="sub-menu">
-                                <a href="<?php echo $this->createUrl('#'); ?>">
+                                <a href="javascript:;">
+                                    <i class="glyphicon glyphicon-briefcase"></i>
+                                    <span>Asignación de Censo</span>
+                                </a>
+                                <ul class="sub">
+                                    <li><a href="<?php echo $this->createUrl('/asignacionCenso/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Asignar Censo</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('/vswAsignacionCenso/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Asignación</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('/vswEmpadronadorCensos/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Empadronador</span></a></li>
+
+                                </ul>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="javascript:;">
                                     <i class="glyphicon glyphicon-tasks"></i>
                                     <span>Censo Socioeconómico</span>
                                 </a>
                                 <ul class="sub">
-
                                     <li><a href="<?php echo $this->createUrl('/beneficiario/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Censo</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('/beneficiario/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Censo</span></a></li>
-                                    <!--<li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Reasignación</span></a></li>-->
                                 </ul>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->createUrl('/analisisCredito/admin'); ?>">
+                                    <i class="glyphicon glyphicon-asterisk"></i>
+                                    <span>Análisis de Crédito</span>
+                                </a>
                             </li>
 
                         </ul>
@@ -234,7 +236,7 @@
             <div id="expirado"></div>
 
             <!--            <footer class='container col-md-12 col-xs-12 text-center'>
-                            Copyright &copy; <?php // echo date('Y');                                                                                                ?> by My Company.<br/>
+                            Copyright &copy; <?php // echo date('Y');                                                                                                               ?> by My Company.<br/>
                             All Rights Reserved.<br/>
             <?php // echo Yii::powered(); ?>
                         </footer>-->

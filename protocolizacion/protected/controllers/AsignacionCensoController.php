@@ -95,6 +95,7 @@ class AsignacionCensoController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
+        $model->fecha_asignacion = date('d/m/Y', strtotime($model->fecha_asignacion));
         $estado = new Tblestado;
         $municipio = new Tblmunicipio;
         $parroquia = new Tblparroquia;
@@ -116,33 +117,100 @@ class AsignacionCensoController extends Controller {
                             'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['AsignacionCenso']['segundo_nombre'])),
                             'PRIMER_APELLIDO' => trim(strtoupper($_POST['AsignacionCenso']['primer_apellido'])),
                             'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['AsignacionCenso']['segundo_apellido'])),
-                            'FECHA_NACIMIENTO' => $_POST['AsignacionCenso']['fechaNac'],
+                            'FECHA_NACIMIENTO' => $_POST['AsignacionCenso']['fecha_nac'],
                                 )
                 );
             } else {
                 $idAsignacion = $_POST['AsignacionCenso']['persona_id'];
             }
-            $ExisteAsignacion = AsignacionCensoController::FindByIdPersona($idAsignacion);
+//            $ExisteAsignacion = AsignacionCensoController::FindByIdPersona($idAsignacion);
 //            echo '<pre>';
 //            var_dump($ExisteAsignacion);
 //            die();
-            if (empty($ExisteAsignacion)) {
-                $model->persona_id = $idAsignacion;
-                $model->fecha_asignacion = Generico::formatoFecha($_POST['AsignacionCenso']['fecha_asignacion']);
-                $model->observaciones = trim(strtoupper($_POST['AsignacionCenso']['observaciones']));
-                $model->fecha_actualizacion = 'now()';
-                $model->usuario_id_creacion = Yii::app()->user->id;
-                if ($model->save()) {
-                    $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
-                } else {
-                    var_dump($model->errors);
-                }
-            } else {
-                $this->render('update', array('model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'error' => 1));
-                Yii::app()->end();
+//            if (empty($ExisteAsignacion)) {
+            $model->persona_id = $idAsignacion;
+            $model->fecha_asignacion = Generico::formatoFecha($_POST['AsignacionCenso']['fecha_asignacion']);
+            $model->observaciones = trim(strtoupper($_POST['AsignacionCenso']['observaciones']));
+            $model->fecha_actualizacion = 'now()';
+            $model->usuario_id_creacion = Yii::app()->user->id;
+
+            if ($model->save()) {
+                $this->redirect(array('view', 'id' => $model->id_asignacion_censo));
+//                    $this->render(array('admin'));
             }
         }
         $this->render('update', array(
+            'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia
+        ));
+    }
+
+    //FUNCION PARA LA REASIGNACION DE OFICINA 
+    public function actionCreateReasignacion($id) {
+        $model = new AsignacionCenso;
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
+
+
+
+        $model = $this->loadModel($id);
+        $model->fecha_asignacion = date('d/m/Y', strtotime($model->fecha_asignacion));
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
+
+        $consulta = ConsultaOracle::setPersona('nacionalidad,cedula,primer_nombre, segundo_nombre,primer_apellido, segundo_apellido', $model->persona_id);
+        $model->nacionalidad = ($consulta['NACIONALIDAD'] == 1) ? 97 : 98;
+        $model->cedula = $consulta['CEDULA'];
+        $model->primer_nombre = $consulta['PRIMER_NOMBRE'];
+        $model->segundo_nombre = $consulta['SEGUNDO_NOMBRE'];
+        $model->primer_apellido = $consulta['PRIMER_APELLIDO'];
+        $model->segundo_apellido = $consulta['SEGUNDO_APELLIDO'];
+        if (isset($_POST['AsignacionCenso'])) {
+            if (empty($_POST['AsignacionCenso']['persona_id'])) {
+                $idAsignacion = ConsultaOracle::insertPersona(array(
+                            'CEDULA' => $_POST['AsignacionCenso']['cedula'],
+                            'NACIONALIDAD' => ($_POST['AsignacionCenso']['nacionalidad'] == 97) ? 1 : 0,
+                            'PRIMER_NOMBRE' => trim(strtoupper($_POST['AsignacionCenso']['primer_nombre'])),
+                            'SEGUNDO_NOMBRE' => trim(strtoupper($_POST['AsignacionCenso']['segundo_nombre'])),
+                            'PRIMER_APELLIDO' => trim(strtoupper($_POST['AsignacionCenso']['primer_apellido'])),
+                            'SEGUNDO_APELLIDO' => trim(strtoupper($_POST['AsignacionCenso']['segundo_apellido'])),
+                            'FECHA_NACIMIENTO' => $_POST['AsignacionCenso']['fecha_nac'],
+                                )
+                );
+            } else {
+                $idAsignacion = $_POST['AsignacionCenso']['persona_id'];
+            }
+
+            $model->fecha_actualizacion = 'now()';
+            $model->usuario_id_creacion = Yii::app()->user->id;
+            $model->estatus = 12;
+
+            $nuevoInsert = new AsignacionCenso;
+
+            if ($model->save()) {
+
+
+                $nuevoInsert->persona_id = $idAsignacion;
+                $nuevoInsert->desarrollo_id = $_POST['AsignacionCenso']['desarrollo_id'];
+                $nuevoInsert->fecha_asignacion = Generico::formatoFecha($_POST['AsignacionCenso']['fecha_asignacion']);
+                $nuevoInsert->observaciones = trim(strtoupper($_POST['AsignacionCenso']['observaciones']));
+                $nuevoInsert->oficina_id = $_POST['AsignacionCenso_oficina_id'];
+                $nuevoInsert->censado = isset($_POST['censado']) ? true : false;
+                $nuevoInsert->fecha_creacion = 'now()';
+                $nuevoInsert->fecha_actualizacion = 'now()';
+                $nuevoInsert->usuario_id_creacion = Yii::app()->user->id;
+                $nuevoInsert->estatus = 11;
+                
+                if ($nuevoInsert->save()) {
+                
+                    $this->redirect(array('view', 'id' => $nuevoInsert->id_asignacion_censo));
+                
+                    
+                } 
+            } 
+        }
+        $this->render('createReasignacion', array(
             'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia
         ));
     }
