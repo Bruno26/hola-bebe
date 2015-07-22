@@ -107,14 +107,14 @@
                                             <li><a href="<?php echo $this->createUrl('/abogados/admin'); ?>">Gestión de Agente de Documentación</a></li>
                                         </ul>
                                     </li>
-                                    
+
                                     <!--                                    <li class="sub-menu">
                                                                             <a href="javascript:;">
                                                                                 <i class="glyphicon glyphicon-briefcase"></i>
                                                                                 <span>Registro Público</span>
                                                                             </a>
                                                                             <ul class="sub">
-                                                                                <li><a href="<?php // echo $this->createUrl('/registroPublico/create');                 ?>">Cargar Nuevo Registro Público</a></li>
+                                                                                <li><a href="<?php // echo $this->createUrl('/registroPublico/create');                    ?>">Cargar Nuevo Registro Público</a></li>
                                                                             </ul>
                                                                         </li>-->
                                     <!--                                    <li class="sub-menu">
@@ -123,10 +123,9 @@
                                                                                 <span>Registro de Documentos</span>
                                                                             </a>
                                                                             <ul class="sub">
-                                                                                <li><a href="<?php // echo $this->createUrl('/registroDocumento/create');                 ?>">Cargar Nuevo Registro de Documento</a></li>
+                                                                                <li><a href="<?php // echo $this->createUrl('/registroDocumento/create');                    ?>">Cargar Nuevo Registro de Documento</a></li>
                                                                             </ul>
                                                                         </li>-->
-
                                 </ul>
                             </li>
 
@@ -189,7 +188,7 @@
                                 <ul class="sub-menu">
                                     <li><a href="<?php echo $this->createUrl('/beneficiarioTemporal/create'); ?>"><i class="glyphicon glyphicon-user"></i><span>Cargar Nuevo Adjudicado</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('/beneficiarioTemporal/admin'); ?>"><i class="glyphicon glyphicon-user"></i><span>Listado de Adjudicados</span></a></li>
-                                   
+
                                 </ul>
                             </li>
                             <li class="sub-menu">
@@ -237,7 +236,7 @@
             <div id="expirado"></div>
 
             <!--            <footer class='container col-md-12 col-xs-12 text-center'>
-                            Copyright &copy; <?php // echo date('Y');                                                                                                            ?> by My Company.<br/>
+                            Copyright &copy; <?php // echo date('Y');                                                                                                               ?> by My Company.<br/>
                             All Rights Reserved.<br/>
             <?php // echo Yii::powered(); ?>
                         </footer>-->
