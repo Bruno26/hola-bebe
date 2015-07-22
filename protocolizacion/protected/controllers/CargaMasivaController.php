@@ -67,11 +67,9 @@ public function actionCreate(){
   $parroquia = new Tblparroquia;
   $desarrollo = new Desarrollo;
   $error = FALSE;
-  $cant_columnas = 8;
+  $cant_columnas = 34;
   // Uncomment the following line if AJAX validation is needed
   // $this->performAjaxValidation($model);
-  $model->num_lineas = 55;
-  $model->tamano_archivo = 1024;
   $model->estatus = 100;
   $model->tipo_carga_masiva = 1;
   $model->usuario_id_creacion = 1;
@@ -107,8 +105,12 @@ public function actionCreate(){
 
   if ($error == FALSE){
       $archivo = Yii::app()->basePath.'/../images/'.$model->nombre_archivo;
-
       $model->nombre_archivo->saveAs($archivo);
+
+      $model->num_lineas = count(file($archivo));
+      $model->tamano_archivo = filesize($archivo);
+
+
       $perl = "/usr/bin/perl";
       $result = 0;
       $result = shell_exec("$perl /var/www/html/carga-perl/inicio.pl $archivo");
