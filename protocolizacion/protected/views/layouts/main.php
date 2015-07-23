@@ -199,7 +199,7 @@
                                 <ul class="sub">
                                     <li><a href="<?php echo $this->createUrl('/asignacionCenso/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Asignar Censo</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('/vswAsignacionCenso/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Asignación</span></a></li>
-                                    <li><a href="<?php echo $this->createUrl('/vswEmpadronadorCensos/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Empadronador</span></a></li>
+                                    <!--<li><a href="<?php // echo $this->createUrl('/vswEmpadronadorCensos/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Empadronador</span></a></li>-->
 
                                 </ul>
                             </li>
@@ -260,7 +260,9 @@ $url_valida_sesion = CHtml::normalizeUrl(array('/cruge/ui/login'));
 $url_destroy_session = CHtml::normalizeUrl(array('/site/logout'));
 Yii::app()->getClientScript()->registerScript("core_cruge", "
 var tstampActual = 0;
-var comprobar = 900000;
+var comprobar = 1200000;
+
+
 
     function kill_session() {
         if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -284,6 +286,7 @@ function actividad() {
         kill_session();
     }
 }
+
 $( document ).ready(function() {
     // Handler for .ready() called.
     document.body.addEventListener('mousemove', function() {

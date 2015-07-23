@@ -13,6 +13,6 @@ $this->breadcrumbs=array(
 	);
 	?>
 
-	<h1>Update BeneficiarioTemporal <?php echo $model->id_beneficiario_temporal; ?></h1>
+	<h1>Actualizar Adjudicado<?php echo $model->id_beneficiario_temporal; ?></h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
