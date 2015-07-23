@@ -81,6 +81,7 @@ class ValidacionJsController extends Controller {
                     'id_desarrollo' => $existeTemporal->desarrollo->id_desarrollo,
                     'id_unidadh'  => $existeTemporal->unidadHabitacional->id_unidad_habitacional,
                     'vivienda_id' => $existeTemporal->vivienda->id_vivienda,
+                    'construccion_mt2' => $existeTemporal->vivienda->construccion_mt2,
 
                 );
                 $salida = array('persona' => $consultaPer, 'desarrollo' => $desarrollo);

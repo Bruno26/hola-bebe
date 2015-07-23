@@ -1,5 +1,5 @@
 
-<h1>Detalle de Adjudicado Temporal #<?php echo $model->id_beneficiario_temporal; ?></h1>
+<h1>Detalle de Adjudicado #<?php echo $model->id_beneficiario_temporal; ?></h1>
 
 <?php $this->widget('booster.widgets.TbPanel', array(
     'context' => 'primary',

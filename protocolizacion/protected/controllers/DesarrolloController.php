@@ -86,7 +86,7 @@ class DesarrolloController extends Controller {
                 $model->fecha_creacion = 'now()';
                 $model->fecha_actualizacion = 'now()';
                 $model->usuario_id_creacion = Yii::app()->user->id;
-                $model->estatus = 29;
+                $model->estatus = 30;
                 // echo '<pre>';  var_dump($model); die();
 
                 if ($model->save()) {
