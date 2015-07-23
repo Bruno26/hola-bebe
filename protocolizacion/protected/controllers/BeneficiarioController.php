@@ -92,7 +92,7 @@ class BeneficiarioController extends Controller {
                             $unidad_familiar->nombre = $Existe->nombre_completo;
                             $unidad_familiar->beneficiario_id = $model->id_beneficiario;
                             $unidad_familiar->ingreso_total_familiar = '0.00';
-                            $unidad_familiar->procedencia_beneficio_id = 140; //INIDICAR EN QUE MOMENTO SE CARGA ESTE DATO
+//                            $unidad_familiar->procedencia_beneficio_id = 140; //INIDICAR EN QUE MOMENTO SE CARGA ESTE DATO
                             $unidad_familiar->fuente_datos_entrada_id = 90;
                             $unidad_familiar->condicion_unidad_familiar_id = $_POST['UnidadFamiliar']['condicion_unidad_familiar_id']; //Berifivar cual es el id
                             $unidad_familiar->total_personas_cotizando = 0;

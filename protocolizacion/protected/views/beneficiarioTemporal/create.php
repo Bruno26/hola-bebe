@@ -37,7 +37,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         ")  */ ?>
 
 
-<h1>Cargar Nuevo Adjudicado Temporal</h1>
+<h1>Cargar Nuevo Adjudicado</h1>
 <br><br>
 
 

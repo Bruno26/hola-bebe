@@ -107,13 +107,14 @@
                                             <li><a href="<?php echo $this->createUrl('/abogados/admin'); ?>">Gestión de Agente de Documentación</a></li>
                                         </ul>
                                     </li>
+
                                     <!--                                    <li class="sub-menu">
                                                                             <a href="javascript:;">
                                                                                 <i class="glyphicon glyphicon-briefcase"></i>
                                                                                 <span>Registro Público</span>
                                                                             </a>
                                                                             <ul class="sub">
-                                                                                <li><a href="<?php // echo $this->createUrl('/registroPublico/create');      ?>">Cargar Nuevo Registro Público</a></li>
+                                                                                <li><a href="<?php // echo $this->createUrl('/registroPublico/create');                    ?>">Cargar Nuevo Registro Público</a></li>
                                                                             </ul>
                                                                         </li>-->
                                     <!--                                    <li class="sub-menu">
@@ -122,23 +123,12 @@
                                                                                 <span>Registro de Documentos</span>
                                                                             </a>
                                                                             <ul class="sub">
-                                                                                <li><a href="<?php // echo $this->createUrl('/registroDocumento/create');      ?>">Cargar Nuevo Registro de Documento</a></li>
+                                                                                <li><a href="<?php // echo $this->createUrl('/registroDocumento/create');                    ?>">Cargar Nuevo Registro de Documento</a></li>
                                                                             </ul>
                                                                         </li>-->
-                                    <li class="sub-menu">
-                                        <a href="javascript:;">
-                                            <i class="glyphicon glyphicon-briefcase"></i>
-                                            <span>Asignación de Censo</span>
-                                        </a>
-                                        <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/asignacionCenso/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Asignación de Censo</span></a></li>
-                                            <li><a href="<?php echo $this->createUrl('/vswAsignacionCenso/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Asignación</span></a></li>
-                                            <li><a href="<?php echo $this->createUrl('/vswEmpadronadorCensos/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Empadronador</span></a></li>
-
-                                        </ul>
-                                    </li>
                                 </ul>
                             </li>
+
                             <li class="sub-menu">
                                 <a href="javascript:;">
                                     <i class="glyphicon glyphicon-globe"></i>
@@ -191,26 +181,36 @@
                                 </ul>
                             </li>
                             <li class="sub-menu">
-                                <a href="<?php echo $this->createUrl('#'); ?>">
+                                <a href="javascript:;">
                                     <i class="glyphicon glyphicon-user"></i>
                                     <span>Gestión de Adjudicados</span>
                                 </a>
                                 <ul class="sub-menu">
                                     <li><a href="<?php echo $this->createUrl('/beneficiarioTemporal/create'); ?>"><i class="glyphicon glyphicon-user"></i><span>Cargar Nuevo Adjudicado</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('/beneficiarioTemporal/admin'); ?>"><i class="glyphicon glyphicon-user"></i><span>Listado de Adjudicados</span></a></li>
-                                    <!--<li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Carga Masiva</span></a></li>-->
+
                                 </ul>
                             </li>
                             <li class="sub-menu">
-                                <a href="<?php echo $this->createUrl('#'); ?>">
+                                <a href="javascript:;">
+                                    <i class="glyphicon glyphicon-briefcase"></i>
+                                    <span>Asignación de Censo</span>
+                                </a>
+                                <ul class="sub">
+                                    <li><a href="<?php echo $this->createUrl('/asignacionCenso/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Asignar Censo</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('/vswAsignacionCenso/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Asignación</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('/vswEmpadronadorCensos/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Empadronador</span></a></li>
+
+                                </ul>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="javascript:;">
                                     <i class="glyphicon glyphicon-tasks"></i>
                                     <span>Censo Socioeconómico</span>
                                 </a>
                                 <ul class="sub">
-
                                     <li><a href="<?php echo $this->createUrl('/beneficiario/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Censo</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('/beneficiario/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Censo</span></a></li>
-                                    <!--<li><a href="<?php echo $this->createUrl('#'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Reasignación</span></a></li>-->
                                 </ul>
                             </li>
                             <li>
@@ -236,7 +236,7 @@
             <div id="expirado"></div>
 
             <!--            <footer class='container col-md-12 col-xs-12 text-center'>
-                            Copyright &copy; <?php // echo date('Y');                                                                                                 ?> by My Company.<br/>
+                            Copyright &copy; <?php // echo date('Y');                                                                                                               ?> by My Company.<br/>
                             All Rights Reserved.<br/>
             <?php // echo Yii::powered(); ?>
                         </footer>-->
@@ -260,7 +260,9 @@ $url_valida_sesion = CHtml::normalizeUrl(array('/cruge/ui/login'));
 $url_destroy_session = CHtml::normalizeUrl(array('/site/logout'));
 Yii::app()->getClientScript()->registerScript("core_cruge", "
 var tstampActual = 0;
-var comprobar = 900000;
+var comprobar = 1200000;
+
+
 
     function kill_session() {
         if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -284,6 +286,7 @@ function actividad() {
         kill_session();
     }
 }
+
 $( document ).ready(function() {
     // Handler for .ready() called.
     document.body.addEventListener('mousemove', function() {
