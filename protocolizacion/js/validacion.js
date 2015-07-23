@@ -423,7 +423,101 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
 /*  +++++++++++++++++++++++++++++++++++++++++++++ */
 
 
+/* -------------------Para Update  ---------------- */
 
+
+function buscarPersonaBeneficiarioTemp2(nacionalidad, cedula) {
+
+    if (nacionalidad == 'SELECCIONE') {
+        bootbox.alert('Verifique que la nacionalidad no esten vacios');
+        return false;
+    }
+    if (cedula == '') {
+        bootbox.alert('Verifique que la cédula no esten vacios');
+        return false;
+    }
+
+
+    $.ajax({
+        url: baseUrl + "/ValidacionJs/BuscarPersonasBeneficiario",
+        async: true,
+        type: 'POST',
+        data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
+        dataType: 'json',
+        success: function (datos) {
+
+                 // alert(datos);
+                    $('#BeneficiarioTemporal_cedula').attr('readonly', true);
+                    $('#BeneficiarioTemporal_nacionalidad').attr('disabled', true);
+                            
+                    $('#BeneficiarioTemporal_primer_nombre').val(datos.persona.PRIMERNOMBRE);
+                    $('#BeneficiarioTemporal_primer_nombre').attr('readonly', false);
+                
+
+                    $('#BeneficiarioTemporal_segundo_nombre').val(datos.persona.SEGUNDONOMBRE);
+                    $('#BeneficiarioTemporal_segundo_nombre').attr('readonly', false);
+               
+
+                    $('#BeneficiarioTemporal_primer_apellido').val(datos.persona.PRIMERAPELLIDO);
+                    $('#BeneficiarioTemporal_primer_apellido').attr('readonly', false);
+                
+
+                    $('#BeneficiarioTemporal_segundo_apellido').val(datos.persona.SEGUNDOAPELLIDO);
+                    $('#BeneficiarioTemporal_segundo_apellido').attr('readonly', false);
+               
+
+                    $('#BeneficiarioTemporal_fecha_nacimiento').val(datos.persona.FECHANACIMIENTO);
+                    $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', false);
+                
+
+                //  habilito los campos que se llenan en persona
+                $('#BeneficiarioTemporal_sexo').attr('readonly', false);
+                $('#BeneficiarioTemporal_sexo').attr('disabled', false);
+
+                $('#BeneficiarioTemporal_estado_civil').attr('disabled', false);
+                $('#BeneficiarioTemporal_estado_civil').attr('readonly', false);
+                $('#BeneficiarioTemporal_estado_civil').val('');
+
+                $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', false);
+                $('#BeneficiarioTemporal_telf_habitacion').val(datos.persona.TELEFONOHAB);
+
+                $('#BeneficiarioTemporal_telf_celular').attr('readonly', false);
+                $('#BeneficiarioTemporal_telf_celular').val(datos.persona.TELEFONOMOVIL);
+
+                $('#BeneficiarioTemporal_correo_electronico').attr('readonly', false);
+                $('#BeneficiarioTemporal_correo_electronico').val(datos.persona.CORREO);
+           
+
+                /*  ------------------ */
+
+             /*   $('#Beneficiario_estado').val(datos.desarrollo.estado);
+                $('#Beneficiario_municipio').val(datos.desarrollo.municipio);
+                $('#Beneficiario_parroquia').val(datos.desarrollo.parroquia_id); 
+                $('#Beneficiario_nombre_desarrollo').val(datos.desarrollo.nombre);*/
+                $('#Desarrollo_urban_barrio').val(datos.desarrollo.urban_barrio);
+                $('#Desarrollo_av_call_esq_carr').val(datos.desarrollo.av_call_esq_carr);
+                $('#Desarrollo_zona').val(datos.desarrollo.zona);
+                /*$('#Desarrollo_lote_terreno_mt2').val(datos.desarrollo.lote_terreno_mt2);
+                $('#Beneficiario_nomb_edif').val(datos.desarrollo.nomb_edif);
+                $('#Beneficiario_piso').val(datos.desarrollo.nro_piso);
+                $('#Beneficiario_numero_vivienda').val(datos.desarrollo.nro_vivienda);
+                $('#Beneficiario_tipo_vivienda').val(datos.desarrollo.tipo_vivienda_id);
+                $('#Beneficiario_beneficiario_temporal_id').val(datos.desarrollo.Temp); */
+
+                /*  ----------------- */
+            
+
+//            }
+        },
+        error: function (datos) {
+            bootbox.alert('CEDULA NO ES VALIDA VERIFIQUE');
+        }
+    })
+
+
+}
+
+/*  +++++++++++++++++++++++++++++++++++++++++++++ */
 
 /*  /////////////////  PARA CENSO ////////////////////// */
 function buscarBeneficiarioTemporal(nacionalidad, cedula) {
@@ -445,7 +539,8 @@ function buscarBeneficiarioTemporal(nacionalidad, cedula) {
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
         success: function (datos) {
-            /* ++++ solo verifico en Persona  ++++  */
+            /* ++++   solo verifico en Persona  ++++  */
+
             if (datos != 2) {
                 //datos de beneficiario temporal
                 $('#Beneficiario_primer_nombre').val(datos.persona.PRIMERNOMBRE);

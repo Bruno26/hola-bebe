@@ -41,8 +41,7 @@ $persona = (object) ConsultaOracle::getPersonaBeneficiario($model->nacionalidad,
                     <p>
                         <b>  Desarrollo:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                         <?php echo $model->desarrollo->nombre; ?><br/>               
-
+                         <?php echo $model->desarrollo->nombre; ?><br/> 
                         <b> Estado:   </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <?php echo $model->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion; ?><br/>
@@ -61,8 +60,6 @@ $persona = (object) ConsultaOracle::getPersonaBeneficiario($model->nacionalidad,
                        
                         <b>  Fecha Creación:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <?php echo date('d/m/Y', strtotime($model->fecha_creacion)); ?> <br>
-                       
-
                     </p>
                 </blockquote>
             </div>
