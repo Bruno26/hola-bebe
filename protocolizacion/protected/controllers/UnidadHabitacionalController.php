@@ -88,7 +88,7 @@ class UnidadHabitacionalController extends Controller {
                 $model->fecha_creacion = 'now()';
                 $model->fecha_actualizacion = 'now()';
                 $model->usuario_id_creacion = Yii::app()->user->id;
-                $model->estatus = 77;
+                $model->estatus = 78;
 //                echo '<pre>';var_dump($model); die();
 
                 if ($model->save()) {

@@ -31,6 +31,11 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
                         $('#EmpadronadorCenso_UnidadMultifamiliar').html(data);
                     });
                     $('#EmpadronadorCenso_empadronador_usuario_id').val('');
+                    $('#EmpadronadorCenso_edoDes').val('');
+                    $('#EmpadronadorCenso_munDes').val('');
+                    $('#EmpadronadorCenso_parqDes').val('');
+                    $('#EmpadronadorCenso_Des').val('');
+                    $('#EmpadronadorCenso_parqDes').val('');
                     $('#EmpadronadorCenso_UnidadMultifamiliar').val('');
                     html = '<option value=\"\">SELECCIONE</option>';
                     $('#EmpadronadorCenso_BeneficiarioAdju').html(html);
@@ -119,7 +124,7 @@ Yii::app()->clientScript->registerScript('grupoFamiliar', "
 
         <?php
         $this->widget('booster.widgets.TbGridView', array(
-            'id' => 'vsw-empadronador-censos-grid',
+            'id' => 'listado_empadronador',
             'type' => 'striped bordered condensed',
 //        'dataProvider' => $vistaEmpadronador->search(),
             'dataProvider' => new CActiveDataProvider('VswEmpadronadorCensos', array(

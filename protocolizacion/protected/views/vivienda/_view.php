@@ -1,4 +1,4 @@
-<?php //  echo '<pre>';var_dump($model);die();  ?>
+<?php //  echo '<pre>';var_dump($model);die();        ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -62,25 +62,27 @@
                         <b>Piso:</b> <?php echo $model->nro_piso; ?><br/>
                         <b>N° de Vivienda:</b> <?php echo $model->nro_vivienda; ?><br/>
                         <b>Sala:</b> 
-                            <?php
-                            if ($model->sala = TRUE): echo'SI';
-                            else: echo 'NO';
-                            endif;
-                            ?>
+                        <?php
+                        if ($model->sala): echo'SI';
+                        else: echo 'NO';
+                        endif;
+                        ?>
                         <br/>
                         <b>Comedor:</b> 
-                            <?php
-                            if ($model->comedor = TRUE): echo'SI';
-                            else: echo 'NO';
-                            endif;
-                            ?>
+                        <?php
+                        if ($model->comedor): echo'SI';
+                        else: echo 'NO';
+                        endif;
+                        ?>
                         <br/>
                         <b>Cocina:</b> 
-                            <?php
-                            if ($model->cocina = TRUE): echo'SI';
-                            else: echo 'NO';
-                            endif;
-                            ?>
+                        <?php
+                        if ($model->cocina):
+                            echo'SI';
+                        else:
+                            echo 'NO';
+                        endif;
+                        ?>
                     </p>
                 </blockquote>
             </div>
@@ -88,17 +90,19 @@
                 <blockquote>
                     <p>
                         <b>Lavandero: </b>
-                            <?php
-                            if ($model->lavandero = TRUE): echo'SI';
-                            else: echo 'NO';
-                            endif;
-                            ?>
+                        <?php
+                        if ($model->lavandero):
+                            echo'SI';
+                        else:
+                            echo 'NO';
+                        endif;
+                        ?>
                         <br/>
                         <b>N° de Habitantes: </b><?php echo $model->nro_habitaciones; ?><br/>
                         <b>N° de Baños: </b><?php echo $model->nro_banos; ?><br/>
                         <b>Puesto de Estacionamiento: </b><?php echo $model->descripcion_estac; ?><br/>
                         <b>N° de Estacionamiento: </b><?php echo $model->nro_estacionamientos; ?><br/>
-                        <b>Precio de Vivienda: </b><?php echo Generico::FormatearBs($model->precio_vivienda);?> Bs<br/>
+                        <b>Precio de Vivienda: </b><?php echo Generico::FormatearBs($model->precio_vivienda); ?> Bs<br/>
                     </p>
                 </blockquote>
             </div>

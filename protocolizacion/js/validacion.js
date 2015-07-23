@@ -567,6 +567,7 @@ function buscarBeneficiarioTemporal(nacionalidad, cedula) {
                 $('#Beneficiario_numero_vivienda').val(datos.desarrollo.nro_vivienda);
                 $('#Beneficiario_tipo_vivienda').val(datos.desarrollo.tipo_vivienda_id);
                 $('#Beneficiario_beneficiario_temporal_id').val(datos.desarrollo.Temp);
+                $('#Vivienda_construccion_mt2').val(datos.desarrollo.construccion_mt2);
 
             } else {
 
