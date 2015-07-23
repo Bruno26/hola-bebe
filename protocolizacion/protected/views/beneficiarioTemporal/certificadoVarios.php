@@ -680,9 +680,6 @@ foreach ($recordBeneTemp as $model) {
              
             
 
-
-
-
     $html.="<p class='saltodepagina'/>";
 }
 
