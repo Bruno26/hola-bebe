@@ -64,7 +64,7 @@ class UnidadHabitacional extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('nombre, desarrollo_id, gen_tipo_inmueble_id, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, estatus', 'required'),
-            array('desarrollo_id, gen_tipo_inmueble_id, total_unidades, registro_publico_id, tipo_documento_id, ano, fuente_datos_entrada_id, usuario_id_creacion, usuario_id_actualizacion, estatus, num_protocolo', 'numerical', 'integerOnly' => true),
+            array('desarrollo_id, gen_tipo_inmueble_id, total_unidades, registro_publico_id, tipo_documento_id, ano, fuente_datos_entrada_id, usuario_id_creacion, usuario_id_actualizacion, estatus, num_protocolo, total_unidad_censada', 'numerical', 'integerOnly' => true),
             array('nombre, nro_matricula', 'length', 'max' => 100),
             array('tomo, nro_documento', 'length', 'max' => 50),
             array('asiento_registral, folio_real', 'length', 'max' => 6),
@@ -72,7 +72,7 @@ class UnidadHabitacional extends CActiveRecord {
             array('fecha_registro', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id_unidad_habitacional, nombre, desarrollo_id, gen_tipo_inmueble_id, total_unidades, registro_publico_id, tipo_documento_id, fecha_registro, tomo, ano, nro_documento, asiento_registral, folio_real, nro_matricula, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, estatus, num_protocolo, lindero_norte, lindero_sur, lindero_este, lindero_oeste', 'safe', 'on' => 'search'),
+            array('id_unidad_habitacional, nombre, desarrollo_id, gen_tipo_inmueble_id, total_unidades, registro_publico_id, tipo_documento_id, fecha_registro, tomo, ano, nro_documento, asiento_registral, folio_real, nro_matricula, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, estatus, num_protocolo, lindero_norte, lindero_sur, lindero_este, lindero_oeste, total_unidad_censada', 'safe', 'on' => 'search'),
         );
     }
 
@@ -129,6 +129,7 @@ class UnidadHabitacional extends CActiveRecord {
             'lindero_sur' => 'Lindero Sur',
             'lindero_este' => 'Lindero Este',
             'lindero_oeste' => 'Lindero Oeste',
+            'total_unidad_censada' => 'total_unidad_censada',
 
         );
     }
@@ -175,6 +176,7 @@ class UnidadHabitacional extends CActiveRecord {
         $criteria->compare('lindero_sur', $this->lindero_sur, true);
         $criteria->compare('lindero_este', $this->lindero_este, true);
         $criteria->compare('lindero_oeste', $this->lindero_oeste, true);
+        $criteria->compare('total_unidad_censada', $this->total_unidad_censada);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

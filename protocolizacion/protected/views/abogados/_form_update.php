@@ -18,7 +18,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
        
 
 "); ?>
-<?php #echo $form->errorSummary($model); ?>
+<?php #echo $form->errorSummary($model);                  ?>
 <div class="row">
     <div class="row-fluid">
 
@@ -42,12 +42,12 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 
 </div>
 <div class="row">
-        <div class='col-md-6'>
-            <?php echo $form->textFieldGroup($model, 'primer_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
-        </div>
-        <div class='col-md-6'>
-            <?php echo $form->textFieldGroup($model, 'segundo_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
-        </div>
+    <div class='col-md-6'>
+        <?php echo $form->textFieldGroup($model, 'primer_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
+    </div>
+    <div class='col-md-6'>
+        <?php echo $form->textFieldGroup($model, 'segundo_apellido', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100, 'readonly' => true,)))); ?>
+    </div>
 </div>
 
 
@@ -65,14 +65,71 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
             );
             ?>
         </div>
-        <?php if($model->tipo_abogado_id == 101){?>
-        <div class="col-md-4 inpreabogado">
-            <?php echo $form->textFieldGroup($model, 'inpreabogado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20)))); ?>
-        </div>
-        <?php }else{ ?>
-        <div class="col-md-4 inpreabogado" style ="display: none">
-            <?php echo $form->textFieldGroup($model, 'inpreabogado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20)))); ?>
-        </div>
+        <?php if ($model->tipo_abogado_id == 101) { ?>
+            <div class="col-md-4 inpreabogado">
+                <?php echo $form->textFieldGroup($model, 'inpreabogado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20)))); ?>
+            </div>
+        <?php } else { ?>
+            <div class="col-md-4">
+                <b>Rif Abogado </b> <span class="required">*</span>
+                <?php echo $form->textFieldGroup($model, 'rif_abogado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20)))); ?>
+            </div>
+            <div class="col-md-4">
+                <b>Resgistro Público</b> <span class="required">*</span>
+                <?php
+                echo $form->dropDownListGroup($model, 'registro_publico_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+                    'widgetOptions' => array(
+                        'data' => CHtml::listData(RegistroPublico::model()->findAll(), 'id_registro_publico', 'nombre_registro_publico'),
+                        'htmlOptions' => array('empty' => 'SELECCIONE', 'disabled' => true,),
+                    )
+                        )
+                );
+                ?>
+            </div>
+            <div class="col-md-4">
+                <b> Número de Protocolo </b> <span class="required">*</span>
+                <?php
+                echo $form->dropDownListGroup($model, 'nun_protocolo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+                    'widgetOptions' => array(
+                        'data' => Maestro::FindMaestrosByPadreSelect(144, 'descripcion ASC'),
+                        'htmlOptions' => array('empty' => 'SELECCIONE'),
+                    )
+                        )
+                );
+                ?>
+            </div>
+            <div class="col-md-4">
+                <b> Folio </b> <span class="required">*</span>
+                <?php echo $form->textFieldGroup($model, 'folio', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 12)))); ?>
+            </div>
+            <div class="col-md-4">
+                <b>Número de Tomo </b> <span class="required">*</span>
+                <?php echo $form->textFieldGroup($model, 'tomo', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 12)))); ?>
+
+            </div>
+            <div class="col-md-4">
+                <b> Año </b> <span class="required">*</span>
+                <?php
+                echo $form->datePickerGroup($model, 'anio', array('widgetOptions' =>
+                    array(
+                        'options' => array(
+                            'language' => 'es',
+                            'format' => 'yyyy',
+                            'startView' => 1,
+                            'minViewMode' => 2,
+                            'autoclose' => true,
+                            'endDate' => 'now()',
+                        ),
+                        'htmlOptions' => array(
+                            'class' => 'span5 limpiar',
+                            'readonly' => true,
+                        ),
+                    ),
+                    'prepend' => '<i class="glyphicon glyphicon-calendar"></i>',
+                        )
+                );
+                ?>
+            </div>
         <?php } ?>
         <div class="col-md-4">
             <?php
