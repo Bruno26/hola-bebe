@@ -15,7 +15,6 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
         
 "); ?>
 
-
 <div class="row">
     <div class="col-md-4">
 
