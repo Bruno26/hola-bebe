@@ -9,22 +9,60 @@ if (baseUrl.indexOf('.protocolizacion.org.ve') == -1) {
     baseUrl = $(location).attr('href').replace($(location).attr('pathname'), ruta) + '/protocolizacion';
 }
 
-//$(document).ready(function(){
-//    alert("hola");
-//});
-
 function conMayusculas(field) {
     field.value = field.value.toUpperCase()
 }
+$(document).ready(function() {
+    var SalarioGrupoFamiliar = $('#opciones_2').val();
+    $.ajax({
+        url: baseUrl + "/CalculoAnalisisCredito/Ajax/TipoInterresAplicable",
+        async: true,
+        type: 'POST',
+        data: 'SalarioFamiliar=' + SalarioGrupoFamiliar,
+        dataType: 'json',
+        success: function(datos) {
+            $('#AnalisisCredito_tasa_interes_id').val(datos);
+        },
+        error: function(datos) {
+            bootbox.alert('Ocurrio un error');
+        }
+    })
+});
 
+
+/*
+ * FUNCTION QUE RECALCULA LA TAZA DE INTERE4S APLICABLE SEGUN TABLA DEL SUELDO
+ */
+
+function RecalculoDeInteres() {
+    if ($('#opciones_2').is(':checked')) {
+        var valorSalario = $('#opciones_2').val();
+    }
+    if ($('#opciones_1').is(':checked')) {
+        var valorSalario = $('#opciones_1').val();
+    }
+    $.ajax({
+        url: baseUrl + "/CalculoAnalisisCredito/Ajax/TipoInterresAplicable",
+        async: true,
+        type: 'POST',
+        data: 'SalarioFamiliar=' + valorSalario,
+        dataType: 'json',
+        success: function(datos) {
+            $('#AnalisisCredito_tasa_interes_id').val(datos);
+        },
+        error: function(datos) {
+            bootbox.alert('Ocurrio un error');
+        }
+    })
+}
 
 /*
  * FUNCION QUE BUSCA EN SAIME Y EN PERSONA POR NUMERO DE CEDULA Y NACIONALIDAD
  */
 function calcularSueldo(fondo_recuperacion) {
     if (fondo_recuperacion == '') {
-        var tableDeclarable ='<table class="table table-bordered"><th>Sueldo Declarado</th><tr><td><i>Sin información</i></td></tr></table>';
-        var tableFaov='<table class="table table-bordered"><th>Sueldo Según Faov</th><tr><td><i>Sin información</i></td></tr></table>';
+        var tableDeclarable = '<table class="table table-bordered"><th>Sueldo Declarado</th><tr><td><i>Sin información</i></td></tr></table>';
+        var tableFaov = '<table class="table table-bordered"><th>Sueldo Según Faov</th><tr><td><i>Sin información</i></td></tr></table>';
         $('#ingreso_declarado').html(tableDeclarable);
         $('#ingreso_faov').html(tableFaov);
         bootbox.alert('Verifique que el Fondo de Recuperación no este vacios');

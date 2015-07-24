@@ -49,11 +49,12 @@
         <?php
         $criteria = new CDbCriteria;
         $criteria->order = 'id_tasa_interes ASC';
-        echo $form->dropDownListGroup($model, 'tasa_interes_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-4',),
+        echo $form->dropDownListGroup($model, 'tasa_interes_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-4'),
             'widgetOptions' => array(
-                'data' => CHtml::listData(TasaInteres::model()->findAll($criteria), 'id_tasa_interes', 'nombre_tasa_interes'),
+                'data' => CHtml::listData(TasaInteres::model()->findAll($criteria), 'id_tasa_interes', 'tasa_interes'),
                 'htmlOptions' => array(
                     'empty' => 'SELECCIONE',
+                    'disabled' => 'true'
                 ),
             )
                 )
