@@ -4,7 +4,7 @@
     </div>
 <?php endif; ?>
 
-<h1>Gestión de Adjudicados Temporales</h1>
+<h1>Gestión de Adjudicados</h1>
 
 <?php
 $model->estatus=221;
