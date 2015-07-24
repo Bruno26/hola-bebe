@@ -9,7 +9,15 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         'validateOnType' => true,
         )));
 ?>
+<?php
+$baseUrl = Yii::app()->baseUrl;
+$numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
+$mascara = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/jquery.mask.min.js');?>
+
 <?php Yii::app()->clientScript->registerScript('abogado', "  
+     $(document).ready(function(){
+         $('#Abogados_rif_abogado').mask('A-BBBBBBBB-9', {translation: { 'A': {pattern: /[VEve]/}, 'B':{pattern: /[0-9]/}}, clearIfNotMatch: true});
+    }); 
         $('#guardar').click(function(){
             if($('#Abogados_tipo_abogado_id').val()==''){
               bootbox.alert('Por favor indique el tipo de agente');

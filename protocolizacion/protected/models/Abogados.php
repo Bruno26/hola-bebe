@@ -15,8 +15,21 @@
  * @property string $fecha_actualizacion
  * @property integer $usuario_id_creacion
  * @property integer $usuario_id_actualizacion
- * @property Oficina $oficinaId
+ * @property string $rif_abogado
+ * @property integer $registro_publico_id
+ * @property integer $nun_protocolo
+ * @property string $folio
+ * @property string $tomo
+ * @property string $anio
+ *
+ * The followings are the available model relations:
+ * @property Maestro $estatus0
+ * @property Oficina $oficina
  * @property Maestro $tipoAbogado
+ * @property CrugeUser $usuarioIdActualizacion
+ * @property CrugeUser $usuarioIdCreacion
+ * @property RegistroPublico $registroPublico
+ * @property Maestro $nunProtocolo
  */
 class Abogados extends CActiveRecord {
 
@@ -43,12 +56,13 @@ class Abogados extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('persona_id, tipo_abogado_id, oficina_id, estatus, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
-            array('persona_id, tipo_abogado_id, oficina_id, estatus, usuario_id_creacion, usuario_id_actualizacion', 'numerical', 'integerOnly' => true),
+            array('persona_id, tipo_abogado_id, oficina_id, estatus, usuario_id_creacion, usuario_id_actualizacion, registro_publico_id, nun_protocolo', 'numerical', 'integerOnly' => true),
             array('inpreabogado', 'length', 'max' => 20),
             array('observaciones', 'length', 'max' => 200),
+            array('rif_abogado, folio, tomo', 'length', 'max' => 12),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, persona_id, inpreabogado, tipo_abogado_id, oficina_id, observaciones, estatus, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, nacionalidad, cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido', 'safe', 'on' => 'search'),
+            array('id, persona_id, inpreabogado, tipo_abogado_id, oficina_id, observaciones, estatus, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, rif_abogado, registro_publico_id, nun_protocolo, folio, tomo, anio', 'safe', 'on' => 'search'),
         );
     }
 
@@ -59,8 +73,13 @@ class Abogados extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'estatus0' => array(self::BELONGS_TO, 'Maestro', 'estatus'),
             'oficinaId' => array(self::BELONGS_TO, 'Oficina', 'oficina_id'),
             'tipoAbogado' => array(self::BELONGS_TO, 'Maestro', 'tipo_abogado_id'),
+            'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
+            'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
+            'registroPublico' => array(self::BELONGS_TO, 'RegistroPublico', 'registro_publico_id'),
+            'nunProtocolo' => array(self::BELONGS_TO, 'Maestro', 'nun_protocolo'),
         );
     }
 
@@ -72,7 +91,7 @@ class Abogados extends CActiveRecord {
             'id' => 'ID',
             'persona_id' => 'Persona',
             'inpreabogado' => 'Inpreabogado',
-            'tipo_abogado_id' => 'Tipo de Agente',
+            'tipo_abogado_id' => 'Tipo Abogado',
             'oficina_id' => 'Oficina',
             'observaciones' => 'Observaciones',
             'estatus' => 'Estatus',
@@ -80,13 +99,19 @@ class Abogados extends CActiveRecord {
             'fecha_actualizacion' => 'Fecha Actualizacion',
             'usuario_id_creacion' => 'Usuario Id Creacion',
             'usuario_id_actualizacion' => 'Usuario Id Actualizacion',
+            'rif_abogado' => 'Rif Abogado',
+            'registro_publico_id' => 'Registro Público',
+            'nun_protocolo' => 'Número de Protocolo',
+            'folio' => 'Folio',
+            'tomo' => 'Tomo',
+            'anio' => 'Año',
             'nacionalidad' => 'Nacionalidad',
             'cedula' => 'Cedula',
             'primer_nombre' => 'Primer Nombre',
             'segundo_nombre' => 'Segundo Nombre',
             'primer_apellido' => 'Primer Apellido',
             'segundo_apellido' => 'Segundo Apellido',
-            'fecha_nac'=>'Fecha de Nacimiento',
+            'fecha_nac' => 'Fecha de Nacimiento',
         );
     }
 
@@ -106,7 +131,7 @@ class Abogados extends CActiveRecord {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-        $criteria->order = 'id DESC';
+
         $criteria->compare('id', $this->id);
         $criteria->compare('persona_id', $this->persona_id);
         $criteria->compare('inpreabogado', $this->inpreabogado, true);
@@ -118,19 +143,17 @@ class Abogados extends CActiveRecord {
         $criteria->compare('fecha_actualizacion', $this->fecha_actualizacion, true);
         $criteria->compare('usuario_id_creacion', $this->usuario_id_creacion);
         $criteria->compare('usuario_id_actualizacion', $this->usuario_id_actualizacion);
+        $criteria->compare('rif_abogado', $this->rif_abogado, true);
+        $criteria->compare('registro_publico_id', $this->registro_publico_id);
+        $criteria->compare('nun_protocolo', $this->nun_protocolo);
+        $criteria->compare('folio', $this->folio, true);
+        $criteria->compare('tomo', $this->tomo, true);
+        $criteria->compare('anio', $this->anio, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
     }
-
-//    public static function getListvendedor() {
-//
-//        return CHtml::listData(Oficina::model()->findAll(array(
-//                            'select' => "id_us_usuario, var_usuario ||' - '|| var_nombre1 ||' '|| var_apellido1 as var_usuario",
-//                            'condition' => "var_estatus = 'act' AND id_li_us_cargo = '4'",
-//                            'order' => "var_usuario ASC")), 'id_us_usuario', 'var_usuario');
-//    }
 
     /**
      * Returns the static model of the specified AR class.
