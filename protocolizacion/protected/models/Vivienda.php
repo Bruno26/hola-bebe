@@ -152,8 +152,8 @@ class Vivienda extends CActiveRecord {
         $criteria->compare('tipo_vivienda_id', $this->tipo_vivienda_id);
         $criteria->compare('unidad_habitacional_id', $this->unidad_habitacional_id);
         $criteria->compare('construccion_mt2', $this->construccion_mt2, true);
-        $criteria->compare('nro_piso', $this->nro_piso, true);
-        $criteria->compare('nro_vivienda', $this->nro_vivienda, true);
+        $criteria->compare('nro_piso', $this->nro_piso);
+        $criteria->compare('nro_vivienda', $this->nro_vivienda);
         $criteria->compare('sala', $this->sala);
         $criteria->compare('comedor', $this->comedor);
         $criteria->compare('lavandero', $this->lavandero);
