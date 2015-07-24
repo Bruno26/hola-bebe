@@ -11,9 +11,15 @@
  * @property integer $estatus
  * @property integer $usuario_id_creacion
  * @property integer $usuario_id_actualizacion
- *
+ * @property integer $fuente_financiamiento_id
+ * 
  * The followings are the available model relations:
  * @property Desarrollo[] $desarrollos
+ * @property Maestro $estatus0
+ * @property CrugeUser $usuarioIdActualizacion
+ * @property CrugeUser $usuarioIdCreacion
+ * @property FuenteFinanciamiento $fuenteFinanciamiento
+ * @property AnalisisCredito[] $analisisCreditos
  */
 class Programa extends CActiveRecord {
 
@@ -31,12 +37,12 @@ class Programa extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('nombre_programa, fecha_creacion, fecha_actualizacion, estatus, usuario_id_creacion', 'required'),
-            array('estatus, usuario_id_creacion, usuario_id_actualizacion', 'numerical', 'integerOnly' => true),
+            array('nombre_programa, fecha_creacion, fecha_actualizacion, estatus, usuario_id_creacion, fuente_financiamiento_id', 'required'),
+            array('estatus, usuario_id_creacion, usuario_id_actualizacion, fuente_financiamiento_id', 'numerical', 'integerOnly' => true),
             array('nombre_programa', 'length', 'max' => 100),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id_programa, nombre_programa, fecha_creacion, fecha_actualizacion, estatus, usuario_id_creacion, usuario_id_actualizacion', 'safe', 'on' => 'search'),
+            array('id_programa, nombre_programa, fecha_creacion, fecha_actualizacion, estatus, usuario_id_creacion, usuario_id_actualizacion, fuente_financiamiento_id', 'safe', 'on' => 'search'),
         );
     }
 
@@ -48,7 +54,11 @@ class Programa extends CActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'desarrollos' => array(self::HAS_MANY, 'Desarrollo', 'programa_id'),
-
+            'estatus0' => array(self::BELONGS_TO, 'Maestro', 'estatus'),
+            'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
+            'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
+            'fuenteFinanciamiento' => array(self::BELONGS_TO, 'FuenteFinanciamiento', 'fuente_financiamiento_id'),
+            'analisisCreditos' => array(self::HAS_MANY, 'AnalisisCredito', 'programa_id'),
         );
     }
 
@@ -64,6 +74,7 @@ class Programa extends CActiveRecord {
             'estatus' => 'Estatus',
             'usuario_id_creacion' => 'Usuario Id Creacion',
             'usuario_id_actualizacion' => 'Usuario Id Actualizacion',
+            'fuente_financiamiento_id' => 'Fuente Financiamiento',
         );
     }
 
@@ -91,6 +102,7 @@ class Programa extends CActiveRecord {
         $criteria->compare('estatus', $this->estatus);
         $criteria->compare('usuario_id_creacion', $this->usuario_id_creacion);
         $criteria->compare('usuario_id_actualizacion', $this->usuario_id_actualizacion);
+        $criteria->compare('fuente_financiamiento_id', $this->fuente_financiamiento_id);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

@@ -62,18 +62,21 @@ $this->widget('booster.widgets.TbGridView', array(
             'header' => 'Nombre de Oficina',
             'name' => 'nombre',
             'value' => '$data->nombre',
+            'filter' => CHtml::listData(Oficina::model()->findall(), 'nombre', 'nombre'),
         //'htmlOptions' => array('width' => '80', 'style' => 'text-align: center;'),
         ),
         'primer_nombre' => array(
             'header' => 'Nombre',
             'name' => 'primer_nombre',
             'value' => 'nombre("PRIMER_NOMBRE",$data->persona_id_jefe)',
+            'filter'=> false,
         //'htmlOptions' => array('width' => '80', 'style' => 'text-align: center;'),
         ),
         'primer_apellido' => array(
             'header' => 'Apellido',
             'name' => 'primer_apellido',
             'value' => 'apellido("PRIMER_APELLIDO",$data->persona_id_jefe)',
+            'filter'=> false,
         // 'value' => '$data->persona_id_jefe',
         ),
         array(

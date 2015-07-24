@@ -108,22 +108,22 @@
                                         </ul>
                                     </li>
 
-                                    <!--                                    <li class="sub-menu">
+                                                                        <li class="sub-menu">
                                                                             <a href="javascript:;">
                                                                                 <i class="glyphicon glyphicon-briefcase"></i>
                                                                                 <span>Registro Público</span>
                                                                             </a>
                                                                             <ul class="sub">
-                                                                                <li><a href="<?php // echo $this->createUrl('/registroPublico/create');                    ?>">Cargar Nuevo Registro Público</a></li>
+                                                                                <li><a href="<?php echo $this->createUrl('/registroPublico/create');?>">Cargar Nuevo Registro Público</a></li>
                                                                             </ul>
-                                                                        </li>-->
-                                    <!--                                    <li class="sub-menu">
+                                                                        </li>
+<!--                                                                        <li class="sub-menu">
                                                                             <a href="javascript:;">
                                                                                 <i class="glyphicon glyphicon-list-alt"></i>
                                                                                 <span>Registro de Documentos</span>
                                                                             </a>
                                                                             <ul class="sub">
-                                                                                <li><a href="<?php // echo $this->createUrl('/registroDocumento/create');                    ?>">Cargar Nuevo Registro de Documento</a></li>
+                                                                                <li><a href="<?php // echo $this->createUrl('/registroDocumento/create');?>">Cargar Nuevo Registro de Documento</a></li>
                                                                             </ul>
                                                                         </li>-->
                                 </ul>
@@ -141,9 +141,9 @@
                                             <span>Desarrollos</span>
                                         </a>
                                         <ul class="sub">
+                                            <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Cargar Funtes de Financiamiento</a></li>
                                             <li><a href="<?php echo $this->createUrl('/programa/create'); ?>">Cargar Nuevo Programa</a></li>
                                             <li><a href="<?php echo $this->createUrl('/enteEjecutor/create'); ?>">Cargar Ente Ejecutor</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Cargar Funtes de Financiamiento</a></li>
                                             <li><a href="<?php echo $this->createUrl('/desarrollo/create'); ?>">Cargar Nuevo Desarrollo</a></li>
                                             <li><a href="<?php echo $this->createUrl('/desarrollo/admin'); ?>">Gestión de Desarrollo Habitacional</a></li>
                                         </ul>

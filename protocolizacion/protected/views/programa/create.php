@@ -63,6 +63,8 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         'validateOnChange' => true,
         'validateOnType' => true,
         )));
+
+//echo '<pre>';var_dump($model);die;
 ?>
 
 <div class="row">
