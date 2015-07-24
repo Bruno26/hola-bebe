@@ -2,9 +2,17 @@
 <?php Yii::app()->clientScript->registerScript('desarrolloVal', "
          $(document).ready(function(){
             $('#AnalisisCredito_plazo_credito_ano').numeric(); 
+            $('#AnalisisCredito_monto_inicial').numeric(); 
+            $('#AnalisisCredito_monto_inicial').val('0'); 
         });
         $('#AnalisisCredito_plazo_credito_ano').keypress(function(event) {
             return false;
+        });
+        $('#CalcCalculo').click(function() {
+            if($('#AnalisisCredito_monto_inicial').val() ==''){
+                bootbox.alert('Indique un monto inicial');
+                return false;
+            }
         });
         
 "); ?>
@@ -41,11 +49,12 @@
         <?php
         $criteria = new CDbCriteria;
         $criteria->order = 'id_tasa_interes ASC';
-        echo $form->dropDownListGroup($model, 'tasa_interes_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-4',),
+        echo $form->dropDownListGroup($model, 'tasa_interes_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-4'),
             'widgetOptions' => array(
-                'data' => CHtml::listData(TasaInteres::model()->findAll($criteria), 'id_tasa_interes', 'nombre_tasa_interes'),
+                'data' => CHtml::listData(TasaInteres::model()->findAll($criteria), 'id_tasa_interes', 'tasa_interes'),
                 'htmlOptions' => array(
                     'empty' => 'SELECCIONE',
+                    'disabled' => 'true'
                 ),
             )
                 )
@@ -85,6 +94,21 @@
         );
         ?>
     </div>
+</div>
+<div class="row text-center">
+    <?php
+    $this->widget('booster.widgets.TbButton', array(
+        'context' => 'success',
+        'label' => 'Generar Calculo',
+        //'size' => 'large',
+        'id' => 'CalcCalculo',
+        'icon' => 'search',
+        'htmlOptions' => array(
+//                'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
+        )
+    ));
+    ?>
+
 </div>
 
 

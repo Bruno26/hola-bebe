@@ -48,24 +48,7 @@ $this->widget('booster.widgets.TbGridView',array(
 'type' => 'striped bordered condensed',
 'dataProvider'=>$model->search(),
 'filter'=>$model,
-//'columns'=>array(
-//		'id',
-//		'persona_id',
-//		'inpreabogado',
-//		'tipo_abogado_id',
-//		'oficina_id',
-//		'observaciones',
-//		/*
-//		'estatus',
-//		'fecha_creacion',
-//		'fecha_actualizacion',
-//		'usuario_id_creacion',
-//		'usuario_id_actualizacion',
-//		*/
-//array(
-//'class'=>'booster.widgets.TbButtonColumn',
-//),
-//),
+
     'columns' => array(
     'id' => array(
     'header' => 'N°',
@@ -107,11 +90,7 @@ $this->widget('booster.widgets.TbGridView',array(
 //        'filter' => CHtml::listData(Abogados::model()->findall(), 'oficina_id', 'nombre'),
          ),   
         
-        'observaciones' => array(
-            'header' => 'Observaciones',
-            'name' => 'observaciones',
-            'value' => '$data->observaciones',
-        ),
+
         array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',

@@ -89,7 +89,7 @@ class BeneficiarioController extends Controller {
                         $viviendaUpdate = ViviendaController::loadModel($Existe->vivienda_id);
                         $viviendaUpdate->construccion_mt2 = $_POST['Vivienda']['construccion_mt2'];
                         if ($viviendaUpdate->save()) {
-                            $unidad_familiar->nombre = $Existe->nombre_completo;
+//                            $unidad_familiar->nombre = $Existe->nombre_completo;
                             $unidad_familiar->beneficiario_id = $model->id_beneficiario;
                             $unidad_familiar->ingreso_total_familiar = '0.00';
 //                            $unidad_familiar->procedencia_beneficio_id = 140; //INIDICAR EN QUE MOMENTO SE CARGA ESTE DATO
@@ -108,12 +108,12 @@ class BeneficiarioController extends Controller {
                                     'usuario_id_actualizacion' => Yii::app()->user->id,
                                     'fecha_actualizacion' => 'now()'
                                 ));
-                                
-                               
+
+
                                 $this->redirect(array('grupoFamiliar/create', 'id' => $unidad_familiar->id_unidad_familiar));
                                 Yii::app()->end();
-                            }
-                        }
+                            } 
+                        } 
                     }
                 } else {
 
@@ -200,7 +200,7 @@ class BeneficiarioController extends Controller {
 
 
             if ($model->save()) {
-           
+
                 $IdBeneficiarioTmp = $model->beneficiario_temporal_id;
                 $n = BeneficiarioTemporal::model()->updateByPk($IdBeneficiarioTmp, array(
                     'estatus' => 79,
@@ -213,7 +213,7 @@ class BeneficiarioController extends Controller {
 
                 $this->redirect(array('admin'));
                 Yii::app()->end();
-            } 
+            }
         }
 
         $this->render('createDatos', array(
@@ -234,7 +234,8 @@ class BeneficiarioController extends Controller {
 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        } else
+        }
+        else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 

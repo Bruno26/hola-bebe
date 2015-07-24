@@ -90,8 +90,8 @@ class AnalisisCreditoController extends Controller {
             array_push($totalSueldoDeclarado, $fila['ingreso_mensual']);
             array_push($totalSueldoFaov, $fila['ingreso_mensual_faov']);
         }
-        $TableSueldo.='<th>Total: Bs.' . array_sum($totalSueldoDeclarado) . ' <input type="radio" name="opciones" id="opciones_2" checked value="' . array_sum($totalSueldoDeclarado) . '"></th>';
-        $TableSueldoFaov.='<th>Total: Bs.' . array_sum($totalSueldoFaov) . ' <input type="radio" name="opciones" id="opciones_1" value="' . array_sum($totalSueldoFaov) . '"></th>';
+        $TableSueldo.='<th>Total: Bs.' . array_sum($totalSueldoDeclarado) . ' <input onclick="RecalculoDeInteres()" type="radio" name="opciones" id="opciones_2" checked value="' . array_sum($totalSueldoDeclarado) . '"></th>';
+        $TableSueldoFaov.='<th>Total: Bs.' . array_sum($totalSueldoFaov) . ' <input onclick="RecalculoDeInteres()" type="radio" name="opciones" id="opciones_1" value="' . array_sum($totalSueldoFaov) . '"></th>';
 
         $TableSueldo.='</table>';
         $TableSueldoFaov.='</table>';
