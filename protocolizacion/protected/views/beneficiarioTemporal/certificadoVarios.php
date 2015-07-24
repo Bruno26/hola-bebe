@@ -48,6 +48,12 @@ $html.='<style>
                 width: 33%;
                 border-bottom: 1pt solid black;
             }
+            
+    .uno {
+        
+        width: 50%;
+    }
+   
         </style>';
 foreach ($recordBeneTemp as $model) {
     $cabecera = '<img src="' . Yii::app()->request->baseUrl . '/images/cintillo.jpg"/>';
@@ -57,14 +63,15 @@ foreach ($recordBeneTemp as $model) {
             . "<table>"
             . "<tr>"
             . "<td align='left'><b><font size='6' color='#B40404'>"
-            . "Adjudicado:</font><font size='5'> " . nombre('PRIMER_NOMBRE', $model->persona_id) . " " . apellido('PRIMER_APELLIDO', $model->persona_id) . " <br/>Fecha de Adjudicación: " . date('d/m/Y', strtotime($model->fecha_creacion)) . "<br/>Fecha de Censo: _______________________ </font>"
+            . "Adjudicado:</font><font size='5'> " . nombre('PRIMER_NOMBRE', $model->persona_id) . " " . apellido('PRIMER_APELLIDO', $model->persona_id) . " <br/>Fecha de Adjudicación: " . date('d/m/Y', strtotime($model->fecha_creacion)) .
+            "<br/>Fecha de Censo: _______________________ " . " <br/>Condición Unidad Familiar:</font> <font size='3'><br/><label>Organo Estadal de Vivienda<input type='checkbox'></label>&nbsp;&nbsp;<label>Censo Refugiados<input type='checkbox'>&nbsp;&nbsp;Censo GMVV</label><label><input type='checkbox'></label>&nbsp;&nbsp;<label>Caso Especial<input type='checkbox'></label></font>"
             . "</td>"
             . "<td align='right'><img src='" . Yii::app()->baseUrl . "/images/LOGO_BANAVIH-1.jpg' style='width: 25%;'/></td>"
             . "</tr>"
             . "</table>"
             . "</div>"
             . "<br/>"
-            . "<div style='margin-top:1%'></div>";
+            . "<div style='margin-top:1%'></div><br><br><br>";
     $html.="<br/>"
             . "<div id='prueba'>"
             . "<table class='table table-striped' border='0'>"
@@ -76,7 +83,7 @@ foreach ($recordBeneTemp as $model) {
                     <span class='subtitulo'>Rif:</span> <br>
                 </td>
                 <td class='col-interno' colspan='1'>
-                    <span class='subtitulo'>Cédula:</span> " .nacionalidadCedula('NACIONALIDAD', 'CEDULA', $model->persona_id). "<br>
+                    <span class='subtitulo'>Cédula:</span> " . nacionalidadCedula('NACIONALIDAD', 'CEDULA', $model->persona_id) . "<br>
                 </td>
             </tr>"
             . "<tr>
@@ -86,7 +93,7 @@ foreach ($recordBeneTemp as $model) {
             </tr>"
             . "<tr>
                 <td class='col-interno   border-right'>
-                    <span class='subtitulo'>Fecha de Nacimiento:</span> " .  date('d/m/Y', strtotime($persona->FECHANACIMIENTO)) . "<br>
+                    <span class='subtitulo'>Fecha de Nacimiento:</span> " . date('d/m/Y', strtotime($persona->FECHANACIMIENTO)) . "<br>
                 </td>
                 <td class='col-interno  border-right'>
                     <span class='subtitulo'>Sexo:</span> " . $persona->SEXO . "<br>
@@ -158,7 +165,9 @@ foreach ($recordBeneTemp as $model) {
                 </td>
             </tr>"
             . "</table>"
-            . "</div>";
+            . "</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+
+    //    ----------------------- GRUPO FAMILIAR --------------------------------
 
     $html.="<br/>"
             . "<div><h3 align='center'>Grupo Familiar</h3></div>"
@@ -175,39 +184,506 @@ foreach ($recordBeneTemp as $model) {
             . "<tr>
                 <td class='col-interno' colspan='3'>
                 <span class='subtitulo'>Parentesco: </span><br>";
-                $i = 0;
-                foreach ($parentesco as $key => $value) {
-                    $html.=" <label>" . $value . "&nbsp;<input type='checkbox'></label>";
-                    $i++;
-
-                }
-                $html.="</td>
+    $i = 0;
+    foreach ($parentesco as $key => $value) {
+        $html.=" <label>" . $value . "&nbsp;<input type='checkbox'></label>";
+        $i++;
+    }
+    $html.="</td>
             </tr>"
             . "<tr>
                 <td class='col-interno border-right'>
-                    <span class='subtitulo'>Lote Terreno Mt2:</span> " . $model->desarrollo->lote_terreno_mt2 . "<br>
+                    <span class='subtitulo'>Lote Terreno Mt2:</span> <br>
                 </td>
                 <td class='col-interno border-right'>
-                    <span class='subtitulo'>Piso:</span> " . $model->vivienda->nro_piso . "<br>
+                    <span class='subtitulo'>Piso:</span><br>
                 </td>
                 <td class='col-interno'>
-                    <span class='subtitulo'>N° de la Vivienda:</span> " . $model->vivienda->nro_vivienda . "<br>
+                    <span class='subtitulo'>N° de la Vivienda:</span> <br>
                 </td>
             </tr>"
             . "<tr>
                 <td colspan='2' style=' width: 50%;' class='border-right'>
-                    <span class='subtitulo'>Tipo de Inmueble:</span> " . $model->unidadHabitacional->genTipoInmueble->descripcion . "<br>
+                    <span class='subtitulo'>Tipo de Inmueble:</span> <br>
                 </td>
                 <td style=' width: 50%;'>
                     <span class='subtitulo'>Área de Vivienda mt2:</span><br>
                 </td>
             </tr>"
             . "</table>"
+            . "</div><br><br>";
+    
+    $html.="<br/>"
+            . "<div id='prueba'>"
+            . "<table class='table table-striped' border='0'>"
+            . "<tr>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Cédula: <label>V<input type='checkbox'></label> <label>E<input type='checkbox'></label></span><br>
+                </td>
+                <td colspan='2' class='col-interno'>
+                    <span class='subtitulo'>Nombre Completo:</span><br>
+                </td>
+            </tr>"
+            . "<tr>
+                <td class='col-interno' colspan='3'>
+                <span class='subtitulo'>Parentesco: </span><br>";
+    $i = 0;
+    foreach ($parentesco as $key => $value) {
+        $html.=" <label>" . $value . "&nbsp;<input type='checkbox'></label>";
+        $i++;
+    }
+    $html.="</td>
+            </tr>"
+            . "<tr>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Lote Terreno Mt2:</span> <br>
+                </td>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Piso:</span><br>
+                </td>
+                <td class='col-interno'>
+                    <span class='subtitulo'>N° de la Vivienda:</span> <br>
+                </td>
+            </tr>"
+            . "<tr>
+                <td colspan='2' style=' width: 50%;' class='border-right'>
+                    <span class='subtitulo'>Tipo de Inmueble:</span> <br>
+                </td>
+                <td style=' width: 50%;'>
+                    <span class='subtitulo'>Área de Vivienda mt2:</span><br>
+                </td>
+            </tr>"
+            . "</table>"
+            . "</div><br><br>";
+    
+    $html.="<br/>"
+            . "<div id='prueba'>"
+            . "<table class='table table-striped' border='0'>"
+            . "<tr>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Cédula: <label>V<input type='checkbox'></label> <label>E<input type='checkbox'></label></span><br>
+                </td>
+                <td colspan='2' class='col-interno'>
+                    <span class='subtitulo'>Nombre Completo:</span><br>
+                </td>
+            </tr>"
+            . "<tr>
+                <td class='col-interno' colspan='3'>
+                <span class='subtitulo'>Parentesco: </span><br>";
+    $i = 0;
+    foreach ($parentesco as $key => $value) {
+        $html.=" <label>" . $value . "&nbsp;<input type='checkbox'></label>";
+        $i++;
+    }
+    $html.="</td>
+            </tr>"
+            . "<tr>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Lote Terreno Mt2:</span> <br>
+                </td>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Piso:</span><br>
+                </td>
+                <td class='col-interno'>
+                    <span class='subtitulo'>N° de la Vivienda:</span> <br>
+                </td>
+            </tr>"
+            . "<tr>
+                <td colspan='2' style=' width: 50%;' class='border-right'>
+                    <span class='subtitulo'>Tipo de Inmueble:</span> <br>
+                </td>
+                <td style=' width: 50%;'>
+                    <span class='subtitulo'>Área de Vivienda mt2:</span><br>
+                </td>
+            </tr>"
+            . "</table>"
+            . "</div><br><br>";
+    $html.="<br/>"
+            . "<div id='prueba'>"
+            . "<table class='table table-striped' border='0'>"
+            . "<tr>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Cédula: <label>V<input type='checkbox'></label> <label>E<input type='checkbox'></label></span><br>
+                </td>
+                <td colspan='2' class='col-interno'>
+                    <span class='subtitulo'>Nombre Completo:</span><br>
+                </td>
+            </tr>"
+            . "<tr>
+                <td class='col-interno' colspan='3'>
+                <span class='subtitulo'>Parentesco: </span><br>";
+    $i = 0;
+    foreach ($parentesco as $key => $value) {
+        $html.=" <label>" . $value . "&nbsp;<input type='checkbox'></label>";
+        $i++;
+    }
+    $html.="</td>
+            </tr>"
+            . "<tr>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Lote Terreno Mt2:</span> <br>
+                </td>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Piso:</span><br>
+                </td>
+                <td class='col-interno'>
+                    <span class='subtitulo'>N° de la Vivienda:</span> <br>
+                </td>
+            </tr>"
+            . "<tr>
+                <td colspan='2' style=' width: 50%;' class='border-right'>
+                    <span class='subtitulo'>Tipo de Inmueble:</span> <br>
+                </td>
+                <td style=' width: 50%;'>
+                    <span class='subtitulo'>Área de Vivienda mt2:</span><br>
+                </td>
+            </tr>"
+            . "</table>"
+            . "</div><br><br>";
+    $html.="<br/>"
+            . "<div id='prueba'>"
+            . "<table class='table table-striped' border='0'>"
+            . "<tr>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Cédula: <label>V<input type='checkbox'></label> <label>E<input type='checkbox'></label></span><br>
+                </td>
+                <td colspan='2' class='col-interno'>
+                    <span class='subtitulo'>Nombre Completo:</span><br>
+                </td>
+            </tr>"
+            . "<tr>
+                <td class='col-interno' colspan='3'>
+                <span class='subtitulo'>Parentesco: </span><br>";
+    $i = 0;
+    foreach ($parentesco as $key => $value) {
+        $html.=" <label>" . $value . "&nbsp;<input type='checkbox'></label>";
+        $i++;
+    }
+    $html.="</td>
+            </tr>"
+            . "<tr>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Lote Terreno Mt2:</span> <br>
+                </td>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Piso:</span><br>
+                </td>
+                <td class='col-interno'>
+                    <span class='subtitulo'>N° de la Vivienda:</span> <br>
+                </td>
+            </tr>"
+            . "<tr>
+                <td colspan='2' style=' width: 50%;' class='border-right'>
+                    <span class='subtitulo'>Tipo de Inmueble:</span> <br>
+                </td>
+                <td style=' width: 50%;'>
+                    <span class='subtitulo'>Área de Vivienda mt2:</span><br>
+                </td>
+            </tr>"
+            . "</table>"
+            . "</div><br><br><br><br><br><br><br><br><br><br>";
+
+//    -------------------------PLANILLA 2 ------------------------
+
+
+    $html.="<br/>"
+            . "<div id='prueba'>"
+            . "<table class='table table-striped' border='0'>"
+            . "<tr>"
+            . "<td colspan='3' align='center' class='border'><b>Dirección Anterior del Beneficiario</b></td>"
+            . "</tr>"
+            . "<tr>
+                <td class='   border-right'>
+                    <span class='subtitulo'>Estado:</span> " . date('d/m/Y', strtotime($persona->FECHANACIMIENTO)) . "<br>
+                </td>
+                <td class=' border-right'>
+                    <span class='subtitulo'>Municipio:</span> " . $persona->SEXO . "<br>
+                </td>
+                <td>
+                    <span class='subtitulo'>Parroquia:</span> " . $persona->EDOCIVIL . "<br>
+                </td>
+            </tr>"
+            . "</table>"
             . "</div>";
+
+    $html.="<br/>"
+            . "<div id='prueba'>"
+            . "<table class='table table-striped' border='0'>"
+            
+            . "<tr>"
+            . "<td colspan='3' align='center' class='border'><b>Datos Laborales del Beneficiario</b></td>"
+            . "</tr>"
+            
+            . "<tr>
+                <td class='col-interno' colspan='3'  >
+                    <span class='subtitulo'>Condición de Trabajo:</span> " . "<br>
+                </td>
+                
+                </tr>"
+            
+            . "<tr>
+                <td class='col-interno' colspan='3'>
+                       <label>Desempleado<input type='checkbox'></label>&nbsp;&nbsp;<label>Trabajando<input type='checkbox'>&nbsp;&nbsp;Hogar</label><label><input type='checkbox'></label>&nbsp;&nbsp;<label>Incapacitad<input type='checkbox'></label>&nbsp;&nbsp;<label>Pensionado<input type='checkbox'></label></font>          
+" . "<br>
+                </td>
+                
+                </tr>"
+            
+            
+            . "<tr>
+                <td>
+                <table >
+                  <tr> 
+                <td class='uno'>
+                    <span class='uno'><b>Fuente Principal de Ingresos:</b></span> " . "<br>
+                </td>
+              
+                 <td colspan='2' style=' width: 50%;' class='border-right'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                <td class='uno'>
+                    <span class='uno'><b>Relación de Trabajo:</b></span> " . "<br>
+                </td>
+                <td class='dos'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                </tr>
+                  <tr> 
+                <td class='col-interno' >
+                    <label>Ninguna<input type='checkbox'></label>&nbsp;<label>Renta<input type='checkbox'>Pensión</label><label><input type='checkbox'></label><label>Sueldo<input type='checkbox'></label><label>Herencia<input type='checkbox'></label></font>          
+" . "<br>
+                </td>
+              
+                 <td colspan='2' style=' width: 50%;' class='border-right'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                <td class='col-interno' >
+                    <label>Empleador<input type='checkbox'></label>&nbsp;&nbsp;<label>Cuenta Propia<input type='checkbox'>&nbsp;Patrón</label><label><input type='checkbox'></label><label>Empresa Privada<input type='checkbox'></label><label>Empresa Pública<input type='checkbox'></label>&nbsp;&nbsp;<label>Miembro Cooperal<input type='checkbox'></label></font>          
+" . "<br>
+                </td>
+                <td class='dos'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                </tr>
+                
+                <tr> 
+                <td class='col-interno'>
+                    <span class='uno'><b>Nombre de la Empresa Donde Trabaja:</b></span> " . "<br>
+                </td>
+              
+                 <td colspan='2' style=' width: 50%;' class='border-right'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                <td class='col-interno'>
+                    <span class='uno'><b>Dirección de la Empresa:</b></span> " . "<br>
+                </td>
+                <td class='dos'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                </tr>
+                
+
+                <tr> 
+                <td class='col-interno'>
+                    <span class='uno'>|</span> " . "<br>
+                </td>
+              
+                 <td colspan='2' style=' width: 50%;' class='border-right'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                <td class='col-interno'>
+                    <span class='uno'>|</span> " . "<br>
+                </td>
+                <td class='dos'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                </tr>
+                
+                
+                
+                </table>
+                  
+                </td>
+                
+            </tr>"
+            
+            
+            
+            
+            
+            
+            . "</table>"
+            . "</div>";
+    
+    $html.="<br/>"
+            . "<div id='prueba'>"
+            . "<table class='table table-striped' border='0'>"
+           
+            . "<tr>
+                <td class='   border-right' >
+                    <span class='subtitulo'>Teléfono Empresa:</span> " . "<br>
+                </td>
+                <td class=' border-right' colspan='2'>
+                    <span class='subtitulo'>Cargo:</span> " .  "<br>
+                </td>
+                <td class=' border-right'>
+                    <span class='subtitulo'>Ingreso Mensual Bs:</span> " .  "<br>
+                </td>
+                
+            </tr>"
+            . "</table>"
+            . "</div>";
+    $html.="<br/>"
+            . "<div id='prueba'>"
+            . "<table class='table table-striped' border='0'>"
+            
+            . "<tr>"
+            . "<td colspan='3' align='center' class='border'><b>Datos Laborales del Conyuge</b></td>"
+            . "</tr>"
+            
+            . "<tr>
+                <td class='col-interno' colspan='3'  >
+                    <span class='subtitulo'>Condición de Trabajo:</span> " . "<br>
+                </td>
+                
+                </tr>"
+            
+            . "<tr>
+                <td class='col-interno' colspan='3'>
+                       <label>Desempleado<input type='checkbox'></label>&nbsp;&nbsp;<label>Trabajando<input type='checkbox'>&nbsp;&nbsp;Hogar</label><label><input type='checkbox'></label>&nbsp;&nbsp;<label>Incapacitad<input type='checkbox'></label>&nbsp;&nbsp;<label>Pensionado<input type='checkbox'></label></font>          
+" . "<br>
+                </td>
+                
+                </tr>"
+            
+            
+            . "<tr>
+                <td>
+                <table >
+                  <tr> 
+                <td class='uno'>
+                    <span class='uno'><b>Fuente Principal de Ingresos:</b></span> " . "<br>
+                </td>
+              
+                 <td colspan='2' style=' width: 50%;' class='border-right'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                <td class='uno'>
+                    <span class='uno'><b>Relación de Trabajo:</b></span> " . "<br>
+                </td>
+                <td class='dos'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                </tr>
+                  <tr> 
+                <td class='col-interno' >
+                    <label>Ninguna<input type='checkbox'></label>&nbsp;<label>Renta<input type='checkbox'>&nbsp;Pensión</label><label><input type='checkbox'></label>&nbsp;<label>Sueldo<input type='checkbox'></label><label>Herencia<input type='checkbox'></label></font>          
+" . "<br>
+                </td>
+              
+                 <td colspan='2' style=' width: 50%;' class='border-right'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                <td class='col-interno' >
+                    <label>Empleador<input type='checkbox'></label>&nbsp;&nbsp;<label>Cuenta Propia<input type='checkbox'>&nbsp;&nbsp;Patrón</label><label><input type='checkbox'></label>&nbsp;<label>Empresa Privada<input type='checkbox'></label><label>Empresa Pública<input type='checkbox'></label>&nbsp;&nbsp;<label>Miembro Cooperal<input type='checkbox'></label></font>          
+" . "<br>
+                </td>
+                <td class='dos'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                </tr>
+                
+                <tr> 
+                <td class='col-interno'>
+                    <span class='uno'><b>Nombre de la Empresa Donde Trabaja:</b></span> " . "<br>
+                </td>
+              
+                 <td colspan='2' style=' width: 50%;' class='border-right'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                <td class='col-interno'>
+                    <span class='uno'><b>Dirección de la Empresa:</b></span> " . "<br>
+                </td>
+                <td class='dos'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                </tr>
+                
+
+                <tr> 
+                <td class='col-interno'>
+                    <span class='uno'>|</span> " . "<br>
+                </td>
+              
+                 <td colspan='2' style=' width: 50%;' class='border-right'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                <td class='col-interno'>
+                    <span class='uno'>|</span> " . "<br>
+                </td>
+                <td class='dos'>
+                    <span class='dos'></span> " . "<br>
+                </td>
+                </tr>
+                
+                
+                
+                </table>
+                  
+                </td>
+                
+            </tr>"
+            
+            
+            
+            
+            
+            
+            . "</table>"
+            . "</div>";
+    
+    $html.="<br/>"
+            . "<div id='prueba'>"
+            . "<table class='table table-striped' border='0'>"
+           
+            . "<tr>
+                <td class='   border-right'>
+                    <span class='subtitulo'>Teléfono Empresa:</span> " . "<br>
+                </td>
+                <td class=' border-right'>
+                    <span class='subtitulo'>Cargo:</span> " .  "<br>
+                </td>
+                <td>
+                    <span class='subtitulo'>Ingreso Mensual Personal Bs.:</span> " .  "<br>
+                </td>
+            </tr>"
+            
+            
+            
+            . "</table>"
+            . "</div>";
+    
+             $html.="<br/>"
+            . "<div id='prueba'>"
+            . "<table class='table table-striped' border='0'>"
+            . "<tr>"
+            . "<td colspan='3' align='center' class='border'><b>Ingreso Familiar</b></td>"
+            . "</tr>"
+            . "<tr>
+               <td class= colspan='3'  >
+                    <span class='subtitulo'>Ingreso Total Familiar:</span> " . "<br>
+                </td>
+               
+            </tr>"
+            . "</table>"
+            . "</div>";
+             
+            
+
     $html.="<p class='saltodepagina'/>";
 }
 
-
+//echo $html; die;
 
 $mpdf = new mPDF('c', 'LETTER');
 //$mpdf->SetTitle(' Beneficiario N° '.$model->id_beneficiario_temporal.' '.date('h:i:A') .'');
@@ -220,3 +696,15 @@ $mpdf->SetFooter('Generado desde el Sistema de Protocolización el ' . date('d-m
 $mpdf->Output('Beneficiario.pdf', 'D');
 exit;
 ?>
+
+<style>
+
+    .uno {
+        float: left;
+        width: 50%;
+    }
+    .dos {
+        float: right;
+        width: 50%;
+    }
+</style>

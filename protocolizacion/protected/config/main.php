@@ -131,7 +131,7 @@ return array(
         'dbOarcle' => array(
             'class' => 'application.extensions.PHPPDO.CPdoDbConnection',
             'pdoClass' => 'PHPPDO',
-            'connectionString' => 'oci:dbname=//xxx.xxx.x.xxx.xxxxx',
+            'connectionString' => 'oci:dbname=//xxx.xxx.x.xxx/xxxxx',
             'username' => 'xxxxxxxxxxxxxxx',
             'password' => 'xxxxxxxxxxxxxxx',
         ),
