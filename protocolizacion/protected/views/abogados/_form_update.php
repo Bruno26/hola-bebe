@@ -145,6 +145,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
     </div>
 </div>
 
+
 <div class="row">
     <div class="row-fluid">
         <div class="col-md-12">
