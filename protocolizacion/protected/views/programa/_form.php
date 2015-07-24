@@ -3,7 +3,6 @@
   'enableAjaxValidation'=>false,
   )); */ ?>
 
-
 <?php // echo'<pre>';var_dump($model);die;  ?>
 
 <div class="row">
