@@ -19,6 +19,7 @@ Yii::app()->clientScript->registerScript('camara', "
         var ingresoMFaov = $('#GrupoFamiliar_ingreso_mensual_faov').val();
         var fechaNac = $('#GrupoFamiliar_fecha_nacimiento').val();
         var IdUnidadF = '" . $_GET['id'] . "';
+        var tipoPersonaFaov = $('#GrupoFamiliar_tipo_persona_faov').val();
         
         if(cedula == ''){
             bootbox.alert('Ingrese un número de cédula!');
@@ -28,10 +29,6 @@ Yii::app()->clientScript->registerScript('camara', "
         
         if(ingresoM == ''){
             bootbox.alert('Indique el Ingreso Mensual.');
-            return false;
-        }
-        if(tipoSujeto == ''){
-            bootbox.alert('Indique el Tipo Sujeto.');
             return false;
         }
         
@@ -108,7 +105,7 @@ Yii::app()->clientScript->registerScript('camara', "
             url: '" . Yii::app()->createAbsoluteUrl('GrupoFamiliar/InsertFamiliar') . "',
             async: true,
             type: 'POST',
-            data: 'cedula=' +cedula + '&nacionalida=' +nacionalidad + '&primerNombre=' + primerNombre +'&segundoNombre=' +segundoNombre + '&primerApellido=' +primerApellido +'&segundoApellido=' +segundoApellido +'&idPersona=' +idPersona +'&parentesco=' +parentesco +'&tipoSujeto=' +tipoSujeto +'&ingresoM='+ ingresoM+ '&faov='+faov+'&fechaNac='+fechaNac+'&IdUnidadF='+IdUnidadF+'&ingresoMFaov='+ingresoMFaov,
+            data: 'cedula=' +cedula + '&nacionalida=' +nacionalidad + '&primerNombre=' + primerNombre +'&segundoNombre=' +segundoNombre + '&primerApellido=' +primerApellido +'&segundoApellido=' +segundoApellido +'&idPersona=' +idPersona +'&parentesco=' +parentesco +'&tipoSujeto=' +tipoSujeto +'&ingresoM='+ ingresoM+ '&faov='+faov+'&fechaNac='+fechaNac+'&IdUnidadF='+IdUnidadF+'&ingresoMFaov='+ingresoMFaov+ '&tipoPersonaFaov='+tipoPersonaFaov,
             dataType: 'json',
             success: function(data,faov) {
                 if(data == 3){
@@ -123,6 +120,7 @@ Yii::app()->clientScript->registerScript('camara', "
                     $('#GrupoFamiliar_gen_parentesco_id').val('');
                     $('#GrupoFamiliar_tipo_sujeto_atencion').val('');
                     $('#GrupoFamiliar_ingreso_mensual').val('');
+                    $('#GrupoFamiliar_tipo_persona_faov').val('');
                     $.fn.yiiGridView.update('listado_familiar');
                 }
             },

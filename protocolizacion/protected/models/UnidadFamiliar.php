@@ -48,7 +48,7 @@ class UnidadFamiliar extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('beneficiario_id, condicion_unidad_familiar_id, ingreso_total_familiar, procedencia_beneficio_id, fuente_datos_entrada_id, total_personas_cotizando, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
+            array('beneficiario_id, condicion_unidad_familiar_id, ingreso_total_familiar,  fuente_datos_entrada_id, total_personas_cotizando, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
             array('beneficiario_id, condicion_unidad_familiar_id, procedencia_beneficio_id, fuente_datos_entrada_id, total_personas_cotizando, cantidad_dispacitados, usuario_id_creacion, usuario_id_actualizacion, estatus', 'numerical', 'integerOnly' => true),
             array('nombre', 'length', 'max' => 100),
             array('ingreso_total_familiar', 'length', 'max' => 16),

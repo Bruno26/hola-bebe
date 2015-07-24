@@ -185,6 +185,7 @@ class GrupoFamiliarController extends Controller {
             $Familiar->fecha_actualizacion = 'now()';
             $Familiar->usuario_id_creacion = Yii::app()->user->id;
             $Familiar->ingreso_mensual_faov = $_POST['ingresoMFaov'];
+            $Familiar->tipo_persona_faov = $_POST['tipoPersonaFaov'];
             if ($Familiar->save()) {
                 echo CJSON::encode(3);
             } else {

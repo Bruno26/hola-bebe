@@ -5,7 +5,7 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
 ?>
 <?php Yii::app()->clientScript->registerScript('desarrolloVal', "
          $(document).ready(function(){
-            $('#Vivienda_nro_piso').numeric(); 
+//            $('#Vivienda_nro_piso').numeric(); 
             $('#Vivienda_nro_habitaciones').numeric(); 
             $('#Vivienda_nro_banos').numeric(); 
             $('#Vivienda_construccion_mt2').numeric(); 
