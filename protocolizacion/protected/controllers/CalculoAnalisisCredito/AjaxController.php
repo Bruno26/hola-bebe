@@ -16,7 +16,7 @@ class AjaxController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('TipoInterresAplicable'),
+                'actions' => array('TipoInterresAplicable','CalculoTasaAmortizacion'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -26,14 +26,14 @@ class AjaxController extends Controller {
     }
 
     /*
-     * 
+     * FUNCTION QUE DETERMINAL EL TIPO DE INTERES APLICABLE SEGUN CADA CASO
      */
 
     public function actionTipoInterresAplicable() {
         $SalarioFamiliar = (float) $_POST['SalarioFamiliar'];
         $SueldoMinimo =  str_replace(".", "", Maestro::model()->findByPk(238)->descripcion);
         $cantidadSalarios = round($SalarioFamiliar / $SueldoMinimo);
-       
+        
         switch ($cantidadSalarios){
             case ($cantidadSalarios >= 1 && $cantidadSalarios <= 4):
                 $cantidad = 1;
@@ -49,5 +49,14 @@ class AjaxController extends Controller {
                 break;
         }
         echo CJSON::encode($cantidad);
+    }
+    
+    /*
+     * 
+     */
+
+    public function actionCalculoTasaAmortizacion() {
+        echo CJSON::encode(1);
+        //echo '<pre>';var_dump($_POST);die;
     }
 }

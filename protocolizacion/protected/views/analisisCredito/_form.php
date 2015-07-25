@@ -5,9 +5,6 @@
             $('#AnalisisCredito_monto_inicial').numeric(); 
             $('#AnalisisCredito_monto_inicial').val('0'); 
         });
-        $('#AnalisisCredito_plazo_credito_ano').keypress(function(event) {
-            return false;
-        });
         $('#CalcCalculo').click(function() {
             if($('#AnalisisCredito_monto_inicial').val() ==''){
                 bootbox.alert('Indique un monto inicial');
@@ -62,14 +59,10 @@
         ?>
     </div>
     <div class='col-md-4'>
-        <?php echo $form->textFieldGroup($model, 'ultimo_sueldo', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
-    </div>
-    <div class='col-md-4'>
         <label class="control-label required" for="AnalisisCredito_plazo_credito_ano">Plazo Credito Ano <span class="required"><i>*</i></span></label>
-        <input type="number" step="any" step="5"  max="35" min="2" class="span5 form-control" placeholder="Plazo Credito Ano" name="AnalisisCredito[plazo_credito_ano]" id="AnalisisCredito_plazo_credito_ano">
+        <!--<input type="number" step="any" step="5"  max="35" min="2" class="span5 form-control" placeholder="Plazo Credito Ano" name="AnalisisCredito[plazo_credito_ano]" id="AnalisisCredito_plazo_credito_ano">-->
+        <input type="text" class="span5 form-control" placeholder="Plazo Credito Ano" name="AnalisisCredito[plazo_credito_ano]" id="AnalisisCredito_plazo_credito_ano">
     </div>
-</div>
-<div class='row'>
     <div class='col-md-4'>
         <?php
         echo $form->datePickerGroup($model, 'fecha_protocolizacion', array('widgetOptions' =>
@@ -99,12 +92,12 @@
     <?php
     $this->widget('booster.widgets.TbButton', array(
         'context' => 'success',
-        'label' => 'Generar Calculo',
+        'label' => 'Generar Cálculo',
         //'size' => 'large',
         'id' => 'CalcCalculo',
         'icon' => 'search',
         'htmlOptions' => array(
-//                'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
+                'onclick' => 'CalcularAnalisis()'
         )
     ));
     ?>

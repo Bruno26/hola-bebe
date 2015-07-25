@@ -65,6 +65,7 @@ class AnalisisCreditoController extends Controller {
         } else {
             $faov = ' ';
         }
+        $model->unidad_familiar_id = UnidadFamiliar::model()->findByAttributes(array('beneficiario_id' => $beneficiario->id_beneficiario))->id_unidad_familiar;
         $grupoFamiliar = "SELECT gr.ingreso_mensual, gr.ingreso_mensual_faov  FROM grupo_familiar gr
                         JOIN unidad_familiar fa ON  gr.unidad_familiar_id= fa.id_unidad_familiar AND fa.beneficiario_id = " . $id . "AND fa.estatus = 77
                         WHERE gr.estatus = 41 " . $faov;
