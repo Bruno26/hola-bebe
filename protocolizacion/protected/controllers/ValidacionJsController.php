@@ -63,7 +63,7 @@ class ValidacionJsController extends Controller {
                 echo CJSON::encode(3); // existe en Persona
             } else {
 
-               // var_dump($existeTemporal); die();
+                // var_dump($existeTemporal); die();
                 $desarrollo = array(
                     'nro_vivienda' => $existeTemporal->vivienda->nro_vivienda,
                     'nro_piso' => $existeTemporal->vivienda->nro_piso,
@@ -77,12 +77,11 @@ class ValidacionJsController extends Controller {
                     'parroquia_id' => $existeTemporal->desarrollo->fkParroquia->strdescripcion,
                     'municipio' => $existeTemporal->desarrollo->fkParroquia->clvmunicipio0->strdescripcion,
                     'estado' => $existeTemporal->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion,
-                    'Temp'   => $existeTemporal->id_beneficiario_temporal,
+                    'Temp' => $existeTemporal->id_beneficiario_temporal,
                     'id_desarrollo' => $existeTemporal->desarrollo->id_desarrollo,
-                    'id_unidadh'  => $existeTemporal->unidadHabitacional->id_unidad_habitacional,
+                    'id_unidadh' => $existeTemporal->unidadHabitacional->id_unidad_habitacional,
                     'vivienda_id' => $existeTemporal->vivienda->id_vivienda,
                     'construccion_mt2' => $existeTemporal->vivienda->construccion_mt2,
-
                 );
                 $salida = array('persona' => $consultaPer, 'desarrollo' => $desarrollo);
                 echo CJSON::encode($salida);
@@ -577,6 +576,26 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
             }
         } else {
             echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
+        }
+    }
+
+    public function actionCargarPrograma() {
+        $fuente_financiemiento = (isset($_POST['Desarrollo']['fuente_financiamiento_id']) ? $_POST['Desarrollo']['fuente_financiamiento_id'] : $_GET['fuente_financiamiento_id']);
+        $Selected = isset($_GET['fuente_financiamiento_id']) ? $_GET['fuente_financiamiento_id'] : '';
+
+        if (!empty($fuente_financiemiento)) {
+            $criteria = new CDbCriteria;
+            $criteria->addCondition('t.fuente_financiamiento_id = :fuente_financiamiento_id');
+            $criteria->params = array(':fuente_financiamiento_id' => $fuente_financiemiento);
+            $data = CHtml::listData(Programa::model()->findAll($criteria), 'id_programa', 'nombre_programa');
+            echo CHtml::tag('option', array('value' => ''), CHtml::encode('SELECCIONE'), true);
+            foreach ($data as $id => $value) {
+                if ($Selected == $id) {
+                    echo CHtml::tag('option', array('value' => $id, 'selected' => true), CHtml::encode($value), true);
+                } else {
+                    echo CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
+                }
+            }
         }
     }
 

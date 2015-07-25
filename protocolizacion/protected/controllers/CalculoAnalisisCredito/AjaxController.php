@@ -15,7 +15,7 @@ class AjaxController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario', 'BuscarPisoVivienda', 'BuscarVivienda', 'BuscarTipoVivienda', 'BuscarPersonasBeneficiarioTemp', 'BuscarEncargadoOficina', 'BuscarPersonaAbogado', 'BuscarPersonaAsignacionCenso', 'BuscarBeneficiariosTemporalEmpadronador', 'AgregarAsignacionesEmpa', 'BuscarUnidadMulti'),
+                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario', 'BuscarPisoVivienda', 'BuscarVivienda', 'BuscarTipoVivienda', 'BuscarPersonasBeneficiarioTemp', 'BuscarEncargadoOficina', 'BuscarPersonaAbogado', 'BuscarPersonaAsignacionCenso', 'BuscarBeneficiariosTemporalEmpadronador', 'AgregarAsignacionesEmpa', 'BuscarUnidadMulti', 'CargarPrograma'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
