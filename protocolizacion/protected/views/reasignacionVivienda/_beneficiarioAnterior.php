@@ -9,6 +9,7 @@
                     'data' => Maestro::FindMaestrosByPadreSelect(96),
                     'htmlOptions' => array(
                         'empty' => 'SELECCIONE',
+                        'disabled' => TRUE,
                     ),
                 )
                     )

@@ -9,67 +9,97 @@ if (baseUrl.indexOf('.protocolizacion.org.ve') == -1) {
     baseUrl = $(location).attr('href').replace($(location).attr('pathname'), ruta) + '/protocolizacion';
 }
 
-//$(document).ready(function(){
-//    alert("hola");
-//});
-
 function conMayusculas(field) {
     field.value = field.value.toUpperCase()
 }
+$(document).ready(function() {
+    var SalarioGrupoFamiliar = $('#opciones_2').val();
+    $.ajax({
+        url: baseUrl + "/CalculoAnalisisCredito/Ajax/TipoInterresAplicable",
+        async: true,
+        type: 'POST',
+        data: 'SalarioFamiliar=' + SalarioGrupoFamiliar,
+        dataType: 'json',
+        success: function(datos) {
+            $('#AnalisisCredito_tasa_interes_id').val(datos);
+        },
+        error: function(datos) {
+            bootbox.alert('Ocurrio un error');
+        }
+    })
+});
 
 
 /*
- * FUNCION QUE BUSCA EN SAIME Y EN PERSONA POR NUMERO DE CEDULA Y NACIONALIDAD
+ * FUNCTION QUE RECALCULA LA TAZA DE INTERE4S APLICABLE SEGUN TABLA DEL SUELDO
  */
-function calcularSueldo(fondo_recuperacion) {
-    if (fondo_recuperacion == '') {
-        var tableDeclarable ='<table class="table table-bordered"><th>Sueldo Declarado</th><tr><td><i>Sin información</i></td></tr></table>';
-        var tableFaov='<table class="table table-bordered"><th>Sueldo Según Faov</th><tr><td><i>Sin información</i></td></tr></table>';
-        $('#ingreso_declarado').html(tableDeclarable);
-        $('#ingreso_faov').html(tableFaov);
-        bootbox.alert('Verifique que el Fondo de Recuperación no este vacios');
+
+function RecalculoDeInteres() {
+    if ($('#opciones_2').is(':checked')) {
+        var valorSalario = $('#opciones_2').val();
+    }
+    if ($('#opciones_1').is(':checked')) {
+        var valorSalario = $('#opciones_1').val();
+    }
+    $.ajax({
+        url: baseUrl + "/CalculoAnalisisCredito/Ajax/TipoInterresAplicable",
+        async: true,
+        type: 'POST',
+        data: 'SalarioFamiliar=' + valorSalario,
+        dataType: 'json',
+        success: function(datos) {
+            $('#AnalisisCredito_tasa_interes_id').val(datos);
+        },
+        error: function(datos) {
+            bootbox.alert('Ocurrio un error');
+        }
+    })
+}
+/*
+ * 
+ */
+function CalcularAnalisis() {
+    var fuenteFinanciamineto = $('#Desarrollo_fuente_financiamiento_id').val();
+    var programa = $('#Desarrollo_programa_id').val();
+    var montoInical = $('#AnalisisCredito_monto_inicial').val();
+    var montoVivienda = $('#AnalisisCredito_costo_vivienda').val();
+    var idUnidadFamiliar = $('#AnalisisCredito_unidad_familiar_id').val();
+    if ($('#opciones_2').is(':checked')) {
+        var valorSalario = $('#opciones_2').val();
+    } else {
+        var valorSalario = $('#opciones_1').val();
+
+    }
+    var tasaInteres = $('#AnalisisCredito_tasa_interes_id').val();
+    var plazoCredito = $('#AnalisisCredito_plazo_credito_ano').val();
+    var fechaProtocolizacion = $('#AnalisisCredito_fecha_protocolizacion').val();
+
+
+    if (fuenteFinanciamineto == '') {
+        bootbox.alert('Indique la Fuente de Financiamiento.');
         return false;
     }
-//    $.ajax({
-//        url: baseUrl + "/ValidacionJs/BuscarEncargadoOficina",
-//        async: true,
-//        type: 'POST',
-//        data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
-//        dataType: 'json',
-//        success: function (datos) {
-//            if (datos == 1 || datos == 2) {
-//                $('#iconLoding').hide();
-//                $('#Oficina_primer_nombre').val('');
-//                $('#Oficina_persona_id_jefe').val('');
-//                $('#Oficina_segundo_nombre').val('');
-//                $('#Oficina_primer_apellido').val('');
-//                $('#Oficina_segundo_apellido').val('');
-//                $('#Oficina_fechaNac').val('');
-//                if (datos == 1) {
-//                    $('#Oficina_cedula').val('');
-//                    $('#Oficina_nacionalidad').val('');
-//                    bootbox.alert('Esta persona ya se encuentra asignada a una Oficina.');
-//                    return false;
-//                } else if (datos == 2) {
-//                    $('#iconLoding').hide();
-//                    $('#Oficina_persona_id_jefe').val('');
-//                    $('#Oficina_primer_nombre').attr('readonly', false);
-//                    $('#Oficina_segundo_nombre').attr('readonly', false);
-//                    $('#Oficina_primer_apellido').attr('readonly', false);
-//                    $('#Oficina_segundo_apellido').attr('readonly', false);
-//                }
-//            } else {
-//                $('#Oficina_primer_nombre').val(datos.PRIMERNOMBRE);
-//                $('#Oficina_persona_id_jefe').val(datos.ID);
-//                $('#Oficina_segundo_nombre').val(datos.SEGUNDONOMBRE);
-//                $('#Oficina_primer_apellido').val(datos.PRIMERAPELLIDO);
-//                $('#Oficina_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
-//                $('#Oficina_fechaNac').val(datos.FECHANACIMIENTO);
-//                $('#iconLoding').hide();
-//            }
-//        },
-//        error: function (datos) {
-//            bootbox.alert('Ocurrio un error');
-//        }
-//    })
+    if (programa == '') {
+        bootbox.alert('Indique el Programa.');
+        return false;
+    }
+    if (programa == '') {
+        bootbox.alert('Indique el Programa.');
+        return false;
+    }
+
+
+    $.ajax({
+        url: baseUrl + "/CalculoAnalisisCredito/Ajax/CalculoTasaAmortizacion",
+        async: true,
+        type: 'POST',
+        data: 'fuenteFinanciamineto=' + fuenteFinanciamineto + '&programa=' + programa + '&montoInical=' + montoInical + '&montoVivienda=' + montoVivienda + '&idUnidadFamiliar=' + idUnidadFamiliar + '&valorSalario=' + valorSalario + '&tasaInteres=' + tasaInteres + '&plazoCredito=' + plazoCredito + '&fechaProtocolizacion=' + fechaProtocolizacion,
+        dataType: 'json',
+        success: function(datos) {
+            $('#sumilador_id').fadeIn("slow");
+        },
+        error: function(datos) {
+            bootbox.alert('Ocurrio un error');
+        }
+    })
 }

@@ -39,13 +39,15 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 <div class="row rifabogado" style ="display: none">
 
     <div class="col-md-4">
+          <b>Rif Abogado </b> <span class="required">*</span>
         <?php echo $form->textFieldGroup($model, 'rif_abogado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20)))); ?>
     </div>
     <div class="col-md-4" >
+          <b>Resgistro Público</b> <span class="required">*</span>
         <?php
         echo $form->dropDownListGroup($model, 'registro_publico_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
             'widgetOptions' => array(
-                'data' => Maestro::FindMaestrosByPadreSelect(144, 'descripcion DESC'),
+                'data' => CHtml::listData(RegistroPublico::model()->findAll(), 'id_registro_publico', 'nombre_registro_publico'),
                 'htmlOptions' => array('empty' => 'SELECCIONE'),
             )
                 )
@@ -53,6 +55,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
         ?>
     </div>
     <div class="col-md-4 " >
+      <b> Número de Protocolo </b> <span class="required">*</span>
         <?php
         echo $form->dropDownListGroup($model, 'nun_protocolo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
             'widgetOptions' => array(
@@ -68,13 +71,16 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 </div>
 <div class="row rifabogado" style ="display: none" >
     <div class="col-md-4">
+        <b> Folio </b> <span class="required">*</span>
         <?php echo $form->textFieldGroup($model, 'folio', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 12)))); ?>
     </div>
     <div class="col-md-4">
+          <b>Número de Tomo </b> <span class="required">*</span>
         <?php echo $form->textFieldGroup($model, 'tomo', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 12)))); ?>
 
     </div>
     <div class='col-md-4'>
+          <b> Año </b> <span class="required">*</span>
         <?php
         echo $form->datePickerGroup($model, 'anio', array('widgetOptions' =>
             array(

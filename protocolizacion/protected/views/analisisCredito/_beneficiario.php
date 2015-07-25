@@ -1,23 +1,27 @@
+
 <?php
-/*Yii::app()->clientScript->registerScript('desarrollo', "
-         $(document).ready(function(){
-            $('#Tblestado_clvcodigo').val(" . $id_estado . ");
-                    
-            $.get('" . CController::createUrl('ValidacionJs/CargarPrograma') . "', {clvcodigo: " . $id_estado . " }, function(data){
-                $('#Tblmunicipio_clvcodigo').html(data);
-                $('#Tblmunicipio_clvcodigo').val(" . $id_municipio . ");
-                
-            });
-            $.get('" . CController::createUrl('ValidacionJs/BuscarParroquias') . "', {municipio: " . $id_municipio . "}, function(data){
-                $('#Desarrollo_parroquia_id').html(data);
-                $('#Desarrollo_parroquia_id').val(" . $model->parroquia_id . ");
-            });
-        });
+/* Yii::app()->clientScript->registerScript('desarrollo', "
+  $(document).ready(function(){
+  $('#Tblestado_clvcodigo').val(" . $id_estado . ");
+
+  $.get('" . CController::createUrl('ValidacionJs/CargarPrograma') . "', {clvcodigo: " . $id_estado . " }, function(data){
+  $('#Tblmunicipio_clvcodigo').html(data);
+  $('#Tblmunicipio_clvcodigo').val(" . $id_municipio . ");
+
+  });
+  $.get('" . CController::createUrl('ValidacionJs/BuscarParroquias') . "', {municipio: " . $id_municipio . "}, function(data){
+  $('#Desarrollo_parroquia_id').html(data);
+  $('#Desarrollo_parroquia_id').val(" . $model->parroquia_id . ");
+  });
+  });
 
 
-        ") */
+  ") */
 ?>
 
+
+
+<?php echo $form->hiddenField($model, 'unidad_familiar_id'); ?>
 
 <div class='row'>
     <div class='col-md-4'>
@@ -40,8 +44,9 @@
     <div class='col-md-6'>
         <?php
         echo $form->dropDownListGroup($desarrollo, 'fuente_financiamiento_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
-            'widgetOptions' => array(
-                'data' => CHtml::listData(FuenteFinanciamiento::model()->findAll(), 'id_fuente_financiamiento', 'nombre_fuente_financiamiento'),
+        'widgetOptions' => array(
+        'data' => CHtml::listData(FuenteFinanciamiento::model()->findAll(), 'id_fuente_financiamiento', 'nombre_fuente_financiamiento'),
+
                 'htmlOptions' => array(
                     'empty' => 'SELECCIONE',
                     //'onchange'=>'calcularSueldo($(this).val())',

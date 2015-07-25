@@ -22,7 +22,7 @@ class ValidacionJsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario', 'BuscarPisoVivienda', 'BuscarVivienda', 'BuscarTipoVivienda', 'BuscarPersonasBeneficiarioTemp', 'BuscarEncargadoOficina', 'BuscarPersonaAbogado', 'BuscarPersonaAsignacionCenso', 'BuscarBeneficiariosTemporalEmpadronador', 'AgregarAsignacionesEmpa', 'BuscarUnidadMulti'),
+                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario', 'BuscarPisoVivienda', 'BuscarVivienda', 'BuscarTipoVivienda', 'BuscarPersonasBeneficiarioTemp', 'BuscarEncargadoOficina', 'BuscarPersonaAbogado', 'BuscarPersonaAsignacionCenso', 'BuscarBeneficiariosTemporalEmpadronador', 'AgregarAsignacionesEmpa', 'BuscarUnidadMulti','CargarPrograma'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -596,6 +596,25 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
                     echo CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
                 }
             }
+        }
+    }   
+
+    public function actionNroVivienda() {
+        $habitacional = $_POST['habitacional'];
+        $vivienda = $_POST['vivienda'];
+        $piso = $_POST['piso'];
+
+        $criteria = new CDbCriteria;
+        $criteria->addCondition('t.unidad_habitacional_id = :id_unidad_habitacional and t.nro_piso = :nro_piso  and t.nro_vivienda= :nro_vivienda   ');
+        $criteria->params = array(':id_unidad_habitacional' => $habitacional, ':nro_piso' => $piso, ':nro_vivienda' => $vivienda);
+
+        $existeVivienda = Vivienda::model()->findAll($criteria);
+        var_dump($existeVivienda);
+        die();
+        if (!empty($existeVivienda)) {
+            
+        } else {
+            echo CJSON::encode(2); //no existe en vivienda
         }
     }
 

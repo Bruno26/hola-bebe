@@ -40,6 +40,21 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         ?>
     </div>
 </div>
+<div class="row" style="display: none" id="sumilador_id">
+    <div class="col-md-12">
+        <?php
+        $this->widget(
+                'booster.widgets.TbPanel', array(
+            'title' => 'Simulador de Credito Hipotecario',
+            'context' => 'info',
+            'headerIcon' => 'user',
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
+            'content' => $this->renderPartial('_simulador', array('form' => $form), TRUE),
+                )
+        );
+        ?>
+    </div>
+</div>
 <div class="well">
     <div class="pull-center" style="text-align: right;">
         <?php

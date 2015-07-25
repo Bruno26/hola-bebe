@@ -169,15 +169,7 @@
                                             <li><a href="<?php echo $this->createUrl('/vswUnifamiliar/admin'); ?>">Gestión de Unidad Unifamiliar</a></li>
                                         </ul>
                                     </li>
-                                    <li class="sub-menu">
-                                        <a href="javascript:;">
-                                            <i class="glyphicon glyphicon-home"></i>
-                                            <span>Reasignación Vivienda</span>
-                                        </a>
-                                        <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/reasignacionVivienda/create'); ?>">Reasignar Vivienda</a></li>
-                                        </ul>
-                                    </li>
+ 
                                 </ul>
                             </li>
                             <li class="sub-menu">
