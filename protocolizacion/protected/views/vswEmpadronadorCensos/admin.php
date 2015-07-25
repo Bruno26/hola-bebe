@@ -57,14 +57,14 @@ $this->widget('booster.widgets.TbGridView', array(
                     'label' => 'Re-asignacion Vivienda',
                     'icon' => 'glyphicon glyphicon-user',
                     'size' => 'medium',
-                    'url' => 'Yii::app()->createUrl("reasignacionVivienda/create/", array("id"=>$data->id_beneficiario))',
+                    'url' => 'Yii::app()->createUrl("reasignacionVivienda/create/", array("id"=>$data->id_beneficiario_temporal))',
                 ),
                 'censo' => array(
                     'label' => 'Generar Censo',
                     'icon' => 'glyphicon glyphicon-new-window',
                     'size' => 'medium',
                     //'url' => 'Yii::app()->createUrl("beneficiario/culminarRegistro", array("id"=>$data->id_beneficiario))',
-                    'url' => 'Yii::app()->createUrl("/Beneficiario/culminarRegistro", array("id"=>$data->id_beneficiario))',
+                    'url' => 'Yii::app()->createUrl("/Beneficiario/create", array("id"=>$data->id_beneficiario_temporal))',
                 ),
              
             ),

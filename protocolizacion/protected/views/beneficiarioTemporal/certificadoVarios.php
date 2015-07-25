@@ -381,7 +381,7 @@ foreach ($recordBeneTemp as $model) {
                 </td>
             </tr>"
             . "</table>"
-            . "</div><br><br><br><br><br><br><br><br><br><br>";
+            . "</div><br><br><br><br><br><br>";
 
 //    -------------------------PLANILLA 2 ------------------------
 
@@ -394,13 +394,13 @@ foreach ($recordBeneTemp as $model) {
             . "</tr>"
             . "<tr>
                 <td class='   border-right'>
-                    <span class='subtitulo'>Estado:</span> " . date('d/m/Y', strtotime($persona->FECHANACIMIENTO)) . "<br>
+                    <span class='subtitulo'>Estado:</span> " . "<br>
                 </td>
                 <td class=' border-right'>
-                    <span class='subtitulo'>Municipio:</span> " . $persona->SEXO . "<br>
+                    <span class='subtitulo'>Municipio:</span> " ."<br>
                 </td>
                 <td>
-                    <span class='subtitulo'>Parroquia:</span> " . $persona->EDOCIVIL . "<br>
+                    <span class='subtitulo'>Parroquia:</span> " .  "<br>
                 </td>
             </tr>"
             . "</table>"
@@ -508,29 +508,25 @@ foreach ($recordBeneTemp as $model) {
             </tr>"
             
             
-            
-            
-            
-            
             . "</table>"
             . "</div>";
     
-    $html.="<br/>"
+    $html.=""
             . "<div id='prueba'>"
             . "<table class='table table-striped' border='0'>"
-           
-            . "<tr>
-                <td class='   border-right' >
+            
+           . "<tr>
+                <td class='col-interno border-right'>
                     <span class='subtitulo'>Teléfono Empresa:</span> " . "<br>
                 </td>
-                <td class=' border-right' colspan='2'>
-                    <span class='subtitulo'>Cargo:</span> " .  "<br>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Cargo:</span> " . "<br>
                 </td>
-                <td class=' border-right'>
+                <td class='col-interno'>
                     <span class='subtitulo'>Ingreso Mensual Bs:</span> " .  "<br>
                 </td>
-                
             </tr>"
+            
             . "</table>"
             . "</div>";
     $html.="<br/>"
@@ -635,26 +631,22 @@ foreach ($recordBeneTemp as $model) {
             </tr>"
             
             
-            
-            
-            
-            
             . "</table>"
             . "</div>";
     
-    $html.="<br/>"
+    $html.=""
             . "<div id='prueba'>"
             . "<table class='table table-striped' border='0'>"
            
-            . "<tr>
-                <td class='   border-right'>
+           . "<tr>
+                <td class='col-interno border-right'>
                     <span class='subtitulo'>Teléfono Empresa:</span> " . "<br>
                 </td>
-                <td class=' border-right'>
-                    <span class='subtitulo'>Cargo:</span> " .  "<br>
+                <td class='col-interno border-right'>
+                    <span class='subtitulo'>Cargo:</span> " . "<br>
                 </td>
-                <td>
-                    <span class='subtitulo'>Ingreso Mensual Personal Bs.:</span> " .  "<br>
+                <td class='col-interno'>
+                    <span class='subtitulo'>Ingreso Mensual Bs:</span> " .  "<br>
                 </td>
             </tr>"
             
@@ -678,6 +670,42 @@ foreach ($recordBeneTemp as $model) {
             . "</table>"
             . "</div>";
              
+             $html.=""
+            . "<div><h6 align='center'>DECLARO BAJO FE DE JURAMENTO QUE LOS DATOS AQUÍ APORTADOS SON CIERTOS</h6></div>"
+            . "<div id='prueba'>"
+            . "<table class='table table-striped' border='0'>"
+            . "<tr>
+               
+ 
+<tr>
+  <td>Por el Beneficiario</td>
+  <td>Firma___________________</td>
+  <td></td>
+  <td>Huella</td>
+</tr>
+ <br><br><br>
+<tr>
+  <td>Por el Consejo Comunal</td>
+  <td>Firma___________________</td>
+  <td></td>
+  <td>Huella</td>
+</tr>
+ 
+<br><br><br>
+ 
+<tr>
+  <td>Por el Banavih</td>
+  <td>Firma___________________</td>
+  <td></td>
+  <td> Huella
+  </td>
+</tr>
+<br><br><br>
+            </tr>"
+           
+            . "</table>"
+            . "</div>";
+             
             
 
     $html.="<p class='saltodepagina'/>";
@@ -697,14 +725,3 @@ $mpdf->Output('Beneficiario.pdf', 'D');
 exit;
 ?>
 
-<style>
-
-    .uno {
-        float: left;
-        width: 50%;
-    }
-    .dos {
-        float: right;
-        width: 50%;
-    }
-</style>

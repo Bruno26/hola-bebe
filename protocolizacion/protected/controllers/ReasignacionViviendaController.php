@@ -38,24 +38,45 @@ class ReasignacionViviendaController extends Controller {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate() {
+    public function actionCreate($id) {
         $model = new ReasignacionVivienda;
-//        $beneficiario = Beneficiario::model()->findByPk($id);
-//        var_dump($beneficiario); die;
-//        
-//        if(!empty($beneficiario)){
-//            $model->nacionalidadAnterior = $beneficiario->beneficiarioTemporal->nacionalidad;
-//            $model->cedulaAnterior = $beneficiario->beneficiarioTemporal->cedula;
-//        }
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
+        $beneficiarioTemporal = BeneficiarioTemporal::model()->findByPk($id);
+//        var
+        if (!empty($beneficiarioTemporal)) {
+            $model->beneficiario_id_anterior = $beneficiarioTemporal->id_beneficiario_temporal;
+            $model->nacionalidadAnterior = $beneficiarioTemporal->nacionalidad;
+            $model->cedulaAnterior = $beneficiarioTemporal->cedula;
+            $model->nombreCompletoAnterior = $beneficiarioTemporal->nombre_completo;
+            $model->desarrollo = $beneficiarioTemporal->desarrollo->nombre;
+            $model->unidad_habitacional = $beneficiarioTemporal->unidadHabitacional->nombre;
+            $model->vivienda_id = $beneficiarioTemporal->vivienda->id_vivienda;
+            $model->tipo_vivienda = $beneficiarioTemporal->vivienda->tipoVivienda->descripcion;
+            $model->nro_piso = $beneficiarioTemporal->vivienda->nro_piso;
+            $model->nro_vivienda = $beneficiarioTemporal->vivienda->nro_vivienda;
+        }
 
         if (isset($_POST['ReasignacionVivienda'])) {
             $model->attributes = $_POST['ReasignacionVivienda'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_reasignacion_vivienda));
-        }
+            $model->beneficiario_id_anterior = $_POST['ReasignacionVivienda']['beneficiario_id_anterior'];
+            $model->beneficiario_id_actual = $_POST['ReasignacionVivienda']['beneficiario_id_anterior'];
+            $model->vivienda_id = $_POST['ReasignacionVivienda']['vivienda_id'];
+            $model->tipo_reasignacion_id = $_POST['ReasignacionVivienda']['tipo_reasignacion_id'];
+            $model->persona_id_autoriza = Yii::app()->user->id;
+            $model->observaciones = trim(strtoupper($_POST['ReasignacionVivienda']['observaciones']));
+            $model->fecha_reasignacion = $model->fecha_reasignacion = Generico::formatoFecha($_POST['ReasignacionVivienda']['fecha_reasignacion']);
+            $model->fecha_creacion = 'now';
+            $model->fecha_actualizacion = 'now';
+            $model->usuario_id_creacion = Yii::app()->user->id;
+            ;
+            $model->estatus = 49;
 
+            if ($model->save()) {
+                $this->redirect(array('view', 'id' => $model->id_reasignacion_vivienda));
+            } else {
+                var_dump($model->errors);
+                die;
+            }
+        }
         $this->render('create', array(
             'model' => $model,
         ));
