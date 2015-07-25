@@ -871,3 +871,39 @@ function Parentesco(valor) {
 
 }
 
+function Viviendas(habitacional,piso ,vivienda ) {
+
+    if (vivienda == '') {
+        bootbox.alert('Verifique que la vivienda no esten vacios');
+        return false;
+    }
+
+    if (piso == '') {
+        bootbox.alert('Verifique que la piso no esten vacios');
+        return false;
+    }
+
+    $.ajax({
+        url: baseUrl + "/ValidacionJs/NroVivienda",
+        async: true,
+        type: 'POST',
+        data: 'habitacional=' + habitacional + '&vivienda=' + vivienda + '&piso=' + piso,
+        dataType: 'json',
+        success: function (datos) {
+            /* ++++   solo verifico en Persona  ++++  */
+
+            if (datos != 2) {
+                
+
+            } else {
+
+                bootbox.alert('Disculpe.Este..');
+
+            }
+        }
+
+    });
+
+
+}
+
