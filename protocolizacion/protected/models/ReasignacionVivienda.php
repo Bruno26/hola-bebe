@@ -19,13 +19,12 @@
  * @property integer $estatus
  *
  * The followings are the available model relations:
- * @property Vivienda $vivienda
- * @property Maestro $tipoReasignacion
- * @property Beneficiario $beneficiarioIdAnterior
- * @property Beneficiario $beneficiarioIdActual
- * @property CrugeUser $usuarioIdCreacion
- * @property CrugeUser $usuarioIdActualizacion
  * @property Maestro $estatus0
+ * @property Maestro $tipoReasignacion
+ * @property CrugeUser $usuarioIdActualizacion
+ * @property CrugeUser $usuarioIdCreacion
+ * @property BeneficiarioTemporal $beneficiarioIdActual
+ * @property BeneficiarioTemporal $beneficiarioIdAnterior
  */
 class ReasignacionVivienda extends CActiveRecord {
 
@@ -35,6 +34,11 @@ class ReasignacionVivienda extends CActiveRecord {
     public $nacionalidadActual;
     public $nombreCompletoAnterior;
     public $nombreCompletoActual;
+    public $desarrollo;
+    public $unidad_habitacional;
+    public $nro_piso;
+    public $nro_vivienda;
+    public $tipo_vivienda;
 
     /**
      * @return string the associated database table name
@@ -53,7 +57,6 @@ class ReasignacionVivienda extends CActiveRecord {
             array('beneficiario_id_anterior, beneficiario_id_actual, vivienda_id, tipo_reasignacion_id, persona_id_autoriza, fecha_reasignacion, fecha_creacion, fecha_actualizacion, usuario_id_creacion, estatus', 'required'),
             array('beneficiario_id_anterior, beneficiario_id_actual, vivienda_id, tipo_reasignacion_id, persona_id_autoriza, usuario_id_creacion, usuario_id_actualizacion, estatus', 'numerical', 'integerOnly' => true),
             array('observaciones', 'length', 'max' => 200),
-            array('cedulaAnterior,cedulaActual', 'length', 'max' => 8),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id_reasignacion_vivienda, beneficiario_id_anterior, beneficiario_id_actual, vivienda_id, tipo_reasignacion_id, persona_id_autoriza, observaciones, fecha_reasignacion, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, estatus', 'safe', 'on' => 'search'),
@@ -67,13 +70,12 @@ class ReasignacionVivienda extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'vivienda' => array(self::BELONGS_TO, 'Vivienda', 'vivienda_id'),
-            'tipoReasignacion' => array(self::BELONGS_TO, 'Maestro', 'tipo_reasignacion_id'),
-            'beneficiarioIdAnterior' => array(self::BELONGS_TO, 'Beneficiario', 'beneficiario_id_anterior'),
-            'beneficiarioIdActual' => array(self::BELONGS_TO, 'Beneficiario', 'beneficiario_id_actual'),
-            'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
-            'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
             'estatus0' => array(self::BELONGS_TO, 'Maestro', 'estatus'),
+            'tipoReasignacion' => array(self::BELONGS_TO, 'Maestro', 'tipo_reasignacion_id'),
+            'usuarioIdActualizacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_actualizacion'),
+            'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
+            'beneficiarioIdActual' => array(self::BELONGS_TO, 'BeneficiarioTemporal', 'beneficiario_id_actual'),
+            'beneficiarioIdAnterior' => array(self::BELONGS_TO, 'BeneficiarioTemporal', 'beneficiario_id_anterior'),
         );
     }
 
@@ -101,6 +103,11 @@ class ReasignacionVivienda extends CActiveRecord {
             'cedulaActual' => 'Cédula del Beneficiario Actual',
             'nacionalidadActual' => 'Nacionalidad del Beneficiario Actual',
             'nombreCompletoActual' => 'Nombre Completo del Beneficiario Actual',
+            'desarrollo' => 'Nombre del Desarrollo',
+            'unidad_habitacional' => 'Nombre de Unidad Familiar',
+            'nro_piso' => 'Numero Piso',
+            'nro_vivienda' => 'Numero Vivienda',
+            'tipo_vivienda' => 'Numero Vivienda',
         );
     }
 
