@@ -55,3 +55,52 @@ function RecalculoDeInteres() {
         }
     })
 }
+/*
+ * 
+ */
+function CalcularAnalisis() {
+    var fuenteFinanciamineto = $('#Desarrollo_fuente_financiamiento_id').val();
+    var programa = $('#Desarrollo_programa_id').val();
+    var montoInical = $('#AnalisisCredito_monto_inicial').val();
+    var montoVivienda = $('#AnalisisCredito_costo_vivienda').val();
+    var idUnidadFamiliar = $('#AnalisisCredito_unidad_familiar_id').val();
+    if ($('#opciones_2').is(':checked')) {
+        var valorSalario = $('#opciones_2').val();
+    } else {
+        var valorSalario = $('#opciones_1').val();
+
+    }
+    var tasaInteres = $('#AnalisisCredito_tasa_interes_id').val();
+    var plazoCredito = $('#AnalisisCredito_plazo_credito_ano').val();
+    var fechaProtocolizacion = $('#AnalisisCredito_fecha_protocolizacion').val();
+
+
+    if (fuenteFinanciamineto == '') {
+        bootbox.alert('Indique la Fuente de Financiamiento.');
+        return false;
+    }
+    if (programa == '') {
+        bootbox.alert('Indique el Programa.');
+        return false;
+    }
+    if (programa == '') {
+        bootbox.alert('Indique el Programa.');
+        return false;
+    }
+
+
+    $.ajax({
+        url: baseUrl + "/CalculoAnalisisCredito/Ajax/CalculoTasaAmortizacion",
+        async: true,
+        type: 'POST',
+        data: 'fuenteFinanciamineto=' + fuenteFinanciamineto + '&programa=' + programa + '&montoInical=' + montoInical + '&montoVivienda=' + montoVivienda + '&idUnidadFamiliar=' + idUnidadFamiliar + '&valorSalario=' + valorSalario + '&tasaInteres=' + tasaInteres + '&plazoCredito=' + plazoCredito + '&fechaProtocolizacion=' + fechaProtocolizacion,
+        dataType: 'json',
+        success: function(datos) {
+            $('#sumilador_id').fadeIn("slow");
+        },
+        error: function(datos) {
+            bootbox.alert('Ocurrio un error');
+        }
+    })
+
+}

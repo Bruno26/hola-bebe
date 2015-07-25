@@ -1,3 +1,4 @@
+<?php echo $form->hiddenField($model, 'unidad_familiar_id'); ?>
 <div class='row'>
     <div class='col-md-4'>
         <?php
@@ -21,7 +22,7 @@
         echo $form->dropDownListGroup($desarrollo, 'fuente_financiamiento_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
             'widgetOptions' => array(
                 'data' => CHtml::listData(FuenteFinanciamiento::model()->findAll(), 'id_fuente_financiamiento', 'nombre_fuente_financiamiento'),
-                'htmlOptions' => array('empty' => 'SELECCIONE','onchange'=>'calcularSueldo($(this).val())'),
+                'htmlOptions' => array('empty' => 'SELECCIONE', 'onchange' => 'calcularSueldo($(this).val())'),
             )
                 )
         );
