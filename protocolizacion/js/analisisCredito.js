@@ -102,5 +102,4 @@ function CalcularAnalisis() {
             bootbox.alert('Ocurrio un error');
         }
     })
-
 }
