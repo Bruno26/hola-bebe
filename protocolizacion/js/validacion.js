@@ -115,7 +115,7 @@ function buscarBenefAnterior(nacionalidad, cedula, caso) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function(datos) {
+        PhpProject1success: function(datos) {
             if (datos == 2) {
                 //  No Existe en Saime habilito todos los campos para que se llenen a pedal
                 /*  ------  Bloqueo campos    ------- */
@@ -1035,7 +1035,6 @@ function Viviendas(habitacional, piso, vivienda) {
         dataType: 'json',
         success: function(datos) {
             /* ++++   solo verifico en Persona  ++++  */
-
 
             if (datos == 1) {
 
