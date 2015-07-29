@@ -1017,15 +1017,15 @@ function Parentesco(valor) {
 
 function Viviendas(habitacional, piso, vivienda) {
 
-    if (vivienda == '') {
-        bootbox.alert('Verifique que la vivienda no esten vacios');
-        return false;
-    }
+//    if (vivienda == '') {
+//        bootbox.alert('Verifique que la vivienda no esten vacios');
+//        return false;
+//    }
 
-    if (piso == '') {
-        bootbox.alert('Verifique que la piso no esten vacios');
-        return false;
-    }
+//    if (piso == '') {
+//        bootbox.alert('Verifique que la piso no esten vacios');
+//        return false;
+//    }
 
     $.ajax({
         url: baseUrl + "/ValidacionJs/NroVivienda",
@@ -1036,12 +1036,54 @@ function Viviendas(habitacional, piso, vivienda) {
         success: function(datos) {
             /* ++++   solo verifico en Persona  ++++  */
 
-            if (datos != 2) {
 
+            if (datos == 1) {
 
-            } else {
+//                                
+                $('#Vivienda_construccion_mt2').attr('readonly', false);
+                $('#Vivienda_construccion_mt2').attr('disabled', false);
+                
+                $('#Vivienda_nro_habitaciones').attr('readonly', false);
+                $('#Vivienda_nro_habitaciones').attr('disabled', false);
+                
+                $('#Vivienda_nro_banos').attr('readonly', false);
+                $('#Vivienda_nro_banos').attr('disabled', false);
+                
+                $('#Vivienda_coordenadas').attr('readonly', false);
+                $('#Vivienda_coordenadas').attr('disabled', false);
+                
+                $('#Vivienda_lindero_norte').attr('readonly', false);
+                $('#Vivienda_lindero_norte').attr('disabled', false);
+                
+                $('#Vivienda_lindero_sur').attr('readonly', false);
+                $('#Vivienda_lindero_sur').attr('disabled', false);
+                
+                $('#Vivienda_lindero_este').attr('readonly', false);
+                $('#Vivienda_lindero_este').attr('disabled', false);
+                
+                $('#Vivienda_lindero_oeste').attr('readonly', false);
+                $('#Vivienda_lindero_oeste').attr('disabled', false);
+                
+                $('#Vivienda_nro_estacionamientos').attr('readonly', false);
+                $('#Vivienda_nro_estacionamientos').attr('disabled', false);
+                
+                $('#Vivienda_descripcion_estac').attr('readonly', false);
+                $('#Vivienda_descripcion_estac').attr('disabled', false);
+                
+                $('#Vivienda_precio_vivienda').attr('readonly', false);
+                $('#Vivienda_precio_vivienda').attr('disabled', false);
+                
+                          
+               
 
-                bootbox.alert('Disculpe.Este..');
+            } else if (datos == 2) {
+
+                bootbox.alert('Disculpe este número de vivienda ya se encuentra registrado');
+                return false;
+                
+//                $('#Vivienda_construccion_mt2').attr('readonly', true);
+//                $('#Vivienda_construccion_mt2').attr('disabled', true);
+                
 
             }
         }

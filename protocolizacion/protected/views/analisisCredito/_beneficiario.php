@@ -1,22 +1,13 @@
 
 <?php
-/* Yii::app()->clientScript->registerScript('desarrollo', "
+Yii::app()->clientScript->registerScript('desarrollo', "
   $(document).ready(function(){
-  $('#Tblestado_clvcodigo').val(" . $id_estado . ");
-
-  $.get('" . CController::createUrl('ValidacionJs/CargarPrograma') . "', {clvcodigo: " . $id_estado . " }, function(data){
-  $('#Tblmunicipio_clvcodigo').html(data);
-  $('#Tblmunicipio_clvcodigo').val(" . $id_municipio . ");
-
+    $.get('" . CController::createUrl('ValidacionJs/CargarPrograma') . "', {fuente_financiamiento_id: " . $desarrollo->fuente_financiamiento_id . " }, function(data){
+    $('#Desarrollo_programa_id').html(data);
+    $('#Desarrollo_programa_id').val(" . $desarrollo->fuente_financiamiento_id . ");
+    });
   });
-  $.get('" . CController::createUrl('ValidacionJs/BuscarParroquias') . "', {municipio: " . $id_municipio . "}, function(data){
-  $('#Desarrollo_parroquia_id').html(data);
-  $('#Desarrollo_parroquia_id').val(" . $model->parroquia_id . ");
-  });
-  });
-
-
-  ") */
+");
 ?>
 
 
@@ -65,32 +56,11 @@
         echo $form->dropDownListGroup($desarrollo, 'programa_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
             'widgetOptions' => array(
                 'data' => CHtml::listData(Programa::model()->findAll(), 'id_programa', 'nombre_programa'),
-                'htmlOptions' => array( 'ajax' => array(
-                        'type' => 'POST',
-                        'url' => CController::createUrl('ValidacionJs/CargarPrograma'),
-                        'update' => '#' . CHtml::activeId($desarrollo, 'programa_id'),
-                    ),'empty' => 'SELECCIONE',
+                'htmlOptions' => array('empty' => 'SELECCIONE',
                 ),
             )
-                )
+          )
         );
-//        //
-//        echo $form->dropDownListGroup($municipio, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12',),
-//            'widgetOptions' => array(
-//                'htmlOptions' => array(
-//                    'ajax' => array(
-//                        'type' => 'POST',
-//                        'url' => CController::createUrl('ValidacionJs/BuscarParroquias'),
-//                        'update' => '#' . CHtml::activeId($model, 'parroquia_id'),
-//                    ),
-//                    'empty' => 'SELECCIONE',
-//                // 'title' => 'Por favor, Seleccione su municipio de procedencia',
-//                //'data-toggle' => 'tooltip', 'data-placement' => 'right',
-//                ),
-//            )
-//                )
-//        );
-//        //
         ?>
     </div>
 </div>
