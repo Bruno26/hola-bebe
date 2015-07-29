@@ -32,17 +32,19 @@ class ReasignacionVivienda extends CActiveRecord {
     public $nacionalidadAnterior;
     public $nombreCompletoAnterior;
     public $desarrollo;
+    public $id_desarrollo;
     public $unidad_habitacional;
+    public $id_unidad_habitacional;
+    public $id_vivienda;
     public $nro_piso;
     public $nro_vivienda;
     public $tipo_vivienda;
-    public $cedulaActual;
-    public $nacionalidadActual;
+    public $cedula;
+    public $nacionalidad;
     public $primer_nombreActual;
     public $primer_apellidoActual;
     public $segundo_nombreActual;
     public $segundo_apellidoActual;
-    public $fecha_censoActual;
     public $fecha_nacimientoActual;
     public $estado_civilActual;
     public $telf_habitacionActual;
@@ -109,14 +111,24 @@ class ReasignacionVivienda extends CActiveRecord {
             'estatus' => 'Estatus',
             'cedulaAnterior' => 'Cédula del Beneficiario Anterior',
             'nacionalidadAnterior' => 'Nacionalidad del Beneficiario Anterior',
-            'nombreCompletoAnterior' => 'Nombre Completo del Beneficiario Anterior',
-            'cedulaActual' => 'Cédula del Beneficiario Actual',
-            'nacionalidadActual' => 'Nacionalidad del Beneficiario Actual',
+            'nombreCompletoAnterior' => 'Nombre Completo del Beneficiario Anterior',     
             'desarrollo' => 'Nombre del Desarrollo',
             'unidad_habitacional' => 'Nombre de Unidad Familiar',
             'nro_piso' => 'Numero Piso',
             'nro_vivienda' => 'Numero Vivienda',
-            'tipo_vivienda' => 'Numero Vivienda',
+            'tipo_vivienda' => 'Tipo de Vivienda',
+            'cedula' => 'Cédula del Beneficiario Actual',
+            'nacionalidad' => 'Nacionalidad',
+            'primer_nombreActual' => 'Primer Nombre',
+            'primer_apellidoActual'=>'Primer Apellido',
+            'segundo_nombreActual'=>'Segundo Nombre',
+            'segundo_apellidoActual'=>'Segundo Apellido',
+            'fecha_nacimientoActual'=> 'Fecha de Nacimiento',
+            'estado_civilActual'=>'Estado Civil',
+            'telf_habitacionActual'=>'Telefono Habitación',
+            'telf_celularActual'=> 'Teléfono Celular',
+            'correo_electronicoActual'=>'Correo Electronico',
+            'sexoActual'=>'Sexo',
         );
     }
 

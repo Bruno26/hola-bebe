@@ -57,7 +57,7 @@ function buscarPersonaOficina(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function (datos) {
+        success: function(datos) {
             if (datos == 1 || datos == 2) {
                 $('#iconLoding').hide();
                 $('#Oficina_primer_nombre').val('');
@@ -89,18 +89,18 @@ function buscarPersonaOficina(nacionalidad, cedula) {
                 $('#iconLoding').hide();
             }
         },
-        error: function (datos) {
+        error: function(datos) {
             bootbox.alert('Ocurrio un error');
         }
     })
 }
 
 /*
- * FUNCION QUE BUSCA EN SAIME POR NUMERO DE CEDULA Y NACIONALIDAD
- * VAR caso= 1 CONSULTA BENEFICIARIO ANTERIO ELSE BENEFICIARIOACUAL
+ * FUNCION PARA BUSCAR EN PERSONA Y EN SAIME EL BENEFICIARIO ACTUAL
+ * PARA REASIGNACION DE VIVIENDA
  */
 function buscarBenefAnterior(nacionalidad, cedula, caso) {
-
+    
     if (nacionalidad == '') {
         bootbox.alert('Verifique que la nacionalidad no esté vacio');
         return false;
@@ -115,33 +115,177 @@ function buscarBenefAnterior(nacionalidad, cedula, caso) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function (datos) {
-            if (caso == 1) {
-                if (datos == 1) {
-                    $('#ReasignacionVivienda_nombreCompletoAnterior').val('');
-                    $('#ReasignacionVivienda_beneficiario_id_anterior').val('');
-                    $('#ReasignacionVivienda_cedulaAnterior').val('');
-                    $('#ReasignacionVivienda_nacionalidadAnterior').val('');
-                    bootbox.alert('Esta persona no se encuentra registrada.');
+        success: function(datos) {
+            if (datos == 2) {
+                //  No Existe en Saime habilito todos los campos para que se llenen a pedal
+                /*  ------  Bloqueo campos    ------- */
+
+                $('#ReasignacionVivienda_primer_nombreActual').attr('readonly', false);
+                $('#ReasignacionVivienda_primer_nombreActual').val('');
+
+                $('#ReasignacionVivienda_segundo_nombreActual').attr('readonly', false);
+                $('#ReasignacionVivienda_segundo_nombreActual').val('');
+
+                $('#ReasignacionVivienda_primer_apellidoActual').attr('readonly', false);
+                $('#ReasignacionVivienda_primer_apellidoActual').val('');
+
+                $('#ReasignacionVivienda_segundo_apellidoActual').attr('readonly', false);
+                $('#ReasignacionVivienda_segundo_apellidoActual').val('');
+
+                $('#ReasignacionVivienda_fecha_nacimientoActual').attr('readonly', false);
+                $('#ReasignacionVivienda_fecha_nacimientoActual').val('');
+
+                $('#ReasignacionVivienda_sexoActual').attr('disabled', false);
+                $('#ReasignacionVivienda_sexoActual').val('');
+
+                $('#ReasignacionVivienda_estado_civilActual').attr('readonly', false);
+                $('#ReasignacionVivienda_estado_civilActual').val('');
+
+                $('#ReasignacionVivienda_telf_habitacionActual').attr('readonly', false);
+                $('#ReasignacionVivienda_telf_habitacionActual').val('');
+
+                $('#ReasignacionVivienda_telf_celularActual').attr('readonly', false);
+                $('#ReasignacionVivienda_telf_celularActual').val('');
+
+                $('#ReasignacionVivienda_correo_electronicoActual').attr('readonly', false);
+                $('#ReasignacionVivienda_correo_electronicoActual').val('');
+
+                /*   -------------------------------- */
+
+            } else if (datos == 3) {
+                bootbox.alert('Beneficiario Se encuentra Registrado !');
+                // $('#BeneficiarioTemporal_cedula').val('');
+                return false;
+
+            } else if (datos.PROCEDENCIA == 2) {
+                //  Datos de la variable proceden de Saime 
+                // alert('entrooo');
+                if (datos.PRIMERNOMBRE == null) {
+                    $('#ReasignacionVivienda_primer_nombreActual').attr('readonly', false);
+                    $('#ReasignacionVivienda_primer_nombreActual').val('');
+
                 } else {
-                    $('#ReasignacionVivienda_nombreCompletoAnterior').val(datos.nombre_completo);
-                    $('#ReasignacionVivienda_beneficiario_id_anterior').val(datos.persona_id);
-                }
-            } else {
-                if (datos == 1) {
-                    $('#ReasignacionVivienda_nombreCompletoActual').val('');
-                    $('#ReasignacionVivienda_beneficiario_id_actual').val('');
-                    $('#ReasignacionVivienda_cedulaActual').val('');
-                    $('#ReasignacionVivienda_nacionalidadActual').val('');
-                    bootbox.alert('Esta persona no se encuentra registrada.');
-                } else {
-                    $('#ReasignacionVivienda_nombreCompletoActual').val(datos.nombre_completo);
-                    $('#ReasignacionVivienda_beneficiario_id_actual').val(datos.persona_id);
+                    $('#ReasignacionVivienda_primer_nombreActual').val(datos.PRIMERNOMBRE);
+                    $('#ReasignacionVivienda_primer_nombreActual').attr('readonly', true);
                 }
 
-            }
+                if (datos.SEGUNDONOMBRE == null) {
+                    $('#ReasignacionVivienda_segundo_nombreActual').attr('readonly', false);
+                    $('#ReasignacionVivienda_segundo_nombreActual').val('');
+
+
+                } else {
+                    $('#ReasignacionVivienda_segundo_nombreActual').val(datos.SEGUNDONOMBRE);
+                    $('#ReasignacionVivienda_segundo_nombreActual').attr('readonly', true);
+                }
+
+                if (datos.PRIMERAPELLIDO == null) {
+                    $('#ReasignacionVivienda_primer_apellidoActual').attr('readonly', false);
+                    $('#ReasignacionVivienda_primer_apellidoActual').val('');
+                } else {
+                    $('#ReasignacionVivienda_primer_apellidoActual').val(datos.PRIMERAPELLIDO);
+                    $('#ReasignacionVivienda_primer_apellidoActual').attr('readonly', true);
+                }
+
+                if (datos.SEGUNDOAPELLIDO == null) {
+                    $('#ReasignacionVivienda_segundo_apellidoActual').attr('readonly', false);
+                    $('#ReasignacionVivienda_segundo_apellidoActual').val('');
+                } else {
+                    $('#ReasignacionVivienda_segundo_apellidoActual').val(datos.SEGUNDOAPELLIDO);
+                    $('#ReasignacionVivienda_segundo_apellidoActual').attr('readonly', true);
+                }
+
+                if (datos.FECHANACIMIENTO == null) {
+                    $('#ReasignacionVivienda_fecha_nacimientoActual').attr('readonly', false);
+                    $('#ReasignacionVivienda_fecha_nacimientoActual').val('');
+                } else {
+                    $('#ReasignacionVivienda_fecha_nacimientoActual').val(datos.FECHANACIMIENTO);
+                    $('#ReasignacionVivienda_fecha_nacimientoActual').attr('readonly', true);
+                }
+
+                //  habilito los campos que se llenan en persona
+                $('#ReasignacionVivienda_sexoActual').attr('readonly', false);
+                $('#ReasignacionVivienda_sexoActual').attr('disabled', false);
+
+                $('#ReasignacionVivienda_estado_civilActual').attr('disabled', false);
+                $('#ReasignacionVivienda_estado_civilActual').attr('readonly', false);
+                $('#ReasignacionVivienda_estado_civilActual').val('');
+
+                $('#ReasignacionVivienda_telf_habitacionActual').attr('readonly', false);
+                $('#ReasignacionVivienda_telf_habitacionActual').val('');
+
+                $('#ReasignacionVivienda_telf_celularActual').attr('readonly', false);
+                $('#ReasignacionVivienda_telf_celularActual').val('');
+
+                $('#ReasignacionVivienda_correo_electronicoActual').attr('readonly', false);
+                $('#ReasignacionVivienda_correo_electronicoActual').val('');
+
+            } else if (datos.PROCEDENCIA == 1) {
+                // Datos de la variable proceden de Persona si algun campo esta en blanco de puede actualizar solo una vez
+                $('#ReasignacionVivienda_primer_nombreActual').val(datos.PRIMERNOMBRE);
+
+                $('#ReasignacionVivienda_segundo_nombreActual').val(datos.SEGUNDONOMBRE);
+                $('#ReasignacionVivienda_primer_apellidoActual').val(datos.PRIMERAPELLIDO);
+                $('#ReasignacionVivienda_segundo_apellidoActual').val(datos.SEGUNDOAPELLIDO);
+                $('#ReasignacionVivienda_persona_id').val(datos.ID);
+
+                if (datos.FECHANACIMIENTO == null) {
+                    $('#ReasignacionVivienda_fecha_nacimientoActual').attr('readonly', false);
+                    $('#ReasignacionVivienda_fecha_nacimientoActual').val('');
+                } else {
+                    $('#ReasignacionVivienda_fecha_nacimientoActual').val(datos.FECHANACIMIENTO);
+                    $('#ReasignacionVivienda_fecha_nacimientoActual').attr('readonly', true);
+                }
+
+
+                if (datos.SEXO == null) {
+                    $('#ReasignacionVivienda_sexoActual').attr('readonly', false);
+                    $('#ReasignacionVivienda_sexoActual').val('');
+                } else {
+                    $('#ReasignacionVivienda_sexoActual').val(datos.SEXO);
+                    $('#ReasignacionVivienda_sexoActual').attr('readonly', true);
+                }
+
+                if (datos.EDO_CIVIL == null) {
+                    $('#ReasignacionVivienda_estado_civilActual').attr('readonly', false);
+                    $('#ReasignacionVivienda_estado_civilActual').attr('disabled', false);
+                    $('#ReasignacionVivienda_estado_civilActual').val('');
+                } else {
+                    $('#ReasignacionVivienda_estado_civilActual').val(datos.EDO_CIVIL);
+                    $('#ReasignacionVivienda_estado_civilActual').attr('readonly', true);
+                }
+
+                if (datos.TELEFONO_HAB == null) {
+                    $('#ReasignacionVivienda_telf_habitacionActual').attr('readonly', false);
+                    $('#ReasignacionVivienda_telf_habitacionActual').val('');
+                } else {
+                    $('#ReasignacionVivienda_telf_habitacionActual').val(datos.TELEFONO_HAB);
+                    $('#ReasignacionVivienda_telf_habitacionActual').attr('readonly', true);
+                }
+
+                if (datos.TELEFONO_MOVIL == null) {
+                    $('#ReasignacionVivienda_telf_celularActual').attr('readonly', false);
+                    $('#ReasignacionVivienda_telf_celularActual').val('');
+                } else {
+                    $('#ReasignacionVivienda_telf_celularActual').val(datos.TELEFONO_MOVIL);
+                    $('#ReasignacionVivienda_telf_celularActual').attr('readonly', true);
+                }
+
+
+
+                if (datos.CORREO == null) {
+                    $('#ReasignacionVivienda_correo_electronicoActual').attr('readonly', false);
+                    $('#ReasignacionVivienda_correo_electronicoActual').val('');
+                } else {
+                    $('#ReasignacionVivienda_correo_electronicoActual').val(datos.CORREO_PRINCIPAL);
+                    $('#ReasignacionVivienda_correo_electronicoActual').attr('readonly', true);
+                }
+
+            } // fin If principal
+
+
         },
-        error: function (datos) {
+        error: function(datos) {
             bootbox.alert('Ocurrio un error');
         }
 
@@ -176,7 +320,7 @@ function buscarPersonaAbogado(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function (datos) {
+        success: function(datos) {
 
             if (datos == 1) {
                 $('#iconLoding').hide();
@@ -207,7 +351,7 @@ function buscarPersonaAbogado(nacionalidad, cedula) {
             }
 
         },
-        error: function (datos) {
+        error: function(datos) {
             bootbox.alert('Ocurrio un error');
         }
     })
@@ -236,7 +380,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function (datos) {
+        success: function(datos) {
 
             if (datos == 2) {
                 //  No Existe en Saime habilito todos los campos para que se llenen a pedal
@@ -412,7 +556,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
 //                
 //            }
         },
-        error: function (datos) {
+        error: function(datos) {
             bootbox.alert('CEDULA NO ES VALIDA VERIFIQUE');
         }
     })
@@ -444,72 +588,72 @@ function buscarPersonaBeneficiarioTemp2(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function (datos) {
+        success: function(datos) {
 
-                 // alert(datos);
-                    $('#BeneficiarioTemporal_cedula').attr('readonly', true);
-                    $('#BeneficiarioTemporal_nacionalidad').attr('disabled', true);
-                            
-                    $('#BeneficiarioTemporal_primer_nombre').val(datos.persona.PRIMERNOMBRE);
-                    $('#BeneficiarioTemporal_primer_nombre').attr('readonly', false);
-                
+            // alert(datos);
+            $('#BeneficiarioTemporal_cedula').attr('readonly', true);
+            $('#BeneficiarioTemporal_nacionalidad').attr('disabled', true);
 
-                    $('#BeneficiarioTemporal_segundo_nombre').val(datos.persona.SEGUNDONOMBRE);
-                    $('#BeneficiarioTemporal_segundo_nombre').attr('readonly', false);
-               
+            $('#BeneficiarioTemporal_primer_nombre').val(datos.persona.PRIMERNOMBRE);
+            $('#BeneficiarioTemporal_primer_nombre').attr('readonly', false);
 
-                    $('#BeneficiarioTemporal_primer_apellido').val(datos.persona.PRIMERAPELLIDO);
-                    $('#BeneficiarioTemporal_primer_apellido').attr('readonly', false);
-                
 
-                    $('#BeneficiarioTemporal_segundo_apellido').val(datos.persona.SEGUNDOAPELLIDO);
-                    $('#BeneficiarioTemporal_segundo_apellido').attr('readonly', false);
-               
+            $('#BeneficiarioTemporal_segundo_nombre').val(datos.persona.SEGUNDONOMBRE);
+            $('#BeneficiarioTemporal_segundo_nombre').attr('readonly', false);
 
-                    $('#BeneficiarioTemporal_fecha_nacimiento').val(datos.persona.FECHANACIMIENTO);
-                    $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', false);
-                
 
-                //  habilito los campos que se llenan en persona
-                $('#BeneficiarioTemporal_sexo').attr('readonly', false);
-                $('#BeneficiarioTemporal_sexo').attr('disabled', false);
+            $('#BeneficiarioTemporal_primer_apellido').val(datos.persona.PRIMERAPELLIDO);
+            $('#BeneficiarioTemporal_primer_apellido').attr('readonly', false);
 
-                $('#BeneficiarioTemporal_estado_civil').attr('disabled', false);
-                $('#BeneficiarioTemporal_estado_civil').attr('readonly', false);
-                $('#BeneficiarioTemporal_estado_civil').val('');
 
-                $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', false);
-                $('#BeneficiarioTemporal_telf_habitacion').val(datos.persona.TELEFONOHAB);
+            $('#BeneficiarioTemporal_segundo_apellido').val(datos.persona.SEGUNDOAPELLIDO);
+            $('#BeneficiarioTemporal_segundo_apellido').attr('readonly', false);
 
-                $('#BeneficiarioTemporal_telf_celular').attr('readonly', false);
-                $('#BeneficiarioTemporal_telf_celular').val(datos.persona.TELEFONOMOVIL);
 
-                $('#BeneficiarioTemporal_correo_electronico').attr('readonly', false);
-                $('#BeneficiarioTemporal_correo_electronico').val(datos.persona.CORREO);
-           
+            $('#BeneficiarioTemporal_fecha_nacimiento').val(datos.persona.FECHANACIMIENTO);
+            $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', false);
 
-                /*  ------------------ */
 
-             /*   $('#Beneficiario_estado').val(datos.desarrollo.estado);
-                $('#Beneficiario_municipio').val(datos.desarrollo.municipio);
-                $('#Beneficiario_parroquia').val(datos.desarrollo.parroquia_id); 
-                $('#Beneficiario_nombre_desarrollo').val(datos.desarrollo.nombre);*/
-                $('#Desarrollo_urban_barrio').val(datos.desarrollo.urban_barrio);
-                $('#Desarrollo_av_call_esq_carr').val(datos.desarrollo.av_call_esq_carr);
-                $('#Desarrollo_zona').val(datos.desarrollo.zona);
-                /*$('#Desarrollo_lote_terreno_mt2').val(datos.desarrollo.lote_terreno_mt2);
-                $('#Beneficiario_nomb_edif').val(datos.desarrollo.nomb_edif);
-                $('#Beneficiario_piso').val(datos.desarrollo.nro_piso);
-                $('#Beneficiario_numero_vivienda').val(datos.desarrollo.nro_vivienda);
-                $('#Beneficiario_tipo_vivienda').val(datos.desarrollo.tipo_vivienda_id);
-                $('#Beneficiario_beneficiario_temporal_id').val(datos.desarrollo.Temp); */
+            //  habilito los campos que se llenan en persona
+            $('#BeneficiarioTemporal_sexo').attr('readonly', false);
+            $('#BeneficiarioTemporal_sexo').attr('disabled', false);
 
-                /*  ----------------- */
-            
+            $('#BeneficiarioTemporal_estado_civil').attr('disabled', false);
+            $('#BeneficiarioTemporal_estado_civil').attr('readonly', false);
+            $('#BeneficiarioTemporal_estado_civil').val('');
+
+            $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', false);
+            $('#BeneficiarioTemporal_telf_habitacion').val(datos.persona.TELEFONOHAB);
+
+            $('#BeneficiarioTemporal_telf_celular').attr('readonly', false);
+            $('#BeneficiarioTemporal_telf_celular').val(datos.persona.TELEFONOMOVIL);
+
+            $('#BeneficiarioTemporal_correo_electronico').attr('readonly', false);
+            $('#BeneficiarioTemporal_correo_electronico').val(datos.persona.CORREO);
+
+
+            /*  ------------------ */
+
+            /*   $('#Beneficiario_estado').val(datos.desarrollo.estado);
+             $('#Beneficiario_municipio').val(datos.desarrollo.municipio);
+             $('#Beneficiario_parroquia').val(datos.desarrollo.parroquia_id); 
+             $('#Beneficiario_nombre_desarrollo').val(datos.desarrollo.nombre);*/
+            $('#Desarrollo_urban_barrio').val(datos.desarrollo.urban_barrio);
+            $('#Desarrollo_av_call_esq_carr').val(datos.desarrollo.av_call_esq_carr);
+            $('#Desarrollo_zona').val(datos.desarrollo.zona);
+            /*$('#Desarrollo_lote_terreno_mt2').val(datos.desarrollo.lote_terreno_mt2);
+             $('#Beneficiario_nomb_edif').val(datos.desarrollo.nomb_edif);
+             $('#Beneficiario_piso').val(datos.desarrollo.nro_piso);
+             $('#Beneficiario_numero_vivienda').val(datos.desarrollo.nro_vivienda);
+             $('#Beneficiario_tipo_vivienda').val(datos.desarrollo.tipo_vivienda_id);
+             $('#Beneficiario_beneficiario_temporal_id').val(datos.desarrollo.Temp); */
+
+            /*  ----------------- */
+
 
 //            }
         },
-        error: function (datos) {
+        error: function(datos) {
             bootbox.alert('CEDULA NO ES VALIDA VERIFIQUE');
         }
     })
@@ -538,7 +682,7 @@ function buscarBeneficiarioTemporal(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function (datos) {
+        success: function(datos) {
             /* ++++   solo verifico en Persona  ++++  */
 
             if (datos != 2) {
@@ -696,7 +840,7 @@ function buscarPersonaAsignacionCenso(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function (datos) {
+        success: function(datos) {
 
 
             if (datos == 1) {
@@ -728,7 +872,7 @@ function buscarPersonaAsignacionCenso(nacionalidad, cedula) {
             }
 
         },
-        error: function (datos) {
+        error: function(datos) {
             bootbox.alert('Ocurrio un error');
         }
     })
@@ -759,7 +903,7 @@ function buscarPersonaFamiliar(nacionalidad, cedula) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        success: function (datos) {
+        success: function(datos) {
 
             if (datos == 1) {
                 $('#iconLoding').hide();
@@ -794,7 +938,7 @@ function buscarPersonaFamiliar(nacionalidad, cedula) {
                 $('#iconLoding').hide();
             }
         },
-        error: function (datos) {
+        error: function(datos) {
             bootbox.alert('Ocurrio un error');
         }
     })
@@ -817,7 +961,7 @@ function Parentesco(valor) {
     contadorMadre = parseInt(0);
     contadorSuegro = parseInt(0);
     contadorAbuelo = parseInt(0);
-    $('#listado_familiar tr').each(function () {
+    $('#listado_familiar tr').each(function() {
         var parentesco = $(this).find('td:eq(6)').html();
         if (parentesco == 'PADRE') {
             contadorPadre++
@@ -871,7 +1015,7 @@ function Parentesco(valor) {
 
 }
 
-function Viviendas(habitacional,piso ,vivienda ) {
+function Viviendas(habitacional, piso, vivienda) {
 
     if (vivienda == '') {
         bootbox.alert('Verifique que la vivienda no esten vacios');
@@ -889,11 +1033,11 @@ function Viviendas(habitacional,piso ,vivienda ) {
         type: 'POST',
         data: 'habitacional=' + habitacional + '&vivienda=' + vivienda + '&piso=' + piso,
         dataType: 'json',
-        success: function (datos) {
+        success: function(datos) {
             /* ++++   solo verifico en Persona  ++++  */
 
             if (datos != 2) {
-                
+
 
             } else {
 
