@@ -609,13 +609,13 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
         $criteria->params = array(':id_unidad_habitacional' => $habitacional, ':nro_piso' => $piso, ':nro_vivienda' => $vivienda);
 
         $existeVivienda = Vivienda::model()->findAll($criteria);
-        var_dump($existeVivienda);
-        die();
+//        var_dump($existeVivienda);
+//        die();
         if (!empty($existeVivienda)) {
-            
-        } else {
-            echo CJSON::encode(2); //no existe en vivienda
-        }
+             echo CJSON::encode(2); //existe número vivienda
+    } else {
+        echo CJSON::encode(1);
+    }
     }
 
 }

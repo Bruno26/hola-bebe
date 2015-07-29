@@ -1,5 +1,9 @@
 
-<div class="alert alert-info"><i class="icon-info-sign"></i><h4><center> Para realizar la carga masiva de adjudicados adjunte el <b>archivo .csv</b> que desea importar dando clic en el boton <b>"Examinar"</b>. Una vez seleccionado el archivo de clic en el boton <b>"Subir archivo"</b>; el sistema evaluará que el archivo cumpla con todos los parametros requeridos y procedera a guardar en el sistema.</center></h4></div>
+<div class="alert alert-info"><i class="icon-info-sign"></i><h4><center> Para realizar la carga masiva de adjudicados adjunte el <b>archivo .csv</b> que desea importar dando clic en el boton 
+            <b>"Examinar"</b>. Una vez seleccionado el archivo de clic en el boton <b>"Subir archivo"</b>; el sistema evaluará que el archivo cumpla con todos los parametros requeridos y 
+            procedera a guardar en el sistema. <a title="Descargar" href='doc/carga_masiva.csv'>
+                <b>El archivo a subir debe de ajustarse al siguiente formato .csv </b>
+            </a></center></h4></div>
 
 <p class="help-block">Los campos marcados con <span class="required">*</span> son requeridos.</p><br>
 
@@ -10,11 +14,13 @@
         $criteria = new CDbCriteria;
         $criteria->order = 'strdescripcion ASC';
         echo $form->dropDownListGroup($estado, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-4',),
-            'widgetOptions' => array('data' => CHtml::listData(Tblestado::model()->findAll($criteria), 'clvcodigo', 'strdescripcion'),
+            'widgetOptions' => array(
+                'data' => CHtml::listData(Tblestado::model()->findAll($criteria), 'clvcodigo', 'strdescripcion'),
                 'htmlOptions' => array(
                     'empty' => 'SELECCIONE',
                     'ajax' => array(
-                        'type' => 'POST', 'url' => CController::createUrl('ValidacionJs/BuscarMunicipios'),
+                        'type' => 'POST',
+                        'url' => CController::createUrl('ValidacionJs/BuscarMunicipios'),
                         'update' => '#' . CHtml::activeId($municipio, 'clvcodigo'),
                     ),
                 ),
@@ -44,11 +50,12 @@
 
         <?php
         echo $form->dropDownListGroup($parroquia, 'clvcodigo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar',),
-            'widgetOptions' => array('htmlOptions' => array(
+            'widgetOptions' => array(
+                'htmlOptions' => array(
                     'ajax' => array(
                         'type' => 'POST',
                         'url' => CController::createUrl('ValidacionJs/BuscarDesarrollo'),
-                        'update' => '#' . CHtml::activeId($model, 'desarrollo_id'),
+                        'update' => '#' . CHtml::activeId($unidadHabitacional, 'desarrollo_id'),
                     ),
                     'empty' => 'SELECCIONE',
                 ),
@@ -60,13 +67,22 @@
 
 </div>
 <div class="row">
-    <div class="col-md-4">
 
-        <?php echo $form->textFieldGroup($desarrollo, 'nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+    <div class='col-md-4'>
+        <?php
+        echo $form->dropDownListGroup($unidadHabitacional, 'desarrollo_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+            'widgetOptions' => array(
+                'htmlOptions' => array('empty' => 'SELECCIONE',
+                ),
+            )
+                )
+        );
+        ?>
     </div>
-   
+
 
 </div>
+
 
 <?php
 $this->widget('booster.widgets.TbAlert', array(
@@ -89,35 +105,39 @@ $this->widget('booster.widgets.TbAlert', array(
             echo $form->fileField($model, 'nombre_archivo');
             echo $form->error($model, 'nombre_archivo');
             ?>
+
         </div>
     </div>
 </fieldset>
 <br><br>
 
-<p align='center'> <a title="Descargar" href='doc/carga_masiva.csv'>
-        <b>El archivo a subir debe de ajustarse al siguiente formato .csv </b>
-    </a> </p>
+
 
 <div class="form-actions">
-    <?php
-    $this->widget('booster.widgets.TbButton', array(
-        'buttonType' => 'submit',
-        //	'type'=>'success',
-        'id' => 'subirArchivo',
-        'label' => 'Subir archivo',
-    ));
-    ?>
+    <div class="pull-right">
+        <?php
+        $this->widget('booster.widgets.TbButton', array(
+            'buttonType' => 'submit',
+            'icon' => 'glyphicon glyphicon-cloud-upload',
+            'context' => 'primary',
+            'size' => 'large',
+            'id' => 'subirArchivo',
+            'label' => 'Subir archivo',
+        ));
+        ?>
 
-
-    <?php
-    $this->widget('booster.widgets.TbButton', array(
-        //'type'=>'primary',
-        'label' => 'Regresar',
-        'buttonType' => 'link',
-        'url' => CHtml::normalizeUrl(array('admin')),
-    ));
-    ?>
-
+        <?php
+        $this->widget('booster.widgets.TbButton', array(
+            //'type'=>'primary',
+            'label' => 'Regresar',
+            'icon' => 'glyphicon glyphicon-chevron-left',
+            'size' => 'large',
+            'context' => 'danger',
+            'buttonType' => 'link',
+            'url' => CHtml::normalizeUrl(array('admin')),
+        ));
+        ?>
+    </div>
 </div>
 
 

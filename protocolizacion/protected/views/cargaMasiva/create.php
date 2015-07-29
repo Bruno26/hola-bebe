@@ -26,7 +26,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                     bootbox.alert('Por favor seleccione parroquia');
                     return false;
                 }
-                if ($('#Desarrollo_nombre').val()==''){
+                if ($('#UnidadHabitacional_desarrollo_id').val()==''){
                     bootbox.alert('Por favor seleccione el nombre del desarrollo');
                     return false;
                 }
@@ -51,7 +51,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
             'context' => 'info',
             'headerHtmlOptions' => array('style' => 'background: linear-gradient(#1fb5ad, #1fd0ff) !important;color: #FFFFFF !important;'),
             'headerIcon' => 'glyphicon glyphicon-list-alt',
-            'content' => $this->renderPartial('_form', array('model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'desarrollo' => $desarrollo, 'form'=>$form,), TRUE),)
+            'content' => $this->renderPartial('_form', array('model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'desarrollo' => $desarrollo, 'form'=>$form, 'unidadHabitacional'=>$unidadHabitacional), TRUE),)
         );
         ?>
     </div>

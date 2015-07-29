@@ -66,8 +66,10 @@ public function actionCreate(){
   $municipio = new Tblmunicipio;
   $parroquia = new Tblparroquia;
   $desarrollo = new Desarrollo;
+  $unidadHabitacional = new UnidadHabitacional;
+  
   $error = FALSE;
-  $cant_columnas = 34;
+  $cant_columnas = 37;
   // Uncomment the following line if AJAX validation is needed
   // $this->performAjaxValidation($model);
   $model->estatus = 100;
@@ -98,6 +100,7 @@ public function actionCreate(){
           echo Yii::app()->user->setFlash('error', "El archivo no tiene la cantidad de campos requeridos, por favor revise que existan solo $cant_columnas columnas en el archivo.");
           $error = TRUE;
           //echo "el archivo debe tener 7 columnas...";die();
+//          var_dump($cant_columnas) ;die(); 
         }
       } $i++;
   }
@@ -123,7 +126,7 @@ public function actionCreate(){
   }
 }//fin del post global de carga masiva
   $this->render('create',array( 'model'=>$model, 'estado' => $estado,
-  'municipio' => $municipio, 'parroquia' => $parroquia, 'desarrollo' => $desarrollo));
+  'municipio' => $municipio, 'parroquia' => $parroquia, 'desarrollo' => $desarrollo, 'unidadHabitacional'=>$unidadHabitacional));
 
 
 }//fin accion create carga

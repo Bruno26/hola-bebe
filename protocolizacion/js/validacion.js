@@ -446,66 +446,66 @@ function buscarPersonaBeneficiarioTemp2(nacionalidad, cedula) {
         dataType: 'json',
         success: function (datos) {
 
-                 // alert(datos);
-                    $('#BeneficiarioTemporal_cedula').attr('readonly', true);
-                    $('#BeneficiarioTemporal_nacionalidad').attr('disabled', true);
-                            
-                    $('#BeneficiarioTemporal_primer_nombre').val(datos.persona.PRIMERNOMBRE);
-                    $('#BeneficiarioTemporal_primer_nombre').attr('readonly', false);
-                
+            // alert(datos);
+            $('#BeneficiarioTemporal_cedula').attr('readonly', true);
+            $('#BeneficiarioTemporal_nacionalidad').attr('disabled', true);
 
-                    $('#BeneficiarioTemporal_segundo_nombre').val(datos.persona.SEGUNDONOMBRE);
-                    $('#BeneficiarioTemporal_segundo_nombre').attr('readonly', false);
-               
+            $('#BeneficiarioTemporal_primer_nombre').val(datos.persona.PRIMERNOMBRE);
+            $('#BeneficiarioTemporal_primer_nombre').attr('readonly', false);
 
-                    $('#BeneficiarioTemporal_primer_apellido').val(datos.persona.PRIMERAPELLIDO);
-                    $('#BeneficiarioTemporal_primer_apellido').attr('readonly', false);
-                
 
-                    $('#BeneficiarioTemporal_segundo_apellido').val(datos.persona.SEGUNDOAPELLIDO);
-                    $('#BeneficiarioTemporal_segundo_apellido').attr('readonly', false);
-               
+            $('#BeneficiarioTemporal_segundo_nombre').val(datos.persona.SEGUNDONOMBRE);
+            $('#BeneficiarioTemporal_segundo_nombre').attr('readonly', false);
 
-                    $('#BeneficiarioTemporal_fecha_nacimiento').val(datos.persona.FECHANACIMIENTO);
-                    $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', false);
-                
 
-                //  habilito los campos que se llenan en persona
-                $('#BeneficiarioTemporal_sexo').attr('readonly', false);
-                $('#BeneficiarioTemporal_sexo').attr('disabled', false);
+            $('#BeneficiarioTemporal_primer_apellido').val(datos.persona.PRIMERAPELLIDO);
+            $('#BeneficiarioTemporal_primer_apellido').attr('readonly', false);
 
-                $('#BeneficiarioTemporal_estado_civil').attr('disabled', false);
-                $('#BeneficiarioTemporal_estado_civil').attr('readonly', false);
-                $('#BeneficiarioTemporal_estado_civil').val('');
 
-                $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', false);
-                $('#BeneficiarioTemporal_telf_habitacion').val(datos.persona.TELEFONOHAB);
+            $('#BeneficiarioTemporal_segundo_apellido').val(datos.persona.SEGUNDOAPELLIDO);
+            $('#BeneficiarioTemporal_segundo_apellido').attr('readonly', false);
 
-                $('#BeneficiarioTemporal_telf_celular').attr('readonly', false);
-                $('#BeneficiarioTemporal_telf_celular').val(datos.persona.TELEFONOMOVIL);
 
-                $('#BeneficiarioTemporal_correo_electronico').attr('readonly', false);
-                $('#BeneficiarioTemporal_correo_electronico').val(datos.persona.CORREO);
-           
+            $('#BeneficiarioTemporal_fecha_nacimiento').val(datos.persona.FECHANACIMIENTO);
+            $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', false);
 
-                /*  ------------------ */
 
-             /*   $('#Beneficiario_estado').val(datos.desarrollo.estado);
-                $('#Beneficiario_municipio').val(datos.desarrollo.municipio);
-                $('#Beneficiario_parroquia').val(datos.desarrollo.parroquia_id); 
-                $('#Beneficiario_nombre_desarrollo').val(datos.desarrollo.nombre);*/
-                $('#Desarrollo_urban_barrio').val(datos.desarrollo.urban_barrio);
-                $('#Desarrollo_av_call_esq_carr').val(datos.desarrollo.av_call_esq_carr);
-                $('#Desarrollo_zona').val(datos.desarrollo.zona);
-                /*$('#Desarrollo_lote_terreno_mt2').val(datos.desarrollo.lote_terreno_mt2);
-                $('#Beneficiario_nomb_edif').val(datos.desarrollo.nomb_edif);
-                $('#Beneficiario_piso').val(datos.desarrollo.nro_piso);
-                $('#Beneficiario_numero_vivienda').val(datos.desarrollo.nro_vivienda);
-                $('#Beneficiario_tipo_vivienda').val(datos.desarrollo.tipo_vivienda_id);
-                $('#Beneficiario_beneficiario_temporal_id').val(datos.desarrollo.Temp); */
+            //  habilito los campos que se llenan en persona
+            $('#BeneficiarioTemporal_sexo').attr('readonly', false);
+            $('#BeneficiarioTemporal_sexo').attr('disabled', false);
 
-                /*  ----------------- */
-            
+            $('#BeneficiarioTemporal_estado_civil').attr('disabled', false);
+            $('#BeneficiarioTemporal_estado_civil').attr('readonly', false);
+            $('#BeneficiarioTemporal_estado_civil').val('');
+
+            $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', false);
+            $('#BeneficiarioTemporal_telf_habitacion').val(datos.persona.TELEFONOHAB);
+
+            $('#BeneficiarioTemporal_telf_celular').attr('readonly', false);
+            $('#BeneficiarioTemporal_telf_celular').val(datos.persona.TELEFONOMOVIL);
+
+            $('#BeneficiarioTemporal_correo_electronico').attr('readonly', false);
+            $('#BeneficiarioTemporal_correo_electronico').val(datos.persona.CORREO);
+
+
+            /*  ------------------ */
+
+            /*   $('#Beneficiario_estado').val(datos.desarrollo.estado);
+             $('#Beneficiario_municipio').val(datos.desarrollo.municipio);
+             $('#Beneficiario_parroquia').val(datos.desarrollo.parroquia_id); 
+             $('#Beneficiario_nombre_desarrollo').val(datos.desarrollo.nombre);*/
+            $('#Desarrollo_urban_barrio').val(datos.desarrollo.urban_barrio);
+            $('#Desarrollo_av_call_esq_carr').val(datos.desarrollo.av_call_esq_carr);
+            $('#Desarrollo_zona').val(datos.desarrollo.zona);
+            /*$('#Desarrollo_lote_terreno_mt2').val(datos.desarrollo.lote_terreno_mt2);
+             $('#Beneficiario_nomb_edif').val(datos.desarrollo.nomb_edif);
+             $('#Beneficiario_piso').val(datos.desarrollo.nro_piso);
+             $('#Beneficiario_numero_vivienda').val(datos.desarrollo.nro_vivienda);
+             $('#Beneficiario_tipo_vivienda').val(datos.desarrollo.tipo_vivienda_id);
+             $('#Beneficiario_beneficiario_temporal_id').val(datos.desarrollo.Temp); */
+
+            /*  ----------------- */
+
 
 //            }
         },
@@ -871,17 +871,17 @@ function Parentesco(valor) {
 
 }
 
-function Viviendas(habitacional,piso ,vivienda ) {
+function Viviendas(habitacional, piso, vivienda) {
 
-    if (vivienda == '') {
-        bootbox.alert('Verifique que la vivienda no esten vacios');
-        return false;
-    }
+//    if (vivienda == '') {
+//        bootbox.alert('Verifique que la vivienda no esten vacios');
+//        return false;
+//    }
 
-    if (piso == '') {
-        bootbox.alert('Verifique que la piso no esten vacios');
-        return false;
-    }
+//    if (piso == '') {
+//        bootbox.alert('Verifique que la piso no esten vacios');
+//        return false;
+//    }
 
     $.ajax({
         url: baseUrl + "/ValidacionJs/NroVivienda",
@@ -892,12 +892,53 @@ function Viviendas(habitacional,piso ,vivienda ) {
         success: function (datos) {
             /* ++++   solo verifico en Persona  ++++  */
 
-            if (datos != 2) {
+            if (datos == 1) {
+
+//                                
+                $('#Vivienda_construccion_mt2').attr('readonly', false);
+                $('#Vivienda_construccion_mt2').attr('disabled', false);
+                
+                $('#Vivienda_nro_habitaciones').attr('readonly', false);
+                $('#Vivienda_nro_habitaciones').attr('disabled', false);
+                
+                $('#Vivienda_nro_banos').attr('readonly', false);
+                $('#Vivienda_nro_banos').attr('disabled', false);
+                
+                $('#Vivienda_coordenadas').attr('readonly', false);
+                $('#Vivienda_coordenadas').attr('disabled', false);
+                
+                $('#Vivienda_lindero_norte').attr('readonly', false);
+                $('#Vivienda_lindero_norte').attr('disabled', false);
+                
+                $('#Vivienda_lindero_sur').attr('readonly', false);
+                $('#Vivienda_lindero_sur').attr('disabled', false);
+                
+                $('#Vivienda_lindero_este').attr('readonly', false);
+                $('#Vivienda_lindero_este').attr('disabled', false);
+                
+                $('#Vivienda_lindero_oeste').attr('readonly', false);
+                $('#Vivienda_lindero_oeste').attr('disabled', false);
+                
+                $('#Vivienda_nro_estacionamientos').attr('readonly', false);
+                $('#Vivienda_nro_estacionamientos').attr('disabled', false);
+                
+                $('#Vivienda_descripcion_estac').attr('readonly', false);
+                $('#Vivienda_descripcion_estac').attr('disabled', false);
+                
+                $('#Vivienda_precio_vivienda').attr('readonly', false);
+                $('#Vivienda_precio_vivienda').attr('disabled', false);
+                
+                          
                 
 
-            } else {
+            } else if (datos == 2) {
 
-                bootbox.alert('Disculpe.Este..');
+                bootbox.alert('Disculpe este número de vivienda ya se encuentra registrado');
+                return false;
+                
+//                $('#Vivienda_construccion_mt2').attr('readonly', true);
+//                $('#Vivienda_construccion_mt2').attr('disabled', true);
+                
 
             }
         }
