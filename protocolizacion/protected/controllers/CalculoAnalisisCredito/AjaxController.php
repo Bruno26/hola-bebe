@@ -56,7 +56,7 @@ class AjaxController extends Controller {
      */
 
     public function actionCalculoTasaAmortizacion() {
-        echo CJSON::encode(1);
-        //echo '<pre>';var_dump($_POST);die;
+        //echo CJSON::encode(1);
+        echo '<pre>';var_dump($_POST);die;
     }
 }
