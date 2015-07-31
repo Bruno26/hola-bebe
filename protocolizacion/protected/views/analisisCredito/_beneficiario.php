@@ -4,7 +4,7 @@ Yii::app()->clientScript->registerScript('desarrollo', "
   $(document).ready(function(){
     $.get('" . CController::createUrl('ValidacionJs/CargarPrograma') . "', {fuente_financiamiento_id: " . $desarrollo->fuente_financiamiento_id . " }, function(data){
     $('#Desarrollo_programa_id').html(data);
-    $('#Desarrollo_programa_id').val(" . $desarrollo->fuente_financiamiento_id . ");
+    $('#Desarrollo_programa_id').val(" . $desarrollo->programa_id . ");
     });
   });
 ");
