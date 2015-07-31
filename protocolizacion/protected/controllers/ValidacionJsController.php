@@ -327,18 +327,28 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
 
     public function actionBuscarBeneficiarioAnterior() {
         $cedula = (int) $_POST['cedula'];
-        $nacionalidad = $_POST['nacionalidad'];
-        $nacionalidad = $_POST['nacionalidad'];
+        $nacio = (int) $_POST['nacionalidad'];
 
-        $consultaBeneficiarioTmp = BeneficiarioTemporal::model()->findByAttributes(array('cedula' => $cedula, 'nacionalidad' => $nacionalidad));
+             $existeTemporal = BeneficiarioTemporal::model()->findByAttributes(array('nacionalidad' => $nacio, 'cedula' => $cedula));
+             
+        if (empty($existeTemporal)) {
 
-        if (empty($consultaBeneficiarioTmp)) {
-            //NO SE ENCUENTRA EN TABLA BeneficiarioTemporal
-            echo json_encode(1);
+            $result = ConsultaOracle::getPersonaBeneficiario($nacio, $cedula);
+            if ($result == 1) {
+                $saime = ConsultaOracle::getSaimeBeneficiario($nacio, $cedula);
+                // var_dump($saime);die();
+                if ($saime == 1)
+                    echo json_encode(2); //en caso que no exista en saime
+                else
+                    echo CJSON::encode($saime);
+            }else {
+                echo CJSON::encode($result);
+            }
         } else {
-            echo CJSON::encode($consultaBeneficiarioTmp);
+            echo CJSON::encode(3); // Existe en temporal
         }
     }
+    
 
 //    public function actionBuscarBeneficiarioAnterior() {
 //        $cedula = (int) $_POST['cedula'];
@@ -609,13 +619,13 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
         $criteria->params = array(':id_unidad_habitacional' => $habitacional, ':nro_piso' => $piso, ':nro_vivienda' => $vivienda);
 
         $existeVivienda = Vivienda::model()->findAll($criteria);
-        var_dump($existeVivienda);
-        die();
+//        var_dump($existeVivienda);
+//        die();
         if (!empty($existeVivienda)) {
-            
-        } else {
-            echo CJSON::encode(2); //no existe en vivienda
-        }
+             echo CJSON::encode(2); //existe número vivienda
+    } else {
+        echo CJSON::encode(1);
+    }
     }
 
 }

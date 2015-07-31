@@ -3,17 +3,19 @@
     <div class="row-fluid">
         <div class="col-md-4">
             <?php echo $form->textFieldGroup($model, 'desarrollo', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readonly' => TRUE)))); ?>
+            <?php echo $form->hiddenField($model, 'id_desarrollo'); ?>
         </div>
         <div class="col-md-4">
+            <?php echo $form->hiddenField($model, 'id_unidad_habitacional'); ?>
             <?php echo $form->textFieldGroup($model, 'unidad_habitacional', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readonly' => TRUE)))); ?>
         </div>
 
         <div class="col-md-4">
+            <?php echo $form->hiddenField($model, 'id_vivienda'); ?>
             <?php echo $form->textFieldGroup($model, 'tipo_vivienda', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readonly' => TRUE)))); ?>
         </div>
     </div>
 
-    <?php echo $form->hiddenField($model, 'vivienda_id'); ?>
 </div>
 <div class="row">
     <div class="row-fluid">
@@ -27,7 +29,7 @@
             <?php
             echo $form->dropDownListGroup($model, 'tipo_reasignacion_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-4'),
                 'widgetOptions' => array(
-                    'data' => Maestro::FindMaestrosByPadreSelect(96),
+                    'data' => Maestro::FindMaestrosByPadreSelect(239),
                     'htmlOptions' => array(
                         'empty' => 'SELECCIONE',
                     ),

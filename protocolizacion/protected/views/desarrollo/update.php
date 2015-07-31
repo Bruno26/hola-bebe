@@ -51,11 +51,14 @@ if (!empty($model->parroquia_id)) {
                 $('#Desarrollo_parroquia_id').html(data);
                 $('#Desarrollo_parroquia_id').val(" . $model->parroquia_id . ");
             });
+            $.get('" . CController::createUrl('ValidacionJs/CargarPrograma') . "', {fuente_financiamiento_id: " . $model->fuente_financiamiento_id . " }, function(data){
+                $('#Desarrollo_programa_id').html(data);
+                $('#Desarrollo_programa_id').val('".$model->programa_id ."');
+            });
         });
 
 
         ") ?>
-
 <?php
 if (isset($sms) && !empty($sms)) {
     $user = Yii::app()->getComponent('user');

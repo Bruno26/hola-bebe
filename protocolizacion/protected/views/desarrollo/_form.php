@@ -16,15 +16,19 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
     <div class="col-md-4">
         <?php echo $form->textFieldGroup($model, 'descripcion', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 300)))); ?>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" >
         <?php
-        echo $form->dropDownListGroup($model, 'programa_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+        echo $form->dropDownListGroup($model, 'fuente_financiamiento_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
             'widgetOptions' => array(
-                'data' => CHtml::listData(Programa::model()->findAll(), 'id_programa', 'nombre_programa'),
-                'htmlOptions' => array('empty' => 'SELECCIONE',
+                'data' => CHtml::listData(FuenteFinanciamiento::model()->findAll(), 'id_fuente_financiamiento', 'nombre_fuente_financiamiento'),
+                'htmlOptions' => array('empty' => 'SELECCIONE','ajax' => array(
+                            'type' => 'POST',
+                            'url' => CController::createUrl('ValidacionJs/CargarPrograma'),
+                            'update' => '#' . CHtml::activeId($model, 'programa_id'),
+                        )
                 ),
             )
-                )
+          )
         );
         ?>
     </div>
@@ -211,11 +215,11 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
     <div class="col-md-4">
         <?php echo $form->textFieldGroup($model, 'lote_terreno_mt2', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
     </div>
-    <div class="col-md-4" >
+    <div class="col-md-4">
         <?php
-        echo $form->dropDownListGroup($model, 'fuente_financiamiento_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+        echo $form->dropDownListGroup($model, 'programa_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
             'widgetOptions' => array(
-                'data' => CHtml::listData(FuenteFinanciamiento::model()->findAll(), 'id_fuente_financiamiento', 'nombre_fuente_financiamiento'),
+                'data' => CHtml::listData(Programa::model()->findAll(), 'id_programa', 'nombre_programa'),
                 'htmlOptions' => array('empty' => 'SELECCIONE',
                 ),
             )

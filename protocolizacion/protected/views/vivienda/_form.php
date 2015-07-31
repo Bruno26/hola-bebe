@@ -5,12 +5,26 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
 ?>
 <?php Yii::app()->clientScript->registerScript('desarrolloVal', "
          $(document).ready(function(){
-//            $('#Vivienda_nro_piso').numeric(); 
+//          $('#Vivienda_nro_piso').numeric(); 
             $('#Vivienda_nro_habitaciones').numeric(); 
             $('#Vivienda_nro_banos').numeric(); 
             $('#Vivienda_construccion_mt2').numeric(); 
             $('#Vivienda_precio_vivienda').numeric(); 
             $('#Vivienda_nro_estacionamientos').numeric(); 
+            
+                  $('#Vivienda_construccion_mt2').attr('readonly', true);
+                  $('#Vivienda_nro_habitaciones').attr('readonly', true);
+                  $('#Vivienda_nro_banos').attr('readonly', true);
+                  $('#Vivienda_coordenadas').attr('readonly', true);
+                  $('#Vivienda_lindero_norte').attr('readonly', true);
+                  $('#Vivienda_lindero_sur').attr('readonly', true);
+                  $('#Vivienda_lindero_este').attr('readonly', true);
+                  $('#Vivienda_lindero_oeste').attr('readonly', true);
+                  $('#Vivienda_nro_estacionamientos').attr('readonly', true);
+                  $('#Vivienda_descripcion_estac').attr('readonly', true);
+                  $('#Vivienda_precio_vivienda').attr('readonly', true);
+                  
+
         });
         
 "); ?>
@@ -126,15 +140,16 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
         <?php echo $form->textFieldGroup($model, 'nro_piso', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 10)))); ?>
 
     </div>
-   
+
     <div class="col-md-3">
         <?php
         echo $form->textFieldGroup($model, 'nro_vivienda', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8,
-                    'onblur' => "Viviendas($('#Vivienda_unidad_habitacional_id').val(),$('#Vivienda_nro_piso').val(),$(this).val())"))));?>
-        <?php echo $form->error($model, 'nro_vivienda'); ?>
+                    'onblur' => "Viviendas($('#Vivienda_unidad_habitacional_id').val(),$('#Vivienda_nro_piso').val(),$(this).val())"))));
+        ?>
+<?php echo $form->error($model, 'nro_vivienda'); ?>
     </div>
     <div class="col-md-3">
-        <?php echo $form->textFieldGroup($model, 'construccion_mt2', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 10)))); ?>
+<?php echo $form->textFieldGroup($model, 'construccion_mt2', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 10)))); ?>
 
     </div>
 </div>
@@ -217,11 +232,11 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
 <div class="row">
 
     <div class="col-md-4">
-        <?php echo $form->textFieldGroup($model, 'nro_habitaciones', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+<?php echo $form->textFieldGroup($model, 'nro_habitaciones', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
 
     </div>
     <div class="col-md-4">
-        <?php echo $form->textFieldGroup($model, 'nro_banos', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+<?php echo $form->textFieldGroup($model, 'nro_banos', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
 
     </div>
     <div class="col-md-4">
@@ -317,7 +332,7 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
 
     <div class="col-md-4">
 
-        <?php echo $form->textFieldGroup($model, 'nro_estacionamientos', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16)))); ?>
+<?php echo $form->textFieldGroup($model, 'nro_estacionamientos', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16)))); ?>
     </div>
     <div class="col-md-4">
         <?php
@@ -335,6 +350,6 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
         ?>
     </div>
     <div class="col-md-4">
-        <?php echo $form->textFieldGroup($model, 'precio_vivienda', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16)))); ?>
+<?php echo $form->textFieldGroup($model, 'precio_vivienda', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16)))); ?>
     </div>
 </div>
