@@ -70,7 +70,7 @@ $this->widget('booster.widgets.TbGridView', array(
                     'label' => 'Generar PDF',
                     'icon' => 'glyphicon glyphicon-file',
                     'size' => 'medium',
-                    'url' => 'Yii::app()->createUrl("beneficiarioTemporal/pdf/", array("id"=>$data->id_beneficiario_temporal))',
+                    'url' => 'Yii::app()->createUrl("beneficiarioTemporal/pdf/", array("id"=>$data->id_beneficiario_temporal,"model" => $model))',
 //                    'visible' => 'Asignar($data->username);'
                 ),
             ),

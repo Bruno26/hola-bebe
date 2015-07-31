@@ -189,4 +189,18 @@ class ViviendaController extends Controller {
         ));
     }
 
+ /*  ------------------------------------- */
+    public function actiondocumento($id) {
+        
+        $this->render('documento', array(
+            'model' => $this->loadModel($id),
+        ));
+    }
+
+   
+
+ /*  ------------------------------------- */
+
+
+
 }
