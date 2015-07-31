@@ -15,6 +15,8 @@ $texto .= fgets($file);
 fclose($file);
 
 /*  ----------------------------------------------- */
+
+/* */
 ?>
 
 <h1 class="text-center">Gestión de Documentos UniFamiliares</h1> <br>
