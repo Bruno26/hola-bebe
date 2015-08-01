@@ -29,6 +29,8 @@ class VswEmpadronadorCensos extends CActiveRecord
 		return 'vsw_empadronador_censos';
 	}
 
+        
+        
 	/**
 	 * @return array validation rules for model attributes.
 	 */
