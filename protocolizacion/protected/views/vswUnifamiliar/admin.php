@@ -54,7 +54,7 @@ $this->widget('booster.widgets.TbGridView', array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',
             'htmlOptions' => array('width' => '85', 'style' => 'text-align: center;'),
-            'template' => '{ver} {modificar} {pdf}',
+            'template' => '{ver} {modificar} {pdf} {documento}',
             'buttons' => array(
                 'ver' => array(
                     'label' => 'Ver',
@@ -74,6 +74,14 @@ $this->widget('booster.widgets.TbGridView', array(
                     'icon' => 'glyphicon glyphicon-file',
                     'size' => 'medium',
                     'url' => 'Yii::app()->createUrl("vivienda/pdf/", array("id"=>$data->id_vivienda))',
+//                    'visible' => 'Asignar($data->username);'
+                ),
+
+                 'documento' => array(
+                    'label' => 'Generar Documento',
+                    'icon' => 'glyphicon glyphicon-list-alt',
+                    'size' => 'medium',
+                    'url' => 'Yii::app()->createUrl("vivienda/documento/", array("id"=>$data->id_vivienda))',
 //                    'visible' => 'Asignar($data->username);'
                 ),
             ),
