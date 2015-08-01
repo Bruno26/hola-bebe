@@ -5,7 +5,34 @@ Yii::app()->clientScript->registerScript('educacion', "
     $(document).ready(function(){
         $('#ReasignacionVivienda_cedulaAnterior').numeric();   
         $('#ReasignacionVivienda_cedulaActual').numeric();   
-    }),
+    });
+        $('#guardar').click(function(){
+            if( $('#ReasignacionVivienda_nacionalidad').val() == ''){
+                bootbox.alert('Indique la Nacionalidad .');
+                return false;
+            }
+            if( $('#ReasignacionVivienda_cedula').val() == ''){
+                   bootbox.alert('Indique la Cédula .');
+                   return false;
+             }
+            if( $('#ReasignacionVivienda_sexoActual').val() == ''){
+                   bootbox.alert('Indique su sexo .');
+                   return false;
+             }
+            if( $('#ReasignacionVivienda_estado_civilActual').val() == ''){
+                   bootbox.alert('Indique su estado civil.');
+                   return false;
+             }
+            if( $('#ReasignacionVivienda_tipo_reasignacion_id').val() == ''){
+                   bootbox.alert('Indique el tipo de Reasignación de Vivienda.');
+                   return false;
+             }
+            if( $('#ReasignacionVivienda_fecha_reasignacion').val() == ''){
+                   bootbox.alert('Indique la fecha de Reagasinación.');
+                   return false;
+             }
+        });
+
 ");
 $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     'id' => 'reasignacion-vivienda-form',
@@ -20,18 +47,19 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 
 <h1 class="text-center">Re-Asignación de Vivienda</h1>
 
-<?php 
-        $this->widget(
-                'booster.widgets.TbLabel', array(
-            'context' => 'warning',
-            'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
-            // 'success', 'warning', 'important', 'info' or 'inverse'
-            'label' => 'Los campos marcados con * son requeridos',
-                )
-        ); ?>
-        <br><br>
+<?php
+$this->widget(
+        'booster.widgets.TbLabel', array(
+    'context' => 'warning',
+    'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
+    // 'success', 'warning', 'important', 'info' or 'inverse'
+    'label' => 'Los campos marcados con * son requeridos',
+        )
+);
+?>
+<br><br>
 
-<?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php #echo $this->renderPartial('_form', array('model'=>$model));  ?>
 
 <div class="row">
     <div class="col-md-12">

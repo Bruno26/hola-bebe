@@ -99,8 +99,18 @@ function buscarPersonaOficina(nacionalidad, cedula) {
  * FUNCION PARA BUSCAR EN PERSONA Y EN SAIME EL BENEFICIARIO ACTUAL
  * PARA REASIGNACION DE VIVIENDA
  */
-function buscarBenefAnterior(nacionalidad, cedula, caso) {
-    
+function buscarBenefAnterior(nacionalidad, cedula) {
+
+    $('#ReasignacionVivienda_segundo_nombreActual').val('');
+    $('#ReasignacionVivienda_primer_apellidoActual').val('')
+    $('#ReasignacionVivienda_segundo_apellidoActual').val('');
+    $('#ReasignacionVivienda_fecha_nacimientoActual').val('');
+    $('#ReasignacionVivienda_sexoActual').val('');
+    $('#ReasignacionVivienda_estado_civilActual').val('');
+    $('#ReasignacionVivienda_telf_habitacionActual').val('');
+    $('#ReasignacionVivienda_telf_celularActual').val('');
+    $('#ReasignacionVivienda_correo_electronicoActual').val('');
+    $('#iconLoding').show();
     if (nacionalidad == '') {
         bootbox.alert('Verifique que la nacionalidad no esté vacio');
         return false;
@@ -115,11 +125,11 @@ function buscarBenefAnterior(nacionalidad, cedula, caso) {
         type: 'POST',
         data: 'nacionalidad=' + nacionalidad + '&cedula=' + cedula,
         dataType: 'json',
-        PhpProject1success: function(datos) {
+        success: function(datos) {
             if (datos == 2) {
                 //  No Existe en Saime habilito todos los campos para que se llenen a pedal
                 /*  ------  Bloqueo campos    ------- */
-
+                $('#iconLoding').hide();
                 $('#ReasignacionVivienda_primer_nombreActual').attr('readonly', false);
                 $('#ReasignacionVivienda_primer_nombreActual').val('');
 
@@ -153,13 +163,23 @@ function buscarBenefAnterior(nacionalidad, cedula, caso) {
                 /*   -------------------------------- */
 
             } else if (datos == 3) {
+                $('#iconLoding').hide();
+                $('#ReasignacionVivienda_nacionalidad').val('');
+                $('#ReasignacionVivienda_cedula').val('');
+                $('#ReasignacionVivienda_primer_nombreActual').val('');
+                $('#ReasignacionVivienda_segundo_nombreActual').val('');
+                $('#ReasignacionVivienda_primer_apellidoActual').val('')
+                $('#ReasignacionVivienda_segundo_apellidoActual').val('');
+                $('#ReasignacionVivienda_fecha_nacimientoActual').val('');
+                $('#ReasignacionVivienda_sexoActual').val('');
+                $('#ReasignacionVivienda_estado_civilActual').val('');
+                $('#ReasignacionVivienda_telf_habitacionActual').val('');
+                $('#ReasignacionVivienda_telf_celularActual').val('');
+                $('#ReasignacionVivienda_correo_electronicoActual').val('');
                 bootbox.alert('Beneficiario Se encuentra Registrado !');
-                // $('#BeneficiarioTemporal_cedula').val('');
                 return false;
 
             } else if (datos.PROCEDENCIA == 2) {
-                //  Datos de la variable proceden de Saime 
-                // alert('entrooo');
                 if (datos.PRIMERNOMBRE == null) {
                     $('#ReasignacionVivienda_primer_nombreActual').attr('readonly', false);
                     $('#ReasignacionVivienda_primer_nombreActual').val('');
@@ -219,11 +239,11 @@ function buscarBenefAnterior(nacionalidad, cedula, caso) {
 
                 $('#ReasignacionVivienda_correo_electronicoActual').attr('readonly', false);
                 $('#ReasignacionVivienda_correo_electronicoActual').val('');
+                $('#iconLoding').hide();
 
             } else if (datos.PROCEDENCIA == 1) {
                 // Datos de la variable proceden de Persona si algun campo esta en blanco de puede actualizar solo una vez
                 $('#ReasignacionVivienda_primer_nombreActual').val(datos.PRIMERNOMBRE);
-
                 $('#ReasignacionVivienda_segundo_nombreActual').val(datos.SEGUNDONOMBRE);
                 $('#ReasignacionVivienda_primer_apellidoActual').val(datos.PRIMERAPELLIDO);
                 $('#ReasignacionVivienda_segundo_apellidoActual').val(datos.SEGUNDOAPELLIDO);
@@ -280,6 +300,7 @@ function buscarBenefAnterior(nacionalidad, cedula, caso) {
                     $('#ReasignacionVivienda_correo_electronicoActual').val(datos.CORREO_PRINCIPAL);
                     $('#ReasignacionVivienda_correo_electronicoActual').attr('readonly', true);
                 }
+                $('#iconLoding').hide();
 
             } // fin If principal
 
@@ -1041,48 +1062,48 @@ function Viviendas(habitacional, piso, vivienda) {
 //                                
                 $('#Vivienda_construccion_mt2').attr('readonly', false);
                 $('#Vivienda_construccion_mt2').attr('disabled', false);
-                
+
                 $('#Vivienda_nro_habitaciones').attr('readonly', false);
                 $('#Vivienda_nro_habitaciones').attr('disabled', false);
-                
+
                 $('#Vivienda_nro_banos').attr('readonly', false);
                 $('#Vivienda_nro_banos').attr('disabled', false);
-                
+
                 $('#Vivienda_coordenadas').attr('readonly', false);
                 $('#Vivienda_coordenadas').attr('disabled', false);
-                
+
                 $('#Vivienda_lindero_norte').attr('readonly', false);
                 $('#Vivienda_lindero_norte').attr('disabled', false);
-                
+
                 $('#Vivienda_lindero_sur').attr('readonly', false);
                 $('#Vivienda_lindero_sur').attr('disabled', false);
-                
+
                 $('#Vivienda_lindero_este').attr('readonly', false);
                 $('#Vivienda_lindero_este').attr('disabled', false);
-                
+
                 $('#Vivienda_lindero_oeste').attr('readonly', false);
                 $('#Vivienda_lindero_oeste').attr('disabled', false);
-                
+
                 $('#Vivienda_nro_estacionamientos').attr('readonly', false);
                 $('#Vivienda_nro_estacionamientos').attr('disabled', false);
-                
+
                 $('#Vivienda_descripcion_estac').attr('readonly', false);
                 $('#Vivienda_descripcion_estac').attr('disabled', false);
-                
+
                 $('#Vivienda_precio_vivienda').attr('readonly', false);
                 $('#Vivienda_precio_vivienda').attr('disabled', false);
-                
-                          
-               
+
+
+
 
             } else if (datos == 2) {
 
                 bootbox.alert('Disculpe este número de vivienda ya se encuentra registrado');
                 return false;
-                
+
 //                $('#Vivienda_construccion_mt2').attr('readonly', true);
 //                $('#Vivienda_construccion_mt2').attr('disabled', true);
-                
+
 
             }
         }
