@@ -1,12 +1,18 @@
 
 
-<?php  
-//function traza($iD) {
-//     $traza = Traza::getTraza($iD);
-//     return $traza;
-// }
+<?php
 
- ?>
+function prueba($id) {
+    $vswEmpadronador = VswEmpadronadorCensos::model()->findByAttributes(array('id_beneficiario_temporal' => $id));
+
+    if (!empty($vswEmpadronador->id_beneficiario)) {
+        $n = 'Yii::app()->createUrl("beneficiario/culminarRegistro", array("id"=>' . $vswEmpadronador->id_beneficiario . ')))';
+        return $n;
+    } else {
+        return 'Yii::app()->createUrl("/Beneficiario/createCenso", array("id"=>' . $id . '))';
+    }
+}
+?>
 
 <h1>Gestión de Empadronador</h1>
 
@@ -64,9 +70,9 @@ $this->widget('booster.widgets.TbGridView', array(
                     'icon' => 'glyphicon glyphicon-new-window',
                     'size' => 'medium',
                     //'url' => 'Yii::app()->createUrl("beneficiario/culminarRegistro", array("id"=>$data->id_beneficiario))',
-                    'url' => 'Yii::app()->createUrl("/Beneficiario/create", array("id"=>$data->id_beneficiario_temporal))',
+                    //'url' => 'Yii::app()->createUrl("/Beneficiario/createCenso", array("id"=>$data->id_beneficiario_temporal))',
+                    'url' => 'prueba($data->id_beneficiario)',
                 ),
-             
             ),
         ),
     ),
