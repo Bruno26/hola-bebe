@@ -2,7 +2,7 @@
 <div class="row">
 
     <div class='col-md-4'>
-
+        <b>Nacionalidad </b> <span class="required">*</span>
         <?php
         echo $form->dropDownListGroup($model, 'nacionalidad', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
             'widgetOptions' => array(
@@ -15,15 +15,16 @@
 
     </div>
     <div class='col-md-4'>
+        <b>Cédula del Beneficiario Actual</b> <span class="required">*</span>
         <?php
         echo $form->textFieldGroup($model, 'cedula', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8,
-             'onblur' => "buscarBenefAnterior($('#ReasignacionVivienda_nacionalidad').val(), $(this).val())"
+                    'onblur' => "buscarBenefAnterior($('#ReasignacionVivienda_nacionalidad').val(), $(this).val())"
         ))));
         ?>
         <?php // echo $form->error($model, 'cedula'); ?>
     </div>
-    <div class='col-md-4'>
-        <span hidden="hidden" class="cargar"><?php echo CHtml::image(Yii::app()->request->baseUrl . "/images/loading.gif"); ?></span>
+    <div class="col-md-4"  id="iconLoding" style="display: none">
+        <img src="<?php echo Yii::app()->baseUrl; ?>/images/loading.gif" width="50px" height="60px">
     </div>
 
 </div>
@@ -31,25 +32,29 @@
 
 <div class="row">
     <div class='col-md-3'>
+        <b>Primer Nombre</b> <span class="required">*</span>
         <?php
-        echo $form->textFieldGroup($model, 'primer_nombreActual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200, 'readonly'=>true))));
+        echo $form->textFieldGroup($model, 'primer_nombreActual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200, 'readonly' => true))));
         ?>
     </div>
     <div class='col-md-3'>
+        <b>Segundo Nombre</b> <span class="required">*</span>
         <?php
-        echo $form->textFieldGroup($model, 'segundo_nombreActual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200, 'readonly'=>true))));
+        echo $form->textFieldGroup($model, 'segundo_nombreActual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200, 'readonly' => true))));
         ?>
     </div>
 
 
     <div class='col-md-3'>
+        <b>Primer Apellido</b> <span class="required">*</span>
         <?php
-        echo $form->textFieldGroup($model, 'primer_apellidoActual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200,'readonly'=>true))));
+        echo $form->textFieldGroup($model, 'primer_apellidoActual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200, 'readonly' => true))));
         ?>
     </div>
     <div class='col-md-3'>
+        <b>Segundo Apellido</b> <span class="required">*</span>
         <?php
-        echo $form->textFieldGroup($model, 'segundo_apellidoActual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200, 'readonly'=>true))));
+        echo $form->textFieldGroup($model, 'segundo_apellidoActual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200, 'readonly' => true))));
         ?>
     </div>
 
@@ -61,11 +66,13 @@
 
 <div class="row"> 
     <div class='col-md-4'>
+        <b>Fecha de Nacimiento</b> <span class="required">*</span>
         <?php
-        echo $form->textFieldGroup($model, 'fecha_nacimientoActual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));
+        echo $form->textFieldGroup($model, 'fecha_nacimientoActual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200, 'readonly' => true))));
         ?>
     </div>
     <div class='col-md-4'>
+        <b>Sexo</b> <span class="required">*</span>
         <?php
         echo $form->dropDownListGroup($model, 'sexoActual', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
             'widgetOptions' => array(
@@ -79,7 +86,7 @@
     </div>
 
     <div class='col-md-4'>
-
+        <b>Estado Civil</b> <span class="required">*</span>
         <?php
         echo $form->dropDownListGroup($model, 'estado_civilActual', array('wrapperHtmlOptions' => array('class' => 'col-sm-12'),
             'widgetOptions' => array(
@@ -116,7 +123,7 @@
                 'tags' => array(),
                 'class' => 'Limpiar',
                 'placeholder' => 'Número teléfonico!',
-                'width' => '80%',
+                'width' => '100%',
                 'tokenSeparators' => array(',', ' '),
                 'multiple' => true,
                 'maximumInputLength' => 11,
@@ -148,7 +155,7 @@
                 'tags' => array(),
                 'class' => 'Limpiar',
                 'placeholder' => 'Número teléfonico!',
-                'width' => '60%',
+                'width' => '100%',
                 'tokenSeparators' => array(',', ' '),
                 'multiple' => true,
                 'maximumInputLength' => 11,
@@ -171,44 +178,4 @@
 </div>
 
 
-
-
-
-<!--<div class="row">
-    <div class="row-fluid">
-        <div class="col-md-6">
-<?php
-//            echo $form->dropDownListGroup($model, 'nacionalidadActual', array('wrapperHtmlOptions' => array('class' => 'col-sm-4',),
-//                'widgetOptions' => array(
-//                    'data' => Maestro::FindMaestrosByPadreSelect(96),
-//                    'htmlOptions' => array(
-//                        'empty' => 'SELECCIONE',
-//                    ),
-//                )
-//                    )
-//            );
-?>
-        </div>
-        <div class="col-md-6">
-<?php
-//            echo $form->textFieldGroup($model, 'cedulaActual', array(
-//                'widgetOptions' => array(
-//                    'htmlOptions' => array(
-//                        'class' => 'span5',
-//                        'onblur' => "buscarBenefAnterior($('#ReasignacionVivienda_nacionalidadActual').val(), $(this).val(),2)"
-//                    )
-//                )
-//                    )
-//            );
-?>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="row-fluid">
-        <div class="col-md-12">
-<?php // echo $form->textFieldGroup($model, 'nombreCompletoActual', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'readonly' => true))));   ?>
-        </div>
-    </div>
-</div>-->
 
