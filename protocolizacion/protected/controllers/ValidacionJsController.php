@@ -22,7 +22,7 @@ class ValidacionJsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario', 'BuscarPisoVivienda', 'BuscarVivienda', 'BuscarTipoVivienda', 'BuscarPersonasBeneficiarioTemp', 'BuscarEncargadoOficina', 'BuscarPersonaAbogado', 'BuscarPersonaAsignacionCenso', 'BuscarBeneficiariosTemporalEmpadronador', 'AgregarAsignacionesEmpa', 'BuscarUnidadMulti','CargarPrograma'),
+                'actions' => array('BuscarSaime', 'BuscarCita', 'BuscarMunicipios', 'BuscarParroquias', 'GenerarPDF', 'BuscarUnidadHabitacional', 'BuscarPersonas', 'BuscarPersonasBeneficiario', 'BuscarDesarrolloBeneficiario', 'BuscarPisoVivienda', 'BuscarVivienda', 'BuscarTipoVivienda', 'BuscarPersonasBeneficiarioTemp', 'BuscarEncargadoOficina', 'BuscarPersonaAbogado', 'BuscarPersonaAsignacionCenso', 'BuscarBeneficiariosTemporalEmpadronador', 'AgregarAsignacionesEmpa', 'BuscarUnidadMulti', 'CargarPrograma'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -329,8 +329,8 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
         $cedula = (int) $_POST['cedula'];
         $nacio = (int) $_POST['nacionalidad'];
 
-             $existeTemporal = BeneficiarioTemporal::model()->findByAttributes(array('nacionalidad' => $nacio, 'cedula' => $cedula));
-             
+        $existeTemporal = BeneficiarioTemporal::model()->findByAttributes(array('nacionalidad' => $nacio, 'cedula' => $cedula));
+
         if (empty($existeTemporal)) {
 
             $result = ConsultaOracle::getPersonaBeneficiario($nacio, $cedula);
@@ -348,7 +348,6 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
             echo CJSON::encode(3); // Existe en temporal
         }
     }
-    
 
 //    public function actionBuscarBeneficiarioAnterior() {
 //        $cedula = (int) $_POST['cedula'];
@@ -607,7 +606,7 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
                 }
             }
         }
-    }   
+    }
 
     public function actionNroVivienda() {
         $habitacional = $_POST['habitacional'];
@@ -622,10 +621,24 @@ from desarrollo des Left join unidad_habitacional und_hab on des.id_desarrollo =
 //        var_dump($existeVivienda);
 //        die();
         if (!empty($existeVivienda)) {
-             echo CJSON::encode(2); //existe número vivienda
-    } else {
-        echo CJSON::encode(1);
+            echo CJSON::encode(2); //existe número vivienda
+        } else {
+            echo CJSON::encode(1);
+        }
     }
+
+    public function actionCambioEstatus() {
+        
+        $idValue = $_POST['value'];
+        $idSolicitud = $_POST['idSolicitud'];
+
+        $result = RegistroPublico::model()->updateByPk($idSolicitud, array('estatus' => $idValue));
+        echo '<pre>';
+                var_dump($result);
+                                die();
+        if ($result) {
+            echo json_encode(1);
+        }
     }
 
 }

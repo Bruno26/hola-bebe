@@ -19,6 +19,7 @@
  * @property CrugeUser $usuarioIdCreacion
  * @property RegistroDocumento[] $registroDocumentos
  * @property UnidadHabitacional[] $unidadHabitacionals
+ * @property fkParroquia $fkParroquia
  */
 class RegistroPublico extends CActiveRecord {
 
@@ -57,6 +58,7 @@ class RegistroPublico extends CActiveRecord {
             'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
             'registroDocumentos' => array(self::HAS_MANY, 'RegistroDocumento', 'registro_publico_id'),
             'unidadHabitacionals' => array(self::HAS_MANY, 'UnidadHabitacional', 'registro_publico_id'),
+            'fkParroquia' => array(self::BELONGS_TO, 'Tblparroquia', 'parroquia_id'),
         );
     }
 
@@ -73,6 +75,7 @@ class RegistroPublico extends CActiveRecord {
             'fecha_actualizacion' => 'Fecha Actualizacion',
             'usuario_id_creacion' => 'Usuario Id Creacion',
             'usuario_id_actualizacion' => 'Usuario Id Actualizacion',
+            
         );
     }
 
@@ -92,7 +95,8 @@ class RegistroPublico extends CActiveRecord {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-
+        $criteria->order = 'id_registro_publico DESC';
+        
         $criteria->compare('id_registro_publico', $this->id_registro_publico);
         $criteria->compare('nombre_registro_publico', $this->nombre_registro_publico, true);
         $criteria->compare('parroquia_id', $this->parroquia_id);
