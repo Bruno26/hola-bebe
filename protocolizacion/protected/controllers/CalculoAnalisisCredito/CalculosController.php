@@ -61,4 +61,18 @@ class CalculosController extends Controller {
 	return $CreditoSolicitado * 0.0143 ;
     }
 
+    /*
+     * Maxima Capacidad Pago
+     */
+
+ /*   public function actionMaximaCapacidadPago($interes, $anhios, $CuotaFinanaciadaMaxima) {
+	$I = $interes / 12 /100;
+	$PREEXP = 1 + $I;
+	$EXP = pow($PREEXP, -($anhios * 12));
+	
+	$MCP = $CuotaFinanaciadaMaxima * (1 - $EXP ) / $I;
+	return number_format($MCP, 2, ',', '');
+        
+    }*/
+
 }
