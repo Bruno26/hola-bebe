@@ -108,24 +108,24 @@
                                         </ul>
                                     </li>
 
-                                                                        <li class="sub-menu">
-                                                                            <a href="javascript:;">
-                                                                                <i class="glyphicon glyphicon-briefcase"></i>
-                                                                                <span>Registro Público</span>
-                                                                            </a>
-                                                                            <ul class="sub">
-                                                                                <li><a href="<?php echo $this->createUrl('/registroPublico/create');?>">Cargar Nuevo Registro Público</a></li>
-                                                                            </ul>
-                                                                        </li>
-<!--                                                                        <li class="sub-menu">
-                                                                            <a href="javascript:;">
-                                                                                <i class="glyphicon glyphicon-list-alt"></i>
-                                                                                <span>Registro de Documentos</span>
-                                                                            </a>
-                                                                            <ul class="sub">
-                                                                                <li><a href="<?php // echo $this->createUrl('/registroDocumento/create');?>">Cargar Nuevo Registro de Documento</a></li>
-                                                                            </ul>
-                                                                        </li>-->
+                                    <li class="sub-menu">
+                                        <a href="javascript:;">
+                                            <i class="glyphicon glyphicon-briefcase"></i>
+                                            <span>Registro Público</span>
+                                        </a>
+                                        <ul class="sub">
+                                            <li><a href="<?php echo $this->createUrl('/registroPublico/create'); ?>">Cargar Nuevo Registro Público</a></li>
+                                        </ul>
+                                    </li>
+                                    <!--                                                                        <li class="sub-menu">
+                                                                                                                <a href="javascript:;">
+                                                                                                                    <i class="glyphicon glyphicon-list-alt"></i>
+                                                                                                                    <span>Registro de Documentos</span>
+                                                                                                                </a>
+                                                                                                                <ul class="sub">
+                                                                                                                    <li><a href="<?php // echo $this->createUrl('/registroDocumento/create');   ?>">Cargar Nuevo Registro de Documento</a></li>
+                                                                                                                </ul>
+                                                                                                            </li>-->
                                 </ul>
                             </li>
 
@@ -169,7 +169,7 @@
                                             <li><a href="<?php echo $this->createUrl('/vswUnifamiliar/admin'); ?>">Gestión de Unidad Unifamiliar</a></li>
                                         </ul>
                                     </li>
- 
+
                                 </ul>
                             </li>
                             <li class="sub-menu">
@@ -186,6 +186,12 @@
                                     <li><a href="<?php echo $this->createUrl('/cargaMasiva/admin'); ?>"><i class="glyphicon glyphicon-cloud-download"></i><span>Listado Carga Masivas</span></a></li>
                                 </ul>
 
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->createUrl('/reasignacionVivienda/admin'); ?>">
+                                    <i class="glyphicon glyphicon-home"></i>
+                                    <span>Reasignación de Vivienda</span>
+                                </a>
                             </li>
                             <li class="sub-menu">
                                 <a href="javascript:;">
@@ -232,7 +238,7 @@
             <div id="expirado"></div>
 
             <!--            <footer class='container col-md-12 col-xs-12 text-center'>
-                            Copyright &copy; <?php // echo date('Y');                                                                                                               ?> by My Company.<br/>
+                            Copyright &copy; <?php // echo date('Y');                                                                                                                  ?> by My Company.<br/>
                             All Rights Reserved.<br/>
             <?php // echo Yii::powered(); ?>
                         </footer>-->

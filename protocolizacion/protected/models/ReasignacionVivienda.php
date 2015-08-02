@@ -88,6 +88,7 @@ class ReasignacionVivienda extends CActiveRecord {
             'usuarioIdCreacion' => array(self::BELONGS_TO, 'CrugeUser', 'usuario_id_creacion'),
             'beneficiarioIdActual' => array(self::BELONGS_TO, 'BeneficiarioTemporal', 'beneficiario_id_actual'),
             'beneficiarioIdAnterior' => array(self::BELONGS_TO, 'BeneficiarioTemporal', 'beneficiario_id_anterior'),
+            'vivienda' => array(self::BELONGS_TO, 'Vivienda', 'vivienda_id'),
         );
     }
 
