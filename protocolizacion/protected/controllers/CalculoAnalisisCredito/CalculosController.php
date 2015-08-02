@@ -16,7 +16,7 @@ class CalculosController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('CalculoTasaAmortizacion'),
+                'actions' => array('CuotaFinanaciadaMaxima'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -29,11 +29,8 @@ class CalculosController extends Controller {
      * 
      */
 
-    public function actionCalculoTasaAmortizacion() {
-        //echo CJSON::encode(1);
-        echo '<pre>';
-        var_dump($_POST);
-        die;
+    public function actionCuotaFinanaciadaMaxima($ingresoFamiliar) {
+        return $ingresoFamiliar * 0.35;
     }
 
 }

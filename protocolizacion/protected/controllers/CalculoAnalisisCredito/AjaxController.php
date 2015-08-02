@@ -44,7 +44,7 @@ class AjaxController extends Controller {
             case ($cantidadSalarios > 6 && $cantidadSalarios <= 8):
                 $cantidad = 3;
                 break;
-            case ($cantidadSalarios > 8 && $cantidadSalarios <= 10):
+            case ($cantidadSalarios > 8):
                 $cantidad = 4;
                 break;
         }
@@ -56,7 +56,7 @@ class AjaxController extends Controller {
      */
 
     public function actionCalculoTasaAmortizacion() {
-        //echo CJSON::encode(1);
-        echo '<pre>';var_dump($_POST);die;
+        $CuotaFinanciamientoMaximo = CalculosController::actionCuotaFinanaciadaMaxima($_POST['valorSalario']);
+        var_dump($CuotaFinanciamientoMaximo);die;
     }
 }
