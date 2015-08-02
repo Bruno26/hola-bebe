@@ -47,6 +47,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 
 <h1 class="text-center">Re-Asignación de Vivienda</h1>
 
+
 <?php
 $this->widget(
         'booster.widgets.TbLabel', array(
