@@ -180,8 +180,12 @@
                                 <ul class="sub-menu">
                                     <li><a href="<?php echo $this->createUrl('/beneficiarioTemporal/create'); ?>"><i class="glyphicon glyphicon-user"></i><span>Cargar Nuevo Adjudicado</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('/beneficiarioTemporal/admin'); ?>"><i class="glyphicon glyphicon-user"></i><span>Listado de Adjudicados</span></a></li>
-
                                 </ul>
+                                <ul class="sub-menu">
+                                    <li><a href="<?php echo $this->createUrl('/cargaMasiva/create'); ?>"><i class="glyphicon glyphicon-cloud-upload"></i><span>Carga Masiva</span></a></li>
+                                    <li><a href="<?php echo $this->createUrl('/cargaMasiva/admin'); ?>"><i class="glyphicon glyphicon-cloud-download"></i><span>Listado Carga Masivas</span></a></li>
+                                </ul>
+
                             </li>
                             <li class="sub-menu">
                                 <a href="javascript:;">

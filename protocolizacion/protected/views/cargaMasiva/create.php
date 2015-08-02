@@ -36,6 +36,13 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                 }
                 
             });
+$('a[data-toggle=modal]').click(function(){
+    var target = $(this).attr('data-target');
+    var url = $(this).attr('href');
+    if(url){
+        $(target).find('.modal-body').load(url);
+    }
+});
 
 ") ?>
 

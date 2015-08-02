@@ -63,8 +63,8 @@ class ReasignacionViviendaController extends Controller {
             $beneficiarioTemNuevo = new BeneficiarioTemporal;
             if ($beneficiarioTemNuevo->persona_id == '') {
 
-//                $codigo_hab = substr($_POST["ReasignacionVivienda_telf_habitacion"], 0, 4);
-//                $telf_habitacion = substr($_POST["ReasignacionVivienda_telf_habitacion"], 4, 11);
+                $codigo_hab = substr($_POST["ReasignacionVivienda_telf_habitacionActual"], 0, 4);
+                $telf_habitacion = substr($_POST["ReasignacionVivienda_telf_habitacionActual"], 4, 11);
 
                 $codigo_movil = substr($_POST['ReasignacionVivienda_telf_celularActual'], 0, 4);
                 $telf_movil = substr($_POST['ReasignacionVivienda_telf_celularActual'], 4, 11);
@@ -80,8 +80,8 @@ class ReasignacionViviendaController extends Controller {
                             'FECHA_NACIMIENTO' => $_POST['ReasignacionVivienda']['fecha_nacimientoActual'],
                             'GEN_SEXO_ID' => $_POST['ReasignacionVivienda']['sexoActual'],
                             // 'GEN_EDO_CIVIL_ID' => $_POST["BeneficiarioTemporal"]['estado_civil'],
-//                            'CODIGO_HAB' => (string) $codigo_hab,
-//                            'TELEFONO_HAB' => (string) $telf_habitacion,
+                            'CODIGO_HAB' => (string) $codigo_hab,
+                            'TELEFONO_HAB' => (string) $telf_habitacion,
                             'CODIGO_MOVIL' => (string) $codigo_movil,
                             'TELEFONO_MOVIL' => (string) $telf_movil,
                             'CORREO_PRINCIPAL' => $_POST["ReasignacionVivienda"]['correo_electronicoActual'],
@@ -91,8 +91,8 @@ class ReasignacionViviendaController extends Controller {
 
                 $idPersona = $_POST['ReasignacionVivienda']['persona_id'];
 
-//                $codigo_hab = substr($_POST["ReasignacionVivienda_telf_habitacion"], 0, 4);
-//                $telf_habitacion = substr($_POST["ReasignacionVivienda_telf_habitacion"], 4, 11);
+                $codigo_hab = substr($_POST["ReasignacionVivienda_telf_habitacionActual"], 0, 4);
+                $telf_habitacion = substr($_POST["ReasignacionVivienda_telf_habitacionActual"], 4, 11);
 
                 $codigo_movil = substr($_POST["ReasignacionVivienda_telf_celularActual"], 0, 4);
                 $telf_movil = substr($_POST["ReasignacionVivienda_telf_celularActual"], 4, 11);
@@ -141,16 +141,12 @@ class ReasignacionViviendaController extends Controller {
 
             if ($beneficiarioTemNuevo->save()) {
                 $id_benetemp = $beneficiarioTemNuevo->id_beneficiario_temporal;
-
                 // ACTUALIZACION DE ESTATUS DEL BENEFICIARIO ADJUDICADO ANTERIOR //
                 $beneficiarioTemporal->estatus = 186;
                 $beneficiarioTemporal->fecha_actualizacion = 'now';
                 $beneficiarioTemporal->usuario_id_actualizacion = Yii::app()->user->id;
                 $beneficiarioTemporal->save();
-            } else {
-                var_dump($beneficiarioTemNuevo->errors);
-                die();
-            }
+            } 
 
             $model->attributes = $_POST['ReasignacionVivienda'];
             $model->beneficiario_id_anterior = $_POST['ReasignacionVivienda']['beneficiario_id_anterior'];
@@ -163,15 +159,11 @@ class ReasignacionViviendaController extends Controller {
             $model->fecha_creacion = 'now';
             $model->fecha_actualizacion = 'now';
             $model->usuario_id_creacion = Yii::app()->user->id;
-            ;
             $model->estatus = 50;
 
             if ($model->save()) {
                 $this->redirect(array('view', 'id' => $model->id_reasignacion_vivienda));
-            } else {
-                var_dump($model->errors);
-                die;
-            }
+            } 
         }
         $this->render('create', array(
             'model' => $model,
