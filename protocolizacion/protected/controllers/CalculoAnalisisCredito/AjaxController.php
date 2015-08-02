@@ -72,7 +72,10 @@ class AjaxController extends Controller {
 	$CreditoSolicitado = CalculosController::actionCreditoSolicitado($montoInical, $montoVivienda);
 	$fongar = CalculosController::actionMaximaCapacidadPago($CreditoSolicitado);
 
-        var_dump($CapacidadPago);die;
+	if($fuenteFinanciamineto == 2){
+		
+	}else if()}{
+	}
 
     }
 
