@@ -19,12 +19,10 @@ class VswMultifamiliar extends CActiveRecord {
     /**
      * @return string the associated database table name
      */
-    public function primaryKey(){
+    public function primaryKey() {
         return 'id_desarrollo';
-        
     }
-    
-    
+
     public function tableName() {
         return 'vsw_multifamiliar';
     }
@@ -90,7 +88,7 @@ class VswMultifamiliar extends CActiveRecord {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-
+        $criteria->order = 'id_unidad_habitacional DESC';
         $criteria->compare('id_desarrollo', $this->id_desarrollo);
         $criteria->compare('nombre_desarrollo', $this->nombre_desarrollo, true);
         $criteria->compare('id_unidad_habitacional', $this->id_unidad_habitacional);

@@ -1,58 +1,63 @@
-<div class="view">
 
-		<b><?php echo CHtml::encode($data->getAttributeLabel('id_reasignacion_vivienda')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id_reasignacion_vivienda),array('view','id'=>$data->id_reasignacion_vivienda)); ?>
-	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('beneficiario_id_anterior')); ?>:</b>
-	<?php echo CHtml::encode($data->beneficiario_id_anterior); ?>
-	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('beneficiario_id_actual')); ?>:</b>
-	<?php echo CHtml::encode($data->beneficiario_id_actual); ?>
-	<br />
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <h4><i class="glyphicon glyphicon-user"></i> Datos Beneficiario Anterior</h4>
+            <div class='col-md-6'> 
+                <blockquote>
+                    <p>
+                        <b>Cedula de Identidad:</b> <?php echo $model->beneficiarioIdAnterior->cedula ?><br/>
+                        <b>Nombre completo:</b> <?php echo $model->beneficiarioIdAnterior->nombre_completo ?><br/>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('vivienda_id')); ?>:</b>
-	<?php echo CHtml::encode($data->vivienda_id); ?>
-	<br />
+                    </p>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('tipo_reasignacion_id')); ?>:</b>
-	<?php echo CHtml::encode($data->tipo_reasignacion_id); ?>
-	<br />
+                </blockquote>
+            </div>
+            <div class='col-md-6'>
+                <div class='text-right' style='margin-right: 1em;'><img src="<?php echo Yii::app()->baseUrl; ?>/images/LOGO_BANAVIH-1.jpg" style="width: 25%;"/></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+    <div>
+            <h4><i class="glyphicon glyphicon-user"></i> Datos del Beneficiario Actual </h4>
+            <div class='col-md-6'> 
+                <blockquote>
+                    <p>
+                        <b>Cedula de Identidad:</b> <?php echo $model->beneficiarioIdActual->cedula ?><br/>
+                        <b>Nombre completo:</b> <?php echo $model->beneficiarioIdActual->nombre_completo ?><br/>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('persona_id_autoriza')); ?>:</b>
-	<?php echo CHtml::encode($data->persona_id_autoriza); ?>
-	<br />
+                    </p>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('observaciones')); ?>:</b>
-	<?php echo CHtml::encode($data->observaciones); ?>
-	<br />
+                </blockquote>
+            </div>
 
-	<?php /*
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_reasignacion')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_reasignacion); ?>
-	<br />
+    </div>
+    </div>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_creacion')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_creacion); ?>
-	<br />
+    <div class="col-md-12">
+ <div>
+            <h4><i class="glyphicon glyphicon-home"></i>Vivienda Reasignada</h4>
+            <div class='col-md-6'> 
+                <blockquote>
+                    <p>
+                        
+                        <b>Estado:</b> <?php echo $model->vivienda->unidadHabitacional->desarrollo->fkParroquia->clvmunicipio0->clvestado0->strdescripcion ?><br/>
+                        <b>Municipio:</b> <?php echo $model->vivienda->unidadHabitacional->desarrollo->fkParroquia->clvmunicipio0->strdescripcion ?><br/>
+                        <b>Parroquia:</b> <?php echo $model->vivienda->unidadHabitacional->desarrollo->fkParroquia->strdescripcion ?><br/>
+                        <b>Nombre del desarrollo:</b> <?php echo $model->vivienda->unidadHabitacional->desarrollo->nombre ?><br/>
+                        <b>Nombre de la Unidad Familiar:</b> <?php echo $model->vivienda->unidadHabitacional->nombre ?><br/>
+                        <b>Tipo de Vivienda:</b> <?php echo $model->vivienda->tipoVivienda->descripcion ?><br/>
+                        <b>Número de Piso:</b> <?php echo $model->vivienda->nro_piso ?><br/>
+                        <b>Número de Vivienda:</b> <?php echo $model->vivienda->nro_vivienda ?><br/>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_actualizacion')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_actualizacion); ?>
-	<br />
+                    </p>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('usuario_id_creacion')); ?>:</b>
-	<?php echo CHtml::encode($data->usuario_id_creacion); ?>
-	<br />
+                </blockquote>
+            </div>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('usuario_id_actualizacion')); ?>:</b>
-	<?php echo CHtml::encode($data->usuario_id_actualizacion); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('estatus')); ?>:</b>
-	<?php echo CHtml::encode($data->estatus); ?>
-	<br />
-
-	*/ ?>
-
+    </div>
+    </div>
 </div>

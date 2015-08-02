@@ -10,31 +10,60 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     ),
         ));
 ?>
-<?php /* Yii::app()->clientScript->registerScript('BeneficiarioTemporal', "
-          $('#guardar').click(function(){
-               
-                
-                 if($('#BeneficiarioTemporal_nacionalidad').val() === 'SELECCIONE'){
-                    bootbox.alert('Por favor seleccione Nacionalidad');
-                     return false;
-                 }
+<?php  Yii::app()->clientScript->registerScript('BeneficiarioTemporal', "
+        $('#guardar').click(function(){
+            if( $('#BeneficiarioTemporal_nacionalidad').val() == ''){
+                bootbox.alert('Seleccione la Nacionalidad .');
+                return false;
+            }
+            if( $('#BeneficiarioTemporal_cedula').val() == ''){
+                   bootbox.alert('Indique su Cédula .');
+                   return false;
+             }
+            if( $('#BeneficiarioTemporal_sexo').val() == ''){
+                   bootbox.alert('Selecione su sexo .');
+                   return false;
+             }
 
-                 if($('#BeneficiarioTemporal_cedula').val() === 'SELECCIONE'){
-                    bootbox.alert('Por favor Ingrese Cedula ');
-                     return false;
-                 }
-                
-
-                 if($('#Desarrollo_id_desarrollo').val() === ''){
-                  bootbox.alert('Por favor seleccione Nombre del Desarrollo');
-                     return false;
-                 }
-
-                 });
+            if( $('#BeneficiarioTemporal_estado_civil').val() == ''){
+                   bootbox.alert('Seleccione su estado civil.');
+                   return false;
+             }
+            if( $('#Tblestado_clvcodigo').val() == ''){
+                   bootbox.alert('Seleccione el Estado .');
+                   return false;
+             }
+            if( $('#Tblmunicipio_clvcodigo').val() == ''){
+                   bootbox.alert('Seleccione el Municipio.');
+                   return false;
+             }
+            if( $('#Tblparroquia_clvcodigo').val() == ''){
+                   bootbox.alert('Seleccione la parroquia.');
+                   return false;
+             }
+            if( $('#Desarrollo_id_desarrollo').val() == ''){
+                   bootbox.alert('Seleccione el nombre del Desarrollo Habitacional.');
+                   return false;
+             }
+            if( $('#BeneficiarioTemporal_unidad_habitacional_id').val() == ''){
+                   bootbox.alert('Seleccione el Nombre de la Unidad Multifamiliar.');
+                   return false;
+             }
+            if( $('#BeneficiarioTemporal_piso').val() == ''){
+                   bootbox.alert('Seleccione el piso de la vivienda.');
+                   return false;
+             }
+            if( $('#BeneficiarioTemporal_vivienda_nro').val() == ''){
+                   bootbox.alert('Seleccione el número de la vivienda.');
+                   return false;
+             }
+            if( $('#BeneficiarioTemporal_tipo_vivienda').val() == ''){
+                   bootbox.alert('Seleccione el tipo de vivienda.');
+                   return false;
+             }
+        });
          
-         
-                 return true;
-        ")  */ ?>
+        ");  ?>
 
 
 <h1>Cargar Nuevo Adjudicado</h1>
