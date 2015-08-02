@@ -67,7 +67,7 @@ class UnidadHabitacionalController extends Controller {
             if (empty($consulta)) {
                 $model->attributes = $_POST['UnidadHabitacional'];
                 $model->desarrollo_id = $_POST['UnidadHabitacional']['desarrollo_id'];
-                $model->nombre = $nombre;
+                $model->nombre = trim(strtoupper($_POST['UnidadHabitacional']['nombre']));
                 $model->gen_tipo_inmueble_id = $_POST['UnidadHabitacional']['gen_tipo_inmueble_id'];
                 $model->lindero_norte = $_POST['UnidadHabitacional']['lindero_norte'];
                 $model->lindero_sur = $_POST['UnidadHabitacional']['lindero_sur'];

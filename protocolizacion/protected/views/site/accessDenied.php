@@ -7,7 +7,7 @@
 ?>
 
 <div class="text-center col-md-12" >
-    <h1>ACCESO DENEGADO</h1>>
+    <h1>ACCESO DENEGADO</h1>
     <img src="<?= Yii::app()->baseUrl ?>/images/logos.png" width="20%"/>
 </div>
 

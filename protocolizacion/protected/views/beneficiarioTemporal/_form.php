@@ -75,10 +75,9 @@ if (isset($_GET["id"])) {
         ?>
     </div>
     <?php echo $form->error($model, 'cedula'); ?>
-    <div class="col-md-4">
-        <span hidden="hidden" class="cargar"><?php echo CHtml::image(Yii::app()->request->baseUrl . "/images/loading.gif"); ?></span>
+    <div class="col-md-4"  id="iconLoding" style="display: none">
+        <img src="<?php echo Yii::app()->baseUrl; ?>/images/loading.gif" width="50px" height="60px">
     </div>
-
 
 </div>
 

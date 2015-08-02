@@ -1,12 +1,64 @@
 
-<div class="alert alert-info"><i class="icon-info-sign"></i><h4><center> Para realizar la carga masiva de adjudicados adjunte el <b>archivo .csv</b> que desea importar dando clic en el boton 
-            <b>"Examinar"</b>. Una vez seleccionado el archivo de clic en el boton <b>"Subir archivo"</b>; el sistema evaluará que el archivo cumpla con todos los parametros requeridos y 
-            procedera a guardar en el sistema. <a title="Descargar" href='doc/carga_masiva.csv'>
-                <b>El archivo a subir debe de ajustarse al siguiente formato .csv </b>
-            </a></center></h4></div>
+<div class="alert alert-info">
+    <i class="icon-info-sign"></i>
+    <h4><center> 
+    Para realizar la carga masiva de adjudicados adjunte el <b>archivo .csv</b> que desea importar dando clic en el boton 
+    <b>"Examinar"</b>. Una vez seleccionado el archivo de clic en el boton <b>"Subir archivo"</b>; el sistema evaluará que el archivo cumpla con todos los parametros requeridos y 
+    procedera a guardar en el sistema. 
+    <br/>
+    </center></h4>
+</div>
 
-<p class="help-block">Los campos marcados con <span class="required">*</span> son requeridos.</p><br>
 
+<?php $this->beginWidget('booster.widgets.TbModal', array('id'=>'modal')); ?>
+
+<div class="modal-header" >
+    <a class="close" data-dismiss="modal">&times;</a>
+    <h4>Indicaciones y recomendaciones carga masiva</h4>
+</div>
+<div class="modal-body">
+<?php echo $this->renderPartial('instrucciones', array('model'=>$model));  // I need $productId to by dynamic related to link 
+                ?>   
+</div>
+<div class="modal-footer">
+    <?php $this->widget('booster.widgets.TbButton', array(
+        'label'=>'Cerrar',
+        'icon' => 'glyphicon glyphicon-chevron-left',
+        'context' => 'danger',        
+        'url'=>'#',
+        'htmlOptions'=>array('data-dismiss'=>'modal'),
+    )); ?>
+</div>
+
+<?php $this->endWidget(); ?>
+ <div class="pull-left">
+<?php 
+    $this->widget('booster.widgets.TbButton', array(
+        //'type'=>'primary',
+        'label' => 'Archivo maestro',
+        'icon' => 'glyphicon glyphicon-download',
+        'context' => 'success',
+        'buttonType' => 'link',
+        'url' => Yii::app()->baseUrl.'/doc/carga_masiva.csv',
+        ));
+?>    
+<?php 
+    $this->widget(
+    'booster.widgets.TbButton',
+    array(
+        'label' => 'Leer Instrucciones',
+        'icon' => 'glyphicon glyphicon-eye-open',
+        'context' => 'info',
+        'htmlOptions' => array(
+            'data-toggle' => 'modal',
+            'data-target' => '#modal',
+        ),
+    )
+);
+?>
+</div>
+
+<br/><br/><br/>
 <div class="row">
     <div class="col-md-4">
 
@@ -67,7 +119,6 @@
 
 </div>
 <div class="row">
-
     <div class='col-md-4'>
         <?php
         echo $form->dropDownListGroup($unidadHabitacional, 'desarrollo_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
