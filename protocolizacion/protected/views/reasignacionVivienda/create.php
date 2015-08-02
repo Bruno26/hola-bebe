@@ -8,7 +8,7 @@ Yii::app()->clientScript->registerScript('educacion', "
     });
         $('#guardar').click(function(){
             if( $('#ReasignacionVivienda_nacionalidad').val() == ''){
-                bootbox.alert('Indique la Nacionalidad .');
+                bootbox.alert('Seleccione la Nacionalidad .');
                 return false;
             }
             if( $('#ReasignacionVivienda_cedula').val() == ''){
@@ -16,19 +16,19 @@ Yii::app()->clientScript->registerScript('educacion', "
                    return false;
              }
             if( $('#ReasignacionVivienda_sexoActual').val() == ''){
-                   bootbox.alert('Indique su sexo .');
+                   bootbox.alert('Seleccione su sexo .');
                    return false;
              }
             if( $('#ReasignacionVivienda_estado_civilActual').val() == ''){
-                   bootbox.alert('Indique su estado civil.');
+                   bootbox.alert('Seleccione su estado civil.');
                    return false;
              }
             if( $('#ReasignacionVivienda_tipo_reasignacion_id').val() == ''){
-                   bootbox.alert('Indique el tipo de Reasignación de Vivienda.');
+                   bootbox.alert('Seleccione el tipo de Reasignación de Vivienda.');
                    return false;
              }
             if( $('#ReasignacionVivienda_fecha_reasignacion').val() == ''){
-                   bootbox.alert('Indique la fecha de Reagasinación.');
+                   bootbox.alert('Indique la fecha de Reasignación.');
                    return false;
              }
         });

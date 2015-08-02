@@ -384,7 +384,7 @@ function buscarPersonaAbogado(nacionalidad, cedula) {
 
 
 function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
-
+    $('#iconLoding').show();
     if (nacionalidad == 'SELECCIONE') {
         bootbox.alert('Verifique que la nacionalidad no esten vacios');
         return false;
@@ -407,7 +407,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                 //  No Existe en Saime habilito todos los campos para que se llenen a pedal
 
                 /*  ------  Bloqueo campos    ------- */
-
+                $('#iconLoding').hide();
                 $('#BeneficiarioTemporal_primer_apellido').attr('readonly', false);
                 $('#BeneficiarioTemporal_primer_apellido').val('');
 
@@ -441,6 +441,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                 /*   -------------------------------- */
 
             } else if (datos == 3) {
+                 $('#iconLoding').hide();
                 bootbox.alert('Beneficiario Se encuentra Registrado !');
                 // $('#BeneficiarioTemporal_cedula').val('');
                 return false;
@@ -448,6 +449,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
             } else if (datos.PROCEDENCIA == 2) {
                 //  Datos de la variable proceden de Saime 
                 // alert('entrooo');
+                 $('#iconLoding').hide();
                 if (datos.PRIMERNOMBRE == null) {
                     $('#BeneficiarioTemporal_primer_nombre').attr('readonly', false);
                     $('#BeneficiarioTemporal_primer_nombre').val('');
@@ -507,8 +509,8 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
 
             } else if (datos.PROCEDENCIA == 1) {
                 // Datos de la variable proceden de Persona si algun campo esta en blanco de puede actualizar solo una vez
+               $('#iconLoding').hide();
                 $('#BeneficiarioTemporal_primer_nombre').val(datos.PRIMERNOMBRE);
-
                 $('#BeneficiarioTemporal_segundo_nombre').val(datos.SEGUNDONOMBRE);
                 $('#BeneficiarioTemporal_primer_apellido').val(datos.PRIMERAPELLIDO);
                 $('#BeneficiarioTemporal_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
