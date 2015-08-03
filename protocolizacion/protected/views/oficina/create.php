@@ -35,7 +35,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 if (isset($sms) && !empty($sms)) {
     $user = Yii::app()->getComponent('user');
     $user->setFlash(
-            'warning', "<strong>Ya existe una oficina con este nombre.</strong>"
+            'warning', "<strong>Ya existe una Oficina con este nombre asociada a este Estado.</strong>"
     );
     $this->widget('booster.widgets.TbAlert', array(
         'fade' => true,

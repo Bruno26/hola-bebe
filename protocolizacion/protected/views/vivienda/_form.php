@@ -146,97 +146,76 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
         echo $form->textFieldGroup($model, 'nro_vivienda', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 8,
                     'onblur' => "Viviendas($('#Vivienda_unidad_habitacional_id').val(),$('#Vivienda_nro_piso').val(),$(this).val())"))));
         ?>
-<?php echo $form->error($model, 'nro_vivienda'); ?>
+        <?php echo $form->error($model, 'nro_vivienda'); ?>
     </div>
     <div class="col-md-3">
-<?php echo $form->textFieldGroup($model, 'construccion_mt2', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 10)))); ?>
+        <?php echo $form->textFieldGroup($model, 'construccion_mt2', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 10)))); ?>
 
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-3">
-        <?php echo CHtml::activeLabel($model, 'sala'); ?><br>
         <?php
-        $this->widget('booster.widgets.TbSwitch', array(
-            'name' => 'sala',
-            'options' => array(
-                'size' => 'large',
-                'onText' => 'SI',
-                'offText' => 'NO',
-            ),
-            'htmlOptions' => array(
-            // 'class' => '',
-            // 'onChange' => '',
+        echo $form->dropDownListGroup($model, 'sala', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+            'widgetOptions' => array(
+                'data' => array('TRUE' => 'SI', 'FALSE' => 'NO'),
+                'htmlOptions' => array('empty' => 'SELECCIONE',
+                ),
             )
                 )
         );
-        ?> 
+        ?>
+
+
     </div>
     <div class="col-md-3">
-        <?php echo CHtml::activeLabel($model, 'comedor'); ?><br>
-        <?php
-        $this->widget('booster.widgets.TbSwitch', array(
-            'name' => 'comedor',
-            'options' => array(
-                'size' => 'large',
-                'onText' => 'SI',
-                'offText' => 'NO',
-            ),
-            'htmlOptions' => array(
-            // 'class' => '',
-            // 'onChange' => '',
+          <?php
+        echo $form->dropDownListGroup($model, 'comedor', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+            'widgetOptions' => array(
+                'data' => array('TRUE' => 'SI', 'FALSE' => 'NO'),
+                'htmlOptions' => array('empty' => 'SELECCIONE',
+                ),
             )
                 )
         );
-        ?> 
+        ?>
     </div>
 
     <div class="col-md-3">
-        <?php echo CHtml::activeLabel($model, 'cocina'); ?><br>
         <?php
-        $this->widget('booster.widgets.TbSwitch', array(
-            'name' => 'cocina',
-            'options' => array(
-                'size' => 'large',
-                'onText' => 'SI',
-                'offText' => 'NO',
-            ),
-            'htmlOptions' => array(
-            // 'class' => '',
-            // 'onChange' => '',
+        echo $form->dropDownListGroup($model, 'cocina', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+            'widgetOptions' => array(
+                'data' => array('TRUE' => 'SI', 'FALSE' => 'NO'),
+                'htmlOptions' => array('empty' => 'SELECCIONE',
+                ),
             )
                 )
         );
-        ?> 
+        ?>
     </div>
     <div class="col-md-3">
-        <?php echo CHtml::activeLabel($model, 'lavandero'); ?><br>
-        <?php
-        $this->widget('booster.widgets.TbSwitch', array(
-            'name' => 'lavandero',
-            'options' => array(
-                'size' => 'large',
-                'onText' => 'SI',
-                'offText' => 'NO',
-            ),
-            'htmlOptions' => array(
-            // 'class' => '',
-            // 'onChange' => '',
+       <?php
+        echo $form->dropDownListGroup($model, 'lavandero', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
+            'widgetOptions' => array(
+                'data' => array('TRUE' => 'SI', 'FALSE' => 'NO'),
+                'htmlOptions' => array('empty' => 'SELECCIONE',
+                ),
             )
                 )
         );
-        ?> 
+        ?>
     </div>
+
 </div>
 <div class="row">
 
     <div class="col-md-4">
-<?php echo $form->textFieldGroup($model, 'nro_habitaciones', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+        <?php echo $form->textFieldGroup($model, 'nro_habitaciones', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
 
     </div>
     <div class="col-md-4">
-<?php echo $form->textFieldGroup($model, 'nro_banos', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+        <?php echo $form->textFieldGroup($model, 'nro_banos', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
 
     </div>
     <div class="col-md-4">
@@ -332,7 +311,7 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
 
     <div class="col-md-4">
 
-<?php echo $form->textFieldGroup($model, 'nro_estacionamientos', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16)))); ?>
+        <?php echo $form->textFieldGroup($model, 'nro_estacionamientos', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16)))); ?>
     </div>
     <div class="col-md-4">
         <?php
@@ -350,6 +329,6 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
         ?>
     </div>
     <div class="col-md-4">
-<?php echo $form->textFieldGroup($model, 'precio_vivienda', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16)))); ?>
+        <?php echo $form->textFieldGroup($model, 'precio_vivienda', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 16)))); ?>
     </div>
 </div>

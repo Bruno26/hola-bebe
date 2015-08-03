@@ -63,7 +63,7 @@ class OficinaController extends Controller {
             $sql = "SELECT ofi.nombre 
                     FROM oficina ofi
                     LEFT JOIN vsw_sector sec ON sec.cod_parroquia = ofi.parroquia_id 
-                    WHERE ofi.nombre ILIKE '" . $nombre . "' AND sec.cod_estado = " . $cod_estado . " AND ofi.estatus = 44
+                    WHERE sec.cod_estado = " . $cod_estado . " AND ofi.estatus = 44
                     GROUP BY  ofi.id_oficina, ofi.nombre,  sec.cod_estado, sec.estado, ofi.parroquia_id
                     ORDER BY estado ASC";
 

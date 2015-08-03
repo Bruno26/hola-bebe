@@ -59,18 +59,19 @@ $this->widget('booster.widgets.TbGridView', array(
             'value' =>'$data->id',
         //'htmlOptions' => array('width' => '80', 'style' => 'text-align: center;'),
         ),
-        'primer_nombre' => array(
-            'header' => 'Nombre',
-            'name' => 'primer_nombre',
-            'value' => 'nombre("PRIMER_NOMBRE",$data->persona_id)',
+        'persona_id' => array(
+            'header' => 'Agente Documentación y Cobranzas',
+            'name'=>'persona_id',
+            'value' => 'nombre("PRIMER_NOMBRE",$data->persona_id)."".apellido("PRIMER_APELLIDO",$data->persona_id)',
+            'filter'=>TRUE,
         //'htmlOptions' => array('width' => '80', 'style' => 'text-align: center;'),
         ),
-        'primer_apellido' => array(
-            'header' => 'Apellido',
-            'name' => 'primer_apellido',
-            'value' => 'apellido("PRIMER_APELLIDO",$data->persona_id)',
-        // 'value' => '$data->persona_id_jefe',
-        ),
+//        'primer_apellido' => array(
+//            'header' => 'Apellido',
+//            'name' => 'primer_apellido',
+//            'value' => 'apellido("PRIMER_APELLIDO",$data->persona_id)',
+//        // 'value' => '$data->persona_id_jefe',
+//        ),
         'tipo_abogado_id' => array(
             'header' => 'Tipo Abogado',
             'name' => 'tipo_abogado_id',
@@ -82,7 +83,7 @@ $this->widget('booster.widgets.TbGridView', array(
             'header' => 'Oficina',
             'name' => 'oficina_id',
             'value' => '$data->oficinaId->nombre',
-//            'filter' => CHtml::listData(Abogados::model()->findall(), 'oficina_id', 'oficina_id'),
+//            'filter' => CHtml::listData(Oficina::model()->findall(), 'nombre', 'nombre'),
         ),
         array(
             'class' => 'booster.widgets.TbButtonColumn',
