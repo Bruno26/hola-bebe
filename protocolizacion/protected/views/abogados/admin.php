@@ -23,16 +23,12 @@ return false;
 
 <h1>Gestión de Agente de Documentación y Cobranzas</h1>
 
-
-
-<?php // echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
-<!--<div class="search-form" style="display:none">-->
 <?php
-// $this->renderPartial('_search',array(
-//	'model'=>$model,
-//)); 
+$v = "SELECT ofi.id_oficina, ofi.nombre FROM abogados ab
+        JOIN oficina ofi on ofi.id_oficina=ab.oficina_id
+        GROUP BY  ofi.id_oficina, ofi.nombre";
+$conexion = Yii::app()->db->createCommand($v)->queryAll();
 ?>
-<!--</div> search-form -->
 
 <?php
 
@@ -46,7 +42,6 @@ function apellido($selec, $iD) {
     return $saime['PRIMER_APELLIDO'];
 }
 
-
 $this->widget('booster.widgets.TbGridView', array(
     'id' => 'abogados-grid',
     'type' => 'striped bordered condensed',
@@ -56,14 +51,14 @@ $this->widget('booster.widgets.TbGridView', array(
         'id' => array(
             'header' => 'N°',
             'name' => 'id',
-            'value' =>'$data->id',
+            'value' => '$data->id',
         //'htmlOptions' => array('width' => '80', 'style' => 'text-align: center;'),
         ),
         'persona_id' => array(
             'header' => 'Agente Documentación y Cobranzas',
-            'name'=>'persona_id',
-            'value' => 'nombre("PRIMER_NOMBRE",$data->persona_id)."".apellido("PRIMER_APELLIDO",$data->persona_id)',
-            'filter'=>TRUE,
+            'name' => 'persona_id',
+            'value' => 'nombre("PRIMER_NOMBRE",$data->persona_id)."   ".apellido("PRIMER_APELLIDO",$data->persona_id)',
+            'filter' => TRUE,
         //'htmlOptions' => array('width' => '80', 'style' => 'text-align: center;'),
         ),
 //        'primer_apellido' => array(
@@ -83,7 +78,7 @@ $this->widget('booster.widgets.TbGridView', array(
             'header' => 'Oficina',
             'name' => 'oficina_id',
             'value' => '$data->oficinaId->nombre',
-//            'filter' => CHtml::listData(Oficina::model()->findall(), 'nombre', 'nombre'),
+            'filter' => CHtml::listData($conexion, 'id_oficina', 'nombre'),
         ),
         array(
             'class' => 'booster.widgets.TbButtonColumn',
