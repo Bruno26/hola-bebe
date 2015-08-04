@@ -8,10 +8,17 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
                 if( $(this).val() == '101'){
                     $('.inpreabogado').show();
                     $('.rifabogado').hide();
-               
+                    $('#Abogados_rif_abogado').val('');
+                    $('#Abogados_registro_publico_id').val('');
+                    $('#Abogados_nun_protocolo').val('');
+                    $('#Abogados_folio').val('');
+                    $('#Abogados_tomo').val('');
+                    $('#Abogados_anio').val('');
+
                 } else {
                     $('.inpreabogado').hide();
                     $('.rifabogado').show();
+                    $('#Abogados_inpreabogado').val('');
                 }
             }), 
        
@@ -39,11 +46,11 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 <div class="row rifabogado" style ="display: none">
 
     <div class="col-md-4">
-          <b>Rif Abogado </b> <span class="required">*</span>
+        <b>Rif Abogado </b> <span class="required">*</span>
         <?php echo $form->textFieldGroup($model, 'rif_abogado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20)))); ?>
     </div>
     <div class="col-md-4" >
-          <b>Resgistro Público</b> <span class="required">*</span>
+        <b>Resgistro Público</b> <span class="required">*</span>
         <?php
         echo $form->dropDownListGroup($model, 'registro_publico_id', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
             'widgetOptions' => array(
@@ -55,7 +62,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
         ?>
     </div>
     <div class="col-md-4 " >
-      <b> Número de Protocolo </b> <span class="required">*</span>
+        <b> Número de Protocolo </b> <span class="required">*</span>
         <?php
         echo $form->dropDownListGroup($model, 'nun_protocolo', array('wrapperHtmlOptions' => array('class' => 'col-sm-12 limpiar'),
             'widgetOptions' => array(
@@ -75,12 +82,12 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
         <?php echo $form->textFieldGroup($model, 'folio', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 12)))); ?>
     </div>
     <div class="col-md-4">
-          <b>Número de Tomo </b> <span class="required">*</span>
+        <b>Número de Tomo </b> <span class="required">*</span>
         <?php echo $form->textFieldGroup($model, 'tomo', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 12)))); ?>
 
     </div>
     <div class='col-md-4'>
-          <b> Año </b> <span class="required">*</span>
+        <b> Año </b> <span class="required">*</span>
         <?php
         echo $form->datePickerGroup($model, 'anio', array('widgetOptions' =>
             array(

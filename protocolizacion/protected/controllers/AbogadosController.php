@@ -109,6 +109,7 @@ class AbogadosController extends Controller {
             $model->observaciones = trim(strtoupper($_POST['Abogados']['observaciones']));
             $model->usuario_id_actualizacion = Yii::app()->user->id;
             $model->fecha_actualizacion = 'now()';
+         
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }

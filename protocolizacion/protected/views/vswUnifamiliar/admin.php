@@ -22,14 +22,18 @@ $this->widget('booster.widgets.TbGridView', array(
     'dataProvider' => $model->search(),
     'filter' => $model,
     'columns' => array(
-           'nombre_desarrollo' => array(
+        'id_vivienda' => array(
+            'header' => 'N°',
+            'name' => 'id_vivienda',
+            'value' => '$data->id_vivienda',
+            'htmlOptions' => array('width' => '80', 'style' => 'text-align: center;'),
+        ),
+        'nombre_desarrollo' => array(
             'header' => 'Nombre de Desarrollo',
             'name' => 'nombre_desarrollo',
             'value' => '$data->nombre_desarrollo',
             'filter' => CHtml::listData(Desarrollo::model()->findAll(array('order' => 'nombre ASC')), 'nombre', 'nombre')
-
         ),
-
         'nombre_unidad_habitacional' => array(
             'name' => 'nombre_unidad_habitacional',
             'header' => 'Unidad Multifamiliar',
@@ -42,13 +46,11 @@ $this->widget('booster.widgets.TbGridView', array(
             'value' => '$data->tipo_vivienda',
             'filter' => Maestro::FindMaestrosByPadreSelect(92, 'descripcion'),
         ),
-
         'estado' => array(
             'header' => 'Estado',
             'name' => 'estado',
             'value' => '$data->estado',
             'filter' => CHtml::listData(Tblestado::model()->findAll(array('order' => 'strdescripcion ASC')), 'strdescripcion', 'strdescripcion')
-
         ),
         array(
             'class' => 'booster.widgets.TbButtonColumn',
@@ -76,8 +78,7 @@ $this->widget('booster.widgets.TbGridView', array(
                     'url' => 'Yii::app()->createUrl("vivienda/pdf/", array("id"=>$data->id_vivienda))',
 //                    'visible' => 'Asignar($data->username);'
                 ),
-
-                 'documento' => array(
+                'documento' => array(
                     'label' => 'Generar Documento',
                     'icon' => 'glyphicon glyphicon-list-alt',
                     'size' => 'medium',

@@ -46,9 +46,10 @@ class RegistroPublicoController extends Controller {
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
-
         if (isset($_POST['RegistroPublico'])) {
+
             $model->attributes = $_POST['RegistroPublico'];
+            $model->nombre_registro_publico = trim(strtoupper($_POST['RegistroPublico']['nombre_registro_publico']));
             $model->estatus = 56;
             $model->usuario_id_creacion = Yii::app()->user->id;
             $model->fecha_creacion = 'now()';
@@ -60,6 +61,15 @@ class RegistroPublicoController extends Controller {
         $this->render('create', array(
             'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia
         ));
+    }
+
+    public function actionCambioEstatus($id) {
+        if (Yii::app()->request->isAjaxRequest) {
+            $this->renderPartial('cambioEstatus', array('model' => $id), false, true);
+        } else {
+
+            $this->render('anular', array('model' => $id));
+        }
     }
 
     /**

@@ -12,6 +12,7 @@ if (baseUrl.indexOf('.protocolizacion.org.ve') == -1) {
 function conMayusculas(field) {
     field.value = field.value.toUpperCase()
 }
+
 $(document).ready(function() {
     var SalarioGrupoFamiliar = $('#opciones_2').val();
     $.ajax({
@@ -83,11 +84,18 @@ function CalcularAnalisis() {
         bootbox.alert('Indique el Programa.');
         return false;
     }
-    if (programa == '') {
-        bootbox.alert('Indique el Programa.');
+    if (montoInical == '0' || montoInical == '') {
+        bootbox.alert('Indique un Monto Inicial.');
         return false;
     }
-
+    if (plazoCredito == '') {
+        bootbox.alert('Indique el Plazo del Crédito.');
+        return false;
+    }
+    if (fechaProtocolizacion == '') {
+        bootbox.alert('Indique la Fecha de la Protocolización.');
+        return false;
+    }
 
     $.ajax({
         url: baseUrl + "/CalculoAnalisisCredito/Ajax/CalculoTasaAmortizacion",

@@ -121,6 +121,11 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                     'header' => 'Listado de Programas',
                     'value' => '$data->nombre_programa',
                 ),
+                array(
+                    'name' => 'fuente_financiamiento_id',
+                    'header' => 'Fuente de Financiamiento',
+                    'value' => '$data->fuenteFinanciamiento->nombre_fuente_financiamiento',
+                ),
             ),
                 )
         );

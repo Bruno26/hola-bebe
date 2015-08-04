@@ -21,7 +21,6 @@
                 <p>
                    <b>Nombre de la Oficina:</b> <?php echo $model->nombre ?><br/>
                    <b>Jefe Asignado:</b> <?php echo nombre('PRIMER_NOMBRE', $model->persona_id_jefe)." ".apellido('PRIMER_APELLIDO', $model->persona_id_jefe) ?><br/>
-                     <b>Observaciones:</b> <?php echo $model->observaciones ?>
                 </p>
     </div>
         <div class='col-md-6'>

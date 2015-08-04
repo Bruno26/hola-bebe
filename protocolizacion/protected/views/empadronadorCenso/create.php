@@ -45,16 +45,7 @@ $this->widget(
 
     <div class="well">
         <div class="pull-center" style="text-align: right;">
-            <?php
-            $this->widget('booster.widgets.TbButton', array(
-                'buttonType' => 'submit',
-                'icon' => 'glyphicon glyphicon-floppy-saved',
-                'size' => 'large',
-                'id' => 'guardar',
-                'context' => 'primary',
-                'label' => 'Guardar',
-            ));
-            ?>
+       
 
             <?php
             $this->widget('booster.widgets.TbButton', array(

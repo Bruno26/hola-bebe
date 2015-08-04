@@ -55,7 +55,7 @@ class Abogados extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('persona_id, tipo_abogado_id, oficina_id, estatus, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
+            array('persona_id, tipo_abogado_id, oficina_id, estatus, fecha_creacion, usuario_id_creacion', 'required'),
             array('persona_id, tipo_abogado_id, oficina_id, estatus, usuario_id_creacion, usuario_id_actualizacion, registro_publico_id, nun_protocolo', 'numerical', 'integerOnly' => true),
             array('inpreabogado', 'length', 'max' => 20),
             array('observaciones', 'length', 'max' => 200),

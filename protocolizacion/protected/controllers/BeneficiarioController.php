@@ -128,6 +128,88 @@ class BeneficiarioController extends Controller {
             'model' => $model, 'desarrollo' => $desarrollo, 'municipio' => $municipio, 'estado' => $estado, 'parroquia' => $parroquia, 'unidad_familiar' => $unidad_familiar, 'vivienda' => $vivienda
         ));
     }
+    
+    
+    public function actionCreateCenso($id) {
+        $model = new Beneficiario;
+        $desarrollo = new Desarrollo;
+        $vivienda = new Vivienda;
+        $unidad_familiar = new UnidadFamiliar;
+        $estado = new Tblestado;
+        $municipio = new Tblmunicipio;
+        $parroquia = new Tblparroquia;
+        
+        $beneficiarioTmp= BeneficiarioTemporal::model()->findByPk($id);
+
+// Uncomment the following line if AJAX validation is needed
+// $this->performAjaxValidation($model);
+
+        if (isset($_POST['Beneficiario'])) {
+            $model->attributes = $_POST['Beneficiario'];
+            $Existe = BeneficiarioTemporal::model()->findByPk($model->beneficiario_temporal_id);
+            if (empty($Existe)) {
+                $this->render('create', array(
+                    'model' => $model, 'desarrollo' => $desarrollo, 'municipio' => $municipio, 'estado' => $estado, 'parroquia' => $parroquia, 'unidad_familiar' => $unidad_familiar, 'vivienda' => $vivienda, 'error' => 1
+                ));
+                Yii::app()->end();
+            } else {
+
+                $censado = Beneficiario::model()->findByAttributes(array('beneficiario_temporal_id' => $Existe->id_beneficiario_temporal));
+
+                if (empty($censado)) {
+
+                    $model->fecha_creacion = 'now()';
+                    $model->fecha_actualizacion = 'now()';
+                    $model->fecha_ultimo_censo = Generico::formatoFecha($_POST['Beneficiario']['fecha_ultimo_censo']);
+                    $model->usuario_id_creacion = Yii::app()->user->id;
+                    $model->persona_id = $Existe->persona_id;
+                    $model->estatus_beneficiario_id = 223;
+                    if ($model->save()) {
+//                        $Existe->estatus = 224;
+//                        $Existe->save();
+
+                        $viviendaUpdate = ViviendaController::loadModel($Existe->vivienda_id);
+                        $viviendaUpdate->construccion_mt2 = $_POST['Vivienda']['construccion_mt2'];
+                        if ($viviendaUpdate->save()) {
+//                            $unidad_familiar->nombre = $Existe->nombre_completo;
+                            $unidad_familiar->beneficiario_id = $model->id_beneficiario;
+                            $unidad_familiar->ingreso_total_familiar = '0.00';
+//                            $unidad_familiar->procedencia_beneficio_id = 140; //INIDICAR EN QUE MOMENTO SE CARGA ESTE DATO
+                            $unidad_familiar->fuente_datos_entrada_id = 90;
+                            $unidad_familiar->condicion_unidad_familiar_id = $_POST['UnidadFamiliar']['condicion_unidad_familiar_id']; //Berifivar cual es el id
+                            $unidad_familiar->total_personas_cotizando = 0;
+                            $unidad_familiar->fecha_creacion = 'now()';
+                            $unidad_familiar->fecha_actualizacion = 'now()';
+                            $unidad_familiar->usuario_id_creacion = Yii::app()->user->id;
+                            $unidad_familiar->estatus = 77;
+                            if ($unidad_familiar->save()) {
+                                $traza = Traza::actionInsertUpdateTraza(1, $model->id_beneficiario, 1);
+
+                                $n = BeneficiarioTemporal::model()->updateByPk($model->beneficiario_temporal_id, array(
+                                    'estatus' => 224,
+                                    'usuario_id_actualizacion' => Yii::app()->user->id,
+                                    'fecha_actualizacion' => 'now()'
+                                ));
+
+
+                                $this->redirect(array('grupoFamiliar/create', 'id' => $unidad_familiar->id_unidad_familiar));
+                                Yii::app()->end();
+                            } 
+                        } 
+                    }
+                } else {
+
+                    $this->render('createCenso', array( 'beneficiarioTmp'=>$beneficiarioTmp,
+                        'model' => $model, 'desarrollo' => $desarrollo, 'municipio' => $municipio, 'estado' => $estado, 'parroquia' => $parroquia, 'unidad_familiar' => $unidad_familiar, 'vivienda' => $vivienda, 'error' => 2
+                    ));
+                    Yii::app()->end();
+                }
+            }
+        }
+        $this->render('createCenso', array( 'beneficiarioTmp'=>$beneficiarioTmp,
+            'model' => $model, 'desarrollo' => $desarrollo, 'municipio' => $municipio, 'estado' => $estado, 'parroquia' => $parroquia, 'unidad_familiar' => $unidad_familiar, 'vivienda' => $vivienda
+        ));
+    }
 
     /**
      * Updates a particular model.

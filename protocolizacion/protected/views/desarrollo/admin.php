@@ -53,7 +53,7 @@ $this->widget('booster.widgets.TbGridView', array(
             'header' => 'Nombre',
             'name' => 'nombre',
             'value' => '$data->nombre',
-//            'filter' => CHtml::listData(Desarrollo::model()->findall(), 'id_desarrollo', 'nombre'),
+            'filter' => CHtml::listData(Desarrollo::model()->findall(), 'nombre', 'nombre'),
 //            'filter' => Maestro::FindMaestrosByPadreSelect(71),
         ),
         'ente_ejecutor_id' => array(
@@ -66,18 +66,14 @@ $this->widget('booster.widgets.TbGridView', array(
             'value' => '$data->fuenteFinanciamiento->nombre_fuente_financiamiento',
             'filter' => CHtml::listData(FuenteFinanciamiento::model()->findall(), 'id_fuente_financiamiento', 'nombre_fuente_financiamiento'),
         ),
-        'Estado' => array(
+        'parroquia_id' => array(
             'header' => 'Estado',
-            'name' => 'nombre',
+            'name' => 'parroquia_id',
             'value' => '$data->fkParroquia->clvmunicipio0->clvestado0->strdescripcion',
-            'filter' => CHtml::listData(Tblestado::model()->findall(), 'strdescripcion', 'strdescripcion'),
+//            'filter' => CHtml::listData(Tblestado::model()->findall(), 'clvcodigo', 'strdescripcion'),
 //            'filter' => Maestro::FindMaestrosByPadreSelect(71),
         ),
-//        array(
-//            'name' => 'fecha_creacion',
-//            'value' => 'Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($data->fecha_creacion))',
-//        //'header' => 'Creación',
-//        ),
+
         array(
             'class' => 'booster.widgets.TbButtonColumn',
             'header' => 'Acciones',

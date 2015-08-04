@@ -13,33 +13,9 @@ array('label'=>'Manage UnidadHabitacional','url'=>array('admin')),
 );
 ?>
 
-<h1 class="text-center">Unidad Habitacional <?php echo $model->nombre; ?></h1>
+<h1 class="text-center">Unidad Multifamiliar <?php echo $model->nombre; ?></h1>
 
-<?php /* $this->widget('booster.widgets.TbDetailView',array(
-'data'=>$model,
-'attributes'=>array(
-		'id_unidad_habitacional',
-		'nombre',
-		'desarrollo_id',
-		'gen_tipo_inmueble_id',
-		'total_unidades',
-		'registro_publico_id',
-		'tipo_documento_id',
-		'fecha_registro',
-		'nro_documento',
-		'tomo',
-		'ano',
-		'nro_protocolo',
-		'asiento_registral',
-		'folio_real',
-		'nro_matricula',
-		'fuente_datos_entrada_id',
-		'fecha_creacion',
-		'fecha_actualizacion',
-		'usuario_id_creacion',
-		'usuario_id_actualizacion',
-),
-)); */ ?>
+
 <?php $this->widget('booster.widgets.TbPanel', array(
     'context' => 'primary',
     'content' => $this->renderPartial('_view', array('model' => $model, 'estado' => $estado, 'municipio' => $municipio), TRUE),

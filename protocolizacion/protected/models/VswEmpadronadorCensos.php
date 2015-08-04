@@ -9,6 +9,7 @@
  * @property integer $id_unidad_habitacional
  * @property string $nombre_unidad_multifamiliar
  * @property integer $id_beneficiario_temporal
+ * @property integer $id_beneficiario
  * @property integer $persona_id
  * @property integer $cedula
  * @property string $nombre_adjudicado
@@ -28,6 +29,8 @@ class VswEmpadronadorCensos extends CActiveRecord
 		return 'vsw_empadronador_censos';
 	}
 
+        
+        
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -36,14 +39,14 @@ class VswEmpadronadorCensos extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_desarrollo, id_unidad_habitacional, id_beneficiario_temporal, persona_id, cedula, estatus, iduser', 'numerical', 'integerOnly'=>true),
+			array('id_desarrollo, id_unidad_habitacional, id_beneficiario_temporal, id_beneficiario, persona_id, cedula, estatus, iduser', 'numerical', 'integerOnly'=>true),
 			array('nombre_desarrollo, nombre_adjudicado', 'length', 'max'=>200),
 			array('nombre_unidad_multifamiliar', 'length', 'max'=>100),
 			array('nro_piso, nro_vivienda', 'length', 'max'=>10),
 			array('empadronador_usuario', 'length', 'max'=>64),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_desarrollo, nombre_desarrollo, id_unidad_habitacional, nombre_unidad_multifamiliar, id_beneficiario_temporal, persona_id, cedula, nombre_adjudicado, estatus, nro_piso, nro_vivienda, iduser, empadronador_usuario', 'safe', 'on'=>'search'),
+			array('id_desarrollo, nombre_desarrollo, id_unidad_habitacional, nombre_unidad_multifamiliar, id_beneficiario_temporal, id_beneficiario, persona_id, cedula, nombre_adjudicado, estatus, nro_piso, nro_vivienda, iduser, empadronador_usuario', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,6 +72,7 @@ class VswEmpadronadorCensos extends CActiveRecord
 			'id_unidad_habitacional' => 'Id Unidad Habitacional',
 			'nombre_unidad_multifamiliar' => 'Nombre Unidad Multifamiliar',
 			'id_beneficiario_temporal' => 'Id Beneficiario Temporal',
+			'id_beneficiario' => 'Id Beneficiario',
 			'persona_id' => 'Persona',
 			'cedula' => 'Cedula',
 			'nombre_adjudicado' => 'Nombre Adjudicado',
@@ -103,6 +107,7 @@ class VswEmpadronadorCensos extends CActiveRecord
 		$criteria->compare('id_unidad_habitacional',$this->id_unidad_habitacional);
 		$criteria->compare('nombre_unidad_multifamiliar',$this->nombre_unidad_multifamiliar,true);
 		$criteria->compare('id_beneficiario_temporal',$this->id_beneficiario_temporal);
+		$criteria->compare('id_beneficiario',$this->id_beneficiario);
 		$criteria->compare('persona_id',$this->persona_id);
 		$criteria->compare('cedula',$this->cedula);
 		$criteria->compare('nombre_adjudicado',$this->nombre_adjudicado,true);

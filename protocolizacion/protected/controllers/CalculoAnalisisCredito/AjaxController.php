@@ -44,7 +44,7 @@ class AjaxController extends Controller {
             case ($cantidadSalarios > 6 && $cantidadSalarios <= 8):
                 $cantidad = 3;
                 break;
-            case ($cantidadSalarios > 8 && $cantidadSalarios <= 10):
+            case ($cantidadSalarios > 8):
                 $cantidad = 4;
                 break;
         }
@@ -56,7 +56,29 @@ class AjaxController extends Controller {
      */
 
     public function actionCalculoTasaAmortizacion() {
-        echo CJSON::encode(1);
-        //echo '<pre>';var_dump($_POST);die;
+
+
+	$fuenteFinanciamineto = $_POST['fuenteFinanciamineto'];
+	$programa = $_POST['programa'];
+	$montoInical = $_POST['montoInical'];
+	$montoVivienda = $_POST['montoVivienda'];
+	$idUnidadFamiliar = $_POST['idUnidadFamiliar'];
+	$igresoFamiliar =  $_POST['valorSalario'];
+	$tasaInteres = TasaInteres::model()->findByPk($_POST['tasaInteres'])->tasa_interes;
+	$plazoCredito = $_POST['plazoCredito'];
+	$fechaProtocolizacion = Generico::formatoFecha($_POST['fechaProtocolizacion']);
+
+        $CuotaFinanciamientoMaximo = CalculosController::actionCuotaFinancieraMaxima($igresoFamiliar);
+        $CapacidadPago = CalculosController::actionMaximaCapacidadPago($tasaInteres, $plazoCredito, $CuotaFinanciamientoMaximo);
+	$CreditoSolicitado = CalculosController::actionCreditoSolicitado($montoInical, $montoVivienda);
+	$fongar = CalculosController::actionMaximaCapacidadPago($CreditoSolicitado);
+
+	if($fuenteFinanciamineto == 2){
+		
+	}
+
     }
+
+
+
 }
