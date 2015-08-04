@@ -73,8 +73,10 @@ class AbogadosController extends Controller {
             $model->estatus = 2;
             $model->usuario_id_creacion = Yii::app()->user->id;
             $model->fecha_creacion = 'now()';
-            if ($model->save())
+            $model->fecha_actualizacion = 'now()';
+            if ($model->save()){
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('create', array(
