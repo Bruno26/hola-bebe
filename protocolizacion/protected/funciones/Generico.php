@@ -68,6 +68,16 @@ class Generico {
         }
     }
 
+    public function edad($fecha) {
+        /*list($Y, $m, $d) = explode("-", $fecha);
+        return( date("md") < $m . $d ? date("Y") - $Y - 1 : date("Y") - $Y );*/
+        $fecha = str_replace("/","-",$fecha);
+        $fecha = date('Y/m/d',strtotime($fecha));
+        $hoy = date('Y/m/d');
+        $edad = $hoy - $fecha; 
+        return $edad; 
+    }
+
 }
 ?>
 

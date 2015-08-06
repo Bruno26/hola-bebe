@@ -56,26 +56,28 @@ class AjaxController extends Controller {
      */
 
     public function actionCalculoTasaAmortizacion() {
+    	$fuenteFinanciamineto = $_POST['fuenteFinanciamineto'];
+    	$programa = $_POST['programa'];
+    	$montoInical = $_POST['montoInical'];
+    	$montoVivienda = $_POST['montoVivienda'];
+    	$idUnidadFamiliar = $_POST['idUnidadFamiliar'];
+    	$igresoFamiliar =  $_POST['valorSalario'];
+    	$tasaInteres = TasaInteres::model()->findByPk($_POST['tasaInteres'])->tasa_interes;
+    	$plazoCredito = $_POST['plazoCredito'];
+    	$fechaProtocolizacion = Generico::formatoFecha($_POST['fechaProtocolizacion']);
 
-
-	$fuenteFinanciamineto = $_POST['fuenteFinanciamineto'];
-	$programa = $_POST['programa'];
-	$montoInical = $_POST['montoInical'];
-	$montoVivienda = $_POST['montoVivienda'];
-	$idUnidadFamiliar = $_POST['idUnidadFamiliar'];
-	$igresoFamiliar =  $_POST['valorSalario'];
-	$tasaInteres = TasaInteres::model()->findByPk($_POST['tasaInteres'])->tasa_interes;
-	$plazoCredito = $_POST['plazoCredito'];
-	$fechaProtocolizacion = Generico::formatoFecha($_POST['fechaProtocolizacion']);
-
+        
         $CuotaFinanciamientoMaximo = CalculosController::actionCuotaFinancieraMaxima($igresoFamiliar);
         $CapacidadPago = CalculosController::actionMaximaCapacidadPago($tasaInteres, $plazoCredito, $CuotaFinanciamientoMaximo);
-	$CreditoSolicitado = CalculosController::actionCreditoSolicitado($montoInical, $montoVivienda);
-	$fongar = CalculosController::actionMaximaCapacidadPago($CreditoSolicitado);
-
-	if($fuenteFinanciamineto == 2){
-		
-	}
+        $CreditoSolicitado = CalculosController::actionCreditoSolicitado($montoInical, $montoVivienda);
+        
+        
+        if ($fuenteFinanciamineto == '2') { // FUENTE DE FINANCIAMIENTO FAOV
+//        	$subsidio = FaspController::actionSubsidio($CapacidadPago, $montoVivienda);
+        }else if ($fuenteFinanciamineto == '3') {  // FUENTE DE FINANCIAMIENTO FASP
+            $subsidio = FaspController::actionSubsidio($CapacidadPago, $montoVivienda,$idUnidadFamiliar);
+            
+        }
 
     }
 
