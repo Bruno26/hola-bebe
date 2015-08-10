@@ -100,7 +100,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
                     'endDate' => 'now()',
                 ),
                 'htmlOptions' => array(
-                    'class' => 'span5 limpiar',
+                    'class' => 'span5',
                     'readonly' => true,        
                 ),
             ),

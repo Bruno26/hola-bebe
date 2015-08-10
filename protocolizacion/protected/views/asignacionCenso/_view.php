@@ -53,7 +53,7 @@ $fecha_invert = $invert[2] . "-" . $invert[1] . "-" . $invert[0];
 <div class="row">
     <div class="col-md-12">
         <h4><i class="glyphicon glyphicon-user"></i> Persona Asignada</h4>
-        <div class='col-md-6'> 
+        <div class='col-md-8'> 
             <blockquote>
                 <p>
                     <b>Nombre:</b> <?php echo nombre('PRIMER_NOMBRE', $model->persona_id) ?><br/>
@@ -62,7 +62,7 @@ $fecha_invert = $invert[2] . "-" . $invert[1] . "-" . $invert[0];
                 </p>
             </blockquote>
         </div>
-        <div class='col-md-6'> 
+        <div class='col-md-4'> 
             <blockquote>
                 <b>Fecha de Asignación:</b> <?php echo Yii::app()->dateFormatter->format("d/M/y - hh:mm a", strtotime($model->fecha_asignacion)) ?><br/>
                 </p>
