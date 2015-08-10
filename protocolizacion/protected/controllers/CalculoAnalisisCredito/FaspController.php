@@ -25,9 +25,10 @@ class FaspController extends Controller {
         );
     }
 
-    public function actionSubsidio($capacidadPago, $costoVivienda, $idUnidadFamiliar){
+    public function actionSubsidio($capacidadPago, $costoVivienda, $idUnidadFamiliar, $ingresoFamiliar){
         if((int)$capacidadPago >= (int)$costoVivienda){
             return '0';
+        }else if(){}
         } else {
             $criteria = new CDbCriteria;
             $criteria->addCondition('t.unidad_familiar_id = :unidad_familiar_id');
@@ -68,7 +69,7 @@ class FaspController extends Controller {
             if (!$procesa) {
                 return '0';
             } else {
-
+                
             }
             
         }

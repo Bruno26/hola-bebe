@@ -206,19 +206,19 @@ class ConsultaOracle extends CActiveRecord {
             foreach ($array as $key => $value) {
                 if ($key == 'FECHA_NACIMIENTO') {
                     array_push($select, $key);
-                    array_push($valor, "to_date('$value','DD/MM/RR')");
+                    array_push($valor, 'to_date("$value","DD/MM/RR")');
                 } else {
                     array_push($select, $key);
                     if (is_numeric($value)) {
                         array_push($valor, $value);
                     } else {
-                        array_push($valor, "'" . $value . "'");
+                        array_push($valor, '"' . $value . '"');
                     }
                 }
             }
             $select = implode(',', $select);
             $valor = implode(',', $valor);
-            $SQL = "INSERT INTO TABLAS_COMUNES.PERSONA (ID, " . $select . ") VALUES ((SELECT MAX(ID)+1 FROM TABLAS_COMUNES.PERSONA)," . $valor . ")";
+            $SQL = 'INSERT INTO TABLAS_COMUNES.PERSONA (ID, ' . $select . ') VALUES ((SELECT MAX(ID)+1 FROM TABLAS_COMUNES.PERSONA),' . $valor . ')';
             $result = Yii::app()->dbOarcle->createCommand($SQL)->query();
 
             $SQL1 = "SELECT ID FROM TABLAS_COMUNES.PERSONA WHERE NACIONALIDAD = " . (int) $array['NACIONALIDAD'] . " AND CEDULA = " . (int) $array['CEDULA'];
