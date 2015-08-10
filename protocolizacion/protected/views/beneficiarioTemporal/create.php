@@ -62,15 +62,13 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
                    return false;
              }
         });
-         
+
         ");  ?>
 
 
 <h1>Cargar Nuevo Adjudicado</h1>
 <br><br>
-
-
-  <?php 
+  <?php
         $this->widget(
                 'booster.widgets.TbLabel', array(
             'context' => 'warning',
@@ -82,7 +80,7 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         <br><br>
 <div class="row">
     <div class="col-md-12">
-  <?php      
+  <?php
     /* ------------  Datos Beneficiario  --------- */
 
 
@@ -120,11 +118,11 @@ echo '<br>';
 
     /*  *********************************************** */
 
-   
+
     /*  +++++++++++++  Grupo Familiar    +++++++++ */
 
 
-        
+
     /*  ++++++++++++++++++++++++++++++++++++++++++ */
 
     ?>
@@ -167,7 +165,7 @@ echo '<br>';
 
     <!-- *********** -->
 
-   
+
 </div>
 
 <?php  $this->endWidget(); ?>

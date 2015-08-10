@@ -18,12 +18,12 @@ if (isset($_GET["id"])) {
 
     Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
 
-    $(document).ready(function(){ 
+    $(document).ready(function(){
 
 
                $('#BeneficiarioTemporal_cedula').numeric();
-               $('#BeneficiarioTemporal_telf_habitacion').numeric();
-               $('#BeneficiarioTemporal_telf_celular').numeric();
+               $('#s2id_autogen1').numeric();
+               $('#s2id_autogen2').numeric();
 
                /*  ------  Bloqueo campos    ------- */
 
@@ -38,13 +38,11 @@ if (isset($_GET["id"])) {
                   $('#BeneficiarioTemporal_estado_civil').attr('disabled', true);
                   $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', true);
                   $('#BeneficiarioTemporal_telf_celular').attr('readonly', true);
-                  $('#BeneficiarioTemporal_correo_electronico').attr('readonly', true); 
-                 
-               /*   -------------------------------- */     
-        
-                    
-             
-    }); 
+                  $('#BeneficiarioTemporal_correo_electronico').attr('readonly', true);
+
+               /*   -------------------------------- */
+         
+    });
 
 
   ");
@@ -112,7 +110,7 @@ if (isset($_GET["id"])) {
 
 
 
-<div class="row"> 
+<div class="row">
     <div class='col-md-4'>
         <?php
         echo $form->textFieldGroup($model, 'fecha_nacimiento', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));
@@ -144,7 +142,7 @@ if (isset($_GET["id"])) {
         ?>
 
     </div>
-</div> 
+</div>
 
 <div class="row">
     <div class='col-md-4'>
@@ -162,9 +160,9 @@ if (isset($_GET["id"])) {
             'asDropDownList' => false,
             'name' => CHtml::activeId($model, 'telf_habitacion'),
             'attribute' => 'telf_habitacion',
-            'htmlOptions' => array(
-                'onchange' => 'telfCheck(this.id);',
-            ),
+//            'htmlOptions' => array(
+//                'onchange' => 'telfCheck(this.id);',
+//            ),
             'options' => array(
                 'tags' => array(),
                 'class' => 'Limpiar',
@@ -198,9 +196,9 @@ if (isset($_GET["id"])) {
             'asDropDownList' => false,
             'name' => CHtml::activeId($model, 'telf_celular'),
             'attribute' => 'telf_celular',
-            'htmlOptions' => array(
-                'onchange' => 'telfCheck(this.id);',
-            ),
+//            'htmlOptions' => array(
+//                'onchange' => 'telfCheck(this.id);',
+//            ),
             'options' => array(
                 'tags' => array(),
                 'class' => 'Limpiar',
@@ -225,7 +223,4 @@ if (isset($_GET["id"])) {
         echo $form->textFieldGroup($model, 'correo_electronico', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));
         ?>
     </div>
-</div> 
-
-
-
+</div>
