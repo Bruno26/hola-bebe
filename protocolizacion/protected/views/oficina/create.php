@@ -1,5 +1,24 @@
 <?php
-Yii::app()->clientScript->registerScript('camara', "
+$form = $this->beginWidget('booster.widgets.TbActiveForm', array(
+    'id' => 'oficina-form',
+    'enableAjaxValidation' => false,
+    'enableClientValidation' => true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true,
+        'validateOnChange' => true,
+        'validateOnType' => true,
+        )));
+?>
+<?php
+$baseUrl = Yii::app()->baseUrl;
+$numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
+$mascara = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/jquery.mask.min.js');?>
+<?php 
+Yii::app()->clientScript->registerScript('oficina', "
+    $(document).ready(function(){
+         $('#Oficina_cedula').numeric();
+    });   
+    
    $('#guardar').click(function(){
         if( $.trim($('#Oficina_nombre').val())  == ''){
             $('#Oficina_nombre').val('');
@@ -18,15 +37,6 @@ Yii::app()->clientScript->registerScript('camara', "
       
    });
 ");
-$form = $this->beginWidget('booster.widgets.TbActiveForm', array(
-    'id' => 'oficina-form',
-    'enableAjaxValidation' => false,
-    'enableClientValidation' => true,
-    'clientOptions' => array(
-        'validateOnSubmit' => true,
-        'validateOnChange' => true,
-        'validateOnType' => true,
-        )));
 ?>
 
 

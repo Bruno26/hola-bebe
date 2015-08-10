@@ -149,7 +149,7 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
         <?php echo $form->error($model, 'nro_vivienda'); ?>
     </div>
     <div class="col-md-3">
-        <?php echo $form->textFieldGroup($model, 'construccion_mt2', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 10)))); ?>
+        <?php echo $form->textFieldGroup($model, 'construccion_mt2', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 3, 'minlength'=>3)))); ?>
 
     </div>
 </div>

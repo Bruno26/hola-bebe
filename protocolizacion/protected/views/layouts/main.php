@@ -24,9 +24,9 @@
     <body>
         <section id="container">
             <header class="header fixed-top clearfix">
-                <div class="brand" style="height: 60%;">
+                <div class="brand" style="height: 60%;"> 
                     <a href="<?php echo $this->createUrl('/site/indexAdmin'); ?>" class="logo">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/banavih_ndice1.png" alt="" width="180px"  style="margin-top: -6%;margin-bottom: 4%;margin-left: -8%;">
+                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/banavih_ndice1.png" alt="" width="150px"  style="margin-top: -6%;margin-bottom: 4%;margin-left: 10%;">
                     </a>
                     <div class="sidebar-toggle-box">
                         <div class="fa fa-bars glyphicon glyphicon-list"></div>
@@ -117,15 +117,10 @@
                                             <li><a href="<?php echo $this->createUrl('/registroPublico/create'); ?>">Cargar Nuevo Registro Público</a></li>
                                         </ul>
                                     </li>
-                                    <!--                                                                        <li class="sub-menu">
-                                                                                                                <a href="javascript:;">
-                                                                                                                    <i class="glyphicon glyphicon-list-alt"></i>
-                                                                                                                    <span>Registro de Documentos</span>
-                                                                                                                </a>
-                                                                                                                <ul class="sub">
-                                                                                                                    <li><a href="<?php // echo $this->createUrl('/registroDocumento/create');   ?>">Cargar Nuevo Registro de Documento</a></li>
-                                                                                                                </ul>
-                                                                                                            </li>-->
+
+                                    <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Cargar Funtes de Financiamiento</a></li>
+                                    <li><a href="<?php echo $this->createUrl('/programa/create'); ?>">Cargar Nuevo Programa</a></li>
+                                    <li><a href="<?php echo $this->createUrl('/enteEjecutor/create'); ?>">Cargar Ente Ejecutor</a></li>
                                 </ul>
                             </li>
 
@@ -141,9 +136,6 @@
                                             <span>Desarrollos</span>
                                         </a>
                                         <ul class="sub">
-                                            <li><a href="<?php echo $this->createUrl('/fuenteFinanciamiento/create'); ?>">Cargar Funtes de Financiamiento</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/programa/create'); ?>">Cargar Nuevo Programa</a></li>
-                                            <li><a href="<?php echo $this->createUrl('/enteEjecutor/create'); ?>">Cargar Ente Ejecutor</a></li>
                                             <li><a href="<?php echo $this->createUrl('/desarrollo/create'); ?>">Cargar Nuevo Desarrollo</a></li>
                                             <li><a href="<?php echo $this->createUrl('/desarrollo/admin'); ?>">Gestión de Desarrollo Habitacional</a></li>
                                         </ul>
@@ -187,12 +179,6 @@
                                 </ul>
 
                             </li>
-                            <li>
-                                <a href="<?php echo $this->createUrl('/reasignacionVivienda/admin'); ?>">
-                                    <i class="glyphicon glyphicon-home"></i>
-                                    <span>Reasignación de Vivienda</span>
-                                </a>
-                            </li>
                             <li class="sub-menu">
                                 <a href="javascript:;">
                                     <i class="glyphicon glyphicon-briefcase"></i>
@@ -201,19 +187,25 @@
                                 <ul class="sub">
                                     <li><a href="<?php echo $this->createUrl('/asignacionCenso/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Asignar Censo</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('/vswAsignacionCenso/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Asignación</span></a></li>
-                                    <li><a href="<?php echo $this->createUrl('/vswEmpadronadorCensos/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Empadronador</span></a></li>
 
                                 </ul>
                             </li>
                             <li class="sub-menu">
                                 <a href="javascript:;">
                                     <i class="glyphicon glyphicon-tasks"></i>
-                                    <span>Censo Socioeconómico</span>
+                                    <span> Gestión Censo <br> Socioeconómico</span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="<?php echo $this->createUrl('/beneficiario/create'); ?>"><i class="glyphicon glyphicon-home"></i><span>Censo</span></a></li>
+                                    <!--<li><a href="<?php // echo $this->createUrl('/beneficiario/create');       ?>"><i class="glyphicon glyphicon-home"></i><span>Censo</span></a></li>-->
+                                    <li><a href="<?php echo $this->createUrl('/vswEmpadronadorCensos/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Empadronador</span></a></li>
                                     <li><a href="<?php echo $this->createUrl('/beneficiario/admin'); ?>"><i class="glyphicon glyphicon-home"></i><span>Gestión de Censo</span></a></li>
                                 </ul>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->createUrl('/reasignacionVivienda/admin'); ?>">
+                                    <i class="glyphicon glyphicon-home"></i>
+                                    <span>Gestión Reasignación <br> de Vivienda</span>
+                                </a>
                             </li>
                             <li>
                                 <a href="<?php echo $this->createUrl('/analisisCredito/admin'); ?>">
@@ -238,7 +230,7 @@
             <div id="expirado"></div>
 
             <!--            <footer class='container col-md-12 col-xs-12 text-center'>
-                            Copyright &copy; <?php // echo date('Y');                                                                                                                  ?> by My Company.<br/>
+                            Copyright &copy; <?php // echo date('Y');                                                                                                                        ?> by My Company.<br/>
                             All Rights Reserved.<br/>
             <?php // echo Yii::powered(); ?>
                         </footer>-->

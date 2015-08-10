@@ -1,5 +1,5 @@
 
-<h1 class="text-center">Cargar Nueva Fuente de Financiamiento</h1>
+<h1 class="text-center">Cargar Fuente de Financiamiento</h1>
 
 <?php
 if (isset($error) && !empty($error)) {

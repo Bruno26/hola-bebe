@@ -57,9 +57,10 @@ class Abogados extends CActiveRecord {
         return array(
             array('persona_id, tipo_abogado_id, oficina_id, estatus, fecha_creacion, usuario_id_creacion', 'required'),
             array('persona_id, tipo_abogado_id, oficina_id, estatus, usuario_id_creacion, usuario_id_actualizacion, registro_publico_id, nun_protocolo', 'numerical', 'integerOnly' => true),
-            array('inpreabogado', 'length', 'max' => 20),
+            array('inpreabogado', 'length', 'max' => 7),
+            array('tomo', 'length', 'max' => 3),
             array('observaciones', 'length', 'max' => 200),
-            array('rif_abogado, folio, tomo', 'length', 'max' => 12),
+            array('rif_abogado, folio', 'length', 'max' => 12),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, persona_id, inpreabogado, tipo_abogado_id, oficina_id, observaciones, estatus, fecha_creacion, fecha_actualizacion, usuario_id_creacion, usuario_id_actualizacion, rif_abogado, registro_publico_id, nun_protocolo, folio, tomo, anio', 'safe', 'on' => 'search'),

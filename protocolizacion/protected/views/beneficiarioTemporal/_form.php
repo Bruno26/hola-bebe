@@ -113,7 +113,26 @@ if (isset($_GET["id"])) {
 <div class="row">
     <div class='col-md-4'>
         <?php
-        echo $form->textFieldGroup($model, 'fecha_nacimiento', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));
+        echo $form->datePickerGroup($model, 'fecha_nacimiento', array('widgetOptions' =>
+            array(
+                'options' => array(
+                    'language' => 'es',
+                    'format' => 'dd/mm/yyyy',
+                    'startView' => 0,
+                    'minViewMode' => 0,
+                    'todayBtn' => 'linked',
+                    'weekStart' => 0,
+                    'endDate' => 'now()',
+                    'autoclose' => true,
+                ),
+                'htmlOptions' => array(
+                    /* 'class' => 'span5 limpiar', */
+                ),
+            ),
+            'prepend' => '<i class="glyphicon glyphicon-calendar"></i>',
+            'beforeShowDay' => 'DisableDays',
+                )
+        );
         ?>
     </div>
     <div class='col-md-4'>

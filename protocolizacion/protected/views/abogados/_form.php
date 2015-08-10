@@ -39,7 +39,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
     </div>
 
     <div class="col-md-4 inpreabogado" style ="display: none">
-        <?php echo $form->textFieldGroup($model, 'inpreabogado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 20)))); ?>
+        <?php echo $form->textFieldGroup($model, 'inpreabogado', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 7)))); ?>
     </div>
 
 </div>
@@ -83,7 +83,7 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
     </div>
     <div class="col-md-4">
         <b>Número de Tomo </b> <span class="required">*</span>
-        <?php echo $form->textFieldGroup($model, 'tomo', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 12)))); ?>
+        <?php echo $form->textFieldGroup($model, 'tomo', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 3)))); ?>
 
     </div>
     <div class='col-md-4'>
@@ -100,8 +100,8 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
                     'endDate' => 'now()',
                 ),
                 'htmlOptions' => array(
-                    'class' => 'span5 limpiar',
-                    'readonly' => true,
+                    'class' => 'span5',
+                    'readonly' => true,        
                 ),
             ),
             'prepend' => '<i class="glyphicon glyphicon-calendar"></i>',

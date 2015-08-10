@@ -75,7 +75,7 @@ class AjaxController extends Controller {
         if ($fuenteFinanciamineto == '2') { // FUENTE DE FINANCIAMIENTO FAOV
 //        	$subsidio = FaspController::actionSubsidio($CapacidadPago, $montoVivienda);
         }else if ($fuenteFinanciamineto == '3') {  // FUENTE DE FINANCIAMIENTO FASP
-            $subsidio = FaspController::actionSubsidio($CapacidadPago, $montoVivienda,$idUnidadFamiliar);
+            $subsidio = FaspController::actionSubsidio($CapacidadPago, $montoVivienda,$idUnidadFamiliar, $igresoFamiliar);
             
         }
 

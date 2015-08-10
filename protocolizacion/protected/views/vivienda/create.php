@@ -1,3 +1,16 @@
+<?php
+$form = $this->beginWidget('booster.widgets.TbActiveForm', array(
+    'id' => 'vivienda-form',
+    'enableAjaxValidation' => false,
+    'enableClientValidation' => true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true,
+        'validateOnChange' => true,
+        'validateOnType' => true,
+    ),
+        ));
+?>
+
 <?php Yii::app()->clientScript->registerScript('desarrollo', "
          $('#guardarVivienda').click(function(){
          
@@ -26,10 +39,6 @@
                     bootbox.alert('Por favor seleccione tipo de vivienda');
                     return false;
                 }
-                if($('#Vivienda_construccion_mt2').val()==''){
-                    bootbox.alert('Por favor indique metros cuadrado de la vivienda');
-                    return false;
-                }
                 
                 if($('#Vivienda_nro_piso').val()==''){
                     bootbox.alert('Por favor indique número piso');
@@ -39,9 +48,13 @@
                     bootbox.alert('Por favor indique número de vivienda');
                     return false;
                 }
+                if($('#Vivienda_construccion_mt2').val()==''){
+                    bootbox.alert('Por favor indique metros cuadrado de la vivienda');
+                    return false;
+                }
                 
                 if($('#Vivienda_nro_habitaciones').val()==''){
-                    bootbox.alert('Por favor indique número de habitacione');
+                    bootbox.alert('Por favor indique número de habitaciones');
                     return false;
                 }
                 
@@ -50,11 +63,7 @@
                     return false;
                 }
                 
-                if($('#Vivienda_precio_vivienda').val()==''){
-                    bootbox.alert('Por favor indique precio vivienda');
-                    return false;
-                }
-                
+               
              
                 
                 
@@ -65,33 +74,37 @@
         ") ?>
 
 <?php
-$form = $this->beginWidget('booster.widgets.TbActiveForm', array(
-    'id' => 'vivienda-form',
-    'enableAjaxValidation' => false,
-    'enableClientValidation' => true,
-    'clientOptions' => array(
-        'validateOnSubmit' => true,
-        'validateOnChange' => true,
-        'validateOnType' => true,
-    ),
-        ));
+if (isset($sms) && !empty($sms)) {
+    $user = Yii::app()->getComponent('user');
+    $user->setFlash(
+            'warning', "<strong>Número de vivienda ya se encuentra registado.</strong>"
+    );
+    $this->widget('booster.widgets.TbAlert', array(
+        'fade' => true,
+        'closeText' => '&times;', // false equals no close link
+        'events' => array(),
+        'htmlOptions' => array(),
+        'userComponentId' => 'user',
+        'alerts' => array(// configurations per alert type
+            'warning' => array('closeText' => false),
+        ),
+    ));
+}
 ?>
-
-
-
 
 <h1>Cargar Nueva Unidad UniFamiliar</h1>
 
-<?php 
-        $this->widget(
-                'booster.widgets.TbLabel', array(
-            'context' => 'warning',
-            'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
-            // 'success', 'warning', 'important', 'info' or 'inverse'
-            'label' => 'Los campos marcados con * son requeridos',
-                )
-        ); ?>
-        <br><br>
+<?php
+$this->widget(
+        'booster.widgets.TbLabel', array(
+    'context' => 'warning',
+    'htmlOptions' => array('style' => 'padding:3px;text-aling:center; font-size:13px; span{color:red;}'),
+    // 'success', 'warning', 'important', 'info' or 'inverse'
+    'label' => 'Los campos marcados con * son requeridos',
+        )
+);
+?>
+<br><br>
 
 <div class="row">
     <div class="col-md-12">
@@ -121,21 +134,21 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         ));
         ?>
         <?php
-            $this->widget('booster.widgets.TbButton', array(
-                'context' => 'danger',
-                'label' => 'Cancelar',
-                'size' => 'large',
-                'id' => 'CancelarForm',
-                'icon' => 'ban-circle',
-                'htmlOptions' => array(
-                    'onclick' => 'document.location.href ="' . $this->createUrl('/vswUnifamiliar/admin') . '";'
-                )
-            ));
+        $this->widget('booster.widgets.TbButton', array(
+            'context' => 'danger',
+            'label' => 'Cancelar',
+            'size' => 'large',
+            'id' => 'CancelarForm',
+            'icon' => 'ban-circle',
+            'htmlOptions' => array(
+                'onclick' => 'document.location.href ="' . $this->createUrl('/vswUnifamiliar/admin') . '";'
+            )
+        ));
         ?>
     </div>
 </div>
 
-<?php //echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php //echo $this->renderPartial('_form', array('model'=>$model));  ?>
 
 <?php $this->endWidget(); ?>
 

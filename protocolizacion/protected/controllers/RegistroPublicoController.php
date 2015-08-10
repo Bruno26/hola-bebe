@@ -47,15 +47,27 @@ class RegistroPublicoController extends Controller {
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
         if (isset($_POST['RegistroPublico'])) {
-
-            $model->attributes = $_POST['RegistroPublico'];
-            $model->nombre_registro_publico = trim(strtoupper($_POST['RegistroPublico']['nombre_registro_publico']));
-            $model->estatus = 56;
-            $model->usuario_id_creacion = Yii::app()->user->id;
-            $model->fecha_creacion = 'now()';
-            $model->fecha_actualizacion = 'now()';
-            if ($model->save())
-                $this->redirect(array('create', 'id' => $model->id_registro_publico));
+            $nombre_registro = trim(strtoupper($_POST['RegistroPublico']['nombre_registro_publico']));
+            if (!empty($nombre_registro)) {
+                $consulta = RegistroPublico::model()->findByAttributes(array('nombre_registro_publico' => $nombre_registro));
+                if (empty($consulta)) {
+                    $model->attributes = $_POST['RegistroPublico'];
+                    $model->nombre_registro_publico = trim(strtoupper($_POST['RegistroPublico']['nombre_registro_publico']));
+                    $model->estatus = 56;
+                    $model->usuario_id_creacion = Yii::app()->user->id;
+                    $model->fecha_creacion = 'now()';
+                    $model->fecha_actualizacion = 'now()';
+                    if ($model->save()) {
+                        $this->redirect(array('create'));
+                    }
+                } else {
+                    $this->render('create',  array('model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'error' => 1));
+                    Yii::app()->end();
+                }
+            }  else {
+                    $this->render('create', array('model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia, 'error' => 2));
+                    Yii::app()->end();  
+            }
         }
 
         $this->render('create', array(

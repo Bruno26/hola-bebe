@@ -17,6 +17,8 @@ $mascara = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/jqu
 <?php Yii::app()->clientScript->registerScript('abogado', "  
      $(document).ready(function(){
          $('#Abogados_rif_abogado').mask('A-BBBBBBBB-9', {translation: { 'A': {pattern: /[VEve]/}, 'B':{pattern: /[0-9]/}}, clearIfNotMatch: true});
+         $('#Abogados_tomo').numeric();
+         $('#Abogados_cedula').numeric();
     }); 
         $('#guardar').click(function(){
             if($('#Abogados_tipo_abogado_id').val()==''){
