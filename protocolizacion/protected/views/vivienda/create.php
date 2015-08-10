@@ -73,8 +73,6 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
         
         ") ?>
 
-
-
 <?php
 if (isset($sms) && !empty($sms)) {
     $user = Yii::app()->getComponent('user');
