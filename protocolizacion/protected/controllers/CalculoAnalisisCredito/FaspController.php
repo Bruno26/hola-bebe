@@ -26,9 +26,11 @@ class FaspController extends Controller {
     }
 
     public function actionSubsidio($capacidadPago, $costoVivienda, $idUnidadFamiliar, $ingresoFamiliar){
+        $SM = (int)Maestro::FindMaestrosByPadreSelect(237)->descripcion;
         if((int)$capacidadPago >= (int)$costoVivienda){
             return '0';
-        }else if(){}
+        }else if($ingresoFamiliar > 2 * $SM){
+            return '0';
         } else {
             $criteria = new CDbCriteria;
             $criteria->addCondition('t.unidad_familiar_id = :unidad_familiar_id');

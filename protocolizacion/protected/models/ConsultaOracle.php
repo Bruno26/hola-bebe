@@ -78,7 +78,7 @@ class ConsultaOracle extends CActiveRecord {
 
         $nacional = ($nacionalidad == 97) ? 1 : 0;
         $SLQ = "SELECT ID, NACIONALIDAD , CEDULA, PRIMER_NOMBRE AS PRIMERNOMBRE, SEGUNDO_NOMBRE AS SEGUNDONOMBRE, PRIMER_APELLIDO AS PRIMERAPELLIDO, SEGUNDO_APELLIDO AS SEGUNDOAPELLIDO ,TO_CHAR(FECHA_NACIMIENTO, 'DD-MM-YYYY' ) AS FECHANACIMIENTO FROM TABLAS_COMUNES.PERSONA WHERE NACIONALIDAD ='" . $nacional . "' AND CEDULA = " . $cedula;
-        $result = Yii::app()->dbOarcle->createCommand($SLQ)->queryRow();
+        $result = Yii::app()->dbOarcle->createCommand($SLQ)>queryRow();
 //        echo '<pre>';var_dump($result);die;
         if (empty($result)) {
             return 1;
@@ -93,7 +93,7 @@ class ConsultaOracle extends CActiveRecord {
 
         $nacional = ($nacionalidad == 97) ? 1 : 0;
         $SLQ = "SELECT P.ID, P.NACIONALIDAD , P.CEDULA, P.PRIMER_NOMBRE AS PRIMERNOMBRE, P.SEGUNDO_NOMBRE AS SEGUNDONOMBRE, P.PRIMER_APELLIDO AS PRIMERAPELLIDO,
-                P.SEGUNDO_APELLIDO AS SEGUNDOAPELLIDO ,TO_CHAR(P.FECHA_NACIMIENTO, 'DD-MM-YYYY' ) AS FECHANACIMIENTO, GEN_SEXO.NOMBRE AS SEXO, GEN_EDO_CIVIL.NOMBRE AS EDOCIVIL,
+                P.SEGUNDO_APELLIDO AS SEGUNDOAPELLIDO ,TO_CHAR(P.FECHA_NACIMIENTO, 'DD/MM/YYYY' ) AS FECHANACIMIENTO, GEN_SEXO.NOMBRE AS SEXO, GEN_EDO_CIVIL.NOMBRE AS EDOCIVIL,
                 P.TELEFONO_HAB AS TELEFONOHAB, P.TELEFONO_MOVIL AS TELEFONOMOVIL, P.CORREO_PRINCIPAL AS CORREO,1 AS PROCEDENCIA
                 FROM TABLAS_COMUNES.PERSONA P 
                 LEFT JOIN  GEN_SEXO ON P.GEN_SEXO_ID = GEN_SEXO.ID  
@@ -218,17 +218,26 @@ class ConsultaOracle extends CActiveRecord {
             }
             $select = implode(',', $select);
             $valor = implode(',', $valor);
-            $SQL = 'INSERT INTO TABLAS_COMUNES.PERSONA (ID, ' . $select . ') VALUES ((SELECT MAX(ID)+1 FROM TABLAS_COMUNES.PERSONA),' . $valor . ')';
-            $result = Yii::app()->dbOarcle->createCommand($SQL)->query();
 
-            $SQL1 = "SELECT ID FROM TABLAS_COMUNES.PERSONA WHERE NACIONALIDAD = " . (int) $array['NACIONALIDAD'] . " AND CEDULA = " . (int) $array['CEDULA'];
-            $ExistePersona = Yii::app()->dbOarcle->createCommand($SQL1)->queryRow();
-
-            if (empty($ExistePersona)) {
-                return false;
+            $Existe = "SELECT ID FROM TABLAS_COMUNES.PERSONA WHERE NACIONALIDAD = " . (int) $array['NACIONALIDAD'] . " AND CEDULA = " . (int) $array['CEDULA'];
+            $ExistePersonaNew = Yii::app()->dbOarcle->createCommand($Existe)->queryRow();
+            if(empty($ExistePersonaNew)){
+                $SQL = 'INSERT INTO TABLAS_COMUNES.PERSONA (ID, ' . $select . ') VALUES ((SELECT MAX(ID)+1 FROM TABLAS_COMUNES.PERSONA),' . $valor . ')';
+                $result = Yii::app()->dbOarcle->createCommand($SQL)->query();
+    
+                $SQL1 = "SELECT ID FROM TABLAS_COMUNES.PERSONA WHERE NACIONALIDAD = " . (int) $array['NACIONALIDAD'] . " AND CEDULA = " . (int) $array['CEDULA'];
+                $ExistePersona = Yii::app()->dbOarcle->createCommand($SQL1)->queryRow();
+    
+                if (empty($ExistePersona)) {
+                    return false;
+                } else {
+                    return $ExistePersona['ID'];
+                }
             } else {
-                return $ExistePersona['ID'];
+                return false;
             }
+
+
         }
     }
 
