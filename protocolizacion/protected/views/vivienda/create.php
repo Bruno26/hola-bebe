@@ -26,10 +26,6 @@
                     bootbox.alert('Por favor seleccione tipo de vivienda');
                     return false;
                 }
-                if($('#Vivienda_construccion_mt2').val()==''){
-                    bootbox.alert('Por favor indique metros cuadrado de la vivienda');
-                    return false;
-                }
                 
                 if($('#Vivienda_nro_piso').val()==''){
                     bootbox.alert('Por favor indique número piso');
@@ -39,9 +35,13 @@
                     bootbox.alert('Por favor indique número de vivienda');
                     return false;
                 }
+                if($('#Vivienda_construccion_mt2').val()==''){
+                    bootbox.alert('Por favor indique metros cuadrado de la vivienda');
+                    return false;
+                }
                 
                 if($('#Vivienda_nro_habitaciones').val()==''){
-                    bootbox.alert('Por favor indique número de habitacione');
+                    bootbox.alert('Por favor indique número de habitaciones');
                     return false;
                 }
                 
@@ -50,11 +50,7 @@
                     return false;
                 }
                 
-                if($('#Vivienda_precio_vivienda').val()==''){
-                    bootbox.alert('Por favor indique precio vivienda');
-                    return false;
-                }
-                
+               
              
                 
                 

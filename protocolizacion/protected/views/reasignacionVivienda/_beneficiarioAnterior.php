@@ -1,5 +1,15 @@
 <?php echo $form->hiddenField($model, 'beneficiario_id_anterior'); ?>
+<?php
+$baseUrl = Yii::app()->baseUrl;
+$numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
+$mascara = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/jquery.mask.min.js');?>
 
+<?php Yii::app()->clientScript->registerScript('beneficiarioAnterior', "
+    $(document).ready(function(){
+         $('#s2id_autogen1').numeric();
+         $('#s2id_autogen2').numeric();
+    }); ")
+ ?>       
 <div class="row">
     <div class="row-fluid">
         <div class="col-md-6">

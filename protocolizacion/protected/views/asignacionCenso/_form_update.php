@@ -1,7 +1,15 @@
 <?php
 $baseUrl = Yii::app()->baseUrl;
 $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
+$numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
+$mascara = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/jquery.mask.min.js');
 ?>
+<?php 
+Yii::app()->clientScript->registerScript('asignacionCenso', "
+    $(document).ready(function(){
+         $('#AsignacionCenso_cedula').numeric();
+    }); ")
+        ?>
 <div class="row">
     <div class="col-md-4">
 

@@ -11,7 +11,15 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     ),
         ));
 ?>
-<?php Yii::app()->clientScript->registerScript('desarrollo', "
+<?php
+$baseUrl = Yii::app()->baseUrl;
+$numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
+$mascara = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/jquery.mask.min.js');?>
+<?php Yii::app()->clientScript->registerScript('asignacionCenso', "
+    $(document).ready(function(){
+         $('#AsignacionCenso_cedula').numeric();
+    });    
+
          $('#guardarAsignacion').click(function(){
          
                 if ($('#Tblestado_clvcodigo').val()==''){
