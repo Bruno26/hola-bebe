@@ -230,7 +230,7 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
                 'class' => 'col-sm-5',
             ),
             'widgetOptions' => array(
-                'htmlOptions' => array('rows' => 1, 'maxlength' => 200,
+                'htmlOptions' => array('rows' => 1, 'maxlength' => 7,
                 ),
             )
                 )
@@ -239,7 +239,7 @@ $Validacion = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/
         <?php //echo $form->textFieldGroup($model, 'coordenadas', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));    ?>
     </div>
     <div class="col-md-4">
-        <?php echo $form->textFieldGroup($model, 'lote_terreno_mt2', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5')))); ?>
+        <?php echo $form->textFieldGroup($model, 'lote_terreno_mt2', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 3, 'minlength'=>3)))); ?>
     </div>
     <div class="col-md-4 " >
         <?php echo CHtml::activeLabel($model, 'titularidad_del_terreno'); ?><br>

@@ -14,8 +14,34 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
 
 <h1>Cargar Nuevo Registro Público</h1>
 
-<?php #echo $this->renderPartial('_form', array('model'=>$model)); ?>
-
+<?php
+if (isset($error) && !empty($error)) {
+    $user = Yii::app()->getComponent('user');
+    switch ($error) {
+        case 1:
+            $type = 'warning';
+            $sms = "<strong>Ya existe un registro con este nombre.</strong>.";
+            break;
+        case 2:
+            $type = 'info';
+            $sms = "<strong>Por Favor Ingrese un nombre.</strong>.";
+            break;
+    }
+    $user->setFlash(
+            $type, $sms
+    );
+    $this->widget('booster.widgets.TbAlert', array(
+        'fade' => true,
+        'closeText' => '&times;', // false equals no close link
+        'events' => array(),
+        'htmlOptions' => array(),
+        'userComponentId' => 'user',
+        'alerts' => array(// configurations per alert type
+            $type => array('closeText' => false),
+        ),
+    ));
+}
+?>
 <?php
 $this->widget(
         'booster.widgets.TbLabel', array(
