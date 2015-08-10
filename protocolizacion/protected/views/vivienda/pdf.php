@@ -153,7 +153,7 @@ else:
     $html.= "NO";
 endif;
 $html.= "<br/>
-                                <b> N° de Habitantes:</b> " . $model->nro_habitaciones .
+                                <b> N° de Habitaciones:</b> " . $model->nro_habitaciones .
         "<br/>
                                 <b> N° de Baños:</b> " . $model->nro_banos .
         "<br/>

@@ -22,8 +22,8 @@ if (isset($_GET["id"])) {
 
 
                $('#BeneficiarioTemporal_cedula').numeric();
-               $('#BeneficiarioTemporal_telf_habitacion').numeric();
-               $('#BeneficiarioTemporal_telf_celular').numeric();
+               $('#s2id_autogen1').numeric();
+               $('#s2id_autogen2').numeric();
 
                /*  ------  Bloqueo campos    ------- */
 
@@ -162,9 +162,9 @@ if (isset($_GET["id"])) {
             'asDropDownList' => false,
             'name' => CHtml::activeId($model, 'telf_habitacion'),
             'attribute' => 'telf_habitacion',
-            'htmlOptions' => array(
-                'onchange' => 'telfCheck(this.id);',
-            ),
+//            'htmlOptions' => array(
+//                'onchange' => 'telfCheck(this.id);',
+//            ),
             'options' => array(
                 'tags' => array(),
                 'class' => 'Limpiar',
@@ -198,9 +198,9 @@ if (isset($_GET["id"])) {
             'asDropDownList' => false,
             'name' => CHtml::activeId($model, 'telf_celular'),
             'attribute' => 'telf_celular',
-            'htmlOptions' => array(
-                'onchange' => 'telfCheck(this.id);',
-            ),
+//            'htmlOptions' => array(
+//                'onchange' => 'telfCheck(this.id);',
+//            ),
             'options' => array(
                 'tags' => array(),
                 'class' => 'Limpiar',

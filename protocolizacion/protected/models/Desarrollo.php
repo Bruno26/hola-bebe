@@ -60,10 +60,12 @@ class Desarrollo extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('nombre, parroquia_id, fuente_financiamiento_id, ente_ejecutor_id, fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, estatus', 'required'),
+            array('nombre, parroquia_id, fuente_financiamiento_id, ente_ejecutor_id,programa_id,  fuente_datos_entrada_id, fecha_creacion, fecha_actualizacion, usuario_id_creacion, estatus, descripcion, lote_terreno_mt2, urban_barrio, av_call_esq_carr', 'required'),
             array('parroquia_id, fuente_financiamiento_id, ente_ejecutor_id, total_viviendas, total_viviendas_protocolizadas, fuente_datos_entrada_id, usuario_id_creacion, usuario_id_actualizacion, programa_id, estatus', 'numerical', 'integerOnly' => true),
             array('nombre, urban_barrio, av_call_esq_carr, zona, lindero_norte, lindero_sur, lindero_este, lindero_oeste, coordenadas', 'length', 'max' => 200),
             array('descripcion', 'length', 'max' => 300),
+            array('lote_terreno_mt2', 'length', 'max' => 3),
+            array('coordenadas', 'length', 'max' => 7),
             array('lote_terreno_mt2, titularidad_del_terreno, fecha_transferencia, total_unidades', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.

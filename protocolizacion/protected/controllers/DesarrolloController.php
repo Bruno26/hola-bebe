@@ -131,6 +131,7 @@ class DesarrolloController extends Controller {
 
         if (isset($_POST['Desarrollo'])) {
             $model->attributes = $_POST['Desarrollo'];
+            $model->nombre = trim(strtoupper($_POST['Desarrollo']['nombre']));
             $model->descripcion = trim(strtoupper($_POST['Desarrollo']['descripcion']));
             $model->urban_barrio = trim(strtoupper($_POST['Desarrollo']['urban_barrio']));
             $model->av_call_esq_carr = trim(strtoupper($_POST['Desarrollo']['av_call_esq_carr']));
