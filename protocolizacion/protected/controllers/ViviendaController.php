@@ -50,35 +50,59 @@ class ViviendaController extends Controller {
 //$model->;
 
         if (isset($_POST['Vivienda'])) {
-          
-            $model->attributes = $_POST['Vivienda'];
-            $model->unidad_habitacional_id = $_POST['Vivienda']['unidad_habitacional_id'];
-            $model->tipo_vivienda_id = $_POST['Vivienda']['tipo_vivienda_id'];
-            $model->construccion_mt2 = $_POST['Vivienda']['construccion_mt2'];
-            $model->nro_piso = $_POST['Vivienda']['nro_piso'];
-            $model->nro_vivienda = $_POST['Vivienda']['nro_vivienda'];
-            $model->sala = isset($_POST['Vivienda']['sala']) ? '1' : '0';
-            $model->comedor = isset($_POST['Vivienda ']['comedor']) ? '1' : '0';
-            $model->cocina = isset($_POST['Vivienda']['cocina']) ? '1' : '0';
-            $model->lavandero = isset($_POST['Vivienda']['lavandero']) ? '1' : '0';
-            $model->lindero_norte = $_POST['Vivienda']['lindero_norte'];
-            $model->lindero_sur = $_POST['Vivienda']['lindero_sur'];
-            $model->lindero_este = $_POST['Vivienda']['lindero_este'];
-            $model->lindero_oeste = $_POST['Vivienda']['lindero_oeste'];
-            $model->coordenadas = $_POST['Vivienda']['coordenadas'];
-            $model->precio_vivienda = $_POST['Vivienda']['precio_vivienda'];
-            $model->nro_estacionamientos = $_POST['Vivienda']['nro_estacionamientos'];
-            $model->descripcion_estac = $_POST['Vivienda']['descripcion_estac'];
-            $model->fuente_datos_entrada_id = 90;
-            $model->estatus_vivienda_id = 75;
-            $model->asignada = '0';
-            $model->fecha_creacion = 'now';
-            $model->fecha_actualizacion = 'now';
-            $model->usuario_id_creacion = Yii::app()->user->id;
-            // $model->usuario_id_actualizacion = 5;
+            
+            $unidad = $_POST['Vivienda']['unidad_habitacional_id'];
+            $piso = $_POST['Vivienda']['nro_piso'];
+            $vivienda = $_POST['Vivienda']['nro_vivienda'];
+            $consulta = Vivienda::model()->findByAttributes(array('unidad_habitacional_id' => $unidad, 'nro_piso' => $piso, 'nro_vivienda' => $vivienda));
 
-            if ($model->save()) {
-                $this->redirect(array('view', 'id' => $model->id_vivienda));
+            if (empty($consulta)) {
+                $model->attributes = $_POST['Vivienda'];
+
+                $model->unidad_habitacional_id = $unidad;
+//                $model->unidad_habitacional_id = $_POST['Vivienda']['unidad_habitacional_id'];
+                $model->tipo_vivienda_id = $_POST['Vivienda']['tipo_vivienda_id'];
+                $model->construccion_mt2 = $_POST['Vivienda']['construccion_mt2'];
+                $model->nro_piso = $piso;
+                $model->nro_vivienda = $vivienda;
+//                $model->nro_piso = $_POST['Vivienda']['nro_piso'];
+//                $model->nro_vivienda = $_POST['Vivienda']['nro_vivienda'];
+                $model->sala = isset($_POST['sala']) ? true : false;
+                $model->comedor = isset($_POST['comedor']) ? true : false;
+                $model->cocina = isset($_POST['cocina']) ? true : false;
+                $model->lavandero = isset($_POST['lavandero']) ? true : false;
+                $model->lavandero = isset($_POST['lavandero']) ? true : false;
+                $model->lindero_norte = $_POST['Vivienda']['lindero_norte'];
+                $model->lindero_sur = $_POST['Vivienda']['lindero_sur'];
+                $model->lindero_este = $_POST['Vivienda']['lindero_este'];
+                $model->lindero_oeste = $_POST['Vivienda']['lindero_oeste'];
+                $model->coordenadas = $_POST['Vivienda']['coordenadas'];
+                $model->precio_vivienda = $_POST['Vivienda']['precio_vivienda'];
+                $model->nro_estacionamientos = $_POST['Vivienda']['nro_estacionamientos'];
+                $model->descripcion_estac = $_POST['Vivienda']['descripcion_estac'];
+                $model->fuente_datos_entrada_id = 90;
+                $model->estatus_vivienda_id = 75;
+                $model->asignada = '0';
+                $model->fecha_creacion = 'now';
+                $model->fecha_actualizacion = 'now';
+                $model->usuario_id_creacion = Yii::app()->user->id;
+                // $model->usuario_id_actualizacion = 5;
+
+
+                if ($model->save()) {
+                    $this->redirect(array('view', 'id' => $model->id_vivienda));
+                } else {
+                    var_dump($model->errors);
+                    die();
+                }
+            } else {
+                $this->render('create', array(
+                    'model' => $model, 'estado' => $estado,
+                    'municipio' => $municipio, 'parroquia' => $parroquia,
+                    'desarrollo' => $desarrollo,
+                    'sms' => 1
+                ));
+                Yii::app()->end();
             }
         }
         $this->render('create', array(
@@ -188,18 +212,14 @@ class ViviendaController extends Controller {
         ));
     }
 
- /*  ------------------------------------- */
+    /*  ------------------------------------- */
+
     public function actiondocumento($id) {
-        
+
         $this->render('documento', array(
             'model' => $this->loadModel($id),
         ));
     }
 
-   
-
- /*  ------------------------------------- */
-
-
-
+    /*  ------------------------------------- */
 }

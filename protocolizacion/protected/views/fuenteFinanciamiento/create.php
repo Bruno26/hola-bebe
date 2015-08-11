@@ -68,9 +68,6 @@ $form = $this->beginWidget('booster.widgets.TbActiveForm', array(
     );
     ?>
 </div>
-
-
-
 <div class="form-actions text-center">
     <?php
     $this->widget('booster.widgets.TbButton', array(
@@ -102,11 +99,29 @@ $this->endWidget();
                     )),
 //            'template' => "{items}",
             'columns' => array(
-                array(
+              'nombre_fuente_financiamiento',
+                /*array(
                     'name' => 'nombre_fuente_financiamiento',
                     'header' => 'Listado de Fuente de Financiamiento',
                     'value' => '$data->nombre_fuente_financiamiento',
-                ),
+                ),*/
+
+              /*  array(
+                 'class' => 'booster.widgets.TbEditableColumn',
+                 'name' => 'nombre_fuente_financiamiento',
+                 //'htmlOptions' => array('style' => 'text-align:center', 'title' => 'Indique nombre del financiamiento'),
+                 'headerHtmlOptions' => array('style' => 'width: 110px; text-align: center'),
+                 'editable' => array(
+                     'type' => 'text',
+                     'emptytext' => 'Indique nombre del financiamiento',
+                     'inputclass' => 'input-large',
+                     'url' => $this->createUrl('FuenteFinanciamiento/Actualizar'),
+                     'placement' => 'right',
+                     'validate' => 'function(value) {
+                 if(!value) return "Disculpe, no puede estar vacio"
+             }'
+                 )
+             ),*/
             )
                 )
         );

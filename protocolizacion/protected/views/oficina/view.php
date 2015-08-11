@@ -48,7 +48,7 @@ $this->widget('booster.widgets.TbDetailView', array(
         'size' => 'large',
         'label' => 'Regresar',
         'htmlOptions' => array(
-            'onclick' => 'document.location.href ="' . $this->createUrl('/oficina/admin') . '"',
+            'onclick' => 'document.location.href ="' . $this->createUrl('/oficina/create') . '"',
         )
     ));
     ?>

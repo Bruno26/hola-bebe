@@ -60,9 +60,9 @@ class OficinaController extends Controller {
             $parroquia_id = trim(strtoupper($_POST['Oficina']['parroquia_id']));
             $cod_estado = $_POST['Tblestado']['clvcodigo'];
 
-            $sql = "SELECT ofi.nombre 
+            $sql = "SELECT ofi.nombre
                     FROM oficina ofi
-                    LEFT JOIN vsw_sector sec ON sec.cod_parroquia = ofi.parroquia_id 
+                    LEFT JOIN vsw_sector sec ON sec.cod_parroquia = ofi.parroquia_id
                     WHERE sec.cod_estado = " . $cod_estado . " AND ofi.estatus = 44
                     GROUP BY  ofi.id_oficina, ofi.nombre,  sec.cod_estado, sec.estado, ofi.parroquia_id
                     ORDER BY estado ASC";
@@ -106,7 +106,8 @@ class OficinaController extends Controller {
         }
 
         $this->render('create', array(
-            'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia
+            'model' => $model, 'estado' => $estado, 'municipio' => $municipio, 'parroquia' => $parroquia,
+
         ));
     }
 
