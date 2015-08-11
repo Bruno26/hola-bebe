@@ -21,7 +21,15 @@ if (!empty($model->desarrollo_id)) {
 //    var_dump($model->desarrollo_id); die();
 }
 ?>
+<?php
+$baseUrl = Yii::app()->baseUrl;
+$numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
+$mascara = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/jquery.mask.min.js');?>
+
 <?php Yii::app()->clientScript->registerScript('reasignacion', "
+    $(document).ready(function(){
+         $('#AsignacionCenso_cedula').numeric();
+    });
          $('#guardarAsignacion').click(function(){
      
                 if ($('#AsignacionCenso_fecha_asignacion').val()==''){

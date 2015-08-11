@@ -1,13 +1,15 @@
 <?php
-#$form=$this->beginWidget('booster.widgets.TbActiveForm',array(
-#'id'=>'oficina-form',
-#'enableAjaxValidation'=>false,
-#)); 
-?>
-<?php
 $baseUrl = Yii::app()->baseUrl;
 $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/validacion.js');
-?>
+$numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
+$mascara = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/jquery.mask.min.js');?>
+<?php 
+Yii::app()->clientScript->registerScript('oficina', "
+    $(document).ready(function(){
+         $('#Oficina_cedula').numeric();
+    }); ")
+        ?>
+
 <p class="help-block">Los Campos con <span class="required">*</span> son obligatorios.</p>
 
 <?php #echo $form->errorSummary($model);   ?>

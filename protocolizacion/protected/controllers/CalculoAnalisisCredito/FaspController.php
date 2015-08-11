@@ -26,6 +26,7 @@ class FaspController extends Controller {
     }
 
     public function actionSubsidio($capacidadPago, $costoVivienda, $idUnidadFamiliar, $ingresoFamiliar){
+
         $SM = Maestro::FindMaestrosByPadreSelect(237)->descripcion;
         var_dump($SM);die;
         $SM = str_replace('.', '', $SM);

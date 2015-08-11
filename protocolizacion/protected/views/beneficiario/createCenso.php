@@ -52,10 +52,7 @@ Yii::app()->clientScript->registerScript('Beneficiario', "
     }); 
 
     $('#guardar').click(function(){
-         if($('#Beneficiario_rif').val()==''){
-                    bootbox.alert('Por favor indique Rif');
-                    return false;
-         }    
+ 
          
          if($('#Beneficiario_cedula').val()==''){
                     bootbox.alert('Por favor indique cedula');

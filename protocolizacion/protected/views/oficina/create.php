@@ -1,5 +1,24 @@
 <?php
-Yii::app()->clientScript->registerScript('camara', "
+$form = $this->beginWidget('booster.widgets.TbActiveForm', array(
+    'id' => 'oficina-form',
+    'enableAjaxValidation' => false,
+    'enableClientValidation' => true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true,
+        'validateOnChange' => true,
+        'validateOnType' => true,
+        )));
+?>
+<?php
+$baseUrl = Yii::app()->baseUrl;
+$numeros = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/js_jquery.numeric.js');
+$mascara = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/js/jquery.mask.min.js');?>
+<?php 
+Yii::app()->clientScript->registerScript('oficina', "
+    $(document).ready(function(){
+         $('#Oficina_cedula').numeric();
+    });   
+    
    $('#guardar').click(function(){
         if( $.trim($('#Oficina_nombre').val())  == ''){
             $('#Oficina_nombre').val('');
@@ -14,17 +33,10 @@ Yii::app()->clientScript->registerScript('camara', "
             bootbox.alert('Indique la Cédula del Jefe de la Oficina.');
             return false;
         }
+
+      
    });
 ");
-$form = $this->beginWidget('booster.widgets.TbActiveForm', array(
-    'id' => 'oficina-form',
-    'enableAjaxValidation' => false,
-    'enableClientValidation' => true,
-    'clientOptions' => array(
-        'validateOnSubmit' => true,
-        'validateOnChange' => true,
-        'validateOnType' => true,
-        )));
 ?>
 
 
@@ -74,7 +86,7 @@ if (isset($sms) && !empty($sms)) {
         ?>
     </div>
 </div>
-        
+
 <div class="row">
     <div class="col-md-12">
         <?php
@@ -82,7 +94,7 @@ if (isset($sms) && !empty($sms)) {
                 'booster.widgets.TbPanel', array(
             'title' => 'Datos del Jefe de Oficina',
             'context' => 'info',
-            'headerIcon' => 'home',
+            'headerIcon' => 'user',
             'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
             'content' => $this->renderPartial('_form_jefe_oficina', array('form' => $form, 'model' => $model), TRUE),
                 )
@@ -90,6 +102,8 @@ if (isset($sms) && !empty($sms)) {
         ?>
     </div>
 </div>
+
+
 
 <div class="well">
     <div class="pull-center" style="text-align: right;">
@@ -114,6 +128,22 @@ if (isset($sms) && !empty($sms)) {
                 'onclick' => 'document.location.href ="' . $this->createUrl('admin') . '";'
             )
         ));
+        ?>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <?php
+        $this->widget(
+                'booster.widgets.TbPanel', array(
+            'title' => 'Listado de Oficinas Registradas',
+            'context' => 'info',
+            'headerIcon' => 'home',
+            'headerHtmlOptions' => array('style' => 'background-color: #1fb5ad !important;color: #FFFFFF !important;'),
+            'content' => $this->renderPartial('_form_listado_oficina', array('form' => $form,'model' => $model), TRUE),
+                )
+        );
         ?>
     </div>
 </div>

@@ -67,7 +67,13 @@ $Validaciones = Yii::app()->getClientScript()->registerScriptFile($baseUrl . '/j
 <div class="row">
     <div class="row-fluid">
         <div class='col-md-12'>
-            <?php echo $form->textFieldGroup($model, 'nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100)))); ?>
+            <?php
+            echo $form->textFieldGroup($model, 'nombre', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 100,
+                        'placeholder' => 'Ejemplo: BANAVIH-NOMBRE',
+//                        'title' => 'Ejemplo: BANAVIH-NOMBRE',
+//                        'data-toggle' => 'tooltip',
+            ))));
+            ?>
         </div>
         <?php echo $form->hiddenField($model, 'persona_id_jefe'); ?>
         <?php echo $form->hiddenField($model, 'fechaNac'); ?>

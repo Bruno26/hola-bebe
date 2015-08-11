@@ -18,7 +18,7 @@ if (isset($_GET["id"])) {
 
     Yii::app()->clientScript->registerScript('Beneficiario_temporal', "
 
-    $(document).ready(function(){ 
+    $(document).ready(function(){
 
 
                $('#BeneficiarioTemporal_cedula').numeric();
@@ -38,13 +38,11 @@ if (isset($_GET["id"])) {
                   $('#BeneficiarioTemporal_estado_civil').attr('disabled', true);
                   $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', true);
                   $('#BeneficiarioTemporal_telf_celular').attr('readonly', true);
-                  $('#BeneficiarioTemporal_correo_electronico').attr('readonly', true); 
-                 
-               /*   -------------------------------- */     
-        
-                    
-             
-    }); 
+                  $('#BeneficiarioTemporal_correo_electronico').attr('readonly', true);
+
+               /*   -------------------------------- */
+         
+    });
 
 
   ");
@@ -112,7 +110,7 @@ if (isset($_GET["id"])) {
 
 
 
-<div class="row"> 
+<div class="row">
     <div class='col-md-4'>
         <?php
         echo $form->datePickerGroup($model, 'fecha_nacimiento', array('widgetOptions' =>
@@ -163,7 +161,7 @@ if (isset($_GET["id"])) {
         ?>
 
     </div>
-</div> 
+</div>
 
 <div class="row">
     <div class='col-md-4'>
@@ -244,7 +242,4 @@ if (isset($_GET["id"])) {
         echo $form->textFieldGroup($model, 'correo_electronico', array('widgetOptions' => array('htmlOptions' => array('class' => 'span5', 'maxlength' => 200))));
         ?>
     </div>
-</div> 
-
-
-
+</div>

@@ -88,7 +88,6 @@ class ConsultaOracle extends CActiveRecord {
     }
 
     /*  -------------------------------------------- */
-
     public function getPersonaBeneficiario($nacionalidad, $cedula) {
 
         $nacional = ($nacionalidad == 97) ? 1 : 0;

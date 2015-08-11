@@ -24,7 +24,7 @@
     <body>
         <section id="container">
             <header class="header fixed-top clearfix">
-                <div class="brand" style="height: 60%;">
+                <div class="brand" style="height: 60%;"> 
                     <a href="<?php echo $this->createUrl('/site/indexAdmin'); ?>" class="logo">
                         <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/banavih_ndice1.png" alt="" width="150px"  style="margin-top: -6%;margin-bottom: 4%;margin-left: 10%;">
                     </a>
@@ -193,7 +193,7 @@
                             <li class="sub-menu">
                                 <a href="javascript:;">
                                     <i class="glyphicon glyphicon-tasks"></i>
-                                    <span> Gestión Censo Socioeconómico</span>
+                                    <span> Gestión Censo <br> Socioeconómico</span>
                                 </a>
                                 <ul class="sub">
                                     <!--<li><a href="<?php // echo $this->createUrl('/beneficiario/create');       ?>"><i class="glyphicon glyphicon-home"></i><span>Censo</span></a></li>-->
