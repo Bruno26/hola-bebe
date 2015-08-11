@@ -92,7 +92,7 @@ class Beneficiario extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('persona_id, rif, fecha_ultimo_censo, fecha_creacion, fecha_actualizacion, usuario_id_creacion,cedula', 'required'),
+            array('persona_id, fecha_ultimo_censo, fecha_creacion, fecha_actualizacion, usuario_id_creacion,cedula', 'required'),
             array('persona_id, condicion_trabajo_id, fuente_ingreso_id, relacion_trabajo_id, sector_trabajo_id, gen_cargo_id, parroquia_id, usuario_id_creacion, usuario_id_actualizacion, estatus_beneficiario_id, condicion_laboral, beneficiario_temporal_id', 'numerical', 'integerOnly' => true),
             array('rif', 'length', 'max' => 12),
             array('nombre_empresa, direccion_empresa, direccion_anterior, urban_barrio, av_call_esq_carr, zona, observacion', 'length', 'max' => 200),

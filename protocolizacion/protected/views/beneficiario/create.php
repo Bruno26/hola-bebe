@@ -45,11 +45,7 @@ Yii::app()->clientScript->registerScript('Beneficiario', "
          $('#Vivienda_construccion_mt2').numeric();
     }); 
 
-    $('#guardar').click(function(){
-         if($('#Beneficiario_rif').val()==''){
-                    bootbox.alert('Por favor indique Rif');
-                    return false;
-         }    
+    $('#guardar').click(function(){    
          
          if($('#Beneficiario_cedula').val()==''){
                     bootbox.alert('Por favor indique cedula');

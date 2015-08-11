@@ -20,7 +20,7 @@ Yii::app()->clientScript->registerScript('camara', "
         var fechaNac = $('#GrupoFamiliar_fecha_nacimiento').val();
         var IdUnidadF = '" . $_GET['id'] . "';
         var tipoPersonaFaov = $('#GrupoFamiliar_tipo_persona_faov').val();
-        
+ 
         if(cedula == ''){
             bootbox.alert('Ingrese un número de cédula!');
             $('#GrupoFamiliar_gen_parentesco_id').val('');
