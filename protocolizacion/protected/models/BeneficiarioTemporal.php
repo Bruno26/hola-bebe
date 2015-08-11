@@ -72,6 +72,7 @@ class BeneficiarioTemporal extends CActiveRecord {
             array('persona_id, desarrollo_id, unidad_habitacional_id, vivienda_id, nacionalidad, cedula, nombre_completo, fecha_creacion, fecha_actualizacion, usuario_id_creacion', 'required'),
             array('persona_id, desarrollo_id, unidad_habitacional_id, vivienda_id, id_control, nacionalidad, cedula, usuario_id_creacion, usuario_id_actualizacion, estatus', 'numerical', 'integerOnly' => true),
             array('nombre_completo, nombre_archivo', 'length', 'max' => 200),
+            array('primer_nombre, primer_apellido, segundo_nombre, segundo_apellido', 'length', 'max' => 25),
             array('cedula', 'length', 'max' => 8),
             array('telf_celular,telf_habitacion', 'length', 'max' => 11),
             // The following rule is used by search().

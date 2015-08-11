@@ -384,12 +384,44 @@ function buscarPersonaAbogado(nacionalidad, cedula) {
 
 
 function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
+    $('#BeneficiarioTemporal_primer_apellido').attr('readonly', true);
+    $('#BeneficiarioTemporal_primer_apellido').val('');
+    $('#BeneficiarioTemporal_segundo_apellido').attr('readonly', true);
+    $('#BeneficiarioTemporal_segundo_apellido').val('');
+
+    $('#BeneficiarioTemporal_primer_nombre').attr('readonly', true);
+    $('#BeneficiarioTemporal_primer_nombre').val('');
+
+    $('#BeneficiarioTemporal_segundo_nombre').attr('readonly', true);
+    $('#BeneficiarioTemporal_segundo_nombre').val('');
+
+    $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', true);
+    $('#BeneficiarioTemporal_fecha_nacimiento').val('');
+
+    $('#BeneficiarioTemporal_sexo').attr('disabled', true);
+    $('#BeneficiarioTemporal_sexo').val('');
+
+    $('#BeneficiarioTemporal_estado_civil').attr('readonly', true);
+    $('#BeneficiarioTemporal_estado_civil').val('');
+
+    $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', true);
+    $('#BeneficiarioTemporal_telf_habitacion').val('');
+
+    $('#BeneficiarioTemporal_telf_celular').attr('readonly', true);
+    $('#BeneficiarioTemporal_telf_celular').val('');
+
+    $('#BeneficiarioTemporal_correo_electronico').attr('readonly', true);
+    $('#BeneficiarioTemporal_correo_electronico').val('');
+
+
     $('#iconLoding').show();
     if (nacionalidad == 'SELECCIONE') {
+        $('#iconLoding').hide();
         bootbox.alert('Verifique que la nacionalidad no esten vacios');
         return false;
     }
     if (cedula == '') {
+        $('#iconLoding').hide();
         bootbox.alert('Verifique que la cédula no esten vacios');
         return false;
     }
@@ -423,10 +455,12 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                 $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', false);
                 $('#BeneficiarioTemporal_fecha_nacimiento').val('');
 
+                $('#BeneficiarioTemporal_sexo').attr('readonly', false);
                 $('#BeneficiarioTemporal_sexo').attr('disabled', false);
                 $('#BeneficiarioTemporal_sexo').val('');
 
                 $('#BeneficiarioTemporal_estado_civil').attr('readonly', false);
+                $('#BeneficiarioTemporal_estado_civil').attr('disabled', false);
                 $('#BeneficiarioTemporal_estado_civil').val('');
 
                 $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', false);
@@ -441,7 +475,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                 /*   -------------------------------- */
 
             } else if (datos == 3) {
-                 $('#iconLoding').hide();
+                $('#iconLoding').hide();
                 bootbox.alert('Beneficiario Se encuentra Registrado !');
                 // $('#BeneficiarioTemporal_cedula').val('');
                 return false;
@@ -449,7 +483,7 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
             } else if (datos.PROCEDENCIA == 2) {
                 //  Datos de la variable proceden de Saime 
                 // alert('entrooo');
-                 $('#iconLoding').hide();
+                $('#iconLoding').hide();
                 if (datos.PRIMERNOMBRE == null) {
                     $('#BeneficiarioTemporal_primer_nombre').attr('readonly', false);
                     $('#BeneficiarioTemporal_primer_nombre').val('');
@@ -509,13 +543,12 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
 
             } else if (datos.PROCEDENCIA == 1) {
                 // Datos de la variable proceden de Persona si algun campo esta en blanco de puede actualizar solo una vez
-               $('#iconLoding').hide();
+                $('#iconLoding').hide();
                 $('#BeneficiarioTemporal_primer_nombre').val(datos.PRIMERNOMBRE);
                 $('#BeneficiarioTemporal_segundo_nombre').val(datos.SEGUNDONOMBRE);
                 $('#BeneficiarioTemporal_primer_apellido').val(datos.PRIMERAPELLIDO);
                 $('#BeneficiarioTemporal_segundo_apellido').val(datos.SEGUNDOAPELLIDO);
                 $('#BeneficiarioTemporal_persona_id').val(datos.ID);
-
                 if (datos.FECHANACIMIENTO == null) {
                     $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', false);
                     $('#BeneficiarioTemporal_fecha_nacimiento').val('');
@@ -523,8 +556,6 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                     $('#BeneficiarioTemporal_fecha_nacimiento').val(datos.FECHANACIMIENTO);
                     $('#BeneficiarioTemporal_fecha_nacimiento').attr('readonly', true);
                 }
-
-
                 if (datos.SEXO == null) {
                     $('#BeneficiarioTemporal_sexo').attr('readonly', false);
                     $('#BeneficiarioTemporal_sexo').val('');
@@ -532,7 +563,6 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                     $('#BeneficiarioTemporal_sexo').val(datos.SEXO);
                     $('#BeneficiarioTemporal_sexo').attr('readonly', true);
                 }
-
                 if (datos.EDO_CIVIL == null) {
                     $('#BeneficiarioTemporal_estado_civil').attr('readonly', false);
                     $('#BeneficiarioTemporal_estado_civil').attr('disabled', false);
@@ -541,7 +571,6 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                     $('#BeneficiarioTemporal_estado_civil').val(datos.EDO_CIVIL);
                     $('#BeneficiarioTemporal_estado_civil').attr('readonly', true);
                 }
-
                 if (datos.TELEFONO_HAB == null) {
                     $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', false);
                     $('#BeneficiarioTemporal_telf_habitacion').val('');
@@ -549,7 +578,6 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                     $('#BeneficiarioTemporal_telf_habitacion').val(datos.TELEFONO_HAB);
                     $('#BeneficiarioTemporal_telf_habitacion').attr('readonly', true);
                 }
-
                 if (datos.TELEFONO_MOVIL == null) {
                     $('#BeneficiarioTemporal_telf_celular').attr('readonly', false);
                     $('#BeneficiarioTemporal_telf_celular').val('');
@@ -557,9 +585,6 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                     $('#BeneficiarioTemporal_telf_celular').val(datos.TELEFONO_MOVIL);
                     $('#BeneficiarioTemporal_telf_celular').attr('readonly', true);
                 }
-
-
-
                 if (datos.CORREO == null) {
                     $('#BeneficiarioTemporal_correo_electronico').attr('readonly', false);
                     $('#BeneficiarioTemporal_correo_electronico').val('');
@@ -567,19 +592,10 @@ function buscarPersonaBeneficiarioTemp(nacionalidad, cedula) {
                     $('#BeneficiarioTemporal_correo_electronico').val(datos.CORREO_PRINCIPAL);
                     $('#BeneficiarioTemporal_correo_electronico').attr('readonly', true);
                 }
-
             } // fin If principal
-
-
-
-//
-
-
-
-//                
-//            }
         },
         error: function(datos) {
+            $('#iconLoding').hide();
             bootbox.alert('CEDULA NO ES VALIDA VERIFIQUE');
         }
     })
